@@ -41,9 +41,10 @@ let currentUser  = null;
 let studentData  = null;
 
 // Onboarding
-let obStep       = 0;
-let pendingBand  = null;
-let pendingDate  = null;
+let obStep            = 0;
+let pendingBand       = 6.5;
+let pendingDate       = null;
+let pendingExperience = null;
 
 // Reading session
 let sessionQuestions = [];
@@ -103,7 +104,12 @@ onAuthStateChanged(auth, async user => {
   currentUser = user;
   try {
     const snap = await getStudentDoc(user.uid);
-    if (!snap.exists()) {
+    const needsOnboarding = !snap.exists() || snap.data().isNewStudent === true;
+    if (needsOnboarding) {
+      // Ensure skeleton doc exists so we can update it after onboarding
+      if (!snap.exists()) {
+        await createSkeletonDoc(user.uid);
+      }
       initOnboarding();
       goTo('s-onboarding');
     } else {
@@ -161,6 +167,32 @@ async function createStudentDoc(uid, data) {
   });
 }
 
+async function createSkeletonDoc(uid) {
+  const blank = { accuracy: 0, attempted: 0, lastPracticed: null, trend: 'new' };
+  await setDoc(doc(db, 'students', uid), {
+    name:             currentUser.displayName || 'Student',
+    email:            currentUser.email       || '',
+    targetBand:       6.5,
+    examDate:         null,
+    hasExperience:    null,
+    currentBand:      6.5,
+    weekNumber:       1,
+    dayNumber:        1,
+    streak:           0,
+    isNewStudent:     true,
+    createdAt:        serverTimestamp(),
+    lastSession:      null,
+    toughLoveResults: 0,
+    weakAreas:        [],
+    skills: {
+      reading:   { tfng: { ...blank }, matchingHeadings: { ...blank }, summaryCompletion: { ...blank } },
+      listening: { multipleChoice: { ...blank }, formCompletion: { ...blank }, mapDiagram: { ...blank } },
+      writing:   { task1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, task2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' } },
+      speaking:  { part1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, part2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, part3: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' } },
+    }
+  });
+}
+
 async function updateStudentDoc(uid, updates) {
   await updateDoc(doc(db, 'students', uid), updates);
 }
@@ -176,15 +208,13 @@ async function saveSessionDoc(uid, data) {
 function initOnboarding() {
   const firstName = currentUser.displayName?.split(' ')[0] || 'there';
   document.getElementById('ob-first-name').textContent = firstName;
-
-  const bands = [5.0, 5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 8.5];
-  document.getElementById('band-grid').innerHTML = bands.map(b =>
-    `<button class="band-btn" data-band="${b}" onclick="selectBand(${b})">${b}</button>`
-  ).join('');
-
-  document.getElementById('trap-passage').textContent   = TRAP.passage;
-  document.getElementById('trap-statement').textContent = TRAP.statement;
-
+  pendingBand       = 6.5;
+  pendingDate       = null;
+  pendingExperience = null;
+  const slider = document.getElementById('ob-band-slider');
+  if (slider) slider.value = '6.5';
+  const display = document.getElementById('ob-band-display');
+  if (display) display.textContent = '6.5';
   showObStep(0);
 }
 
@@ -195,60 +225,50 @@ function showObStep(n) {
   obStep = n;
 }
 
-window.obNext     = () => showObStep(obStep + 1);
-window.selectBand = function (band) {
-  pendingBand = band;
-  document.querySelectorAll('.band-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelector(`.band-btn[data-band="${band}"]`).classList.add('selected');
-  document.getElementById('ob-band-btn').disabled = false;
+window.obNext = () => showObStep(obStep + 1);
+
+window.updateBandSlider = function () {
+  const val = document.getElementById('ob-band-slider').value;
+  pendingBand = parseFloat(val);
+  document.getElementById('ob-band-display').textContent = val;
 };
 
 window.setExamDate = function () {
   const val = document.getElementById('ob-date-input').value;
-  if (val) { pendingDate = val; }
-  showObStep(3);
+  pendingDate = val || null;
+  showObStep(2);
 };
 
 window.skipExamDate = function () {
   pendingDate = null;
-  showObStep(3);
+  showObStep(2);
 };
 
-window.answerTrap = function (val) {
-  document.querySelectorAll('.trap-btn').forEach(b => { b.disabled = true; });
-  const isRight = val === TRAP.answer;
+window.setExperience = async function (hasExperience) {
+  pendingExperience = hasExperience;
+  // Disable both buttons and show saving state
+  document.getElementById('ob-exp-yes').disabled = true;
+  document.getElementById('ob-exp-no').disabled  = true;
+  document.getElementById('ob-saving').classList.remove('hidden');
+  document.getElementById('ob-error').classList.add('hidden');
 
-  document.getElementById('trap-reveal-msg').innerHTML = isRight
-    ? `You got it right — but do you know <em>exactly</em> why it's Not Given? <strong>This is what we're going to fix together.</strong>`
-    : `The answer is <strong>Not Given</strong> — and most students miss it. <strong>This is exactly what we're going to fix together.</strong>`;
-
-  document.getElementById('trap-result').innerHTML = `
-    <div class="trap-answer-reveal ${isRight ? 'correct' : 'wrong'}">
-      <strong>You answered: ${val}</strong> &nbsp;·&nbsp; Correct: ${TRAP.answer}
-    </div>`;
-
-  document.getElementById('trap-explain').textContent = TRAP.explanation;
-  showObStep(4);
-};
-
-window.finishOnboarding = async function () {
-  const btn = document.getElementById('ob-finish-btn');
-  btn.textContent = 'Setting up your account…';
-  btn.disabled = true;
   try {
-    await createStudentDoc(currentUser.uid, {
-      name:       currentUser.displayName || 'Student',
-      email:      currentUser.email,
-      targetBand: pendingBand || 6.5,
-      examDate:   pendingDate || null,
+    await updateStudentDoc(currentUser.uid, {
+      targetBand:    pendingBand    || 6.5,
+      examDate:      pendingDate    || null,
+      hasExperience: hasExperience,
+      isNewStudent:  false,
+      currentBand:   pendingBand   || 6.5,
     });
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
     renderHome();
     goTo('s-home');
   } catch {
-    btn.textContent = 'Start Day 1 →';
-    btn.disabled = false;
+    document.getElementById('ob-saving').classList.add('hidden');
+    document.getElementById('ob-error').classList.remove('hidden');
+    document.getElementById('ob-exp-yes').disabled = false;
+    document.getElementById('ob-exp-no').disabled  = false;
   }
 };
 
