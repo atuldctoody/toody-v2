@@ -743,6 +743,92 @@ a { color: inherit; text-decoration: none; }
 .text-muted { color: var(--muted); }
 .section-spacer { height: 8px; }
 
+/* ── CRITERIA GRID (Writing + Speaking evaluation) ── */
+.criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 14px; }
+.criteria-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r); padding: 14px 14px 12px; }
+.criteria-label { font-size: 10px; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.criteria-band  { font-size: 26px; font-weight: 800; letter-spacing: -0.04em; color: var(--accent); margin-bottom: 6px; }
+.criteria-feedback { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.overall-band-card { background: var(--accent); border-radius: var(--r-lg); padding: 22px 22px 18px; margin: 0 16px 14px; color: #fff; text-align: center; }
+.overall-band-label { font-size: 11px; font-weight: 700; opacity: 0.75; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 6px; }
+.overall-band-num   { font-size: 52px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-bottom: 8px; }
+.overall-band-note  { font-size: 13px; opacity: 0.85; line-height: 1.55; }
+.suggestion-card    { background: var(--yellow-light); border: 1.5px solid var(--yellow-mid); border-radius: var(--r); padding: 16px 18px; margin: 0 16px 14px; }
+.suggestion-label   { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); margin-bottom: 8px; }
+.suggestion-text    { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.65; }
+
+/* ── MULTIPLE CHOICE ── */
+.mc-option { display: flex; align-items: flex-start; gap: 12px; width: 100%; padding: 13px 14px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r-sm); font-family: inherit; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; text-align: left; line-height: 1.5; transition: all 0.15s; margin-bottom: 8px; }
+.mc-option:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); }
+.mc-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.mc-option.correct  { border-color: var(--success-mid); background: var(--success-light); color: #1a6048; }
+.mc-option.wrong    { border-color: var(--danger-mid);  background: var(--danger-light);  color: #8b1a20; }
+.mc-option:disabled { cursor: not-allowed; }
+.mc-label { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; background: var(--border); border-radius: 6px; font-size: 11px; font-weight: 800; color: var(--muted); flex-shrink: 0; }
+.mc-option.selected .mc-label { background: var(--accent); color: #fff; }
+.mc-option.correct  .mc-label { background: var(--success); color: #fff; }
+.mc-option.wrong    .mc-label { background: var(--danger); color: #fff; }
+
+/* ── FORM COMPLETION ── */
+.fc-field  { margin-bottom: 14px; }
+.fc-label  { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
+.fc-input  { display: block; width: 100%; padding: 11px 14px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r-sm); font-family: inherit; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.15s; }
+.fc-input:focus      { border-color: var(--accent); }
+.fc-input.fc-correct { border-color: var(--success-mid); background: var(--success-light); color: #1a6048; }
+.fc-input.fc-wrong   { border-color: var(--danger-mid);  background: var(--danger-light);  color: #8b1a20; }
+.fc-input:read-only  { cursor: default; }
+.fc-answer-reveal    { font-size: 12px; margin-top: 5px; color: var(--muted); line-height: 1.5; }
+
+/* ── WRITING ── */
+.word-count-row   { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.word-count-badge { font-size: 12px; font-weight: 700; color: var(--muted); background: var(--surface2); border: 1.5px solid var(--border); padding: 3px 10px; border-radius: 100px; transition: background 0.2s, color 0.2s; }
+.word-count-badge.ok   { background: var(--success-light); color: #1a6048; border-color: var(--success-mid); }
+.word-count-badge.warn { background: var(--yellow-light); color: #7a4010; border-color: var(--yellow-mid); }
+.writing-task-info  { background: var(--accent-light); border: 1.5px solid var(--accent-mid); border-radius: var(--r); padding: 16px 18px; margin: 0 16px 14px; }
+.writing-task-type  { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.writing-task-text  { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.7; }
+
+/* ── SPEAKING / RECORDING ── */
+.record-ui    { display: flex; flex-direction: column; align-items: center; padding: 20px 0 8px; gap: 12px; }
+.record-btn   { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 20px rgba(101,87,212,0.35); }
+.record-btn:hover  { transform: scale(1.06); box-shadow: 0 6px 28px rgba(101,87,212,0.45); }
+.record-btn:active { transform: scale(0.96); }
+.record-btn.recording { background: var(--danger); box-shadow: 0 4px 20px rgba(232,82,90,0.4); animation: pulse-rec 1.4s ease-in-out infinite; }
+@keyframes pulse-rec { 0%,100% { box-shadow: 0 4px 20px rgba(232,82,90,0.4); } 50% { box-shadow: 0 4px 32px rgba(232,82,90,0.7); } }
+.record-hint  { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.55; max-width: 220px; }
+.record-timer { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; color: var(--danger); font-variant-numeric: tabular-nums; }
+.speaking-q-list  { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.speaking-q-item  { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--text); }
+.speaking-q-num   { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; border-radius: 6px; flex-shrink: 0; }
+.transcript-card  { background: var(--surface2); border: 1.5px solid var(--border); border-radius: var(--r); padding: 14px 16px; margin: 0 16px 14px; font-size: 13px; line-height: 1.75; color: var(--text); }
+.transcript-label { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+/* ── WEEK 1 REPORT ── */
+.week1-hero       { background: var(--accent); border-radius: var(--r-lg); padding: 22px 22px 20px; margin: 0 16px 14px; color: #fff; }
+.week1-hero-label { font-size: 10px; font-weight: 700; opacity: 0.7; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.week1-band       { font-size: 44px; font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-bottom: 6px; }
+.week1-band-note  { font-size: 13px; opacity: 0.85; line-height: 1.55; }
+.weak-area-list   { display: flex; flex-direction: column; gap: 8px; margin: 0 16px 14px; }
+.weak-area-item   { display: flex; align-items: center; gap: 12px; background: var(--danger-light); border: 1.5px solid var(--danger-mid); border-radius: var(--r-sm); padding: 12px 14px; }
+.weak-area-name   { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+.weak-area-icon   { font-size: 18px; flex-shrink: 0; }
+.weak-area-text   { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.5; }
+
+/* ── MINI MOCK ── */
+.mock-progress { display: flex; gap: 6px; padding: 0 16px 16px; }
+.mock-step     { flex: 1; height: 5px; background: var(--border); border-radius: 4px; transition: background 0.3s; }
+.mock-step.done   { background: var(--success); }
+.mock-step.active { background: var(--accent); }
+
+/* ── PROGRESS SCREEN ── */
+.progress-session-list  { display: flex; flex-direction: column; gap: 8px; margin: 0 16px 14px; }
+.progress-session-item  { display: flex; align-items: center; gap: 12px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r-sm); padding: 12px 14px; }
+.progress-session-day   { font-size: 11px; font-weight: 800; color: var(--accent); background: var(--accent-light); border: 1.5px solid var(--accent-mid); padding: 3px 8px; border-radius: 6px; flex-shrink: 0; }
+.progress-session-info  { flex: 1; }
+.progress-session-skill    { font-size: 13px; font-weight: 600; color: var(--text); }
+.progress-session-accuracy { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.progress-session-acc-val  { font-weight: 700; color: var(--accent); }
+
 /* ── DESKTOP ADJUSTMENTS (secondary) ── */
 @media (min-width: 430px) {
   .screen { box-shadow: 0 0 0 1px var(--border); background: var(--white); }

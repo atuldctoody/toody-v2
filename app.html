@@ -13,21 +13,15 @@
 </head>
 <body>
 
-<!-- ══════════════════════
-     LOADING
-══════════════════════ -->
+<!-- ══════════════════════ LOADING ══════════════════════ -->
 <div class="screen active" id="s-loading">
   <div class="loading-logo">📖</div>
   <div class="loading-name">Too<span>dy</span></div>
   <div class="spinner"></div>
 </div>
 
-<!-- ══════════════════════
-     ONBOARDING
-══════════════════════ -->
+<!-- ══════════════════════ ONBOARDING ══════════════════════ -->
 <div class="screen" id="s-onboarding">
-
-  <!-- Step 0: Welcome -->
   <div class="ob-step" id="ob-0">
     <div class="ob-hero">
       <div class="ob-logo">📖</div>
@@ -36,16 +30,12 @@
     </div>
     <button class="btn" onclick="obNext()">Let's get started <span class="arrow">→</span></button>
   </div>
-
-  <!-- Step 1: Target band -->
   <div class="ob-step" id="ob-1">
     <h2 class="ob-heading">What band score are you targeting?</h2>
     <p class="ob-sub">Be honest — Toody plans better with the real number.</p>
     <div class="band-grid" id="band-grid"></div>
     <button class="btn" id="ob-band-btn" disabled onclick="obNext()">Continue <span class="arrow">→</span></button>
   </div>
-
-  <!-- Step 2: Exam date -->
   <div class="ob-step" id="ob-2">
     <h2 class="ob-heading">When is your exam?</h2>
     <p class="ob-sub">Helps Toody set the right pace. No pressure if it's not booked yet.</p>
@@ -53,10 +43,8 @@
       <input type="date" id="ob-date-input" class="input-field" />
     </div>
     <button class="btn" onclick="setExamDate()">Set this date <span class="arrow">→</span></button>
-    <button class="btn-ghost" onclick="skipExamDate()">Not booked yet — skip this</button>
+    <button class="btn-ghost" onclick="skipExamDate()">Not booked yet — skip</button>
   </div>
-
-  <!-- Step 3: Trap question -->
   <div class="ob-step" id="ob-3">
     <div class="toody-msg" style="padding-top:24px">
       <div class="toody-avatar">🤔</div>
@@ -72,8 +60,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Step 4: Trap reveal -->
   <div class="ob-step" id="ob-4">
     <div class="toody-msg" style="padding-top:24px">
       <div class="toody-avatar">💡</div>
@@ -85,16 +71,14 @@
     </div>
     <button class="btn" onclick="obNext()">Let's fix this together <span class="arrow">→</span></button>
   </div>
-
-  <!-- Step 5: Programme overview -->
   <div class="ob-step" id="ob-5">
     <h2 class="ob-heading">Here's how the next 10 days work.</h2>
-    <p class="ob-sub">Two weeks, five sessions each. By Day 10 you'll have a realistic band estimate across all four sections.</p>
+    <p class="ob-sub">Two weeks. By Day 10 you'll have a band estimate across all four sections.</p>
     <div class="week-preview">
       <div class="week-card">
         <div class="week-badge">Week 1 — Days 1–5</div>
         <div class="week-title">Reading + Listening</div>
-        <div class="week-desc">Find your exact weak spots. Toody identifies your lowest two skills before we go any further.</div>
+        <div class="week-desc">Find your exact weak spots. Toody identifies your two lowest skills before anything else.</div>
       </div>
       <div class="week-card">
         <div class="week-badge">Week 2 — Days 6–10</div>
@@ -104,102 +88,71 @@
     </div>
     <button class="btn" id="ob-finish-btn" onclick="finishOnboarding()">Start Day 1 <span class="arrow">→</span></button>
   </div>
+</div>
 
-</div><!-- /s-onboarding -->
-
-<!-- ══════════════════════
-     HOME
-══════════════════════ -->
+<!-- ══════════════════════ HOME ══════════════════════ -->
 <div class="screen" id="s-home">
   <div class="nav">
-    <div class="logo">
-      <div class="logo-mark">📖</div>
-      <div class="logo-text">Too<span>dy</span></div>
-    </div>
+    <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right">
       <div class="streak-badge" id="home-streak">🔥 0 days</div>
       <div class="day-badge" id="home-day-badge">Day 1</div>
       <button class="nav-btn" onclick="signOutUser()">↩</button>
     </div>
   </div>
-
   <div class="home-greeting" style="padding-top:20px">
     <h1 id="home-greeting">Good morning.</h1>
     <p id="home-subtitle">Let's see where you're starting from.</p>
   </div>
-
   <div class="session-card" id="today-session-card">
     <div class="session-card-day" id="today-day-label">Day 1 of 10</div>
-    <div class="session-card-skill" id="today-skill">Reading — True/False/Not Given</div>
+    <div class="session-card-skill" id="today-skill">Reading — True / False / Not Given</div>
     <div class="session-card-desc" id="today-desc">AI-generated passage with 5 questions. Toody explains every answer.</div>
     <button class="session-card-btn" onclick="startSession()">Start session <span class="arrow">→</span></button>
   </div>
-
   <div class="card">
     <div class="card-label">Skill Snapshot</div>
-    <div id="home-skill-snapshot">
-      <div style="font-size:13px;color:var(--muted);text-align:center;padding:12px 0">Complete your first session to see your skill data.</div>
-    </div>
+    <div id="home-skill-snapshot"><div style="font-size:13px;color:var(--muted);text-align:center;padding:10px 0">Complete your first session to see your skill data.</div></div>
   </div>
-
   <div class="card" style="padding-bottom:6px">
     <div class="card-label">Coming Up</div>
-    <div class="upcoming-list" id="upcoming-list"></div>
+    <div id="upcoming-list"></div>
   </div>
+  <button class="btn-secondary" onclick="goToProgress()">View full progress →</button>
 </div>
 
-<!-- ══════════════════════
-     SESSION INTRO
-══════════════════════ -->
+<!-- ══════════════════════ SESSION INTRO ══════════════════════ -->
 <div class="screen" id="s-session-intro">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
-
   <div class="session-intro-skill">
     <div class="session-intro-icon" id="si-icon">📖</div>
     <div class="session-intro-label" id="si-section">Reading</div>
     <div class="session-intro-title" id="si-skill">True / False / Not Given</div>
   </div>
-
   <div class="toody-msg">
     <div class="toody-avatar">📋</div>
     <div class="toody-bubble">Here's what today's session looks like. Read this before we start.</div>
   </div>
-
   <div class="expect-list" id="si-expect-list"></div>
-
   <button class="btn mt16" onclick="goToSession()">I'm ready — let's go <span class="arrow">→</span></button>
 </div>
 
-<!-- ══════════════════════
-     WARMUP
-══════════════════════ -->
+<!-- ══════════════════════ WARMUP ══════════════════════ -->
 <div class="screen" id="s-warmup">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right"><div class="day-badge" id="warmup-day-badge">Day 2</div></div>
   </div>
-  <div class="phase-bar">
-    <div class="phase-dot active"></div>
-    <div class="phase-dot"></div>
-    <div class="phase-dot"></div>
-  </div>
+  <div class="phase-bar"><div class="phase-dot active"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
   <div class="phase-label">Phase 1 — <span class="pl-name">Memory Check</span> &nbsp;·&nbsp; ~2 min</div>
-
   <div class="toody-msg">
     <div class="toody-avatar">🧠</div>
     <div class="toody-bubble">Yesterday's lesson — did it stick? One quick question before we go deeper.</div>
   </div>
-
-  <!-- Loading state -->
-  <div id="warmup-loading" class="screen-loading">
-    <div class="spinner"></div>
-    <p>Generating your memory check…</p>
-  </div>
-
-  <!-- Content -->
+  <div id="warmup-loading" class="screen-loading"><div class="spinner"></div><p>Generating your memory check…</p></div>
   <div id="warmup-content" class="hidden">
     <div class="card">
       <div class="card-label">Quick Check</div>
@@ -216,223 +169,356 @@
   </div>
 </div>
 
-<!-- ══════════════════════
-     READING SESSION
-══════════════════════ -->
+<!-- ══════════════════════ READING ══════════════════════ -->
 <div class="screen" id="s-reading">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right"><div class="day-badge" id="reading-day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar">
-    <div class="phase-dot done" id="reading-p1-dot"></div>
+    <div class="phase-dot" id="reading-p1-dot"></div>
     <div class="phase-dot active"></div>
     <div class="phase-dot"></div>
   </div>
-  <div class="phase-label">Phase 2 — <span class="pl-name">Deep Dive</span> &nbsp;·&nbsp; ~25 min</div>
-
-  <!-- Loading state -->
-  <div id="reading-loading" class="screen-loading">
-    <div class="spinner"></div>
-    <p>Generating your passage…</p>
-  </div>
-
-  <!-- Session content -->
+  <div class="phase-label">Phase 2 — <span class="pl-name">Deep Dive</span></div>
+  <div id="reading-loading" class="screen-loading"><div class="spinner"></div><p>Generating your passage…</p></div>
   <div id="reading-content" class="hidden">
     <div class="toody-msg">
       <div class="toody-avatar">📖</div>
-      <div class="toody-bubble">Read the passage carefully — all the answers are in there. Mark the text as you go.</div>
+      <div class="toody-bubble" id="reading-intro-msg">Read the passage carefully — all the answers are in there.</div>
     </div>
-
     <div class="passage-wrap">
       <div class="passage-label">Passage</div>
       <div class="passage-text" id="reading-passage"></div>
     </div>
-
     <div class="card">
-      <div class="card-label">Questions — True / False / Not Given</div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">
-        <strong>True</strong> = passage confirms it &nbsp;|&nbsp;
-        <strong>False</strong> = passage contradicts it &nbsp;|&nbsp;
-        <strong>Not Given</strong> = passage doesn't say
+      <div class="card-label" id="reading-q-label">Questions — True / False / Not Given</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6" id="reading-q-instructions">
+        <strong>True</strong> = passage confirms it &nbsp;|&nbsp; <strong>False</strong> = passage contradicts it &nbsp;|&nbsp; <strong>Not Given</strong> = passage doesn't say
       </p>
       <div id="questions-container"></div>
-      <button class="btn mt16" id="btn-reading-submit" disabled onclick="submitReading()">
-        Submit answers <span class="arrow">→</span>
-      </button>
+      <button class="btn mt16" id="btn-reading-submit" disabled onclick="submitReading()">Submit answers <span class="arrow">→</span></button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════
-     TOUGH LOVE CHECK
-══════════════════════ -->
+<!-- ══════════════════════ TOUGH LOVE ══════════════════════ -->
 <div class="screen" id="s-toughlove">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
   </div>
-  <div class="phase-bar">
-    <div class="phase-dot done"></div>
-    <div class="phase-dot active"></div>
-    <div class="phase-dot"></div>
-  </div>
+  <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot active"></div><div class="phase-dot"></div></div>
   <div class="phase-label">Phase 2 — <span class="pl-name">Prove You Understood It</span></div>
-
   <div class="toody-msg">
     <div class="toody-avatar">🔍</div>
     <div class="toody-bubble">Getting it right isn't enough for me. <strong>Show me your reasoning.</strong></div>
   </div>
-
   <div class="tl-card">
     <div class="tl-label">🔍 Tough Love Check</div>
     <div class="tl-q" id="tl-question"></div>
     <div class="hint-options" id="tl-hint-options"></div>
     <div class="result-flash mt16" id="tl-result"></div>
   </div>
-
-  <button class="btn" id="btn-tl-continue" disabled onclick="continueTLToNotebook()">
-    See my notebook <span class="arrow">→</span>
-  </button>
+  <button class="btn" id="btn-tl-continue" disabled onclick="continueTLToNotebook()">See my notebook <span class="arrow">→</span></button>
 </div>
 
-<!-- ══════════════════════
-     LISTENING (Scaffold)
-══════════════════════ -->
+<!-- ══════════════════════ LISTENING ══════════════════════ -->
 <div class="screen" id="s-listening">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
-    <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
+    <div class="nav-right"><div class="day-badge" id="listening-day-badge">Day 2</div></div>
   </div>
-  <div class="toody-msg" style="padding-top:40px">
-    <div class="toody-avatar">🎧</div>
-    <div class="toody-bubble">Listening sessions are coming in Phase 3 of the build. Check back soon.</div>
+  <div class="phase-bar">
+    <div class="phase-dot" id="listening-p1-dot"></div>
+    <div class="phase-dot active"></div>
+    <div class="phase-dot"></div>
   </div>
-  <button class="btn mt16" onclick="goToHome()">Back to home</button>
+  <div class="phase-label">Phase 2 — <span class="pl-name">Deep Dive</span></div>
+  <div id="listening-loading" class="screen-loading"><div class="spinner"></div><p>Generating your listening scenario…</p></div>
+  <div id="listening-content" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🎧</div>
+      <div class="toody-bubble" id="listening-intro-msg">Read the scenario carefully — it describes exactly what you would hear in a real IELTS listening test.</div>
+    </div>
+    <div class="passage-wrap">
+      <div class="passage-label">🎧 Listening Scenario</div>
+      <div class="passage-text" id="listening-scenario"></div>
+    </div>
+    <div class="card">
+      <div class="card-label" id="listening-q-label">Questions</div>
+      <div id="listening-questions"></div>
+      <button class="btn mt16" id="btn-listening-submit" disabled onclick="submitListening()">Submit answers <span class="arrow">→</span></button>
+    </div>
+    <div class="card hidden" id="listening-results">
+      <div class="card-label">Results</div>
+      <div id="listening-results-body"></div>
+      <button class="btn mt16" onclick="finishListeningSession()">See my notebook <span class="arrow">→</span></button>
+    </div>
+  </div>
 </div>
 
-<!-- ══════════════════════
-     WRITING (Scaffold)
-══════════════════════ -->
+<!-- ══════════════════════ WRITING ══════════════════════ -->
 <div class="screen" id="s-writing">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
-    <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
+    <div class="nav-right"><div class="day-badge" id="writing-day-badge">Day 6</div></div>
   </div>
-  <div class="toody-msg" style="padding-top:40px">
-    <div class="toody-avatar">✍️</div>
-    <div class="toody-bubble">Writing sessions are coming in Phase 4 of the build. Check back soon.</div>
+  <div class="phase-bar">
+    <div class="phase-dot" id="writing-p1-dot"></div>
+    <div class="phase-dot active"></div>
+    <div class="phase-dot"></div>
   </div>
-  <button class="btn mt16" onclick="goToHome()">Back to home</button>
+  <div class="phase-label">Phase 2 — <span class="pl-name">Deep Dive</span></div>
+  <div id="writing-loading" class="screen-loading"><div class="spinner"></div><p>Generating your writing task…</p></div>
+  <div id="writing-prompt-view" class="hidden">
+    <div class="writing-task-info">
+      <div class="writing-task-type" id="writing-task-type">Writing Task 1</div>
+      <div class="writing-task-text" id="writing-task-text"></div>
+    </div>
+    <div class="card">
+      <div class="word-count-row">
+        <div class="card-label" style="margin-bottom:0">Your Response</div>
+        <span class="word-count-badge" id="writing-word-count">0 words</span>
+      </div>
+      <textarea class="textarea-field" id="writing-textarea" placeholder="Write your response here…" oninput="updateWordCount()"></textarea>
+      <div style="font-size:12px;color:var(--muted);margin-top:8px" id="writing-target-hint"></div>
+      <button class="btn mt8" id="btn-writing-submit" onclick="submitWriting()">Submit for evaluation <span class="arrow">→</span></button>
+    </div>
+  </div>
+  <div id="writing-evaluating" class="screen-loading hidden"><div class="spinner"></div><p>Evaluating your response…</p></div>
+  <div id="writing-results-view" class="hidden">
+    <div class="overall-band-card">
+      <div class="overall-band-label">Overall Band Estimate</div>
+      <div class="overall-band-num" id="writing-overall-band">—</div>
+      <div class="overall-band-note" id="writing-encouragement"></div>
+    </div>
+    <div class="criteria-grid">
+      <div class="criteria-card"><div class="criteria-label">Task Achievement</div><div class="criteria-band" id="wc-ta-band">—</div><div class="criteria-feedback" id="wc-ta-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Coherence & Cohesion</div><div class="criteria-band" id="wc-cc-band">—</div><div class="criteria-feedback" id="wc-cc-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Lexical Resource</div><div class="criteria-band" id="wc-lr-band">—</div><div class="criteria-feedback" id="wc-lr-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Grammatical Range</div><div class="criteria-band" id="wc-gr-band">—</div><div class="criteria-feedback" id="wc-gr-fb"></div></div>
+    </div>
+    <div class="suggestion-card">
+      <div class="suggestion-label">💡 Top Suggestion</div>
+      <div class="suggestion-text" id="writing-suggestion"></div>
+    </div>
+    <button class="btn" onclick="finishWritingSession()">See my notebook <span class="arrow">→</span></button>
+  </div>
 </div>
 
-<!-- ══════════════════════
-     SPEAKING (Scaffold)
-══════════════════════ -->
+<!-- ══════════════════════ SPEAKING ══════════════════════ -->
 <div class="screen" id="s-speaking">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
-    <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
+    <div class="nav-right"><div class="day-badge" id="speaking-day-badge">Day 8</div></div>
   </div>
-  <div class="toody-msg" style="padding-top:40px">
-    <div class="toody-avatar">🎤</div>
-    <div class="toody-bubble">Speaking sessions — browser audio recording + Whisper AI — are coming in Phase 5. Check back soon.</div>
+  <div class="phase-bar">
+    <div class="phase-dot" id="speaking-p1-dot"></div>
+    <div class="phase-dot active"></div>
+    <div class="phase-dot"></div>
   </div>
-  <button class="btn mt16" onclick="goToHome()">Back to home</button>
+  <div class="phase-label">Phase 2 — <span class="pl-name">Deep Dive</span></div>
+  <div id="speaking-loading" class="screen-loading"><div class="spinner"></div><p>Generating your speaking questions…</p></div>
+  <div id="speaking-prompt-view" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🎤</div>
+      <div class="toody-bubble">Read the questions, then tap the microphone and speak your answers naturally. Aim for 1–2 minutes total.</div>
+    </div>
+    <div class="card">
+      <div class="card-label" id="speaking-topic-label">Speaking Part 1</div>
+      <div class="speaking-q-list" id="speaking-questions"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Record Your Answer</div>
+      <!-- Ready state -->
+      <div id="record-ready">
+        <div class="record-ui">
+          <button class="record-btn" id="btn-start-record" onclick="startRecording()">🎤</button>
+          <p class="record-hint">Tap to start recording. Speak clearly and at a natural pace.</p>
+        </div>
+      </div>
+      <!-- Recording state -->
+      <div id="record-active" class="hidden">
+        <div class="record-ui">
+          <button class="record-btn recording" onclick="stopRecording()">⏹</button>
+          <div class="record-timer" id="record-timer">0:00</div>
+          <p class="record-hint">Recording… Tap to stop when you're done.</p>
+        </div>
+      </div>
+      <!-- Processing state -->
+      <div id="record-processing" class="hidden">
+        <div class="screen-loading" style="padding:30px 0"><div class="spinner"></div><p>Transcribing your audio…</p></div>
+      </div>
+    </div>
+  </div>
+  <div id="speaking-evaluating" class="screen-loading hidden"><div class="spinner"></div><p>Evaluating your response…</p></div>
+  <div id="speaking-results-view" class="hidden">
+    <div class="overall-band-card">
+      <div class="overall-band-label">Overall Speaking Band</div>
+      <div class="overall-band-num" id="speaking-overall-band">—</div>
+      <div class="overall-band-note">Based on transcript analysis — see caveat in Pronunciation.</div>
+    </div>
+    <div class="transcript-card">
+      <div class="transcript-label">📝 Your Transcript</div>
+      <div id="speaking-transcript-text"></div>
+    </div>
+    <div class="criteria-grid">
+      <div class="criteria-card"><div class="criteria-label">Fluency & Coherence</div><div class="criteria-band" id="sc-fc-band">—</div><div class="criteria-feedback" id="sc-fc-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Lexical Resource</div><div class="criteria-band" id="sc-lr-band">—</div><div class="criteria-feedback" id="sc-lr-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Grammatical Range</div><div class="criteria-band" id="sc-gr-band">—</div><div class="criteria-feedback" id="sc-gr-fb"></div></div>
+      <div class="criteria-card"><div class="criteria-label">Pronunciation</div><div class="criteria-band" id="sc-pr-band">—</div><div class="criteria-feedback" id="sc-pr-fb"></div></div>
+    </div>
+    <div class="suggestion-card">
+      <div class="suggestion-label">💡 Top Suggestion</div>
+      <div class="suggestion-text" id="speaking-suggestion"></div>
+    </div>
+    <button class="btn" onclick="finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
+  </div>
 </div>
 
-<!-- ══════════════════════
-     NOTEBOOK
-══════════════════════ -->
+<!-- ══════════════════════ NOTEBOOK ══════════════════════ -->
 <div class="screen" id="s-notebook">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right"><div class="day-badge" id="nb-day-badge">Day 1</div></div>
   </div>
-  <div class="phase-bar">
-    <div class="phase-dot done"></div>
-    <div class="phase-dot done"></div>
-    <div class="phase-dot active"></div>
-  </div>
+  <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot done"></div><div class="phase-dot active"></div></div>
   <div class="phase-label">Phase 3 — <span class="pl-name">Notebook Update</span></div>
-
   <div class="toody-msg">
     <div class="toody-avatar">📓</div>
     <div class="toody-bubble" id="nb-assessment">Loading your results…</div>
   </div>
-
   <div class="nb-stat-row">
-    <div class="nb-stat">
-      <div class="nb-stat-val accent" id="nb-questions-done">—</div>
-      <div class="nb-stat-label">Questions Done</div>
-    </div>
-    <div class="nb-stat">
-      <div class="nb-stat-val" id="nb-band-est">—</div>
-      <div class="nb-stat-label">Band Target</div>
-    </div>
-    <div class="nb-stat">
-      <div class="nb-stat-val" id="nb-streak">—</div>
-      <div class="nb-stat-label">Day Streak 🔥</div>
-    </div>
+    <div class="nb-stat"><div class="nb-stat-val accent" id="nb-questions-done">—</div><div class="nb-stat-label">Done This Session</div></div>
+    <div class="nb-stat"><div class="nb-stat-val" id="nb-band-est">—</div><div class="nb-stat-label">Band Target</div></div>
+    <div class="nb-stat"><div class="nb-stat-val" id="nb-streak">—</div><div class="nb-stat-label">Day Streak 🔥</div></div>
   </div>
-
-  <div class="card">
-    <div class="card-label">Reading — Skill Breakdown</div>
-    <div class="skill-row">
-      <div class="skill-item">
-        <div class="skill-name">True / False / NG</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" id="nb-tfng-bar" style="width:0%"></div></div>
-        <div class="skill-pct" id="nb-tfng-pct">—</div>
+  <!-- Standard skill breakdown (hidden in Week 1 Report) -->
+  <div id="nb-skill-section">
+    <div class="card">
+      <div class="card-label">Reading — Skill Breakdown</div>
+      <div class="skill-row">
+        <div class="skill-item"><div class="skill-name">True / False / NG</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-tfng-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-tfng-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Matching Headings</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-mh-pct">—</div></div>
       </div>
-      <div class="skill-item">
-        <div class="skill-name">Matching Headings</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" id="nb-mh-bar" style="width:0%"></div></div>
-        <div class="skill-pct" id="nb-mh-pct">—</div>
-      </div>
-    </div>
-    <div class="card-label" style="margin-top:14px">Listening — Skill Breakdown</div>
-    <div class="skill-row">
-      <div class="skill-item">
-        <div class="skill-name">Multiple Choice</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" id="nb-mc-bar" style="width:0%"></div></div>
-        <div class="skill-pct" id="nb-mc-pct">—</div>
-      </div>
-      <div class="skill-item">
-        <div class="skill-name">Form Completion</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" id="nb-fc-bar" style="width:0%"></div></div>
-        <div class="skill-pct" id="nb-fc-pct">—</div>
+      <div class="card-label" style="margin-top:14px">Listening — Skill Breakdown</div>
+      <div class="skill-row">
+        <div class="skill-item"><div class="skill-name">Multiple Choice</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-mc-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-mc-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Form Completion</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-fc-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-fc-pct">—</div></div>
       </div>
     </div>
   </div>
-
-  <!-- Worked example (only shown when there's a wrong answer) -->
+  <!-- Week 1 Report section (shown only on Day 5) -->
+  <div id="nb-week1-section" class="hidden">
+    <div class="week1-hero">
+      <div class="week1-hero-label">Week 1 — Band Estimate</div>
+      <div class="week1-band" id="w1-band">6.0</div>
+      <div class="week1-band-note" id="w1-band-note">Across Reading and Listening. Updates as you practice.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Top 2 Weak Areas</div>
+      <div class="weak-area-list" id="w1-weak-areas"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Week 2 Plan</div>
+      <div id="w1-week2-plan"></div>
+    </div>
+  </div>
   <div class="worked-example hidden" id="nb-worked-example">
     <div class="we-label">📌 Worked Example — From This Session</div>
     <div class="we-q" id="we-q"></div>
     <div class="we-exp" id="we-exp"></div>
   </div>
-
   <div class="tomorrow-card">
     <div class="tomorrow-label" id="nb-tomorrow-day">Tomorrow</div>
     <div class="tomorrow-title" id="nb-tomorrow-title"></div>
     <div class="tomorrow-desc" id="nb-tomorrow-desc"></div>
   </div>
-
   <button class="btn" onclick="goToHome()">Done for today ✓</button>
 </div>
 
-<!-- ══════════════════════
-     PROGRESS (Scaffold)
-══════════════════════ -->
+<!-- ══════════════════════ MINI MOCK ══════════════════════ -->
+<div class="screen" id="s-minimock">
+  <div class="nav">
+    <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
+    <div class="nav-right"><div class="day-badge">Day 10</div></div>
+  </div>
+  <div class="mock-progress">
+    <div class="mock-step" id="mock-step-reading"></div>
+    <div class="mock-step" id="mock-step-listening"></div>
+    <div class="mock-step" id="mock-step-writing"></div>
+    <div class="mock-step" id="mock-step-speaking"></div>
+  </div>
+  <div id="mock-intro-view">
+    <div class="toody-msg" style="padding-top:16px">
+      <div class="toody-avatar">🏁</div>
+      <div class="toody-bubble">Day 10 — the Mini Mock. Four sections. Timed. This is the closest thing to the real exam before you sit it. Give it everything.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">What to Expect</div>
+      <div class="expect-list" style="margin:0;gap:8px;">
+        <div class="expect-item"><div class="expect-icon">📖</div><div class="expect-text"><strong>Reading</strong> — 5 T/F/NG questions on a passage. ~20 min.</div></div>
+        <div class="expect-item"><div class="expect-icon">🎧</div><div class="expect-text"><strong>Listening</strong> — 5 Multiple Choice questions. ~15 min.</div></div>
+        <div class="expect-item"><div class="expect-icon">✍️</div><div class="expect-text"><strong>Writing</strong> — Task 1 graph description. ~20 min.</div></div>
+        <div class="expect-item"><div class="expect-icon">🎤</div><div class="expect-text"><strong>Speaking</strong> — Part 2 cue card. 1 min prep, 2 min speak.</div></div>
+      </div>
+    </div>
+    <button class="btn mt16" onclick="startMiniMock()">Begin the Mock <span class="arrow">→</span></button>
+  </div>
+  <div id="mock-results-view" class="hidden">
+    <div class="overall-band-card" style="margin-top:16px">
+      <div class="overall-band-label">Estimated Overall Band</div>
+      <div class="overall-band-num" id="mock-overall-band">—</div>
+      <div class="overall-band-note" id="mock-band-note">Based on your performance across all four sections.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Section Breakdown</div>
+      <div class="skill-row">
+        <div class="skill-item"><div class="skill-name">Reading</div><div class="skill-bar-wrap"><div class="skill-bar" id="mock-reading-bar" style="width:0%"></div></div><div class="skill-pct" id="mock-reading-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Listening</div><div class="skill-bar-wrap"><div class="skill-bar" id="mock-listening-bar" style="width:0%"></div></div><div class="skill-pct" id="mock-listening-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Writing</div><div class="skill-bar-wrap"><div class="skill-bar" id="mock-writing-bar" style="width:0%"></div></div><div class="skill-pct" id="mock-writing-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Speaking</div><div class="skill-bar-wrap"><div class="skill-bar" id="mock-speaking-bar" style="width:0%"></div></div><div class="skill-pct" id="mock-speaking-pct">—</div></div>
+      </div>
+    </div>
+    <div class="suggestion-card">
+      <div class="suggestion-label">📋 Top 3 Recommendations</div>
+      <div class="suggestion-text" id="mock-recommendations"></div>
+    </div>
+    <button class="btn mt8" onclick="goToHome()">Finish programme ✓</button>
+  </div>
+</div>
+
+<!-- ══════════════════════ PROGRESS ══════════════════════ -->
 <div class="screen" id="s-progress">
   <div class="nav">
     <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
-  <div class="toody-msg" style="padding-top:40px">
-    <div class="toody-avatar">📊</div>
-    <div class="toody-bubble">Full progress history is coming in Phase 6. Your data is already being saved.</div>
+  <div class="home-greeting" style="padding-top:20px">
+    <h1 style="font-size:20px">Progress Report</h1>
+    <p id="progress-subtitle">Your full session history.</p>
   </div>
-  <button class="btn mt16" onclick="goToHome()">Back to home</button>
+  <div class="nb-stat-row">
+    <div class="nb-stat"><div class="nb-stat-val accent" id="prog-sessions">—</div><div class="nb-stat-label">Sessions Done</div></div>
+    <div class="nb-stat"><div class="nb-stat-val" id="prog-band">—</div><div class="nb-stat-label">Band Target</div></div>
+    <div class="nb-stat"><div class="nb-stat-val" id="prog-streak">—</div><div class="nb-stat-label">Best Streak</div></div>
+  </div>
+  <div class="card">
+    <div class="card-label">All Skills</div>
+    <div class="skill-row">
+      <div class="skill-item"><div class="skill-name">T/F/Not Given</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-tfng-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-tfng-pct">—</div></div>
+      <div class="skill-item"><div class="skill-name">Matching Headings</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-mh-pct">—</div></div>
+      <div class="skill-item"><div class="skill-name">Multiple Choice</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-mc-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-mc-pct">—</div></div>
+      <div class="skill-item"><div class="skill-name">Form Completion</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-fc-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-fc-pct">—</div></div>
+    </div>
+  </div>
+  <div id="progress-loading" class="screen-loading hidden"><div class="spinner"></div><p>Loading your sessions…</p></div>
+  <div class="card" style="padding-bottom:8px">
+    <div class="card-label">Session History</div>
+    <div class="progress-session-list" id="progress-session-list">
+      <p style="font-size:13px;color:var(--muted)">No sessions yet.</p>
+    </div>
+  </div>
 </div>
 
 <script type="module" src="app.js"></script>
