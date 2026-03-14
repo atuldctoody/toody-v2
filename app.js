@@ -93,12 +93,16 @@ function goTo(id) {
   console.log('[Toody] goTo:', id);
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
-  if (el) {
-    el.classList.add('active');
-    window.scrollTo(0, 0);
-  } else {
-    console.error('[Toody] goTo: element not found:', id);
+  if (!el) { console.error('[Toody] goTo: element not found:', id); return; }
+  el.classList.add('active');
+  const computed = window.getComputedStyle(el).display;
+  console.log('[Toody] after active — computedDisplay:', computed, '| classes:', el.className);
+  // If CSS override is preventing flex, force it directly
+  if (computed === 'none') {
+    console.warn('[Toody] CSS override detected — forcing display:flex');
+    el.style.display = 'flex';
   }
+  window.scrollTo(0, 0);
 }
 
 // ── AUTH ─────────────────────────────────────────────────────────
