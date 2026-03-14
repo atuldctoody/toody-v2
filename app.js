@@ -487,6 +487,75 @@ function launchSkillScreen(plan) {
   else loadReadingSession();
 }
 
+// ── BEHAVIOUR TRACKING ───────────────────────────────────────────
+let bhvSessionStart  = 0;
+let bhvQStart        = {};   // { qnum: timestamp when question became active }
+let bhvQDuration     = {};   // { qnum: ms taken before answering }
+let bhvScrolledUp    = false;
+let bhvScrollHandler = null;
+
+function startSessionTracking() {
+  bhvSessionStart  = Date.now();
+  bhvQStart        = {};
+  bhvQDuration     = {};
+  bhvScrolledUp    = false;
+  if (bhvScrollHandler) {
+    window.removeEventListener('scroll', bhvScrollHandler);
+    bhvScrollHandler = null;
+  }
+}
+
+function trackQStart(qnum) {
+  bhvQStart[qnum] = Date.now();
+}
+
+function trackQAnswer(qnum) {
+  if (bhvQStart[qnum]) {
+    bhvQDuration[qnum] = Date.now() - bhvQStart[qnum];
+  }
+}
+
+function setupScrollTracking() {
+  let maxY = 0;
+  let moved = false;
+  bhvScrollHandler = () => {
+    const y = window.scrollY;
+    if (y > maxY) maxY = y;
+    if (moved && y < maxY - 120) bhvScrolledUp = true;
+    if (y > 80) moved = true;
+  };
+  window.addEventListener('scroll', bhvScrollHandler, { passive: true });
+}
+
+function getBehaviourPayload() {
+  const sessionDurationSec    = Math.round((Date.now() - bhvSessionStart) / 1000);
+  const durations              = Object.values(bhvQDuration);
+  const avgTimePerQuestionSec  = durations.length
+    ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length / 1000) : 0;
+  const questionTimesSeconds   = {};
+  Object.entries(bhvQDuration).forEach(([k, v]) => { questionTimesSeconds[k] = Math.round(v / 1000); });
+  return { sessionDurationSec, avgTimePerQuestionSec, scrolledBackToPassage: bhvScrolledUp, questionTimesSeconds };
+}
+
+async function updateStudentBrain(behaviour, accuracy) {
+  if (!currentUser) return;
+  try {
+    const prev  = studentData?.brain || {};
+    const n     = (prev.totalSessions || 0) + 1;
+    const alpha = 1 / Math.min(n, 10);   // EMA — stabilises after ~10 sessions
+    const ema   = (prevVal, newVal) => Math.round(prevVal + (newVal - prevVal) * alpha);
+    const brain = {
+      totalSessions:         n,
+      avgSessionDurationSec: ema(prev.avgSessionDurationSec || 0, behaviour.sessionDurationSec),
+      avgTimePerQuestionSec: ema(prev.avgTimePerQuestionSec || 0, behaviour.avgTimePerQuestionSec),
+      scrollsBackPct:        ema(prev.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
+      recentAccuracy:        accuracy,
+    };
+    await updateStudentDoc(currentUser.uid, { brain });
+    if (studentData) studentData.brain = brain;
+  } catch { /* non-critical */ }
+}
+
 // ── READING SESSION ───────────────────────────────────────────────
 async function loadReadingSession() {
   sessionQuestions = [];
@@ -536,6 +605,10 @@ Return ONLY this JSON:
 
     document.getElementById('reading-loading').classList.add('hidden');
     document.getElementById('reading-content').classList.remove('hidden');
+
+    startSessionTracking();
+    setupScrollTracking();
+    trackQStart(1);
   } catch {
     document.getElementById('reading-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load passage. Please go back and try again.</p>';
@@ -568,6 +641,9 @@ window.answerTFNG = function (qnum, val) {
   if (sessionAnswers[qnum]) return;
   const q = sessionQuestions.find(x => x.id === qnum);
   if (!q) return;
+
+  trackQAnswer(qnum);
+  trackQStart(qnum + 1);
 
   const isRight = val === q.answer;
   sessionAnswers[qnum] = { val, isRight };
@@ -656,9 +732,13 @@ window.continueTLToNotebook = function () { finishReadingSession(); };
 
 // ── READING FINISH ─────────────────────────────────────────────────
 async function finishReadingSession() {
-  const total    = sessionQuestions.length || 5;
-  const accuracy = Math.round((sessionCorrect / total) * 100);
-  const day      = studentData.dayNumber || 1;
+  const total     = sessionQuestions.length || 5;
+  const accuracy  = Math.round((sessionCorrect / total) * 100);
+  const day       = studentData.dayNumber || 1;
+  const behaviour = getBehaviourPayload();
+
+  // Remove scroll listener now that session is done
+  if (bhvScrollHandler) { window.removeEventListener('scroll', bhvScrollHandler); bhvScrollHandler = null; }
 
   try {
     await saveSessionDoc(currentUser.uid, {
@@ -671,7 +751,8 @@ async function finishReadingSession() {
       toughLovePassed:    tlPassed,
       warmupCorrect,
       aiPassageTopic:     sessionTopic,
-      durationMinutes:    0
+      durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
+      behaviour
     });
 
     const prev         = studentData.skills?.reading?.tfng || { accuracy: 0, attempted: 0 };
@@ -694,6 +775,7 @@ async function finishReadingSession() {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
+    await updateStudentBrain(behaviour, accuracy);
   } catch { /* Firestore save failed — still show notebook */ }
 
   if (mockMode) {
@@ -800,6 +882,9 @@ Return ONLY this JSON:
 
     document.getElementById('listening-loading').classList.add('hidden');
     document.getElementById('listening-content').classList.remove('hidden');
+
+    startSessionTracking();
+    trackQStart(1);
   } catch {
     document.getElementById('listening-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load listening scenario. Please go back and try again.</p>';
@@ -808,6 +893,8 @@ Return ONLY this JSON:
 
 window.answerMC = function (qnum, val) {
   if (listenAnswers[qnum]) return;
+  trackQAnswer(qnum);
+  trackQStart(qnum + 1);
   listenAnswers[qnum] = val;
 
   document.querySelectorAll(`#mc${qnum} .mc-option`).forEach(b => {
@@ -870,11 +957,12 @@ window.submitListening = function () {
 };
 
 window.finishListeningSession = async function () {
-  const total    = listenQuestions.length || 5;
-  const accuracy = Math.round((listenCorrect / total) * 100);
-  const day      = studentData.dayNumber || 2;
-  const skillKey = listenType === 'mc' ? 'multipleChoice' : 'formCompletion';
+  const total     = listenQuestions.length || 5;
+  const accuracy  = Math.round((listenCorrect / total) * 100);
+  const day       = studentData.dayNumber || 2;
+  const skillKey  = listenType === 'mc' ? 'multipleChoice' : 'formCompletion';
   const firestoreKey = `listening.${skillKey}`;
+  const behaviour = getBehaviourPayload();
 
   try {
     await saveSessionDoc(currentUser.uid, {
@@ -885,7 +973,8 @@ window.finishListeningSession = async function () {
       questionsCorrect:   listenCorrect,
       accuracy,
       warmupCorrect,
-      durationMinutes:    0
+      durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
+      behaviour
     });
 
     const prev         = studentData.skills?.listening?.[skillKey] || { accuracy: 0, attempted: 0 };
@@ -906,6 +995,7 @@ window.finishListeningSession = async function () {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
+    await updateStudentBrain(behaviour, accuracy);
   } catch { /* still show notebook */ }
 
   if (mockMode) {
@@ -963,6 +1053,7 @@ Return ONLY this JSON:
 
     document.getElementById('writing-loading').classList.add('hidden');
     document.getElementById('writing-prompt-view').classList.remove('hidden');
+    startSessionTracking();
   } catch {
     document.getElementById('writing-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load writing task. Please go back and try again.</p>';
@@ -1042,9 +1133,10 @@ Return ONLY this JSON:
 };
 
 window.finishWritingSession = async function () {
-  const day    = studentData?.dayNumber || 6;
+  const day     = studentData?.dayNumber || 6;
   const isTask1 = day === 6 || day === 10;
   const taskKey = isTask1 ? 'task1' : 'task2';
+  const behaviour = getBehaviourPayload();
 
   try {
     await saveSessionDoc(currentUser.uid, {
@@ -1053,7 +1145,8 @@ window.finishWritingSession = async function () {
       skillPracticed: DAY_PLAN[day]?.skill || `writing.${taskKey}`,
       bandEstimate:   writingBandEst,
       wordCount:      writingResponse.split(/\s+/).length,
-      durationMinutes: 0
+      durationMinutes: Math.round(behaviour.sessionDurationSec / 60),
+      behaviour
     });
 
     const prev = studentData.skills?.writing?.[taskKey] || { bandEstimate: 0, attempted: 0 };
@@ -1133,6 +1226,7 @@ Return ONLY this JSON:
 
     document.getElementById('speaking-loading').classList.add('hidden');
     document.getElementById('speaking-prompt-view').classList.remove('hidden');
+    startSessionTracking();
   } catch {
     document.getElementById('speaking-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load speaking questions. Please go back and try again.</p>';
@@ -1257,7 +1351,10 @@ Return ONLY this JSON:
 }
 
 window.finishSpeakingSession = async function () {
-  const day = studentData?.dayNumber || 8;
+  const day       = studentData?.dayNumber || 8;
+  const behaviour = getBehaviourPayload();
+  // For speaking, override durationSec with actual recording time
+  behaviour.sessionDurationSec = Math.max(behaviour.sessionDurationSec, recordSeconds);
 
   try {
     await saveSessionDoc(currentUser.uid, {
@@ -1266,7 +1363,8 @@ window.finishSpeakingSession = async function () {
       skillPracticed: DAY_PLAN[day]?.skill || 'speaking.part1',
       bandEstimate:   speakingBandEst,
       transcript:     speakingTranscript,
-      durationMinutes: Math.round(recordSeconds / 60)
+      durationMinutes: Math.round(behaviour.sessionDurationSec / 60),
+      behaviour
     });
 
     const prev = studentData.skills?.speaking?.part1 || { bandEstimate: 0, attempted: 0 };
