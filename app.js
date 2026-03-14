@@ -102,25 +102,53 @@ onAuthStateChanged(auth, async user => {
     return;
   }
   currentUser = user;
+  await bootApp();
+});
+
+window.bootApp = async function bootApp() {
   try {
-    const snap = await getStudentDoc(user.uid);
-    const needsOnboarding = !snap.exists() || snap.data().isNewStudent === true;
+    const snap = await getStudentDoc(currentUser.uid);
+
+    // Needs onboarding if:
+    //  - doc doesn't exist yet
+    //  - isNewStudent is true OR undefined (field never set)
+    //  - targetBand is missing (onboarding was interrupted before saving)
+    const data = snap.exists() ? snap.data() : null;
+    const needsOnboarding = !data
+      || data.isNewStudent !== false
+      || !data.targetBand;
+
     if (needsOnboarding) {
-      // Ensure skeleton doc exists so we can update it after onboarding
       if (!snap.exists()) {
-        await createSkeletonDoc(user.uid);
+        await createSkeletonDoc(currentUser.uid);
       }
       initOnboarding();
       goTo('s-onboarding');
     } else {
-      studentData = snap.data();
+      studentData = data;
       renderHome();
       goTo('s-home');
     }
-  } catch {
-    goTo('s-home');
+  } catch (err) {
+    // Firestore failed — do NOT fall through to home, show a retry screen
+    console.error('bootApp error:', err);
+    showBootError();
   }
-});
+}
+
+function showBootError() {
+  const el = document.getElementById('s-loading');
+  if (el) {
+    el.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 24px;text-align:center">
+        <div style="font-size:40px">⚠️</div>
+        <p style="font-size:15px;font-weight:600;color:#1a1a2e">Could not connect to Toody.</p>
+        <p style="font-size:13px;color:#666;line-height:1.6">Check your internet connection and try again.</p>
+        <button onclick="bootApp()" style="background:#6557D4;color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer">Retry</button>
+      </div>`;
+    goTo('s-loading');
+  }
+}
 
 // ── FIREBASE HELPERS ─────────────────────────────────────────────
 function getStudentDoc(uid) {
