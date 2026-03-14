@@ -127,7 +127,15 @@
     <div class="toody-bubble">Here's what today's session looks like. Read this before we start.</div>
   </div>
   <div class="expect-list" id="si-expect-list"></div>
-  <button class="btn mt16" onclick="goToSession()">I'm ready — let's go <span class="arrow">→</span></button>
+  <button class="btn mt16" id="btn-ready" onclick="
+    console.log('[Toody] btn-ready clicked, goToSession=', typeof window.goToSession);
+    if (typeof window.goToSession === 'function') {
+      window.goToSession();
+    } else {
+      console.error('[Toody] window.goToSession is not defined — module may not have loaded');
+      alert('Session could not start. Please reload the page.');
+    }
+  ">I'm ready — let's go <span class="arrow">→</span></button>
 </div>
 
 <!-- ══════════════════════ WARMUP ══════════════════════ -->
