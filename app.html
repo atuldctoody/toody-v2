@@ -138,6 +138,76 @@
   ">I'm ready — let's go <span class="arrow">→</span></button>
 </div>
 
+<!-- ══════════════════════ TEACH FIRST (Day 1) ══════════════════════ -->
+<div class="screen" id="s-teach">
+  <div class="nav">
+    <div class="logo"><div class="logo-mark">📖</div><div class="logo-text">Too<span>dy</span></div></div>
+    <div class="nav-right"><div class="day-badge">Day 1</div></div>
+  </div>
+  <div class="phase-bar">
+    <div class="phase-dot active"></div>
+    <div class="phase-dot"></div>
+    <div class="phase-dot"></div>
+  </div>
+  <div class="phase-label">Phase 1 — <span class="pl-name">Learn the Strategy</span></div>
+
+  <div id="teach-loading" class="screen-loading"><div class="spinner"></div><p>Preparing your lesson…</p></div>
+
+  <!-- Phase 0: Concept explanation -->
+  <div id="teach-concept" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">📖</div>
+      <div class="toody-bubble">Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.</div>
+    </div>
+    <div class="card">
+      <div class="card-label">The Strategy</div>
+      <div id="teach-concept-body" style="font-size:14px;line-height:1.75;color:var(--text)"></div>
+    </div>
+    <button class="btn mt16" onclick="window.teachShowWorked()">Show me an example <span class="arrow">→</span></button>
+  </div>
+
+  <!-- Phase 1: Worked example -->
+  <div id="teach-worked" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🔍</div>
+      <div class="toody-bubble">Here's a real example. I'll walk you through <strong>my reasoning</strong> step by step.</div>
+    </div>
+    <div class="passage-wrap">
+      <div class="passage-label">Passage</div>
+      <div class="passage-text" id="teach-we-passage"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Statement to judge</div>
+      <div class="q-text" id="teach-we-statement" style="margin-bottom:0"></div>
+    </div>
+    <div id="teach-steps-container"></div>
+    <button class="btn hidden mt16" id="teach-try-btn" onclick="window.teachShowMicro()">Try one yourself <span class="arrow">→</span></button>
+  </div>
+
+  <!-- Phase 2: Micro test -->
+  <div id="teach-micro" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🎯</div>
+      <div class="toody-bubble">Your turn. No pressure — just try applying the strategy.</div>
+    </div>
+    <div class="passage-wrap">
+      <div class="passage-label">Passage</div>
+      <div class="passage-text" id="teach-micro-passage"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Quick Check</div>
+      <div class="q-text" id="teach-micro-statement" style="margin-bottom:14px"></div>
+      <div class="tfng">
+        <button class="tfng-btn" onclick="window.answerMicro('True')"  data-mv="True">✓ True</button>
+        <button class="tfng-btn" onclick="window.answerMicro('False')" data-mv="False">✗ False</button>
+        <button class="tfng-btn" onclick="window.answerMicro('NG')"    data-mv="NG">? Not Given</button>
+      </div>
+      <div class="result-flash" id="teach-micro-result"></div>
+    </div>
+    <button class="btn hidden mt16" id="teach-session-btn" onclick="window.startRealSession()">Start the real session <span class="arrow">→</span></button>
+  </div>
+</div>
+
 <!-- ══════════════════════ WARMUP ══════════════════════ -->
 <div class="screen" id="s-warmup">
   <div class="nav">
@@ -236,17 +306,32 @@
   <div id="listening-content" class="hidden">
     <div class="toody-msg">
       <div class="toody-avatar">🎧</div>
-      <div class="toody-bubble" id="listening-intro-msg">Read the scenario carefully — it describes exactly what you would hear in a real IELTS listening test.</div>
+      <div class="toody-bubble" id="listening-intro-msg">Listen to the audio carefully, then answer the questions below.</div>
     </div>
-    <div class="passage-wrap">
-      <div class="passage-label">🎧 Listening Scenario</div>
-      <div class="passage-text" id="listening-scenario"></div>
+
+    <!-- Audio Player -->
+    <div class="audio-scenario-card" id="listening-audio-wrap">
+      <div class="audio-scenario-label">🎧 Audio Scenario</div>
+      <div class="audio-player-ui">
+        <button class="audio-play-btn" id="audio-play-btn" onclick="window.toggleAudio()" disabled>▶</button>
+        <div class="audio-progress-track" onclick="window.seekAudio(event)">
+          <div class="audio-progress-fill" id="audio-progress-fill" style="width:0%"></div>
+        </div>
+        <span class="audio-time" id="audio-time">0:00</span>
+        <button class="audio-replay-btn" onclick="window.replayAudio()" title="Replay from start">↺</button>
+      </div>
+      <p class="audio-hint" id="audio-hint-text">Loading audio…</p>
     </div>
-    <div class="card">
-      <div class="card-label" id="listening-q-label">Questions</div>
-      <div id="listening-questions"></div>
-      <button class="btn mt16" id="btn-listening-submit" disabled onclick="submitListening()">Submit answers <span class="arrow">→</span></button>
+
+    <!-- Questions — hidden until student presses play -->
+    <div id="listening-questions-gate" class="hidden">
+      <div class="card">
+        <div class="card-label" id="listening-q-label">Questions</div>
+        <div id="listening-questions"></div>
+        <button class="btn mt16" id="btn-listening-submit" disabled onclick="submitListening()">Submit answers <span class="arrow">→</span></button>
+      </div>
     </div>
+
     <div class="card hidden" id="listening-results">
       <div class="card-label">Results</div>
       <div id="listening-results-body"></div>

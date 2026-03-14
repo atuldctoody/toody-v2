@@ -12,8 +12,9 @@ if ('serviceWorker' in navigator) {
 }
 
 // ── CONSTANTS ────────────────────────────────────────────────────
-const API_URL       = 'https://toody-api.vercel.app/api/generate';
+const API_URL        = 'https://toody-api.vercel.app/api/generate';
 const TRANSCRIBE_URL = 'https://toody-api.vercel.app/api/transcribe';
+const AUDIO_URL      = 'https://toody-api.vercel.app/api/audio';
 
 const DAY_PLAN = {
   1:  { skill: 'reading.tfng',             screen: 's-reading',   section: 'Reading',   label: 'True / False / Not Given',   icon: '📖', desc: 'AI-generated passage + 5 questions. Toody explains every answer.' },
@@ -64,11 +65,17 @@ let warmupQ       = null;
 let warmupCorrect = false;
 
 // Listening session
-let listenQuestions = [];
-let listenScenario  = '';
-let listenAnswers   = {};
-let listenType      = 'mc';   // 'mc' | 'fc'
-let listenCorrect   = 0;
+let listenQuestions  = [];
+let listenScenario   = '';
+let listenAnswers    = {};
+let listenType       = 'mc';   // 'mc' | 'fc'
+let listenCorrect    = 0;
+let listenAudioEl    = null;   // Audio element for ElevenLabs playback
+let listenHasPlayed  = false;  // Whether student has pressed play at least once
+
+// Teach-first (Day 1)
+let teachData = null;  // AI-generated lesson content
+let teachStep = 0;     // Current step in worked example
 
 // Writing session
 let writingTaskData = null;
@@ -433,12 +440,13 @@ window.goToSession = function () {
   document.getElementById('speaking-day-badge').textContent  = `Day ${day}`;
   document.getElementById('nb-day-badge').textContent        = `Day ${day}`;
 
-  // Warmup only before reading sessions on Day 2+
-  if (day > 1 && plan.screen === 's-reading') {
-    console.log('[Toody] routing to warmup');
+  // Day 1: teach-first before reading session
+  if (day === 1 && plan.screen === 's-reading') {
+    loadTeachFirst();
+  // Day 2+: warmup before reading sessions
+  } else if (day > 1 && plan.screen === 's-reading') {
     loadWarmup(plan);
   } else {
-    console.log('[Toody] routing to launchSkillScreen, screen:', plan.screen);
     launchSkillScreen(plan);
   }
 };
@@ -505,6 +513,155 @@ function launchSkillScreen(plan) {
   else if (day === 10)                    { setupMiniMock(); goTo('s-minimock'); }
   else loadReadingSession();
 }
+
+// ── TEACH FIRST (Day 1) ───────────────────────────────────────────
+async function loadTeachFirst() {
+  teachData = null;
+  teachStep = 0;
+
+  document.getElementById('teach-loading').classList.remove('hidden');
+  document.getElementById('teach-concept').classList.add('hidden');
+  document.getElementById('teach-worked').classList.add('hidden');
+  document.getElementById('teach-micro').classList.add('hidden');
+  goTo('s-teach');
+
+  const band = studentData?.targetBand || 6.5;
+  const prompt = {
+    system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble.',
+    user: `Generate a teach-first lesson on True/False/Not Given reading for a Band ${band} IELTS student.
+
+Return ONLY this JSON:
+{
+  "concept": "2 short paragraphs explaining the T/F/NG strategy. Paragraph 1: define True, False, Not Given in plain language. Paragraph 2: the #1 mistake students make (confusing 'False' with 'Not Given') and how to avoid it.",
+  "workedExample": {
+    "passage": "2 academic sentences on any interesting topic",
+    "statement": "a clear testable claim about the passage",
+    "answer": "True|False|NG",
+    "steps": [
+      "Step 1: Find the relevant part of the passage. Quote the key phrase.",
+      "Step 2: What exactly is the statement claiming?",
+      "Step 3: Compare the two. Does the passage confirm, contradict, or stay silent?"
+    ],
+    "conclusion": "Therefore the answer is [answer] — one sentence saying why."
+  },
+  "microTest": {
+    "passage": "2 academic sentences on a completely different topic",
+    "statement": "a testable claim",
+    "answer": "True|False|NG",
+    "explanation": "one sentence explaining why"
+  }
+}`
+  };
+
+  try {
+    const raw  = await callAI(prompt);
+    teachData  = JSON.parse(raw);
+
+    document.getElementById('teach-concept-body').innerHTML = teachData.concept
+      .split('\n')
+      .filter(p => p.trim())
+      .map(p => `<p style="margin-bottom:12px">${p}</p>`)
+      .join('');
+
+    document.getElementById('teach-loading').classList.add('hidden');
+    document.getElementById('teach-concept').classList.remove('hidden');
+  } catch {
+    // If teaching fails, skip straight to the reading session
+    loadReadingSession();
+  }
+}
+
+window.teachShowWorked = function () {
+  document.getElementById('teach-concept').classList.add('hidden');
+
+  const we = teachData.workedExample;
+  document.getElementById('teach-we-passage').innerHTML = we.passage
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('teach-we-statement').textContent = we.statement;
+
+  teachStep = 0;
+  const stepsHtml = we.steps.map((s, i) => `
+    <div class="teach-step ${i === 0 ? '' : 'hidden'}" id="teach-step-${i}">
+      <div class="card" style="margin-top:12px">
+        <div class="card-label">Step ${i + 1} of ${we.steps.length}</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--text)">${s}</p>
+      </div>
+    </div>`).join('');
+
+  const conclusionHtml = `
+    <div class="teach-step hidden" id="teach-step-conclusion">
+      <div class="card" style="margin-top:12px;border:2px solid var(--success)">
+        <div class="card-label" style="color:var(--success)">✅ Answer</div>
+        <p style="font-size:14px;line-height:1.6;font-weight:600;color:var(--text)">${we.conclusion}</p>
+      </div>
+    </div>`;
+
+  const btnHtml = `<button class="btn mt16" id="teach-step-btn" onclick="window.teachStepNext()">Next step <span class="arrow">→</span></button>`;
+
+  document.getElementById('teach-steps-container').innerHTML = stepsHtml + conclusionHtml + btnHtml;
+  document.getElementById('teach-try-btn').classList.add('hidden');
+  document.getElementById('teach-worked').classList.remove('hidden');
+};
+
+window.teachStepNext = function () {
+  const totalSteps = teachData.workedExample.steps.length;
+  teachStep++;
+
+  const btn = document.getElementById('teach-step-btn');
+  if (teachStep < totalSteps) {
+    document.getElementById(`teach-step-${teachStep}`).classList.remove('hidden');
+    if (teachStep === totalSteps - 1) btn.textContent = 'Show the answer →';
+  } else {
+    // Show conclusion, hide step button, show "Try yourself" button
+    document.getElementById('teach-step-conclusion').classList.remove('hidden');
+    btn.classList.add('hidden');
+    document.getElementById('teach-try-btn').classList.remove('hidden');
+  }
+};
+
+window.teachShowMicro = function () {
+  document.getElementById('teach-worked').classList.add('hidden');
+
+  const micro = teachData.microTest;
+  document.getElementById('teach-micro-passage').innerHTML = micro.passage
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('teach-micro-statement').textContent = micro.statement;
+
+  document.getElementById('teach-micro-result').className = 'result-flash';
+  document.getElementById('teach-micro-result').textContent = '';
+  document.getElementById('teach-session-btn').classList.add('hidden');
+  document.querySelectorAll('[data-mv]').forEach(b => {
+    b.disabled  = false;
+    b.className = 'tfng-btn';
+  });
+
+  document.getElementById('teach-micro').classList.remove('hidden');
+};
+
+window.answerMicro = function (val) {
+  if (!teachData?.microTest) return;
+  const micro = teachData.microTest;
+
+  document.querySelectorAll('[data-mv]').forEach(b => {
+    b.disabled = true;
+    const bVal = b.getAttribute('data-mv');
+    if (bVal.toLowerCase() === (micro.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (bVal === val && bVal.toLowerCase() !== (micro.answer || '').toLowerCase()) b.classList.add('wrong');
+  });
+
+  const isRight = val.toLowerCase() === (micro.answer || '').toLowerCase();
+  const rf = document.getElementById('teach-micro-result');
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight
+    ? `✅ Correct! ${micro.explanation}`
+    : `❌ The answer is <strong>${micro.answer}</strong>. ${micro.explanation}`;
+
+  document.getElementById('teach-session-btn').classList.remove('hidden');
+};
+
+window.startRealSession = function () {
+  loadReadingSession();
+};
 
 // ── BEHAVIOUR TRACKING ───────────────────────────────────────────
 let bhvSessionStart  = 0;
@@ -666,14 +823,14 @@ window.answerTFNG = function (qnum, val) {
   trackQAnswer(qnum);
   trackQStart(qnum + 1);
 
-  const isRight = val === q.answer;
+  const isRight = val.toLowerCase() === (q.answer || '').toLowerCase();
   sessionAnswers[qnum] = { val, isRight };
   if (isRight) sessionCorrect++;
 
   document.querySelectorAll(`#tfng${qnum} .tfng-btn`).forEach(b => {
     b.disabled = true;
-    if      (b.dataset.v === q.answer)        b.classList.add('correct');
-    else if (b.dataset.v === val && !isRight) b.classList.add('wrong');
+    if      (b.dataset.v.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (b.dataset.v === val && !isRight)                               b.classList.add('wrong');
   });
 
   const rf = document.getElementById(`rf${qnum}`);
@@ -688,9 +845,8 @@ window.answerTFNG = function (qnum, val) {
 };
 
 window.submitReading = function () {
-  const day        = studentData?.dayNumber || 1;
   const tlAnswer   = tlQ ? sessionAnswers[tlQ.id] : null;
-  const tlEligible = day > 1 && tlQ !== null && tlAnswer?.isRight === true;
+  const tlEligible = tlQ !== null && tlAnswer?.isRight === true;
 
   if (tlEligible) {
     renderToughLove();
@@ -702,7 +858,6 @@ window.submitReading = function () {
 
 // ── TOUGH LOVE ─────────────────────────────────────────────────────
 function buildToughLove(questions, passage, day) {
-  if (day === 1) { tlQ = null; return; }
   tlQ           = questions[Math.floor(Math.random() * questions.length)];
   tlKeySentence = tlQ.keySentence || '';
   tlExplanation = tlQ.explanation || '';
@@ -813,16 +968,18 @@ async function finishReadingSession() {
 // ── LISTENING SESSION ─────────────────────────────────────────────
 async function loadListeningSession() {
   const day = studentData?.dayNumber || 2;
-  listenType      = day === 4 ? 'fc' : 'mc';
-  listenQuestions = [];
-  listenScenario  = '';
-  listenAnswers   = {};
-  listenCorrect   = 0;
+  listenType       = day === 4 ? 'fc' : 'mc';
+  listenQuestions  = [];
+  listenScenario   = '';
+  listenAnswers    = {};
+  listenCorrect    = 0;
+  listenHasPlayed  = false;
+  if (listenAudioEl) { listenAudioEl.pause(); listenAudioEl = null; }
 
   document.getElementById('listening-loading').classList.remove('hidden');
   document.getElementById('listening-content').classList.add('hidden');
   document.getElementById('listening-results').classList.add('hidden');
-  document.getElementById('btn-listening-submit').disabled = true;
+  document.getElementById('listening-questions-gate').classList.add('hidden');
 
   document.getElementById('listening-p1-dot').className = 'phase-dot';
   goTo('s-listening');
@@ -834,10 +991,10 @@ async function loadListeningSession() {
     prompt = {
       system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
       user: `Create an IELTS Listening Multiple Choice exercise for a Band ${band} student.
-The scenario describes what a student would hear in a real IELTS recording.
+"transcript" must be the ACTUAL spoken words a student would hear — write it as natural speech (4-6 sentences of a real conversation, monologue, or announcement). The questions must be answerable from the transcript.
 Return ONLY this JSON:
 {
-  "scenario": "3-4 sentence description of the audio content (e.g. a conversation, monologue, lecture)",
+  "transcript": "The actual spoken words — written as natural human speech, not a description. 4-6 sentences.",
   "questions": [
     {"id":1,"text":"question","options":["A. option","B. option","C. option"],"answer":"A","explanation":"why"},
     {"id":2,"text":"question","options":["A. option","B. option","C. option"],"answer":"B","explanation":"why"},
@@ -851,12 +1008,13 @@ Return ONLY this JSON:
     prompt = {
       system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
       user: `Create an IELTS Listening Form Completion exercise for a Band ${band} student.
+"transcript" must be the ACTUAL spoken words of the phone call or interview — write it as natural speech (4-6 sentences). Include the answers embedded naturally in the spoken text.
 Return ONLY this JSON:
 {
-  "scenario": "3-4 sentence description of the audio (e.g. a phone call, information session, interview)",
-  "formTitle": "title of the form",
+  "transcript": "The actual spoken words of the interaction — written as natural human speech, not a description.",
+  "formTitle": "title of the form being completed",
   "questions": [
-    {"id":1,"label":"Name","answer":"exact answer from scenario","hint":"first name only"},
+    {"id":1,"label":"Name","answer":"exact answer spoken in transcript","hint":"first name only"},
     {"id":2,"label":"Phone number","answer":"exact answer","hint":"10 digits"},
     {"id":3,"label":"Date","answer":"exact answer","hint":"day and month"},
     {"id":4,"label":"Reason for contact","answer":"exact answer","hint":"one word or short phrase"},
@@ -869,14 +1027,12 @@ Return ONLY this JSON:
   try {
     const raw    = await callAI(prompt);
     const parsed = JSON.parse(raw);
-    listenScenario  = parsed.scenario;
+    listenScenario  = parsed.transcript || parsed.scenario || '';
     listenQuestions = parsed.questions;
 
-    document.getElementById('listening-scenario').innerHTML = parsed.scenario
-      .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
-
+    // Render questions (gated — hidden until user presses play)
     if (listenType === 'mc') {
-      document.getElementById('listening-q-label').textContent   = 'Questions — Multiple Choice';
+      document.getElementById('listening-q-label').textContent = 'Questions — Multiple Choice';
       document.getElementById('listening-questions').innerHTML = listenQuestions.map(q => `
         <div class="q-block" id="lqb${q.id}">
           <div class="q-num">${q.id}</div>
@@ -890,7 +1046,7 @@ Return ONLY this JSON:
         </div>
       `).join('');
     } else {
-      document.getElementById('listening-q-label').textContent = `${parsed.formTitle || 'Form Completion'}`;
+      document.getElementById('listening-q-label').textContent = parsed.formTitle || 'Form Completion';
       document.getElementById('listening-questions').innerHTML = `
         <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Complete the form. Write no more than <strong>three words</strong> for each answer.</p>
         ${listenQuestions.map(q => `
@@ -906,10 +1062,120 @@ Return ONLY this JSON:
 
     startSessionTracking();
     trackQStart(1);
+
+    // Fetch audio from ElevenLabs (async — player shows loading state)
+    fetchListeningAudio(listenScenario);
+
   } catch {
     document.getElementById('listening-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load listening scenario. Please go back and try again.</p>';
   }
+}
+
+// ── LISTENING AUDIO ────────────────────────────────────────────────
+async function fetchListeningAudio(text) {
+  try {
+    const res = await fetch(AUDIO_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ text })
+    });
+    if (!res.ok) throw new Error('Audio fetch failed');
+    const data = await res.json();
+    if (!data.audio) throw new Error('No audio in response');
+
+    const blob = base64ToBlob(data.audio, data.mimeType || 'audio/mpeg');
+    const url  = URL.createObjectURL(blob);
+    setupAudioPlayer(url);
+  } catch {
+    // Graceful fallback: show questions and an inline scenario text
+    document.getElementById('audio-hint-text').textContent = 'Audio unavailable. Read the scenario below and answer the questions.';
+    document.getElementById('listening-audio-wrap').insertAdjacentHTML('afterend',
+      `<div class="passage-wrap" style="margin-top:0">
+         <div class="passage-label">Scenario (Text Fallback)</div>
+         <div class="passage-text">${listenScenario.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('')}</div>
+       </div>`);
+    showListeningQuestionsGate();
+  }
+}
+
+function base64ToBlob(base64, mimeType) {
+  const bytes  = atob(base64);
+  const buffer = new ArrayBuffer(bytes.length);
+  const view   = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.length; i++) view[i] = bytes.charCodeAt(i);
+  return new Blob([buffer], { type: mimeType });
+}
+
+function setupAudioPlayer(url) {
+  if (listenAudioEl) { listenAudioEl.pause(); }
+  listenAudioEl = new Audio(url);
+
+  listenAudioEl.addEventListener('timeupdate', updateAudioProgress);
+  listenAudioEl.addEventListener('ended', () => {
+    const btn = document.getElementById('audio-play-btn');
+    if (btn) btn.textContent = '▶';
+    showListeningQuestionsGate();
+  });
+  listenAudioEl.addEventListener('error', () => {
+    showListeningQuestionsGate();
+  });
+
+  const btn  = document.getElementById('audio-play-btn');
+  const hint = document.getElementById('audio-hint-text');
+  if (btn)  { btn.disabled = false; btn.textContent = '▶'; }
+  if (hint) hint.textContent = 'Press ▶ to listen before answering.';
+}
+
+function updateAudioProgress() {
+  if (!listenAudioEl || !listenAudioEl.duration) return;
+  const pct  = (listenAudioEl.currentTime / listenAudioEl.duration) * 100;
+  const fill = document.getElementById('audio-progress-fill');
+  const time = document.getElementById('audio-time');
+  if (fill) fill.style.width = pct + '%';
+  if (time) {
+    const secs = Math.floor(listenAudioEl.currentTime);
+    time.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')}`;
+  }
+}
+
+window.toggleAudio = function () {
+  if (!listenAudioEl) return;
+  const btn = document.getElementById('audio-play-btn');
+  if (listenAudioEl.paused) {
+    listenAudioEl.play();
+    if (btn) btn.textContent = '⏸';
+    if (!listenHasPlayed) {
+      listenHasPlayed = true;
+      // Reveal questions 1 second after first play
+      setTimeout(showListeningQuestionsGate, 1000);
+    }
+  } else {
+    listenAudioEl.pause();
+    if (btn) btn.textContent = '▶';
+  }
+};
+
+window.replayAudio = function () {
+  if (!listenAudioEl) return;
+  listenAudioEl.currentTime = 0;
+  listenAudioEl.play();
+  const btn = document.getElementById('audio-play-btn');
+  if (btn) btn.textContent = '⏸';
+};
+
+window.seekAudio = function (e) {
+  if (!listenAudioEl || !listenAudioEl.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct  = (e.clientX - rect.left) / rect.width;
+  listenAudioEl.currentTime = pct * listenAudioEl.duration;
+};
+
+function showListeningQuestionsGate() {
+  const gate = document.getElementById('listening-questions-gate');
+  const hint = document.getElementById('audio-hint-text');
+  if (gate) gate.classList.remove('hidden');
+  if (hint && listenHasPlayed) hint.textContent = 'You can replay the audio at any time.';
 }
 
 window.answerMC = function (qnum, val) {
@@ -945,7 +1211,7 @@ window.submitListening = function () {
 
     if (listenType === 'mc') {
       userAns = listenAnswers[q.id] || '—';
-      isRight = userAns === q.answer;
+      isRight = (userAns || '').toUpperCase() === (q.answer || '').toUpperCase();
     } else {
       const el = document.getElementById(`fc${q.id}`);
       userAns  = el ? el.value.trim() : '';
@@ -978,6 +1244,7 @@ window.submitListening = function () {
 };
 
 window.finishListeningSession = async function () {
+  if (listenAudioEl) { listenAudioEl.pause(); listenAudioEl = null; }
   const total     = listenQuestions.length || 5;
   const accuracy  = Math.round((listenCorrect / total) * 100);
   const day       = studentData.dayNumber || 2;
