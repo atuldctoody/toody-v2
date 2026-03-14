@@ -1,11 +1,12 @@
-const CACHE = 'toody-v2-v1';
+const CACHE = 'toody-v2-v3';
 const APP_SHELL = [
-  '/toody-v2/index.html',
-  '/toody-v2/app.html',
-  '/toody-v2/styles.css',
-  '/toody-v2/app.js',
-  '/toody-v2/firebase-config.js',
-  '/toody-v2/manifest.json'
+  '/',
+  '/index.html',
+  '/app.html',
+  '/styles.css',
+  '/app.js',
+  '/firebase-config.js',
+  '/manifest.json'
 ];
 
 self.addEventListener('install', e => {

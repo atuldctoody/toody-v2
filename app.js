@@ -105,20 +105,22 @@ onAuthStateChanged(auth, async user => {
   await bootApp();
 });
 
-window.bootApp = async function bootApp() {
+window.bootApp = async function () {
   try {
     const snap = await getStudentDoc(currentUser.uid);
-
-    // Needs onboarding if:
-    //  - doc doesn't exist yet
-    //  - isNewStudent is true OR undefined (field never set)
-    //  - targetBand is missing (onboarding was interrupted before saving)
     const data = snap.exists() ? snap.data() : null;
-    const needsOnboarding = !data
-      || data.isNewStudent !== false
-      || !data.targetBand;
 
-    if (needsOnboarding) {
+    // Gate: hasExperience is the ONLY field written exclusively by the new
+    // 3-question onboarding (setExperience). It is:
+    //   undefined  — old account that pre-dates new onboarding
+    //   null       — skeleton doc created but onboarding not completed
+    //   true/false — onboarding completed ✓
+    // Any value other than true or false means onboarding is incomplete.
+    const onboardingDone = data !== null
+      && (data.hasExperience === true || data.hasExperience === false);
+
+    if (!onboardingDone) {
+      // Create skeleton doc only if no doc exists yet
       if (!snap.exists()) {
         await createSkeletonDoc(currentUser.uid);
       }
@@ -130,11 +132,10 @@ window.bootApp = async function bootApp() {
       goTo('s-home');
     }
   } catch (err) {
-    // Firestore failed — do NOT fall through to home, show a retry screen
     console.error('bootApp error:', err);
     showBootError();
   }
-}
+};
 
 function showBootError() {
   const el = document.getElementById('s-loading');
