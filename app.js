@@ -90,9 +90,15 @@ let mockResults = {};  // { reading, listening, writing, speaking }
 
 // ── ROUTING ──────────────────────────────────────────────────────
 function goTo(id) {
+  console.log('[Toody] goTo:', id);
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
-  if (el) { el.classList.add('active'); window.scrollTo(0, 0); }
+  if (el) {
+    el.classList.add('active');
+    window.scrollTo(0, 0);
+  } else {
+    console.error('[Toody] goTo: element not found:', id);
+  }
 }
 
 // ── AUTH ─────────────────────────────────────────────────────────
@@ -406,21 +412,29 @@ function buildExpectations(day, skill) {
 }
 
 window.goToSession = function () {
+  console.log('[Toody] button clicked');
   const day  = studentData?.dayNumber || 1;
   const plan = DAY_PLAN[Math.min(day, 10)];
-  if (!plan) return;
+  console.log('[Toody] day:', day, '| plan:', plan, '| studentData:', studentData);
 
-  document.getElementById('warmup-day-badge').textContent   = `Day ${day}`;
-  document.getElementById('reading-day-badge').textContent  = `Day ${day}`;
+  if (!plan) {
+    console.error('[Toody] goToSession: no plan found for day', day);
+    return;
+  }
+
+  document.getElementById('warmup-day-badge').textContent    = `Day ${day}`;
+  document.getElementById('reading-day-badge').textContent   = `Day ${day}`;
   document.getElementById('listening-day-badge').textContent = `Day ${day}`;
-  document.getElementById('writing-day-badge').textContent  = `Day ${day}`;
-  document.getElementById('speaking-day-badge').textContent = `Day ${day}`;
-  document.getElementById('nb-day-badge').textContent       = `Day ${day}`;
+  document.getElementById('writing-day-badge').textContent   = `Day ${day}`;
+  document.getElementById('speaking-day-badge').textContent  = `Day ${day}`;
+  document.getElementById('nb-day-badge').textContent        = `Day ${day}`;
 
   // Warmup only before reading sessions on Day 2+
   if (day > 1 && plan.screen === 's-reading') {
+    console.log('[Toody] routing to warmup');
     loadWarmup(plan);
   } else {
+    console.log('[Toody] routing to launchSkillScreen, screen:', plan.screen);
     launchSkillScreen(plan);
   }
 };
@@ -559,6 +573,7 @@ async function updateStudentBrain(behaviour, accuracy) {
 
 // ── READING SESSION ───────────────────────────────────────────────
 async function loadReadingSession() {
+  console.log('[Toody] loadReadingSession() called');
   sessionQuestions = [];
   sessionPassage   = '';
   sessionAnswers   = {};
