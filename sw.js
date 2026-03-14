@@ -1,4 +1,4 @@
-const CACHE = 'toody-v2-v4';
+const CACHE = 'toody-v2-v5';
 const APP_SHELL = [
   '/',
   '/index.html',

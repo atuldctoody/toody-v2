@@ -67,7 +67,7 @@ a { color: inherit; text-decoration: none; }
   gap: 20px;
   background: var(--bg);
 }
-.loading-logo { font-size: 48px; }
+.loading-logo { display: block; flex-shrink: 0; }
 .loading-name {
   font-size: 28px;
   font-weight: 800;
@@ -101,7 +101,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 8px;
 }
-.logo-mark { font-size: 20px; }
+.logo-mark { display: block; flex-shrink: 0; }
 .logo-text {
   font-size: 18px;
   font-weight: 800;
