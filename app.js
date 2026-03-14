@@ -566,6 +566,7 @@ async function loadReadingSession() {
   sessionTopic     = '';
   tlQ = null; tlPassed = false;
 
+  goTo('s-reading');
   document.getElementById('reading-loading').classList.remove('hidden');
   document.getElementById('reading-content').classList.add('hidden');
   document.getElementById('btn-reading-submit').disabled = true;
