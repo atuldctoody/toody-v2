@@ -44,6 +44,8 @@ let studentData  = null;
 // Onboarding
 let obStep            = 0;
 let pendingBand       = 6.5;
+// Briefing
+let briefingCard      = 0;
 let pendingDate       = null;
 let pendingExperience = null;
 let pendingName       = '';
@@ -379,17 +381,53 @@ window.finishOnboarding = async function () {
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
     renderHome();
-    // Show welcome screen
+    // Show welcome screen, then go into briefing
     const welcomeName = document.getElementById('welcome-name');
     if (welcomeName) welcomeName.textContent = pendingName || 'there';
     goTo('s-welcome');
-    setTimeout(() => goTo('s-home'), 2500);
+    setTimeout(() => initBriefing(), 2500);
   } catch (err) {
     console.error('finishOnboarding error', err);
     document.getElementById('ob-saving').classList.add('hidden');
     document.getElementById('ob-error').classList.remove('hidden');
     document.getElementById('ob-finish-btn').disabled = false;
   }
+};
+
+// ── DAY 1 BRIEFING ───────────────────────────────────────────────
+function initBriefing() {
+  briefingCard = 0;
+  // Reset all cards
+  document.querySelectorAll('.briefing-card').forEach((c, i) => {
+    c.classList.toggle('active', i === 0);
+    c.classList.toggle('hidden', i !== 0);
+  });
+  document.querySelectorAll('.briefing-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === 0);
+  });
+  goTo('s-briefing');
+}
+
+window.nextBriefingCard = function () {
+  const prev = document.getElementById(`bc-${briefingCard}`);
+  if (prev) { prev.classList.remove('active'); prev.classList.add('hidden'); }
+  briefingCard++;
+  const next = document.getElementById(`bc-${briefingCard}`);
+  if (next) { next.classList.remove('hidden'); next.classList.add('active'); }
+  // Update dots
+  document.querySelectorAll('.briefing-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === briefingCard);
+  });
+};
+
+window.finishBriefing = async function () {
+  // Mark briefing seen in Firestore (fire-and-forget)
+  try {
+    await updateStudentDoc(currentUser.uid, { briefingSeen: true });
+    if (studentData) studentData.briefingSeen = true;
+  } catch (e) { console.warn('briefing save failed', e); }
+  // Go straight into Teach-First T/F/NG
+  loadTeachFirst('reading.tfng');
 };
 
 // ── HOME ─────────────────────────────────────────────────────────
@@ -522,7 +560,11 @@ window.goToSession = function () {
     return attempted === 0;
   })();
 
-  if (plan.screen === 's-reading' && isFirstTimeSkill) {
+  // Briefing gate: Day 1, first-time skill, briefing not yet seen
+  if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
+    renderHome(); // ensure home data is up to date
+    initBriefing();
+  } else if (plan.screen === 's-reading' && isFirstTimeSkill) {
     loadTeachFirst(plan.skill);
   // Warmup fires on Day 2+ reading sessions that are NOT first-time
   } else if (day > 1 && plan.screen === 's-reading') {
@@ -625,8 +667,8 @@ async function loadTeachFirst(skillKey) {
   if (strategyLabel) strategyLabel.textContent = 'The Strategy';
 
   const conceptPromptDetail = isMH
-    ? `Paragraph 1: explain what Matching Headings tests (identifying the main idea of a paragraph, not details). Paragraph 2: the #1 mistake students make (choosing a heading based on a word that appears in the paragraph rather than the main idea) and how to avoid it.`
-    : `Paragraph 1: define True, False, Not Given in plain language. Paragraph 2: the #1 mistake students make (confusing 'False' with 'Not Given') and how to avoid it.`;
+    ? `An array of 4-5 short bullet strings. Each bullet: one clear fact or rule about Matching Headings. Cover: what it tests (main idea of a paragraph, not details), the #1 mistake (picking a heading based on a word match not the main idea), and how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`
+    : `An array of 4-5 short bullet strings. Each bullet: one clear fact or rule. Cover: what True means (passage confirms), what False means (passage contradicts), what Not Given means (passage is silent — not False!), and the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`;
 
   const microTestPrompt = isMH
     ? `"passage": "one paragraph of 3-4 academic sentences", "statement": "Does the heading '[a heading]' describe the main idea of this paragraph? Answer True if it matches, False if it contradicts or is clearly wrong.", "answer": "True|False", "explanation": "one sentence saying why"`
@@ -638,7 +680,7 @@ async function loadTeachFirst(skillKey) {
 
 Return ONLY this JSON:
 {
-  "concept": "2 short paragraphs. ${conceptPromptDetail}",
+  "concept": ${conceptPromptDetail},
   "workedExample": {
     "passage": "2 academic sentences on any interesting topic",
     "statement": "${isMH ? 'a heading that either does or does not capture the main idea of the passage' : 'a clear testable claim about the passage'}",
@@ -670,11 +712,15 @@ Return ONLY this JSON:
     const raw  = await callAI(prompt);
     teachData  = JSON.parse(raw);
 
-    document.getElementById('teach-concept-body').innerHTML = teachData.concept
-      .split('\n')
-      .filter(p => p.trim())
-      .map(p => `<p style="margin-bottom:12px">${p}</p>`)
-      .join('');
+    // concept is an array of bullet strings; bold **text** markers
+    const bullets = Array.isArray(teachData.concept)
+      ? teachData.concept
+      : String(teachData.concept).split('\n').filter(p => p.trim());
+    const boldify = s => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    document.getElementById('teach-concept-body').innerHTML =
+      '<ul class="teach-bullets">' +
+      bullets.map(b => `<li>${boldify(b.replace(/^[-•]\s*/, ''))}</li>`).join('') +
+      '</ul>';
 
     document.getElementById('teach-loading').classList.add('hidden');
     document.getElementById('teach-concept').classList.remove('hidden');
@@ -705,7 +751,7 @@ window.teachShowWorked = function () {
       <div class="predict-reveal hidden" id="predict-reveal-0">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 1</div>
-          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[0]}</p>
+          <div class="teach-step-text">${we.steps[0]}</div>
         </div>
       </div>
     </div>
@@ -716,7 +762,7 @@ window.teachShowWorked = function () {
       <div class="predict-reveal hidden" id="predict-reveal-1">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 2</div>
-          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[1]}</p>
+          <div class="teach-step-text">${we.steps[1]}</div>
         </div>
       </div>
     </div>
@@ -731,11 +777,11 @@ window.teachShowWorked = function () {
       <div class="predict-reveal hidden" id="predict-reveal-2">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 3</div>
-          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[2]}</p>
+          <div class="teach-step-text">${we.steps[2]}</div>
         </div>
         <div class="card" style="margin-top:8px;border:2px solid var(--success)">
           <div class="card-label" style="color:var(--success)">✅ Answer</div>
-          <p style="font-size:14px;line-height:1.6;font-weight:600;color:var(--text)">${we.conclusion}</p>
+          <div class="teach-step-text" style="font-weight:600">${we.conclusion}</div>
         </div>
       </div>
     </div>`;
