@@ -138,6 +138,16 @@
   ">I'm ready — let's go <span class="arrow">→</span></button>
 </div>
 
+<!-- ══════════════════════ PHASE 2 TRANSITION ══════════════════════ -->
+<div class="screen" id="s-phase2">
+  <div class="phase2-wrap">
+    <div class="phase2-eyebrow">Phase 2</div>
+    <div class="phase2-title">Deep Dive</div>
+    <div class="phase2-skill" id="phase2-skill-name"></div>
+    <div class="phase2-note">5 questions. I’ve tailored these to your level.</div>
+  </div>
+</div>
+
 <!-- ══════════════════════ TEACH FIRST (Day 1) ══════════════════════ -->
 <div class="screen" id="s-teach">
   <div class="nav">
@@ -170,25 +180,52 @@
   <div id="teach-worked" class="hidden">
     <div class="toody-msg">
       <div class="toody-avatar">🔍</div>
-      <div class="toody-bubble">Here's a real example. I'll walk you through <strong>my reasoning</strong> step by step.</div>
+      <div class="toody-bubble">Here’s a real example. I’ll walk you through <strong>my reasoning</strong> — but I want <em>you</em> to predict each step first.</div>
     </div>
     <div class="passage-wrap">
       <div class="passage-label">Passage</div>
       <div class="passage-text" id="teach-we-passage"></div>
     </div>
     <div class="card">
-      <div class="card-label">Statement to judge</div>
+      <div class="card-label">The Statement</div>
       <div class="q-text" id="teach-we-statement" style="margin-bottom:0"></div>
     </div>
     <div id="teach-steps-container"></div>
-    <button class="btn hidden mt16" id="teach-try-btn" onclick="window.teachShowMicro()">Try one yourself <span class="arrow">→</span></button>
+    <button class="btn hidden mt16" id="teach-try-btn" onclick="window.teachShowReinforce()">Lock it in <span class="arrow">→</span></button>
   </div>
 
-  <!-- Phase 2: Micro test -->
+  <!-- Reinforcement options -->
+  <div id="teach-reinforce" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🧠</div>
+      <div class="toody-bubble">Good work. Before you try one solo — how do you want to lock this in?</div>
+    </div>
+    <div class="reinforce-options">
+      <button class="reinforce-btn" onclick="window.teachReinforceHear()">
+        <span class="reinforce-icon">🔊</span>
+        <span class="reinforce-label">Hear it</span>
+        <span class="reinforce-sub">Toody talks you through it</span>
+      </button>
+      <button class="reinforce-btn" onclick="window.teachReinforceSee()">
+        <span class="reinforce-icon">👁</span>
+        <span class="reinforce-label">See it</span>
+        <span class="reinforce-sub">Decision tree visual</span>
+      </button>
+      <button class="reinforce-btn" onclick="window.teachReinforceDrill()">
+        <span class="reinforce-icon">⚡</span>
+        <span class="reinforce-label">Quick drill</span>
+        <span class="reinforce-sub">2 rapid-fire questions</span>
+      </button>
+    </div>
+    <div id="teach-reinforce-content" class="hidden"></div>
+    <button class="btn mt16 hidden" id="teach-continue-micro-btn" onclick="window.teachShowMicro()">Try one yourself <span class="arrow">→</span></button>
+  </div>
+
+  <!-- Micro test -->
   <div id="teach-micro" class="hidden">
     <div class="toody-msg">
       <div class="toody-avatar">🎯</div>
-      <div class="toody-bubble">Your turn. No pressure — just try applying the strategy.</div>
+      <div class="toody-bubble" id="teach-micro-bubble">Your turn. No pressure — just try applying the strategy.</div>
     </div>
     <div class="passage-wrap">
       <div class="passage-label">Passage</div>
@@ -197,14 +234,17 @@
     <div class="card">
       <div class="card-label">Quick Check</div>
       <div class="q-text" id="teach-micro-statement" style="margin-bottom:14px"></div>
-      <div class="tfng">
+      <div class="tfng" id="teach-micro-btns">
         <button class="tfng-btn" onclick="window.answerMicro('True')"  data-mv="True">✓ True</button>
         <button class="tfng-btn" onclick="window.answerMicro('False')" data-mv="False">✗ False</button>
         <button class="tfng-btn" onclick="window.answerMicro('NG')"    data-mv="NG">? Not Given</button>
       </div>
       <div class="result-flash" id="teach-micro-result"></div>
     </div>
-    <button class="btn hidden mt16" id="teach-session-btn" onclick="window.startRealSession()">Start the real session <span class="arrow">→</span></button>
+    <div class="teach-celebrate hidden" id="teach-celebrate">
+      <div class="celebrate-icon">✅</div>
+      <div class="celebrate-text">You’ve got it. Let’s put it to work.</div>
+    </div>
   </div>
 </div>
 

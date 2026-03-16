@@ -74,8 +74,12 @@ let listenAudioEl    = null;   // Audio element for ElevenLabs playback
 let listenHasPlayed  = false;  // Whether student has pressed play at least once
 
 // Teach-first (Day 1)
-let teachData = null;  // AI-generated lesson content
-let teachStep = 0;     // Current step in worked example
+let teachData         = null;  // AI-generated lesson content
+let teachStep         = 0;     // Current step in worked example
+let teachSkillKey     = '';    // Skill being taught (e.g. 'reading.tfng')
+let microAttempts     = 0;     // How many times student tried the micro test
+let teachDrillIndex   = 0;     // Current drill question index
+let teachDrillCorrect = 0;     // Correct answers in quick drill
 
 // Writing session
 let writingTaskData = null;
@@ -523,8 +527,12 @@ function launchSkillScreen(plan) {
 
 // ── TEACH FIRST (first encounter of a skill) ─────────────────────
 async function loadTeachFirst(skillKey) {
-  teachData = null;
-  teachStep = 0;
+  teachData         = null;
+  teachStep         = 0;
+  microAttempts     = 0;
+  teachDrillIndex   = 0;
+  teachDrillCorrect = 0;
+  teachSkillKey     = skillKey || 'reading.tfng';
 
   document.getElementById('teach-loading').classList.remove('hidden');
   document.getElementById('teach-concept').classList.add('hidden');
@@ -565,17 +573,27 @@ Return ONLY this JSON:
     "passage": "2 academic sentences on any interesting topic",
     "statement": "${isMH ? 'a heading that either does or does not capture the main idea of the passage' : 'a clear testable claim about the passage'}",
     "answer": "${isMH ? 'True|False' : 'True|False|NG'}",
+    "relevantPhrase": "exact phrase from the passage that is key to answering",
+    "statementClaim": "one sentence: what exactly the statement is claiming",
     "steps": [
-      "Step 1: ${isMH ? 'Read the whole passage for the main idea — not individual details.' : 'Find the relevant part of the passage. Quote the key phrase.'}",
-      "Step 2: ${isMH ? 'What is the heading claiming the paragraph is mainly about?' : 'What exactly is the statement claiming?'}",
-      "Step 3: ${isMH ? 'Does the heading capture the overall message, or just a detail?' : 'Compare the two. Does the passage confirm, contradict, or stay silent?'}"
+      "Step 1: explanation of which part of the passage is relevant and why",
+      "Step 2: explanation of what the statement is claiming",
+      "Step 3: explanation of whether the passage confirms, contradicts, or stays silent"
     ],
     "conclusion": "Therefore the answer is [answer] — one sentence saying why."
   },
   "microTest": {
     ${microTestPrompt}
-  }
-}`
+  },
+  "microTest2": {
+    ${microTestPrompt.replace(/completely different topic/g, 'third completely different topic')}
+  },
+  "drillQuestions": [
+    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${isMH ? 'True|False' : 'True|False|NG'}", "explanation": "one sentence"},
+    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${isMH ? 'True|False' : 'True|False|NG'}", "explanation": "one sentence"}
+  ]
+}`,
+    maxTokens: 2000
   };
 
   try {
@@ -605,87 +623,299 @@ window.teachShowWorked = function () {
   document.getElementById('teach-we-statement').textContent = we.statement;
 
   teachStep = 0;
-  const stepsHtml = we.steps.map((s, i) => `
-    <div class="teach-step ${i === 0 ? '' : 'hidden'}" id="teach-step-${i}">
-      <div class="card" style="margin-top:12px">
-        <div class="card-label">Step ${i + 1} of ${we.steps.length}</div>
-        <p style="font-size:14px;line-height:1.7;color:var(--text)">${s}</p>
-      </div>
-    </div>`).join('');
 
-  const conclusionHtml = `
-    <div class="teach-step hidden" id="teach-step-conclusion">
-      <div class="card" style="margin-top:12px;border:2px solid var(--success)">
-        <div class="card-label" style="color:var(--success)">✅ Answer</div>
-        <p style="font-size:14px;line-height:1.6;font-weight:600;color:var(--text)">${we.conclusion}</p>
+  // Step 3 answer → which choice button to highlight
+  const answerToChoice = { true: 'confirms', false: 'contradicts', ng: 'silent' };
+  const correctChoice  = answerToChoice[(we.answer || 'ng').toLowerCase()] || 'silent';
+
+  const html = `
+    <div class="predict-block" id="predict-0">
+      <div class="predict-prompt">What part of the passage is relevant here?</div>
+      <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
+      <div class="predict-reveal hidden" id="predict-reveal-0">
+        <div class="card" style="margin-top:12px">
+          <div class="card-label" style="color:var(--accent)">Step 1</div>
+          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[0]}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="predict-block hidden" id="predict-1">
+      <div class="predict-prompt">What is this statement actually claiming?</div>
+      <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Reveal <span class="arrow">→</span></button>
+      <div class="predict-reveal hidden" id="predict-reveal-1">
+        <div class="card" style="margin-top:12px">
+          <div class="card-label" style="color:var(--accent)">Step 2</div>
+          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[1]}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="predict-block hidden" id="predict-2">
+      <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
+      <div class="step3-choices mt8">
+        <button class="step3-btn" data-choice="confirms" onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
+        <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
+        <button class="step3-btn" data-choice="silent" onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
+      </div>
+      <div class="predict-reveal hidden" id="predict-reveal-2">
+        <div class="card" style="margin-top:12px">
+          <div class="card-label" style="color:var(--accent)">Step 3</div>
+          <p style="font-size:14px;line-height:1.7;color:var(--text)">${we.steps[2]}</p>
+        </div>
+        <div class="card" style="margin-top:8px;border:2px solid var(--success)">
+          <div class="card-label" style="color:var(--success)">✅ Answer</div>
+          <p style="font-size:14px;line-height:1.6;font-weight:600;color:var(--text)">${we.conclusion}</p>
+        </div>
       </div>
     </div>`;
 
-  const btnHtml = `<button class="btn mt16" id="teach-step-btn" onclick="window.teachStepNext()">Next step <span class="arrow">→</span></button>`;
-
-  document.getElementById('teach-steps-container').innerHTML = stepsHtml + conclusionHtml + btnHtml;
+  document.getElementById('teach-steps-container').innerHTML = html;
   document.getElementById('teach-try-btn').classList.add('hidden');
   document.getElementById('teach-worked').classList.remove('hidden');
 };
 
-window.teachStepNext = function () {
-  const totalSteps = teachData.workedExample.steps.length;
-  teachStep++;
-
-  const btn = document.getElementById('teach-step-btn');
-  if (teachStep < totalSteps) {
-    document.getElementById(`teach-step-${teachStep}`).classList.remove('hidden');
-    if (teachStep === totalSteps - 1) btn.textContent = 'Show the answer →';
-  } else {
-    // Show conclusion, hide step button, show "Try yourself" button
-    document.getElementById('teach-step-conclusion').classList.remove('hidden');
-    btn.classList.add('hidden');
-    document.getElementById('teach-try-btn').classList.remove('hidden');
-  }
+window.teachRevealStep = function (stepIdx) {
+  document.getElementById(`predict-reveal-${stepIdx}`).classList.remove('hidden');
+  // Hide the reveal button after click
+  const block = document.getElementById(`predict-${stepIdx}`);
+  const btn = block.querySelector('.btn-secondary');
+  if (btn) btn.classList.add('hidden');
+  // Show next step
+  const nextBlock = document.getElementById(`predict-${stepIdx + 1}`);
+  if (nextBlock) nextBlock.classList.remove('hidden');
 };
 
-window.teachShowMicro = function () {
+window.teachPickStep3 = function (choice, correct) {
+  // Lock all buttons, highlight correct/wrong
+  document.querySelectorAll('.step3-btn').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.choice === correct)  b.classList.add('step3-correct');
+    if (b.dataset.choice === choice && choice !== correct) b.classList.add('step3-wrong');
+  });
+  // Reveal explanation + conclusion
+  document.getElementById('predict-reveal-2').classList.remove('hidden');
+  // Show "Lock it in" button
+  document.getElementById('teach-try-btn').classList.remove('hidden');
+  window.scrollTo(0, document.body.scrollHeight);
+};
+
+window.teachShowReinforce = function () {
   document.getElementById('teach-worked').classList.add('hidden');
+  document.getElementById('teach-reinforce-content').classList.add('hidden');
+  document.getElementById('teach-continue-micro-btn').classList.add('hidden');
+  document.getElementById('teach-reinforce').classList.remove('hidden');
+};
+
+window.teachReinforceHear = function () {
+  saveLearningStyleSignal('hear');
+  const we = teachData.workedExample;
+  const text = `Here is the reasoning for the worked example. ${we.steps.join(' ')} ${we.conclusion}`;
+  const contentEl = document.getElementById('teach-reinforce-content');
+  contentEl.innerHTML = '<div class="screen-loading" style="min-height:60px"><div class="spinner"></div><p>Generating audio…</p></div>';
+  contentEl.classList.remove('hidden');
+
+  fetch(AUDIO_URL, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  }).then(r => r.json()).then(data => {
+    if (!data.audio) throw new Error('no audio');
+    const blob = base64ToBlob(data.audio, data.mimeType || 'audio/mpeg');
+    const url  = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    contentEl.innerHTML = `
+      <div class="card mt8" style="text-align:center">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Toody is reading the reasoning aloud.</p>
+        <button class="btn" id="hear-play-btn" onclick="window.toggleHearAudio()">\u25b6 Play</button>
+      </div>`;
+    window._hearAudio = audio;
+    audio.addEventListener('ended', () => {
+      document.getElementById('hear-play-btn').textContent = '\u25b6 Replay';
+    });
+    document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
+  }).catch(() => {
+    contentEl.innerHTML = `<div class="card mt8"><p style="font-size:13px;color:var(--muted)">Audio unavailable. Read the steps above to review the reasoning.</p></div>`;
+    document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
+  });
+};
+
+window.toggleHearAudio = function () {
+  const audio = window._hearAudio;
+  if (!audio) return;
+  const btn = document.getElementById('hear-play-btn');
+  if (audio.paused) { audio.play(); btn.textContent = '\u23f8 Pause'; }
+  else              { audio.pause(); btn.textContent = '\u25b6 Play'; }
+};
+
+window.teachReinforceSee = function () {
+  saveLearningStyleSignal('see');
+  const contentEl = document.getElementById('teach-reinforce-content');
+  contentEl.innerHTML = `
+    <div class="card mt8">
+      <div class="card-label">Decision Tree</div>
+      <div class="dtree">
+        <div class="dtree-node root">Read the statement</div>
+        <div class="dtree-arrow">\u2193</div>
+        <div class="dtree-node">Find the relevant part of the passage</div>
+        <div class="dtree-arrow">\u2193</div>
+        <div class="dtree-row">
+          <div class="dtree-branch">
+            <div class="dtree-node branch-q">Passage <strong>confirms</strong> it?</div>
+            <div class="dtree-arrow">\u2193</div>
+            <div class="dtree-node answer true-node"><strong>TRUE</strong></div>
+          </div>
+          <div class="dtree-branch">
+            <div class="dtree-node branch-q">Passage <strong>contradicts</strong> it?</div>
+            <div class="dtree-arrow">\u2193</div>
+            <div class="dtree-node answer false-node"><strong>FALSE</strong></div>
+          </div>
+          <div class="dtree-branch">
+            <div class="dtree-node branch-q">Passage is <strong>silent</strong>?</div>
+            <div class="dtree-arrow">\u2193</div>
+            <div class="dtree-node answer ng-node"><strong>NOT GIVEN</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  contentEl.classList.remove('hidden');
+  document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
+};
+
+window.teachReinforceDrill = function () {
+  saveLearningStyleSignal('drill');
+  teachDrillIndex   = 0;
+  teachDrillCorrect = 0;
+  renderDrillQuestion(0);
+};
+
+function renderDrillQuestion(idx) {
+  const qs = teachData.drillQuestions || [];
+  if (idx >= qs.length) {
+    // Drill complete
+    const contentEl = document.getElementById('teach-reinforce-content');
+    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:#1a6048;text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p></div>`;
+    document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
+    return;
+  }
+  const q = qs[idx];
+  const contentEl = document.getElementById('teach-reinforce-content');
+  contentEl.innerHTML = `
+    <div class="card mt8" id="drill-card-${idx}">
+      <div class="card-label">Quick drill ${idx + 1} of ${qs.length}</div>
+      <div class="passage-snippet" style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px">${q.passage}</div>
+      <div class="q-text" style="margin-bottom:12px">${q.statement}</div>
+      <div class="tfng">
+        <button class="tfng-btn" data-dv="True"  onclick="window.answerDrill(${idx},'True')">✓ True</button>
+        <button class="tfng-btn" data-dv="False" onclick="window.answerDrill(${idx},'False')">✗ False</button>
+        <button class="tfng-btn" data-dv="NG"    onclick="window.answerDrill(${idx},'NG')">? Not Given</button>
+      </div>
+      <div class="result-flash" id="drill-result-${idx}"></div>
+    </div>`;
+  contentEl.classList.remove('hidden');
+}
+
+window.answerDrill = function (idx, val) {
+  const q = teachData.drillQuestions[idx];
+  const isRight = val.toLowerCase() === (q.answer || '').toLowerCase();
+  if (isRight) teachDrillCorrect++;
+
+  document.querySelectorAll(`#drill-card-${idx} .tfng-btn`).forEach(b => {
+    b.disabled = true;
+    if      (b.dataset.dv.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (b.dataset.dv === val && !isRight) b.classList.add('wrong');
+  });
+  const rf = document.getElementById(`drill-result-${idx}`);
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight ? `\u2705 Correct. ${q.explanation}` : `\u274c Answer: <strong>${q.answer}</strong>. ${q.explanation}`;
+
+  setTimeout(() => renderDrillQuestion(idx + 1), 1200);
+};
+
+function saveLearningStyleSignal(type) {
+  if (!currentUser || !studentData) return;
+  const prev   = studentData.brain?.learningStyleSignal || {};
+  const updated = { ...prev, [type]: (prev[type] || 0) + 1 };
+  updateStudentDoc(currentUser.uid, { 'brain.learningStyleSignal': updated }).catch(() => {});
+  if (studentData.brain) studentData.brain.learningStyleSignal = updated;
+}
+
+window.teachShowMicro = function () {
+  document.getElementById('teach-reinforce').classList.add('hidden');
 
   const micro = teachData.microTest;
-  document.getElementById('teach-micro-passage').innerHTML = micro.passage
-    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
-  document.getElementById('teach-micro-statement').textContent = micro.statement;
-
-  document.getElementById('teach-micro-result').className = 'result-flash';
-  document.getElementById('teach-micro-result').textContent = '';
-  document.getElementById('teach-session-btn').classList.add('hidden');
-  document.querySelectorAll('[data-mv]').forEach(b => {
-    b.disabled  = false;
-    b.className = 'tfng-btn';
-  });
-
+  loadMicroQuestion(micro);
   document.getElementById('teach-micro').classList.remove('hidden');
 };
 
-window.answerMicro = function (val) {
-  if (!teachData?.microTest) return;
-  const micro = teachData.microTest;
+function loadMicroQuestion(micro) {
+  document.getElementById('teach-micro-passage').innerHTML = micro.passage
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+  document.getElementById('teach-micro-statement').textContent = micro.statement;
+  document.getElementById('teach-micro-result').className = 'result-flash';
+  document.getElementById('teach-micro-result').innerHTML = '';
+  document.getElementById('teach-celebrate').classList.add('hidden');
+  const btnsEl = document.getElementById('teach-micro-btns');
+  btnsEl.innerHTML = `
+    <button class="tfng-btn" onclick="window.answerMicro('True')"  data-mv="True">\u2713 True</button>
+    <button class="tfng-btn" onclick="window.answerMicro('False')" data-mv="False">\u2717 False</button>
+    <button class="tfng-btn" onclick="window.answerMicro('NG')"    data-mv="NG">? Not Given</button>`;
+}
 
-  document.querySelectorAll('[data-mv]').forEach(b => {
+window.answerMicro = function (val) {
+  const micro = microAttempts === 0 ? teachData?.microTest : teachData?.microTest2;
+  if (!micro) return;
+
+  document.querySelectorAll('#teach-micro-btns .tfng-btn').forEach(b => {
     b.disabled = true;
-    const bVal = b.getAttribute('data-mv');
-    if (bVal.toLowerCase() === (micro.answer || '').toLowerCase()) b.classList.add('correct');
-    else if (bVal === val && bVal.toLowerCase() !== (micro.answer || '').toLowerCase()) b.classList.add('wrong');
+    const bv = b.getAttribute('data-mv');
+    if      (bv.toLowerCase() === (micro.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (bv === val && bv.toLowerCase() !== (micro.answer || '').toLowerCase()) b.classList.add('wrong');
   });
 
   const isRight = val.toLowerCase() === (micro.answer || '').toLowerCase();
   const rf = document.getElementById('teach-micro-result');
-  rf.classList.add('show', isRight ? 'good' : 'bad');
-  rf.innerHTML = isRight
-    ? `✅ Correct! ${micro.explanation}`
-    : `❌ The answer is <strong>${micro.answer}</strong>. ${micro.explanation}`;
+  microAttempts++;
 
-  document.getElementById('teach-session-btn').classList.remove('hidden');
+  if (isRight) {
+    rf.classList.add('show', 'good');
+    rf.innerHTML = `\u2705 Correct! ${micro.explanation}`;
+    // Brief celebration then auto-advance
+    setTimeout(() => {
+      rf.classList.remove('show');
+      document.getElementById('teach-celebrate').classList.remove('hidden');
+      setTimeout(() => window.startRealSession(), 2000);
+    }, 600);
+    return;
+  }
+
+  // Wrong answer handling
+  rf.classList.add('show', 'bad');
+
+  if (microAttempts === 1 && teachData?.microTest2) {
+    // First failure — give them a second different question
+    rf.innerHTML = `\u274c The answer is <strong>${micro.answer}</strong>. ${micro.explanation} Let\u2019s try one more.`;
+    const bubble = document.getElementById('teach-micro-bubble');
+    if (bubble) bubble.textContent = 'One more — slightly different. Same strategy.';
+    setTimeout(() => {
+      rf.className = 'result-flash';
+      loadMicroQuestion(teachData.microTest2);
+    }, 2200);
+  } else {
+    // Second failure — move forward anyway
+    rf.innerHTML = `\u274c The answer is <strong>${micro.answer}</strong>. ${micro.explanation}`;
+    const bubble = document.getElementById('teach-micro-bubble');
+    if (bubble) bubble.textContent = "Let\u2019s learn through doing \u2014 I\u2019ll explain as we go.";
+    setTimeout(() => window.startRealSession(), 2500);
+  }
 };
 
 window.startRealSession = function () {
-  loadReadingSession();
+  const day = studentData?.dayNumber || 1;
+  const plan = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
+  const label = plan.label || 'Reading';
+  document.getElementById('phase2-skill-name').textContent = label;
+  goTo('s-phase2');
+  setTimeout(() => loadReadingSession(), 1500);
 };
 
 // ── BEHAVIOUR TRACKING ───────────────────────────────────────────
@@ -2257,13 +2487,17 @@ function buildContextSnippet() {
   if (brain.scrollsBackPct > 30)   patterns.push('re-reads passage frequently');
   if (brain.changesAnswersPct > 20) patterns.push('changes answers often');
 
-  // Learning style inference — available after 3+ sessions
+  // Learning style — from learningStyleSignal after 3+ sessions
   let learningStyle = '';
   if ((brain.totalSessions || 0) >= 3) {
-    if (brain.avgTimePerQuestionSec > 60)   learningStyle = 'Deliberate reader — may benefit from timed pressure practice.';
-    else if (brain.scrollsBackPct > 50)     learningStyle = 'Detail-oriented — responds well to explicit passage structure cues.';
-    else if (brain.changesAnswersPct > 30)  learningStyle = 'Second-guesses initial answers — build answer-confidence exercises.';
-    else                                    learningStyle = 'Efficient test-taker — push with higher-complexity material.';
+    const signal = brain.learningStyleSignal || {};
+    const topSignal = Object.entries(signal).sort((a, b) => b[1] - a[1])[0]?.[0];
+    if      (topSignal === 'hear')  learningStyle = 'Auditory learner — prefers hearing explanations. Use clear verbal reasoning in feedback.';
+    else if (topSignal === 'see')   learningStyle = 'Visual learner — responds to structured frameworks and decision trees.';
+    else if (topSignal === 'drill') learningStyle = 'Practice-first learner — learns best through repetition. Provide more examples.';
+    else if (brain.avgTimePerQuestionSec > 60)  learningStyle = 'Deliberate reader — may benefit from timed pressure practice.';
+    else if (brain.scrollsBackPct > 50)         learningStyle = 'Detail-oriented — responds well to explicit passage structure cues.';
+    else                                        learningStyle = 'Efficient test-taker — push with higher-complexity material.';
   }
 
   const targetPush = Math.min(9, parseFloat((current + 0.5).toFixed(1)));
