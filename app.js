@@ -46,6 +46,9 @@ let obStep            = 0;
 let pendingBand       = 6.5;
 let pendingDate       = null;
 let pendingExperience = null;
+let pendingName       = '';
+let pendingPurpose    = '';
+let pendingLastScore  = null;
 
 // Reading session
 let sessionQuestions = [];
@@ -255,70 +258,137 @@ async function saveSessionDoc(uid, data) {
 }
 
 // ── ONBOARDING ───────────────────────────────────────────────────
+const BAND_MEANINGS = {
+  '5.0': 'Modest user',
+  '5.5': 'Modest user',
+  '6.0': 'Competent user',
+  '6.5': 'Competent user',
+  '7.0': 'Good user',
+  '7.5': 'Good user',
+  '8.0': 'Very good user',
+  '8.5': 'Very good user',
+  '9.0': 'Expert user',
+};
+
 function initOnboarding() {
-  const firstName = currentUser.displayName?.split(' ')[0] || 'there';
-  document.getElementById('ob-first-name').textContent = firstName;
   pendingBand       = 6.5;
   pendingDate       = null;
   pendingExperience = null;
+  pendingName       = currentUser.displayName?.split(' ')[0] || '';
+  pendingPurpose    = '';
+  pendingLastScore  = null;
+  // Pre-fill name input
+  const nameInput = document.getElementById('ob-name-input');
+  if (nameInput) nameInput.value = pendingName;
+  // Reset slider
   const slider = document.getElementById('ob-band-slider');
   if (slider) slider.value = '6.5';
   const display = document.getElementById('ob-band-display');
   if (display) display.textContent = '6.5';
+  const meaning = document.getElementById('ob-band-meaning');
+  if (meaning) meaning.textContent = 'Competent user';
   showObStep(0);
 }
 
-function showObStep(n) {
-  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+window.showObStep = function showObStep(n) {
+  document.querySelectorAll('.ob-step').forEach(s => {
+    s.classList.remove('active');
+    s.classList.add('hidden');
+  });
   const step = document.getElementById(`ob-${n}`);
-  if (step) { step.classList.add('active'); window.scrollTo(0, 0); }
+  if (step) {
+    step.classList.remove('hidden');
+    step.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  // Update dots
+  document.querySelectorAll('.ob-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === n);
+    dot.classList.toggle('done', i < n);
+  });
   obStep = n;
-}
+};
 
-window.obNext = () => showObStep(obStep + 1);
+window.obSetName = function () {
+  const val = document.getElementById('ob-name-input').value.trim();
+  pendingName = val || currentUser.displayName?.split(' ')[0] || 'there';
+  showObStep(1);
+};
+
+window.obSetPurpose = function (btn) {
+  pendingPurpose = btn.dataset.val;
+  // Visual selection
+  document.querySelectorAll('#ob-purpose-group .ob-choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  // Auto-advance after brief highlight
+  setTimeout(() => showObStep(2), 300);
+};
 
 window.updateBandSlider = function () {
   const val = document.getElementById('ob-band-slider').value;
   pendingBand = parseFloat(val);
   document.getElementById('ob-band-display').textContent = val;
+  const meaning = document.getElementById('ob-band-meaning');
+  if (meaning) meaning.textContent = BAND_MEANINGS[val] || '';
 };
 
 window.setExamDate = function () {
   const val = document.getElementById('ob-date-input').value;
   pendingDate = val || null;
-  showObStep(2);
+  showObStep(4);
 };
 
 window.skipExamDate = function () {
   pendingDate = null;
-  showObStep(2);
+  showObStep(4);
 };
 
-window.setExperience = async function (hasExperience) {
+window.obPickExperience = function (hasExperience) {
   pendingExperience = hasExperience;
-  // Disable both buttons and show saving state
-  document.getElementById('ob-exp-yes').disabled = true;
-  document.getElementById('ob-exp-no').disabled  = true;
+  document.getElementById('ob-exp-yes').classList.toggle('selected', hasExperience === true);
+  document.getElementById('ob-exp-no').classList.toggle('selected', hasExperience === false);
+  if (hasExperience) {
+    document.getElementById('ob-last-score-wrap').classList.remove('hidden');
+  } else {
+    document.getElementById('ob-last-score-wrap').classList.add('hidden');
+    pendingLastScore = null;
+  }
+  document.getElementById('ob-finish-btn').classList.remove('hidden');
+};
+
+window.finishOnboarding = async function () {
+  if (pendingExperience === true) {
+    const scoreEl = document.getElementById('ob-last-score');
+    pendingLastScore = scoreEl?.value ? parseFloat(scoreEl.value) : null;
+  }
+  document.getElementById('ob-finish-btn').disabled = true;
   document.getElementById('ob-saving').classList.remove('hidden');
   document.getElementById('ob-error').classList.add('hidden');
 
   try {
     await updateStudentDoc(currentUser.uid, {
-      targetBand:    pendingBand    || 6.5,
-      examDate:      pendingDate    || null,
-      hasExperience: hasExperience,
-      isNewStudent:  false,
-      currentBand:   pendingBand   || 6.5,
+      preferredName:  pendingName,
+      purpose:        pendingPurpose    || 'other',
+      targetBand:     pendingBand       || 6.5,
+      examDate:       pendingDate       || null,
+      hasExperience:  pendingExperience,
+      lastScore:      pendingLastScore  || null,
+      isNewStudent:   false,
+      currentBand:    pendingBand       || 6.5,
     });
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
     renderHome();
-    goTo('s-home');
-  } catch {
+    // Show welcome screen
+    const welcomeName = document.getElementById('welcome-name');
+    if (welcomeName) welcomeName.textContent = pendingName || 'there';
+    goTo('s-welcome');
+    setTimeout(() => goTo('s-home'), 2500);
+  } catch (err) {
+    console.error('finishOnboarding error', err);
     document.getElementById('ob-saving').classList.add('hidden');
     document.getElementById('ob-error').classList.remove('hidden');
-    document.getElementById('ob-exp-yes').disabled = false;
-    document.getElementById('ob-exp-no').disabled  = false;
+    document.getElementById('ob-finish-btn').disabled = false;
   }
 };
 
@@ -327,7 +397,7 @@ function renderHome() {
   if (!studentData) return;
   const day    = studentData.dayNumber || 1;
   const plan   = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
-  const name   = studentData.name?.split(' ')[0] || 'there';
+  const name   = studentData.preferredName || studentData.name?.split(' ')[0] || 'there';
   const streak = studentData.streak || 0;
 
   const hour  = new Date().getHours();
@@ -2452,7 +2522,7 @@ window.goToProgress = async function () {
 function buildContextSnippet() {
   if (!studentData) return '';
 
-  const name    = studentData.name?.split(' ')[0] || 'Student';
+  const name    = studentData.preferredName || studentData.name?.split(' ')[0] || 'Student';
   const target  = studentData.targetBand  || 6.5;
   const current = studentData.currentBand || target;
   const week    = studentData.weekNumber  || 1;
@@ -2460,6 +2530,7 @@ function buildContextSnippet() {
   const skills  = studentData.skills      || {};
   const brain   = studentData.brain       || {};
   const weak    = studentData.weakAreas   || [];
+  const purpose = studentData.purpose     || '';
 
   const allSkills = [
     { key: 'reading.tfng',             name: 'T/F/Not Given',     s: skills?.reading?.tfng              },
@@ -2504,6 +2575,11 @@ function buildContextSnippet() {
   const focusSkill = weak[0] ? weak[0].replace('.', ' ') : 'the student\'s weakest area';
   const focusMissed = weak[0] ? (brain.topMissedSubType?.[weak[0].replace('.', '_')] || null) : null;
 
+  const purposeNote = purpose === 'university'  ? 'Use academic/scientific passage topics (research, environment, technology, history).'
+                    : purpose === 'migration'   ? 'Use general-interest topics relevant to daily life, society, health, culture.'
+                    : purpose === 'work'        ? 'Use professional/workplace topics where relevant.'
+                    : '';
+
   const lines = [
     `STUDENT: ${name} | Target: Band ${target} | Current estimate: Band ${current} | Week ${week} Day ${day}`,
     `STRONG: ${strong.length ? strong.join(', ') : 'No data yet — first session'}`,
@@ -2514,6 +2590,7 @@ function buildContextSnippet() {
     '- Do NOT re-teach basics for strong skills',
     `- Focus on ${focusSkill}${focusMissed ? ` — student consistently misses "${focusMissed}" answer type` : ''}`,
     `- Set difficulty at Band ${targetPush} — push slightly beyond current level`,
+    ...(purposeNote ? [`- TOPIC PREFERENCE: ${purposeNote}`] : []),
   ];
 
   return lines.join('\n');

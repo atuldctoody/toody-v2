@@ -23,30 +23,69 @@
 <!-- ══════════════════════ ONBOARDING ══════════════════════ -->
 <div class="screen" id="s-onboarding">
 
-  <!-- Step 0 — Band target -->
+  <!-- Progress dots -->
+  <div class="ob-dots" id="ob-dots">
+    <span class="ob-dot active" id="ob-dot-0"></span>
+    <span class="ob-dot" id="ob-dot-1"></span>
+    <span class="ob-dot" id="ob-dot-2"></span>
+    <span class="ob-dot" id="ob-dot-3"></span>
+    <span class="ob-dot" id="ob-dot-4"></span>
+  </div>
+
+  <!-- Step 0 — Name -->
   <div class="ob-step" id="ob-0">
-    <div class="ob-hero">
-      <div class="ob-logo">📖</div>
-      <h1 class="ob-title">Hi <span id="ob-first-name">there</span>.<br/>I'm Too<span style="color:var(--accent)">dy</span>.</h1>
-      <p class="ob-tagline">Your personal IELTS coach. Three quick questions to build your plan.</p>
+    <div class="ob-icon-wrap">🙋</div>
+    <h2 class="ob-heading">What should Toody call you?</h2>
+    <p class="ob-sub">We'll use this throughout your sessions.</p>
+    <input type="text" id="ob-name-input" class="input-field ob-name-field" placeholder="Your name" />
+    <button class="btn" onclick="obSetName()">Continue <span class="arrow">→</span></button>
+  </div>
+
+  <!-- Step 1 — Purpose -->
+  <div class="ob-step hidden" id="ob-1">
+    <div class="ob-icon-wrap">🎯</div>
+    <h2 class="ob-heading">Why are you taking IELTS?</h2>
+    <p class="ob-sub">Toody tailors reading passages to topics you'll actually care about.</p>
+    <div class="ob-choice-group" id="ob-purpose-group">
+      <button class="ob-choice-btn" data-val="university" onclick="obSetPurpose(this)">
+        <div class="ob-choice-icon">🎓</div>
+        <div class="ob-choice-label">University admission</div>
+      </button>
+      <button class="ob-choice-btn" data-val="migration" onclick="obSetPurpose(this)">
+        <div class="ob-choice-icon">✈️</div>
+        <div class="ob-choice-label">Migration / PR visa</div>
+      </button>
+      <button class="ob-choice-btn" data-val="work" onclick="obSetPurpose(this)">
+        <div class="ob-choice-icon">💼</div>
+        <div class="ob-choice-label">Work or professional licence</div>
+      </button>
+      <button class="ob-choice-btn" data-val="other" onclick="obSetPurpose(this)">
+        <div class="ob-choice-icon">💡</div>
+        <div class="ob-choice-label">Other / just improving my English</div>
+      </button>
     </div>
-    <div class="ob-step-indicator">1 of 3</div>
-    <h2 class="ob-heading">What band score are you aiming for?</h2>
+  </div>
+
+  <!-- Step 2 — Target band -->
+  <div class="ob-step hidden" id="ob-2">
+    <div class="ob-icon-wrap">🏆</div>
+    <h2 class="ob-heading">What's your target band score?</h2>
     <p class="ob-sub">Be honest — Toody plans better with the real number.</p>
     <div class="band-slider-wrap">
       <div class="band-slider-val" id="ob-band-display">6.5</div>
+      <div class="band-meaning" id="ob-band-meaning">Competent user</div>
       <input type="range" min="5.0" max="9.0" step="0.5" value="6.5"
              id="ob-band-slider" class="band-slider" oninput="updateBandSlider()" />
       <div class="band-slider-labels">
         <span>5.0</span><span>7.0</span><span>9.0</span>
       </div>
     </div>
-    <button class="btn" onclick="obNext()">Continue <span class="arrow">→</span></button>
+    <button class="btn" onclick="showObStep(3)">Continue <span class="arrow">→</span></button>
   </div>
 
-  <!-- Step 1 — Exam date -->
-  <div class="ob-step" id="ob-1">
-    <div class="ob-step-indicator">2 of 3</div>
+  <!-- Step 3 — Exam date -->
+  <div class="ob-step hidden" id="ob-3">
+    <div class="ob-icon-wrap">📅</div>
     <h2 class="ob-heading">When is your IELTS exam?</h2>
     <p class="ob-sub">Helps Toody set the right pace. No pressure if it's not booked yet.</p>
     <div class="date-input-wrap">
@@ -56,21 +95,39 @@
     <button class="btn-ghost" onclick="skipExamDate()">Not booked yet — skip</button>
   </div>
 
-  <!-- Step 2 — Prior experience -->
-  <div class="ob-step" id="ob-2">
-    <div class="ob-step-indicator">3 of 3</div>
+  <!-- Step 4 — Prior experience -->
+  <div class="ob-step hidden" id="ob-4">
+    <div class="ob-icon-wrap">📝</div>
     <h2 class="ob-heading">Have you taken IELTS before?</h2>
     <p class="ob-sub">Toody adjusts difficulty and explanation depth based on your experience.</p>
     <div class="ob-choice-group">
-      <button class="ob-choice-btn" id="ob-exp-yes" onclick="setExperience(true)">
+      <button class="ob-choice-btn" id="ob-exp-yes" onclick="obPickExperience(true)">
         <div class="ob-choice-icon">✅</div>
         <div class="ob-choice-label">Yes — I've sat the real exam</div>
       </button>
-      <button class="ob-choice-btn" id="ob-exp-no" onclick="setExperience(false)">
+      <button class="ob-choice-btn" id="ob-exp-no" onclick="obPickExperience(false)">
         <div class="ob-choice-icon">🆕</div>
         <div class="ob-choice-label">No — this will be my first time</div>
       </button>
     </div>
+    <div class="ob-last-score hidden" id="ob-last-score-wrap">
+      <p class="ob-sub" style="margin-top:20px">What was your last overall band score?</p>
+      <select id="ob-last-score" class="input-field">
+        <option value="">Select score…</option>
+        <option value="4.0">4.0</option>
+        <option value="4.5">4.5</option>
+        <option value="5.0">5.0</option>
+        <option value="5.5">5.5</option>
+        <option value="6.0">6.0</option>
+        <option value="6.5">6.5</option>
+        <option value="7.0">7.0</option>
+        <option value="7.5">7.5</option>
+        <option value="8.0">8.0</option>
+        <option value="8.5">8.5</option>
+        <option value="9.0">9.0</option>
+      </select>
+    </div>
+    <button class="btn hidden" id="ob-finish-btn" onclick="finishOnboarding()">Start my programme <span class="arrow">→</span></button>
     <div class="ob-saving hidden" id="ob-saving">
       <div class="spinner" style="width:22px;height:22px;border-width:3px"></div>
       <span>Setting up your account…</span>
@@ -78,6 +135,15 @@
     <div class="ob-error hidden" id="ob-error">Something went wrong. Please tap an option again.</div>
   </div>
 
+</div>
+
+<!-- ══════════════════════ WELCOME ══════════════════════ -->
+<div class="screen" id="s-welcome">
+  <div class="phase2-wrap">
+    <div class="phase2-eyebrow">You're all set</div>
+    <div class="phase2-title">Welcome to Toody,<br/><span id="welcome-name" class="phase2-skill">there</span>.</div>
+    <div class="phase2-note">Your 10-session programme starts now.</div>
+  </div>
 </div>
 
 <!-- ══════════════════════ HOME ══════════════════════ -->
