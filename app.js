@@ -440,10 +440,17 @@ window.goToSession = function () {
   document.getElementById('speaking-day-badge').textContent  = `Day ${day}`;
   document.getElementById('nb-day-badge').textContent        = `Day ${day}`;
 
-  // Day 1: teach-first before reading session
-  if (day === 1 && plan.screen === 's-reading') {
-    loadTeachFirst();
-  // Day 2+: warmup before reading sessions
+  // Teach-first fires the FIRST TIME a student encounters any reading or listening skill
+  const isFirstTimeSkill = (() => {
+    const [section, subSkill] = (plan.skill || '').split('.');
+    if (!section || !subSkill) return false;
+    const attempted = studentData?.skills?.[section]?.[subSkill]?.attempted || 0;
+    return attempted === 0;
+  })();
+
+  if (plan.screen === 's-reading' && isFirstTimeSkill) {
+    loadTeachFirst(plan.skill);
+  // Warmup fires on Day 2+ reading sessions that are NOT first-time
   } else if (day > 1 && plan.screen === 's-reading') {
     loadWarmup(plan);
   } else {
@@ -514,8 +521,8 @@ function launchSkillScreen(plan) {
   else loadReadingSession();
 }
 
-// ── TEACH FIRST (Day 1) ───────────────────────────────────────────
-async function loadTeachFirst() {
+// ── TEACH FIRST (first encounter of a skill) ─────────────────────
+async function loadTeachFirst(skillKey) {
   teachData = null;
   teachStep = 0;
 
@@ -526,29 +533,47 @@ async function loadTeachFirst() {
   goTo('s-teach');
 
   const band = studentData?.targetBand || 6.5;
+  const isMH = skillKey === 'reading.matchingHeadings';
+  const skillLabel = isMH ? 'Matching Headings' : 'True/False/Not Given';
+
+  // Update the concept section header text
+  const conceptBubble = document.querySelector('#teach-concept .toody-bubble');
+  if (conceptBubble) {
+    conceptBubble.innerHTML = isMH
+      ? `Before we start, let me show you <strong>exactly</strong> how Matching Headings works — and the trap most students fall into.`
+      : `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`;
+  }
+  const strategyLabel = document.querySelector('#teach-concept .card-label');
+  if (strategyLabel) strategyLabel.textContent = 'The Strategy';
+
+  const conceptPromptDetail = isMH
+    ? `Paragraph 1: explain what Matching Headings tests (identifying the main idea of a paragraph, not details). Paragraph 2: the #1 mistake students make (choosing a heading based on a word that appears in the paragraph rather than the main idea) and how to avoid it.`
+    : `Paragraph 1: define True, False, Not Given in plain language. Paragraph 2: the #1 mistake students make (confusing 'False' with 'Not Given') and how to avoid it.`;
+
+  const microTestPrompt = isMH
+    ? `"passage": "one paragraph of 3-4 academic sentences", "statement": "Does the heading '[a heading]' describe the main idea of this paragraph? Answer True if it matches, False if it contradicts or is clearly wrong.", "answer": "True|False", "explanation": "one sentence saying why"`
+    : `"passage": "2 academic sentences on a completely different topic", "statement": "a testable claim", "answer": "True|False|NG", "explanation": "one sentence explaining the answer"`;
+
   const prompt = {
     system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble.',
-    user: `Generate a teach-first lesson on True/False/Not Given reading for a Band ${band} IELTS student.
+    user: `Generate a teach-first lesson on ${skillLabel} reading for a Band ${band} IELTS student.
 
 Return ONLY this JSON:
 {
-  "concept": "2 short paragraphs explaining the T/F/NG strategy. Paragraph 1: define True, False, Not Given in plain language. Paragraph 2: the #1 mistake students make (confusing 'False' with 'Not Given') and how to avoid it.",
+  "concept": "2 short paragraphs. ${conceptPromptDetail}",
   "workedExample": {
     "passage": "2 academic sentences on any interesting topic",
-    "statement": "a clear testable claim about the passage",
-    "answer": "True|False|NG",
+    "statement": "${isMH ? 'a heading that either does or does not capture the main idea of the passage' : 'a clear testable claim about the passage'}",
+    "answer": "${isMH ? 'True|False' : 'True|False|NG'}",
     "steps": [
-      "Step 1: Find the relevant part of the passage. Quote the key phrase.",
-      "Step 2: What exactly is the statement claiming?",
-      "Step 3: Compare the two. Does the passage confirm, contradict, or stay silent?"
+      "Step 1: ${isMH ? 'Read the whole passage for the main idea — not individual details.' : 'Find the relevant part of the passage. Quote the key phrase.'}",
+      "Step 2: ${isMH ? 'What is the heading claiming the paragraph is mainly about?' : 'What exactly is the statement claiming?'}",
+      "Step 3: ${isMH ? 'Does the heading capture the overall message, or just a detail?' : 'Compare the two. Does the passage confirm, contradict, or stay silent?'}"
     ],
     "conclusion": "Therefore the answer is [answer] — one sentence saying why."
   },
   "microTest": {
-    "passage": "2 academic sentences on a completely different topic",
-    "statement": "a testable claim",
-    "answer": "True|False|NG",
-    "explanation": "one sentence explaining why"
+    ${microTestPrompt}
   }
 }`
   };
@@ -669,12 +694,16 @@ let bhvQStart        = {};   // { qnum: timestamp when question became active }
 let bhvQDuration     = {};   // { qnum: ms taken before answering }
 let bhvScrolledUp    = false;
 let bhvScrollHandler = null;
+let bhvAnswerChanges = 0;    // count of answer changes before submission
+let bhvPrevFCValues  = {};   // { qnum: last recorded non-empty value } for FC inputs
 
 function startSessionTracking() {
   bhvSessionStart  = Date.now();
   bhvQStart        = {};
   bhvQDuration     = {};
   bhvScrolledUp    = false;
+  bhvAnswerChanges = 0;
+  bhvPrevFCValues  = {};
   if (bhvScrollHandler) {
     window.removeEventListener('scroll', bhvScrollHandler);
     bhvScrollHandler = null;
@@ -689,6 +718,10 @@ function trackQAnswer(qnum) {
   if (bhvQStart[qnum]) {
     bhvQDuration[qnum] = Date.now() - bhvQStart[qnum];
   }
+}
+
+function trackAnswerChange() {
+  bhvAnswerChanges++;
 }
 
 function setupScrollTracking() {
@@ -710,25 +743,94 @@ function getBehaviourPayload() {
     ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length / 1000) : 0;
   const questionTimesSeconds   = {};
   Object.entries(bhvQDuration).forEach(([k, v]) => { questionTimesSeconds[k] = Math.round(v / 1000); });
-  return { sessionDurationSec, avgTimePerQuestionSec, scrolledBackToPassage: bhvScrolledUp, questionTimesSeconds };
+  return { sessionDurationSec, avgTimePerQuestionSec, scrolledBackToPassage: bhvScrolledUp, questionTimesSeconds, answerChangesCount: bhvAnswerChanges };
 }
 
-async function updateStudentBrain(behaviour, accuracy) {
+async function updateStudentBrain(behaviour, accuracy, skillKey) {
   if (!currentUser) return;
   try {
     const prev  = studentData?.brain || {};
     const n     = (prev.totalSessions || 0) + 1;
     const alpha = 1 / Math.min(n, 10);   // EMA — stabilises after ~10 sessions
     const ema   = (prevVal, newVal) => Math.round(prevVal + (newVal - prevVal) * alpha);
+    const changesThisSession = behaviour.answerChangesCount > 0 ? 100 : 0;
+
+    // Per-skill breakdown stored under brain.skills[safeKey]
+    const safeKey = skillKey ? skillKey.replace('.', '_') : null;
+    const prevSkillBrain = safeKey ? (prev.skills?.[safeKey] || {}) : {};
+    const skillBrainUpdate = safeKey ? {
+      avgTimePerQ:    ema(prevSkillBrain.avgTimePerQ    || 0, behaviour.avgTimePerQuestionSec),
+      scrollsBackPct: ema(prevSkillBrain.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
+      changesAnswers: ema(prevSkillBrain.changesAnswers  || 0, changesThisSession),
+      lastAccuracy:   accuracy,
+      sessions:       (prevSkillBrain.sessions || 0) + 1,
+    } : null;
+
     const brain = {
       totalSessions:         n,
       avgSessionDurationSec: ema(prev.avgSessionDurationSec || 0, behaviour.sessionDurationSec),
       avgTimePerQuestionSec: ema(prev.avgTimePerQuestionSec || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct:        ema(prev.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
+      changesAnswersPct:      ema(prev.changesAnswersPct || 0, changesThisSession),
       recentAccuracy:        accuracy,
+      skills:                { ...(prev.skills || {}), ...(safeKey && skillBrainUpdate ? { [safeKey]: skillBrainUpdate } : {}) },
     };
     await updateStudentDoc(currentUser.uid, { brain });
     if (studentData) studentData.brain = brain;
+  } catch { /* non-critical */ }
+}
+
+async function updateWeakAreas(skillKey, missedSubTypes) {
+  if (!currentUser || !studentData) return;
+  try {
+    const skills = studentData.skills || {};
+    const candidates = [
+      { key: 'reading.tfng',             name: 'T/F/Not Given',          s: skills?.reading?.tfng },
+      { key: 'reading.matchingHeadings', name: 'Matching Headings',      s: skills?.reading?.matchingHeadings },
+      { key: 'listening.multipleChoice', name: 'Multiple Choice',        s: skills?.listening?.multipleChoice },
+      { key: 'listening.formCompletion', name: 'Form Completion',        s: skills?.listening?.formCompletion },
+    ].filter(c => c.s?.attempted > 0 && c.s.accuracy < 70)
+     .sort((a, b) => a.s.accuracy - b.s.accuracy);
+
+    const weakAreas = candidates.slice(0, 2).map(c => c.key);
+
+    // Accumulate consistently missed sub-types (e.g. 'Not Given' within TF/NG)
+    const updates = { weakAreas };
+    if (skillKey && missedSubTypes && Object.keys(missedSubTypes).length > 0) {
+      const safeKey = skillKey.replace('.', '_');
+      const prevBrain = studentData.brain || {};
+      const prevMissed = prevBrain.consistentlyWeak?.[safeKey] || {};
+      const merged = { ...prevMissed };
+      Object.entries(missedSubTypes).forEach(([type, count]) => {
+        merged[type] = (merged[type] || 0) + count;
+      });
+      // Find the sub-type missed 2+ times
+      const topMissed = Object.entries(merged)
+        .filter(([, c]) => c >= 2)
+        .sort((a, b) => b[1] - a[1])[0];
+      updates['brain.consistentlyWeak'] = {
+        ...(studentData.brain?.consistentlyWeak || {}),
+        [safeKey]: merged,
+      };
+      if (topMissed) {
+        updates['brain.topMissedSubType'] = {
+          ...(studentData.brain?.topMissedSubType || {}),
+          [safeKey]: topMissed[0],
+        };
+      }
+    }
+
+    await updateStudentDoc(currentUser.uid, updates);
+    if (studentData) {
+      studentData.weakAreas = weakAreas;
+      if (updates['brain.consistentlyWeak']) {
+        if (!studentData.brain) studentData.brain = {};
+        studentData.brain.consistentlyWeak = updates['brain.consistentlyWeak'];
+      }
+      if (updates['brain.topMissedSubType']) {
+        studentData.brain.topMissedSubType = updates['brain.topMissedSubType'];
+      }
+    }
   } catch { /* non-critical */ }
 }
 
@@ -911,27 +1013,42 @@ async function finishReadingSession() {
   const total     = sessionQuestions.length || 5;
   const accuracy  = Math.round((sessionCorrect / total) * 100);
   const day       = studentData.dayNumber || 1;
+  const skillKey  = DAY_PLAN[day]?.skill || 'reading.tfng';
   const behaviour = getBehaviourPayload();
 
   // Remove scroll listener now that session is done
   if (bhvScrollHandler) { window.removeEventListener('scroll', bhvScrollHandler); bhvScrollHandler = null; }
 
+  // Tally missed answer sub-types (e.g. how many True / False / NG were wrong)
+  const missedSubTypes = {};
+  sessionQuestions.forEach(q => {
+    const a = sessionAnswers[q.id];
+    if (a && !a.isRight) {
+      missedSubTypes[q.answer] = (missedSubTypes[q.answer] || 0) + 1;
+    }
+  });
+
+  const isTfng   = skillKey === 'reading.tfng';
+  const skillPath = isTfng ? 'reading.tfng' : 'reading.matchingHeadings';
+  const [section, subSkill] = skillPath.split('.');
+
   try {
     await saveSessionDoc(currentUser.uid, {
       weekNumber:         studentData.weekNumber || 1,
       dayNumber:          day,
-      skillPracticed:     DAY_PLAN[day]?.skill || 'reading.tfng',
+      skillPracticed:     skillKey,
       questionsAttempted: total,
       questionsCorrect:   sessionCorrect,
       accuracy,
       toughLovePassed:    tlPassed,
       warmupCorrect,
       aiPassageTopic:     sessionTopic,
+      missedSubTypes,
       durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
       behaviour
     });
 
-    const prev         = studentData.skills?.reading?.tfng || { accuracy: 0, attempted: 0 };
+    const prev         = studentData.skills?.[section]?.[subSkill] || { accuracy: 0, attempted: 0 };
     const prevCorrect  = Math.round((prev.accuracy / 100) * prev.attempted);
     const newAttempted = prev.attempted + total;
     const newAccuracy  = newAttempted > 0
@@ -939,10 +1056,10 @@ async function finishReadingSession() {
     const newStreak = (studentData.streak || 0) + 1;
 
     await updateStudentDoc(currentUser.uid, {
-      'skills.reading.tfng.accuracy':      newAccuracy,
-      'skills.reading.tfng.attempted':     newAttempted,
-      'skills.reading.tfng.lastPracticed': serverTimestamp(),
-      'skills.reading.tfng.trend':         newAccuracy > prev.accuracy ? 'up' : newAccuracy < prev.accuracy ? 'down' : 'stable',
+      [`skills.${section}.${subSkill}.accuracy`]:      newAccuracy,
+      [`skills.${section}.${subSkill}.attempted`]:     newAttempted,
+      [`skills.${section}.${subSkill}.lastPracticed`]: serverTimestamp(),
+      [`skills.${section}.${subSkill}.trend`]:         newAccuracy > prev.accuracy ? 'up' : newAccuracy < prev.accuracy ? 'down' : 'stable',
       dayNumber:        day + 1,
       streak:           newStreak,
       lastSession:      serverTimestamp(),
@@ -951,7 +1068,8 @@ async function finishReadingSession() {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
-    await updateStudentBrain(behaviour, accuracy);
+    await updateStudentBrain(behaviour, accuracy, skillKey);
+    await updateWeakAreas(skillKey, missedSubTypes);
   } catch { /* Firestore save failed — still show notebook */ }
 
   if (mockMode) {
@@ -1197,7 +1315,14 @@ window.answerMC = function (qnum, val) {
 window.checkFCProgress = function () {
   const allFilled = listenQuestions.every(q => {
     const el = document.getElementById(`fc${q.id}`);
-    return el && el.value.trim().length > 0;
+    if (!el) return false;
+    const val = el.value.trim();
+    // Track if student changed a previously entered answer
+    if (val.length > 0 && bhvPrevFCValues[q.id] && bhvPrevFCValues[q.id] !== val) {
+      trackAnswerChange();
+    }
+    if (val.length > 0) bhvPrevFCValues[q.id] = val;
+    return val.length > 0;
   });
   document.getElementById('btn-listening-submit').disabled = !allFilled;
 };
@@ -1283,7 +1408,8 @@ window.finishListeningSession = async function () {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
-    await updateStudentBrain(behaviour, accuracy);
+    await updateStudentBrain(behaviour, accuracy, `listening.${skillKey}`);
+    await updateWeakAreas(`listening.${skillKey}`, null);
   } catch { /* still show notebook */ }
 
   if (mockMode) {
@@ -1450,6 +1576,7 @@ window.finishWritingSession = async function () {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
+    await updateWeakAreas(`writing.${taskKey}`, null);
   } catch { /* still show notebook */ }
 
   if (mockMode) {
@@ -1668,6 +1795,7 @@ window.finishSpeakingSession = async function () {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
+    await updateWeakAreas('speaking.part1', null);
   } catch { /* still show notebook */ }
 
   if (mockMode) {
@@ -2090,15 +2218,87 @@ window.goToProgress = async function () {
   }
 };
 
+// ── CONTEXT SNIPPET ───────────────────────────────────────────────
+function buildContextSnippet() {
+  if (!studentData) return '';
+
+  const name    = studentData.name?.split(' ')[0] || 'Student';
+  const target  = studentData.targetBand  || 6.5;
+  const current = studentData.currentBand || target;
+  const week    = studentData.weekNumber  || 1;
+  const day     = studentData.dayNumber   || 1;
+  const skills  = studentData.skills      || {};
+  const brain   = studentData.brain       || {};
+  const weak    = studentData.weakAreas   || [];
+
+  const allSkills = [
+    { key: 'reading.tfng',             name: 'T/F/Not Given',     s: skills?.reading?.tfng              },
+    { key: 'reading.matchingHeadings', name: 'Matching Headings', s: skills?.reading?.matchingHeadings  },
+    { key: 'listening.multipleChoice', name: 'Multiple Choice',   s: skills?.listening?.multipleChoice  },
+    { key: 'listening.formCompletion', name: 'Form Completion',   s: skills?.listening?.formCompletion  },
+  ].filter(x => x.s?.attempted > 0);
+
+  const strong = allSkills
+    .filter(x => x.s.accuracy >= 75)
+    .map(x => `${x.name} (${x.s.accuracy}%)`);
+
+  const weakSkills = allSkills
+    .filter(x => x.s.accuracy < 70)
+    .map(x => {
+      let str = `${x.name} (${x.s.accuracy}%)`;
+      const topMissed = brain.topMissedSubType?.[x.key.replace('.', '_')];
+      if (topMissed) str += ` — especially "${topMissed}" answer type`;
+      return str;
+    });
+
+  // Behaviour pattern line
+  const patterns = [];
+  if (brain.avgTimePerQuestionSec) patterns.push(`${brain.avgTimePerQuestionSec}s avg per question`);
+  if (brain.scrollsBackPct > 30)   patterns.push('re-reads passage frequently');
+  if (brain.changesAnswersPct > 20) patterns.push('changes answers often');
+
+  // Learning style inference — available after 3+ sessions
+  let learningStyle = '';
+  if ((brain.totalSessions || 0) >= 3) {
+    if (brain.avgTimePerQuestionSec > 60)   learningStyle = 'Deliberate reader — may benefit from timed pressure practice.';
+    else if (brain.scrollsBackPct > 50)     learningStyle = 'Detail-oriented — responds well to explicit passage structure cues.';
+    else if (brain.changesAnswersPct > 30)  learningStyle = 'Second-guesses initial answers — build answer-confidence exercises.';
+    else                                    learningStyle = 'Efficient test-taker — push with higher-complexity material.';
+  }
+
+  const targetPush = Math.min(9, parseFloat((current + 0.5).toFixed(1)));
+  const focusSkill = weak[0] ? weak[0].replace('.', ' ') : 'the student\'s weakest area';
+  const focusMissed = weak[0] ? (brain.topMissedSubType?.[weak[0].replace('.', '_')] || null) : null;
+
+  const lines = [
+    `STUDENT: ${name} | Target: Band ${target} | Current estimate: Band ${current} | Week ${week} Day ${day}`,
+    `STRONG: ${strong.length ? strong.join(', ') : 'No data yet — first session'}`,
+    `WEAK: ${weakSkills.length ? weakSkills.join(', ') : 'No weak areas identified yet'}`,
+    `PATTERN: ${patterns.length ? patterns.join('. ') + '.' : 'No pattern data yet.'}${learningStyle ? ' ' + learningStyle : ''}`,
+    '',
+    'INSTRUCTION FOR THIS SESSION:',
+    '- Do NOT re-teach basics for strong skills',
+    `- Focus on ${focusSkill}${focusMissed ? ` — student consistently misses "${focusMissed}" answer type` : ''}`,
+    `- Set difficulty at Band ${targetPush} — push slightly beyond current level`,
+  ];
+
+  return lines.join('\n');
+}
+
 // ── AI CALL ───────────────────────────────────────────────────────
 async function callAI(prompt) {
+  const snippet = buildContextSnippet();
+  const systemContent = snippet
+    ? `${snippet}\n\n---\n\n${prompt.system}`
+    : prompt.system;
+
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model:       'gpt-4o-mini',
       messages:    [
-        { role: 'system', content: prompt.system },
+        { role: 'system', content: systemContent },
         { role: 'user',   content: prompt.user   }
       ],
       max_tokens:  prompt.maxTokens || 1500,
