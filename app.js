@@ -46,6 +46,11 @@ let obStep            = 0;
 let pendingBand       = 6.5;
 // Briefing
 let briefingCard      = 0;
+// Navigation history
+const screenHistory   = [];
+let   _goingBack      = false;
+const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2']);
+const BRIEFING_COLORS    = ['#EEEAFF','#FFE8E8','#E8F8F0','#FFF4E0','#EEEAFF'];
 let pendingDate       = null;
 let pendingExperience = null;
 let pendingName       = '';
@@ -107,19 +112,49 @@ let mockResults = {};  // { reading, listening, writing, speaking }
 // ── ROUTING ──────────────────────────────────────────────────────
 function goTo(id) {
   console.log('[Toody] goTo:', id);
+  // Push current screen to history (unless going back, or it's a non-navigable screen)
+  if (!_goingBack) {
+    const current = document.querySelector('.screen.active')?.id;
+    if (current && !NO_HISTORY_SCREENS.has(current) && current !== id) {
+      screenHistory.push(current);
+    }
+  }
+  _goingBack = false;
+
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
   if (!el) { console.error('[Toody] goTo: element not found:', id); return; }
   el.classList.add('active');
   const computed = window.getComputedStyle(el).display;
-  console.log('[Toody] after active — computedDisplay:', computed, '| classes:', el.className);
-  // If CSS override is preventing flex, force it directly
   if (computed === 'none') {
     console.warn('[Toody] CSS override detected — forcing display:flex');
     el.style.display = 'flex';
   }
+  // Reset history when returning to home
+  if (id === 's-home') screenHistory.length = 0;
+
+  _updateBackBtn(id);
   window.scrollTo(0, 0);
 }
+
+function _updateBackBtn(screenId) {
+  const btn = document.getElementById('global-back-btn');
+  if (!btn) return;
+  const show = screenHistory.length > 0 || (screenId === 's-briefing' && briefingCard > 0);
+  btn.classList.toggle('hidden', !show);
+}
+
+window.goBack = function () {
+  // Back within briefing cards
+  if (document.querySelector('.screen.active')?.id === 's-briefing' && briefingCard > 0) {
+    _showBriefingCard(briefingCard - 1, 'back');
+    return;
+  }
+  if (screenHistory.length === 0) return;
+  _goingBack = true;
+  const prev = screenHistory.pop();
+  goTo(prev);
+};
 
 // ── AUTH ─────────────────────────────────────────────────────────
 onAuthStateChanged(auth, async user => {
@@ -397,28 +432,52 @@ window.finishOnboarding = async function () {
 // ── DAY 1 BRIEFING ───────────────────────────────────────────────
 function initBriefing() {
   briefingCard = 0;
-  // Reset all cards
-  document.querySelectorAll('.briefing-card').forEach((c, i) => {
+  document.querySelectorAll('.bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
     c.classList.toggle('hidden', i !== 0);
+    c.style.animation = '';
   });
-  document.querySelectorAll('.briefing-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === 0);
-  });
+  _setBriefingBg(0);
+  _updateBriefingDots(0);
   goTo('s-briefing');
 }
 
-window.nextBriefingCard = function () {
-  const prev = document.getElementById(`bc-${briefingCard}`);
-  if (prev) { prev.classList.remove('active'); prev.classList.add('hidden'); }
-  briefingCard++;
-  const next = document.getElementById(`bc-${briefingCard}`);
-  if (next) { next.classList.remove('hidden'); next.classList.add('active'); }
-  // Update dots
-  document.querySelectorAll('.briefing-dot').forEach((d, i) => {
-    d.classList.toggle('active', i === briefingCard);
+function _setBriefingBg(idx) {
+  const wrap = document.getElementById('s-briefing');
+  if (wrap) wrap.style.background = BRIEFING_COLORS[idx] || '#EEEAFF';
+}
+
+function _updateBriefingDots(idx) {
+  document.querySelectorAll('.bc-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+    d.classList.toggle('done', i < idx);
   });
-};
+  _updateBackBtn('s-briefing');
+}
+
+function _showBriefingCard(nextIdx, direction) {
+  const currEl = document.getElementById(`bc-${briefingCard}`);
+  const nextEl = document.getElementById(`bc-${nextIdx}`);
+  if (!currEl || !nextEl) return;
+
+  // Hide current
+  currEl.classList.remove('active');
+  currEl.classList.add('hidden');
+  currEl.style.animation = '';
+
+  // Animate next in
+  nextEl.classList.remove('hidden');
+  nextEl.style.animation = 'none';
+  nextEl.offsetHeight; // force reflow
+  nextEl.style.animation = direction === 'back' ? 'bc-enter-back 0.3s ease' : 'bc-enter-fwd 0.3s ease';
+  nextEl.classList.add('active');
+
+  briefingCard = nextIdx;
+  _setBriefingBg(nextIdx);
+  _updateBriefingDots(nextIdx);
+}
+
+window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
   // Mark briefing seen in Firestore (fire-and-forget)
