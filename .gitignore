@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Environment variables — never commit API keys
+.env
+.env.local
+.env.*.local
+
+# Firebase local cache and debug logs
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+.firebaserc.backup
+
+# Temp lock files (Word/Excel open file locks)
+~$*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
