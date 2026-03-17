@@ -994,3 +994,29 @@ a { color: inherit; text-decoration: none; }
 .teach-bullets li   { font-size: 14px; line-height: 1.6; color: var(--text); padding-left: 18px; position: relative; }
 .teach-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 .teach-step-text    { font-size: 14px; line-height: 1.65; color: var(--text); }
+
+/* ── HOOK PHASE ── */
+.hook-reveal        { margin-top: 16px; display: flex; flex-direction: column; gap: 12px; animation: phase2-in 0.35s ease; }
+.hook-insight-pill  { background: #EEEAFF; border: 1.5px solid #C5BBFF; border-radius: 24px; padding: 12px 18px; font-size: 14px; font-weight: 600; color: #3D31A0; line-height: 1.5; }
+
+/* ── WORKED EXAMPLE HEADER ── */
+.teach-ex-header    { display: flex; flex-direction: column; gap: 6px; margin: 0 0 16px; }
+.teach-ex-label     { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.teach-ex-bar       { height: 5px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.teach-ex-fill      { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s ease; }
+.teach-ex-insight   { display: flex; align-items: flex-start; gap: 10px; background: #E8F8F0; border: 1.5px solid #A8DFC0; border-radius: 12px; padding: 12px 14px; margin-top: 16px; animation: phase2-in 0.3s ease; }
+.insight-icon       { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.teach-ex-insight p { font-size: 13px; font-weight: 600; color: #1a6048; line-height: 1.5; margin: 0; }
+
+/* ── CONFIDENCE BUILDER ── */
+.teach-conf-counter { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+
+/* ── TIP SCREEN ── */
+.tip-wrap           { display: flex; flex-direction: column; flex: 1; padding: 24px 16px 32px; animation: phase2-in 0.4s ease; }
+.tip-header         { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.tip-avatar         { font-size: 32px; flex-shrink: 0; }
+.tip-label          { font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.tip-body           { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--r); padding: 20px; box-shadow: var(--shadow-sm); margin-bottom: 16px; font-size: 15px; line-height: 1.65; color: var(--text); }
+.tip-action-pill    { display: flex; align-items: center; gap: 10px; background: var(--accent); border-radius: 28px; padding: 12px 18px; margin-bottom: 24px; }
+.tip-action-label   { font-size: 12px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.75); flex-shrink: 0; }
+#tip-action-text    { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.4; }

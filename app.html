@@ -245,6 +245,107 @@
   </div>
 </div>
 
+<!-- ══════════════════════ IELTS OVERVIEW ══════════════════════ -->
+<div class="screen" id="s-ielts">
+  <div class="bc-wrap" id="ielts-wrap">
+
+    <!-- Card 1 -->
+    <div class="bc active" id="ic-0">
+      <div class="bc-top">
+        <div class="bc-icon">⏱️</div>
+        <div class="bc-eyebrow">The basics</div>
+        <h2 class="bc-title">The Test at a Glance</h2>
+      </div>
+      <div class="bc-pills">
+        <div class="bc-pill"><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong></div>
+        <div class="bc-pill"><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers</div>
+        <div class="bc-pill"><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages</div>
+        <div class="bc-pill"><strong>Writing:</strong> 60 minutes, 2 tasks</div>
+        <div class="bc-pill"><strong>Speaking:</strong> 11–14 minutes, face to face with an examiner</div>
+        <div class="bc-pill">Now <strong>mostly computerised</strong> — type Writing, click Reading, record Speaking</div>
+      </div>
+      <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bc hidden" id="ic-1">
+      <div class="bc-top">
+        <div class="bc-icon">🎯</div>
+        <div class="bc-eyebrow">The scoring</div>
+        <h2 class="bc-title">How Your Band Score Works</h2>
+      </div>
+      <div class="bc-pills">
+        <div class="bc-pill">Each section scored <strong>0–9 in 0.5 increments</strong></div>
+        <div class="bc-pill"><strong>Overall band = average</strong> of 4 sections, rounded to nearest 0.5</div>
+        <div class="bc-pill">Example: 7.0 + 6.5 + 6.0 + 6.5 = <strong>Overall 6.5</strong></div>
+        <div class="bc-pill">Most universities need <strong>Band 6.5–7.5 overall</strong> with no band below 6.0</div>
+        <div class="bc-pill">Half a band can be the difference between <strong>an offer and a rejection</strong></div>
+      </div>
+      <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bc hidden" id="ic-2">
+      <div class="bc-top">
+        <div class="bc-icon">📋</div>
+        <div class="bc-eyebrow">The criteria</div>
+        <h2 class="bc-title">What Examiners Are Scoring</h2>
+      </div>
+      <div class="bc-pills">
+        <div class="bc-pill"><strong>Reading + Listening:</strong> pure accuracy — every correct answer counts equally</div>
+        <div class="bc-pill"><strong>Writing Task 1:</strong> Task Achievement, Coherence, Lexical Resource, Grammar (25% each)</div>
+        <div class="bc-pill"><strong>Writing Task 2:</strong> same 4 criteria — worth <strong>double Task 1</strong></div>
+        <div class="bc-pill"><strong>Speaking:</strong> Fluency, Vocabulary, Grammar, Pronunciation (25% each)</div>
+        <div class="bc-pill">Examiners mark your <strong>English under pressure,</strong> not your knowledge</div>
+      </div>
+      <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bc hidden" id="ic-3">
+      <div class="bc-top">
+        <div class="bc-icon">💻</div>
+        <div class="bc-eyebrow">The format</div>
+        <h2 class="bc-title">The Computerised Test</h2>
+      </div>
+      <div class="bc-pills">
+        <div class="bc-pill"><strong>Reading:</strong> scroll passages on screen, click answers — no underlining on paper</div>
+        <div class="bc-pill"><strong>Listening:</strong> audio through headphones, type or click answers <strong>in real time</strong></div>
+        <div class="bc-pill"><strong>Writing:</strong> type your essays — word count shown automatically</div>
+        <div class="bc-pill"><strong>Speaking:</strong> recorded in a booth — <strong>no human examiner</strong> in the room</div>
+        <div class="bc-pill">You can <strong>copy/paste</strong> in Writing, use <strong>highlight tool</strong> in Reading</div>
+      </div>
+      <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="bc hidden" id="ic-4">
+      <div class="bc-top">
+        <div class="bc-icon">💡</div>
+        <div class="bc-eyebrow">The shift</div>
+        <h2 class="bc-title">The One Thing Most Students Get Wrong</h2>
+      </div>
+      <div class="bc-pills">
+        <div class="bc-pill">They practise <strong>answering questions.</strong> They don't practise understanding <strong>why answers are right or wrong</strong></div>
+        <div class="bc-pill"><strong>Band 6</strong> students know the rules. <strong>Band 7</strong> students know how the <strong>examiner thinks</strong></div>
+        <div class="bc-pill">Toody's job: teach you to <strong>think like the examiner,</strong> not just answer like a student</div>
+      </div>
+      <div class="bc-coach-note">"From this point, everything Toody teaches is examiner-first thinking."</div>
+      <button class="bc-btn bc-btn-start" onclick="finishIELTSOverview()">Start Day 1 — let's build that skill <span class="arrow">→</span></button>
+    </div>
+
+    <!-- Progress dots -->
+    <div class="bc-dots" id="ielts-dots">
+      <span class="bc-dot active" id="id-dot-0"></span>
+      <span class="bc-dot" id="id-dot-1"></span>
+      <span class="bc-dot" id="id-dot-2"></span>
+      <span class="bc-dot" id="id-dot-3"></span>
+      <span class="bc-dot" id="id-dot-4"></span>
+    </div>
+
+  </div>
+</div>
+
 <!-- ══════════════════════ HOME ══════════════════════ -->
 <div class="screen" id="s-home">
   <div class="nav">
@@ -326,6 +427,30 @@
   </div>
   <div class="phase-label">Phase 1 — <span class="pl-name">Learn the Strategy</span></div>
 
+  <!-- HOOK — cold question, unscored (min 0-2) -->
+  <div id="teach-hook" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">🤔</div>
+      <div class="toody-bubble" id="teach-hook-bubble">Before I explain anything — just have a go at this. No scoring, no pressure. What would you answer?</div>
+    </div>
+    <div class="passage-wrap">
+      <div class="passage-label">Passage</div>
+      <div class="passage-text" id="teach-hook-passage"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">The Statement</div>
+      <div class="q-text" id="teach-hook-statement" style="margin-bottom:14px"></div>
+      <div class="tfng" id="teach-hook-btns">
+        <button class="tfng-btn" onclick="window.answerHook('True')"  data-mv="True">✓ True</button>
+        <button class="tfng-btn" onclick="window.answerHook('False')" data-mv="False">✗ False</button>
+        <button class="tfng-btn" onclick="window.answerHook('NG')"    data-mv="NG">? Not Given</button>
+      </div>
+    </div>
+    <div class="hook-reveal hidden" id="teach-hook-reveal">
+      <div class="hook-insight-pill" id="teach-hook-insight"></div>
+      <button class="btn mt16" onclick="window.startConceptPhase()">Let me explain the pattern <span class="arrow">→</span></button>
+    </div>
+  </div>
   <div id="teach-loading" class="screen-loading"><div class="spinner"></div><p>Preparing your lesson…</p></div>
 
   <!-- Phase 0: Concept explanation -->
@@ -338,11 +463,15 @@
       <div class="card-label">The Strategy</div>
       <div id="teach-concept-body" style="font-size:14px;line-height:1.75;color:var(--text)"></div>
     </div>
-    <button class="btn mt16" onclick="window.teachShowWorked()">Show me an example <span class="arrow">→</span></button>
+    <button class="btn mt16" onclick="window.teachShowReinforce()">Lock in the concept <span class="arrow">→</span></button>
   </div>
 
-  <!-- Phase 1: Worked example -->
+  <!-- GUIDED PRACTICE — 3 worked examples (min 5-8) -->
   <div id="teach-worked" class="hidden">
+    <div class="teach-ex-header">
+      <div class="teach-ex-label" id="teach-ex-counter">Example 1 of 3 — Easy</div>
+      <div class="teach-ex-bar"><div class="teach-ex-fill" id="teach-ex-fill" style="width:33%"></div></div>
+    </div>
     <div class="toody-msg">
       <div class="toody-avatar">🔍</div>
       <div class="toody-bubble">Here’s a real example. I’ll walk you through <strong>my reasoning</strong> — but I want <em>you</em> to predict each step first.</div>
@@ -356,7 +485,11 @@
       <div class="q-text" id="teach-we-statement" style="margin-bottom:0"></div>
     </div>
     <div id="teach-steps-container"></div>
-    <button class="btn hidden mt16" id="teach-try-btn" onclick="window.teachShowReinforce()">Lock it in <span class="arrow">→</span></button>
+    <div class="teach-ex-insight hidden" id="teach-ex-insight">
+      <span class="insight-icon">💡</span>
+      <span id="teach-ex-insight-text"></span>
+    </div>
+    <button class="btn hidden mt16" id="teach-try-btn" onclick="window.advanceWorkedExample()">Next example <span class="arrow">→</span></button>
   </div>
 
   <!-- Reinforcement options -->
@@ -383,32 +516,33 @@
       </button>
     </div>
     <div id="teach-reinforce-content" class="hidden"></div>
-    <button class="btn mt16 hidden" id="teach-continue-micro-btn" onclick="window.teachShowMicro()">Try one yourself <span class="arrow">→</span></button>
+    <button class="btn mt16 hidden" id="teach-continue-micro-btn" onclick="window.startWorkedExamples()">Show me the examples <span class="arrow">→</span></button>
   </div>
 
-  <!-- Micro test -->
-  <div id="teach-micro" class="hidden">
+  <!-- CONFIDENCE BUILDER — 2 achievable questions (min 8-10) -->
+  <div id="teach-confidence" class="hidden">
     <div class="toody-msg">
-      <div class="toody-avatar">🎯</div>
-      <div class="toody-bubble" id="teach-micro-bubble">Your turn. No pressure — just try applying the strategy.</div>
+      <div class="toody-avatar">💪</div>
+      <div class="toody-bubble" id="teach-conf-bubble">Your turn. Two questions — apply the strategy you just saw.</div>
     </div>
+    <div class="teach-conf-counter" id="teach-conf-counter">Question 1 of 2</div>
     <div class="passage-wrap">
       <div class="passage-label">Passage</div>
-      <div class="passage-text" id="teach-micro-passage"></div>
+      <div class="passage-text" id="teach-conf-passage"></div>
     </div>
     <div class="card">
-      <div class="card-label">Quick Check</div>
-      <div class="q-text" id="teach-micro-statement" style="margin-bottom:14px"></div>
-      <div class="tfng" id="teach-micro-btns">
-        <button class="tfng-btn" onclick="window.answerMicro('True')"  data-mv="True">✓ True</button>
-        <button class="tfng-btn" onclick="window.answerMicro('False')" data-mv="False">✗ False</button>
-        <button class="tfng-btn" onclick="window.answerMicro('NG')"    data-mv="NG">? Not Given</button>
+      <div class="card-label">The Statement</div>
+      <div class="q-text" id="teach-conf-statement" style="margin-bottom:14px"></div>
+      <div class="tfng" id="teach-conf-btns">
+        <button class="tfng-btn" onclick="window.answerConfidence('True')"  data-mv="True">✓ True</button>
+        <button class="tfng-btn" onclick="window.answerConfidence('False')" data-mv="False">✗ False</button>
+        <button class="tfng-btn" onclick="window.answerConfidence('NG')"    data-mv="NG">? Not Given</button>
       </div>
-      <div class="result-flash" id="teach-micro-result"></div>
+      <div class="result-flash" id="teach-conf-result"></div>
     </div>
     <div class="teach-celebrate hidden" id="teach-celebrate">
       <div class="celebrate-icon">✅</div>
-      <div class="celebrate-text">You’ve got it. Let’s put it to work.</div>
+      <div class="celebrate-text">You’ve got the pattern. Now let’s put it under real conditions.</div>
     </div>
   </div>
 </div>
@@ -810,6 +944,29 @@
 </div>
 
 <script type="module" src="app.js"></script>
+
+
+<!-- ══════════════════════ SESSION TIP ══════════════════════ -->
+<div class="screen" id="s-tip">
+  <div class="nav">
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+  </div>
+  <div class="tip-wrap">
+    <div class="tip-header">
+      <div class="tip-avatar">👁️</div>
+      <div class="tip-label">Toody noticed something</div>
+    </div>
+    <div id="tip-loading" class="screen-loading" style="padding:30px 0"><div class="spinner"></div><p>Analysing your session…</p></div>
+    <div id="tip-content" class="hidden">
+      <div class="tip-body" id="tip-text"></div>
+      <div class="tip-action-pill hidden" id="tip-action-pill">
+        <span class="tip-action-label">Next session:</span>
+        <span id="tip-action-text"></span>
+      </div>
+    </div>
+    <button class="btn hidden mt16" id="tip-done-btn" onclick="window.finishTip()">Got it — show me my notebook <span class="arrow">→</span></button>
+  </div>
+</div>
 
 <button id="global-back-btn" class="global-back-btn hidden" onclick="goBack()" aria-label="Go back">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

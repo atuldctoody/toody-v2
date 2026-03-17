@@ -87,9 +87,18 @@ let listenHasPlayed  = false;  // Whether student has pressed play at least once
 let teachData         = null;  // AI-generated lesson content
 let teachStep         = 0;     // Current step in worked example
 let teachSkillKey     = '';    // Skill being taught (e.g. 'reading.tfng')
-let microAttempts     = 0;     // How many times student tried the micro test
+let microAttempts     = 0;     // Legacy — kept for drill compat
 let teachDrillIndex   = 0;     // Current drill question index
 let teachDrillCorrect = 0;     // Correct answers in quick drill
+let teachStartTime    = 0;     // Date.now() at start of teach phase
+let workedExIdx       = 0;     // Which of the 3 guided examples we're on
+let confQIdx          = 0;     // Confidence builder question index
+let confCorrect       = 0;     // Confidence correct count
+// IELTS Overview
+let ieltsCard         = 0;
+const IELTS_COLORS    = ['#E8F0FF','#EEEAFF','#E8F8F0','#FFF4E0','#FFE8E8'];
+// Session tip
+let tipNotebookFn     = null;
 
 // Writing session
 let writingTaskData = null;
@@ -140,16 +149,16 @@ function goTo(id) {
 function _updateBackBtn(screenId) {
   const btn = document.getElementById('global-back-btn');
   if (!btn) return;
-  const show = screenHistory.length > 0 || (screenId === 's-briefing' && briefingCard > 0);
+  const show = screenHistory.length > 0
+    || (screenId === 's-briefing' && briefingCard > 0)
+    || (screenId === 's-ielts'    && ieltsCard    > 0);
   btn.classList.toggle('hidden', !show);
 }
 
 window.goBack = function () {
-  // Back within briefing cards
-  if (document.querySelector('.screen.active')?.id === 's-briefing' && briefingCard > 0) {
-    _showBriefingCard(briefingCard - 1, 'back');
-    return;
-  }
+  const cur = document.querySelector('.screen.active')?.id;
+  if (cur === 's-briefing' && briefingCard > 0) { _showBriefingCard(briefingCard - 1, 'back'); return; }
+  if (cur === 's-ielts'    && ieltsCard    > 0) { _showIELTSCard(ieltsCard    - 1, 'back'); return; }
   if (screenHistory.length === 0) return;
   _goingBack = true;
   const prev = screenHistory.pop();
@@ -480,12 +489,55 @@ function _showBriefingCard(nextIdx, direction) {
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
-  // Mark briefing seen in Firestore (fire-and-forget)
   try {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
     if (studentData) studentData.briefingSeen = true;
   } catch (e) { console.warn('briefing save failed', e); }
-  // Go straight into Teach-First T/F/NG
+  initIELTSOverview();
+};
+
+// ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
+function initIELTSOverview() {
+  ieltsCard = 0;
+  document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
+    c.classList.toggle('active', i === 0);
+    c.classList.toggle('hidden', i !== 0);
+    c.style.animation = '';
+  });
+  document.getElementById('s-ielts').style.background = IELTS_COLORS[0];
+  document.querySelectorAll('#s-ielts .bc-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === 0);
+    d.classList.remove('done');
+  });
+  goTo('s-ielts');
+}
+
+window.nextIELTSCard = function () { _showIELTSCard(ieltsCard + 1, 'forward'); };
+
+function _showIELTSCard(nextIdx, direction) {
+  const currEl = document.getElementById(`ic-${ieltsCard}`);
+  const nextEl = document.getElementById(`ic-${nextIdx}`);
+  if (!currEl || !nextEl) return;
+  currEl.classList.remove('active'); currEl.classList.add('hidden'); currEl.style.animation = '';
+  nextEl.classList.remove('hidden');
+  nextEl.style.animation = 'none';
+  nextEl.offsetHeight;
+  nextEl.style.animation = direction === 'back' ? 'bc-enter-back 0.3s ease' : 'bc-enter-fwd 0.3s ease';
+  nextEl.classList.add('active');
+  ieltsCard = nextIdx;
+  document.getElementById('s-ielts').style.background = IELTS_COLORS[nextIdx] || IELTS_COLORS[0];
+  document.querySelectorAll('#s-ielts .bc-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === nextIdx);
+    d.classList.toggle('done', i < nextIdx);
+  });
+  _updateBackBtn('s-ielts');
+}
+
+window.finishIELTSOverview = async function () {
+  try {
+    await updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true });
+    if (studentData) studentData.hasSeenIELTSOverview = true;
+  } catch (e) { console.warn('IELTS overview save failed', e); }
   loadTeachFirst('reading.tfng');
 };
 
@@ -619,10 +671,13 @@ window.goToSession = function () {
     return attempted === 0;
   })();
 
-  // Briefing gate: Day 1, first-time skill, briefing not yet seen
+  // Onboarding gates (in order): briefing → IELTS overview → teach-first
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
-    renderHome(); // ensure home data is up to date
+    renderHome();
     initBriefing();
+  } else if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.hasSeenIELTSOverview) {
+    renderHome();
+    initIELTSOverview();
   } else if (plan.screen === 's-reading' && isFirstTimeSkill) {
     loadTeachFirst(plan.skill);
   // Warmup fires on Day 2+ reading sessions that are NOT first-time
@@ -696,19 +751,22 @@ function launchSkillScreen(plan) {
   else loadReadingSession();
 }
 
-// ── TEACH FIRST (first encounter of a skill) ─────────────────────
+// ── TEACH FIRST — 10-minute interactive learning phase ─────────
 async function loadTeachFirst(skillKey) {
   teachData         = null;
   teachStep         = 0;
-  microAttempts     = 0;
+  teachStartTime    = Date.now();
+  workedExIdx       = 0;
+  confQIdx          = 0;
+  confCorrect       = 0;
   teachDrillIndex   = 0;
   teachDrillCorrect = 0;
   teachSkillKey     = skillKey || 'reading.tfng';
 
+  ['teach-hook','teach-concept','teach-worked','teach-reinforce','teach-confidence'].forEach(id => {
+    document.getElementById(id)?.classList.add('hidden');
+  });
   document.getElementById('teach-loading').classList.remove('hidden');
-  document.getElementById('teach-concept').classList.add('hidden');
-  document.getElementById('teach-worked').classList.add('hidden');
-  document.getElementById('teach-micro').classList.add('hidden');
   goTo('s-teach');
 
   const band = studentData?.targetBand || 6.5;
@@ -725,53 +783,48 @@ async function loadTeachFirst(skillKey) {
   const strategyLabel = document.querySelector('#teach-concept .card-label');
   if (strategyLabel) strategyLabel.textContent = 'The Strategy';
 
+  const ans = isMH ? 'True|False' : 'True|False|NG';
   const conceptPromptDetail = isMH
-    ? `An array of 4-5 short bullet strings. Each bullet: one clear fact or rule about Matching Headings. Cover: what it tests (main idea of a paragraph, not details), the #1 mistake (picking a heading based on a word match not the main idea), and how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`
-    : `An array of 4-5 short bullet strings. Each bullet: one clear fact or rule. Cover: what True means (passage confirms), what False means (passage contradicts), what Not Given means (passage is silent — not False!), and the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`;
+    ? `An array of 4-5 short bullet strings about Matching Headings. Cover: what it tests (main idea of paragraph, not details), the #1 trap (picking heading from a word match not the main idea), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`
+    : `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`;
 
-  const microTestPrompt = isMH
-    ? `"passage": "one paragraph of 3-4 academic sentences", "statement": "Does the heading '[a heading]' describe the main idea of this paragraph? Answer True if it matches, False if it contradicts or is clearly wrong.", "answer": "True|False", "explanation": "one sentence saying why"`
-    : `"passage": "2 academic sentences on a completely different topic", "statement": "a testable claim", "answer": "True|False|NG", "explanation": "one sentence explaining the answer"`;
+  const exSchema = `{"label":"Easy|Medium|Hard","passage":"2 academic sentences","statement":"testable claim","answer":"${ans}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is X — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
     system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble.',
-    user: `Generate a teach-first lesson on ${skillLabel} reading for a Band ${band} IELTS student.
+    user: `Generate a 10-minute interactive lesson on ${skillLabel} for a Band ${band} IELTS student.
 
 Return ONLY this JSON:
 {
   "concept": ${conceptPromptDetail},
-  "workedExample": {
-    "passage": "2 academic sentences on any interesting topic",
-    "statement": "${isMH ? 'a heading that either does or does not capture the main idea of the passage' : 'a clear testable claim about the passage'}",
+  "hookQuestion": {
+    "passage": "2 academic sentences — choose a tricky topic where the Not Given trap applies",
+    "statement": "a testable claim that looks True but is actually ${isMH ? 'False' : 'Not Given'}",
     "answer": "${isMH ? 'True|False' : 'True|False|NG'}",
-    "relevantPhrase": "exact phrase from the passage that is key to answering",
-    "statementClaim": "one sentence: what exactly the statement is claiming",
-    "steps": [
-      "Step 1: explanation of which part of the passage is relevant and why",
-      "Step 2: explanation of what the statement is claiming",
-      "Step 3: explanation of whether the passage confirms, contradicts, or stays silent"
-    ],
-    "conclusion": "Therefore the answer is [answer] — one sentence saying why."
+    "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
-  "microTest": {
-    ${microTestPrompt}
-  },
-  "microTest2": {
-    ${microTestPrompt.replace(/completely different topic/g, 'third completely different topic')}
-  },
+  "workedExamples": [
+    ${exSchema.replace('Easy|Medium|Hard', 'Easy')},
+    ${exSchema.replace('Easy|Medium|Hard', 'Medium — introduce the most common trap for this question type')},
+    ${exSchema.replace('Easy|Medium|Hard', 'Hard — the exact sub-type where most Band 6 students fail')}
+  ],
+  "confidenceQuestions": [
+    {"passage": "2 academic sentences — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable claim", "answer": "${ans}", "explanation": "one sentence"},
+    {"passage": "2 academic sentences on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable claim", "answer": "${ans}", "explanation": "one sentence"}
+  ],
   "drillQuestions": [
-    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${isMH ? 'True|False' : 'True|False|NG'}", "explanation": "one sentence"},
-    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${isMH ? 'True|False' : 'True|False|NG'}", "explanation": "one sentence"}
+    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${ans}", "explanation": "one sentence"},
+    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${ans}", "explanation": "one sentence"}
   ]
 }`,
-    maxTokens: 2000
+    maxTokens: 3500
   };
 
   try {
     const raw  = await callAI(prompt);
     teachData  = JSON.parse(raw);
 
-    // concept is an array of bullet strings; bold **text** markers
+    // Render concept bullets
     const bullets = Array.isArray(teachData.concept)
       ? teachData.concept
       : String(teachData.concept).split('\n').filter(p => p.trim());
@@ -782,73 +835,111 @@ Return ONLY this JSON:
       '</ul>';
 
     document.getElementById('teach-loading').classList.add('hidden');
-    document.getElementById('teach-concept').classList.remove('hidden');
+    renderHookQuestion();
   } catch {
-    // If teaching fails, skip straight to the reading session
     loadReadingSession();
   }
 }
 
-window.teachShowWorked = function () {
-  document.getElementById('teach-concept').classList.add('hidden');
+// Hook phase functions (min 0-2)
+function renderHookQuestion() {
+  const hq = teachData.hookQuestion;
+  if (!hq) { window.startConceptPhase(); return; }
+  document.getElementById('teach-hook-passage').textContent = hq.passage;
+  document.getElementById('teach-hook-statement').textContent = hq.statement;
+  const isMH = teachSkillKey === 'reading.matchingHeadings';
+  const ngBtn = document.querySelector('#teach-hook-btns [data-mv="NG"]');
+  if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
+  document.getElementById('teach-hook').classList.remove('hidden');
+}
 
-  const we = teachData.workedExample;
-  document.getElementById('teach-we-passage').innerHTML = we.passage
+window.answerHook = function (val) {
+  const hq = teachData.hookQuestion;
+  if (!hq) return;
+  document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.mv.toLowerCase() === (hq.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (b.dataset.mv === val) b.classList.add('wrong');
+  });
+  document.getElementById('teach-hook-insight').textContent = hq.insight || '';
+  document.getElementById('teach-hook-reveal').classList.remove('hidden');
+  window.scrollTo(0, document.body.scrollHeight);
+};
+
+window.startConceptPhase = function () {
+  document.getElementById('teach-hook').classList.add('hidden');
+  document.getElementById('teach-concept').classList.remove('hidden');
+};
+
+// Guided practice — 3 worked examples (min 5-8)
+function renderWorkedExampleAt(idx) {
+  const examples = teachData.workedExamples || [];
+  if (idx >= examples.length) { renderConfidenceQuestion(0); return; }
+  const we = examples[idx];
+  const labels = ['Easy', 'Medium', 'Hard'];
+
+  document.getElementById('teach-ex-counter').textContent = `Example ${idx + 1} of 3 — ${labels[idx] || ''}`;
+  document.getElementById('teach-ex-fill').style.width = `${((idx + 1) / 3) * 100}%`;
+  document.getElementById('teach-we-passage').innerHTML = (we.passage || '')
     .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
-  document.getElementById('teach-we-statement').textContent = we.statement;
+  document.getElementById('teach-we-statement').textContent = we.statement || '';
 
-  teachStep = 0;
+  const insightEl = document.getElementById('teach-ex-insight');
+  insightEl.classList.add('hidden');
+  document.getElementById('teach-ex-insight-text').textContent = '';
 
-  // Step 3 answer → which choice button to highlight
+  const tryBtn = document.getElementById('teach-try-btn');
+  tryBtn.classList.add('hidden');
+  tryBtn.textContent = idx < 2 ? 'Next example →' : 'Try on your own →';
+
   const answerToChoice = { true: 'confirms', false: 'contradicts', ng: 'silent' };
   const correctChoice  = answerToChoice[(we.answer || 'ng').toLowerCase()] || 'silent';
 
-  const html = `
+  document.getElementById('teach-steps-container').innerHTML = `
     <div class="predict-block" id="predict-0">
       <div class="predict-prompt">What part of the passage is relevant here?</div>
       <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
       <div class="predict-reveal hidden" id="predict-reveal-0">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 1</div>
-          <div class="teach-step-text">${we.steps[0]}</div>
+          <div class="teach-step-text">${(we.steps || [])[0] || ''}</div>
         </div>
       </div>
     </div>
-
     <div class="predict-block hidden" id="predict-1">
       <div class="predict-prompt">What is this statement actually claiming?</div>
       <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Reveal <span class="arrow">→</span></button>
       <div class="predict-reveal hidden" id="predict-reveal-1">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 2</div>
-          <div class="teach-step-text">${we.steps[1]}</div>
+          <div class="teach-step-text">${(we.steps || [])[1] || ''}</div>
         </div>
       </div>
     </div>
-
     <div class="predict-block hidden" id="predict-2">
       <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
       <div class="step3-choices mt8">
-        <button class="step3-btn" data-choice="confirms" onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
+        <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
         <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
-        <button class="step3-btn" data-choice="silent" onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
+        <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
       </div>
       <div class="predict-reveal hidden" id="predict-reveal-2">
         <div class="card" style="margin-top:12px">
           <div class="card-label" style="color:var(--accent)">Step 3</div>
-          <div class="teach-step-text">${we.steps[2]}</div>
+          <div class="teach-step-text">${(we.steps || [])[2] || ''}</div>
         </div>
         <div class="card" style="margin-top:8px;border:2px solid var(--success)">
           <div class="card-label" style="color:var(--success)">✅ Answer</div>
-          <div class="teach-step-text" style="font-weight:600">${we.conclusion}</div>
+          <div class="teach-step-text" style="font-weight:600">${we.conclusion || ''}</div>
         </div>
       </div>
     </div>`;
 
-  document.getElementById('teach-steps-container').innerHTML = html;
-  document.getElementById('teach-try-btn').classList.add('hidden');
+  document.getElementById('teach-reinforce').classList.add('hidden');
+  document.getElementById('teach-confidence').classList.add('hidden');
   document.getElementById('teach-worked').classList.remove('hidden');
-};
+  window.scrollTo(0, 0);
+}
 
 window.teachRevealStep = function (stepIdx) {
   document.getElementById(`predict-reveal-${stepIdx}`).classList.remove('hidden');
@@ -862,21 +953,38 @@ window.teachRevealStep = function (stepIdx) {
 };
 
 window.teachPickStep3 = function (choice, correct) {
-  // Lock all buttons, highlight correct/wrong
   document.querySelectorAll('.step3-btn').forEach(b => {
     b.disabled = true;
     if (b.dataset.choice === correct)  b.classList.add('step3-correct');
     if (b.dataset.choice === choice && choice !== correct) b.classList.add('step3-wrong');
   });
-  // Reveal explanation + conclusion
   document.getElementById('predict-reveal-2').classList.remove('hidden');
-  // Show "Lock it in" button
+  // Show per-example insight
+  const examples = teachData.workedExamples || [];
+  const insight = examples[workedExIdx]?.insight || '';
+  if (insight) {
+    document.getElementById('teach-ex-insight-text').textContent = insight;
+    document.getElementById('teach-ex-insight').classList.remove('hidden');
+  }
   document.getElementById('teach-try-btn').classList.remove('hidden');
   window.scrollTo(0, document.body.scrollHeight);
 };
 
+window.advanceWorkedExample = function () {
+  workedExIdx++;
+  renderWorkedExampleAt(workedExIdx);
+};
+
+window.startWorkedExamples = function () {
+  workedExIdx = 0;
+  document.getElementById('teach-reinforce').classList.add('hidden');
+  renderWorkedExampleAt(0);
+};
+
 window.teachShowReinforce = function () {
-  document.getElementById('teach-worked').classList.add('hidden');
+  ['teach-hook','teach-concept','teach-worked'].forEach(id =>
+    document.getElementById(id)?.classList.add('hidden')
+  );
   document.getElementById('teach-reinforce-content').classList.add('hidden');
   document.getElementById('teach-continue-micro-btn').classList.add('hidden');
   document.getElementById('teach-reinforce').classList.remove('hidden');
@@ -884,8 +992,9 @@ window.teachShowReinforce = function () {
 
 window.teachReinforceHear = function () {
   saveLearningStyleSignal('hear');
-  const we = teachData.workedExample;
-  const text = `Here is the reasoning for the worked example. ${we.steps.join(' ')} ${we.conclusion}`;
+  const bullets = Array.isArray(teachData.concept) ? teachData.concept : [];
+  const skillLabel2 = teachSkillKey === 'reading.matchingHeadings' ? 'Matching Headings' : 'True, False, Not Given';
+  const text = `Here is how ${skillLabel2} reading works. ${bullets.map(b => b.replace(/\*\*/g, '')).join(' ')}`;
   const contentEl = document.getElementById('teach-reinforce-content');
   contentEl.innerHTML = '<div class="screen-loading" style="min-height:60px"><div class="spinner"></div><p>Generating audio…</p></div>';
   contentEl.classList.remove('hidden');
@@ -964,7 +1073,7 @@ window.teachReinforceDrill = function () {
 };
 
 function renderDrillQuestion(idx) {
-  const qs = teachData.drillQuestions || [];
+  const qs = teachData.drillQuestions || teachData.confidenceQuestions || [];
   if (idx >= qs.length) {
     // Drill complete
     const contentEl = document.getElementById('teach-reinforce-content');
@@ -990,7 +1099,8 @@ function renderDrillQuestion(idx) {
 }
 
 window.answerDrill = function (idx, val) {
-  const q = teachData.drillQuestions[idx];
+  const qs2 = teachData.drillQuestions || teachData.confidenceQuestions || [];
+  const q = qs2[idx];
   const isRight = val.toLowerCase() === (q.answer || '').toLowerCase();
   if (isRight) teachDrillCorrect++;
 
@@ -1014,83 +1124,129 @@ function saveLearningStyleSignal(type) {
   if (studentData.brain) studentData.brain.learningStyleSignal = updated;
 }
 
-window.teachShowMicro = function () {
-  document.getElementById('teach-reinforce').classList.add('hidden');
-
-  const micro = teachData.microTest;
-  loadMicroQuestion(micro);
-  document.getElementById('teach-micro').classList.remove('hidden');
-};
-
-function loadMicroQuestion(micro) {
-  document.getElementById('teach-micro-passage').innerHTML = micro.passage
-    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
-  document.getElementById('teach-micro-statement').textContent = micro.statement;
-  document.getElementById('teach-micro-result').className = 'result-flash';
-  document.getElementById('teach-micro-result').innerHTML = '';
-  document.getElementById('teach-celebrate').classList.add('hidden');
-  const btnsEl = document.getElementById('teach-micro-btns');
-  btnsEl.innerHTML = `
-    <button class="tfng-btn" onclick="window.answerMicro('True')"  data-mv="True">\u2713 True</button>
-    <button class="tfng-btn" onclick="window.answerMicro('False')" data-mv="False">\u2717 False</button>
-    <button class="tfng-btn" onclick="window.answerMicro('NG')"    data-mv="NG">? Not Given</button>`;
-}
-
-window.answerMicro = function (val) {
-  const micro = microAttempts === 0 ? teachData?.microTest : teachData?.microTest2;
-  if (!micro) return;
-
-  document.querySelectorAll('#teach-micro-btns .tfng-btn').forEach(b => {
-    b.disabled = true;
-    const bv = b.getAttribute('data-mv');
-    if      (bv.toLowerCase() === (micro.answer || '').toLowerCase()) b.classList.add('correct');
-    else if (bv === val && bv.toLowerCase() !== (micro.answer || '').toLowerCase()) b.classList.add('wrong');
-  });
-
-  const isRight = val.toLowerCase() === (micro.answer || '').toLowerCase();
-  const rf = document.getElementById('teach-micro-result');
-  microAttempts++;
-
-  if (isRight) {
-    rf.classList.add('show', 'good');
-    rf.innerHTML = `\u2705 Correct! ${micro.explanation}`;
-    // Brief celebration then auto-advance
-    setTimeout(() => {
-      rf.classList.remove('show');
-      document.getElementById('teach-celebrate').classList.remove('hidden');
-      setTimeout(() => window.startRealSession(), 2000);
-    }, 600);
+// Confidence builder (min 8-10)
+function renderConfidenceQuestion(idx) {
+  confQIdx = idx;
+  const qs = teachData.confidenceQuestions || [];
+  if (idx >= qs.length) {
+    document.getElementById('teach-celebrate').classList.remove('hidden');
+    setTimeout(() => window.startRealSession(), 2000);
     return;
   }
+  const q = qs[idx];
+  document.getElementById('teach-conf-counter').textContent = `Question ${idx + 1} of 2`;
+  document.getElementById('teach-conf-passage').textContent = q.passage;
+  document.getElementById('teach-conf-statement').textContent = q.statement;
+  const isMH = teachSkillKey === 'reading.matchingHeadings';
+  const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
+  if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
+  document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
+    b.disabled = false; b.classList.remove('correct', 'wrong');
+  });
+  const rf = document.getElementById('teach-conf-result');
+  rf.className = 'result-flash'; rf.textContent = '';
+  document.getElementById('teach-celebrate').classList.add('hidden');
+  document.getElementById('teach-worked').classList.add('hidden');
+  document.getElementById('teach-confidence').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
 
-  // Wrong answer handling
-  rf.classList.add('show', 'bad');
-
-  if (microAttempts === 1 && teachData?.microTest2) {
-    // First failure — give them a second different question
-    rf.innerHTML = `\u274c The answer is <strong>${micro.answer}</strong>. ${micro.explanation} Let\u2019s try one more.`;
-    const bubble = document.getElementById('teach-micro-bubble');
-    if (bubble) bubble.textContent = 'One more — slightly different. Same strategy.';
-    setTimeout(() => {
-      rf.className = 'result-flash';
-      loadMicroQuestion(teachData.microTest2);
-    }, 2200);
-  } else {
-    // Second failure — move forward anyway
-    rf.innerHTML = `\u274c The answer is <strong>${micro.answer}</strong>. ${micro.explanation}`;
-    const bubble = document.getElementById('teach-micro-bubble');
-    if (bubble) bubble.textContent = "Let\u2019s learn through doing \u2014 I\u2019ll explain as we go.";
-    setTimeout(() => window.startRealSession(), 2500);
-  }
+window.answerConfidence = function (val) {
+  const qs = teachData.confidenceQuestions || [];
+  const q = qs[confQIdx];
+  if (!q) return;
+  const isCorrect = val.toLowerCase() === (q.answer || '').toLowerCase();
+  if (isCorrect) confCorrect++;
+  document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.mv.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
+    else if (b.dataset.mv === val && !isCorrect) b.classList.add('wrong');
+  });
+  const rf = document.getElementById('teach-conf-result');
+  rf.classList.add('show', isCorrect ? 'good' : 'bad');
+  rf.textContent = isCorrect
+    ? `✅ Correct. ${q.explanation}`
+    : `❌ The answer is ${q.answer}. ${q.explanation}`;
+  setTimeout(() => {
+    if (confQIdx + 1 >= qs.length) {
+      const bubble = document.getElementById('teach-conf-bubble');
+      if (confCorrect === 2 && bubble) bubble.textContent = "You’ve got the pattern. Now let’s see it under real conditions.";
+      else if (bubble)                 bubble.textContent = "Good effort — let’s see the full session now.";
+      document.getElementById('teach-celebrate').classList.remove('hidden');
+      setTimeout(() => window.startRealSession(), 2000);
+    } else {
+      renderConfidenceQuestion(confQIdx + 1);
+    }
+  }, 1600);
 };
-
 window.startRealSession = function () {
   const day = studentData?.dayNumber || 1;
   const plan = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
   const label = plan.label || 'Reading';
+  const teachingMinutes = teachStartTime ? Math.round((Date.now() - teachStartTime) / 60000) : 0;
+  if (currentUser && teachingMinutes > 0) {
+    updateStudentDoc(currentUser.uid, { lastTeachingMinutes: teachingMinutes }).catch(() => {});
+  }
   document.getElementById('phase2-skill-name').textContent = label;
   goTo('s-phase2');
   setTimeout(() => loadReadingSession(), 1500);
+};
+
+// ── TIP SCREEN ────────────────────────────────────────────────────
+async function showSessionTip({ accuracy, behaviour, missedSubTypes, skillKey }) {
+  tipNotebookFn = tipNotebookFn || null;
+  goTo('s-tip');
+  document.getElementById('tip-loading').classList.remove('hidden');
+  document.getElementById('tip-content').classList.add('hidden');
+  document.getElementById('tip-done-btn').classList.add('hidden');
+  document.getElementById('tip-action-pill').classList.add('hidden');
+
+  const brain  = studentData?.studentBrain || {};
+  const ctx    = brain.contextSnippet || '';
+  const skills = brain.skills         || {};
+  const topMissed = Object.entries(missedSubTypes || {})
+    .sort((a,b) => b[1] - a[1]).map(e => e[0])[0] || 'N/A';
+
+  const prompt = {
+    role: 'user',
+    content: `You are Toody, an IELTS Academic coach. A student just completed a ${skillKey} session.
+
+Student context: ${ctx}
+- Avg time per question: ${behaviour?.avgTimePerQuestionSec || '?'}s
+- Scrolled back to passage: ${behaviour?.scrollsBackCount || 0} times
+- Changed answers: ${behaviour?.answerChangesCount || 0} times
+- Accuracy: ${accuracy}%
+- Missed sub-types: ${JSON.stringify(missedSubTypes || {})}
+- Known weak area: ${topMissed}
+
+Generate a personalised coaching tip. Return ONLY this JSON:
+{
+  "observation": "one sentence about a specific behaviour pattern from this session",
+  "revelation": "one sentence explaining what that pattern reveals about their current approach",
+  "action": "one concrete thing they can do differently in their next session",
+  "nextSessionInstruction": "max 12 words — the single most important focus for next session"
+}`
+  };
+
+  try {
+    const raw = await callAI(prompt);
+    const tip = JSON.parse(raw);
+    document.getElementById('tip-text').textContent =
+      [tip.observation, tip.revelation, tip.action].filter(Boolean).join(' ');
+    if (tip.nextSessionInstruction) {
+      document.getElementById('tip-action-text').textContent = tip.nextSessionInstruction;
+      document.getElementById('tip-action-pill').classList.remove('hidden');
+    }
+    document.getElementById('tip-loading').classList.add('hidden');
+    document.getElementById('tip-content').classList.remove('hidden');
+    document.getElementById('tip-done-btn').classList.remove('hidden');
+  } catch {
+    if (tipNotebookFn) { tipNotebookFn(); tipNotebookFn = null; }
+  }
+}
+
+window.finishTip = function () {
+  if (tipNotebookFn) { tipNotebookFn(); tipNotebookFn = null; }
 };
 
 // ── BEHAVIOUR TRACKING ───────────────────────────────────────────
@@ -1483,9 +1639,12 @@ async function finishReadingSession() {
     return;
   }
 
-  document.getElementById('nb-day-badge').textContent = `Day ${day}`;
-  goTo('s-notebook');
-  renderNotebook(sessionCorrect, total, 'reading.tfng');
+  tipNotebookFn = () => {
+    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    goTo('s-notebook');
+    renderNotebook(sessionCorrect, total, 'reading.tfng');
+  };
+  showSessionTip({ accuracy, behaviour, missedSubTypes, skillKey });
 }
 
 // ── LISTENING SESSION ─────────────────────────────────────────────
@@ -1823,9 +1982,19 @@ window.finishListeningSession = async function () {
     return;
   }
 
-  document.getElementById('nb-day-badge').textContent = `Day ${day}`;
-  goTo('s-notebook');
-  renderNotebook(listenCorrect, total, firestoreKey);
+  const listenMissed = {};
+  listenQuestions.forEach(q => {
+    const a = listenAnswers?.[q.id];
+    if (a !== undefined && String(a).toLowerCase() !== String(q.answer || '').toLowerCase()) {
+      listenMissed[q.type || 'mc'] = (listenMissed[q.type || 'mc'] || 0) + 1;
+    }
+  });
+  tipNotebookFn = () => {
+    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    goTo('s-notebook');
+    renderNotebook(listenCorrect, total, firestoreKey);
+  };
+  showSessionTip({ accuracy, behaviour: getBehaviourPayload(), missedSubTypes: listenMissed, skillKey: firestoreKey });
 };
 
 // ── WRITING SESSION ───────────────────────────────────────────────
@@ -1990,9 +2159,12 @@ window.finishWritingSession = async function () {
     return;
   }
 
-  document.getElementById('nb-day-badge').textContent = `Day ${day}`;
-  goTo('s-notebook');
-  renderNotebookWriting();
+  tipNotebookFn = () => {
+    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    goTo('s-notebook');
+    renderNotebookWriting();
+  };
+  showSessionTip({ accuracy: Math.round(writingBandEst * 10), behaviour: getBehaviourPayload(), missedSubTypes: {}, skillKey: 'writing' });
 };
 
 // ── SPEAKING SESSION ──────────────────────────────────────────────
@@ -2209,9 +2381,12 @@ window.finishSpeakingSession = async function () {
     return;
   }
 
-  document.getElementById('nb-day-badge').textContent = `Day ${day}`;
-  goTo('s-notebook');
-  renderNotebookSpeaking();
+  tipNotebookFn = () => {
+    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    goTo('s-notebook');
+    renderNotebookSpeaking();
+  };
+  showSessionTip({ accuracy: Math.round(speakingBandEst * 10), behaviour: getBehaviourPayload(), missedSubTypes: {}, skillKey: 'speaking' });
 };
 
 // ── WEEK 1 REPORT ─────────────────────────────────────────────────
