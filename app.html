@@ -375,6 +375,19 @@
     <div id="upcoming-list"></div>
   </div>
   <button class="btn-secondary" onclick="goToProgress()">View full progress →</button>
+
+  <!-- Mock Test card — shown after Day 10 -->
+  <div id="home-mock-card" style="display:none;margin-top:12px">
+    <div class="home-mock-banner">
+      <div class="hmb-icon">🏁</div>
+      <div class="hmb-body">
+        <div class="hmb-title">Practice Mock Tests</div>
+        <div class="hmb-sub">AI-generated full IELTS mock · Unlimited attempts</div>
+      </div>
+      <button class="hmb-btn" onclick="window.startFullMockSetup()">Start →</button>
+    </div>
+    <button class="btn-secondary mt10" style="width:100%;font-size:13px" onclick="window.goToMockHistory()">View Mock History</button>
+  </div>
 </div>
 
 <!-- ══════════════════════ SESSION INTRO ══════════════════════ -->
@@ -973,5 +986,157 @@
     <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 </button>
+
+  <!-- ═══════════════════════ FULL MOCK SETUP ══════════════════════ -->
+  <div id="s-fullmock-setup" class="screen hidden">
+    <nav class="nav">
+      <button class="global-back-btn" onclick="goBack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="nav-title">Mock Test</span>
+    </nav>
+    <div class="mock-setup-wrap">
+      <div class="mock-setup-header">
+        <div class="mock-setup-icon">📋</div>
+        <h2 class="mock-setup-title">IELTS Academic Practice Mock</h2>
+        <p class="mock-setup-sub">AI-generated exam conditions. No hints. No feedback during the test.</p>
+      </div>
+      <div class="mock-options">
+        <button class="mock-option-btn active" data-sections="all" onclick="window.selectMockOption(this)">
+          <div class="mock-opt-row">
+            <span class="mock-opt-label">Full Mock Test</span>
+            <span class="mock-opt-time">3h 34m</span>
+          </div>
+          <div class="mock-opt-desc">All 4 sections — Reading, Listening, Writing, Speaking</div>
+        </button>
+        <button class="mock-option-btn" data-sections="reading" onclick="window.selectMockOption(this)">
+          <div class="mock-opt-row">
+            <span class="mock-opt-label">Reading Only</span>
+            <span class="mock-opt-time">1h 00m</span>
+          </div>
+          <div class="mock-opt-desc">3 passages · ~24 questions</div>
+        </button>
+        <button class="mock-option-btn" data-sections="listening" onclick="window.selectMockOption(this)">
+          <div class="mock-opt-row">
+            <span class="mock-opt-label">Listening Only</span>
+            <span class="mock-opt-time">40m</span>
+          </div>
+          <div class="mock-opt-desc">4 audio sections · ~28 questions</div>
+        </button>
+        <button class="mock-option-btn" data-sections="writing" onclick="window.selectMockOption(this)">
+          <div class="mock-opt-row">
+            <span class="mock-opt-label">Writing Only</span>
+            <span class="mock-opt-time">1h 00m</span>
+          </div>
+          <div class="mock-opt-desc">Task 1 + Task 2</div>
+        </button>
+        <button class="mock-option-btn" data-sections="speaking" onclick="window.selectMockOption(this)">
+          <div class="mock-opt-row">
+            <span class="mock-opt-label">Speaking Only</span>
+            <span class="mock-opt-time">14m</span>
+          </div>
+          <div class="mock-opt-desc">Part 1 · Part 2 Cue Card · Part 3</div>
+        </button>
+      </div>
+      <div class="mock-setup-note">Timer starts immediately. Sections auto-advance when time runs out. You can submit a section early.</div>
+      <button class="btn mt16" onclick="window.startFullMockGeneration()">Generate Mock Test →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FULL MOCK GENERATION ═════════════════ -->
+  <div id="s-fullmock-gen" class="screen hidden">
+    <div class="mock-gen-wrap">
+      <div class="mock-gen-icon">⚙️</div>
+      <h2 class="mock-gen-title">Generating your mock test...</h2>
+      <p class="mock-gen-sub">Creating personalised exam content. This takes about 30 seconds.</p>
+      <div class="mock-gen-steps" id="mock-gen-steps">
+        <div class="mock-gen-step" id="mgs-reading"><span class="mgs-dot">○</span> Reading passages</div>
+        <div class="mock-gen-step" id="mgs-listening"><span class="mgs-dot">○</span> Listening scenarios &amp; audio</div>
+        <div class="mock-gen-step" id="mgs-writing"><span class="mgs-dot">○</span> Writing prompts</div>
+        <div class="mock-gen-step" id="mgs-speaking"><span class="mgs-dot">○</span> Speaking questions</div>
+      </div>
+      <div class="mock-gen-bar-wrap"><div class="mock-gen-bar" id="mock-gen-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FULL MOCK TEST ════════════════════════ -->
+  <div id="s-fullmock-test" class="screen hidden">
+    <div class="mock-test-header" id="mock-test-header">
+      <div class="mock-test-section-label" id="mock-test-section-label">Reading</div>
+      <div class="mock-test-timer" id="mock-test-timer">60:00</div>
+    </div>
+    <div class="mock-test-body" id="mock-test-body">
+      <!-- Section content rendered by JS -->
+    </div>
+    <div class="mock-test-footer">
+      <button class="btn mock-submit-btn" id="mock-submit-btn" onclick="window.submitMockSection()">Submit Section →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FULL MOCK EVALUATION ═════════════════ -->
+  <div id="s-fullmock-eval" class="screen hidden">
+    <div class="mock-eval-wrap">
+      <div class="mock-eval-anim" id="mock-eval-anim">🧠</div>
+      <h2 class="mock-eval-title">Toody is evaluating your mock test...</h2>
+      <p class="mock-eval-sub">Analysing your writing, speaking, and question patterns.</p>
+      <div class="spinner mt16"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FULL MOCK REPORT ═════════════════════ -->
+  <div id="s-fullmock-report" class="screen hidden">
+    <nav class="nav">
+      <button class="global-back-btn hidden" id="mock-report-back"></button>
+      <span class="nav-title">Mock Report</span>
+      <button class="nav-action" onclick="window.goToMockHistory()">History</button>
+    </nav>
+    <div class="mock-report-scroll">
+      <!-- Part 1: Score Summary -->
+      <div class="mock-report-section">
+        <div class="mock-report-date" id="mock-report-date">—</div>
+        <div class="mock-overall-band-card">
+          <div class="mob-label">Overall Band Estimate</div>
+          <div class="mob-score" id="mr-overall-band">—</div>
+          <div class="mob-compare" id="mr-compare">—</div>
+        </div>
+        <div class="mock-section-scores" id="mock-section-scores">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+      <!-- Part 2: Skill Breakdown -->
+      <div class="mock-report-section">
+        <div class="mock-report-heading">Skill Breakdown</div>
+        <div id="mr-skill-breakdown"><!-- Rendered by JS --></div>
+      </div>
+      <!-- Part 3: Personalised Debrief -->
+      <div class="mock-report-section">
+        <div class="mock-report-heading">Toody's Assessment</div>
+        <div id="mr-debrief-loading" class="mock-debrief-loading"><div class="spinner"></div></div>
+        <div id="mr-debrief" class="mock-debrief-body hidden"><!-- Rendered by JS --></div>
+      </div>
+      <!-- Part 4: Question Review -->
+      <div class="mock-report-section">
+        <div class="mock-report-heading">Question Review</div>
+        <p class="mock-review-intro">Every question you got wrong — with the correct answer and explanation.</p>
+        <div id="mr-question-review"><!-- Rendered by JS --></div>
+      </div>
+      <div style="padding:24px 16px">
+        <button class="btn" onclick="window.goToHome()">Back to Home</button>
+        <button class="btn-secondary mt12" style="width:100%" onclick="window.startFullMockSetup()">Take Another Mock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ FULL MOCK HISTORY ════════════════════ -->
+  <div id="s-fullmock-history" class="screen hidden">
+    <nav class="nav">
+      <button class="global-back-btn" onclick="goBack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <span class="nav-title">Mock History</span>
+    </nav>
+    <div style="padding:16px">
+      <div id="mock-history-loading" class="screen-loading" style="padding:40px 0"><div class="spinner"></div></div>
+      <div id="mock-history-trend" class="mock-history-trend hidden"><!-- trend rendered by JS --></div>
+      <div id="mock-history-list" class="mock-history-list"><!-- Rendered by JS --></div>
+    </div>
+  </div>
+
 </body>
 </html>

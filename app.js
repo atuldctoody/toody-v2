@@ -97,8 +97,126 @@ let confCorrect       = 0;     // Confidence correct count
 // IELTS Overview
 let ieltsCard         = 0;
 const IELTS_COLORS    = ['#E8F0FF','#EEEAFF','#E8F8F0','#FFF4E0','#FFE8E8'];
+
+// ── SUBJECT-AGNOSTIC SCHEMA HELPERS ──────────────────────────────
+// Converts 'reading.tfng' → 'reading-tfng'
+function toSkillId(key) { return (key || '').replace('.', '-'); }
+
+// Returns the IELTS skill map from the subject-agnostic brain schema.
+// Falls back to migrating from the old studentData.skills structure.
+function getIELTSSkills() {
+  const newPath = studentData?.brain?.subjects?.['ielts-academic']?.skills;
+  if (newPath && Object.keys(newPath).length > 0) return newPath;
+  // Graceful migration from legacy skills.* structure
+  const old = studentData?.skills;
+  if (!old) return {};
+  return {
+    'reading-tfng':              old.reading?.tfng,
+    'reading-matchingHeadings':  old.reading?.matchingHeadings,
+    'reading-summaryCompletion': old.reading?.summaryCompletion,
+    'listening-multipleChoice':  old.listening?.multipleChoice,
+    'listening-formCompletion':  old.listening?.formCompletion,
+    'listening-mapDiagram':      old.listening?.mapDiagram,
+    'writing-task1':             old.writing?.task1,
+    'writing-task2':             old.writing?.task2,
+    'speaking-part1':            old.speaking?.part1,
+    'speaking-part2':            old.speaking?.part2,
+    'speaking-part3':            old.speaking?.part3,
+  };
+}
+
+// Updates local studentData memory with new skill data
+function setIELTSSkillLocal(skillId, data) {
+  if (!studentData.brain)                              studentData.brain = {};
+  if (!studentData.brain.subjects)                     studentData.brain.subjects = {};
+  if (!studentData.brain.subjects['ielts-academic'])   studentData.brain.subjects['ielts-academic'] = {};
+  if (!studentData.brain.subjects['ielts-academic'].skills) studentData.brain.subjects['ielts-academic'].skills = {};
+  studentData.brain.subjects['ielts-academic'].skills[skillId] = {
+    ...studentData.brain.subjects['ielts-academic'].skills[skillId],
+    ...data,
+  };
+}
+
+// ── TEACHING CONFIG (modular per-skill teaching methodology) ──────
+// To add a new subject: add a top-level key (e.g. 'cambridge-igcse').
+// Core loadTeachFirst() reads from this config — no core code changes needed.
+const TEACHING_CONFIG = {
+  'ielts-academic': {
+    name: 'IELTS Academic',
+    skills: {
+      'reading-tfng': {
+        name:          'True / False / Not Given',
+        section:       'Reading',
+        hasNGButton:   true,
+        answerFormat:  'True|False|NG',
+        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`,
+        conceptPrompt: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`,
+        hookPromptHint: `a testable claim that looks True but is actually Not Given`,
+        workedExHint:   `True/False/Not Given reasoning`,
+      },
+      'reading-matchingHeadings': {
+        name:          'Matching Headings',
+        section:       'Reading',
+        hasNGButton:   false,
+        answerFormat:  'True|False',
+        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how Matching Headings works — and the trap most students fall into.`,
+        conceptPrompt: `An array of 4-5 short bullet strings about Matching Headings. Cover: what it tests (main idea of paragraph, not details), the #1 trap (picking heading from a word match not the main idea), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
+        hookPromptHint: `a testable claim that looks True but is actually False`,
+        workedExHint:   `Matching Headings reasoning`,
+      },
+      'reading-summaryCompletion': {
+        name:          'Summary Completion',
+        section:       'Reading',
+        hasNGButton:   false,
+        answerFormat:  'True|False',
+        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how Summary Completion works — and why students lose marks.`,
+        conceptPrompt: `An array of 4-5 short bullet strings about Summary Completion. Cover: what it tests (locating specific information), the #1 mistake (using wrong word form or changing meaning), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
+        hookPromptHint: `a gap-fill claim where the wrong word form is the trap`,
+        workedExHint:   `Summary Completion reasoning`,
+      },
+      'listening-multipleChoice': {
+        name:          'Multiple Choice',
+        section:       'Listening',
+        hasNGButton:   false,
+        answerFormat:  'A|B|C',
+        conceptBubble: `Before we start, let me show you how IELTS Listening Multiple Choice works — and the distractor trap.`,
+        conceptPrompt: `An array of 4-5 short bullet strings about IELTS Listening Multiple Choice. Cover: how distractors work (mentioned but not the answer), the importance of predicting before listening, and how to eliminate wrong options. Use ** around key terms.`,
+        hookPromptHint: `a multiple choice question where the obvious answer is a distractor`,
+        workedExHint:   `Multiple Choice reasoning`,
+      },
+      'listening-formCompletion': {
+        name:          'Form Completion',
+        section:       'Listening',
+        hasNGButton:   false,
+        answerFormat:  'text',
+        conceptBubble: `Before we start, let me show you how IELTS Listening Form Completion works — and how to avoid spelling traps.`,
+        conceptPrompt: `An array of 4-5 short bullet strings about IELTS Listening Form Completion. Cover: how answers are always spelled out or obvious, the importance of word limits, and common trap categories (numbers, names, spelling). Use ** around key terms.`,
+        hookPromptHint: `a form completion gap where the word limit is the trap`,
+        workedExHint:   `Form Completion reasoning`,
+      },
+    }
+  }
+};
 // Session tip
 let tipNotebookFn     = null;
+
+// Full Mock Test state
+let fullMockSections       = [];   // e.g. ['reading','listening','writing','speaking']
+let fullMockSectionIdx     = 0;    // current section index
+let fullMockContent        = {};   // generated content per section
+let fullMockAnswers        = {};   // { sectionKey: { qid: answer } }
+let fullMockWritingResp    = {};   // { task1: '...', task2: '...' }
+let fullMockSpeakingResp   = {};   // { part1: transcript, part2: ..., part3: ... }
+let fullMockTimerInterval  = null;
+let fullMockTimeRemaining  = 0;    // seconds remaining for current section
+let fullMockSelectedOpt    = 'all';
+let fullMockResults        = {};   // final evaluated results
+let fullMockRecordingEl    = null; // MediaRecorder for mock speaking
+const MOCK_SECTION_TIMES   = { reading: 3600, listening: 2400, writing: 3600, speaking: 840 };
+const IELTS_BAND_TABLE     = [
+  [40,9.0],[39,8.5],[37,8.0],[35,7.5],[32,7.0],[30,6.5],[26,6.0],[23,5.5],
+  [20,5.0],[16,4.5],[13,4.0],[10,3.5],[8,3.0],[6,2.5],[4,2.0]
+];
 
 // Writing session
 let writingTaskData = null;
@@ -242,25 +360,23 @@ async function createStudentDoc(uid, data) {
     lastSession:      null,
     toughLoveResults: 0,
     weakAreas:        [],
-    skills: {
-      reading: {
-        tfng:             { ...blank },
-        matchingHeadings: { ...blank },
-        summaryCompletion:{ ...blank },
-      },
-      listening: {
-        multipleChoice: { ...blank },
-        formCompletion: { ...blank },
-        mapDiagram:     { ...blank },
-      },
-      writing: {
-        task1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
-        task2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
-      },
-      speaking: {
-        part1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
-        part2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
-        part3: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+    brain: {
+      subjects: {
+        'ielts-academic': {
+          skills: {
+            'reading-tfng':              { ...blank },
+            'reading-matchingHeadings':  { ...blank },
+            'reading-summaryCompletion': { ...blank },
+            'listening-multipleChoice':  { ...blank },
+            'listening-formCompletion':  { ...blank },
+            'listening-mapDiagram':      { ...blank },
+            'writing-task1':   { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'writing-task2':   { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part1':  { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part2':  { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part3':  { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+          }
+        }
       }
     }
   });
@@ -283,11 +399,24 @@ async function createSkeletonDoc(uid) {
     lastSession:      null,
     toughLoveResults: 0,
     weakAreas:        [],
-    skills: {
-      reading:   { tfng: { ...blank }, matchingHeadings: { ...blank }, summaryCompletion: { ...blank } },
-      listening: { multipleChoice: { ...blank }, formCompletion: { ...blank }, mapDiagram: { ...blank } },
-      writing:   { task1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, task2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' } },
-      speaking:  { part1: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, part2: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' }, part3: { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' } },
+    brain: {
+      subjects: {
+        'ielts-academic': {
+          skills: {
+            'reading-tfng':              { ...blank },
+            'reading-matchingHeadings':  { ...blank },
+            'reading-summaryCompletion': { ...blank },
+            'listening-multipleChoice':  { ...blank },
+            'listening-formCompletion':  { ...blank },
+            'listening-mapDiagram':      { ...blank },
+            'writing-task1':  { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'writing-task2':  { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part1': { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part2': { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+            'speaking-part3': { bandEstimate: 0, attempted: 0, lastPracticed: null, trend: 'new' },
+          }
+        }
+      }
     }
   });
 }
@@ -586,17 +715,20 @@ function renderHome() {
       }).join('')
     : '<p style="font-size:13px;color:var(--muted);padding:8px 0">Programme complete.</p>';
 
+  // Show mock card after Day 10
+  const mockCard = document.getElementById('home-mock-card');
+  if (mockCard) mockCard.style.display = day > 10 ? '' : 'none';
+
   renderSkillSnapshot();
 }
 
 function renderSkillSnapshot() {
-  if (!studentData?.skills) return;
-  const s = studentData.skills;
+  const sk = getIELTSSkills();
   const rows = [
-    { label: 'T / F / Not Given', pct: s.reading?.tfng?.attempted             > 0 ? s.reading.tfng.accuracy             : null },
-    { label: 'Matching Headings', pct: s.reading?.matchingHeadings?.attempted  > 0 ? s.reading.matchingHeadings.accuracy  : null },
-    { label: 'Multiple Choice',   pct: s.listening?.multipleChoice?.attempted  > 0 ? s.listening.multipleChoice.accuracy  : null },
-    { label: 'Form Completion',   pct: s.listening?.formCompletion?.attempted  > 0 ? s.listening.formCompletion.accuracy   : null },
+    { label: 'T / F / Not Given', pct: (sk['reading-tfng']?.attempted             || 0) > 0 ? sk['reading-tfng'].accuracy             : null },
+    { label: 'Matching Headings', pct: (sk['reading-matchingHeadings']?.attempted  || 0) > 0 ? sk['reading-matchingHeadings'].accuracy  : null },
+    { label: 'Multiple Choice',   pct: (sk['listening-multipleChoice']?.attempted  || 0) > 0 ? sk['listening-multipleChoice'].accuracy  : null },
+    { label: 'Form Completion',   pct: (sk['listening-formCompletion']?.attempted  || 0) > 0 ? sk['listening-formCompletion'].accuracy   : null },
   ];
   const el      = document.getElementById('home-skill-snapshot');
   const anyData = rows.some(r => r.pct !== null);
@@ -665,9 +797,9 @@ window.goToSession = function () {
 
   // Teach-first fires the FIRST TIME a student encounters any reading or listening skill
   const isFirstTimeSkill = (() => {
-    const [section, subSkill] = (plan.skill || '').split('.');
-    if (!section || !subSkill) return false;
-    const attempted = studentData?.skills?.[section]?.[subSkill]?.attempted || 0;
+    const skillId = toSkillId(plan.skill || '');
+    if (!skillId.includes('-')) return false;
+    const attempted = getIELTSSkills()[skillId]?.attempted || 0;
     return attempted === 0;
   })();
 
@@ -770,23 +902,20 @@ async function loadTeachFirst(skillKey) {
   goTo('s-teach');
 
   const band = studentData?.targetBand || 6.5;
-  const isMH = skillKey === 'reading.matchingHeadings';
-  const skillLabel = isMH ? 'Matching Headings' : 'True/False/Not Given';
+  // Look up per-skill config from TEACHING_CONFIG (subject-agnostic)
+  const skillId     = toSkillId(skillKey);
+  const skillCfg    = TEACHING_CONFIG['ielts-academic']?.skills[skillId] || TEACHING_CONFIG['ielts-academic']?.skills['reading-tfng'];
+  const skillLabel  = skillCfg.name;
+  const isMH        = skillId === 'reading-matchingHeadings';
 
-  // Update the concept section header text
+  // Update the concept section header text from config
   const conceptBubble = document.querySelector('#teach-concept .toody-bubble');
-  if (conceptBubble) {
-    conceptBubble.innerHTML = isMH
-      ? `Before we start, let me show you <strong>exactly</strong> how Matching Headings works — and the trap most students fall into.`
-      : `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`;
-  }
+  if (conceptBubble) conceptBubble.innerHTML = skillCfg.conceptBubble;
   const strategyLabel = document.querySelector('#teach-concept .card-label');
   if (strategyLabel) strategyLabel.textContent = 'The Strategy';
 
-  const ans = isMH ? 'True|False' : 'True|False|NG';
-  const conceptPromptDetail = isMH
-    ? `An array of 4-5 short bullet strings about Matching Headings. Cover: what it tests (main idea of paragraph, not details), the #1 trap (picking heading from a word match not the main idea), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`
-    : `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`;
+  const ans = skillCfg.answerFormat;
+  const conceptPromptDetail = skillCfg.conceptPrompt;
 
   const exSchema = `{"label":"Easy|Medium|Hard","passage":"2 academic sentences","statement":"testable claim","answer":"${ans}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is X — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
@@ -1201,9 +1330,8 @@ async function showSessionTip({ accuracy, behaviour, missedSubTypes, skillKey })
   document.getElementById('tip-done-btn').classList.add('hidden');
   document.getElementById('tip-action-pill').classList.add('hidden');
 
-  const brain  = studentData?.studentBrain || {};
-  const ctx    = brain.contextSnippet || '';
-  const skills = brain.skills         || {};
+  const ctx            = buildContextSnippet();
+  const ieltsSkillsForTip = getIELTSSkills();
   const topMissed = Object.entries(missedSubTypes || {})
     .sort((a,b) => b[1] - a[1]).map(e => e[0])[0] || 'N/A';
 
@@ -1316,10 +1444,11 @@ async function updateStudentBrain(behaviour, accuracy, skillKey) {
     const ema   = (prevVal, newVal) => Math.round(prevVal + (newVal - prevVal) * alpha);
     const changesThisSession = behaviour.answerChangesCount > 0 ? 100 : 0;
 
-    // Per-skill breakdown stored under brain.skills[safeKey]
-    const safeKey = skillKey ? skillKey.replace('.', '_') : null;
-    const prevSkillBrain = safeKey ? (prev.skills?.[safeKey] || {}) : {};
-    const skillBrainUpdate = safeKey ? {
+    // Per-skill breakdown stored under brain.subjects['ielts-academic'].skills[skillId]
+    const skillId = skillKey ? toSkillId(skillKey) : null;
+    const prevSubj = prev.subjects?.['ielts-academic'] || {};
+    const prevSkillBrain = skillId ? (prevSubj.skills?.[skillId] || {}) : {};
+    const skillBrainUpdate = skillId ? {
       avgTimePerQ:    ema(prevSkillBrain.avgTimePerQ    || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct: ema(prevSkillBrain.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
       changesAnswers: ema(prevSkillBrain.changesAnswers  || 0, changesThisSession),
@@ -1327,14 +1456,22 @@ async function updateStudentBrain(behaviour, accuracy, skillKey) {
       sessions:       (prevSkillBrain.sessions || 0) + 1,
     } : null;
 
+    const updatedSubjSkills = {
+      ...(prevSubj.skills || {}),
+      ...(skillId && skillBrainUpdate ? { [skillId]: { ...(prevSubj.skills?.[skillId] || {}), ...skillBrainUpdate } } : {}),
+    };
     const brain = {
+      ...prev,
       totalSessions:         n,
       avgSessionDurationSec: ema(prev.avgSessionDurationSec || 0, behaviour.sessionDurationSec),
       avgTimePerQuestionSec: ema(prev.avgTimePerQuestionSec || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct:        ema(prev.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
       changesAnswersPct:      ema(prev.changesAnswersPct || 0, changesThisSession),
       recentAccuracy:        accuracy,
-      skills:                { ...(prev.skills || {}), ...(safeKey && skillBrainUpdate ? { [safeKey]: skillBrainUpdate } : {}) },
+      subjects: {
+        ...(prev.subjects || {}),
+        'ielts-academic': { ...prevSubj, skills: updatedSubjSkills },
+      },
     };
     await updateStudentDoc(currentUser.uid, { brain });
     if (studentData) studentData.brain = brain;
@@ -1344,21 +1481,21 @@ async function updateStudentBrain(behaviour, accuracy, skillKey) {
 async function updateWeakAreas(skillKey, missedSubTypes) {
   if (!currentUser || !studentData) return;
   try {
-    const skills = studentData.skills || {};
+    const ieltsSkills = getIELTSSkills();
     const candidates = [
-      { key: 'reading.tfng',             name: 'T/F/Not Given',          s: skills?.reading?.tfng },
-      { key: 'reading.matchingHeadings', name: 'Matching Headings',      s: skills?.reading?.matchingHeadings },
-      { key: 'listening.multipleChoice', name: 'Multiple Choice',        s: skills?.listening?.multipleChoice },
-      { key: 'listening.formCompletion', name: 'Form Completion',        s: skills?.listening?.formCompletion },
+      { key: 'reading-tfng',             name: 'T/F/Not Given',     s: ieltsSkills['reading-tfng'] },
+      { key: 'reading-matchingHeadings', name: 'Matching Headings', s: ieltsSkills['reading-matchingHeadings'] },
+      { key: 'listening-multipleChoice', name: 'Multiple Choice',   s: ieltsSkills['listening-multipleChoice'] },
+      { key: 'listening-formCompletion', name: 'Form Completion',   s: ieltsSkills['listening-formCompletion'] },
     ].filter(c => c.s?.attempted > 0 && c.s.accuracy < 70)
      .sort((a, b) => a.s.accuracy - b.s.accuracy);
 
     const weakAreas = candidates.slice(0, 2).map(c => c.key);
 
-    // Accumulate consistently missed sub-types (e.g. 'Not Given' within TF/NG)
+    // Accumulate consistently missed sub-types
     const updates = { weakAreas };
     if (skillKey && missedSubTypes && Object.keys(missedSubTypes).length > 0) {
-      const safeKey = skillKey.replace('.', '_');
+      const safeKey = toSkillId(skillKey);
       const prevBrain = studentData.brain || {};
       const prevMissed = prevBrain.consistentlyWeak?.[safeKey] || {};
       const merged = { ...prevMissed };
@@ -1589,9 +1726,8 @@ async function finishReadingSession() {
     }
   });
 
-  const isTfng   = skillKey === 'reading.tfng';
-  const skillPath = isTfng ? 'reading.tfng' : 'reading.matchingHeadings';
-  const [section, subSkill] = skillPath.split('.');
+  const skillId  = toSkillId(skillKey);
+  const prevSkill = getIELTSSkills()[skillId] || { accuracy: 0, attempted: 0 };
 
   try {
     await saveSessionDoc(currentUser.uid, {
@@ -1609,18 +1745,18 @@ async function finishReadingSession() {
       behaviour
     });
 
-    const prev         = studentData.skills?.[section]?.[subSkill] || { accuracy: 0, attempted: 0 };
-    const prevCorrect  = Math.round((prev.accuracy / 100) * prev.attempted);
-    const newAttempted = prev.attempted + total;
+    const prevCorrect  = Math.round(((prevSkill.accuracy || 0) / 100) * (prevSkill.attempted || 0));
+    const newAttempted = (prevSkill.attempted || 0) + total;
     const newAccuracy  = newAttempted > 0
       ? Math.round(((prevCorrect + sessionCorrect) / newAttempted) * 100) : 0;
     const newStreak = (studentData.streak || 0) + 1;
+    const subjPath  = `brain.subjects.ielts-academic.skills.${skillId}`;
 
     await updateStudentDoc(currentUser.uid, {
-      [`skills.${section}.${subSkill}.accuracy`]:      newAccuracy,
-      [`skills.${section}.${subSkill}.attempted`]:     newAttempted,
-      [`skills.${section}.${subSkill}.lastPracticed`]: serverTimestamp(),
-      [`skills.${section}.${subSkill}.trend`]:         newAccuracy > prev.accuracy ? 'up' : newAccuracy < prev.accuracy ? 'down' : 'stable',
+      [`${subjPath}.accuracy`]:      newAccuracy,
+      [`${subjPath}.attempted`]:     newAttempted,
+      [`${subjPath}.lastPracticed`]: serverTimestamp(),
+      [`${subjPath}.trend`]:         newAccuracy > (prevSkill.accuracy || 0) ? 'up' : newAccuracy < (prevSkill.accuracy || 0) ? 'down' : 'stable',
       dayNumber:        day + 1,
       streak:           newStreak,
       lastSession:      serverTimestamp(),
@@ -1937,8 +2073,9 @@ window.finishListeningSession = async function () {
   const total     = listenQuestions.length || 5;
   const accuracy  = Math.round((listenCorrect / total) * 100);
   const day       = studentData.dayNumber || 2;
-  const skillKey  = listenType === 'mc' ? 'multipleChoice' : 'formCompletion';
-  const firestoreKey = `listening.${skillKey}`;
+  const listenSkillSuffix = listenType === 'mc' ? 'multipleChoice' : 'formCompletion';
+  const firestoreKey      = `listening.${listenSkillSuffix}`;
+  const listenSkillId     = toSkillId(firestoreKey);
   const behaviour = getBehaviourPayload();
 
   try {
@@ -1954,17 +2091,18 @@ window.finishListeningSession = async function () {
       behaviour
     });
 
-    const prev         = studentData.skills?.listening?.[skillKey] || { accuracy: 0, attempted: 0 };
-    const prevCorrect  = Math.round((prev.accuracy / 100) * prev.attempted);
-    const newAttempted = prev.attempted + total;
+    const prevL        = getIELTSSkills()[listenSkillId] || { accuracy: 0, attempted: 0 };
+    const prevCorrect  = Math.round(((prevL.accuracy || 0) / 100) * (prevL.attempted || 0));
+    const newAttempted = (prevL.attempted || 0) + total;
     const newAccuracy  = newAttempted > 0
       ? Math.round(((prevCorrect + listenCorrect) / newAttempted) * 100) : 0;
+    const subjPath = `brain.subjects.ielts-academic.skills.${listenSkillId}`;
 
     await updateStudentDoc(currentUser.uid, {
-      [`skills.listening.${skillKey}.accuracy`]:      newAccuracy,
-      [`skills.listening.${skillKey}.attempted`]:     newAttempted,
-      [`skills.listening.${skillKey}.lastPracticed`]: serverTimestamp(),
-      [`skills.listening.${skillKey}.trend`]:         newAccuracy > prev.accuracy ? 'up' : newAccuracy < prev.accuracy ? 'down' : 'stable',
+      [`${subjPath}.accuracy`]:      newAccuracy,
+      [`${subjPath}.attempted`]:     newAttempted,
+      [`${subjPath}.lastPracticed`]: serverTimestamp(),
+      [`${subjPath}.trend`]:         newAccuracy > (prevL.accuracy || 0) ? 'up' : newAccuracy < (prevL.accuracy || 0) ? 'down' : 'stable',
       dayNumber:   day + 1,
       streak:      (studentData.streak || 0) + 1,
       lastSession: serverTimestamp(),
@@ -1972,8 +2110,8 @@ window.finishListeningSession = async function () {
 
     const snap = await getStudentDoc(currentUser.uid);
     studentData = snap.data();
-    await updateStudentBrain(behaviour, accuracy, `listening.${skillKey}`);
-    await updateWeakAreas(`listening.${skillKey}`, null);
+    await updateStudentBrain(behaviour, accuracy, firestoreKey);
+    await updateWeakAreas(firestoreKey, null);
   } catch { /* still show notebook */ }
 
   if (mockMode) {
@@ -2137,12 +2275,14 @@ window.finishWritingSession = async function () {
       behaviour
     });
 
-    const prev = studentData.skills?.writing?.[taskKey] || { bandEstimate: 0, attempted: 0 };
+    const writingSkillId = toSkillId(`writing.${taskKey}`);
+    const prevW = getIELTSSkills()[writingSkillId] || { bandEstimate: 0, attempted: 0 };
+    const wSubjPath = `brain.subjects.ielts-academic.skills.${writingSkillId}`;
     await updateStudentDoc(currentUser.uid, {
-      [`skills.writing.${taskKey}.bandEstimate`]:   writingBandEst,
-      [`skills.writing.${taskKey}.attempted`]:      (prev.attempted || 0) + 1,
-      [`skills.writing.${taskKey}.lastPracticed`]:  serverTimestamp(),
-      [`skills.writing.${taskKey}.trend`]:          writingBandEst > prev.bandEstimate ? 'up' : writingBandEst < prev.bandEstimate ? 'down' : 'stable',
+      [`${wSubjPath}.bandEstimate`]:  writingBandEst,
+      [`${wSubjPath}.attempted`]:     (prevW.attempted || 0) + 1,
+      [`${wSubjPath}.lastPracticed`]: serverTimestamp(),
+      [`${wSubjPath}.trend`]:         writingBandEst > (prevW.bandEstimate || 0) ? 'up' : writingBandEst < (prevW.bandEstimate || 0) ? 'down' : 'stable',
       dayNumber:   day + 1,
       streak:      (studentData.streak || 0) + 1,
       lastSession: serverTimestamp(),
@@ -2359,12 +2499,14 @@ window.finishSpeakingSession = async function () {
       behaviour
     });
 
-    const prev = studentData.skills?.speaking?.part1 || { bandEstimate: 0, attempted: 0 };
+    const speakSkillId = 'speaking-part1';
+    const prevSp = getIELTSSkills()[speakSkillId] || { bandEstimate: 0, attempted: 0 };
+    const spSubjPath = `brain.subjects.ielts-academic.skills.${speakSkillId}`;
     await updateStudentDoc(currentUser.uid, {
-      'skills.speaking.part1.bandEstimate':   speakingBandEst,
-      'skills.speaking.part1.attempted':      (prev.attempted || 0) + 1,
-      'skills.speaking.part1.lastPracticed':  serverTimestamp(),
-      'skills.speaking.part1.trend':          speakingBandEst > prev.bandEstimate ? 'up' : speakingBandEst < prev.bandEstimate ? 'down' : 'stable',
+      [`${spSubjPath}.bandEstimate`]:  speakingBandEst,
+      [`${spSubjPath}.attempted`]:     (prevSp.attempted || 0) + 1,
+      [`${spSubjPath}.lastPracticed`]: serverTimestamp(),
+      [`${spSubjPath}.trend`]:         speakingBandEst > (prevSp.bandEstimate || 0) ? 'up' : speakingBandEst < (prevSp.bandEstimate || 0) ? 'down' : 'stable',
       dayNumber:   day + 1,
       streak:      (studentData.streak || 0) + 1,
       lastSession: serverTimestamp(),
@@ -2397,11 +2539,11 @@ function renderWeek1Report() {
   document.getElementById('nb-skill-section').classList.add('hidden');
   document.getElementById('nb-week1-section').classList.remove('hidden');
 
-  const skills  = studentData?.skills;
-  const tfng    = skills?.reading?.tfng?.attempted    > 0 ? skills.reading.tfng.accuracy            : null;
-  const mh      = skills?.reading?.matchingHeadings?.attempted > 0 ? skills.reading.matchingHeadings.accuracy : null;
-  const mc      = skills?.listening?.multipleChoice?.attempted > 0 ? skills.listening.multipleChoice.accuracy : null;
-  const fc      = skills?.listening?.formCompletion?.attempted > 0 ? skills.listening.formCompletion.accuracy : null;
+  const w1Skills = getIELTSSkills();
+  const tfng = (w1Skills['reading-tfng']?.attempted             || 0) > 0 ? w1Skills['reading-tfng'].accuracy             : null;
+  const mh   = (w1Skills['reading-matchingHeadings']?.attempted  || 0) > 0 ? w1Skills['reading-matchingHeadings'].accuracy  : null;
+  const mc   = (w1Skills['listening-multipleChoice']?.attempted  || 0) > 0 ? w1Skills['listening-multipleChoice'].accuracy  : null;
+  const fc   = (w1Skills['listening-formCompletion']?.attempted  || 0) > 0 ? w1Skills['listening-formCompletion'].accuracy   : null;
 
   const scores = [tfng, mh, mc, fc].filter(s => s !== null);
   const avgBand = scores.length > 0
@@ -2480,7 +2622,7 @@ function renderNotebook(correct, total, skillKey) {
   document.getElementById('nb-streak').textContent         = streak;
   document.getElementById('nb-band-est').textContent       = studentData?.currentBand || studentData?.targetBand || '—';
 
-  const skills  = studentData?.skills;
+  const nbSkills = getIELTSSkills();
   const isTfng  = skillKey === 'reading.tfng';
   const isMH    = skillKey === 'reading.matchingHeadings';
   const isMC    = skillKey === 'listening.multipleChoice';
@@ -2510,10 +2652,10 @@ function renderNotebook(correct, total, skillKey) {
   }
 
   // Other bars from Firestore
-  if (!isTfng) setSkillBar('nb-tfng-bar', 'nb-tfng-pct', skills?.reading?.tfng?.attempted            > 0 ? skills.reading.tfng.accuracy             : null);
-  if (!isMH)   setSkillBar('nb-mh-bar',   'nb-mh-pct',   skills?.reading?.matchingHeadings?.attempted > 0 ? skills.reading.matchingHeadings.accuracy  : null);
-  if (!isMC)   setSkillBar('nb-mc-bar',   'nb-mc-pct',   skills?.listening?.multipleChoice?.attempted > 0 ? skills.listening.multipleChoice.accuracy   : null);
-  if (!isFC)   setSkillBar('nb-fc-bar',   'nb-fc-pct',   skills?.listening?.formCompletion?.attempted > 0 ? skills.listening.formCompletion.accuracy    : null);
+  if (!isTfng) setSkillBar('nb-tfng-bar', 'nb-tfng-pct', (nbSkills['reading-tfng']?.attempted             || 0) > 0 ? nbSkills['reading-tfng'].accuracy             : null);
+  if (!isMH)   setSkillBar('nb-mh-bar',   'nb-mh-pct',   (nbSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? nbSkills['reading-matchingHeadings'].accuracy  : null);
+  if (!isMC)   setSkillBar('nb-mc-bar',   'nb-mc-pct',   (nbSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? nbSkills['listening-multipleChoice'].accuracy   : null);
+  if (!isFC)   setSkillBar('nb-fc-bar',   'nb-fc-pct',   (nbSkills['listening-formCompletion']?.attempted  || 0) > 0 ? nbSkills['listening-formCompletion'].accuracy    : null);
 
   const assessment = accuracy >= 80
     ? `${accuracy}% — strong session. You're building real exam instincts.`
@@ -2616,12 +2758,12 @@ function setSkillBar(barId, pctId, pct) {
 
 // ── FOCUSED DRILL (Day 9) ─────────────────────────────────────────
 async function loadFocusedDrill() {
-  const skills  = studentData?.skills;
+  const drillSkills = getIELTSSkills();
   const skillRows = [
-    { name: 'T / F / Not Given',  pct: skills?.reading?.tfng?.attempted            > 0 ? skills.reading.tfng.accuracy            : null, loader: loadReadingSession   },
-    { name: 'Matching Headings',  pct: skills?.reading?.matchingHeadings?.attempted > 0 ? skills.reading.matchingHeadings.accuracy : null, loader: loadReadingSession   },
-    { name: 'Multiple Choice',    pct: skills?.listening?.multipleChoice?.attempted > 0 ? skills.listening.multipleChoice.accuracy : null, loader: loadListeningSession },
-    { name: 'Form Completion',    pct: skills?.listening?.formCompletion?.attempted > 0 ? skills.listening.formCompletion.accuracy  : null, loader: loadListeningSession },
+    { name: 'T / F / Not Given', pct: (drillSkills['reading-tfng']?.attempted             || 0) > 0 ? drillSkills['reading-tfng'].accuracy             : null, loader: loadReadingSession   },
+    { name: 'Matching Headings', pct: (drillSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? drillSkills['reading-matchingHeadings'].accuracy  : null, loader: loadReadingSession   },
+    { name: 'Multiple Choice',   pct: (drillSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? drillSkills['listening-multipleChoice'].accuracy   : null, loader: loadListeningSession },
+    { name: 'Form Completion',   pct: (drillSkills['listening-formCompletion']?.attempted  || 0) > 0 ? drillSkills['listening-formCompletion'].accuracy    : null, loader: loadListeningSession },
   ].filter(r => r.pct !== null).sort((a, b) => a.pct - b.pct);
 
   if (skillRows.length === 0) {
@@ -2746,11 +2888,11 @@ window.goToProgress = async function () {
   document.getElementById('prog-band').textContent     = studentData.targetBand || '—';
   document.getElementById('prog-streak').textContent   = studentData.streak     || 0;
 
-  const skills = studentData.skills;
-  setSkillBar('prog-tfng-bar', 'prog-tfng-pct', skills?.reading?.tfng?.attempted            > 0 ? skills.reading.tfng.accuracy            : null);
-  setSkillBar('prog-mh-bar',   'prog-mh-pct',   skills?.reading?.matchingHeadings?.attempted > 0 ? skills.reading.matchingHeadings.accuracy : null);
-  setSkillBar('prog-mc-bar',   'prog-mc-pct',   skills?.listening?.multipleChoice?.attempted > 0 ? skills.listening.multipleChoice.accuracy  : null);
-  setSkillBar('prog-fc-bar',   'prog-fc-pct',   skills?.listening?.formCompletion?.attempted > 0 ? skills.listening.formCompletion.accuracy   : null);
+  const progSkills = getIELTSSkills();
+  setSkillBar('prog-tfng-bar', 'prog-tfng-pct', (progSkills['reading-tfng']?.attempted             || 0) > 0 ? progSkills['reading-tfng'].accuracy             : null);
+  setSkillBar('prog-mh-bar',   'prog-mh-pct',   (progSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? progSkills['reading-matchingHeadings'].accuracy  : null);
+  setSkillBar('prog-mc-bar',   'prog-mc-pct',   (progSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? progSkills['listening-multipleChoice'].accuracy   : null);
+  setSkillBar('prog-fc-bar',   'prog-fc-pct',   (progSkills['listening-formCompletion']?.attempted  || 0) > 0 ? progSkills['listening-formCompletion'].accuracy    : null);
 
   document.getElementById('progress-loading').classList.remove('hidden');
   document.getElementById('progress-session-list').innerHTML = '';
@@ -2807,16 +2949,16 @@ function buildContextSnippet() {
   const current = studentData.currentBand || target;
   const week    = studentData.weekNumber  || 1;
   const day     = studentData.dayNumber   || 1;
-  const skills  = studentData.skills      || {};
+  const ctxSkills = getIELTSSkills();
   const brain   = studentData.brain       || {};
   const weak    = studentData.weakAreas   || [];
   const purpose = studentData.purpose     || '';
 
   const allSkills = [
-    { key: 'reading.tfng',             name: 'T/F/Not Given',     s: skills?.reading?.tfng              },
-    { key: 'reading.matchingHeadings', name: 'Matching Headings', s: skills?.reading?.matchingHeadings  },
-    { key: 'listening.multipleChoice', name: 'Multiple Choice',   s: skills?.listening?.multipleChoice  },
-    { key: 'listening.formCompletion', name: 'Form Completion',   s: skills?.listening?.formCompletion  },
+    { key: 'reading-tfng',             name: 'T/F/Not Given',     s: ctxSkills['reading-tfng']             },
+    { key: 'reading-matchingHeadings', name: 'Matching Headings', s: ctxSkills['reading-matchingHeadings'] },
+    { key: 'listening-multipleChoice', name: 'Multiple Choice',   s: ctxSkills['listening-multipleChoice'] },
+    { key: 'listening-formCompletion', name: 'Form Completion',   s: ctxSkills['listening-formCompletion'] },
   ].filter(x => x.s?.attempted > 0);
 
   const strong = allSkills
@@ -2827,7 +2969,7 @@ function buildContextSnippet() {
     .filter(x => x.s.accuracy < 70)
     .map(x => {
       let str = `${x.name} (${x.s.accuracy}%)`;
-      const topMissed = brain.topMissedSubType?.[x.key.replace('.', '_')];
+      const topMissed = brain.topMissedSubType?.[x.key]; // key is already 'reading-tfng' format
       if (topMissed) str += ` — especially "${topMissed}" answer type`;
       return str;
     });
@@ -2852,8 +2994,8 @@ function buildContextSnippet() {
   }
 
   const targetPush = Math.min(9, parseFloat((current + 0.5).toFixed(1)));
-  const focusSkill = weak[0] ? weak[0].replace('.', ' ') : 'the student\'s weakest area';
-  const focusMissed = weak[0] ? (brain.topMissedSubType?.[weak[0].replace('.', '_')] || null) : null;
+  const focusSkill = weak[0] ? weak[0].replace('-', ' ') : 'the student\'s weakest area';
+  const focusMissed = weak[0] ? (brain.topMissedSubType?.[toSkillId(weak[0])] || brain.topMissedSubType?.[weak[0]] || null) : null;
 
   const purposeNote = purpose === 'university'  ? 'Use academic/scientific passage topics (research, environment, technology, history).'
                     : purpose === 'migration'   ? 'Use general-interest topics relevant to daily life, society, health, culture.'
@@ -2902,6 +3044,743 @@ async function callAI(prompt) {
 }
 
 // ── NAV ACTIONS ───────────────────────────────────────────────────
+
+// ══════════════════════════════════════════════════════════════════
+// FULL MOCK TEST SYSTEM
+// ══════════════════════════════════════════════════════════════════
+
+function rawScoreToBand(raw, total) {
+  const pct = raw / total;
+  for (const [minRaw, band] of IELTS_BAND_TABLE) {
+    if (raw >= (minRaw / 40) * total) return band;
+  }
+  return 1.0;
+}
+
+window.startFullMockSetup = function () {
+  fullMockSelectedOpt = 'all';
+  document.querySelectorAll('.mock-option-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === 0);
+  });
+  goTo('s-fullmock-setup');
+};
+
+window.selectMockOption = function (btn) {
+  document.querySelectorAll('.mock-option-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  fullMockSelectedOpt = btn.dataset.sections;
+};
+
+window.startFullMockGeneration = async function () {
+  const opt = fullMockSelectedOpt;
+  fullMockSections = opt === 'all'
+    ? ['reading','listening','writing','speaking']
+    : [opt];
+  fullMockSectionIdx = 0;
+  fullMockContent    = {};
+  fullMockAnswers    = {};
+  fullMockWritingResp  = {};
+  fullMockSpeakingResp = {};
+  fullMockResults    = {};
+
+  goTo('s-fullmock-gen');
+  _setGenStep('reading',   false);
+  _setGenStep('listening', false);
+  _setGenStep('writing',   false);
+  _setGenStep('speaking',  false);
+  document.getElementById('mock-gen-bar').style.width = '0%';
+
+  const band = studentData?.targetBand || 6.5;
+  let done = 0;
+  const total = fullMockSections.length;
+
+  const updateBar = () => {
+    done++;
+    document.getElementById('mock-gen-bar').style.width = `${Math.round(done/total*100)}%`;
+  };
+
+  // Generate all sections in parallel
+  const tasks = [];
+
+  if (fullMockSections.includes('reading')) {
+    tasks.push((async () => {
+      _setGenStep('reading', 'loading');
+      try {
+        const [p1, p2, p3] = await Promise.all([
+          callAI({ system: 'You are an IELTS Academic examiner. Return valid JSON only.', user: `Generate an IELTS Academic Reading passage with 8 True/False/Not Given questions for Band ${band}. Return ONLY: {"topic":"...","passage":"200-word academic passage","questions":[{"id":1,"text":"claim","answer":"True|False|NG","explanation":"one sentence"},...8 questions]}`, maxTokens: 1800 }),
+          callAI({ system: 'You are an IELTS Academic examiner. Return valid JSON only.', user: `Generate an IELTS Academic Reading passage with 8 Matching Headings questions for Band ${band}. Return ONLY: {"topic":"...","passage":"4 paragraphs labelled A-D, each 40-50 words","headings":["heading 1","heading 2","heading 3","heading 4","heading 5","heading 6"],"questions":[{"id":1,"paragraph":"A","answer":"3","explanation":"one sentence"},...4 questions matching A-D to headings]}`, maxTokens: 1800 }),
+          callAI({ system: 'You are an IELTS Academic examiner. Return valid JSON only.', user: `Generate an IELTS Academic Reading passage with 8 Summary Completion questions for Band ${band}. Return ONLY: {"topic":"...","passage":"200-word academic passage","summaryText":"A short summary with 8 gaps marked as [1],[2]...[8]","wordBank":["word1","word2","word3","word4","word5","word6","word7","word8","decoy1","decoy2"],"questions":[{"id":1,"answer":"correct word from passage","explanation":"one sentence"},...8 questions]}`, maxTokens: 1800 }),
+        ]);
+        fullMockContent.reading = {
+          passages: [
+            { ...JSON.parse(p1), type: 'tfng' },
+            { ...JSON.parse(p2), type: 'matchingHeadings' },
+            { ...JSON.parse(p3), type: 'summaryCompletion' },
+          ]
+        };
+        _setGenStep('reading', 'done');
+      } catch { _setGenStep('reading', 'error'); fullMockContent.reading = null; }
+      updateBar();
+    })());
+  }
+
+  if (fullMockSections.includes('listening')) {
+    tasks.push((async () => {
+      _setGenStep('listening', 'loading');
+      try {
+        const [s1, s2, s3, s4] = await Promise.all([
+          callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Multiple Choice section for Band ${band}. A conversation in an everyday context (e.g. booking, enquiry). Return ONLY: {"scenario":"2-sentence description","audioText":"spoken conversation 150-180 words","questions":[{"id":1,"text":"question?","options":["A: option","B: option","C: option"],"answer":"A|B|C","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
+          callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Multiple Choice section for Band ${band}. A monologue/talk in an educational context. Return ONLY: {"scenario":"2-sentence description","audioText":"spoken monologue 150-180 words","questions":[{"id":1,"text":"question?","options":["A: option","B: option","C: option"],"answer":"A|B|C","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
+          callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Form Completion section for Band ${band}. Return ONLY: {"scenario":"2-sentence description","audioText":"spoken conversation 150-180 words about a form","formTitle":"Form name","questions":[{"id":1,"fieldLabel":"Field name","answer":"answer word(s)","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
+          callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Multiple Choice section (academic lecture context) for Band ${band}. Return ONLY: {"scenario":"2-sentence description","audioText":"academic lecture 180-200 words","questions":[{"id":1,"text":"question?","options":["A: option","B: option","C: option"],"answer":"A|B|C","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
+        ]);
+        const parsed = [s1, s2, s3, s4].map(r => JSON.parse(r));
+        // Generate audio in sequence (rate limit friendly)
+        const audioUrls = [];
+        for (const sec of parsed) {
+          try {
+            const audioRes = await fetch(`${API_URL.replace('/generate', '/audio')}`, {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ text: sec.audioText })
+            });
+            const audioData = await audioRes.json();
+            audioUrls.push(audioData.audioUrl || null);
+          } catch { audioUrls.push(null); }
+        }
+        fullMockContent.listening = {
+          sections: parsed.map((sec, i) => ({
+            ...sec,
+            audioUrl: audioUrls[i],
+            type: i === 2 ? 'formCompletion' : 'multipleChoice',
+          }))
+        };
+        _setGenStep('listening', 'done');
+      } catch { _setGenStep('listening', 'error'); fullMockContent.listening = null; }
+      updateBar();
+    })());
+  }
+
+  if (fullMockSections.includes('writing')) {
+    tasks.push((async () => {
+      _setGenStep('writing', 'loading');
+      try {
+        const raw = await callAI({
+          system: 'You are an IELTS Writing examiner. Return valid JSON only.',
+          user: `Generate both IELTS Writing tasks for Band ${band}. Return ONLY: {"task1":{"title":"Graph/Chart Description","prompt":"Describe the following [bar chart/line graph/table]. The graph shows [topic]. Write at least 150 words."},"task2":{"title":"Opinion Essay","prompt":"[Essay question on a relevant academic topic]. Give your opinion and support it with examples. Write at least 250 words."}}`,
+          maxTokens: 600
+        });
+        fullMockContent.writing = JSON.parse(raw);
+        _setGenStep('writing', 'done');
+      } catch { _setGenStep('writing', 'error'); fullMockContent.writing = null; }
+      updateBar();
+    })());
+  }
+
+  if (fullMockSections.includes('speaking')) {
+    tasks.push((async () => {
+      _setGenStep('speaking', 'loading');
+      try {
+        const raw = await callAI({
+          system: 'You are an IELTS Speaking examiner. Return valid JSON only.',
+          user: `Generate IELTS Speaking test content for Band ${band}. Return ONLY: {"part1":{"topic":"Personal topic (e.g. hometown)","questions":["question 1?","question 2?","question 3?","question 4?","question 5?"]},"part2":{"topic":"Cue card topic","cueCard":["Describe [topic]. You should say:","- point 1","- point 2","- point 3","and explain [final point]."]},"part3":{"questions":["discussion question 1?","discussion question 2?","discussion question 3?","discussion question 4?","discussion question 5?"]}}`,
+          maxTokens: 800
+        });
+        fullMockContent.speaking = JSON.parse(raw);
+        _setGenStep('speaking', 'done');
+      } catch { _setGenStep('speaking', 'error'); fullMockContent.speaking = null; }
+      updateBar();
+    })());
+  }
+
+  await Promise.all(tasks);
+
+  // All done — check if any critical section failed
+  const failed = fullMockSections.filter(s => fullMockContent[s] === null);
+  if (failed.length === fullMockSections.length) {
+    alert('Could not generate mock test content. Please check your connection and try again.');
+    goTo('s-fullmock-setup');
+    return;
+  }
+  // Filter out failed sections
+  fullMockSections = fullMockSections.filter(s => fullMockContent[s] !== null);
+  fullMockSectionIdx = 0;
+  _startMockSection();
+};
+
+function _setGenStep(section, state) {
+  const el = document.getElementById(`mgs-${section}`);
+  if (!el) return;
+  const dot = el.querySelector('.mgs-dot');
+  if (state === false)     { el.className = 'mock-gen-step'; if (dot) dot.textContent = '○'; }
+  else if (state === 'loading') { el.className = 'mock-gen-step loading'; if (dot) dot.textContent = '⟳'; }
+  else if (state === 'done')    { el.className = 'mock-gen-step done'; if (dot) dot.textContent = '✓'; }
+  else if (state === 'error')   { el.className = 'mock-gen-step error'; if (dot) dot.textContent = '✗'; }
+}
+
+function _startMockSection() {
+  if (fullMockSectionIdx >= fullMockSections.length) {
+    _evalMockTest();
+    return;
+  }
+  const section = fullMockSections[fullMockSectionIdx];
+  fullMockTimeRemaining = MOCK_SECTION_TIMES[section] || 3600;
+  if (!fullMockAnswers[section]) fullMockAnswers[section] = {};
+  goTo('s-fullmock-test');
+  _renderMockSection(section);
+  _startMockTimer();
+}
+
+function _startMockTimer() {
+  if (fullMockTimerInterval) clearInterval(fullMockTimerInterval);
+  _updateTimerDisplay();
+  fullMockTimerInterval = setInterval(() => {
+    fullMockTimeRemaining--;
+    _updateTimerDisplay();
+    if (fullMockTimeRemaining <= 0) {
+      clearInterval(fullMockTimerInterval);
+      window.submitMockSection();
+    }
+  }, 1000);
+}
+
+function _updateTimerDisplay() {
+  const m = Math.floor(fullMockTimeRemaining / 60);
+  const s = fullMockTimeRemaining % 60;
+  const el = document.getElementById('mock-test-timer');
+  if (el) {
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    el.className = 'mock-test-timer' + (fullMockTimeRemaining <= 300 ? ' urgent' : '');
+  }
+}
+
+function _renderMockSection(section) {
+  const labelEl = document.getElementById('mock-test-section-label');
+  if (labelEl) labelEl.textContent = section.charAt(0).toUpperCase() + section.slice(1);
+  const body = document.getElementById('mock-test-body');
+  if (!body) return;
+
+  if (section === 'reading') {
+    body.innerHTML = _renderMockReading();
+  } else if (section === 'listening') {
+    body.innerHTML = _renderMockListening();
+  } else if (section === 'writing') {
+    body.innerHTML = _renderMockWriting();
+  } else if (section === 'speaking') {
+    body.innerHTML = _renderMockSpeaking();
+    _initMockSpeaking();
+  }
+}
+
+function _renderMockReading() {
+  const passages = fullMockContent.reading?.passages || [];
+  let html = '';
+  passages.forEach((passage, pIdx) => {
+    html += `<div class="mock-passage-block">
+      <div class="mock-passage-label">Passage ${pIdx+1} — ${passage.topic || ''}</div>
+      <div class="mock-passage-text">${(passage.passage || '').split('\n').map(p => `<p>${p}</p>`).join('')}</div>`;
+    if (passage.type === 'matchingHeadings' && passage.headings) {
+      html += `<div class="mock-headings-list"><strong>List of Headings:</strong><ol class="mock-heading-ol">`;
+      passage.headings.forEach((h, i) => { html += `<li>${h}</li>`; });
+      html += `</ol></div>`;
+    }
+    if (passage.type === 'summaryCompletion' && passage.summaryText) {
+      html += `<div class="mock-summary-wrap"><div class="mock-summary-label">Summary Completion</div><div class="mock-summary-text">${passage.summaryText}</div>`;
+      if (passage.wordBank) {
+        html += `<div class="mock-wordbank"><strong>Word Bank:</strong> ${passage.wordBank.join(' · ')}</div>`;
+      }
+      html += `</div>`;
+    }
+    const questions = passage.questions || [];
+    html += `<div class="mock-questions-block">`;
+    questions.forEach(q => {
+      const qid = `r_${pIdx}_${q.id}`;
+      if (passage.type === 'tfng') {
+        html += `<div class="mock-q">
+          <div class="mock-q-num">${q.id}.</div>
+          <div class="mock-q-body">
+            <div class="mock-q-text">${q.text}</div>
+            <div class="mock-q-tfng">
+              <label><input type="radio" name="${qid}" value="True" onchange="window.mockAnswer('reading','${qid}',this.value)"> True</label>
+              <label><input type="radio" name="${qid}" value="False" onchange="window.mockAnswer('reading','${qid}',this.value)"> False</label>
+              <label><input type="radio" name="${qid}" value="NG" onchange="window.mockAnswer('reading','${qid}',this.value)"> Not Given</label>
+            </div>
+          </div>
+        </div>`;
+      } else if (passage.type === 'matchingHeadings') {
+        html += `<div class="mock-q">
+          <div class="mock-q-num">${q.id}.</div>
+          <div class="mock-q-body">
+            <div class="mock-q-text">Paragraph ${q.paragraph}</div>
+            <select class="mock-select" onchange="window.mockAnswer('reading','${qid}',this.value)">
+              <option value="">— Choose heading —</option>
+              ${(passage.headings || []).map((h,i) => `<option value="${i+1}">${i+1}. ${h}</option>`).join('')}
+            </select>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="mock-q">
+          <div class="mock-q-num">${q.id}.</div>
+          <div class="mock-q-body">
+            <input type="text" class="mock-input" placeholder="Your answer" onchange="window.mockAnswer('reading','${qid}',this.value)">
+          </div>
+        </div>`;
+      }
+    });
+    html += `</div></div>`;
+  });
+  return html;
+}
+
+function _renderMockListening() {
+  const sections = fullMockContent.listening?.sections || [];
+  let html = '';
+  sections.forEach((sec, sIdx) => {
+    html += `<div class="mock-listen-block">
+      <div class="mock-passage-label">Section ${sIdx+1} — ${sec.scenario || ''}</div>`;
+    if (sec.audioUrl) {
+      html += `<div class="mock-audio-wrap">
+        <audio id="mock-audio-${sIdx}" src="${sec.audioUrl}" preload="auto"></audio>
+        <button class="mock-play-btn" onclick="document.getElementById('mock-audio-${sIdx}').play()">▶ Play Audio</button>
+      </div>`;
+    } else {
+      html += `<div class="mock-audio-unavail">Audio unavailable — read the scenario text for this section.</div>`;
+      html += `<div class="mock-passage-text" style="font-style:italic;font-size:13px">${sec.audioText || ''}</div>`;
+    }
+    const questions = sec.questions || [];
+    html += `<div class="mock-questions-block">`;
+    questions.forEach(q => {
+      const qid = `l_${sIdx}_${q.id}`;
+      if (sec.type === 'multipleChoice') {
+        html += `<div class="mock-q">
+          <div class="mock-q-num">${q.id}.</div>
+          <div class="mock-q-body">
+            <div class="mock-q-text">${q.text}</div>
+            <div class="mock-q-options">
+              ${(q.options || []).map(opt => {
+                const val = opt.split(':')[0].trim();
+                return `<label class="mock-opt-label"><input type="radio" name="${qid}" value="${val}" onchange="window.mockAnswer('listening','${qid}',this.value)"> ${opt}</label>`;
+              }).join('')}
+            </div>
+          </div>
+        </div>`;
+      } else {
+        html += `<div class="mock-q">
+          <div class="mock-q-num">${q.id}.</div>
+          <div class="mock-q-body">
+            <div class="mock-q-text">${q.fieldLabel || q.text || ''}</div>
+            <input type="text" class="mock-input" placeholder="Your answer" onchange="window.mockAnswer('listening','${qid}',this.value)">
+          </div>
+        </div>`;
+      }
+    });
+    html += `</div></div>`;
+  });
+  return html;
+}
+
+function _renderMockWriting() {
+  const w = fullMockContent.writing || {};
+  return `
+    <div class="mock-writing-block">
+      <div class="mock-passage-label">Task 1 — ${w.task1?.title || 'Graph Description'}</div>
+      <div class="mock-writing-prompt">${w.task1?.prompt || ''}</div>
+      <textarea class="mock-textarea" id="mock-w-task1" placeholder="Write your Task 1 response here (minimum 150 words)..."
+        oninput="window.mockWritingInput('task1',this.value)"></textarea>
+      <div class="mock-wc" id="mock-wc-task1">0 words</div>
+    </div>
+    <div class="mock-writing-block" style="margin-top:24px">
+      <div class="mock-passage-label">Task 2 — ${w.task2?.title || 'Essay'}</div>
+      <div class="mock-writing-prompt">${w.task2?.prompt || ''}</div>
+      <textarea class="mock-textarea" id="mock-w-task2" placeholder="Write your Task 2 response here (minimum 250 words)..."
+        oninput="window.mockWritingInput('task2',this.value)"></textarea>
+      <div class="mock-wc" id="mock-wc-task2">0 words</div>
+    </div>`;
+}
+
+function _renderMockSpeaking() {
+  const sp = fullMockContent.speaking || {};
+  return `
+    <div class="mock-speaking-block">
+      <div class="mock-passage-label">Part 1 — ${sp.part1?.topic || 'Personal Questions'}</div>
+      <div class="mock-speaking-qs">
+        ${(sp.part1?.questions || []).map((q,i) => `<div class="mock-sp-q">${i+1}. ${q}</div>`).join('')}
+      </div>
+      <div class="mock-passage-label mt16">Part 2 — Cue Card</div>
+      <div class="mock-cue-card">
+        ${(sp.part2?.cueCard || []).map(line => `<div>${line}</div>`).join('')}
+      </div>
+      <div class="mock-passage-label mt16">Part 3 — Discussion</div>
+      <div class="mock-speaking-qs">
+        ${(sp.part3?.questions || []).map((q,i) => `<div class="mock-sp-q">${i+1}. ${q}</div>`).join('')}
+      </div>
+      <div class="mock-speaking-record">
+        <div class="mock-record-status" id="mock-record-status">Tap to record your answers</div>
+        <button class="mock-record-btn" id="mock-record-btn" onclick="window.toggleMockRecording()">🎙 Start Recording</button>
+        <div class="mock-record-timer" id="mock-record-timer" style="display:none">0:00</div>
+      </div>
+      <textarea class="mock-textarea" id="mock-sp-notes" placeholder="(Optional) Note down key points..." rows="4"
+        oninput="window.mockSpeakingNotes(this.value)"></textarea>
+    </div>`;
+}
+
+function _initMockSpeaking() {
+  window.mockSpeakingNotes = function (val) {
+    fullMockSpeakingResp.notes = val;
+  };
+}
+
+window.mockAnswer = function (section, qid, value) {
+  if (!fullMockAnswers[section]) fullMockAnswers[section] = {};
+  fullMockAnswers[section][qid] = value;
+};
+
+window.mockWritingInput = function (taskKey, value) {
+  fullMockWritingResp[taskKey] = value;
+  const wc = value.trim().split(/\s+/).filter(Boolean).length;
+  const el = document.getElementById(`mock-wc-${taskKey}`);
+  if (el) el.textContent = `${wc} word${wc !== 1 ? 's' : ''}`;
+};
+
+let mockRecording = false;
+let mockRecorder  = null;
+let mockRecordedChunks = [];
+let mockRecordSeconds  = 0;
+let mockRecordInterval = null;
+
+window.toggleMockRecording = async function () {
+  const btn  = document.getElementById('mock-record-btn');
+  const stat = document.getElementById('mock-record-status');
+  const timer = document.getElementById('mock-record-timer');
+  if (!mockRecording) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mockRecordedChunks = [];
+      mockRecorder = new MediaRecorder(stream);
+      mockRecorder.ondataavailable = e => { if (e.data.size > 0) mockRecordedChunks.push(e.data); };
+      mockRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+        const blob = new Blob(mockRecordedChunks, { type: 'audio/webm' });
+        // Transcribe via Whisper
+        stat.textContent = 'Transcribing...';
+        try {
+          const formData = new FormData();
+          formData.append('audio', blob, 'speaking.webm');
+          const res = await fetch(API_URL.replace('/generate', '/transcribe'), { method: 'POST', body: formData });
+          const data = await res.json();
+          fullMockSpeakingResp.transcript = data.transcript || '';
+          stat.textContent = 'Recording saved ✓';
+        } catch { stat.textContent = 'Recording saved (transcription failed)'; }
+      };
+      mockRecorder.start();
+      mockRecording = true;
+      mockRecordSeconds = 0;
+      timer.style.display = '';
+      timer.textContent = '0:00';
+      mockRecordInterval = setInterval(() => {
+        mockRecordSeconds++;
+        const m = Math.floor(mockRecordSeconds/60), s = mockRecordSeconds%60;
+        timer.textContent = `${m}:${String(s).padStart(2,'0')}`;
+      }, 1000);
+      btn.textContent = '⏹ Stop Recording';
+      stat.textContent = 'Recording...';
+    } catch { stat.textContent = 'Microphone access denied.'; }
+  } else {
+    if (mockRecorder && mockRecorder.state !== 'inactive') mockRecorder.stop();
+    clearInterval(mockRecordInterval);
+    mockRecording = false;
+    btn.textContent = '🎙 Record Again';
+  }
+};
+
+window.submitMockSection = function () {
+  clearInterval(fullMockTimerInterval);
+  if (mockRecording && mockRecorder) {
+    mockRecorder.stop();
+    mockRecording = false;
+    clearInterval(mockRecordInterval);
+  }
+  fullMockSectionIdx++;
+  if (fullMockSectionIdx < fullMockSections.length) {
+    _startMockSection();
+  } else {
+    _evalMockTest();
+  }
+};
+
+async function _evalMockTest() {
+  goTo('s-fullmock-eval');
+  const band = studentData?.targetBand || 6.5;
+
+  // Evaluate reading
+  if (fullMockContent.reading) {
+    let correct = 0, total = 0;
+    const wrongQs = [];
+    fullMockContent.reading.passages.forEach((passage, pIdx) => {
+      (passage.questions || []).forEach(q => {
+        const qid = `r_${pIdx}_${q.id}`;
+        const given = (fullMockAnswers.reading?.[qid] || '').toLowerCase().trim();
+        const correct_ans = (q.answer || '').toLowerCase().trim();
+        total++;
+        if (given === correct_ans) { correct++; }
+        else { wrongQs.push({ ...q, givenAnswer: given, section: 'Reading', type: passage.type }); }
+      });
+    });
+    fullMockResults.reading = { correct, total, band: rawScoreToBand(correct, total), wrongQs };
+  }
+
+  // Evaluate listening
+  if (fullMockContent.listening) {
+    let correct = 0, total = 0;
+    const wrongQs = [];
+    fullMockContent.listening.sections.forEach((sec, sIdx) => {
+      (sec.questions || []).forEach(q => {
+        const qid = `l_${sIdx}_${q.id}`;
+        const given = (fullMockAnswers.listening?.[qid] || '').toLowerCase().trim();
+        const correct_ans = (q.answer || '').toLowerCase().trim();
+        total++;
+        if (given === correct_ans || given === correct_ans.charAt(0)) { correct++; }
+        else { wrongQs.push({ ...q, givenAnswer: given, section: 'Listening', type: sec.type }); }
+      });
+    });
+    fullMockResults.listening = { correct, total, band: rawScoreToBand(correct, total), wrongQs };
+  }
+
+  // Evaluate writing via AI
+  if (fullMockContent.writing) {
+    try {
+      const t1 = fullMockWritingResp.task1 || '';
+      const t2 = fullMockWritingResp.task2 || '';
+      const evalPrompt = {
+        system: 'You are an IELTS Writing examiner. Return valid JSON only.',
+        user: `Evaluate these IELTS Writing responses for a Band ${band} student.
+Task 1 prompt: ${fullMockContent.writing.task1?.prompt || ''}
+Task 1 response: ${t1}
+Task 2 prompt: ${fullMockContent.writing.task2?.prompt || ''}
+Task 2 response: ${t2}
+Return ONLY: {"task1Band":6.0,"task2Band":6.5,"overallBand":6.5,"task1Feedback":"one sentence","task2Feedback":"one sentence","topIssue":"most important improvement"}`,
+        maxTokens: 500
+      };
+      const raw = await callAI(evalPrompt);
+      const result = JSON.parse(raw);
+      fullMockResults.writing = {
+        band: result.overallBand || 6.0,
+        task1Band: result.task1Band, task2Band: result.task2Band,
+        task1Feedback: result.task1Feedback, task2Feedback: result.task2Feedback,
+        topIssue: result.topIssue,
+      };
+    } catch { fullMockResults.writing = { band: 6.0 }; }
+  }
+
+  // Evaluate speaking via AI
+  if (fullMockContent.speaking) {
+    try {
+      const transcript = fullMockSpeakingResp.transcript || fullMockSpeakingResp.notes || '(no transcript available)';
+      const evalPrompt = {
+        system: 'You are an IELTS Speaking examiner. Return valid JSON only.',
+        user: `Evaluate this IELTS Speaking response for a Band ${band} student.
+Questions covered: Part 1 (${fullMockContent.speaking.part1?.topic}), Part 2 (${fullMockContent.speaking.part2?.topic}), Part 3 discussion.
+Transcript/notes: ${transcript}
+Return ONLY: {"overallBand":6.5,"fluencyBand":6.5,"lexicalBand":6.5,"grammarBand":6.5,"pronunciationBand":6.5,"feedback":"2 sentences of honest assessment","topSuggestion":"one concrete improvement"}`,
+        maxTokens: 400
+      };
+      const raw = await callAI(evalPrompt);
+      const result = JSON.parse(raw);
+      fullMockResults.speaking = {
+        band: result.overallBand || 6.0,
+        feedback: result.feedback, topSuggestion: result.topSuggestion,
+      };
+    } catch { fullMockResults.speaking = { band: 6.0 }; }
+  }
+
+  await _showMockReport();
+}
+
+async function _showMockReport() {
+  // Calculate overall band
+  const bands = [];
+  if (fullMockResults.reading)   bands.push(fullMockResults.reading.band);
+  if (fullMockResults.listening) bands.push(fullMockResults.listening.band);
+  if (fullMockResults.writing)   bands.push(fullMockResults.writing.band);
+  if (fullMockResults.speaking)  bands.push(fullMockResults.speaking.band);
+  const overall = bands.length ? (bands.reduce((a,b) => a+b, 0) / bands.length) : 0;
+  // Round to nearest 0.5
+  const overallRounded = Math.round(overall * 2) / 2;
+
+  fullMockResults.overall = overallRounded;
+
+  // Save to Firestore
+  const mockDoc = {
+    date:            new Date().toISOString(),
+    sections:        fullMockSections,
+    overall:         overallRounded,
+    reading:         fullMockResults.reading?.band  || null,
+    listening:       fullMockResults.listening?.band || null,
+    writing:         fullMockResults.writing?.band   || null,
+    speaking:        fullMockResults.speaking?.band  || null,
+  };
+  try {
+    await saveSessionDoc(currentUser.uid, { ...mockDoc, skillPracticed: 'fullMock', durationMinutes: 0 });
+    // Save compact mock history entry
+    const existingMocks = studentData?.mockHistory || [];
+    await updateStudentDoc(currentUser.uid, {
+      mockHistory: [...existingMocks, { date: mockDoc.date, overall: overallRounded,
+        reading: mockDoc.reading, listening: mockDoc.listening,
+        writing: mockDoc.writing, speaking: mockDoc.speaking }]
+    });
+  } catch { /* non-critical */ }
+
+  // Update brain with mock performance
+  const skillUpdates = {};
+  if (fullMockResults.reading) {
+    const r = fullMockResults.reading;
+    const acc = Math.round(r.correct / r.total * 100);
+    skillUpdates['reading-tfng'] = { accuracy: acc, attempted: r.total };
+    await updateStudentBrain(getBehaviourPayload(), acc, 'reading.tfng');
+  }
+
+  goTo('s-fullmock-report');
+
+  // Render Part 1: Score Summary
+  document.getElementById('mock-report-date').textContent = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  document.getElementById('mr-overall-band').textContent = overallRounded.toFixed(1);
+
+  // Compare to Day 1
+  const baseline = studentData?.targetBand || 6.5;
+  const diff = (overallRounded - baseline).toFixed(1);
+  const compareEl = document.getElementById('mr-compare');
+  if (compareEl) {
+    const sign = diff >= 0 ? '+' : '';
+    compareEl.textContent = `${sign}${diff} bands vs. your target of ${baseline}`;
+    compareEl.style.color = diff >= 0 ? 'var(--success)' : 'var(--danger)';
+  }
+
+  const scoreHtml = [
+    { label: 'Reading',   band: fullMockResults.reading?.band,   color: '#E8F0FF' },
+    { label: 'Listening', band: fullMockResults.listening?.band, color: '#EEEAFF' },
+    { label: 'Writing',   band: fullMockResults.writing?.band,   color: '#E8F8F0' },
+    { label: 'Speaking',  band: fullMockResults.speaking?.band,  color: '#FFF4E0' },
+  ].filter(s => s.band != null).map(s => `
+    <div class="mock-score-card" style="background:${s.color}">
+      <div class="msc-label">${s.label}</div>
+      <div class="msc-band">${s.band.toFixed(1)}</div>
+    </div>`).join('');
+  document.getElementById('mock-section-scores').innerHTML = scoreHtml;
+
+  // Render Part 2: Skill Breakdown
+  const sbRows = [];
+  if (fullMockResults.reading) {
+    const pct = Math.round(fullMockResults.reading.correct / fullMockResults.reading.total * 100);
+    sbRows.push({ label: 'Reading (overall)', pct });
+  }
+  if (fullMockResults.listening) {
+    const pct = Math.round(fullMockResults.listening.correct / fullMockResults.listening.total * 100);
+    sbRows.push({ label: 'Listening (overall)', pct });
+  }
+  const sbHtml = sbRows.map(r => `
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="flex:1;font-size:13px;font-weight:500">${r.label}</span>
+      <div style="flex:1;height:5px;background:var(--border);border-radius:4px;overflow:hidden">
+        <div style="width:${r.pct}%;height:100%;background:${r.pct>=70?'var(--success)':'var(--danger)'};border-radius:4px"></div>
+      </div>
+      <span style="font-size:11px;font-weight:700;color:var(--accent);width:36px;text-align:right">${r.pct}%</span>
+    </div>`).join('');
+  document.getElementById('mr-skill-breakdown').innerHTML = sbHtml || '<p style="font-size:13px;color:var(--muted)">—</p>';
+
+  // Part 3: AI Debrief (async)
+  _generateMockDebrief(overallRounded);
+
+  // Part 4: Question Review
+  const allWrong = [
+    ...(fullMockResults.reading?.wrongQs  || []),
+    ...(fullMockResults.listening?.wrongQs || []),
+  ];
+  const reviewHtml = allWrong.length
+    ? allWrong.map(q => `
+      <div class="mock-review-item">
+        <div class="mock-review-section">${q.section}</div>
+        <div class="mock-review-q">${q.text || q.fieldLabel || ''}</div>
+        <div class="mock-review-ans">Your answer: <span class="wrong-ans">${q.givenAnswer || '—'}</span></div>
+        <div class="mock-review-ans">Correct: <span class="correct-ans">${q.answer}</span></div>
+        <div class="mock-review-exp">${q.explanation || ''}</div>
+      </div>`).join('')
+    : '<p style="font-size:13px;color:var(--muted)">All answers correct!</p>';
+  document.getElementById('mr-question-review').innerHTML = reviewHtml;
+}
+
+async function _generateMockDebrief(overall) {
+  try {
+    const ctx = buildContextSnippet();
+    const rBand = fullMockResults.reading?.band;
+    const lBand = fullMockResults.listening?.band;
+    const wBand = fullMockResults.writing?.band;
+    const sBand = fullMockResults.speaking?.band;
+    const debriefPrompt = {
+      system: 'You are Toody, an honest IELTS coach. Return valid JSON only.',
+      user: `${ctx}
+This student just completed a full IELTS mock test.
+Results: Reading ${rBand||'—'}, Listening ${lBand||'—'}, Writing ${wBand||'—'}, Speaking ${sBand||'—'}, Overall: ${overall}
+Writing feedback: ${fullMockResults.writing?.task2Feedback || ''}
+Speaking feedback: ${fullMockResults.speaking?.feedback || ''}
+Generate an honest 3-5 sentence assessment. Return ONLY: {"debrief":"3-5 sentence honest assessment referencing specific results and patterns from their practice history","focusArea":"the single most impactful thing to work on before the real exam"}`,
+      maxTokens: 400
+    };
+    const raw = await callAI(debriefPrompt);
+    const result = JSON.parse(raw);
+    document.getElementById('mr-debrief-loading').classList.add('hidden');
+    document.getElementById('mr-debrief').textContent = result.debrief || '';
+    document.getElementById('mr-debrief').classList.remove('hidden');
+    if (result.focusArea) {
+      document.getElementById('mr-debrief').innerHTML +=
+        `<div class="mock-focus-pill">Before your real exam: ${result.focusArea}</div>`;
+    }
+  } catch {
+    document.getElementById('mr-debrief-loading').classList.add('hidden');
+    document.getElementById('mr-debrief').textContent = 'Assessment unavailable — check your connection.';
+    document.getElementById('mr-debrief').classList.remove('hidden');
+  }
+}
+
+window.goToMockHistory = async function () {
+  goTo('s-fullmock-history');
+  document.getElementById('mock-history-loading').classList.remove('hidden');
+  document.getElementById('mock-history-list').innerHTML = '';
+  document.getElementById('mock-history-trend').classList.add('hidden');
+
+  const mocks = studentData?.mockHistory || [];
+  document.getElementById('mock-history-loading').classList.add('hidden');
+
+  if (!mocks.length) {
+    document.getElementById('mock-history-list').innerHTML =
+      '<p style="font-size:13px;color:var(--muted);text-align:center;padding:40px 0">No mock tests taken yet.</p>';
+    return;
+  }
+
+  // Simple text-based trend chart
+  const trendEl = document.getElementById('mock-history-trend');
+  trendEl.classList.remove('hidden');
+  const maxBand = 9, minBand = 4;
+  const chartHtml = mocks.slice(-8).map((m, i) => {
+    const pct = Math.round(((m.overall - minBand) / (maxBand - minBand)) * 100);
+    return `<div class="mht-bar-wrap" title="Mock ${i+1}: Band ${m.overall}">
+      <div class="mht-bar" style="height:${pct}%"></div>
+      <div class="mht-label">${m.overall.toFixed(1)}</div>
+    </div>`;
+  }).join('');
+  trendEl.innerHTML = `<div class="mock-history-trend-label">Band Score Trend</div><div class="mht-bars">${chartHtml}</div>`;
+
+  document.getElementById('mock-history-list').innerHTML = [...mocks].reverse().map((m, i) => {
+    const d = m.date ? new Date(m.date).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '—';
+    return `<div class="mock-history-item">
+      <div class="mhi-date">${d}</div>
+      <div class="mhi-scores">
+        ${[['Reading',m.reading],['Listening',m.listening],['Writing',m.writing],['Speaking',m.speaking]].filter(([,v])=>v!=null).map(([l,v])=>`<span class="mhi-score">${l}: ${v.toFixed(1)}</span>`).join('')}
+      </div>
+      <div class="mhi-overall">Band ${m.overall.toFixed(1)}</div>
+    </div>`;
+  }).join('');
+};
+
+
 window.goToHome = function () { renderHome(); goTo('s-home'); };
 
 window.signOutUser = async function () {
