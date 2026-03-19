@@ -13,9 +13,19 @@
 </head>
 <body>
 
+<!-- ══════════════════════ TOAST ══════════════════════ -->
+<div id="toast-container" aria-live="polite"></div>
+
+<!-- ══════════════════════ MINI-MOCK TIMER BAR ══════════════════════ -->
+<div id="mini-mock-timer-bar" class="hidden">
+  <span id="mini-mock-phase-label">Reading</span>
+  <span id="mini-mock-countdown" class="mini-mock-countdown">20:00</span>
+  <span class="mini-mock-hint">auto-submits when timer ends</span>
+</div>
+
 <!-- ══════════════════════ LOADING ══════════════════════ -->
 <div class="screen active" id="s-loading">
-  <img class="loading-logo" src="icons/toody-logo.png" alt="Toody" width="72" height="72" />
+  <img class="loading-logo" src="icons/toody-logo.png?v=2" alt="Toody" width="72" height="72" />
   <div class="loading-name">Too<span>dy</span></div>
   <div class="spinner"></div>
 </div>
@@ -349,7 +359,7 @@
 <!-- ══════════════════════ HOME ══════════════════════ -->
 <div class="screen" id="s-home">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right">
       <div class="streak-badge" id="home-streak">🔥 0 days</div>
       <div class="day-badge" id="home-day-badge">Day 1</div>
@@ -393,7 +403,7 @@
 <!-- ══════════════════════ SESSION INTRO ══════════════════════ -->
 <div class="screen" id="s-session-intro">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
   <div class="session-intro-skill">
@@ -430,7 +440,7 @@
 <!-- ══════════════════════ TEACH FIRST (Day 1) ══════════════════════ -->
 <div class="screen" id="s-teach">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar">
@@ -563,7 +573,7 @@
 <!-- ══════════════════════ WARMUP ══════════════════════ -->
 <div class="screen" id="s-warmup">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="warmup-day-badge">Day 2</div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot active"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
@@ -592,7 +602,7 @@
 <!-- ══════════════════════ READING ══════════════════════ -->
 <div class="screen" id="s-reading">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="reading-day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar">
@@ -625,7 +635,7 @@
 <!-- ══════════════════════ TOUGH LOVE ══════════════════════ -->
 <div class="screen" id="s-toughlove">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
   </div>
   <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot active"></div><div class="phase-dot"></div></div>
   <div class="phase-label">Phase 2 — <span class="pl-name">Prove You Understood It</span></div>
@@ -645,7 +655,7 @@
 <!-- ══════════════════════ LISTENING ══════════════════════ -->
 <div class="screen" id="s-listening">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="listening-day-badge">Day 2</div></div>
   </div>
   <div class="phase-bar">
@@ -695,7 +705,7 @@
 <!-- ══════════════════════ WRITING ══════════════════════ -->
 <div class="screen" id="s-writing">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="writing-day-badge">Day 6</div></div>
   </div>
   <div class="phase-bar">
@@ -744,7 +754,7 @@
 <!-- ══════════════════════ SPEAKING ══════════════════════ -->
 <div class="screen" id="s-speaking">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="speaking-day-badge">Day 8</div></div>
   </div>
   <div class="phase-bar">
@@ -814,7 +824,7 @@
 <!-- ══════════════════════ NOTEBOOK ══════════════════════ -->
 <div class="screen" id="s-notebook">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge" id="nb-day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot done"></div><div class="phase-dot active"></div></div>
@@ -834,7 +844,7 @@
       <div class="card-label">Reading — Skill Breakdown</div>
       <div class="skill-row">
         <div class="skill-item"><div class="skill-name">True / False / NG</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-tfng-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-tfng-pct">—</div></div>
-        <div class="skill-item"><div class="skill-name">Matching Headings</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-mh-pct">—</div></div>
+        <div class="skill-item"><div class="skill-name">Summ. Completion</div><div class="skill-bar-wrap"><div class="skill-bar" id="nb-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="nb-mh-pct">—</div></div>
       </div>
       <div class="card-label" style="margin-top:14px">Listening — Skill Breakdown</div>
       <div class="skill-row">
@@ -875,7 +885,7 @@
 <!-- ══════════════════════ MINI MOCK ══════════════════════ -->
 <div class="screen" id="s-minimock">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><div class="day-badge">Day 10</div></div>
   </div>
   <div class="mock-progress">
@@ -892,10 +902,10 @@
     <div class="card">
       <div class="card-label">What to Expect</div>
       <div class="expect-list" style="margin:0;gap:8px;">
-        <div class="expect-item"><div class="expect-icon">📖</div><div class="expect-text"><strong>Reading</strong> — 5 T/F/NG questions on a passage. ~20 min.</div></div>
-        <div class="expect-item"><div class="expect-icon">🎧</div><div class="expect-text"><strong>Listening</strong> — 5 Multiple Choice questions. ~15 min.</div></div>
-        <div class="expect-item"><div class="expect-icon">✍️</div><div class="expect-text"><strong>Writing</strong> — Task 1 graph description. ~20 min.</div></div>
-        <div class="expect-item"><div class="expect-icon">🎤</div><div class="expect-text"><strong>Speaking</strong> — Part 2 cue card. 1 min prep, 2 min speak.</div></div>
+        <div class="expect-item"><div class="expect-icon">📖</div><div class="expect-text"><strong>Reading</strong> — 5 T/F/NG questions. 20 min timed. Auto-submits.</div></div>
+        <div class="expect-item"><div class="expect-icon">🎧</div><div class="expect-text"><strong>Listening</strong> — 5 Multiple Choice. 15 min timed. Auto-submits.</div></div>
+        <div class="expect-item"><div class="expect-icon">✍️</div><div class="expect-text"><strong>Writing</strong> — Task 1 graph description. 30 min timed.</div></div>
+        <div class="expect-item"><div class="expect-icon">🎤</div><div class="expect-text"><strong>Speaking</strong> — Part 2 cue card. 7 min timed.</div></div>
       </div>
     </div>
     <button class="btn mt16" onclick="startMiniMock()">Begin the Mock <span class="arrow">→</span></button>
@@ -926,7 +936,7 @@
 <!-- ══════════════════════ PROGRESS ══════════════════════ -->
 <div class="screen" id="s-progress">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
   <div class="home-greeting" style="padding-top:20px">
@@ -942,9 +952,15 @@
     <div class="card-label">All Skills</div>
     <div class="skill-row">
       <div class="skill-item"><div class="skill-name">T/F/Not Given</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-tfng-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-tfng-pct">—</div></div>
-      <div class="skill-item"><div class="skill-name">Matching Headings</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-mh-pct">—</div></div>
+      <div class="skill-item"><div class="skill-name">Summ. Completion</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-mh-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-mh-pct">—</div></div>
       <div class="skill-item"><div class="skill-name">Multiple Choice</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-mc-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-mc-pct">—</div></div>
       <div class="skill-item"><div class="skill-name">Form Completion</div><div class="skill-bar-wrap"><div class="skill-bar" id="prog-fc-bar" style="width:0%"></div></div><div class="skill-pct" id="prog-fc-pct">—</div></div>
+    </div>
+  </div>
+  <div class="card" id="prog-behaviour-card">
+    <div class="card-label">How You Study</div>
+    <div id="progress-behaviour-section">
+      <p style="font-size:13px;color:var(--muted)">Complete a few sessions to see your study patterns.</p>
     </div>
   </div>
   <div id="progress-loading" class="screen-loading hidden"><div class="spinner"></div><p>Loading your sessions…</p></div>
@@ -962,7 +978,7 @@
 <!-- ══════════════════════ SESSION TIP ══════════════════════ -->
 <div class="screen" id="s-tip">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png" alt="Toody" /></div>
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=2" alt="Toody" /></div>
   </div>
   <div class="tip-wrap">
     <div class="tip-header">

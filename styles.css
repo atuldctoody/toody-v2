@@ -1168,3 +1168,104 @@ a { color: inherit; text-decoration: none; }
 .mhi-score           { font-size: 12px; color: var(--muted); background: var(--bg); border-radius: 6px; padding: 3px 8px; }
 .mhi-overall         { font-size: 18px; font-weight: 900; color: var(--accent); }
 .mt10                { margin-top: 10px; }
+
+/* ── TOAST NOTIFICATIONS ── */
+#toast-container {
+  position: fixed;
+  top: env(safe-area-inset-top, 0);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  width: 100%;
+  max-width: 390px;
+  padding-top: 12px;
+}
+.toast-pill {
+  background: #1A1829;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  animation: toast-in 0.25s ease;
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.45;
+}
+.toast-pill.fade-out { animation: toast-out 0.3s ease forwards; }
+@keyframes toast-in  { from { opacity:0; transform:translateY(-8px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes toast-out { from { opacity:1; } to { opacity:0; transform:translateY(-6px); } }
+
+/* ── MINI MOCK TIMER BAR ── */
+#mini-mock-timer-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(101,87,212,0.35);
+}
+#mini-mock-timer-bar.hidden { display: none; }
+.mini-mock-countdown        { font-size: 18px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.mini-mock-countdown.urgent { color: #FFD700; }
+.mini-mock-hint             { font-size: 11px; font-weight: 500; opacity: 0.8; text-align: right; }
+
+/* ── SUMMARY COMPLETION READING ── */
+.sc-summary-wrap  { background: var(--accent-light); border-radius: var(--r-sm); padding: 14px; margin-bottom: 14px; }
+.sc-summary-label { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+.sc-summary-text  { font-size: 14px; line-height: 1.9; color: var(--text); }
+.sc-gap-select {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--white);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  padding: 2px 6px;
+  min-width: 110px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0 2px;
+}
+.sc-gap-select.sc-correct { border-color: var(--success); color: var(--success); background: var(--success-light); }
+.sc-gap-select.sc-wrong   { border-color: var(--danger);  color: var(--danger);  background: var(--danger-light); }
+.sc-wordbank-wrap { margin-bottom: 14px; }
+.sc-wordbank      { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.sc-word-chip {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── BEHAVIOUR ANALYTICS ── */
+.behaviour-metric   { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.behaviour-metric:last-child { border-bottom: none; }
+.bm-label     { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.bm-bar-track { background: var(--border); border-radius: 4px; height: 6px; overflow: hidden; margin-bottom: 6px; }
+.bm-bar       { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.5s ease; }
+.bm-meta      { display: flex; justify-content: space-between; align-items: center; }
+.bm-value     { font-size: 12px; font-weight: 700; color: var(--accent); }
+.bm-note      { font-size: 11px; color: var(--muted); max-width: 60%; text-align: right; }

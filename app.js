@@ -19,7 +19,7 @@ const AUDIO_URL      = 'https://toody-api.vercel.app/api/audio';
 const DAY_PLAN = {
   1:  { skill: 'reading.tfng',             screen: 's-reading',   section: 'Reading',   label: 'True / False / Not Given',   icon: '📖', desc: 'AI-generated passage + 5 questions. Toody explains every answer.' },
   2:  { skill: 'listening.multipleChoice', screen: 's-listening', section: 'Listening', label: 'Multiple Choice',             icon: '🎧', desc: 'Practice picking the correct answer from detailed audio scenarios.' },
-  3:  { skill: 'reading.matchingHeadings', screen: 's-reading',   section: 'Reading',   label: 'Matching Headings',           icon: '📖', desc: 'Match paragraph headings to the right sections in the passage.' },
+  3:  { skill: 'reading.summaryCompletion', screen: 's-reading',  section: 'Reading',   label: 'Summary Completion',          icon: '📖', desc: 'Complete a gapped summary of the passage using words from a word bank.' },
   4:  { skill: 'listening.formCompletion', screen: 's-listening', section: 'Listening', label: 'Form Completion',             icon: '🎧', desc: 'Complete a form or notes from information in the audio.' },
   5:  { skill: 'week1report',              screen: 's-notebook',  section: 'Report',    label: 'Week 1 Report',               icon: '📊', desc: 'Your band estimate, skill bars, and personalised Week 2 plan.' },
   6:  { skill: 'writing.task1',            screen: 's-writing',   section: 'Writing',   label: 'Task 1 — Graph Description',  icon: '✍️', desc: 'Describe an academic graph or chart in 150+ words.' },
@@ -235,10 +235,45 @@ let recordSeconds       = 0;
 let mockMode    = false;
 let mockPhase   = 0;   // 0=reading 1=listening 2=writing 3=speaking
 let mockResults = {};  // { reading, listening, writing, speaking }
+let miniMockTimerInterval = null;
+let miniMockTimeRemaining = 0;
+const MINI_MOCK_TIMES = { 0: 1200, 1: 900, 2: 1800, 3: 420 }; // reading, listening, writing, speaking (seconds)
+
+// Summary Completion session
+let isSCSession    = false;
+let sessionSummary = '';   // SC summary text
+let sessionWordBank = [];  // SC word bank
+
+// ── TOAST NOTIFICATIONS ──────────────────────────────────────────
+function showToast(message, duration = 3000) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const pill = document.createElement('div');
+  pill.className = 'toast-pill';
+  pill.textContent = message;
+  container.appendChild(pill);
+  setTimeout(() => {
+    pill.classList.add('fade-out');
+    setTimeout(() => pill.remove(), 320);
+  }, duration);
+}
+
+// ── API RETRY ─────────────────────────────────────────────────────
+async function withRetry(fn, maxRetries = 3) {
+  let lastErr;
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try { return await fn(); } catch (err) {
+      lastErr = err;
+      if (attempt < maxRetries - 1) {
+        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, attempt)));
+      }
+    }
+  }
+  throw lastErr;
+}
 
 // ── ROUTING ──────────────────────────────────────────────────────
 function goTo(id) {
-  console.log('[Toody] goTo:', id);
   // Push current screen to history (unless going back, or it's a non-navigable screen)
   if (!_goingBack) {
     const current = document.querySelector('.screen.active')?.id;
@@ -250,13 +285,10 @@ function goTo(id) {
 
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById(id);
-  if (!el) { console.error('[Toody] goTo: element not found:', id); return; }
+  if (!el) return;
   el.classList.add('active');
   const computed = window.getComputedStyle(el).display;
-  if (computed === 'none') {
-    console.warn('[Toody] CSS override detected — forcing display:flex');
-    el.style.display = 'flex';
-  }
+  if (computed === 'none') el.style.display = 'flex';
   // Reset history when returning to home
   if (id === 's-home') screenHistory.length = 0;
 
@@ -319,8 +351,7 @@ window.bootApp = async function () {
       renderHome();
       goTo('s-home');
     }
-  } catch (err) {
-    console.error('bootApp error:', err);
+  } catch {
     showBootError();
   }
 };
@@ -559,8 +590,7 @@ window.finishOnboarding = async function () {
     if (welcomeName) welcomeName.textContent = pendingName || 'there';
     goTo('s-welcome');
     setTimeout(() => initBriefing(), 2500);
-  } catch (err) {
-    console.error('finishOnboarding error', err);
+  } catch {
     document.getElementById('ob-saving').classList.add('hidden');
     document.getElementById('ob-error').classList.remove('hidden');
     document.getElementById('ob-finish-btn').disabled = false;
@@ -621,7 +651,7 @@ window.finishBriefing = async function () {
   try {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
     if (studentData) studentData.briefingSeen = true;
-  } catch (e) { console.warn('briefing save failed', e); }
+  } catch { /* non-critical */ }
   initIELTSOverview();
 };
 
@@ -666,7 +696,7 @@ window.finishIELTSOverview = async function () {
   try {
     await updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true });
     if (studentData) studentData.hasSeenIELTSOverview = true;
-  } catch (e) { console.warn('IELTS overview save failed', e); }
+  } catch { /* non-critical */ }
   loadTeachFirst('reading.tfng');
 };
 
@@ -725,10 +755,10 @@ function renderHome() {
 function renderSkillSnapshot() {
   const sk = getIELTSSkills();
   const rows = [
-    { label: 'T / F / Not Given', pct: (sk['reading-tfng']?.attempted             || 0) > 0 ? sk['reading-tfng'].accuracy             : null },
-    { label: 'Matching Headings', pct: (sk['reading-matchingHeadings']?.attempted  || 0) > 0 ? sk['reading-matchingHeadings'].accuracy  : null },
-    { label: 'Multiple Choice',   pct: (sk['listening-multipleChoice']?.attempted  || 0) > 0 ? sk['listening-multipleChoice'].accuracy  : null },
-    { label: 'Form Completion',   pct: (sk['listening-formCompletion']?.attempted  || 0) > 0 ? sk['listening-formCompletion'].accuracy   : null },
+    { label: 'T / F / Not Given',  pct: (sk['reading-tfng']?.attempted              || 0) > 0 ? sk['reading-tfng'].accuracy              : null },
+    { label: 'Summ. Completion',   pct: (sk['reading-summaryCompletion']?.attempted  || 0) > 0 ? sk['reading-summaryCompletion'].accuracy  : null },
+    { label: 'Multiple Choice',    pct: (sk['listening-multipleChoice']?.attempted   || 0) > 0 ? sk['listening-multipleChoice'].accuracy   : null },
+    { label: 'Form Completion',    pct: (sk['listening-formCompletion']?.attempted   || 0) > 0 ? sk['listening-formCompletion'].accuracy    : null },
   ];
   const el      = document.getElementById('home-skill-snapshot');
   const anyData = rows.some(r => r.pct !== null);
@@ -778,15 +808,9 @@ function buildExpectations(day, skill) {
 }
 
 window.goToSession = function () {
-  console.log('[Toody] button clicked');
   const day  = studentData?.dayNumber || 1;
   const plan = DAY_PLAN[Math.min(day, 10)];
-  console.log('[Toody] day:', day, '| plan:', plan, '| studentData:', studentData);
-
-  if (!plan) {
-    console.error('[Toody] goToSession: no plan found for day', day);
-    return;
-  }
+  if (!plan) return;
 
   document.getElementById('warmup-day-badge').textContent    = `Day ${day}`;
   document.getElementById('reading-day-badge').textContent   = `Day ${day}`;
@@ -966,6 +990,7 @@ Return ONLY this JSON:
     document.getElementById('teach-loading').classList.add('hidden');
     renderHookQuestion();
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     loadReadingSession();
   }
 }
@@ -1483,10 +1508,10 @@ async function updateWeakAreas(skillKey, missedSubTypes) {
   try {
     const ieltsSkills = getIELTSSkills();
     const candidates = [
-      { key: 'reading-tfng',             name: 'T/F/Not Given',     s: ieltsSkills['reading-tfng'] },
-      { key: 'reading-matchingHeadings', name: 'Matching Headings', s: ieltsSkills['reading-matchingHeadings'] },
-      { key: 'listening-multipleChoice', name: 'Multiple Choice',   s: ieltsSkills['listening-multipleChoice'] },
-      { key: 'listening-formCompletion', name: 'Form Completion',   s: ieltsSkills['listening-formCompletion'] },
+      { key: 'reading-tfng',              name: 'T/F/Not Given',      s: ieltsSkills['reading-tfng'] },
+      { key: 'reading-summaryCompletion', name: 'Summary Completion', s: ieltsSkills['reading-summaryCompletion'] },
+      { key: 'listening-multipleChoice',  name: 'Multiple Choice',    s: ieltsSkills['listening-multipleChoice'] },
+      { key: 'listening-formCompletion',  name: 'Form Completion',    s: ieltsSkills['listening-formCompletion'] },
     ].filter(c => c.s?.attempted > 0 && c.s.accuracy < 70)
      .sort((a, b) => a.s.accuracy - b.s.accuracy);
 
@@ -1534,27 +1559,58 @@ async function updateWeakAreas(skillKey, missedSubTypes) {
 
 // ── READING SESSION ───────────────────────────────────────────────
 async function loadReadingSession() {
-  console.log('[Toody] loadReadingSession() called');
   sessionQuestions = [];
   sessionPassage   = '';
   sessionAnswers   = {};
   sessionCorrect   = 0;
   sessionTopic     = '';
+  sessionSummary   = '';
+  sessionWordBank  = [];
+  isSCSession      = false;
   tlQ = null; tlPassed = false;
 
   goTo('s-reading');
   document.getElementById('reading-loading').classList.remove('hidden');
   document.getElementById('reading-content').classList.add('hidden');
-  document.getElementById('btn-reading-submit').disabled = true;
 
-  const day = studentData?.dayNumber || 1;
+  const submitBtn = document.getElementById('btn-reading-submit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submit answers →';
+  submitBtn.onclick = () => window.submitReading();
+
+  const day      = studentData?.dayNumber || 1;
+  const skillKey = DAY_PLAN[Math.min(day, 10)]?.skill || 'reading.tfng';
+  isSCSession    = (skillKey === 'reading.summaryCompletion');
+
   document.getElementById('reading-p1-dot').className = day > 1 ? 'phase-dot done' : 'phase-dot';
 
   const band = studentData?.targetBand || 6.5;
 
-  const prompt = {
-    system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
-    user: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
+  let prompt;
+  if (isSCSession) {
+    prompt = {
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Summary Completion IELTS Academic reading exercise for a Band ${band} student.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
+  "topic": "2-4 word topic label",
+  "summaryText": "A 60-80 word summary of the passage with 5 gaps marked as [1], [2], [3], [4], [5]. Each gap must be fillable with ONE word from the passage.",
+  "wordBank": ["word1","word2","word3","word4","word5","decoy1","decoy2","decoy3"],
+  "questions": [
+    {"id": 1, "text": "Gap [1]", "answer": "exact single word from passage that fills gap 1", "explanation": "why this word fills gap 1", "keySentence": "sentence from passage containing this word"},
+    {"id": 2, "text": "Gap [2]", "answer": "exact single word from passage that fills gap 2", "explanation": "why this word fills gap 2", "keySentence": "sentence from passage containing this word"},
+    {"id": 3, "text": "Gap [3]", "answer": "exact single word from passage that fills gap 3", "explanation": "why this word fills gap 3", "keySentence": "sentence from passage containing this word"},
+    {"id": 4, "text": "Gap [4]", "answer": "exact single word from passage that fills gap 4", "explanation": "why this word fills gap 4", "keySentence": "sentence from passage containing this word"},
+    {"id": 5, "text": "Gap [5]", "answer": "exact single word from passage that fills gap 5", "explanation": "why this word fills gap 5", "keySentence": "sentence from passage containing this word"}
+  ]
+}`
+    };
+  } else {
+    prompt = {
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
 
 Return ONLY this JSON:
 {
@@ -1568,7 +1624,8 @@ Return ONLY this JSON:
     {"id": 5, "text": "statement", "answer": "False", "explanation": "why", "keySentence": "exact sentence from passage"}
   ]
 }`
-  };
+    };
+  }
 
   try {
     const raw    = await callAI(prompt);
@@ -1578,8 +1635,14 @@ Return ONLY this JSON:
     sessionQuestions = parsed.questions;
     sessionTopic     = parsed.topic || 'Reading';
 
-    buildToughLove(parsed.questions, parsed.passage, day);
-    renderReadingSession(parsed);
+    if (isSCSession) {
+      sessionSummary  = parsed.summaryText || '';
+      sessionWordBank = parsed.wordBank    || [];
+      renderSCSession(parsed);
+    } else {
+      buildToughLove(parsed.questions, parsed.passage, day);
+      renderReadingSession(parsed);
+    }
 
     document.getElementById('reading-loading').classList.add('hidden');
     document.getElementById('reading-content').classList.remove('hidden');
@@ -1588,9 +1651,81 @@ Return ONLY this JSON:
     setupScrollTracking();
     trackQStart(1);
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('reading-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load passage. Please go back and try again.</p>';
   }
+}
+
+function renderSCSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully, then complete the summary below using words from the word bank.';
+  document.getElementById('reading-q-label').textContent = 'Summary Completion';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Fill each gap with <strong>one word</strong> from the Word Bank. Each word can be used only once.';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  const wordBankOpts = (parsed.wordBank || [])
+    .map(w => `<option value="${w.toLowerCase()}">${w}</option>`).join('');
+
+  const summaryHtml = (parsed.summaryText || '').replace(/\[(\d+)\]/g, (_, num) => {
+    const qid = parseInt(num);
+    return `<select class="sc-gap-select" id="sc-gap-${qid}" onchange="window.onSCSelectChange()">
+      <option value="">—</option>${wordBankOpts}
+    </select>`;
+  });
+
+  const wordBankHtml = (parsed.wordBank || [])
+    .map(w => `<span class="sc-word-chip">${w}</span>`).join('');
+
+  document.getElementById('questions-container').innerHTML = `
+    <div class="sc-summary-wrap">
+      <div class="sc-summary-label">Summary — fill in the gaps</div>
+      <div class="sc-summary-text">${summaryHtml}</div>
+    </div>
+    <div class="sc-wordbank-wrap">
+      <div class="sc-summary-label">Word Bank</div>
+      <div class="sc-wordbank">${wordBankHtml}</div>
+    </div>
+    <div id="sc-results-container"></div>`;
+}
+
+window.onSCSelectChange = function () {
+  const allFilled = sessionQuestions.every(q => {
+    const el = document.getElementById(`sc-gap-${q.id}`);
+    return el && el.value !== '';
+  });
+  document.getElementById('btn-reading-submit').disabled = !allFilled;
+};
+
+function submitSCSession() {
+  sessionCorrect = 0;
+  let resultsHtml = '';
+
+  sessionQuestions.forEach(q => {
+    const el      = document.getElementById(`sc-gap-${q.id}`);
+    const val     = el ? el.value.trim().toLowerCase() : '';
+    const correct = (q.answer || '').toLowerCase().trim();
+    const isRight = val === correct;
+    if (isRight) sessionCorrect++;
+    sessionAnswers[q.id] = { val, isRight };
+    if (el) { el.disabled = true; el.classList.add(isRight ? 'sc-correct' : 'sc-wrong'); }
+    resultsHtml += `
+      <div class="result-flash show ${isRight ? 'good' : 'bad'}" style="margin:6px 0">
+        Gap [${q.id}]: ${isRight
+          ? '✅ Correct.'
+          : `❌ Answer: <strong>${q.answer}</strong>. ${q.explanation}`}
+      </div>`;
+  });
+
+  document.getElementById('sc-results-container').innerHTML = resultsHtml;
+  const btn = document.getElementById('btn-reading-submit');
+  btn.textContent = 'Continue to notebook →';
+  btn.disabled = false;
+  btn.onclick = () => finishReadingSession();
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
 function renderReadingSession(parsed) {
@@ -1645,6 +1780,8 @@ window.answerTFNG = function (qnum, val) {
 };
 
 window.submitReading = function () {
+  if (isSCSession) { submitSCSession(); return; }
+
   const tlAnswer   = tlQ ? sessionAnswers[tlQ.id] : null;
   const tlEligible = tlQ !== null && tlAnswer?.isRight === true;
 
@@ -1885,6 +2022,7 @@ Return ONLY this JSON:
     fetchListeningAudio(listenScenario);
 
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('listening-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load listening scenario. Please go back and try again.</p>';
   }
@@ -1893,19 +2031,22 @@ Return ONLY this JSON:
 // ── LISTENING AUDIO ────────────────────────────────────────────────
 async function fetchListeningAudio(text) {
   try {
-    const res = await fetch(AUDIO_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ text })
+    const data = await withRetry(async () => {
+      const res = await fetch(AUDIO_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ text })
+      });
+      if (!res.ok) throw new Error('Audio fetch failed');
+      const json = await res.json();
+      if (!json.audio) throw new Error('No audio in response');
+      return json;
     });
-    if (!res.ok) throw new Error('Audio fetch failed');
-    const data = await res.json();
-    if (!data.audio) throw new Error('No audio in response');
-
     const blob = base64ToBlob(data.audio, data.mimeType || 'audio/mpeg');
     const url  = URL.createObjectURL(blob);
     setupAudioPlayer(url);
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     // Graceful fallback: show questions and an inline scenario text
     document.getElementById('audio-hint-text').textContent = 'Audio unavailable. Read the scenario below and answer the questions.';
     document.getElementById('listening-audio-wrap').insertAdjacentHTML('afterend',
@@ -2181,6 +2322,7 @@ Return ONLY this JSON:
     document.getElementById('writing-prompt-view').classList.remove('hidden');
     startSessionTracking();
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('writing-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load writing task. Please go back and try again.</p>';
   }
@@ -2199,7 +2341,7 @@ window.updateWordCount = function () {
 window.submitWriting = async function () {
   const text = document.getElementById('writing-textarea').value.trim();
   if (!text || text.split(/\s+/).length < 30) {
-    alert('Please write at least a few sentences before submitting.');
+    showToast('Please write at least a few sentences before submitting.');
     return;
   }
   writingResponse = text;
@@ -2253,6 +2395,7 @@ Return ONLY this JSON:
     document.getElementById('writing-evaluating').classList.add('hidden');
     document.getElementById('writing-results-view').classList.remove('hidden');
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('writing-evaluating').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Evaluation failed. Please go back and try again.</p>';
   }
@@ -2360,6 +2503,7 @@ Return ONLY this JSON:
     document.getElementById('speaking-prompt-view').classList.remove('hidden');
     startSessionTracking();
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('speaking-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load speaking questions. Please go back and try again.</p>';
   }
@@ -2395,7 +2539,7 @@ window.startRecording = async function () {
     document.getElementById('record-ready').classList.add('hidden');
     document.getElementById('record-active').classList.remove('hidden');
   } catch {
-    alert('Microphone access is required for the speaking section. Please allow microphone access and try again.');
+    showToast('Microphone access is required. Please allow it and try again.');
   }
 };
 
@@ -2410,18 +2554,21 @@ async function transcribeAudio(blob) {
     const arrayBuffer = await blob.arrayBuffer();
     const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
 
-    const res = await fetch(TRANSCRIBE_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ audio: base64, mimeType: blob.type || 'audio/webm' })
+    const data = await withRetry(async () => {
+      const res = await fetch(TRANSCRIBE_URL, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ audio: base64, mimeType: blob.type || 'audio/webm' })
+      });
+      if (!res.ok) throw new Error('Transcription failed');
+      return res.json();
     });
-    if (!res.ok) throw new Error('Transcription failed');
-    const data = await res.json();
     speakingTranscript = data.text || '';
 
     document.getElementById('record-processing').classList.add('hidden');
     await evaluateSpeaking(speakingTranscript);
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('record-processing').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Transcription failed. Please try again.</p>';
   }
@@ -2477,6 +2624,7 @@ Return ONLY this JSON:
     document.getElementById('speaking-evaluating').classList.add('hidden');
     document.getElementById('speaking-results-view').classList.remove('hidden');
   } catch {
+    showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('speaking-evaluating').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Evaluation failed. Please go back and try again.</p>';
   }
@@ -2540,10 +2688,10 @@ function renderWeek1Report() {
   document.getElementById('nb-week1-section').classList.remove('hidden');
 
   const w1Skills = getIELTSSkills();
-  const tfng = (w1Skills['reading-tfng']?.attempted             || 0) > 0 ? w1Skills['reading-tfng'].accuracy             : null;
-  const mh   = (w1Skills['reading-matchingHeadings']?.attempted  || 0) > 0 ? w1Skills['reading-matchingHeadings'].accuracy  : null;
-  const mc   = (w1Skills['listening-multipleChoice']?.attempted  || 0) > 0 ? w1Skills['listening-multipleChoice'].accuracy  : null;
-  const fc   = (w1Skills['listening-formCompletion']?.attempted  || 0) > 0 ? w1Skills['listening-formCompletion'].accuracy   : null;
+  const tfng = (w1Skills['reading-tfng']?.attempted              || 0) > 0 ? w1Skills['reading-tfng'].accuracy              : null;
+  const mh   = (w1Skills['reading-summaryCompletion']?.attempted  || 0) > 0 ? w1Skills['reading-summaryCompletion'].accuracy  : null;
+  const mc   = (w1Skills['listening-multipleChoice']?.attempted   || 0) > 0 ? w1Skills['listening-multipleChoice'].accuracy   : null;
+  const fc   = (w1Skills['listening-formCompletion']?.attempted   || 0) > 0 ? w1Skills['listening-formCompletion'].accuracy    : null;
 
   const scores = [tfng, mh, mc, fc].filter(s => s !== null);
   const avgBand = scores.length > 0
@@ -2556,7 +2704,7 @@ function renderWeek1Report() {
   // Top 2 weak areas
   const skillRows = [
     { name: 'T / F / Not Given',  pct: tfng, key: 'reading.tfng' },
-    { name: 'Matching Headings',  pct: mh,   key: 'reading.matchingHeadings' },
+    { name: 'Summ. Completion',   pct: mh,   key: 'reading.summaryCompletion' },
     { name: 'Multiple Choice',    pct: mc,   key: 'listening.multipleChoice' },
     { name: 'Form Completion',    pct: fc,   key: 'listening.formCompletion' },
   ].filter(r => r.pct !== null).sort((a, b) => a.pct - b.pct);
@@ -2624,7 +2772,7 @@ function renderNotebook(correct, total, skillKey) {
 
   const nbSkills = getIELTSSkills();
   const isTfng  = skillKey === 'reading.tfng';
-  const isMH    = skillKey === 'reading.matchingHeadings';
+  const isSC    = skillKey === 'reading.summaryCompletion';
   const isMC    = skillKey === 'listening.multipleChoice';
   const isFC    = skillKey === 'listening.formCompletion';
 
@@ -2635,7 +2783,7 @@ function renderNotebook(correct, total, skillKey) {
     document.getElementById('nb-tfng-bar').style.width = accuracy + '%';
     document.getElementById('nb-tfng-pct').textContent = accuracy + '%';
   }
-  if (isMH) {
+  if (isSC) {
     document.getElementById('nb-mh-bar').className   = `skill-bar ${barClass}`;
     document.getElementById('nb-mh-bar').style.width = accuracy + '%';
     document.getElementById('nb-mh-pct').textContent = accuracy + '%';
@@ -2652,10 +2800,10 @@ function renderNotebook(correct, total, skillKey) {
   }
 
   // Other bars from Firestore
-  if (!isTfng) setSkillBar('nb-tfng-bar', 'nb-tfng-pct', (nbSkills['reading-tfng']?.attempted             || 0) > 0 ? nbSkills['reading-tfng'].accuracy             : null);
-  if (!isMH)   setSkillBar('nb-mh-bar',   'nb-mh-pct',   (nbSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? nbSkills['reading-matchingHeadings'].accuracy  : null);
-  if (!isMC)   setSkillBar('nb-mc-bar',   'nb-mc-pct',   (nbSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? nbSkills['listening-multipleChoice'].accuracy   : null);
-  if (!isFC)   setSkillBar('nb-fc-bar',   'nb-fc-pct',   (nbSkills['listening-formCompletion']?.attempted  || 0) > 0 ? nbSkills['listening-formCompletion'].accuracy    : null);
+  if (!isTfng) setSkillBar('nb-tfng-bar', 'nb-tfng-pct', (nbSkills['reading-tfng']?.attempted             || 0) > 0 ? nbSkills['reading-tfng'].accuracy              : null);
+  if (!isSC)   setSkillBar('nb-mh-bar',   'nb-mh-pct',   (nbSkills['reading-summaryCompletion']?.attempted || 0) > 0 ? nbSkills['reading-summaryCompletion'].accuracy  : null);
+  if (!isMC)   setSkillBar('nb-mc-bar',   'nb-mc-pct',   (nbSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? nbSkills['listening-multipleChoice'].accuracy    : null);
+  if (!isFC)   setSkillBar('nb-fc-bar',   'nb-fc-pct',   (nbSkills['listening-formCompletion']?.attempted  || 0) > 0 ? nbSkills['listening-formCompletion'].accuracy     : null);
 
   const assessment = accuracy >= 80
     ? `${accuracy}% — strong session. You're building real exam instincts.`
@@ -2665,8 +2813,8 @@ function renderNotebook(correct, total, skillKey) {
   document.getElementById('nb-assessment').textContent = assessment;
 
   // Worked example
-  const questions = isTfng || isMH ? sessionQuestions : listenQuestions;
-  const answers   = isTfng || isMH ? sessionAnswers   : listenAnswers;
+  const questions = isTfng || isSC ? sessionQuestions : listenQuestions;
+  const answers   = isTfng || isSC ? sessionAnswers   : listenAnswers;
   const wrongQ    = questions.find(q => {
     const a = answers[q.id];
     return typeof a === 'object' ? a.isRight === false : (a?.toLowerCase() !== q.answer?.toLowerCase());
@@ -2694,10 +2842,11 @@ function renderNotebookWriting() {
   document.getElementById('nb-streak').textContent         = streak;
   document.getElementById('nb-band-est').textContent       = writingBandEst.toFixed(1);
 
-  setSkillBar('nb-tfng-bar', 'nb-tfng-pct', studentData?.skills?.reading?.tfng?.attempted            > 0 ? studentData.skills.reading.tfng.accuracy            : null);
-  setSkillBar('nb-mh-bar',   'nb-mh-pct',   studentData?.skills?.reading?.matchingHeadings?.attempted > 0 ? studentData.skills.reading.matchingHeadings.accuracy : null);
-  setSkillBar('nb-mc-bar',   'nb-mc-pct',   studentData?.skills?.listening?.multipleChoice?.attempted > 0 ? studentData.skills.listening.multipleChoice.accuracy  : null);
-  setSkillBar('nb-fc-bar',   'nb-fc-pct',   studentData?.skills?.listening?.formCompletion?.attempted > 0 ? studentData.skills.listening.formCompletion.accuracy   : null);
+  const wSkills = getIELTSSkills();
+  setSkillBar('nb-tfng-bar', 'nb-tfng-pct', (wSkills['reading-tfng']?.attempted             || 0) > 0 ? wSkills['reading-tfng'].accuracy              : null);
+  setSkillBar('nb-mh-bar',   'nb-mh-pct',   (wSkills['reading-summaryCompletion']?.attempted || 0) > 0 ? wSkills['reading-summaryCompletion'].accuracy  : null);
+  setSkillBar('nb-mc-bar',   'nb-mc-pct',   (wSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? wSkills['listening-multipleChoice'].accuracy    : null);
+  setSkillBar('nb-fc-bar',   'nb-fc-pct',   (wSkills['listening-formCompletion']?.attempted  || 0) > 0 ? wSkills['listening-formCompletion'].accuracy     : null);
 
   document.getElementById('nb-assessment').textContent =
     `Writing Band Estimate: ${writingBandEst.toFixed(1)}. ${writingBandEst >= 7 ? 'Excellent — this is exam-ready writing.' : writingBandEst >= 6 ? 'Solid foundation. One targeted improvement can push you to 7.' : 'Keep practising. Toody has noted your specific gap areas.'}`;
@@ -2715,10 +2864,11 @@ function renderNotebookSpeaking() {
   document.getElementById('nb-streak').textContent         = streak;
   document.getElementById('nb-band-est').textContent       = speakingBandEst.toFixed(1);
 
-  setSkillBar('nb-tfng-bar', 'nb-tfng-pct', studentData?.skills?.reading?.tfng?.attempted            > 0 ? studentData.skills.reading.tfng.accuracy            : null);
-  setSkillBar('nb-mh-bar',   'nb-mh-pct',   studentData?.skills?.reading?.matchingHeadings?.attempted > 0 ? studentData.skills.reading.matchingHeadings.accuracy : null);
-  setSkillBar('nb-mc-bar',   'nb-mc-pct',   studentData?.skills?.listening?.multipleChoice?.attempted > 0 ? studentData.skills.listening.multipleChoice.accuracy  : null);
-  setSkillBar('nb-fc-bar',   'nb-fc-pct',   studentData?.skills?.listening?.formCompletion?.attempted > 0 ? studentData.skills.listening.formCompletion.accuracy   : null);
+  const spSkills = getIELTSSkills();
+  setSkillBar('nb-tfng-bar', 'nb-tfng-pct', (spSkills['reading-tfng']?.attempted             || 0) > 0 ? spSkills['reading-tfng'].accuracy              : null);
+  setSkillBar('nb-mh-bar',   'nb-mh-pct',   (spSkills['reading-summaryCompletion']?.attempted || 0) > 0 ? spSkills['reading-summaryCompletion'].accuracy  : null);
+  setSkillBar('nb-mc-bar',   'nb-mc-pct',   (spSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? spSkills['listening-multipleChoice'].accuracy    : null);
+  setSkillBar('nb-fc-bar',   'nb-fc-pct',   (spSkills['listening-formCompletion']?.attempted  || 0) > 0 ? spSkills['listening-formCompletion'].accuracy     : null);
 
   document.getElementById('nb-assessment').textContent =
     `Speaking Band Estimate: ${speakingBandEst.toFixed(1)}. ${speakingBandEst >= 7 ? 'Impressive — you sound like a Band 7+ speaker.' : speakingBandEst >= 6 ? 'Good fluency. Focus on the suggestion above for your next session.' : 'Early days — every session builds your spoken fluency.'}`;
@@ -2760,8 +2910,8 @@ function setSkillBar(barId, pctId, pct) {
 async function loadFocusedDrill() {
   const drillSkills = getIELTSSkills();
   const skillRows = [
-    { name: 'T / F / Not Given', pct: (drillSkills['reading-tfng']?.attempted             || 0) > 0 ? drillSkills['reading-tfng'].accuracy             : null, loader: loadReadingSession   },
-    { name: 'Matching Headings', pct: (drillSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? drillSkills['reading-matchingHeadings'].accuracy  : null, loader: loadReadingSession   },
+    { name: 'T / F / Not Given',  pct: (drillSkills['reading-tfng']?.attempted              || 0) > 0 ? drillSkills['reading-tfng'].accuracy              : null, loader: loadReadingSession   },
+    { name: 'Summary Completion', pct: (drillSkills['reading-summaryCompletion']?.attempted  || 0) > 0 ? drillSkills['reading-summaryCompletion'].accuracy  : null, loader: loadReadingSession   },
     { name: 'Multiple Choice',   pct: (drillSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? drillSkills['listening-multipleChoice'].accuracy   : null, loader: loadListeningSession },
     { name: 'Form Completion',   pct: (drillSkills['listening-formCompletion']?.attempted  || 0) > 0 ? drillSkills['listening-formCompletion'].accuracy    : null, loader: loadListeningSession },
   ].filter(r => r.pct !== null).sort((a, b) => a.pct - b.pct);
@@ -2777,7 +2927,83 @@ async function loadFocusedDrill() {
 }
 
 // ── MINI MOCK ─────────────────────────────────────────────────────
+function _startMiniMockTimer(phase) {
+  if (miniMockTimerInterval) clearInterval(miniMockTimerInterval);
+  miniMockTimeRemaining = MINI_MOCK_TIMES[phase] || 1200;
+  const labels = ['Reading', 'Listening', 'Writing', 'Speaking'];
+  const bar    = document.getElementById('mini-mock-timer-bar');
+  if (bar) {
+    bar.classList.remove('hidden');
+    document.getElementById('mini-mock-phase-label').textContent = labels[phase] || '';
+  }
+  _updateMiniMockTimerDisplay();
+  miniMockTimerInterval = setInterval(() => {
+    miniMockTimeRemaining--;
+    _updateMiniMockTimerDisplay();
+    if (miniMockTimeRemaining <= 0) {
+      clearInterval(miniMockTimerInterval);
+      miniMockTimerInterval = null;
+      _miniMockAutoSubmit(phase);
+    }
+  }, 1000);
+}
+
+function _updateMiniMockTimerDisplay() {
+  const m  = Math.floor(miniMockTimeRemaining / 60);
+  const s  = miniMockTimeRemaining % 60;
+  const el = document.getElementById('mini-mock-countdown');
+  if (el) {
+    el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('urgent', miniMockTimeRemaining <= 60);
+  }
+}
+
+function _hideMiniMockTimer() {
+  if (miniMockTimerInterval) { clearInterval(miniMockTimerInterval); miniMockTimerInterval = null; }
+  const bar = document.getElementById('mini-mock-timer-bar');
+  if (bar) bar.classList.add('hidden');
+}
+
+function _miniMockAutoSubmit(phase) {
+  _hideMiniMockTimer();
+  if (phase === 0) {
+    // Complete any unanswered reading questions as wrong, then finish
+    sessionQuestions.forEach(q => {
+      if (!sessionAnswers[q.id]) sessionAnswers[q.id] = { val: '', isRight: false };
+    });
+    finishReadingSession();
+  } else if (phase === 1) {
+    // Score whatever was answered, finish listening
+    listenQuestions.forEach(q => { if (!listenAnswers[q.id]) listenAnswers[q.id] = ''; });
+    listenCorrect = listenQuestions.filter(q => {
+      const a = listenAnswers[q.id];
+      return String(a).toLowerCase() === String(q.answer || '').toLowerCase();
+    }).length;
+    window.finishListeningSession();
+  } else if (phase === 2) {
+    // Submit whatever is written
+    const text = document.getElementById('writing-textarea')?.value?.trim() || '';
+    if (text.split(/\s+/).filter(Boolean).length >= 5) {
+      window.submitWriting();
+    } else {
+      // Nothing written — go to results with 0 band
+      mockResults.writing = { band: 0 };
+      runMockPhase(3);
+    }
+  } else if (phase === 3) {
+    // Stop recording if active, evaluate whatever was captured
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      window.stopRecording();
+    } else {
+      // Nothing recorded
+      mockResults.speaking = { band: 0 };
+      showMockResults();
+    }
+  }
+}
+
 function setupMiniMock() {
+  _hideMiniMockTimer();
   mockMode    = false;
   mockPhase   = 0;
   mockResults = {};
@@ -2801,6 +3027,9 @@ window.startMiniMock = function () {
 function runMockPhase(phase) {
   mockPhase = phase;
 
+  // Stop any running timer
+  if (miniMockTimerInterval) { clearInterval(miniMockTimerInterval); miniMockTimerInterval = null; }
+
   // Update mock progress indicators
   const labels = ['reading','listening','writing','speaking'];
   labels.forEach((l, i) => {
@@ -2811,14 +3040,15 @@ function runMockPhase(phase) {
     else                 { el.className = 'mock-step'; }
   });
 
-  if (phase === 0) loadReadingSession();
-  else if (phase === 1) { listenType = 'mc'; loadListeningSession(); }
-  else if (phase === 2) loadWritingSession();
-  else if (phase === 3) loadSpeakingSession();
+  if (phase === 0) { loadReadingSession(); _startMiniMockTimer(0); }
+  else if (phase === 1) { listenType = 'mc'; loadListeningSession(); _startMiniMockTimer(1); }
+  else if (phase === 2) { loadWritingSession(); _startMiniMockTimer(2); }
+  else if (phase === 3) { loadSpeakingSession(); _startMiniMockTimer(3); }
   else showMockResults();
 }
 
 function showMockResults() {
+  _hideMiniMockTimer();
   mockMode = false;
 
   const readingPct  = mockResults.reading?.accuracy  || 0;
@@ -2880,6 +3110,60 @@ function showMockResults() {
   document.getElementById('mock-results-view').classList.remove('hidden');
 }
 
+// ── BEHAVIOUR ANALYTICS UI ────────────────────────────────────────
+function renderBehaviourAnalytics() {
+  const el = document.getElementById('progress-behaviour-section');
+  if (!el) return;
+  const brain = studentData?.brain || {};
+  const sessions = brain.totalSessions || 0;
+
+  if (sessions < 2) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--muted)">Complete a few sessions to see your study patterns.</p>';
+    return;
+  }
+
+  const avgTime   = brain.avgTimePerQuestionSec || 0;
+  const scrollPct = brain.scrollsBackPct        || 0;
+  const changePct = brain.changesAnswersPct      || 0;
+
+  const timeBar  = Math.min(Math.round((avgTime / 120) * 100), 100);
+  const timeNote = avgTime < 30 ? 'Fast pace — good instinct'
+                 : avgTime < 60 ? 'Considered pace'
+                 : 'Slow and thorough — may need to speed up';
+  const scrollNote = scrollPct > 70 ? 'Re-reads passage a lot'
+                   : scrollPct > 30 ? 'Re-reads when unsure'
+                   : 'Trusts first read';
+  const changeNote = changePct > 60 ? 'Often second-guesses yourself'
+                   : changePct > 20 ? 'Occasionally reconsiders'
+                   : 'Confident in first answer';
+
+  el.innerHTML = `
+    <div class="behaviour-metric">
+      <div class="bm-label">⏱ Time per question</div>
+      <div class="bm-bar-track"><div class="bm-bar" style="width:${timeBar}%"></div></div>
+      <div class="bm-meta">
+        <span class="bm-value">${avgTime}s avg</span>
+        <span class="bm-note">${timeNote}</span>
+      </div>
+    </div>
+    <div class="behaviour-metric">
+      <div class="bm-label">🔁 Re-reads passage</div>
+      <div class="bm-bar-track"><div class="bm-bar" style="width:${scrollPct}%"></div></div>
+      <div class="bm-meta">
+        <span class="bm-value">${scrollPct}% of sessions</span>
+        <span class="bm-note">${scrollNote}</span>
+      </div>
+    </div>
+    <div class="behaviour-metric">
+      <div class="bm-label">✏️ Changes answers</div>
+      <div class="bm-bar-track"><div class="bm-bar" style="width:${changePct}%"></div></div>
+      <div class="bm-meta">
+        <span class="bm-value">${changePct}% of sessions</span>
+        <span class="bm-note">${changeNote}</span>
+      </div>
+    </div>`;
+}
+
 // ── PROGRESS SCREEN ───────────────────────────────────────────────
 window.goToProgress = async function () {
   if (!studentData) return;
@@ -2889,10 +3173,12 @@ window.goToProgress = async function () {
   document.getElementById('prog-streak').textContent   = studentData.streak     || 0;
 
   const progSkills = getIELTSSkills();
-  setSkillBar('prog-tfng-bar', 'prog-tfng-pct', (progSkills['reading-tfng']?.attempted             || 0) > 0 ? progSkills['reading-tfng'].accuracy             : null);
-  setSkillBar('prog-mh-bar',   'prog-mh-pct',   (progSkills['reading-matchingHeadings']?.attempted  || 0) > 0 ? progSkills['reading-matchingHeadings'].accuracy  : null);
-  setSkillBar('prog-mc-bar',   'prog-mc-pct',   (progSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? progSkills['listening-multipleChoice'].accuracy   : null);
-  setSkillBar('prog-fc-bar',   'prog-fc-pct',   (progSkills['listening-formCompletion']?.attempted  || 0) > 0 ? progSkills['listening-formCompletion'].accuracy    : null);
+  setSkillBar('prog-tfng-bar', 'prog-tfng-pct', (progSkills['reading-tfng']?.attempted              || 0) > 0 ? progSkills['reading-tfng'].accuracy              : null);
+  setSkillBar('prog-mh-bar',   'prog-mh-pct',   (progSkills['reading-summaryCompletion']?.attempted  || 0) > 0 ? progSkills['reading-summaryCompletion'].accuracy  : null);
+  setSkillBar('prog-mc-bar',   'prog-mc-pct',   (progSkills['listening-multipleChoice']?.attempted   || 0) > 0 ? progSkills['listening-multipleChoice'].accuracy    : null);
+  setSkillBar('prog-fc-bar',   'prog-fc-pct',   (progSkills['listening-formCompletion']?.attempted   || 0) > 0 ? progSkills['listening-formCompletion'].accuracy     : null);
+
+  renderBehaviourAnalytics();
 
   document.getElementById('progress-loading').classList.remove('hidden');
   document.getElementById('progress-session-list').innerHTML = '';
@@ -2955,10 +3241,10 @@ function buildContextSnippet() {
   const purpose = studentData.purpose     || '';
 
   const allSkills = [
-    { key: 'reading-tfng',             name: 'T/F/Not Given',     s: ctxSkills['reading-tfng']             },
-    { key: 'reading-matchingHeadings', name: 'Matching Headings', s: ctxSkills['reading-matchingHeadings'] },
-    { key: 'listening-multipleChoice', name: 'Multiple Choice',   s: ctxSkills['listening-multipleChoice'] },
-    { key: 'listening-formCompletion', name: 'Form Completion',   s: ctxSkills['listening-formCompletion'] },
+    { key: 'reading-tfng',              name: 'T/F/Not Given',      s: ctxSkills['reading-tfng']              },
+    { key: 'reading-summaryCompletion', name: 'Summary Completion', s: ctxSkills['reading-summaryCompletion'] },
+    { key: 'listening-multipleChoice',  name: 'Multiple Choice',    s: ctxSkills['listening-multipleChoice']  },
+    { key: 'listening-formCompletion',  name: 'Form Completion',    s: ctxSkills['listening-formCompletion']  },
   ].filter(x => x.s?.attempted > 0);
 
   const strong = allSkills
@@ -3025,22 +3311,24 @@ async function callAI(prompt) {
     ? `${snippet}\n\n---\n\n${prompt.system}`
     : prompt.system;
 
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model:       'gpt-4o-mini',
-      messages:    [
-        { role: 'system', content: systemContent },
-        { role: 'user',   content: prompt.user   }
-      ],
-      max_tokens:  prompt.maxTokens || 1500,
-      temperature: 0.8
-    })
+  return withRetry(async () => {
+    const res = await fetch(API_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model:       'gpt-4o-mini',
+        messages:    [
+          { role: 'system', content: systemContent },
+          { role: 'user',   content: prompt.user   }
+        ],
+        max_tokens:  prompt.maxTokens || 1500,
+        temperature: 0.8
+      })
+    });
+    if (!res.ok) throw new Error(`AI call failed: ${res.status}`);
+    const data = await res.json();
+    return data.choices[0].message.content;
   });
-  if (!res.ok) throw new Error(`AI call failed: ${res.status}`);
-  const data = await res.json();
-  return data.choices[0].message.content;
 }
 
 // ── NAV ACTIONS ───────────────────────────────────────────────────
@@ -3197,7 +3485,7 @@ window.startFullMockGeneration = async function () {
   // All done — check if any critical section failed
   const failed = fullMockSections.filter(s => fullMockContent[s] === null);
   if (failed.length === fullMockSections.length) {
-    alert('Could not generate mock test content. Please check your connection and try again.');
+    showToast('Having trouble connecting — please check your internet and try again.');
     goTo('s-fullmock-setup');
     return;
   }
