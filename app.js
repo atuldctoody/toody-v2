@@ -272,6 +272,17 @@ async function withRetry(fn, maxRetries = 3) {
   throw lastErr;
 }
 
+// ── ANSWER NORMALISER ────────────────────────────────────────────
+function normaliseAnswer(raw) {
+  if (raw == null) return '';
+  let s = String(raw).toLowerCase().trim();
+  s = s.replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '');
+  if (s === 'notgiven' || s === 'ng' || s === 'notgiven') s = 'notgiven';
+  if (s === 'true'  || s === 't') s = 'true';
+  if (s === 'false' || s === 'f') s = 'false';
+  return s;
+}
+
 // ── ROUTING ──────────────────────────────────────────────────────
 function goTo(id) {
   // Push current screen to history (unless going back, or it's a non-navigable screen)
@@ -1706,9 +1717,9 @@ function submitSCSession() {
 
   sessionQuestions.forEach(q => {
     const el      = document.getElementById(`sc-gap-${q.id}`);
-    const val     = el ? el.value.trim().toLowerCase() : '';
-    const correct = (q.answer || '').toLowerCase().trim();
-    const isRight = val === correct;
+    const val     = el ? el.value : '';
+    const correct = q.answer || '';
+    const isRight = normaliseAnswer(val) === normaliseAnswer(correct);
     if (isRight) sessionCorrect++;
     sessionAnswers[q.id] = { val, isRight };
     if (el) { el.disabled = true; el.classList.add(isRight ? 'sc-correct' : 'sc-wrong'); }
@@ -1758,14 +1769,14 @@ window.answerTFNG = function (qnum, val) {
   trackQAnswer(qnum);
   trackQStart(qnum + 1);
 
-  const isRight = val.toLowerCase() === (q.answer || '').toLowerCase();
+  const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
   sessionAnswers[qnum] = { val, isRight };
   if (isRight) sessionCorrect++;
 
   document.querySelectorAll(`#tfng${qnum} .tfng-btn`).forEach(b => {
     b.disabled = true;
-    if      (b.dataset.v.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
-    else if (b.dataset.v === val && !isRight)                               b.classList.add('wrong');
+    if      (normaliseAnswer(b.dataset.v) === normaliseAnswer(q.answer)) b.classList.add('correct');
+    else if (b.dataset.v === val && !isRight)                             b.classList.add('wrong');
   });
 
   const rf = document.getElementById(`rf${qnum}`);
@@ -2177,11 +2188,11 @@ window.submitListening = function () {
 
     if (listenType === 'mc') {
       userAns = listenAnswers[q.id] || '—';
-      isRight = (userAns || '').toUpperCase() === (q.answer || '').toUpperCase();
+      isRight = normaliseAnswer(userAns) === normaliseAnswer(q.answer);
     } else {
       const el = document.getElementById(`fc${q.id}`);
       userAns  = el ? el.value.trim() : '';
-      isRight  = userAns.toLowerCase() === q.answer.toLowerCase();
+      isRight  = normaliseAnswer(userAns) === normaliseAnswer(q.answer);
       // Lock the input
       if (el) { el.disabled = true; el.classList.add(isRight ? 'fc-correct' : 'fc-wrong'); }
     }
