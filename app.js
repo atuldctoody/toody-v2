@@ -50,7 +50,7 @@ let briefingCard      = 0;
 const screenHistory   = [];
 let   _goingBack      = false;
 const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2']);
-const BRIEFING_COLORS    = ['#EEEAFF','#FFE8E8','#E8F8F0','#FFF4E0','#EEEAFF'];
+const BRIEFING_COLORS    = ['var(--accent-light)','var(--danger-light)','var(--success-light)','var(--yellow-light)','var(--accent-light)'];
 let pendingDate       = null;
 let pendingExperience = null;
 let pendingName       = '';
@@ -96,7 +96,7 @@ let confQIdx          = 0;     // Confidence builder question index
 let confCorrect       = 0;     // Confidence correct count
 // IELTS Overview
 let ieltsCard         = 0;
-const IELTS_COLORS    = ['#E8F0FF','#EEEAFF','#E8F8F0','#FFF4E0','#FFE8E8'];
+const IELTS_COLORS    = ['var(--accent-light)','var(--accent-light)','var(--success-light)','var(--yellow-light)','var(--danger-light)'];
 
 // ── SUBJECT-AGNOSTIC SCHEMA HELPERS ──────────────────────────────
 // Converts 'reading.tfng' → 'reading-tfng'
@@ -373,9 +373,9 @@ function showBootError() {
     el.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 24px;text-align:center">
         <div style="font-size:40px">⚠️</div>
-        <p style="font-size:15px;font-weight:600;color:#1a1a2e">Could not connect to Toody.</p>
-        <p style="font-size:13px;color:#666;line-height:1.6">Check your internet connection and try again.</p>
-        <button onclick="bootApp()" style="background:#6557D4;color:#fff;border:none;border-radius:12px;padding:14px 28px;font-size:15px;font-weight:700;cursor:pointer">Retry</button>
+        <p style="font-size:15px;font-weight:600;color:var(--text)">Could not connect to Toody.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.6">Check your internet connection and try again.</p>
+        <button onclick="bootApp()" style="background:var(--accent);color:#fff;border:none;border-radius:var(--radius-full);padding:14px 28px;font-size:15px;font-weight:600;cursor:pointer">Retry</button>
       </div>`;
     goTo('s-loading');
   }
@@ -623,7 +623,7 @@ function initBriefing() {
 
 function _setBriefingBg(idx) {
   const wrap = document.getElementById('s-briefing');
-  if (wrap) wrap.style.background = BRIEFING_COLORS[idx] || '#EEEAFF';
+  if (wrap) wrap.style.background = BRIEFING_COLORS[idx] || 'var(--accent-light)';
 }
 
 function _updateBriefingDots(idx) {
@@ -781,13 +781,13 @@ function renderSkillSnapshot() {
     const pct = r.pct;
     return `
       <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);">
-        <span style="font-size:13px;font-weight:500;flex:1">${r.label}</span>
+        <span style="font-size:13px;font-weight:400;flex:1">${r.label}</span>
         ${pct === null
           ? '<span style="font-size:11px;color:var(--muted2)">Not tested</span>'
           : `<div style="flex:1;height:5px;background:var(--border);border-radius:4px;overflow:hidden;">
                <div style="width:${pct}%;height:100%;border-radius:4px;background:${pct>=80?'var(--success)':pct>=50?'var(--yellow)':'var(--danger)'};transition:width 0.6s ease;"></div>
              </div>
-             <span style="font-size:11px;font-weight:700;color:var(--muted);width:32px;text-align:right">${pct}%</span>`}
+             <span style="font-size:11px;font-weight:600;color:var(--muted);width:32px;text-align:right">${pct}%</span>`}
       </div>`;
   }).join('');
 }
@@ -1248,7 +1248,7 @@ function renderDrillQuestion(idx) {
   if (idx >= qs.length) {
     // Drill complete
     const contentEl = document.getElementById('teach-reinforce-content');
-    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:#1a6048;text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p></div>`;
+    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p></div>`;
     document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
     return;
   }
@@ -2212,7 +2212,7 @@ window.submitListening = function () {
 
     resultsHtml += `
       <div style="padding:10px 0;border-bottom:1px solid var(--border);">
-        <div style="font-size:13px;font-weight:500;margin-bottom:4px">${q.id}. ${q.text || q.label}</div>
+        <div style="font-size:13px;font-weight:400;margin-bottom:4px">${q.id}. ${q.text || q.label}</div>
         <div style="font-size:12px;color:${isRight ? 'var(--success)' : 'var(--danger)'}">
           ${isRight ? '✅' : '❌'} Your answer: <strong>${userAns}</strong>
           ${!isRight ? ` — Correct: <strong>${q.answer}</strong>` : ''}
@@ -2739,7 +2739,7 @@ function renderWeek1Report() {
           <div class="skill-bar-wrap" style="max-width:140px;display:inline-block;vertical-align:middle">
             <div class="skill-bar weak" style="width:${r.pct}%"></div>
           </div>
-          <span style="font-size:11px;font-weight:700;color:var(--danger);margin-left:6px">${r.pct}%</span>
+          <span style="font-size:11px;font-weight:600;color:var(--danger);margin-left:6px">${r.pct}%</span>
         </div>`
       ).join('')
     : '<p style="font-size:13px;color:var(--muted)">Complete more sessions to identify weak areas.</p>';
@@ -3237,7 +3237,7 @@ window.goToProgress = async function () {
             <div style="font-size:13px;font-weight:600">${day} — ${skill}</div>
             <div style="font-size:11px;color:var(--muted)">${dateStr}</div>
           </div>
-          <div style="font-size:14px;font-weight:700;color:var(--accent)">${score}</div>
+          <div style="font-size:14px;font-weight:600;color:var(--accent)">${score}</div>
         </div>`;
     }).join('');
   } catch {
@@ -3964,10 +3964,10 @@ async function _showMockReport() {
   }
 
   const scoreHtml = [
-    { label: 'Reading',   band: fullMockResults.reading?.band,   color: '#E8F0FF' },
-    { label: 'Listening', band: fullMockResults.listening?.band, color: '#EEEAFF' },
-    { label: 'Writing',   band: fullMockResults.writing?.band,   color: '#E8F8F0' },
-    { label: 'Speaking',  band: fullMockResults.speaking?.band,  color: '#FFF4E0' },
+    { label: 'Reading',   band: fullMockResults.reading?.band,   color: 'var(--accent-light)' },
+    { label: 'Listening', band: fullMockResults.listening?.band, color: 'var(--surface2)' },
+    { label: 'Writing',   band: fullMockResults.writing?.band,   color: 'var(--success-light)' },
+    { label: 'Speaking',  band: fullMockResults.speaking?.band,  color: 'var(--yellow-light)' },
   ].filter(s => s.band != null).map(s => `
     <div class="mock-score-card" style="background:${s.color}">
       <div class="msc-label">${s.label}</div>
@@ -3987,11 +3987,11 @@ async function _showMockReport() {
   }
   const sbHtml = sbRows.map(r => `
     <div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">
-      <span style="flex:1;font-size:13px;font-weight:500">${r.label}</span>
+      <span style="flex:1;font-size:13px;font-weight:400">${r.label}</span>
       <div style="flex:1;height:5px;background:var(--border);border-radius:4px;overflow:hidden">
         <div style="width:${r.pct}%;height:100%;background:${r.pct>=70?'var(--success)':'var(--danger)'};border-radius:4px"></div>
       </div>
-      <span style="font-size:11px;font-weight:700;color:var(--accent);width:36px;text-align:right">${r.pct}%</span>
+      <span style="font-size:11px;font-weight:600;color:var(--accent);width:36px;text-align:right">${r.pct}%</span>
     </div>`).join('');
   document.getElementById('mr-skill-breakdown').innerHTML = sbHtml || '<p style="font-size:13px;color:var(--muted)">—</p>';
 
