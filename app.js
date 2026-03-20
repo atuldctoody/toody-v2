@@ -468,10 +468,26 @@ async function updateStudentDoc(uid, updates) {
 }
 
 async function saveSessionDoc(uid, data) {
-  await addDoc(collection(db, 'students', uid, 'sessions'), {
+  const ref = await addDoc(collection(db, 'students', uid, 'sessions'), {
     ...data,
     date: serverTimestamp()
   });
+  return ref;
+}
+
+// Generates a 3-sentence mentor-facing session narrative and saves it to the session doc.
+// Fire-and-forget — never awaited, never blocks UI.
+async function generateAndSaveNarrative(uid, sessionRef, ctx) {
+  try {
+    const prompt = {
+      system: 'You are a clinical IELTS tutor writing session notes for a human mentor. Be specific, factual, and concise.',
+      user: `Session data: ${JSON.stringify(ctx)}
+
+In exactly 3 sentences, summarise this student's session. Sentence 1: what they practised and their overall score. Sentence 2: the specific pattern you observed — what they got right and what they got wrong at a sub-type level. Sentence 3: one honest observation about where the learning is and is not happening. Be specific and clinical — this will be read by a human mentor, not the student.`
+    };
+    const narrative = await callAI(prompt);
+    await updateDoc(sessionRef, { sessionNarrative: narrative.trim() });
+  } catch { /* non-critical — narrative is additive only */ }
 }
 
 // ── ONBOARDING ───────────────────────────────────────────────────
@@ -942,6 +958,23 @@ async function loadTeachFirst(skillKey) {
   const skillCfg    = TEACHING_CONFIG['ielts-academic']?.skills[skillId] || TEACHING_CONFIG['ielts-academic']?.skills['reading-tfng'];
   const skillLabel  = skillCfg.name;
   const isMH        = skillId === 'reading-matchingHeadings';
+
+  // ── TEACHING ATTEMPTS TRACKING ────────────────────────────────────
+  // Record that Teach-First fired for this skill, and snapshot accuracy before teaching.
+  if (currentUser) {
+    try {
+      const prevSkillBrainTeach = studentData?.brain?.subjects?.['ielts-academic']?.skills?.[skillId] || {};
+      const newTeachAttempts    = (prevSkillBrainTeach.teachingAttempts || 0) + 1;
+      const currentAccForSkill  = getIELTSSkills()[skillId]?.accuracy ?? null;
+      const subjPathTeach       = `brain.subjects.ielts-academic.skills.${skillId}`;
+      await updateStudentDoc(currentUser.uid, {
+        [`${subjPathTeach}.teachingAttempts`]:      newTeachAttempts,
+        [`${subjPathTeach}.accuracyBeforeTeaching`]: currentAccForSkill,
+        [`${subjPathTeach}.aiResolved`]:            prevSkillBrainTeach.aiResolved || false,
+        [`${subjPathTeach}.needsHuman`]:            prevSkillBrainTeach.needsHuman || false,
+      });
+    } catch { /* non-critical */ }
+  }
 
   // Update the concept section header text from config
   const conceptBubble = document.querySelector('#teach-concept .toody-bubble');
@@ -1490,12 +1523,25 @@ async function updateStudentBrain(behaviour, accuracy, skillKey) {
     const skillId = skillKey ? toSkillId(skillKey) : null;
     const prevSubj = prev.subjects?.['ielts-academic'] || {};
     const prevSkillBrain = skillId ? (prevSubj.skills?.[skillId] || {}) : {};
+    // Compute teaching resolution fields
+    let aiResolved = prevSkillBrain.aiResolved || false;
+    let needsHuman = prevSkillBrain.needsHuman || false;
+    if (skillId && (prevSkillBrain.teachingAttempts || 0) >= 1 && prevSkillBrain.accuracyBeforeTeaching != null) {
+      const sessionsNow = (prevSkillBrain.sessions || 0) + 1;
+      if (sessionsNow >= 3 && !aiResolved) {
+        if (accuracy >= prevSkillBrain.accuracyBeforeTeaching + 10) aiResolved = true;
+      }
+      if ((prevSkillBrain.teachingAttempts || 0) >= 3 && !aiResolved) needsHuman = true;
+    }
+
     const skillBrainUpdate = skillId ? {
       avgTimePerQ:    ema(prevSkillBrain.avgTimePerQ    || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct: ema(prevSkillBrain.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
       changesAnswers: ema(prevSkillBrain.changesAnswers  || 0, changesThisSession),
       lastAccuracy:   accuracy,
       sessions:       (prevSkillBrain.sessions || 0) + 1,
+      aiResolved,
+      needsHuman,
     } : null;
 
     const updatedSubjSkills = {
@@ -1887,8 +1933,9 @@ async function finishReadingSession() {
   const skillId  = toSkillId(skillKey);
   const prevSkill = getIELTSSkills()[skillId] || { accuracy: 0, attempted: 0 };
 
+  let _readingSessionRef = null;
   try {
-    await saveSessionDoc(currentUser.uid, {
+    _readingSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:         studentData.weekNumber || 1,
       dayNumber:          day,
       skillPracticed:     skillKey,
@@ -1926,6 +1973,10 @@ async function finishReadingSession() {
     await updateStudentBrain(behaviour, accuracy, skillKey);
     await updateWeakAreas(skillKey, missedSubTypes);
   } catch { /* Firestore save failed — still show notebook */ }
+
+  if (_readingSessionRef) generateAndSaveNarrative(currentUser.uid, _readingSessionRef, {
+    skill: skillKey, day, accuracy, questionsCorrect: sessionCorrect, total, missedSubTypes, topic: sessionTopic,
+  });
 
   if (mockMode) {
     mockResults.reading = { correct: sessionCorrect, total, accuracy };
@@ -2240,8 +2291,9 @@ window.finishListeningSession = async function () {
   const listenSkillId     = toSkillId(firestoreKey);
   const behaviour = getBehaviourPayload();
 
+  let _listenSessionRef = null;
   try {
-    await saveSessionDoc(currentUser.uid, {
+    _listenSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:         studentData.weekNumber || 1,
       dayNumber:          day,
       skillPracticed:     DAY_PLAN[day]?.skill || firestoreKey,
@@ -2275,6 +2327,10 @@ window.finishListeningSession = async function () {
     await updateStudentBrain(behaviour, accuracy, firestoreKey);
     await updateWeakAreas(firestoreKey, null);
   } catch { /* still show notebook */ }
+
+  if (_listenSessionRef) generateAndSaveNarrative(currentUser.uid, _listenSessionRef, {
+    skill: firestoreKey, day, accuracy, questionsCorrect: listenCorrect, total,
+  });
 
   if (mockMode) {
     mockResults.listening = { correct: listenCorrect, total, accuracy };
@@ -2428,8 +2484,9 @@ window.finishWritingSession = async function () {
   const taskKey = isTask1 ? 'task1' : 'task2';
   const behaviour = getBehaviourPayload();
 
+  let _writingSessionRef = null;
   try {
-    await saveSessionDoc(currentUser.uid, {
+    _writingSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:     studentData.weekNumber || 2,
       dayNumber:      day,
       skillPracticed: DAY_PLAN[day]?.skill || `writing.${taskKey}`,
@@ -2456,6 +2513,11 @@ window.finishWritingSession = async function () {
     studentData = snap.data();
     await updateWeakAreas(`writing.${taskKey}`, null);
   } catch { /* still show notebook */ }
+
+  if (_writingSessionRef) generateAndSaveNarrative(currentUser.uid, _writingSessionRef, {
+    skill: `writing.${taskKey}`, day, bandEstimate: writingBandEst,
+    wordCount: writingResponse.split(/\s+/).length,
+  });
 
   if (mockMode) {
     mockResults.writing = { band: writingBandEst };
@@ -2657,8 +2719,9 @@ window.finishSpeakingSession = async function () {
   // For speaking, override durationSec with actual recording time
   behaviour.sessionDurationSec = Math.max(behaviour.sessionDurationSec, recordSeconds);
 
+  let _speakSessionRef = null;
   try {
-    await saveSessionDoc(currentUser.uid, {
+    _speakSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:     studentData.weekNumber || 2,
       dayNumber:      day,
       skillPracticed: DAY_PLAN[day]?.skill || 'speaking.part1',
@@ -2685,6 +2748,11 @@ window.finishSpeakingSession = async function () {
     studentData = snap.data();
     await updateWeakAreas('speaking.part1', null);
   } catch { /* still show notebook */ }
+
+  if (_speakSessionRef) generateAndSaveNarrative(currentUser.uid, _speakSessionRef, {
+    skill: 'speaking.part1', day, bandEstimate: speakingBandEst,
+    transcriptLength: speakingTranscript?.length || 0,
+  });
 
   if (mockMode) {
     mockResults.speaking = { band: speakingBandEst };
