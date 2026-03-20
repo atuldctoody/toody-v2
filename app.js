@@ -1015,6 +1015,12 @@ function renderHookQuestion() {
   const isMH = teachSkillKey === 'reading.matchingHeadings';
   const ngBtn = document.querySelector('#teach-hook-btns [data-mv="NG"]');
   if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
+  // Reset all buttons to neutral unselected state
+  document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'wrong');
+  });
+  document.getElementById('teach-hook-reveal').classList.add('hidden');
   document.getElementById('teach-hook').classList.remove('hidden');
 }
 
@@ -1603,12 +1609,14 @@ async function loadReadingSession() {
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a Summary Completion IELTS Academic reading exercise for a Band ${band} student.
 
+The wordBank must contain the 5 correct answers PLUS 3 distractor words. Distractors must be real English words that are plausible in context (they could grammatically fit at least one gap) but are semantically wrong — a student who hasn't read carefully might be tempted. Never use placeholder labels like "decoy1" or "word2".
+
 Return ONLY this JSON:
 {
   "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
   "topic": "2-4 word topic label",
   "summaryText": "A 60-80 word summary of the passage with 5 gaps marked as [1], [2], [3], [4], [5]. Each gap must be fillable with ONE word from the passage.",
-  "wordBank": ["word1","word2","word3","word4","word5","decoy1","decoy2","decoy3"],
+  "wordBank": ["correctAnswer1","correctAnswer2","correctAnswer3","correctAnswer4","correctAnswer5","plausibleDistractor1","plausibleDistractor2","plausibleDistractor3"],
   "questions": [
     {"id": 1, "text": "Gap [1]", "answer": "exact single word from passage that fills gap 1", "explanation": "why this word fills gap 1", "keySentence": "sentence from passage containing this word"},
     {"id": 2, "text": "Gap [2]", "answer": "exact single word from passage that fills gap 2", "explanation": "why this word fills gap 2", "keySentence": "sentence from passage containing this word"},
@@ -1678,7 +1686,9 @@ function renderSCSession(parsed) {
   document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
     .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
 
-  const wordBankOpts = (parsed.wordBank || [])
+  const shuffledBank = [...(parsed.wordBank || [])].sort(() => Math.random() - 0.5);
+
+  const wordBankOpts = shuffledBank
     .map(w => `<option value="${w.toLowerCase()}">${w}</option>`).join('');
 
   const summaryHtml = (parsed.summaryText || '').replace(/\[(\d+)\]/g, (_, num) => {
@@ -1688,7 +1698,7 @@ function renderSCSession(parsed) {
     </select>`;
   });
 
-  const wordBankHtml = (parsed.wordBank || [])
+  const wordBankHtml = shuffledBank
     .map(w => `<span class="sc-word-chip">${w}</span>`).join('');
 
   document.getElementById('questions-container').innerHTML = `
