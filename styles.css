@@ -1318,3 +1318,27 @@ a { color: inherit; text-decoration: none; }
 .bm-meta      { display: flex; justify-content: space-between; align-items: center; }
 .bm-value     { font-size: 12px; font-weight: 600; color: var(--accent); }
 .bm-note      { font-size: 11px; color: var(--muted); max-width: 60%; text-align: right; }
+
+/* ── SKILL PICKER (home screen) ── */
+.skill-pick-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.skill-pick-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-light); }
+.skill-pick-btn:active { transform: scale(0.98); }
+.skill-pick-btn.active { border-color: var(--accent); background: var(--accent-light); }
+.skill-pick-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.spb-icon  { font-size: 20px; flex-shrink: 0; }
+.spb-body  { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.spb-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.spb-acc   { font-size: 11px; color: var(--muted); }

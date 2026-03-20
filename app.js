@@ -16,17 +16,24 @@ const API_URL        = 'https://toody-api.vercel.app/api/generate';
 const TRANSCRIBE_URL = 'https://toody-api.vercel.app/api/transcribe';
 const AUDIO_URL      = 'https://toody-api.vercel.app/api/audio';
 
+const SKILL_CATALOGUE = [
+  { skill: 'reading.tfng',              screen: 's-reading',   section: 'Reading',   label: 'True / False / Not Given',    icon: '📖', desc: 'AI-generated passage + 5 TF/NG questions. Toody explains every answer.' },
+  { skill: 'reading.summaryCompletion', screen: 's-reading',   section: 'Reading',   label: 'Summary Completion',           icon: '📖', desc: 'Complete a gapped summary using a word bank.' },
+  { skill: 'listening.multipleChoice',  screen: 's-listening', section: 'Listening', label: 'Multiple Choice',              icon: '🎧', desc: 'Pick the correct answer from detailed audio scenarios.' },
+  { skill: 'listening.formCompletion',  screen: 's-listening', section: 'Listening', label: 'Form Completion',              icon: '🎧', desc: 'Complete a form from information in the audio.' },
+  { skill: 'writing.task1',             screen: 's-writing',   section: 'Writing',   label: 'Task 1 — Graph Description',   icon: '✍️', desc: 'Describe an academic graph or chart in 150+ words.' },
+  { skill: 'writing.task2',             screen: 's-writing',   section: 'Writing',   label: 'Task 2 — Opinion Essay',       icon: '✍️', desc: 'Write a 250-word academic opinion essay.' },
+  { skill: 'speaking.part1',            screen: 's-speaking',  section: 'Speaking',  label: 'Part 1 — Personal Questions',  icon: '🎤', desc: 'Answer personal questions. Transcribed and evaluated.' },
+];
+
+// Fast lookup by skill key
+const SKILL_MAP = Object.fromEntries(SKILL_CATALOGUE.map(s => [s.skill, s]));
+
+// Legacy alias kept for any remaining references
 const DAY_PLAN = {
-  1:  { skill: 'reading.tfng',             screen: 's-reading',   section: 'Reading',   label: 'True / False / Not Given',   icon: '📖', desc: 'AI-generated passage + 5 questions. Toody explains every answer.' },
-  2:  { skill: 'listening.multipleChoice', screen: 's-listening', section: 'Listening', label: 'Multiple Choice',             icon: '🎧', desc: 'Practice picking the correct answer from detailed audio scenarios.' },
-  3:  { skill: 'reading.summaryCompletion', screen: 's-reading',  section: 'Reading',   label: 'Summary Completion',          icon: '📖', desc: 'Complete a gapped summary of the passage using words from a word bank.' },
-  4:  { skill: 'listening.formCompletion', screen: 's-listening', section: 'Listening', label: 'Form Completion',             icon: '🎧', desc: 'Complete a form or notes from information in the audio.' },
-  5:  { skill: 'week1report',              screen: 's-notebook',  section: 'Report',    label: 'Week 1 Report',               icon: '📊', desc: 'Your band estimate, skill bars, and personalised Week 2 plan.' },
-  6:  { skill: 'writing.task1',            screen: 's-writing',   section: 'Writing',   label: 'Task 1 — Graph Description',  icon: '✍️', desc: 'Describe an academic graph or chart in 150+ words.' },
-  7:  { skill: 'writing.task2',            screen: 's-writing',   section: 'Writing',   label: 'Task 2 — Opinion Essay',      icon: '✍️', desc: 'Write a 250-word academic opinion essay on a given topic.' },
-  8:  { skill: 'speaking.part1',           screen: 's-speaking',  section: 'Speaking',  label: 'Part 1 — Personal Questions', icon: '🎤', desc: 'Answer personal questions. Your audio is transcribed and evaluated.' },
-  9:  { skill: 'drill',                    screen: null,          section: 'Drill',     label: 'Focused Drill',               icon: '🎯', desc: 'Deep drill on your single weakest area from Week 1.' },
-  10: { skill: 'minimock',                 screen: null,          section: 'Mock',      label: 'Mini Mock',                   icon: '🏁', desc: 'Timed session across all 4 sections. Full report card after.' },
+  1: SKILL_CATALOGUE[0], 2: SKILL_CATALOGUE[2], 3: SKILL_CATALOGUE[1],
+  4: SKILL_CATALOGUE[3], 6: SKILL_CATALOGUE[4], 7: SKILL_CATALOGUE[5],
+  8: SKILL_CATALOGUE[6], 9: SKILL_CATALOGUE[0], 10: SKILL_CATALOGUE[0],
 };
 
 // Day 1 trap question — hardcoded, no instructions, hooks on NG confusion
@@ -40,6 +47,7 @@ const TRAP = {
 // ── STATE ─────────────────────────────────────────────────────────
 let currentUser  = null;
 let studentData  = null;
+let currentPlan   = null;   // The skill plan chosen for the current/next session
 
 // Onboarding
 let obStep            = 0;
@@ -281,6 +289,114 @@ function normaliseAnswer(raw) {
   if (s === 'true'  || s === 't') s = 'true';
   if (s === 'false' || s === 'f') s = 'false';
   return s;
+}
+
+// ── ADAPTIVE ENGINE HELPERS ───────────────────────────────────────
+function accToBand(acc) {
+  if (acc >= 90) return 8.5; if (acc >= 80) return 7.5; if (acc >= 70) return 7.0;
+  if (acc >= 60) return 6.5; if (acc >= 50) return 6.0; if (acc >= 40) return 5.5;
+  return 5.0;
+}
+
+function calcBandEstimate() {
+  const skills = getIELTSSkills();
+  function avgAcc(keys) {
+    const q = keys.map(k => skills[k]).filter(s => s && (s.attempted || 0) >= 5);
+    return q.length ? q.reduce((sum, s) => sum + (s.accuracy || 0), 0) / q.length : null;
+  }
+  function avgBand(keys) {
+    const q = keys.map(k => skills[k]).filter(s => s && (s.attempted || 0) > 0);
+    return q.length ? q.reduce((sum, s) => sum + (s.bandEstimate || 0), 0) / q.length : null;
+  }
+  const parts = [];
+  const rAcc = avgAcc(['reading-tfng','reading-summaryCompletion']); if (rAcc !== null) parts.push(accToBand(rAcc));
+  const lAcc = avgAcc(['listening-multipleChoice','listening-formCompletion']); if (lAcc !== null) parts.push(accToBand(lAcc));
+  const wBand = avgBand(['writing-task1','writing-task2']); if (wBand !== null) parts.push(wBand);
+  const sBand = avgBand(['speaking-part1']); if (sBand !== null) parts.push(sBand);
+  if (!parts.length) return null;
+  return Math.round((parts.reduce((a, b) => a + b, 0) / parts.length) * 2) / 2;
+}
+
+function isMockUnlocked() {
+  const skills = getIELTSSkills();
+  return ['reading','listening','writing','speaking'].every(sec =>
+    Object.keys(skills).some(k => k.startsWith(sec + '-') && (skills[k]?.attempted || 0) > 0)
+  );
+}
+
+function getExamDaysRemaining() {
+  const d = studentData?.examDate;
+  if (!d) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const exam  = new Date(d); exam.setHours(0,0,0,0);
+  return Math.ceil((exam - today) / 86400000);
+}
+
+function pickNextSkill(forceSkillKey) {
+  if (forceSkillKey) {
+    const found = SKILL_MAP[forceSkillKey];
+    if (found) return { ...found, reason: 'You selected this skill.' };
+  }
+  const daysToExam = getExamDaysRemaining();
+  if (daysToExam !== null && daysToExam >= 0 && daysToExam <= 7) {
+    return { skill: 'minimock', screen: null, section: 'Mock', label: 'Mini Mock', icon: '🏁',
+      desc: 'Full timed session across all 4 sections.',
+      reason: `Only ${daysToExam} day${daysToExam === 1 ? '' : 's'} until your exam — full mock practice now.` };
+  }
+
+  const skills = getIELTSSkills();
+  const recentSkills = studentData?.recentSkills || [];
+  const lastSkill = recentSkills[0] || null;
+
+  // Section recency: how many sessions ago was each section last practiced
+  const sectionLastIdx = {};
+  SKILL_CATALOGUE.forEach(s => {
+    const idx = recentSkills.indexOf(s.skill);
+    const prev = sectionLastIdx[s.section];
+    sectionLastIdx[s.section] = prev === undefined ? (idx === -1 ? 99 : idx) : Math.min(prev, idx === -1 ? 99 : idx);
+  });
+
+  const scored = SKILL_CATALOGUE.map(s => {
+    const id = toSkillId(s.skill);
+    const data = skills[id] || {};
+    return { ...s, id, data,
+      accuracy:  data.accuracy  ?? null,
+      attempted: data.attempted || 0,
+      isStrong:  data.isStrong  || false,
+      isLast:    s.skill === lastSkill,
+    };
+  });
+
+  let candidates = scored.filter(s => !s.isLast && !s.isStrong);
+  if (!candidates.length) candidates = scored.filter(s => !s.isLast);
+  if (!candidates.length) candidates = scored;
+
+  // 1) Never-attempted first, prefer section least recently covered
+  const never = candidates.filter(s => s.attempted === 0);
+  if (never.length) {
+    const pick = never.sort((a, b) => (sectionLastIdx[b.section] ?? 0) - (sectionLastIdx[a.section] ?? 0))[0];
+    return { ...pick, reason: `You haven't tried ${pick.label} yet — let's see where you start.` };
+  }
+
+  // 2) Section rotation: if any section not practiced in 3+ sessions, prioritise it
+  const starved = Object.entries(sectionLastIdx).filter(([, i]) => i >= 3).sort((a, b) => b[1] - a[1]);
+  if (starved.length) {
+    const sc = candidates.filter(s => s.section === starved[0][0]);
+    if (sc.length) {
+      const pick = sc.sort((a, b) => (a.accuracy ?? -1) - (b.accuracy ?? -1))[0];
+      return { ...pick, reason: `It's been a while since ${pick.section} — let's keep all sections sharp.` };
+    }
+  }
+
+  // 3) Lowest accuracy
+  candidates.sort((a, b) => (a.accuracy ?? -1) - (b.accuracy ?? -1));
+  const pick = candidates[0];
+  let reason;
+  if (pick.accuracy === null)      reason = `You haven't tried ${pick.label} yet.`;
+  else if (pick.accuracy < 50)     reason = `Your ${pick.label} accuracy is ${pick.accuracy}% — biggest opportunity right now.`;
+  else if (pick.accuracy < 70)     reason = `Your ${pick.label} accuracy is ${pick.accuracy}% — still below target. Let's close that gap.`;
+  else                             reason = `Keeping ${pick.label} sharp — ${pick.accuracy}% is good but there's still room.`;
+  return { ...pick, reason };
 }
 
 // ── ROUTING ──────────────────────────────────────────────────────
@@ -730,54 +846,125 @@ window.finishIELTSOverview = async function () {
 // ── HOME ─────────────────────────────────────────────────────────
 function renderHome() {
   if (!studentData) return;
-  const day    = studentData.dayNumber || 1;
-  const plan   = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
+  const sessionCount = (studentData.dayNumber || 1) - 1;
   const name   = studentData.preferredName || studentData.name?.split(' ')[0] || 'there';
   const streak = studentData.streak || 0;
+  const target = studentData.targetBand || 6.5;
+  const daysToExam = getExamDaysRemaining();
+  const bandEst = calcBandEstimate();
+  const mockUnlocked = isMockUnlocked();
 
   const hour  = new Date().getHours();
   const greet = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   document.getElementById('home-greeting').innerHTML = `${greet}, <span style="color:var(--accent)">${name}</span>.`;
-  document.getElementById('home-subtitle').textContent = day === 1
+
+  // Subtitle: exam countdown or generic
+  let subtitle = sessionCount === 0
     ? "Let's find out where you're starting from."
-    : day > 10
-    ? "You've completed the 10-day programme. Incredible work."
-    : `Day ${day} of 10. Keep the streak alive.`;
+    : daysToExam !== null && daysToExam >= 0
+    ? `<strong style="color:var(--accent)">${daysToExam} day${daysToExam === 1 ? '' : 's'}</strong> until your exam. Every session counts.`
+    : `${sessionCount} session${sessionCount !== 1 ? 's' : ''} done. Keep the streak alive.`;
+  document.getElementById('home-subtitle').innerHTML = subtitle;
 
   document.getElementById('home-streak').textContent  = `🔥 ${streak} day${streak !== 1 ? 's' : ''}`;
-  document.getElementById('home-day-badge').textContent = `Day ${Math.min(day, 10)}`;
 
-  if (day <= 10) {
-    document.getElementById('today-day-label').textContent = `Day ${day} of 10`;
-    document.getElementById('today-skill').textContent     = `${plan.section} — ${plan.label}`;
-    document.getElementById('today-desc').textContent      = plan.desc;
-    document.getElementById('today-session-card').style.display = '';
-  } else {
-    document.getElementById('today-session-card').style.display = 'none';
+  // Replace day badge with band estimate or session count
+  const badgeEl = document.getElementById('home-day-badge');
+  if (badgeEl) badgeEl.textContent = bandEst !== null ? `Band ~${bandEst}` : `${sessionCount} done`;
+
+  // Band progress bar
+  const progressCard = document.getElementById('home-band-progress');
+  if (progressCard) {
+    if (bandEst !== null) {
+      const min = 5.0, span = target - min;
+      const pct = span > 0 ? Math.min(100, Math.max(0, Math.round(((bandEst - min) / span) * 100))) : 100;
+      document.getElementById('band-progress-fill').style.width  = `${pct}%`;
+      document.getElementById('band-progress-label').textContent = `${pct}% of the way to Band ${target}`;
+      document.getElementById('band-est-text').textContent       = `Current: ~${bandEst}`;
+      document.getElementById('band-target-text').textContent    = `Target: ${target}`;
+      progressCard.classList.remove('hidden');
+    } else {
+      progressCard.classList.add('hidden');
+    }
   }
 
-  const upcomingEl   = document.getElementById('upcoming-list');
-  const upcomingDays = [day + 1, day + 2, day + 3].filter(d => d >= 1 && d <= 10);
-  upcomingEl.innerHTML = upcomingDays.length
-    ? upcomingDays.map(d => {
-        const p = DAY_PLAN[d];
-        return `
-          <div class="upcoming-item">
-            <div class="upcoming-day">D${d}</div>
-            <div class="upcoming-info">
-              <div class="upcoming-skill">${p.section} — ${p.label}</div>
-              <div class="upcoming-desc">${p.desc}</div>
-            </div>
-          </div>`;
-      }).join('')
-    : '<p style="font-size:13px;color:var(--muted);padding:8px 0">Programme complete.</p>';
+  // Adaptive recommendation
+  currentPlan = pickNextSkill();
+  const sessionCard = document.getElementById('today-session-card');
+  if (currentPlan.skill === 'minimock') {
+    document.getElementById('today-day-label').textContent = '🏁 Exam mode';
+    document.getElementById('today-skill').textContent     = 'Mini Mock Test';
+    document.getElementById('today-desc').textContent      = currentPlan.desc;
+    document.getElementById('today-reason').textContent    = currentPlan.reason;
+    sessionCard.style.display = '';
+  } else {
+    document.getElementById('today-day-label').textContent = `${currentPlan.section} · Toody recommends`;
+    document.getElementById('today-skill').textContent     = currentPlan.label;
+    document.getElementById('today-desc').textContent      = currentPlan.desc;
+    document.getElementById('today-reason').textContent    = `Why: ${currentPlan.reason}`;
+    sessionCard.style.display = '';
+  }
 
-  // Show mock card after Day 10
+  // Final 3 days message
+  const readinessCard = document.getElementById('home-readiness-card');
+  if (readinessCard) {
+    if (daysToExam !== null && daysToExam >= 0 && daysToExam <= 3) {
+      readinessCard.classList.remove('hidden');
+    } else {
+      readinessCard.classList.add('hidden');
+    }
+  }
+
+  // Exam countdown banner (if 4–30 days out)
+  const countdownBanner = document.getElementById('home-countdown-banner');
+  if (countdownBanner) {
+    if (daysToExam !== null && daysToExam > 3 && daysToExam <= 30) {
+      document.getElementById('countdown-days').textContent = daysToExam;
+      countdownBanner.classList.remove('hidden');
+    } else {
+      countdownBanner.classList.add('hidden');
+    }
+  }
+
+  // Skill picker grid
+  renderSkillPicker();
+
+  // Mock card
   const mockCard = document.getElementById('home-mock-card');
-  if (mockCard) mockCard.style.display = day > 10 ? '' : 'none';
+  if (mockCard) mockCard.style.display = mockUnlocked ? '' : 'none';
 
   renderSkillSnapshot();
 }
+
+function renderSkillPicker() {
+  const el = document.getElementById('home-skill-picker');
+  if (!el) return;
+  const skills = getIELTSSkills();
+  el.innerHTML = SKILL_CATALOGUE.map(s => {
+    const data = skills[toSkillId(s.skill)] || {};
+    const pct  = data.attempted > 0 ? (data.accuracy ?? data.bandEstimate !== undefined ? Math.round((data.bandEstimate||0)*10) : null) : null;
+    const acc  = data.attempted > 0 ? (data.accuracy !== undefined ? `${data.accuracy}%` : data.bandEstimate !== undefined ? `Band ${data.bandEstimate}` : '—') : 'Not tried';
+    const isActive = currentPlan?.skill === s.skill;
+    return `<button class="skill-pick-btn${isActive ? ' active' : ''}" onclick="window.pickSkill('${s.skill}')">
+      <span class="spb-icon">${s.icon}</span>
+      <span class="spb-body">
+        <span class="spb-label">${s.label}</span>
+        <span class="spb-acc">${acc}</span>
+      </span>
+    </button>`;
+  }).join('');
+}
+
+window.pickSkill = function (skillKey) {
+  currentPlan = pickNextSkill(skillKey);
+  // Update session card
+  document.getElementById('today-day-label').textContent = `${currentPlan.section} · Your choice`;
+  document.getElementById('today-skill').textContent     = currentPlan.label;
+  document.getElementById('today-desc').textContent      = currentPlan.desc;
+  document.getElementById('today-reason').textContent    = '';
+  // Refresh picker to show new active
+  renderSkillPicker();
+};
 
 function renderSkillSnapshot() {
   const sk = getIELTSSkills();
@@ -810,14 +997,15 @@ function renderSkillSnapshot() {
 
 // ── SESSION INTRO ─────────────────────────────────────────────────
 window.startSession = function () {
-  const day  = studentData?.dayNumber || 1;
-  const plan = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
+  const plan = currentPlan || pickNextSkill();
+  currentPlan = plan;
 
-  document.getElementById('si-icon').textContent    = plan.icon;
-  document.getElementById('si-section').textContent = plan.section;
+  document.getElementById('si-icon').textContent    = plan.icon || '📖';
+  document.getElementById('si-section').textContent = plan.section || 'Session';
   document.getElementById('si-skill').textContent   = plan.label;
 
-  const expects = buildExpectations(day, plan.skill);
+  const sessionCount = (studentData?.dayNumber || 1) - 1;
+  const expects = buildExpectations(sessionCount, plan.skill);
   document.getElementById('si-expect-list').innerHTML = expects
     .map(e => `<div class="expect-item"><div class="expect-icon">${e.icon}</div><div class="expect-text">${e.text}</div></div>`)
     .join('');
@@ -825,46 +1013,40 @@ window.startSession = function () {
   goTo('s-session-intro');
 };
 
-function buildExpectations(day, skill) {
+function buildExpectations(sessionCount, skill) {
   const list = [];
-  if (day > 1) list.push({ icon: '🧠', text: 'Quick memory check first — one question from last session rephrased.' });
+  if (sessionCount > 0) list.push({ icon: '🧠', text: 'Quick memory check first — one question from a previous session.' });
   list.push({ icon: '📝', text: 'AI-generated material specific to your current band level — different every session.' });
   list.push({ icon: '💬', text: 'Instant feedback after every answer with the exact reasoning.' });
-  if (day > 1) list.push({ icon: '🔍', text: 'Get one right and Toody will ask you to prove your reasoning — the Tough Love Check.' });
+  if (sessionCount > 0) list.push({ icon: '🔍', text: 'Get one right and Toody will ask you to prove your reasoning — the Tough Love Check.' });
   return list;
 }
 
 window.goToSession = function () {
-  const day  = studentData?.dayNumber || 1;
-  const plan = DAY_PLAN[Math.min(day, 10)];
-  if (!plan) return;
+  const plan = currentPlan || pickNextSkill();
+  currentPlan = plan;
+  const sessionCount = (studentData?.dayNumber || 1) - 1;
 
-  document.getElementById('warmup-day-badge').textContent    = `Day ${day}`;
-  document.getElementById('reading-day-badge').textContent   = `Day ${day}`;
-  document.getElementById('listening-day-badge').textContent = `Day ${day}`;
-  document.getElementById('writing-day-badge').textContent   = `Day ${day}`;
-  document.getElementById('speaking-day-badge').textContent  = `Day ${day}`;
-  document.getElementById('nb-day-badge').textContent        = `Day ${day}`;
+  // Update all screen session badges to show session count
+  const badge = `Session ${sessionCount + 1}`;
+  ['warmup','reading','listening','writing','speaking','nb'].forEach(id => {
+    const el = document.getElementById(`${id}-day-badge`);
+    if (el) el.textContent = badge;
+  });
 
-  // Teach-first fires the FIRST TIME a student encounters any reading or listening skill
-  const isFirstTimeSkill = (() => {
-    const skillId = toSkillId(plan.skill || '');
-    if (!skillId.includes('-')) return false;
-    const attempted = getIELTSSkills()[skillId]?.attempted || 0;
-    return attempted === 0;
-  })();
+  // Special plan types
+  if (plan.skill === 'minimock') { setupMiniMock(); goTo('s-minimock'); return; }
+
+  const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
 
   // Onboarding gates (in order): briefing → IELTS overview → teach-first
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
-    renderHome();
-    initBriefing();
+    renderHome(); initBriefing();
   } else if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.hasSeenIELTSOverview) {
-    renderHome();
-    initIELTSOverview();
-  } else if (plan.screen === 's-reading' && isFirstTimeSkill) {
+    renderHome(); initIELTSOverview();
+  } else if (isFirstTimeSkill && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
     loadTeachFirst(plan.skill);
-  // Warmup fires on Day 2+ reading sessions that are NOT first-time
-  } else if (day > 1 && plan.screen === 's-reading') {
+  } else if (sessionCount > 0 && plan.screen === 's-reading') {
     loadWarmup(plan);
   } else {
     launchSkillScreen(plan);
@@ -882,13 +1064,13 @@ async function loadWarmup(plan) {
   document.querySelectorAll('.warmup-btn').forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
   goTo('s-warmup');
 
-  const prevDay  = studentData.dayNumber - 1;
-  const prevPlan = DAY_PLAN[prevDay];
-  const band     = studentData.targetBand || 6.5;
+  const lastSkill = (studentData.recentSkills || [])[0] || '';
+  const prevLabel = SKILL_MAP[lastSkill]?.label || 'reading';
+  const band      = studentData.targetBand || 6.5;
 
   const prompt = {
     system: 'You are an IELTS Academic examiner creating retrieval-practice questions. Return valid JSON only, no markdown, no extra text.',
-    user: `Create one True/False/Not Given memory-check question for a Band ${band} IELTS student to revisit ${prevPlan?.label || 'reading'} skills.
+    user: `Create one True/False/Not Given memory-check question for a Band ${band} IELTS student to revisit ${prevLabel} skills.
 Return ONLY this JSON:
 {"passage": "2 sentences of academic text", "statement": "one claim about the passage", "answer": "True|False|NG", "explanation": "one sentence explaining the answer"}`
   };
@@ -918,20 +1100,16 @@ window.answerWarmup = function (val) {
 };
 
 window.continueFromWarmup = function () {
-  const plan = DAY_PLAN[Math.min(studentData.dayNumber, 10)];
-  launchSkillScreen(plan);
+  launchSkillScreen(currentPlan || pickNextSkill());
 };
 
 function launchSkillScreen(plan) {
-  const day = studentData?.dayNumber || 1;
   if      (plan.screen === 's-reading')   loadReadingSession();
   else if (plan.screen === 's-listening') loadListeningSession();
   else if (plan.screen === 's-writing')   loadWritingSession();
   else if (plan.screen === 's-speaking')  loadSpeakingSession();
-  else if (plan.screen === 's-notebook')  { renderWeek1Report(); goTo('s-notebook'); }
-  else if (day === 9)                     loadFocusedDrill();
-  else if (day === 10)                    { setupMiniMock(); goTo('s-minimock'); }
-  else loadReadingSession();
+  else if (plan.skill  === 'minimock')    { setupMiniMock(); goTo('s-minimock'); }
+  else                                    loadReadingSession();
 }
 
 // ── TEACH FIRST — 10-minute interactive learning phase ─────────
@@ -1384,8 +1562,7 @@ window.answerConfidence = function (val) {
   }, 1600);
 };
 window.startRealSession = function () {
-  const day = studentData?.dayNumber || 1;
-  const plan = DAY_PLAN[Math.min(day, 10)] || DAY_PLAN[1];
+  const plan = currentPlan || pickNextSkill();
   const label = plan.label || 'Reading';
   const teachingMinutes = teachStartTime ? Math.round((Date.now() - teachStartTime) / 60000) : 0;
   if (currentUser && teachingMinutes > 0) {
@@ -1534,12 +1711,19 @@ async function updateStudentBrain(behaviour, accuracy, skillKey) {
       if ((prevSkillBrain.teachingAttempts || 0) >= 3 && !aiResolved) needsHuman = true;
     }
 
+    // Track consecutive high-accuracy sessions for "strong skill" detection
+    const prevConsec = prevSkillBrain.consecutiveHighSessions || 0;
+    const newConsec  = accuracy >= 80 ? prevConsec + 1 : 0;
+    const isStrong   = newConsec >= 3;
+
     const skillBrainUpdate = skillId ? {
       avgTimePerQ:    ema(prevSkillBrain.avgTimePerQ    || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct: ema(prevSkillBrain.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
       changesAnswers: ema(prevSkillBrain.changesAnswers  || 0, changesThisSession),
       lastAccuracy:   accuracy,
       sessions:       (prevSkillBrain.sessions || 0) + 1,
+      consecutiveHighSessions: newConsec,
+      isStrong,
       aiResolved,
       needsHuman,
     } : null;
@@ -1641,11 +1825,11 @@ async function loadReadingSession() {
   submitBtn.textContent = 'Submit answers →';
   submitBtn.onclick = () => window.submitReading();
 
-  const day      = studentData?.dayNumber || 1;
-  const skillKey = DAY_PLAN[Math.min(day, 10)]?.skill || 'reading.tfng';
+  const skillKey = currentPlan?.skill || 'reading.tfng';
   isSCSession    = (skillKey === 'reading.summaryCompletion');
 
-  document.getElementById('reading-p1-dot').className = day > 1 ? 'phase-dot done' : 'phase-dot';
+  const _scDay = (studentData?.dayNumber || 1) - 1;
+  document.getElementById('reading-p1-dot').className = _scDay > 0 ? 'phase-dot done' : 'phase-dot';
 
   const band = studentData?.targetBand || 6.5;
 
@@ -1915,7 +2099,7 @@ async function finishReadingSession() {
   const total     = sessionQuestions.length || 5;
   const accuracy  = Math.round((sessionCorrect / total) * 100);
   const day       = studentData.dayNumber || 1;
-  const skillKey  = DAY_PLAN[day]?.skill || 'reading.tfng';
+  const skillKey  = currentPlan?.skill || 'reading.tfng';
   const behaviour = getBehaviourPayload();
 
   // Remove scroll listener now that session is done
@@ -1962,7 +2146,8 @@ async function finishReadingSession() {
       [`${subjPath}.attempted`]:     newAttempted,
       [`${subjPath}.lastPracticed`]: serverTimestamp(),
       [`${subjPath}.trend`]:         newAccuracy > (prevSkill.accuracy || 0) ? 'up' : newAccuracy < (prevSkill.accuracy || 0) ? 'down' : 'stable',
-      dayNumber:        day + 1,
+      dayNumber:        (studentData.dayNumber || 1) + 1,
+      recentSkills:     [skillKey, ...(studentData.recentSkills || [])].slice(0, 5),
       streak:           newStreak,
       lastSession:      serverTimestamp(),
       toughLoveResults: (studentData.toughLoveResults || 0) + (tlPassed ? 1 : 0),
@@ -1995,7 +2180,7 @@ async function finishReadingSession() {
 // ── LISTENING SESSION ─────────────────────────────────────────────
 async function loadListeningSession() {
   const day = studentData?.dayNumber || 2;
-  listenType       = day === 4 ? 'fc' : 'mc';
+  listenType = currentPlan?.skill === 'listening.formCompletion' ? 'fc' : 'mc';
   listenQuestions  = [];
   listenScenario   = '';
   listenAnswers    = {};
@@ -2296,7 +2481,7 @@ window.finishListeningSession = async function () {
     _listenSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:         studentData.weekNumber || 1,
       dayNumber:          day,
-      skillPracticed:     DAY_PLAN[day]?.skill || firestoreKey,
+      skillPracticed:     firestoreKey,
       questionsAttempted: total,
       questionsCorrect:   listenCorrect,
       accuracy,
@@ -2317,9 +2502,10 @@ window.finishListeningSession = async function () {
       [`${subjPath}.attempted`]:     newAttempted,
       [`${subjPath}.lastPracticed`]: serverTimestamp(),
       [`${subjPath}.trend`]:         newAccuracy > (prevL.accuracy || 0) ? 'up' : newAccuracy < (prevL.accuracy || 0) ? 'down' : 'stable',
-      dayNumber:   day + 1,
-      streak:      (studentData.streak || 0) + 1,
-      lastSession: serverTimestamp(),
+      dayNumber:    (studentData.dayNumber || 1) + 1,
+      recentSkills: [firestoreKey, ...(studentData.recentSkills || [])].slice(0, 5),
+      streak:       (studentData.streak || 0) + 1,
+      lastSession:  serverTimestamp(),
     });
 
     const snap = await getStudentDoc(currentUser.uid);
@@ -2366,7 +2552,7 @@ async function loadWritingSession() {
   document.getElementById('writing-p1-dot').className = 'phase-dot';
   goTo('s-writing');
 
-  const isTask1 = day === 6 || day === 10;
+  const isTask1 = currentPlan?.skill !== 'writing.task2';
   const band    = studentData?.targetBand || 6.5;
   const taskNum = isTask1 ? 1 : 2;
   const minWords = isTask1 ? 150 : 250;
@@ -2408,8 +2594,7 @@ Return ONLY this JSON:
 window.updateWordCount = function () {
   const text  = document.getElementById('writing-textarea').value.trim();
   const words = text ? text.split(/\s+/).length : 0;
-  const day   = studentData?.dayNumber || 6;
-  const min   = (day === 6 || day === 10) ? 150 : 250;
+  const min   = currentPlan?.skill !== 'writing.task2' ? 150 : 250;
   const badge = document.getElementById('writing-word-count');
   badge.textContent = `${words} word${words !== 1 ? 's' : ''}`;
   badge.className   = `word-count-badge ${words >= min ? 'ok' : words >= min * 0.7 ? 'warn' : ''}`;
@@ -2426,8 +2611,7 @@ window.submitWriting = async function () {
   document.getElementById('writing-prompt-view').classList.add('hidden');
   document.getElementById('writing-evaluating').classList.remove('hidden');
 
-  const day    = studentData?.dayNumber || 6;
-  const isTask1 = day === 6 || day === 10;
+  const isTask1 = currentPlan?.skill !== 'writing.task2';
   const band   = studentData?.targetBand || 6.5;
   const taskLabel = isTask1 ? 'Task 1 (Graph Description)' : 'Task 2 (Opinion Essay)';
 
@@ -2480,7 +2664,7 @@ Return ONLY this JSON:
 
 window.finishWritingSession = async function () {
   const day     = studentData?.dayNumber || 6;
-  const isTask1 = day === 6 || day === 10;
+  const isTask1 = currentPlan?.skill !== 'writing.task2';
   const taskKey = isTask1 ? 'task1' : 'task2';
   const behaviour = getBehaviourPayload();
 
@@ -2489,7 +2673,7 @@ window.finishWritingSession = async function () {
     _writingSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:     studentData.weekNumber || 2,
       dayNumber:      day,
-      skillPracticed: DAY_PLAN[day]?.skill || `writing.${taskKey}`,
+      skillPracticed: `writing.${taskKey}`,
       bandEstimate:   writingBandEst,
       wordCount:      writingResponse.split(/\s+/).length,
       durationMinutes: Math.round(behaviour.sessionDurationSec / 60),
@@ -2504,9 +2688,10 @@ window.finishWritingSession = async function () {
       [`${wSubjPath}.attempted`]:     (prevW.attempted || 0) + 1,
       [`${wSubjPath}.lastPracticed`]: serverTimestamp(),
       [`${wSubjPath}.trend`]:         writingBandEst > (prevW.bandEstimate || 0) ? 'up' : writingBandEst < (prevW.bandEstimate || 0) ? 'down' : 'stable',
-      dayNumber:   day + 1,
-      streak:      (studentData.streak || 0) + 1,
-      lastSession: serverTimestamp(),
+      dayNumber:    (studentData.dayNumber || 1) + 1,
+      recentSkills: [`writing.${taskKey}`, ...(studentData.recentSkills || [])].slice(0, 5),
+      streak:       (studentData.streak || 0) + 1,
+      lastSession:  serverTimestamp(),
     });
 
     const snap = await getStudentDoc(currentUser.uid);
@@ -2724,7 +2909,7 @@ window.finishSpeakingSession = async function () {
     _speakSessionRef = await saveSessionDoc(currentUser.uid, {
       weekNumber:     studentData.weekNumber || 2,
       dayNumber:      day,
-      skillPracticed: DAY_PLAN[day]?.skill || 'speaking.part1',
+      skillPracticed: 'speaking.part1',
       bandEstimate:   speakingBandEst,
       transcript:     speakingTranscript,
       durationMinutes: Math.round(behaviour.sessionDurationSec / 60),
@@ -2739,9 +2924,10 @@ window.finishSpeakingSession = async function () {
       [`${spSubjPath}.attempted`]:     (prevSp.attempted || 0) + 1,
       [`${spSubjPath}.lastPracticed`]: serverTimestamp(),
       [`${spSubjPath}.trend`]:         speakingBandEst > (prevSp.bandEstimate || 0) ? 'up' : speakingBandEst < (prevSp.bandEstimate || 0) ? 'down' : 'stable',
-      dayNumber:   day + 1,
-      streak:      (studentData.streak || 0) + 1,
-      lastSession: serverTimestamp(),
+      dayNumber:    (studentData.dayNumber || 1) + 1,
+      recentSkills: ['speaking.part1', ...(studentData.recentSkills || [])].slice(0, 5),
+      streak:       (studentData.streak || 0) + 1,
+      lastSession:  serverTimestamp(),
     });
 
     const snap = await getStudentDoc(currentUser.uid);
@@ -2836,13 +3022,10 @@ function renderWeek1Report() {
 
   document.getElementById('nb-worked-example').classList.add('hidden');
 
-  const nextDay = studentData?.dayNumber || 6;
-  if (nextDay <= 10) {
-    const next = DAY_PLAN[nextDay];
-    document.getElementById('nb-tomorrow-day').textContent   = `Next — Day ${nextDay}`;
-    document.getElementById('nb-tomorrow-title').textContent = `${next.section} — ${next.label}`;
-    document.getElementById('nb-tomorrow-desc').textContent  = next.desc;
-  }
+  const next = pickNextSkill();
+  document.getElementById('nb-tomorrow-day').textContent   = `Up next — ${next.section}`;
+  document.getElementById('nb-tomorrow-title').textContent = next.label;
+  document.getElementById('nb-tomorrow-desc').textContent  = next.desc;
 }
 
 // ── NOTEBOOK HELPERS ──────────────────────────────────────────────
@@ -2967,17 +3150,10 @@ function renderNotebookSpeaking() {
 }
 
 function renderTomorrowCard() {
-  const nextDay = studentData?.dayNumber;
-  if (nextDay && nextDay <= 10) {
-    const next = DAY_PLAN[nextDay];
-    document.getElementById('nb-tomorrow-day').textContent   = `Tomorrow — Day ${nextDay}`;
-    document.getElementById('nb-tomorrow-title').textContent = `${next.section} — ${next.label}`;
-    document.getElementById('nb-tomorrow-desc').textContent  = next.desc;
-  } else {
-    document.getElementById('nb-tomorrow-day').textContent   = 'Programme complete 🎉';
-    document.getElementById('nb-tomorrow-title').textContent = 'You\'ve finished all 10 sessions.';
-    document.getElementById('nb-tomorrow-desc').textContent  = 'Check your progress to see your full band estimate and improvement.';
-  }
+  const next = pickNextSkill();
+  document.getElementById('nb-tomorrow-day').textContent   = `Up next — ${next.section}`;
+  document.getElementById('nb-tomorrow-title').textContent = next.label;
+  document.getElementById('nb-tomorrow-desc').textContent  = next.desc;
 }
 
 function setSkillBar(barId, pctId, pct) {
@@ -3290,7 +3466,7 @@ window.goToProgress = async function () {
     document.getElementById('progress-session-list').innerHTML = snap.docs.map(d => {
       const s   = d.data();
       const day = s.dayNumber    ? `Day ${s.dayNumber}` : '—';
-      const skill = DAY_PLAN[s.dayNumber]?.label || s.skillPracticed || '—';
+      const skill = (s.skillPracticed && SKILL_MAP[s.skillPracticed]?.label) || s.skillPracticed || '—';
       const score = s.accuracy != null
         ? `${s.accuracy}%`
         : s.bandEstimate != null
