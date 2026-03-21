@@ -1889,7 +1889,7 @@ Return ONLY this JSON:
       sessionWordBank = parsed.wordBank    || [];
       renderSCSession(parsed);
     } else {
-      buildToughLove(parsed.questions, parsed.passage, day);
+      buildToughLove(parsed.questions, parsed.passage);
       renderReadingSession(parsed);
     }
 
@@ -2045,7 +2045,7 @@ window.submitReading = function () {
 };
 
 // ── TOUGH LOVE ─────────────────────────────────────────────────────
-function buildToughLove(questions, passage, day) {
+function buildToughLove(questions, passage) {
   tlQ           = questions[Math.floor(Math.random() * questions.length)];
   tlKeySentence = tlQ.keySentence || '';
   tlExplanation = tlQ.explanation || '';
