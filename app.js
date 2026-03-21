@@ -1240,7 +1240,7 @@ window.answerHook = function (val) {
   if (!hq) return;
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.disabled = true;
-    if (b.dataset.mv.toLowerCase() === (hq.answer || '').toLowerCase()) b.classList.add('correct');
+    if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(hq.answer)) b.classList.add('correct');
     else if (b.dataset.mv === val) b.classList.add('wrong');
   });
   document.getElementById('teach-hook-insight').textContent = hq.insight || '';
@@ -1483,12 +1483,12 @@ function renderDrillQuestion(idx) {
 window.answerDrill = function (idx, val) {
   const qs2 = teachData.drillQuestions || teachData.confidenceQuestions || [];
   const q = qs2[idx];
-  const isRight = val.toLowerCase() === (q.answer || '').toLowerCase();
+  const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
   if (isRight) teachDrillCorrect++;
 
   document.querySelectorAll(`#drill-card-${idx} .tfng-btn`).forEach(b => {
     b.disabled = true;
-    if      (b.dataset.dv.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
+    if      (normaliseAnswer(b.dataset.dv) === normaliseAnswer(q.answer)) b.classList.add('correct');
     else if (b.dataset.dv === val && !isRight) b.classList.add('wrong');
   });
   const rf = document.getElementById(`drill-result-${idx}`);
@@ -1537,11 +1537,11 @@ window.answerConfidence = function (val) {
   const qs = teachData.confidenceQuestions || [];
   const q = qs[confQIdx];
   if (!q) return;
-  const isCorrect = val.toLowerCase() === (q.answer || '').toLowerCase();
+  const isCorrect = normaliseAnswer(val) === normaliseAnswer(q.answer);
   if (isCorrect) confCorrect++;
   document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
     b.disabled = true;
-    if (b.dataset.mv.toLowerCase() === (q.answer || '').toLowerCase()) b.classList.add('correct');
+    if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(q.answer)) b.classList.add('correct');
     else if (b.dataset.mv === val && !isCorrect) b.classList.add('wrong');
   });
   const rf = document.getElementById('teach-conf-result');
@@ -1839,14 +1839,17 @@ async function loadReadingSession() {
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a Summary Completion IELTS Academic reading exercise for a Band ${band} student.
 
-The wordBank must contain the 5 correct answers PLUS 3 distractor words. Distractors must be real English words that are plausible in context (they could grammatically fit at least one gap) but are semantically wrong — a student who hasn't read carefully might be tempted. Never use placeholder labels like "decoy1" or "word2".
+The wordBank must contain exactly 8 items: the 5 correct answers PLUS 3 distractor words.
+- Correct answers: exact words from the passage that fill the 5 gaps
+- Distractors: real English words (NOT labels or placeholders) that could grammatically fit at least one gap but are factually wrong based on the passage. For example, if the passage is about urban growth, a good distractor is "rural" — it fits grammatically but contradicts the passage.
+- NEVER use placeholder labels like "decoy1", "distractor2", "word3", "correctAnswer4", or any similar pattern. Every item in wordBank must be a real English word.
 
 Return ONLY this JSON:
 {
   "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
   "topic": "2-4 word topic label",
   "summaryText": "A 60-80 word summary of the passage with 5 gaps marked as [1], [2], [3], [4], [5]. Each gap must be fillable with ONE word from the passage.",
-  "wordBank": ["correctAnswer1","correctAnswer2","correctAnswer3","correctAnswer4","correctAnswer5","plausibleDistractor1","plausibleDistractor2","plausibleDistractor3"],
+  "wordBank": ["significant","natural","limited","urban","migration","stable","complex","rural"],
   "questions": [
     {"id": 1, "text": "Gap [1]", "answer": "exact single word from passage that fills gap 1", "explanation": "why this word fills gap 1", "keySentence": "sentence from passage containing this word"},
     {"id": 2, "text": "Gap [2]", "answer": "exact single word from passage that fills gap 2", "explanation": "why this word fills gap 2", "keySentence": "sentence from passage containing this word"},
