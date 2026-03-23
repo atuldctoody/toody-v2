@@ -1,6 +1,7 @@
 import { auth, db } from './firebase-config.js';
 import { getVisionPrompt }  from './api/vision-prompt.js';
-import { verifyAnswers }   from './api/verify-answers.js';
+// NOTE: verifyAnswers is loaded via dynamic import() inside loadReadingSession()
+// to prevent a module-load failure from breaking the entire app.
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
   doc, getDoc, setDoc, updateDoc,
@@ -1976,10 +1977,15 @@ Return ONLY this JSON:
       sessionWordBank  = parsed.wordBank    || [];
       renderSCSession(parsed);
     } else {
-      // Run the Answer Verification Agent before showing anything to the student
-      const verified       = await verifyAnswers(parsed.passage, parsed.questions, API_URL);
-      sessionQuestions     = verified.questions;
-      sessionCorrections   = verified.corrections;
+      // Run the Answer Verification Agent before showing anything to the student.
+      // Dynamic import so a load failure here never prevents app.js from booting.
+      let verified = { questions: parsed.questions, corrections: [] };
+      try {
+        const { verifyAnswers } = await import('./api/verify-answers.js');
+        verified = await verifyAnswers(parsed.passage, parsed.questions, API_URL);
+      } catch { /* non-fatal — original questions used */ }
+      sessionQuestions   = verified.questions;
+      sessionCorrections = verified.corrections;
 
       // Re-build tough love with verified (possibly corrected) questions
       buildToughLove(verified.questions, parsed.passage);
