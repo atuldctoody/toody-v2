@@ -822,20 +822,31 @@ function _showBriefingCard(nextIdx, direction) {
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
-  // Write both flags atomically so a reload after briefing never re-triggers the overview
+  // Only write briefingSeen here — hasSeenIELTSOverview is owned by initIELTSOverview()
   try {
-    await updateStudentDoc(currentUser.uid, { briefingSeen: true, hasSeenIELTSOverview: true });
-    if (studentData) { studentData.briefingSeen = true; studentData.hasSeenIELTSOverview = true; }
+    await updateStudentDoc(currentUser.uid, { briefingSeen: true });
+    if (studentData) studentData.briefingSeen = true;
   } catch (e) {
     console.warn('[finishBriefing] Firestore write failed:', e);
-    if (studentData) { studentData.briefingSeen = true; studentData.hasSeenIELTSOverview = true; }
+    if (studentData) studentData.briefingSeen = true;
   }
   initIELTSOverview();
 };
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 function initIELTSOverview() {
-  // hasSeenIELTSOverview is written by finishBriefing() before this is called — no write needed here
+  // GUARD: if already seen (flag true in studentData from Firestore), skip to home — never show twice
+  console.log('[initIELTSOverview] hasSeenIELTSOverview =', studentData?.hasSeenIELTSOverview);
+  if (studentData?.hasSeenIELTSOverview) {
+    console.log('[initIELTSOverview] already seen — routing to home');
+    renderHome(); goTo('s-home'); return;
+  }
+  // Write flag NOW (before showing the screen) so a studentData refresh after this point never re-triggers
+  if (currentUser && studentData) {
+    updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true })
+      .catch(e => console.warn('[initIELTSOverview] flag write failed:', e));
+    studentData.hasSeenIELTSOverview = true;
+  }
   ieltsCard = 0;
   document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
@@ -1072,7 +1083,7 @@ window.goToSession = function (forceSkillKey) {
   const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
 
   // Onboarding gates (in order): briefing → teach-first
-  // hasSeenIELTSOverview is written by finishBriefing() — no second trigger here
+  // hasSeenIELTSOverview is owned by initIELTSOverview() — no trigger here
   console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen);
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();
