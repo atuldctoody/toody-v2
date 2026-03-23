@@ -5,7 +5,14 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "**/*.docx"
+      "**/*.docx",
+      "**/*.exe",
+      "**/*.sh",
+      "package.json",
+      "package-lock.json",
+      "playwright.config.js",
+      "test-results/**",
+      "tests/**"
     ]
   }
 }
