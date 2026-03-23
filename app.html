@@ -169,12 +169,30 @@
         <h2 class="bc-title">The Test at a Glance</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill"><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong></div>
-        <div class="bc-pill"><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers</div>
-        <div class="bc-pill"><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages</div>
-        <div class="bc-pill"><strong>Writing:</strong> 60 minutes, 2 tasks — Task 2 is worth double Task 1</div>
-        <div class="bc-pill"><strong>Speaking:</strong> 11–14 minutes — recorded at most centres</div>
-        <div class="bc-pill">Each section scored <strong>Band 1–9</strong> — overall band is the average of all four</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Reading and Listening are back to back. Writing follows. Speaking is usually on a different day at most centres.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You hear each recording exactly once — no replay. In the computerised test you type or click answers in real time as you listen.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">3 passages, increasing in difficulty. Around 13–14 questions per passage. No extra time to transfer answers in the computerised test.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing:</strong> 60 minutes, 2 tasks — Task 2 is worth double Task 1</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Task 1: describe a graph or diagram in at least 150 words (20 mins). Task 2: write an essay in at least 250 words (40 mins). Task 2 is worth double.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Speaking:</strong> 11–14 minutes — recorded at most centres</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">3 parts: personal questions, a 2-minute talk on a cue card topic, and a discussion. Recorded at most computerised centres.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Each section scored <strong>Band 1–9</strong> — overall band is the average of all four</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Scores go up in 0.5 increments. Your overall band is the average of all four sections, rounded to the nearest 0.5.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextBriefingCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -187,10 +205,22 @@
         <h2 class="bc-title">What the examiner knows that you don't</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill"><strong>Reading:</strong> "The passage always contains the answer. Always. The question is whether you're looking for the right thing — or falling for what the examiner wants you to think is the answer."</div>
-        <div class="bc-pill"><strong>Listening:</strong> "Every answer is said out loud. You will hear it. The only question is whether you're listening for the answer — or listening to the story."</div>
-        <div class="bc-pill"><strong>Writing:</strong> "The examiner decides your band in the first paragraph. Structure and clarity signal a Band 7 student before they've read a single idea."</div>
-        <div class="bc-pill"><strong>Speaking:</strong> "The examiner isn't waiting for you to be perfect. They're waiting to see if you can keep talking when you don't know the word. That's fluency."</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading:</strong> "The passage always contains the answer. Always."</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">The examiner writes statements that use synonyms of passage words — so if you search for the exact statement words you won't find them. Look for meaning, not matching words.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Listening:</strong> "Every answer is said out loud. You will hear it."</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">The audio often gives you the wrong answer first, then corrects it. The last thing said on a topic is usually the answer.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing:</strong> "The examiner decides your band in the first paragraph."</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Examiners spend about 2–3 minutes per script. Your introduction and topic sentences are read most carefully — they set the band before the examiner reads your arguments.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Speaking:</strong> "They're waiting to see if you can keep talking when you don't know the word."</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">If you don't know a word, describe it. Examiners reward communication strategies — working around a gap fluently scores higher than stopping and saying "I don't know".</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextBriefingCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -203,11 +233,26 @@
         <h2 class="bc-title">How Toody works</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">Toody builds your <strong>personal path to your target band</strong> — every session is chosen based on what you need most, not a fixed calendar</div>
-        <div class="bc-pill">Start with <strong>Reading and Listening</strong> — Toody maps your baseline across 4 question types</div>
-        <div class="bc-pill">Once baseline is set, <strong>Writing and Speaking</strong> are introduced — scored on the real IELTS criteria</div>
-        <div class="bc-pill">When a skill hits 80%+ for 3 sessions, Toody marks it <strong>strong</strong> and moves on to what needs work</div>
-        <div class="bc-pill"><strong>Mock tests unlock</strong> after you've covered all 4 sections — run them anytime after that</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Toody builds your <strong>personal path to your target band</strong> — every session is chosen based on what you need most</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Unlike fixed courses, Toody adapts every session to your current weak spots. If you nail TF/NG, it moves on. If you keep missing it, it drills deeper.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Start with <strong>Reading and Listening</strong> — Toody maps your baseline across 4 question types</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">These two sections are scored purely on accuracy — fastest gains for early confidence. Your first sessions establish where you are right now.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Once baseline is set, <strong>Writing and Speaking</strong> are introduced</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Introduced once Reading and Listening baselines are set, so you're not juggling too many new skills at once. Both scored on the real IELTS criteria.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>When a skill hits 80%+ for 3 sessions, Toody marks it <strong>strong</strong> and moves on</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Three consistent sessions confirms it's real progress, not luck. Toody then redirects that session time to your weaker areas.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Mock tests unlock</strong> after you've covered all 4 sections</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Full timed mock across all 4 sections. Mirrors real test conditions — the best way to identify pressure-specific errors before the real day.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextBriefingCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -220,11 +265,26 @@
         <h2 class="bc-title">The Computerised Test</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">The test is now <strong>mostly taken on computer</strong> at IELTS centres worldwide</div>
-        <div class="bc-pill"><strong>Reading:</strong> scroll through passages on screen, click to select your answers</div>
-        <div class="bc-pill"><strong>Listening:</strong> audio plays through headphones — you type or click answers in real time</div>
-        <div class="bc-pill">On screen you get a <strong>highlighter tool</strong> for Reading and a <strong>word counter</strong> for Writing — use them</div>
-        <div class="bc-pill">Speaking is recorded in a <strong>private booth</strong> — speak clearly, at normal pace, into the microphone</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>The test is now <strong>mostly taken on computer</strong> at IELTS centres worldwide</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Since 2019, most IELTS centres globally offer the computerised version. Results arrive in 3–5 days, versus 13 days for the paper-based test.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading:</strong> scroll through passages on screen, click to select your answers</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Practise reading long text on screen — many students find it harder to concentrate than on paper. Train your eyes to scan efficiently, not just read linearly.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Listening:</strong> audio plays through headphones — you type or click answers in real time</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Type fast enough to keep up — you can't pause or replay. In Toody's listening sessions, you'll train exactly this real-time response.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>On screen: a <strong>highlighter tool</strong> for Reading and a <strong>word counter</strong> for Writing</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Highlight key details in Reading passages as you read each question. The word counter removes the need to count manually — always aim for 150+ (Task 1) and 250+ (Task 2).</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Speaking is recorded in a <strong>private booth</strong> — no examiner in the room</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You're talking to a microphone, not a person. Some students find this easier. Others find it harder. Practise speaking aloud with Toody to get comfortable.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextBriefingCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -237,10 +297,22 @@
         <h2 class="bc-title">You're starting with Reading</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">The <strong>most underestimated</strong> section — students assume they can already read</div>
-        <div class="bc-pill">We start with <strong>True / False / Not Given</strong> because it's the trickiest question type</div>
-        <div class="bc-pill">The trap: <strong>"Not Given" ≠ False.</strong> The passage simply doesn't address the claim</div>
-        <div class="bc-pill">Most Band 6 students get this wrong because they read for <strong>meaning</strong> instead of <strong>evidence</strong></div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>The <strong>most underestimated</strong> section — students assume they can already read</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Students who read in English daily often assume they'll score well. They often don't — IELTS Reading tests precision, not general comprehension.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>We start with <strong>True / False / Not Given</strong> because it's the trickiest question type</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">It appears in every Academic Reading test. A single confusion between False and Not Given can cost 2–3 questions — that's up to half a band.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>The trap: <strong>"Not Given" ≠ False.</strong> The passage simply doesn't address the claim</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">False means the passage says the opposite. Not Given means the passage says nothing about it. This distinction alone separates Band 6 from Band 7 in Reading.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Most Band 6 students get this wrong because they read for <strong>meaning</strong> instead of <strong>evidence</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">They're reading for comprehension. The examiner tests whether you can tell the difference between silence and contradiction.</div>
+        </div>
       </div>
       <div class="bc-coach-note">"Let's build the skill that most Band 6 students are missing."</div>
       <button class="bc-btn bc-btn-start" onclick="finishBriefing()">I'm ready — show me how <span class="arrow">→</span></button>
@@ -270,12 +342,30 @@
         <h2 class="bc-title">The Test at a Glance</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill"><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong></div>
-        <div class="bc-pill"><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers</div>
-        <div class="bc-pill"><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages</div>
-        <div class="bc-pill"><strong>Writing:</strong> 60 minutes, 2 tasks</div>
-        <div class="bc-pill"><strong>Speaking:</strong> 11–14 minutes — recorded on computer at most centres, or face to face at some centres</div>
-        <div class="bc-pill">Now <strong>mostly computerised</strong> — type Writing, click Reading, record Speaking</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Reading and Listening are back to back. Writing follows. Speaking is usually on a different day at most centres.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You hear each recording exactly once — no replay. In the computerised test you type or click answers in real time as you listen.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">3 passages, increasing in difficulty. Around 13–14 questions per passage. No extra time to transfer answers in the computerised test.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing:</strong> 60 minutes, 2 tasks — Task 2 is worth double Task 1</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Task 1: describe a graph or diagram in at least 150 words (20 mins). Task 2: write an essay in at least 250 words (40 mins). Task 2 is worth double.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Speaking:</strong> 11–14 minutes — recorded on computer at most centres</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">3 parts: personal questions, a 2-minute talk on a cue card topic, and a discussion. Some paper-based centres still use a human examiner.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Each section scored <strong>Band 1–9</strong> — overall band is the average of all four</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Scores go up in 0.5 increments. Your overall band is the average of all four sections, rounded to the nearest 0.5.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -288,11 +378,26 @@
         <h2 class="bc-title">How Your Band Score Works</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">Each section scored <strong>0–9 in 0.5 increments</strong></div>
-        <div class="bc-pill"><strong>Overall band = average</strong> of 4 sections, rounded to nearest 0.5</div>
-        <div class="bc-pill">Example: 7.0 + 6.5 + 6.0 + 6.5 = <strong>Overall 6.5</strong></div>
-        <div class="bc-pill">Most universities need <strong>Band 6.5–7.5 overall</strong> with no band below 6.0</div>
-        <div class="bc-pill">Half a band can be the difference between <strong>an offer and a rejection</strong></div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Each section scored <strong>0–9 in 0.5 increments</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">There is no Band 0. Band 1 means non-user. Band 9 means expert. Most test-takers fall between 5.0 and 8.0.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Overall band = average</strong> of 4 sections, rounded to nearest 0.5</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Unlike some exams, IELTS has no pass or fail — your score simply reflects your current English level. Institutions then set their own minimum requirements.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Example: 7.0 + 6.5 + 6.0 + 6.5 = <strong>Overall 6.5</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">The average is 6.5 here. If a section average fell between two bands (e.g. 6.375), it rounds to the nearest 0.5 — so 6.5 in this case.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Most universities need <strong>Band 6.5–7.5 overall</strong> with no band below 6.0</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Always check your specific institution's requirements — some courses (like medicine or law) require higher minimum scores in individual sections.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Half a band can be the difference between <strong>an offer and a rejection</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">A 6.5 instead of 7.0 can close doors you don't know are closed. This is why Toody tracks your progress in 0.5-band increments.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -305,11 +410,26 @@
         <h2 class="bc-title">What Examiners Are Scoring</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill"><strong>Reading + Listening:</strong> pure accuracy — every correct answer counts equally</div>
-        <div class="bc-pill"><strong>Writing Task 1:</strong> Task Achievement, Coherence, Lexical Resource, Grammar (25% each)</div>
-        <div class="bc-pill"><strong>Writing Task 2:</strong> same 4 criteria — worth <strong>double Task 1</strong></div>
-        <div class="bc-pill"><strong>Speaking:</strong> Fluency, Vocabulary, Grammar, Pronunciation (25% each)</div>
-        <div class="bc-pill">Examiners mark your <strong>English under pressure,</strong> not your knowledge</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading + Listening:</strong> pure accuracy — every correct answer counts equally</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Every correct answer earns exactly one mark. There's no partial credit, no bonus for difficulty. Speed and accuracy are both required.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing Task 1:</strong> Task Achievement, Coherence, Lexical Resource, Grammar (25% each)</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Task Achievement checks you described the data accurately. Coherence checks your paragraphs flow logically. Lexical Resource and Grammar check the quality of your English.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing Task 2:</strong> same 4 criteria — worth <strong>double Task 1</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Spend roughly 40 minutes on Task 2 and 20 on Task 1. A weak Task 2 hurts your Writing band significantly more than a weak Task 1.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Speaking:</strong> Fluency, Vocabulary, Grammar, Pronunciation (25% each)</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Fluency means speaking smoothly and at length — not just being correct. Vocabulary rewards range and precision. Pronunciation is clarity, not accent.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Examiners mark your <strong>English under pressure</strong> — not your knowledge</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You can discuss topics you know nothing about and still score high. Examiners don't mark your ideas — they mark how you express them.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -322,11 +442,26 @@
         <h2 class="bc-title">The Computerised Test</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill"><strong>Reading:</strong> scroll passages on screen, click answers — no underlining on paper</div>
-        <div class="bc-pill"><strong>Listening:</strong> audio through headphones, type or click answers <strong>in real time</strong></div>
-        <div class="bc-pill"><strong>Writing:</strong> type your essays — word count shown automatically</div>
-        <div class="bc-pill"><strong>Speaking:</strong> recorded in a booth at computerised centres — no examiner in the room. Some paper-based centres still use a human examiner.</div>
-        <div class="bc-pill">You can <strong>copy/paste</strong> in Writing, use <strong>highlight tool</strong> in Reading</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Reading:</strong> scroll passages on screen, click answers — no underlining on paper</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Use the on-screen highlighter to mark key details as you read each question. Practise scanning efficiently — the passages are long and time is tight.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Listening:</strong> audio through headphones, type or click answers <strong>in real time</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You can't pause or replay. Type fast enough to keep up — accuracy matters more than perfect spelling for short answers.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Writing:</strong> type your essays — word count shown automatically</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">You can copy, paste, and edit freely. The word counter updates live — always hit the minimums (150 for Task 1, 250 for Task 2) before submitting.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Speaking:</strong> recorded in a booth — no examiner in the room</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Speak clearly and at a natural pace into the microphone. Some students find it easier without a person watching — use Toody's speaking sessions to get comfortable with this format.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>You can <strong>copy/paste</strong> in Writing, use <strong>highlight tool</strong> in Reading</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">These tools are provided at no cost to your score. Use the highlighter in Reading to mark evidence as you answer each question. In Writing, restructure freely — no marks deducted for edits.</div>
+        </div>
       </div>
       <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
     </div>
@@ -339,9 +474,18 @@
         <h2 class="bc-title">The One Thing Most Students Get Wrong</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">They practise <strong>answering questions.</strong> They don't practise understanding <strong>why answers are right or wrong</strong></div>
-        <div class="bc-pill"><strong>Band 6</strong> students know the rules. <strong>Band 7</strong> students know how the <strong>examiner thinks</strong></div>
-        <div class="bc-pill">Toody's job: teach you to <strong>think like the examiner,</strong> not just answer like a student</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>They practise <strong>answering questions</strong> — not understanding <strong>why answers are right or wrong</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Doing 100 practice tests without reviewing errors deeply just reinforces bad habits. Toody's feedback names the exact reasoning failure — not just the right answer.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span><strong>Band 6</strong> students know the rules. <strong>Band 7</strong> students know how the <strong>examiner thinks</strong></span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Rules tell you True means explicitly stated. Thinking like an examiner tells you why hedging language like "may suggest" will never be True — even if the passage seems to support it.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Toody's job: teach you to <strong>think like the examiner</strong> — not just answer like a student</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Every piece of feedback Toody gives names the exact reasoning error — not "you got this wrong" but "you read this as evidence when it's actually hedging language".</div>
+        </div>
       </div>
       <div class="bc-coach-note">"From this point, everything Toody teaches is examiner-first thinking."</div>
       <button class="bc-btn" onclick="nextIELTSCard()">Next <span class="arrow">→</span></button>
@@ -355,10 +499,22 @@
         <h2 class="bc-title">You're Starting with Reading</h2>
       </div>
       <div class="bc-pills">
-        <div class="bc-pill">Today's skill: <strong>True / False / Not Given</strong> — the most misunderstood question type in IELTS Reading</div>
-        <div class="bc-pill">Most students confuse <strong>False</strong> with <strong>Not Given</strong>. By the end of today, you won't.</div>
-        <div class="bc-pill">Toody will teach the concept first, then walk you through examples, then put you under real conditions.</div>
-        <div class="bc-pill">The session takes about <strong>15–20 minutes.</strong> Don't rush — the first session sets the foundation.</div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Today's skill: <strong>True / False / Not Given</strong> — the most misunderstood question type in IELTS Reading</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">T/F/NG tests whether a statement is confirmed, contradicted, or simply not addressed by the passage. The "not addressed" category is the one most students miss.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Most students confuse <strong>False</strong> with <strong>Not Given</strong>. By the end of today, you won't.</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">By the end of today's session, you'll be able to name the exact difference — not just know it, but explain it and apply it under exam conditions.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>Toody will teach the concept first, then examples, then real conditions</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">The teach-first approach means you understand the rule before you're tested on it. Most apps test first. Toody teaches first — then tests.</div>
+        </div>
+        <div class="bc-pill bc-pill-exp" onclick="togglePill(this)">
+          <div class="bc-pill-top"><span>The session takes about <strong>15–20 minutes</strong> — the first session sets the foundation</span><span class="bc-chevron">▾</span></div>
+          <div class="bc-pill-body">Day 1 is intentionally focused. The goal is concept clarity, not volume. Speed and stamina come after you understand what you're looking for.</div>
+        </div>
       </div>
       <div class="bc-coach-note">"Reading accuracy is the fastest path to a higher band — because every correct answer counts equally."</div>
       <button class="bc-btn bc-btn-start" onclick="finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>

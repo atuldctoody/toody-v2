@@ -304,6 +304,13 @@ function renderMarkdown(s) {
 // Legacy alias — retained for any call sites not yet updated
 const boldify = renderMarkdown;
 
+// Expandable briefing/IELTS overview pill — only one open at a time per card
+window.togglePill = function (el) {
+  const isOpen = el.classList.contains('open');
+  el.closest('.bc-pills').querySelectorAll('.bc-pill-exp.open').forEach(p => p.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+};
+
 // ── ANSWER NORMALISER ────────────────────────────────────────────
 function normaliseAnswer(raw) {
   if (raw == null) return '';
