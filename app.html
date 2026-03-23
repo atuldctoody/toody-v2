@@ -458,7 +458,7 @@
 <!-- ══════════════════════ HOME ══════════════════════ -->
 <div class="screen" id="s-home">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><img id="dev-logo-trigger" class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
     <div class="nav-right">
       <div class="streak-badge" id="home-streak">🔥 0 days</div>
       <div class="day-badge" id="home-day-badge">0 done</div>
@@ -532,6 +532,11 @@
       <button class="hmb-btn" onclick="window.startFullMockSetup()">Start →</button>
     </div>
     <button class="btn-secondary mt10" style="width:100%;font-size:13px" onclick="window.goToMockHistory()">View Mock History</button>
+  </div>
+
+  <!-- DEV ONLY — hidden reset button, revealed by 3s long-press on logo -->
+  <div style="text-align:center;padding:24px 0 8px">
+    <button id="dev-reset-btn" onclick="window.devResetAccount()" style="display:none;font-size:11px;color:#bbb;background:none;border:1px solid #ddd;border-radius:6px;padding:4px 10px;cursor:pointer">⚠ Reset account (dev)</button>
   </div>
 </div>
 

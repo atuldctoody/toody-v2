@@ -6,7 +6,7 @@ import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/
 import {
   doc, getDoc, setDoc, updateDoc,
   addDoc, collection, getDocs,
-  orderBy, query, serverTimestamp
+  orderBy, query, serverTimestamp, deleteDoc
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 
@@ -487,6 +487,7 @@ onAuthStateChanged(auth, async user => {
     return;
   }
   currentUser = user;
+  initDevTools();
   await bootApp();
 });
 
@@ -4653,6 +4654,48 @@ window.goToMockHistory = async function () {
 
 
 window.goToHome = function () { renderHome(); goTo('s-home'); };
+
+// ── DEV TOOLS (testing only — not visible to students) ───────────
+// Long-press 3s on home logo  → shows the hidden reset button
+// Long-press 3s on streak     → skips straight to home (returning-student test)
+
+function _attachLongPress(elId, ms, cb) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  let t = null;
+  const start = () => { t = setTimeout(cb, ms); };
+  const cancel = () => { clearTimeout(t); t = null; };
+  el.addEventListener('touchstart',  start,  { passive: true });
+  el.addEventListener('touchend',    cancel);
+  el.addEventListener('touchcancel', cancel);
+  el.addEventListener('mousedown',   start);
+  el.addEventListener('mouseup',     cancel);
+  el.addEventListener('mouseleave',  cancel);
+}
+
+function initDevTools() {
+  // Logo long-press → reveal the reset button
+  _attachLongPress('dev-logo-trigger', 3000, () => {
+    const btn = document.getElementById('dev-reset-btn');
+    if (btn) btn.style.display = btn.style.display === 'none' ? 'block' : 'none';
+  });
+  // Streak long-press → skip onboarding/briefing and jump straight to home
+  _attachLongPress('home-streak', 3000, () => {
+    if (!studentData) return;
+    renderHome();
+    goTo('s-home');
+  });
+}
+
+window.devResetAccount = async function () {
+  if (!confirm('Reset account? This deletes all Firestore data and signs out.')) return;
+  try {
+    if (currentUser) await deleteDoc(doc(db, 'students', currentUser.uid));
+  } catch { /* non-fatal */ }
+  localStorage.clear();
+  try { await signOut(auth); } catch { /* non-fatal */ }
+  window.location.href = 'index.html';
+};
 
 window.signOutUser = async function () {
   try {
