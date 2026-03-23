@@ -1111,13 +1111,14 @@ window.goToSession = function (forceSkillKey) {
   if (plan.skill === 'minimock') { setupMiniMock(); goTo('s-minimock'); return; }
 
   const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
+  const teachFirstDone = studentData[`teachFirstDone_${toSkillId(plan.skill)}`] === true;
+  const shouldTeachFirst = isFirstTimeSkill && !teachFirstDone;
 
   // Onboarding gates (in order): briefing → teach-first
-  // hasSeenIELTSOverview is set by showIELTSModal() — no trigger here
-  console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen);
+  console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen, '| teachFirstDone:', teachFirstDone);
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();
-  } else if (isFirstTimeSkill && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
+  } else if (shouldTeachFirst && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
     loadTeachFirst(plan.skill);
   } else if (sessionCount > 0 && plan.screen === 's-reading') {
     loadWarmup(plan);
@@ -1667,6 +1668,9 @@ window.startRealSession = function () {
   const plan = currentPlan || pickNextSkill();
   const label = plan.label || 'Reading';
   const teachingMinutes = teachStartTime ? Math.round((Date.now() - teachStartTime) / 60000) : 0;
+  const skillDoneKey = `teachFirstDone_${toSkillId(plan.skill)}`;
+  if (studentData) studentData[skillDoneKey] = true;
+  if (currentUser) updateStudentDoc(currentUser.uid, { [skillDoneKey]: true }).catch(() => {});
   if (currentUser && teachingMinutes > 0) {
     updateStudentDoc(currentUser.uid, { lastTeachingMinutes: teachingMinutes }).catch(() => {});
   }
@@ -2846,6 +2850,8 @@ window.submitWriting = async function () {
   window._submitWritingRunning = true;
   const text = document.getElementById('writing-textarea').value.trim();
   if (!text || text.split(/\s+/).length < 30) {
+    window._submitWritingRunning = false;
+    document.getElementById('btn-writing-submit').disabled = false;
     showToast('Please write at least a few sentences before submitting.');
     return;
   }
@@ -2899,9 +2905,11 @@ Return ONLY this JSON:
     document.getElementById('writing-evaluating').classList.add('hidden');
     document.getElementById('writing-results-view').classList.remove('hidden');
   } catch {
-    showToast('Having trouble connecting — please check your internet and try again.');
-    document.getElementById('writing-evaluating').innerHTML =
-      '<p style="color:var(--danger);padding:20px;text-align:center">Evaluation failed. Please go back and try again.</p>';
+    window._submitWritingRunning = false;
+    document.getElementById('btn-writing-submit').disabled = false;
+    document.getElementById('writing-evaluating').classList.add('hidden');
+    document.getElementById('writing-prompt-view').classList.remove('hidden');
+    showToast('Evaluation failed — please try submitting again.');
   }
 };
 

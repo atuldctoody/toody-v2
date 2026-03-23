@@ -1,0 +1,25 @@
+{
+  "name": "toody-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright test --reporter=html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atuldctoody/toody-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/atuldctoody/toody-v2/issues"
+  },
+  "homepage": "https://github.com/atuldctoody/toody-v2#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
