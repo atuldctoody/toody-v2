@@ -59,7 +59,7 @@ let   _goingBack      = false;
 // Screens that must never appear in the back-navigation stack.
 // Onboarding/briefing/overview screens are one-way flows — once completed they are non-replayable.
 const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2','s-briefing']);
-const BRIEFING_COLORS    = ['var(--accent-light)','var(--danger-light)','var(--success-light)','var(--yellow-light)','var(--accent-light)'];
+const BRIEFING_COLORS    = ['var(--danger-light)','var(--success-light)','var(--yellow-light)','var(--accent-light)'];
 let pendingDate       = null;
 let pendingExperience = null;
 let pendingName       = '';
@@ -784,7 +784,7 @@ window.finishOnboarding = async function () {
 // ── DAY 1 BRIEFING ───────────────────────────────────────────────
 function initBriefing() {
   briefingCard = 0;
-  document.querySelectorAll('.bc').forEach((c, i) => {
+  document.querySelectorAll('#s-briefing .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
     c.classList.toggle('hidden', i !== 0);
     c.style.animation = '';
@@ -800,7 +800,7 @@ function _setBriefingBg(idx) {
 }
 
 function _updateBriefingDots(idx) {
-  document.querySelectorAll('.bc-dot').forEach((d, i) => {
+  document.querySelectorAll('#briefing-dots .bc-dot').forEach((d, i) => {
     d.classList.toggle('active', i === idx);
     d.classList.toggle('done', i < idx);
   });
