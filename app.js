@@ -835,26 +835,25 @@ window.finishBriefing = async function () {
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 async function initIELTSOverview() {
-  // ── DIAGNOSTIC LOGGING ──────────────────────────────────────────
-  console.trace('[IELTS-OVERVIEW] call stack');
-  let firestoreValue = '(read failed)';
-  try {
-    const snap = await getDoc(doc(db, 'students', currentUser.uid));
-    firestoreValue = snap.data()?.hasSeenIELTSOverview;
-  } catch (e) { firestoreValue = '(error: ' + e.message + ')'; }
-  console.log('[IELTS-OVERVIEW] called. hasSeenIELTSOverview (local) =', studentData?.hasSeenIELTSOverview, '| Firestore =', firestoreValue);
-  // ── END DIAGNOSTIC LOGGING ──────────────────────────────────────
-  // GUARD: if already seen (flag true in studentData from Firestore), skip to home — never show twice
-  if (studentData?.hasSeenIELTSOverview) {
-    console.log('[initIELTSOverview] already seen — routing to home');
+  // GUARD: fresh Firestore read — never trust potentially stale local studentData for this check
+  const studentRef = doc(db, 'students', currentUser.uid);
+  const freshSnap = await getDoc(studentRef);
+  if (freshSnap.data()?.hasSeenIELTSOverview === true) {
+    console.log('[IELTS-OVERVIEW] already seen (Firestore) — routing to home');
     renderHome(); goTo('s-home'); return;
   }
-  // Write flag NOW (before showing the screen) so a studentData refresh after this point never re-triggers
-  if (currentUser && studentData) {
-    updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true })
-      .catch(e => console.warn('[initIELTSOverview] flag write failed:', e));
+
+  // Write flag with awaited call — proceed only after confirmed write
+  try {
+    await updateDoc(studentRef, { hasSeenIELTSOverview: true });
     studentData.hasSeenIELTSOverview = true;
+    console.log('[IELTS-OVERVIEW] flag written successfully');
+  } catch (err) {
+    console.error('[IELTS-OVERVIEW] flag write failed:', err);
+    // Still set locally so the in-memory guard works for this session
+    if (studentData) studentData.hasSeenIELTSOverview = true;
   }
+
   ieltsCard = 0;
   document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
