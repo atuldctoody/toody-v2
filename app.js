@@ -843,21 +843,38 @@ window.finishBriefing = async function () {
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 async function initIELTSOverview() {
+  // ── DIAGNOSTIC ALERT ──
+  window._ieltsCount = (window._ieltsCount || 0) + 1;
+  alert('[IELTS] call #' + window._ieltsCount + '\n\nStack: ' + new Error().stack.split('\n').slice(0,5).join('\n'));
+  if (window._ieltsCount > 1) {
+    alert('[IELTS] DUPLICATE — blocking and going home');
+    goTo('s-home'); return;
+  }
+  // ── END DIAGNOSTIC ──
+
   if (window._ieltsOverviewRunning) return;
   window._ieltsOverviewRunning = true;
   try {
-    // Trust nothing local. Read directly from Firestore every time.
-    const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
-    const freshData = freshSnap.data();
-    if (freshData?.hasSeenIELTSOverview === true) {
+    // localStorage fast-path — check before hitting Firestore
+    const localFlag = localStorage.getItem('hasSeenIELTSOverview');
+    if (localFlag === 'true') {
       goTo('s-home'); window._ieltsOverviewRunning = false; return;
     }
 
-    // Write flag first, awaited — only show screen after confirmed write
+    // Firestore check — authoritative source
+    const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
+    if (freshSnap.data()?.hasSeenIELTSOverview === true) {
+      localStorage.setItem('hasSeenIELTSOverview', 'true');
+      goTo('s-home'); window._ieltsOverviewRunning = false; return;
+    }
+
+    // Write flag to both Firestore and localStorage before showing screen
     await updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true });
+    localStorage.setItem('hasSeenIELTSOverview', 'true');
     if (studentData) studentData.hasSeenIELTSOverview = true;
   } catch (err) {
     console.error('[IELTS-OVERVIEW] flag write failed:', err);
+    localStorage.setItem('hasSeenIELTSOverview', 'true');
     if (studentData) studentData.hasSeenIELTSOverview = true;
   }
 
