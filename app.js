@@ -848,6 +848,7 @@ window.finishBriefing = async function () {
 // Modal overlay — outside the navigation stack entirely. Cannot be
 // triggered by goTo(), auth state changes, or back-button history.
 function showIELTSModal() {
+  if (document.getElementById('ielts-modal').style.display === 'block') return;
   // Synchronous guard — no awaits, no race condition possible
   if (localStorage.getItem('hasSeenIELTSOverview') === 'true') return;
   localStorage.setItem('hasSeenIELTSOverview', 'true');
