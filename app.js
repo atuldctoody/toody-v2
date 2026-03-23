@@ -3983,7 +3983,7 @@ window.startFullMockGeneration = async function () {
         ]);
         const parsed = [s1, s2, s3, s4].map(r => parseAIJson(r));
         // Generate audio in sequence (rate limit friendly)
-        const audioUrls = [];
+        const audioBlobUrls = [];
         for (const sec of parsed) {
           try {
             const audioRes = await fetch(`${API_URL.replace('/generate', '/audio')}`, {
@@ -3991,13 +3991,18 @@ window.startFullMockGeneration = async function () {
               body: JSON.stringify({ text: sec.audioText })
             });
             const audioData = await audioRes.json();
-            audioUrls.push(audioData.audioUrl || null);
-          } catch { audioUrls.push(null); }
+            if (audioData.audio) {
+              const blob = base64ToBlob(audioData.audio, audioData.mimeType || 'audio/mpeg');
+              audioBlobUrls.push(URL.createObjectURL(blob));
+            } else {
+              audioBlobUrls.push(null);
+            }
+          } catch { audioBlobUrls.push(null); }
         }
         fullMockContent.listening = {
           sections: parsed.map((sec, i) => ({
             ...sec,
-            audioUrl: audioUrls[i],
+            audioUrl: audioBlobUrls[i],
             type: i === 2 ? 'formCompletion' : 'multipleChoice',
           }))
         };
@@ -4310,11 +4315,15 @@ window.toggleMockRecording = async function () {
         // Transcribe via Whisper
         stat.textContent = 'Transcribing...';
         try {
-          const formData = new FormData();
-          formData.append('audio', blob, 'speaking.webm');
-          const res = await fetch(API_URL.replace('/generate', '/transcribe'), { method: 'POST', body: formData });
+          const arrayBuffer = await blob.arrayBuffer();
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+          const res = await fetch(TRANSCRIBE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ audio: base64, mimeType: blob.type || 'audio/webm' })
+          });
           const data = await res.json();
-          fullMockSpeakingResp.transcript = data.transcript || '';
+          fullMockSpeakingResp.transcript = data.text || '';
           stat.textContent = 'Recording saved ✓';
         } catch { stat.textContent = 'Recording saved (transcription failed)'; }
       };
