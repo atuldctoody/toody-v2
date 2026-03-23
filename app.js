@@ -1031,8 +1031,8 @@ function buildExpectations(sessionCount, skill) {
   return list;
 }
 
-window.goToSession = function () {
-  const plan = currentPlan || pickNextSkill();
+window.goToSession = function (forceSkillKey) {
+  const plan = currentPlan || pickNextSkill(forceSkillKey);
   currentPlan = plan;
   const sessionCount = (studentData?.dayNumber || 1) - 1;
 
@@ -1099,7 +1099,7 @@ Return ONLY this JSON:
 window.answerWarmup = function (val) {
   if (!warmupQ) return;
   document.querySelectorAll('.warmup-btn').forEach(b => { b.disabled = true; });
-  warmupCorrect = val === warmupQ.answer;
+  warmupCorrect = normaliseAnswer(val) === normaliseAnswer(warmupQ.answer);
   const rf = document.getElementById('warmup-result');
   rf.classList.add('show', warmupCorrect ? 'good' : 'bad');
   rf.textContent = warmupCorrect
@@ -2540,7 +2540,7 @@ window.finishListeningSession = async function () {
   const listenMissed = {};
   listenQuestions.forEach(q => {
     const a = listenAnswers?.[q.id];
-    if (a !== undefined && String(a).toLowerCase() !== String(q.answer || '').toLowerCase()) {
+    if (a !== undefined && normaliseAnswer(String(a)) !== normaliseAnswer(q.answer || '')) {
       listenMissed[q.type || 'mc'] = (listenMissed[q.type || 'mc'] || 0) + 1;
     }
   });
@@ -3102,7 +3102,7 @@ function renderNotebook(correct, total, skillKey) {
   const answers   = isTfng || isSC ? sessionAnswers   : listenAnswers;
   const wrongQ    = questions.find(q => {
     const a = answers[q.id];
-    return typeof a === 'object' ? a.isRight === false : (a?.toLowerCase() !== q.answer?.toLowerCase());
+    return typeof a === 'object' ? a.isRight === false : (normaliseAnswer(a) !== normaliseAnswer(q.answer));
   });
   const weEl = document.getElementById('nb-worked-example');
   if (wrongQ) {
@@ -3255,7 +3255,7 @@ function _miniMockAutoSubmit(phase) {
     listenQuestions.forEach(q => { if (!listenAnswers[q.id]) listenAnswers[q.id] = ''; });
     listenCorrect = listenQuestions.filter(q => {
       const a = listenAnswers[q.id];
-      return String(a).toLowerCase() === String(q.answer || '').toLowerCase();
+      return normaliseAnswer(String(a)) === normaliseAnswer(q.answer || '');
     }).length;
     window.finishListeningSession();
   } else if (phase === 2) {
@@ -4084,8 +4084,8 @@ async function _evalMockTest() {
     fullMockContent.reading.passages.forEach((passage, pIdx) => {
       (passage.questions || []).forEach(q => {
         const qid = `r_${pIdx}_${q.id}`;
-        const given = (fullMockAnswers.reading?.[qid] || '').toLowerCase().trim();
-        const correct_ans = (q.answer || '').toLowerCase().trim();
+        const given = normaliseAnswer(fullMockAnswers.reading?.[qid] || '');
+        const correct_ans = normaliseAnswer(q.answer || '');
         total++;
         if (given === correct_ans) { correct++; }
         else { wrongQs.push({ ...q, givenAnswer: given, section: 'Reading', type: passage.type }); }
@@ -4101,8 +4101,8 @@ async function _evalMockTest() {
     fullMockContent.listening.sections.forEach((sec, sIdx) => {
       (sec.questions || []).forEach(q => {
         const qid = `l_${sIdx}_${q.id}`;
-        const given = (fullMockAnswers.listening?.[qid] || '').toLowerCase().trim();
-        const correct_ans = (q.answer || '').toLowerCase().trim();
+        const given = normaliseAnswer(fullMockAnswers.listening?.[qid] || '');
+        const correct_ans = normaliseAnswer(q.answer || '');
         total++;
         if (given === correct_ans || given === correct_ans.charAt(0)) { correct++; }
         else { wrongQs.push({ ...q, givenAnswer: given, section: 'Listening', type: sec.type }); }
