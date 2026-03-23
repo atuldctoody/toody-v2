@@ -1,4 +1,4 @@
-const CACHE = 'toody-v2-v10';
+const CACHE = 'toody-v2-v11';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -18,11 +18,14 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
-  );
+  e.waitUntil((async () => {
+    // Wipe ALL existing caches so no stale files survive the version bump
+    const cacheNames = await caches.keys();
+    await Promise.all(cacheNames.map(name => caches.delete(name)));
+    // Re-populate with current version
+    const cache = await caches.open(CACHE);
+    await cache.addAll(APP_SHELL);
+  })());
   self.clients.claim();
 });
 
