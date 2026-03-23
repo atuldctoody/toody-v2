@@ -849,6 +849,7 @@ window.finishBriefing = async function () {
 // Modal overlay — outside the navigation stack entirely. Cannot be
 // triggered by goTo(), auth state changes, or back-button history.
 function showIELTSModal() {
+  if (document.getElementById('ielts-modal').style.display === 'block') return;
   if (_ieltsModalShownThisSession) return;                               // process-lifetime guard — immune to DOM/localStorage state
   _ieltsModalShownThisSession = true;
   if (localStorage.getItem('hasSeenIELTSOverview') === 'true') return;  // returning user on same device
@@ -912,7 +913,7 @@ window.finishIELTSOverview = function () {
   if (window._finishIELTSOverviewRunning) return;
   window._finishIELTSOverviewRunning = true;
   hideIELTSModal();
-  loadTeachFirst('reading.tfng');
+  loadTeachFirst('reading-tfng');
 };
 
 // ── HOME ─────────────────────────────────────────────────────────
@@ -2860,6 +2861,8 @@ window.updateWordCount = function () {
 };
 
 window.submitWriting = async function () {
+  const btn = document.getElementById('btn-writing-submit');
+  btn.disabled = true;
   if (window._submitWritingRunning) return;
   window._submitWritingRunning = true;
   const text = document.getElementById('writing-textarea').value.trim();
