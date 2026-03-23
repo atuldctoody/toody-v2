@@ -1647,14 +1647,16 @@ let bhvScrolledUp    = false;
 let bhvScrollHandler = null;
 let bhvAnswerChanges = 0;    // count of answer changes before submission
 let bhvPrevFCValues  = {};   // { qnum: last recorded non-empty value } for FC inputs
+let bhvQChangedAnswer = {};  // { qnum: true } if student changed answer at least once
 
 function startSessionTracking() {
   bhvSessionStart  = Date.now();
   bhvQStart        = {};
   bhvQDuration     = {};
   bhvScrolledUp    = false;
-  bhvAnswerChanges = 0;
-  bhvPrevFCValues  = {};
+  bhvAnswerChanges  = 0;
+  bhvPrevFCValues   = {};
+  bhvQChangedAnswer = {};
   if (bhvScrollHandler) {
     window.removeEventListener('scroll', bhvScrollHandler);
     bhvScrollHandler = null;
@@ -1695,6 +1697,43 @@ function getBehaviourPayload() {
   const questionTimesSeconds   = {};
   Object.entries(bhvQDuration).forEach(([k, v]) => { questionTimesSeconds[k] = Math.round(v / 1000); });
   return { sessionDurationSec, avgTimePerQuestionSec, scrolledBackToPassage: bhvScrolledUp, questionTimesSeconds, answerChangesCount: bhvAnswerChanges };
+}
+
+// ── CONFIDENCE METRICS ────────────────────────────────────────────
+// Computes per-session confidence signals from per-question timing data.
+// questions: array of { id, answer }
+// answers:   { id: { val, isRight } } (reading) or { id: 'A' } (MC/FC)
+function computeConfidenceMetrics(questions, answers) {
+  const answered = questions.filter(q => bhvQDuration[q.id] != null);
+  if (!answered.length) return null;
+
+  let confidentCount = 0, hesitatedCount = 0, overconf = 0, underconf = 0;
+
+  answered.forEach(q => {
+    const durSec  = bhvQDuration[q.id] / 1000;
+    const changed = bhvQChangedAnswer[q.id] || false;
+    const a       = answers[q.id];
+    const isRight = typeof a === 'object'
+      ? a.isRight === true
+      : normaliseAnswer(String(a || '')) === normaliseAnswer(q.answer || '');
+
+    // Confident = answered in ≤20s without changing
+    if (durSec <= 20 && !changed) confidentCount++;
+    // Hesitation = took >15s before committing
+    if (durSec > 15)              hesitatedCount++;
+    // Overconfidence = answered in <10s but wrong
+    if (durSec < 10 && !isRight)  overconf++;
+    // Underconfidence = hesitated (>15s) but got it right
+    if (durSec > 15 && isRight)   underconf++;
+  });
+
+  const n = answered.length;
+  return {
+    confidenceScore:      Math.round((confidentCount / n) * 100),
+    hesitationRate:       Math.round((hesitatedCount / n) * 100),
+    overconfidenceEvents: overconf,
+    underconfidenceEvents: underconf,
+  };
 }
 
 async function updateStudentBrain(behaviour, accuracy, skillKey) {
@@ -2183,12 +2222,30 @@ async function finishReadingSession() {
       errorReasonsUpdate = mergedER;
     }
 
+    // Confidence profile
+    const confMetrics = computeConfidenceMetrics(sessionQuestions, sessionAnswers);
+    let confProfileUpdate = null;
+    if (confMetrics) {
+      const prevCP  = prevSkill.confidenceProfile || {};
+      const cpN     = (prevCP.sessions || 0) + 1;
+      const cpAlpha = 1 / Math.min(cpN, 10);
+      const cpEma   = (p, n) => Math.round(p + (n - p) * cpAlpha);
+      confProfileUpdate = {
+        avgConfidenceScore:    cpEma(prevCP.avgConfidenceScore    || 0, confMetrics.confidenceScore),
+        avgHesitationRate:     cpEma(prevCP.avgHesitationRate     || 0, confMetrics.hesitationRate),
+        overconfidenceEvents:  (prevCP.overconfidenceEvents  || 0) + confMetrics.overconfidenceEvents,
+        underconfidenceEvents: (prevCP.underconfidenceEvents || 0) + confMetrics.underconfidenceEvents,
+        sessions: cpN,
+      };
+    }
+
     await updateStudentDoc(currentUser.uid, {
       [`${subjPath}.accuracy`]:      newAccuracy,
       [`${subjPath}.attempted`]:     newAttempted,
       [`${subjPath}.lastPracticed`]: serverTimestamp(),
       [`${subjPath}.trend`]:         newAccuracy > (prevSkill.accuracy || 0) ? 'up' : newAccuracy < (prevSkill.accuracy || 0) ? 'down' : 'stable',
-      ...(errorReasonsUpdate ? { [`${subjPath}.errorReasons`]: errorReasonsUpdate } : {}),
+      ...(errorReasonsUpdate    ? { [`${subjPath}.errorReasons`]:     errorReasonsUpdate    } : {}),
+      ...(confProfileUpdate     ? { [`${subjPath}.confidenceProfile`]: confProfileUpdate    } : {}),
       dayNumber:        (studentData.dayNumber || 1) + 1,
       recentSkills:     [skillKey, ...(studentData.recentSkills || [])].slice(0, 5),
       streak:           newStreak,
@@ -2461,6 +2518,7 @@ window.checkFCProgress = function () {
     // Track if student changed a previously entered answer
     if (val.length > 0 && bhvPrevFCValues[q.id] && bhvPrevFCValues[q.id] !== val) {
       trackAnswerChange();
+      bhvQChangedAnswer[q.id] = true;
     }
     if (val.length > 0) bhvPrevFCValues[q.id] = val;
     return val.length > 0;
@@ -2540,11 +2598,29 @@ window.finishListeningSession = async function () {
       ? Math.round(((prevCorrect + listenCorrect) / newAttempted) * 100) : 0;
     const subjPath = `brain.subjects.ielts-academic.skills.${listenSkillId}`;
 
+    // Confidence profile
+    const lConfMetrics = computeConfidenceMetrics(listenQuestions, listenAnswers);
+    let lConfProfileUpdate = null;
+    if (lConfMetrics) {
+      const prevCP  = prevL.confidenceProfile || {};
+      const cpN     = (prevCP.sessions || 0) + 1;
+      const cpAlpha = 1 / Math.min(cpN, 10);
+      const cpEma   = (p, n) => Math.round(p + (n - p) * cpAlpha);
+      lConfProfileUpdate = {
+        avgConfidenceScore:    cpEma(prevCP.avgConfidenceScore    || 0, lConfMetrics.confidenceScore),
+        avgHesitationRate:     cpEma(prevCP.avgHesitationRate     || 0, lConfMetrics.hesitationRate),
+        overconfidenceEvents:  (prevCP.overconfidenceEvents  || 0) + lConfMetrics.overconfidenceEvents,
+        underconfidenceEvents: (prevCP.underconfidenceEvents || 0) + lConfMetrics.underconfidenceEvents,
+        sessions: cpN,
+      };
+    }
+
     await updateStudentDoc(currentUser.uid, {
       [`${subjPath}.accuracy`]:      newAccuracy,
       [`${subjPath}.attempted`]:     newAttempted,
       [`${subjPath}.lastPracticed`]: serverTimestamp(),
       [`${subjPath}.trend`]:         newAccuracy > (prevL.accuracy || 0) ? 'up' : newAccuracy < (prevL.accuracy || 0) ? 'down' : 'stable',
+      ...(lConfProfileUpdate ? { [`${subjPath}.confidenceProfile`]: lConfProfileUpdate } : {}),
       dayNumber:    (studentData.dayNumber || 1) + 1,
       recentSkills: [firestoreKey, ...(studentData.recentSkills || [])].slice(0, 5),
       streak:       (studentData.streak || 0) + 1,
@@ -3617,6 +3693,26 @@ function buildContextSnippet() {
     `STRONG: ${strong.length ? strong.join(', ') : 'No data yet — first session'}`,
     `WEAK: ${weakSkills.length ? weakSkills.join(', ') : 'No weak areas identified yet'}`,
     ...(topTfngErrors.length ? [`READING ERROR PATTERNS: ${topTfngErrors.join('; ')} — target these specific failures in T/F/NG questions`] : []),
+    ...(() => {
+      // Confidence signals — emit for any skill with ≥2 sessions of data
+      const CP_SKILL_LABELS = {
+        'reading-tfng':              'T/F/Not Given',
+        'reading-summaryCompletion': 'Summary Completion',
+        'listening-multipleChoice':  'Multiple Choice',
+        'listening-formCompletion':  'Form Completion',
+      };
+      const signals = [];
+      Object.entries(CP_SKILL_LABELS).forEach(([skillId, label]) => {
+        const cp = ctxSkills[skillId]?.confidenceProfile;
+        if (!cp || (cp.sessions || 0) < 2) return;
+        if (cp.overconfidenceEvents  >= 2) signals.push(`rushes and gets ${label} wrong (overconfidence ×${cp.overconfidenceEvents})`);
+        if (cp.underconfidenceEvents >= 2) signals.push(`hesitates on ${label} even when correct (underconfidence ×${cp.underconfidenceEvents})`);
+        else if (cp.avgHesitationRate > 60) signals.push(`consistently slow to commit on ${label} (${cp.avgHesitationRate}% hesitation rate)`);
+      });
+      return signals.length
+        ? [`CONFIDENCE PROFILE: ${signals.slice(0, 2).join('. ')}. Adjust difficulty and pacing accordingly.`]
+        : [];
+    })(),
     `PATTERN: ${patterns.length ? patterns.join('. ') + '.' : 'No pattern data yet.'}${learningStyle ? ' ' + learningStyle : ''}`,
     '',
     'INSTRUCTION FOR THIS SESSION:',
