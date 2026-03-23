@@ -105,7 +105,7 @@ let confQIdx          = 0;     // Confidence builder question index
 let confCorrect       = 0;     // Confidence correct count
 // IELTS Overview
 let ieltsCard         = 0;
-const IELTS_COLORS    = ['var(--accent-light)','var(--accent-light)','var(--success-light)','var(--yellow-light)','var(--danger-light)'];
+const IELTS_COLORS    = ['var(--accent-light)','var(--accent-light)','var(--success-light)','var(--yellow-light)','var(--danger-light)','var(--success-light)'];
 
 // ── SUBJECT-AGNOSTIC SCHEMA HELPERS ──────────────────────────────
 // Converts 'reading.tfng' → 'reading-tfng'
@@ -289,6 +289,10 @@ function parseAIJson(raw) {
   s = s.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
   return JSON.parse(s);
 }
+
+// ── MARKDOWN → HTML HELPERS ──────────────────────────────────────
+// Converts **bold** markers from AI text to <strong> tags.
+function boldify(s) { return String(s || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
 
 // ── ANSWER NORMALISER ────────────────────────────────────────────
 function normaliseAnswer(raw) {
@@ -810,6 +814,11 @@ window.finishBriefing = async function () {
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 function initIELTSOverview() {
+  // Mark as seen immediately so navigating back doesn't re-trigger it
+  if (currentUser && studentData && !studentData.hasSeenIELTSOverview) {
+    updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true }).catch(() => {});
+    if (studentData) studentData.hasSeenIELTSOverview = true;
+  }
   ieltsCard = 0;
   document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
@@ -845,11 +854,7 @@ function _showIELTSCard(nextIdx, direction) {
   _updateBackBtn('s-ielts');
 }
 
-window.finishIELTSOverview = async function () {
-  try {
-    await updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true });
-    if (studentData) studentData.hasSeenIELTSOverview = true;
-  } catch { /* non-critical */ }
+window.finishIELTSOverview = function () {
   loadTeachFirst('reading.tfng');
 };
 
@@ -1103,9 +1108,9 @@ window.answerWarmup = function (val) {
   warmupCorrect = normaliseAnswer(val) === normaliseAnswer(warmupQ.answer);
   const rf = document.getElementById('warmup-result');
   rf.classList.add('show', warmupCorrect ? 'good' : 'bad');
-  rf.textContent = warmupCorrect
-    ? `✅ Correct. ${warmupQ.explanation}`
-    : `❌ The answer is ${warmupQ.answer}. ${warmupQ.explanation}`;
+  rf.innerHTML = warmupCorrect
+    ? `✅ Correct. ${boldify(warmupQ.explanation)}`
+    : `❌ The answer is ${warmupQ.answer}. ${boldify(warmupQ.explanation)}`;
   document.getElementById('warmup-continue-btn').classList.remove('hidden');
 };
 
@@ -1240,6 +1245,7 @@ function renderHookQuestion() {
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.disabled = false;
     b.classList.remove('correct', 'wrong');
+    b.blur();
   });
   document.getElementById('teach-hook-reveal').classList.add('hidden');
   document.getElementById('teach-hook').classList.remove('hidden');
@@ -1503,9 +1509,11 @@ window.answerDrill = function (idx, val) {
   });
   const rf = document.getElementById(`drill-result-${idx}`);
   rf.classList.add('show', isRight ? 'good' : 'bad');
-  rf.innerHTML = isRight ? `\u2705 Correct. ${q.explanation}` : `\u274c Answer: <strong>${q.answer}</strong>. ${q.explanation}`;
-
-  setTimeout(() => renderDrillQuestion(idx + 1), 1200);
+  const qs2b = teachData.drillQuestions || teachData.confidenceQuestions || [];
+  const hasNext = idx + 1 < qs2b.length;
+  rf.innerHTML = (isRight ? `✅ Correct. ${boldify(q.explanation)}` : `❌ Answer: <strong>${q.answer}</strong>. ${boldify(q.explanation)}`)
+    + (hasNext ? `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderDrillQuestion(${idx + 1})">Next question →</button>` : '');
+  if (!hasNext) setTimeout(() => renderDrillQuestion(idx + 1), 1000);
 };
 
 function saveLearningStyleSignal(type) {
@@ -1554,22 +1562,20 @@ window.answerConfidence = function (val) {
     if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(q.answer)) b.classList.add('correct');
     else if (b.dataset.mv === val && !isCorrect) b.classList.add('wrong');
   });
-  const rf = document.getElementById('teach-conf-result');
-  rf.classList.add('show', isCorrect ? 'good' : 'bad');
-  rf.textContent = isCorrect
-    ? `✅ Correct. ${q.explanation}`
-    : `❌ The answer is ${q.answer}. ${q.explanation}`;
-  setTimeout(() => {
-    if (confQIdx + 1 >= qs.length) {
-      const bubble = document.getElementById('teach-conf-bubble');
-      if (confCorrect === 2 && bubble) bubble.textContent = "You’ve got the pattern. Now let’s see it under real conditions.";
-      else if (bubble)                 bubble.textContent = "Good effort — let’s see the full session now.";
-      document.getElementById('teach-celebrate').classList.remove('hidden');
-      setTimeout(() => window.startRealSession(), 2000);
-    } else {
-      renderConfidenceQuestion(confQIdx + 1);
-    }
-  }, 1600);
+  const rf = document.getElementById(‘teach-conf-result’);
+  rf.classList.add(‘show’, isCorrect ? ‘good’ : ‘bad’);
+  const isLastConfQ = confQIdx + 1 >= qs.length;
+  rf.innerHTML = (isCorrect ? `✅ Correct. ${boldify(q.explanation)}` : `❌ The answer is ${q.answer}. ${boldify(q.explanation)}`)
+    + (isLastConfQ
+        ? ‘’
+        : `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderConfidenceQuestion(${confQIdx + 1})">Next question →</button>`);
+  if (isLastConfQ) {
+    const bubble = document.getElementById(‘teach-conf-bubble’);
+    if (confCorrect === 2 && bubble) bubble.textContent = "You’ve got the pattern. Now let’s see it under real conditions.";
+    else if (bubble)                 bubble.textContent = "Good effort — let’s see the full session now.";
+    document.getElementById(‘teach-celebrate’).classList.remove(‘hidden’);
+    setTimeout(() => window.startRealSession(), 2000);
+  }
 };
 window.startRealSession = function () {
   const plan = currentPlan || pickNextSkill();
@@ -1580,7 +1586,7 @@ window.startRealSession = function () {
   }
   document.getElementById('phase2-skill-name').textContent = label;
   goTo('s-phase2');
-  setTimeout(() => loadReadingSession(), 1500);
+  setTimeout(() => launchSkillScreen(plan), 1500);
 };
 
 // ── TIP SCREEN ────────────────────────────────────────────────────
@@ -1913,6 +1919,11 @@ Return ONLY this JSON:
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
 
+ANSWER FORMAT RULES (mandatory):
+- The "answer" field must contain exactly one of: True, False, or NG. Nothing else.
+- Never use pipe-separated formats like "True|False". Never use option labels like A/B/C.
+- Every explanation must name the specific word, phrase, or logical feature that determines the answer. Never explain by location alone.
+
 For each question, set "errorReason" to the reasoning trap this question is specifically designed to test. Valid values:
 - "synonymTrap" — statement paraphrases passage with near-synonym; student reads meaning not exact evidence
 - "hedgingMissed" — answer hinges on hedging language in passage (may, suggests, could, tends to)
@@ -1920,6 +1931,11 @@ For each question, set "errorReason" to the reasoning trap this question is spec
 - "scopeError" — statement claims more or less than passage actually states (all vs some, always vs usually)
 - "notGivenMarkedFalse" — passage is silent on claim; designed to catch students who mark silence as contradiction
 - "other" — does not fit a specific category above
+
+SELF-VERIFICATION (do this before returning):
+1. For each question, confirm the answer is exactly one word: True, False, or NG.
+2. For each explanation, confirm it names a specific word or phrase — not just a paragraph number.
+3. For NG answers, confirm the passage is genuinely silent on the claim (not just ambiguous).
 
 Return ONLY this JSON:
 {
@@ -2083,8 +2099,8 @@ window.answerTFNG = function (qnum, val) {
   const rf = document.getElementById(`rf${qnum}`);
   rf.classList.add('show', isRight ? 'good' : 'bad');
   rf.innerHTML = isRight
-    ? `✅ Correct. ${q.explanation}`
-    : `❌ The answer is <strong>${q.answer}</strong>. ${q.explanation}`;
+    ? `✅ Correct. ${boldify(q.explanation)}`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${boldify(q.explanation)}`;
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
     document.getElementById('btn-reading-submit').disabled = false;
