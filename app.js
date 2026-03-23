@@ -280,6 +280,15 @@ async function withRetry(fn, maxRetries = 3) {
   throw lastErr;
 }
 
+// ── AI JSON PARSER ────────────────────────────────────────────────
+// GPT-4o-mini often wraps responses in ```json … ``` despite instructions.
+// This strips all markdown code fences before parsing.
+function parseAIJson(raw) {
+  let s = (raw || '').trim();
+  s = s.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  return JSON.parse(s);
+}
+
 // ── ANSWER NORMALISER ────────────────────────────────────────────
 function normaliseAnswer(raw) {
   if (raw == null) return '';
@@ -1077,7 +1086,7 @@ Return ONLY this JSON:
 
   try {
     const raw  = await callAI(prompt);
-    warmupQ = JSON.parse(raw);
+    warmupQ = parseAIJson(raw);
     document.getElementById('warmup-passage').textContent   = warmupQ.passage;
     document.getElementById('warmup-statement').textContent = warmupQ.statement;
     document.getElementById('warmup-loading').classList.add('hidden');
@@ -1197,7 +1206,7 @@ Return ONLY this JSON:
 
   try {
     const raw  = await callAI(prompt);
-    teachData  = JSON.parse(raw);
+    teachData  = parseAIJson(raw);
 
     // Render concept bullets
     const bullets = Array.isArray(teachData.concept)
@@ -1610,7 +1619,7 @@ Generate a personalised coaching tip. Return ONLY this JSON:
 
   try {
     const raw = await callAI(prompt);
-    const tip = JSON.parse(raw);
+    const tip = parseAIJson(raw);
     document.getElementById('tip-text').textContent =
       [tip.observation, tip.revelation, tip.action].filter(Boolean).join(' ');
     if (tip.nextSessionInstruction) {
@@ -1881,7 +1890,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI(prompt);
-    const parsed = JSON.parse(raw);
+    const parsed = parseAIJson(raw);
 
     sessionPassage   = parsed.passage;
     sessionQuestions = parsed.questions;
@@ -1902,10 +1911,11 @@ Return ONLY this JSON:
     startSessionTracking();
     setupScrollTracking();
     trackQStart(1);
-  } catch {
+  } catch (err) {
+    console.error('[loadReadingSession] failed:', err);
     showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('reading-loading').innerHTML =
-      '<p style="color:var(--danger);padding:20px;text-align:center">Could not load passage. Please go back and try again.</p>';
+      `<p style="color:var(--danger);padding:20px;text-align:center">Could not load passage. Please go back and try again.<br><small style="opacity:.6">${err?.message || ''}</small></p>`;
   }
 }
 
@@ -2241,7 +2251,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI(prompt);
-    const parsed = JSON.parse(raw);
+    const parsed = parseAIJson(raw);
     listenScenario  = parsed.transcript || parsed.scenario || '';
     listenQuestions = parsed.questions;
 
@@ -2573,7 +2583,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI(prompt);
-    writingTaskData = JSON.parse(raw);
+    writingTaskData = parseAIJson(raw);
 
     document.getElementById('writing-task-type').textContent = writingTaskData.taskType || `Writing Task ${taskNum}`;
     document.getElementById('writing-task-text').innerHTML   = writingTaskData.prompt
@@ -2641,7 +2651,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI({ ...prompt, maxTokens: 600 });
-    const result = JSON.parse(raw);
+    const result = parseAIJson(raw);
     writingBandEst = result.overallBand || 6.0;
 
     document.getElementById('writing-overall-band').textContent  = writingBandEst.toFixed(1);
@@ -2762,7 +2772,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI(prompt);
-    const parsed = JSON.parse(raw);
+    const parsed = parseAIJson(raw);
     speakingQs   = parsed.questions || [];
 
     document.getElementById('speaking-topic-label').textContent = parsed.topicLabel || partLabel;
@@ -2877,7 +2887,7 @@ Return ONLY this JSON:
 
   try {
     const raw    = await callAI({ ...prompt, maxTokens: 600 });
-    const result = JSON.parse(raw);
+    const result = parseAIJson(raw);
     speakingBandEst = result.overallBand || 6.0;
 
     document.getElementById('speaking-transcript-text').textContent = transcript || '[No transcript available]';
@@ -3669,9 +3679,9 @@ window.startFullMockGeneration = async function () {
         ]);
         fullMockContent.reading = {
           passages: [
-            { ...JSON.parse(p1), type: 'tfng' },
-            { ...JSON.parse(p2), type: 'matchingHeadings' },
-            { ...JSON.parse(p3), type: 'summaryCompletion' },
+            { ...parseAIJson(p1), type: 'tfng' },
+            { ...parseAIJson(p2), type: 'matchingHeadings' },
+            { ...parseAIJson(p3), type: 'summaryCompletion' },
           ]
         };
         _setGenStep('reading', 'done');
@@ -3690,7 +3700,7 @@ window.startFullMockGeneration = async function () {
           callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Form Completion section for Band ${band}. Return ONLY: {"scenario":"2-sentence description","audioText":"spoken conversation 150-180 words about a form","formTitle":"Form name","questions":[{"id":1,"fieldLabel":"Field name","answer":"answer word(s)","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
           callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Multiple Choice section (academic lecture context) for Band ${band}. Return ONLY: {"scenario":"2-sentence description","audioText":"academic lecture 180-200 words","questions":[{"id":1,"text":"question?","options":["A: option","B: option","C: option"],"answer":"A|B|C","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
         ]);
-        const parsed = [s1, s2, s3, s4].map(r => JSON.parse(r));
+        const parsed = [s1, s2, s3, s4].map(r => parseAIJson(r));
         // Generate audio in sequence (rate limit friendly)
         const audioUrls = [];
         for (const sec of parsed) {
@@ -3725,7 +3735,7 @@ window.startFullMockGeneration = async function () {
           user: `Generate both IELTS Writing tasks for Band ${band}. Return ONLY: {"task1":{"title":"Graph/Chart Description","prompt":"Describe the following [bar chart/line graph/table]. The graph shows [topic]. Write at least 150 words."},"task2":{"title":"Opinion Essay","prompt":"[Essay question on a relevant academic topic]. Give your opinion and support it with examples. Write at least 250 words."}}`,
           maxTokens: 600
         });
-        fullMockContent.writing = JSON.parse(raw);
+        fullMockContent.writing = parseAIJson(raw);
         _setGenStep('writing', 'done');
       } catch { _setGenStep('writing', 'error'); fullMockContent.writing = null; }
       updateBar();
@@ -3741,7 +3751,7 @@ window.startFullMockGeneration = async function () {
           user: `Generate IELTS Speaking test content for Band ${band}. Return ONLY: {"part1":{"topic":"Personal topic (e.g. hometown)","questions":["question 1?","question 2?","question 3?","question 4?","question 5?"]},"part2":{"topic":"Cue card topic","cueCard":["Describe [topic]. You should say:","- point 1","- point 2","- point 3","and explain [final point]."]},"part3":{"questions":["discussion question 1?","discussion question 2?","discussion question 3?","discussion question 4?","discussion question 5?"]}}`,
           maxTokens: 800
         });
-        fullMockContent.speaking = JSON.parse(raw);
+        fullMockContent.speaking = parseAIJson(raw);
         _setGenStep('speaking', 'done');
       } catch { _setGenStep('speaking', 'error'); fullMockContent.speaking = null; }
       updateBar();
@@ -4117,7 +4127,7 @@ Return ONLY: {"task1Band":6.0,"task2Band":6.5,"overallBand":6.5,"task1Feedback":
         maxTokens: 500
       };
       const raw = await callAI(evalPrompt);
-      const result = JSON.parse(raw);
+      const result = parseAIJson(raw);
       fullMockResults.writing = {
         band: result.overallBand || 6.0,
         task1Band: result.task1Band, task2Band: result.task2Band,
@@ -4140,7 +4150,7 @@ Return ONLY: {"overallBand":6.5,"fluencyBand":6.5,"lexicalBand":6.5,"grammarBand
         maxTokens: 400
       };
       const raw = await callAI(evalPrompt);
-      const result = JSON.parse(raw);
+      const result = parseAIJson(raw);
       fullMockResults.speaking = {
         band: result.overallBand || 6.0,
         feedback: result.feedback, topSuggestion: result.topSuggestion,
@@ -4281,7 +4291,7 @@ Generate an honest 3-5 sentence assessment. Return ONLY: {"debrief":"3-5 sentenc
       maxTokens: 400
     };
     const raw = await callAI(debriefPrompt);
-    const result = JSON.parse(raw);
+    const result = parseAIJson(raw);
     document.getElementById('mr-debrief-loading').classList.add('hidden');
     document.getElementById('mr-debrief').textContent = result.debrief || '';
     document.getElementById('mr-debrief').classList.remove('hidden');
