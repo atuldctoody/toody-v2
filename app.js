@@ -815,20 +815,20 @@ function _showBriefingCard(nextIdx, direction) {
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
+  // Write both flags atomically so a reload after briefing never re-triggers the overview
   try {
-    await updateStudentDoc(currentUser.uid, { briefingSeen: true });
-    if (studentData) studentData.briefingSeen = true;
-  } catch { /* non-critical */ }
+    await updateStudentDoc(currentUser.uid, { briefingSeen: true, hasSeenIELTSOverview: true });
+    if (studentData) { studentData.briefingSeen = true; studentData.hasSeenIELTSOverview = true; }
+  } catch (e) {
+    console.warn('[finishBriefing] Firestore write failed:', e);
+    if (studentData) { studentData.briefingSeen = true; studentData.hasSeenIELTSOverview = true; }
+  }
   initIELTSOverview();
 };
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 function initIELTSOverview() {
-  // Mark as seen immediately so navigating back doesn't re-trigger it
-  if (currentUser && studentData && !studentData.hasSeenIELTSOverview) {
-    updateStudentDoc(currentUser.uid, { hasSeenIELTSOverview: true }).catch(() => {});
-    if (studentData) studentData.hasSeenIELTSOverview = true;
-  }
+  // hasSeenIELTSOverview is written by finishBriefing() before this is called — no write needed here
   ieltsCard = 0;
   document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
@@ -1064,11 +1064,11 @@ window.goToSession = function (forceSkillKey) {
 
   const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
 
-  // Onboarding gates (in order): briefing → IELTS overview → teach-first
+  // Onboarding gates (in order): briefing → teach-first
+  // hasSeenIELTSOverview is written by finishBriefing() — no second trigger here
+  console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen);
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();
-  } else if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.hasSeenIELTSOverview) {
-    renderHome(); initIELTSOverview();
   } else if (isFirstTimeSkill && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
     loadTeachFirst(plan.skill);
   } else if (sessionCount > 0 && plan.screen === 's-reading') {
