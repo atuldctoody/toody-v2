@@ -58,7 +58,7 @@ const screenHistory   = [];
 let   _goingBack      = false;
 // Screens that must never appear in the back-navigation stack.
 // Onboarding/briefing/overview screens are one-way flows — once completed they are non-replayable.
-const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2','s-briefing','s-ielts']);
+const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2','s-briefing']);
 const BRIEFING_COLORS    = ['var(--accent-light)','var(--danger-light)','var(--success-light)','var(--yellow-light)','var(--accent-light)'];
 let pendingDate       = null;
 let pendingExperience = null;
@@ -456,26 +456,26 @@ function _updateBackBtn(screenId) {
   const btn = document.getElementById('global-back-btn');
   if (!btn) return;
   const show = screenHistory.length > 0
-    || (screenId === 's-briefing' && briefingCard > 0)
-    || (screenId === 's-ielts'    && ieltsCard    > 0);
+    || (screenId === 's-briefing' && briefingCard > 0);
   btn.classList.toggle('hidden', !show);
 }
 
 window.goBack = function () {
+  // Modal back navigation — modal is outside the screen stack
+  const modal = document.getElementById('ielts-modal');
+  if (modal && modal.style.display !== 'none') {
+    if (ieltsCard > 0) _showIELTSCard(ieltsCard - 1, 'back');
+    return;
+  }
   const cur = document.querySelector('.screen.active')?.id;
   if (cur === 's-briefing' && briefingCard > 0) { _showBriefingCard(briefingCard - 1, 'back'); return; }
-  if (cur === 's-ielts'    && ieltsCard    > 0) { _showIELTSCard(ieltsCard    - 1, 'back'); return; }
   if (screenHistory.length === 0) return;
   _goingBack = true;
-  // Skip any completed one-way screens still in the stack (e.g. s-ielts, s-briefing pushed before this fix)
   let prev;
   do {
     if (screenHistory.length === 0) { _goingBack = false; return; }
     prev = screenHistory.pop();
-  } while (
-    (prev === 's-ielts'    && studentData?.hasSeenIELTSOverview) ||
-    (prev === 's-briefing' && studentData?.briefingSeen)
-  );
+  } while (prev === 's-briefing' && studentData?.briefingSeen);
   goTo(prev);
 };
 
@@ -838,57 +838,47 @@ window.finishBriefing = async function () {
     if (studentData) studentData.briefingSeen = true;
   }
   window._finishBriefingRunning = false;
-  initIELTSOverview();
+  showIELTSModal();
 };
 
-// ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
-async function initIELTSOverview() {
-  if (window._ieltsOverviewRunning) return;
-  window._ieltsOverviewRunning = true;
+// ── IELTS OVERVIEW MODAL (one-time, after briefing) ───────────────
+// Modal overlay — outside the navigation stack entirely. Cannot be
+// triggered by goTo(), auth state changes, or back-button history.
+function showIELTSModal() {
+  // Synchronous guard — no awaits, no race condition possible
+  if (localStorage.getItem('hasSeenIELTSOverview') === 'true') return;
+  localStorage.setItem('hasSeenIELTSOverview', 'true');
 
-  // Cancellation token — if auth fires again and resets this, stale call bails
-  window._ieltsSessionId = (window._ieltsSessionId || 0) + 1;
-  const sessionId = window._ieltsSessionId;
-
-  try {
-    // localStorage fast-path — check before hitting Firestore
-    const localFlag = localStorage.getItem('hasSeenIELTSOverview');
-    if (localFlag === 'true') {
-      goTo('s-home'); window._ieltsOverviewRunning = false; return;
-    }
-
-    // Firestore check — authoritative source
-    const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
-    if (window._ieltsSessionId !== sessionId) { window._ieltsOverviewRunning = false; return; }
-    if (freshSnap.data()?.hasSeenIELTSOverview === true) {
-      localStorage.setItem('hasSeenIELTSOverview', 'true');
-      goTo('s-home'); window._ieltsOverviewRunning = false; return;
-    }
-
-    // Write flag to both Firestore and localStorage before showing screen
-    await updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true });
-    if (window._ieltsSessionId !== sessionId) { window._ieltsOverviewRunning = false; return; }
-    localStorage.setItem('hasSeenIELTSOverview', 'true');
-    if (studentData) studentData.hasSeenIELTSOverview = true;
-  } catch (err) {
-    console.error('[IELTS-OVERVIEW] flag write failed:', err);
-    localStorage.setItem('hasSeenIELTSOverview', 'true');
-    if (studentData) studentData.hasSeenIELTSOverview = true;
+  // Fire-and-forget Firestore write — intentionally not awaited
+  if (auth.currentUser) {
+    updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true })
+      .catch(err => console.warn('[IELTS-MODAL] Firestore write failed:', err));
   }
+  if (studentData) studentData.hasSeenIELTSOverview = true;
 
+  // Reset card state
   ieltsCard = 0;
-  document.querySelectorAll('#s-ielts .bc').forEach((c, i) => {
+  const modal = document.getElementById('ielts-modal');
+  document.querySelectorAll('#ielts-modal .bc').forEach((c, i) => {
     c.classList.toggle('active', i === 0);
     c.classList.toggle('hidden', i !== 0);
     c.style.animation = '';
   });
-  document.getElementById('s-ielts').style.background = IELTS_COLORS[0];
-  document.querySelectorAll('#s-ielts .bc-dot').forEach((d, i) => {
+  modal.style.background = IELTS_COLORS[0];
+  document.querySelectorAll('#ielts-modal .bc-dot').forEach((d, i) => {
     d.classList.toggle('active', i === 0);
     d.classList.remove('done');
   });
-  window._ieltsOverviewRunning = false;
-  goTo('s-ielts');
+  const backBtn = document.getElementById('ielts-modal-back');
+  if (backBtn) backBtn.classList.add('hidden');
+
+  modal.style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+function hideIELTSModal() {
+  const modal = document.getElementById('ielts-modal');
+  if (modal) modal.style.display = 'none';
 }
 
 window.nextIELTSCard = function () { _showIELTSCard(ieltsCard + 1, 'forward'); };
@@ -904,17 +894,19 @@ function _showIELTSCard(nextIdx, direction) {
   nextEl.style.animation = direction === 'back' ? 'bc-enter-back 0.3s ease' : 'bc-enter-fwd 0.3s ease';
   nextEl.classList.add('active');
   ieltsCard = nextIdx;
-  document.getElementById('s-ielts').style.background = IELTS_COLORS[nextIdx] || IELTS_COLORS[0];
-  document.querySelectorAll('#s-ielts .bc-dot').forEach((d, i) => {
+  document.getElementById('ielts-modal').style.background = IELTS_COLORS[nextIdx] || IELTS_COLORS[0];
+  document.querySelectorAll('#ielts-modal .bc-dot').forEach((d, i) => {
     d.classList.toggle('active', i === nextIdx);
     d.classList.toggle('done', i < nextIdx);
   });
-  _updateBackBtn('s-ielts');
+  const backBtn = document.getElementById('ielts-modal-back');
+  if (backBtn) backBtn.classList.toggle('hidden', nextIdx === 0);
 }
 
 window.finishIELTSOverview = function () {
   if (window._finishIELTSOverviewRunning) return;
   window._finishIELTSOverviewRunning = true;
+  hideIELTSModal();
   loadTeachFirst('reading.tfng');
 };
 
@@ -1118,7 +1110,7 @@ window.goToSession = function (forceSkillKey) {
   const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
 
   // Onboarding gates (in order): briefing → teach-first
-  // hasSeenIELTSOverview is owned by initIELTSOverview() — no trigger here
+  // hasSeenIELTSOverview is set by showIELTSModal() — no trigger here
   console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen);
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();

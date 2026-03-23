@@ -329,9 +329,15 @@
   </div>
 </div>
 
-<!-- ══════════════════════ IELTS OVERVIEW ══════════════════════ -->
-<div class="screen" id="s-ielts">
-  <div class="bc-wrap" id="ielts-wrap">
+<!-- ══════════════════════ IELTS OVERVIEW MODAL ══════════════════════ -->
+<!-- Fixed overlay — outside the screen navigation stack entirely -->
+<div id="ielts-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100dvh; z-index:9999; overflow-y:auto; transition:background 0.4s ease;">
+  <button id="ielts-modal-back" class="global-back-btn hidden" style="z-index:10000;" onclick="goBack()" aria-label="Go back">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <div class="bc-wrap" id="ielts-wrap" style="max-width:430px; margin:0 auto;">
 
     <!-- Card 1 -->
     <div class="bc active" id="ic-0">
