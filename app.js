@@ -1572,18 +1572,18 @@ window.answerConfidence = function (val) {
     if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(q.answer)) b.classList.add('correct');
     else if (b.dataset.mv === val && !isCorrect) b.classList.add('wrong');
   });
-  const rf = document.getElementById(‘teach-conf-result’);
-  rf.classList.add(‘show’, isCorrect ? ‘good’ : ‘bad’);
+  const rf = document.getElementById('teach-conf-result');
+  rf.classList.add('show', isCorrect ? 'good' : 'bad');
   const isLastConfQ = confQIdx + 1 >= qs.length;
   rf.innerHTML = (isCorrect ? `✅ Correct. ${boldify(q.explanation)}` : `❌ The answer is ${q.answer}. ${boldify(q.explanation)}`)
     + (isLastConfQ
-        ? ‘’
+        ? ''
         : `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderConfidenceQuestion(${confQIdx + 1})">Next question →</button>`);
   if (isLastConfQ) {
-    const bubble = document.getElementById(‘teach-conf-bubble’);
-    if (confCorrect === 2 && bubble) bubble.textContent = "You’ve got the pattern. Now let’s see it under real conditions.";
-    else if (bubble)                 bubble.textContent = "Good effort — let’s see the full session now.";
-    document.getElementById(‘teach-celebrate’).classList.remove(‘hidden’);
+    const bubble = document.getElementById('teach-conf-bubble');
+    if (confCorrect === 2 && bubble) bubble.textContent = "You've got the pattern. Now let's see it under real conditions.";
+    else if (bubble)                 bubble.textContent = "Good effort — let's see the full session now.";
+    document.getElementById('teach-celebrate').classList.remove('hidden');
     setTimeout(() => window.startRealSession(), 2000);
   }
 };
