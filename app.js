@@ -1,5 +1,6 @@
 import { auth, db } from './firebase-config.js';
-import { getVisionPrompt } from './api/vision-prompt.js';
+import { getVisionPrompt }  from './api/vision-prompt.js';
+import { verifyAnswers }   from './api/verify-answers.js';
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
   doc, getDoc, setDoc, updateDoc,
@@ -67,11 +68,12 @@ let pendingPurpose    = '';
 let pendingLastScore  = null;
 
 // Reading session
-let sessionQuestions = [];
-let sessionPassage   = '';
-let sessionAnswers   = {};   // { qnum: { val, isRight } }
-let sessionCorrect   = 0;
-let sessionTopic     = '';
+let sessionQuestions   = [];
+let sessionPassage     = '';
+let sessionAnswers     = {};   // { qnum: { val, isRight } }
+let sessionCorrect     = 0;
+let sessionTopic       = '';
+let sessionCorrections = [];   // Answer corrections from verifyAnswers() — logged to Firestore
 
 // Tough Love
 let tlQ           = null;
@@ -291,8 +293,15 @@ function parseAIJson(raw) {
 }
 
 // ── MARKDOWN → HTML HELPERS ──────────────────────────────────────
-// Converts **bold** markers from AI text to <strong> tags.
-function boldify(s) { return String(s || '').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
+// Converts **bold** and *italic* markers from AI text to HTML tags.
+// Apply to every AI explanation/feedback before inserting into innerHTML.
+function renderMarkdown(s) {
+  return String(s || '')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+?)\*/g,  '<em>$1</em>');
+}
+// Legacy alias — retained for any call sites not yet updated
+const boldify = renderMarkdown;
 
 // ── ANSWER NORMALISER ────────────────────────────────────────────
 function normaliseAnswer(raw) {
@@ -1627,8 +1636,8 @@ Generate a personalised coaching tip. Return ONLY this JSON:
   try {
     const raw = await callAI(prompt);
     const tip = parseAIJson(raw);
-    document.getElementById('tip-text').textContent =
-      [tip.observation, tip.revelation, tip.action].filter(Boolean).join(' ');
+    document.getElementById('tip-text').innerHTML =
+      renderMarkdown([tip.observation, tip.revelation, tip.action].filter(Boolean).join(' '));
     if (tip.nextSessionInstruction) {
       document.getElementById('tip-action-text').textContent = tip.nextSessionInstruction;
       document.getElementById('tip-action-pill').classList.remove('hidden');
@@ -1952,21 +1961,29 @@ Return ONLY this JSON:
     };
   }
 
+  sessionCorrections = [];
+
   try {
     const raw    = await callAI(prompt);
     const parsed = parseAIJson(raw);
 
-    sessionPassage   = parsed.passage;
-    sessionQuestions = parsed.questions;
-    sessionTopic     = parsed.topic || 'Reading';
+    sessionPassage = parsed.passage;
+    sessionTopic   = parsed.topic || 'Reading';
 
     if (isSCSession) {
-      sessionSummary  = parsed.summaryText || '';
-      sessionWordBank = parsed.wordBank    || [];
+      sessionQuestions = parsed.questions;
+      sessionSummary   = parsed.summaryText || '';
+      sessionWordBank  = parsed.wordBank    || [];
       renderSCSession(parsed);
     } else {
-      buildToughLove(parsed.questions, parsed.passage);
-      renderReadingSession(parsed);
+      // Run the Answer Verification Agent before showing anything to the student
+      const verified       = await verifyAnswers(parsed.passage, parsed.questions, API_URL);
+      sessionQuestions     = verified.questions;
+      sessionCorrections   = verified.corrections;
+
+      // Re-build tough love with verified (possibly corrected) questions
+      buildToughLove(verified.questions, parsed.passage);
+      renderReadingSession({ ...parsed, questions: verified.questions });
     }
 
     document.getElementById('reading-loading').classList.add('hidden');
@@ -2044,7 +2061,7 @@ function submitSCSession() {
       <div class="result-flash show ${isRight ? 'good' : 'bad'}" style="margin:6px 0">
         Gap [${q.id}]: ${isRight
           ? '✅ Correct.'
-          : `❌ Answer: <strong>${q.answer}</strong>. ${q.explanation}`}
+          : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation)}`}
       </div>`;
   });
 
@@ -2208,7 +2225,8 @@ async function finishReadingSession() {
       aiPassageTopic:     sessionTopic,
       missedSubTypes,
       durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
-      behaviour
+      behaviour,
+      ...(sessionCorrections.length ? { answerCorrections: sessionCorrections } : {}),
     });
 
     const prevCorrect  = Math.round(((prevSkill.accuracy || 0) / 100) * (prevSkill.attempted || 0));
@@ -2570,7 +2588,7 @@ window.submitListening = function () {
           ${isRight ? '✅' : '❌'} Your answer: <strong>${userAns}</strong>
           ${!isRight ? ` — Correct: <strong>${q.answer}</strong>` : ''}
         </div>
-        <div style="font-size:12px;color:var(--muted);margin-top:3px">${q.explanation || ''}</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px">${renderMarkdown(q.explanation || '')}</div>
       </div>`;
   });
 
@@ -2776,17 +2794,17 @@ Return ONLY this JSON:
     const result = parseAIJson(raw);
     writingBandEst = result.overallBand || 6.0;
 
-    document.getElementById('writing-overall-band').textContent  = writingBandEst.toFixed(1);
-    document.getElementById('writing-encouragement').textContent = result.encouragement || '';
-    document.getElementById('wc-ta-band').textContent  = result.taskAchievement?.band?.toFixed(1)    || '—';
-    document.getElementById('wc-ta-fb').textContent    = result.taskAchievement?.feedback            || '';
-    document.getElementById('wc-cc-band').textContent  = result.coherenceCohesion?.band?.toFixed(1)  || '—';
-    document.getElementById('wc-cc-fb').textContent    = result.coherenceCohesion?.feedback          || '';
-    document.getElementById('wc-lr-band').textContent  = result.lexicalResource?.band?.toFixed(1)    || '—';
-    document.getElementById('wc-lr-fb').textContent    = result.lexicalResource?.feedback            || '';
-    document.getElementById('wc-gr-band').textContent  = result.grammaticalRange?.band?.toFixed(1)   || '—';
-    document.getElementById('wc-gr-fb').textContent    = result.grammaticalRange?.feedback           || '';
-    document.getElementById('writing-suggestion').textContent = result.topSuggestion || '';
+    document.getElementById('writing-overall-band').textContent = writingBandEst.toFixed(1);
+    document.getElementById('writing-encouragement').innerHTML  = renderMarkdown(result.encouragement || '');
+    document.getElementById('wc-ta-band').textContent  = result.taskAchievement?.band?.toFixed(1)   || '—';
+    document.getElementById('wc-ta-fb').innerHTML      = renderMarkdown(result.taskAchievement?.feedback   || '');
+    document.getElementById('wc-cc-band').textContent  = result.coherenceCohesion?.band?.toFixed(1) || '—';
+    document.getElementById('wc-cc-fb').innerHTML      = renderMarkdown(result.coherenceCohesion?.feedback || '');
+    document.getElementById('wc-lr-band').textContent  = result.lexicalResource?.band?.toFixed(1)   || '—';
+    document.getElementById('wc-lr-fb').innerHTML      = renderMarkdown(result.lexicalResource?.feedback   || '');
+    document.getElementById('wc-gr-band').textContent  = result.grammaticalRange?.band?.toFixed(1)  || '—';
+    document.getElementById('wc-gr-fb').innerHTML      = renderMarkdown(result.grammaticalRange?.feedback  || '');
+    document.getElementById('writing-suggestion').innerHTML = renderMarkdown(result.topSuggestion || '');
 
     document.getElementById('writing-evaluating').classList.add('hidden');
     document.getElementById('writing-results-view').classList.remove('hidden');
@@ -3014,15 +3032,15 @@ Return ONLY this JSON:
 
     document.getElementById('speaking-transcript-text').textContent = transcript || '[No transcript available]';
     document.getElementById('speaking-overall-band').textContent    = speakingBandEst.toFixed(1);
-    document.getElementById('sc-fc-band').textContent  = result.fluencyCoherence?.band?.toFixed(1) || '—';
-    document.getElementById('sc-fc-fb').textContent    = result.fluencyCoherence?.feedback         || '';
-    document.getElementById('sc-lr-band').textContent  = result.lexicalResource?.band?.toFixed(1)  || '—';
-    document.getElementById('sc-lr-fb').textContent    = result.lexicalResource?.feedback          || '';
-    document.getElementById('sc-gr-band').textContent  = result.grammaticalRange?.band?.toFixed(1) || '—';
-    document.getElementById('sc-gr-fb').textContent    = result.grammaticalRange?.feedback         || '';
-    document.getElementById('sc-pr-band').textContent  = result.pronunciation?.band?.toFixed(1)    || '—';
-    document.getElementById('sc-pr-fb').textContent    = result.pronunciation?.feedback            || '';
-    document.getElementById('speaking-suggestion').textContent = result.topSuggestion || '';
+    document.getElementById('sc-fc-band').textContent = result.fluencyCoherence?.band?.toFixed(1) || '—';
+    document.getElementById('sc-fc-fb').innerHTML     = renderMarkdown(result.fluencyCoherence?.feedback || '');
+    document.getElementById('sc-lr-band').textContent = result.lexicalResource?.band?.toFixed(1)  || '—';
+    document.getElementById('sc-lr-fb').innerHTML     = renderMarkdown(result.lexicalResource?.feedback  || '');
+    document.getElementById('sc-gr-band').textContent = result.grammaticalRange?.band?.toFixed(1) || '—';
+    document.getElementById('sc-gr-fb').innerHTML     = renderMarkdown(result.grammaticalRange?.feedback || '');
+    document.getElementById('sc-pr-band').textContent = result.pronunciation?.band?.toFixed(1)    || '—';
+    document.getElementById('sc-pr-fb').innerHTML     = renderMarkdown(result.pronunciation?.feedback    || '');
+    document.getElementById('speaking-suggestion').innerHTML = renderMarkdown(result.topSuggestion || '');
 
     document.getElementById('speaking-evaluating').classList.add('hidden');
     document.getElementById('speaking-results-view').classList.remove('hidden');
@@ -3229,8 +3247,8 @@ function renderNotebook(correct, total, skillKey) {
   const weEl = document.getElementById('nb-worked-example');
   if (wrongQ) {
     weEl.classList.remove('hidden');
-    document.getElementById('we-q').textContent   = wrongQ.text || wrongQ.label || '';
-    document.getElementById('we-exp').textContent = `Answer: ${wrongQ.answer}. ${wrongQ.explanation || ''}`;
+    document.getElementById('we-q').textContent = wrongQ.text || wrongQ.label || '';
+    document.getElementById('we-exp').innerHTML  = `Answer: ${wrongQ.answer}. ${renderMarkdown(wrongQ.explanation || '')}`;
   } else {
     weEl.classList.add('hidden');
   }
@@ -4429,7 +4447,7 @@ async function _showMockReport() {
         <div class="mock-review-q">${q.text || q.fieldLabel || ''}</div>
         <div class="mock-review-ans">Your answer: <span class="wrong-ans">${q.givenAnswer || '—'}</span></div>
         <div class="mock-review-ans">Correct: <span class="correct-ans">${q.answer}</span></div>
-        <div class="mock-review-exp">${q.explanation || ''}</div>
+        <div class="mock-review-exp">${renderMarkdown(q.explanation || '')}</div>
       </div>`).join('')
     : '<p style="font-size:13px;color:var(--muted)">All answers correct!</p>';
   document.getElementById('mr-question-review').innerHTML = reviewHtml;
