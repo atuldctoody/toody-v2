@@ -839,7 +839,7 @@ async function initIELTSOverview() {
   const studentRef = doc(db, 'students', currentUser.uid);
   const freshSnap = await getDoc(studentRef);
   if (freshSnap.data()?.hasSeenIELTSOverview === true) {
-    console.log('[IELTS-OVERVIEW] already seen (Firestore) — routing to home');
+    console.trace('[IELTS-OVERVIEW] second call detected — already seen in Firestore, routing to home');
     renderHome(); goTo('s-home'); return;
   }
 
