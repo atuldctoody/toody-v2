@@ -828,10 +828,8 @@ function _showBriefingCard(nextIdx, direction) {
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
-  window._finishBriefingCallCount = (window._finishBriefingCallCount || 0) + 1;
-  console.log('[FINISH-BRIEFING] call number:', window._finishBriefingCallCount);
-  console.trace('[FINISH-BRIEFING] call stack');
-  // Only write briefingSeen here — hasSeenIELTSOverview is owned by initIELTSOverview()
+  if (window._finishBriefingRunning) return;
+  window._finishBriefingRunning = true;
   try {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
     if (studentData) studentData.briefingSeen = true;
@@ -839,28 +837,25 @@ window.finishBriefing = async function () {
     console.warn('[finishBriefing] Firestore write failed:', e);
     if (studentData) studentData.briefingSeen = true;
   }
+  window._finishBriefingRunning = false;
   initIELTSOverview();
 };
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 async function initIELTSOverview() {
-  window._ieltsOverviewCallCount = (window._ieltsOverviewCallCount || 0) + 1;
-  console.log('[IELTS-OVERVIEW] call number:', window._ieltsOverviewCallCount);
-  console.trace('[IELTS-OVERVIEW] call stack');
-  // Trust nothing local. Read directly from Firestore every time.
-  const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
-  const freshData = freshSnap.data();
-  console.log('[IELTS-OVERVIEW] Firestore hasSeenIELTSOverview =', freshData?.hasSeenIELTSOverview);
-  if (freshData?.hasSeenIELTSOverview === true) {
-    console.log('[IELTS-OVERVIEW] already seen — going home');
-    goTo('s-home'); return;
-  }
-
-  // Write flag first, awaited — only show screen after confirmed write
+  if (window._ieltsOverviewRunning) return;
+  window._ieltsOverviewRunning = true;
   try {
+    // Trust nothing local. Read directly from Firestore every time.
+    const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
+    const freshData = freshSnap.data();
+    if (freshData?.hasSeenIELTSOverview === true) {
+      goTo('s-home'); window._ieltsOverviewRunning = false; return;
+    }
+
+    // Write flag first, awaited — only show screen after confirmed write
     await updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true });
     if (studentData) studentData.hasSeenIELTSOverview = true;
-    console.log('[IELTS-OVERVIEW] flag written successfully');
   } catch (err) {
     console.error('[IELTS-OVERVIEW] flag write failed:', err);
     if (studentData) studentData.hasSeenIELTSOverview = true;
@@ -877,6 +872,7 @@ async function initIELTSOverview() {
     d.classList.toggle('active', i === 0);
     d.classList.remove('done');
   });
+  window._ieltsOverviewRunning = false;
   goTo('s-ielts');
 }
 
@@ -902,6 +898,8 @@ function _showIELTSCard(nextIdx, direction) {
 }
 
 window.finishIELTSOverview = function () {
+  if (window._finishIELTSOverviewRunning) return;
+  window._finishIELTSOverviewRunning = true;
   loadTeachFirst('reading.tfng');
 };
 
@@ -1059,6 +1057,9 @@ function renderSkillSnapshot() {
 
 // ── SESSION INTRO ─────────────────────────────────────────────────
 window.startSession = function () {
+  if (window._startSessionRunning) return;
+  window._startSessionRunning = true;
+  setTimeout(() => { window._startSessionRunning = false; }, 3000);
   const plan = currentPlan || pickNextSkill();
   currentPlan = plan;
 
@@ -2604,6 +2605,8 @@ window.checkFCProgress = function () {
 };
 
 window.submitListening = function () {
+  if (window._submitListeningRunning) return;
+  window._submitListeningRunning = true;
   listenCorrect = 0;
   let resultsHtml = '';
 
@@ -2645,6 +2648,8 @@ window.submitListening = function () {
 };
 
 window.finishListeningSession = async function () {
+  if (window._finishListeningRunning) return;
+  window._finishListeningRunning = true;
   if (listenAudioEl) { listenAudioEl.pause(); listenAudioEl = null; }
   const total     = listenQuestions.length || 5;
   const accuracy  = Math.round((listenCorrect / total) * 100);
@@ -2797,6 +2802,8 @@ window.updateWordCount = function () {
 };
 
 window.submitWriting = async function () {
+  if (window._submitWritingRunning) return;
+  window._submitWritingRunning = true;
   const text = document.getElementById('writing-textarea').value.trim();
   if (!text || text.split(/\s+/).length < 30) {
     showToast('Please write at least a few sentences before submitting.');
@@ -3095,6 +3102,8 @@ Return ONLY this JSON:
 }
 
 window.finishSpeakingSession = async function () {
+  if (window._finishSpeakingRunning) return;
+  window._finishSpeakingRunning = true;
   const day       = studentData?.dayNumber || 8;
   const behaviour = getBehaviourPayload();
   // For speaking, override durationSec with actual recording time

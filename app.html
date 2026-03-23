@@ -314,7 +314,7 @@
         </div>
       </div>
       <div class="bc-coach-note">"Let's build the skill that most Band 6 students are missing."</div>
-      <button class="bc-btn bc-btn-start" onclick="finishBriefing()">I'm ready — show me how <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" onclick="this.disabled=true; finishBriefing()">I'm ready — show me how <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots (persistent, outside cards) -->
@@ -516,7 +516,7 @@
         </div>
       </div>
       <div class="bc-coach-note">"Reading accuracy is the fastest path to a higher band — because every correct answer counts equally."</div>
-      <button class="bc-btn bc-btn-start" onclick="finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" onclick="this.disabled=true; finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots -->
@@ -586,7 +586,7 @@
     <div class="session-card-skill" id="today-skill">True / False / Not Given</div>
     <div class="session-card-desc" id="today-desc">AI-generated passage + 5 questions.</div>
     <div class="session-card-reason" id="today-reason" style="font-size:12px;opacity:0.85;margin-bottom:var(--space-4);line-height:1.5"></div>
-    <button class="btn" onclick="startSession()">Let's go <span class="arrow">→</span></button>
+    <button class="btn" onclick="this.disabled=true; startSession()">Let's go <span class="arrow">→</span></button>
   </div>
   <div class="card">
     <div class="card-label">Skill Snapshot</div>
@@ -636,6 +636,7 @@
       console.error('[Toody] window.goToSession is not defined — module may not have loaded');
       alert('Session could not start. Please reload the page.');
     }
+  this.disabled=true;
   ">I'm ready — let's go <span class="arrow">→</span></button>
 </div>
 
@@ -909,7 +910,7 @@
     <div class="card hidden" id="listening-results">
       <div class="card-label">Results</div>
       <div id="listening-results-body"></div>
-      <button class="btn mt16" onclick="finishListeningSession()">See my notebook <span class="arrow">→</span></button>
+      <button class="btn mt16" onclick="this.disabled=true; finishListeningSession()">See my notebook <span class="arrow">→</span></button>
     </div>
   </div>
 </div>
@@ -939,7 +940,7 @@
       </div>
       <textarea class="textarea-field" id="writing-textarea" placeholder="Write your response here…" oninput="updateWordCount()"></textarea>
       <div style="font-size:12px;color:var(--muted);margin-top:8px" id="writing-target-hint"></div>
-      <button class="btn mt8" id="btn-writing-submit" onclick="submitWriting()">Submit for evaluation <span class="arrow">→</span></button>
+      <button class="btn mt8" id="btn-writing-submit" onclick="this.disabled=true; submitWriting()">Submit for evaluation <span class="arrow">→</span></button>
     </div>
   </div>
   <div id="writing-evaluating" class="screen-loading hidden"><div class="spinner"></div><p>Evaluating your response…</p></div>
@@ -1029,7 +1030,7 @@
       <div class="suggestion-label">💡 Top Suggestion</div>
       <div class="suggestion-text" id="speaking-suggestion"></div>
     </div>
-    <button class="btn" onclick="finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
+    <button class="btn" onclick="this.disabled=true; finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
   </div>
 </div>
 
@@ -1091,7 +1092,7 @@
     <div class="tomorrow-title" id="nb-tomorrow-title"></div>
     <div class="tomorrow-desc" id="nb-tomorrow-desc"></div>
   </div>
-  <button class="btn" onclick="goToHome()">Done for today ✓</button>
+  <button class="btn" onclick="this.disabled=true; goToHome()">Done for today ✓</button>
 </div>
 
 <!-- ══════════════════════ MINI MOCK ══════════════════════ -->
