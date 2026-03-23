@@ -512,6 +512,9 @@ window.bootApp = async function () {
       goTo('s-onboarding');
     } else {
       studentData = data;
+      if (studentData.hasSeenIELTSOverview) {
+        localStorage.setItem('hasSeenIELTSOverview', 'true');
+      }
       renderHome();
       goTo('s-home');
     }
@@ -1233,10 +1236,12 @@ async function loadTeachFirst(skillKey) {
   const ans = skillCfg.answerFormat;
   const conceptPromptDetail = skillCfg.conceptPrompt;
 
-  const exSchema = `{"label":"Easy|Medium|Hard","passage":"2 academic sentences","statement":"testable claim","answer":"${ans}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is X — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
+  const ansVals = isMH ? ['A','B','A'] : ['True','False','NG'];
+  const exSchema = (label, ansIdx) =>
+    `{"label":"${label}","passage":"2 academic sentences","statement":"testable claim","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
-    system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble.',
+    system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated like "True|False|NG".',
     user: `Generate a 10-minute interactive lesson on ${skillLabel} for a Band ${band} IELTS student.
 
 Return ONLY this JSON:
@@ -1245,21 +1250,21 @@ Return ONLY this JSON:
   "hookQuestion": {
     "passage": "2 academic sentences — choose a tricky topic where the Not Given trap applies",
     "statement": "a testable claim that looks True but is actually ${isMH ? 'False' : 'Not Given'}",
-    "answer": "${isMH ? 'True|False' : 'True|False|NG'}",
+    "answer": "${isMH ? 'False' : 'NG'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
   "workedExamples": [
-    ${exSchema.replace('Easy|Medium|Hard', 'Easy')},
-    ${exSchema.replace('Easy|Medium|Hard', 'Medium — introduce the most common trap for this question type')},
-    ${exSchema.replace('Easy|Medium|Hard', 'Hard — the exact sub-type where most Band 6 students fail')}
+    ${exSchema('Easy', 0)},
+    ${exSchema('Medium — introduce the most common trap for this question type', 1)},
+    ${exSchema('Hard — the exact sub-type where most Band 6 students fail', 2)}
   ],
   "confidenceQuestions": [
-    {"passage": "2 academic sentences — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable claim", "answer": "${ans}", "explanation": "one sentence"},
-    {"passage": "2 academic sentences on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable claim", "answer": "${ans}", "explanation": "one sentence"}
+    {"passage": "2 academic sentences — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable claim", "answer": "${ansVals[0]}", "explanation": "one sentence"},
+    {"passage": "2 academic sentences on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable claim", "answer": "${ansVals[1]}", "explanation": "one sentence"}
   ],
   "drillQuestions": [
-    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${ans}", "explanation": "one sentence"},
-    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${ans}", "explanation": "one sentence"}
+    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${ansVals[2]}", "explanation": "one sentence"},
+    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${ansVals[0]}", "explanation": "one sentence"}
   ]
 }`,
     maxTokens: 3500
@@ -1298,9 +1303,13 @@ function renderHookQuestion() {
   if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
   // Reset all buttons to neutral unselected state
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
+    b.classList.remove('correct', 'wrong', 'selected');
+  });
+  if (document.activeElement && document.activeElement !== document.body) {
+    document.activeElement.blur();
+  }
+  document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.disabled = false;
-    b.classList.remove('correct', 'wrong');
-    b.blur();
   });
   document.getElementById('teach-hook-reveal').classList.add('hidden');
   document.getElementById('teach-hook').classList.remove('hidden');
@@ -1584,8 +1593,19 @@ function renderConfidenceQuestion(idx) {
   confQIdx = idx;
   const qs = teachData.confidenceQuestions || [];
   if (idx >= qs.length) {
-    document.getElementById('teach-celebrate').classList.remove('hidden');
-    setTimeout(() => window.startRealSession(), 2000);
+    const celebrate = document.getElementById('teach-celebrate');
+    celebrate.classList.remove('hidden');
+    let startBtn = document.getElementById('teach-start-session-btn');
+    if (!startBtn) {
+      startBtn = document.createElement('button');
+      startBtn.id = 'teach-start-session-btn';
+      startBtn.className = 'bc-btn';
+      startBtn.style.marginTop = '16px';
+      startBtn.innerHTML = 'Start my session <span class="arrow">→</span>';
+      celebrate.appendChild(startBtn);
+    }
+    startBtn.style.display = '';
+    startBtn.onclick = () => { startBtn.disabled = true; window.startRealSession(); };
     return;
   }
   const q = qs[idx];
@@ -1628,8 +1648,19 @@ window.answerConfidence = function (val) {
     const bubble = document.getElementById('teach-conf-bubble');
     if (confCorrect === 2 && bubble) bubble.textContent = "You've got the pattern. Now let's see it under real conditions.";
     else if (bubble)                 bubble.textContent = "Good effort — let's see the full session now.";
-    document.getElementById('teach-celebrate').classList.remove('hidden');
-    setTimeout(() => window.startRealSession(), 2000);
+    const celebrate = document.getElementById('teach-celebrate');
+    celebrate.classList.remove('hidden');
+    let startBtn = document.getElementById('teach-start-session-btn');
+    if (!startBtn) {
+      startBtn = document.createElement('button');
+      startBtn.id = 'teach-start-session-btn';
+      startBtn.className = 'bc-btn';
+      startBtn.style.marginTop = '16px';
+      startBtn.innerHTML = 'Start my session <span class="arrow">→</span>';
+      celebrate.appendChild(startBtn);
+    }
+    startBtn.style.display = '';
+    startBtn.onclick = () => { startBtn.disabled = true; window.startRealSession(); };
   }
 };
 window.startRealSession = function () {
@@ -2166,9 +2197,11 @@ window.answerTFNG = function (qnum, val) {
 
   const rf = document.getElementById(`rf${qnum}`);
   rf.classList.add('show', isRight ? 'good' : 'bad');
+  const expl = q.explanation ? boldify(q.explanation) : (isRight ? 'Good work.' : 'Review the passage carefully.');
   rf.innerHTML = isRight
-    ? `✅ Correct. ${boldify(q.explanation)}`
-    : `❌ The answer is <strong>${q.answer}</strong>. ${boldify(q.explanation)}`;
+    ? `✅ Correct. ${expl}`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${expl}`;
+  setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
     document.getElementById('btn-reading-submit').disabled = false;
