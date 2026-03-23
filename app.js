@@ -837,7 +837,7 @@ window.finishBriefing = async function () {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
     if (studentData) studentData.briefingSeen = true;
   } catch (e) {
-    console.warn('[finishBriefing] Firestore write failed:', e);
+    /* Firestore write failed — briefingSeen still set in memory */
     if (studentData) studentData.briefingSeen = true;
   }
   window._finishBriefingRunning = false;
@@ -856,7 +856,7 @@ function showIELTSModal() {
   // Fire-and-forget Firestore write — intentionally not awaited
   if (auth.currentUser) {
     updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true })
-      .catch(err => console.warn('[IELTS-MODAL] Firestore write failed:', err));
+      .catch(() => { /* non-critical — localStorage guard still active */ });
   }
   if (studentData) studentData.hasSeenIELTSOverview = true;
 
@@ -1116,7 +1116,7 @@ window.goToSession = function (forceSkillKey) {
   const shouldTeachFirst = isFirstTimeSkill && !teachFirstDone;
 
   // Onboarding gates (in order): briefing → teach-first
-  console.log('[goToSession] hasSeenIELTSOverview:', studentData?.hasSeenIELTSOverview, '| briefingSeen:', studentData?.briefingSeen, '| teachFirstDone:', teachFirstDone);
+  /* debug removed */
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();
   } else if (shouldTeachFirst && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
@@ -2080,7 +2080,7 @@ Return ONLY this JSON:
     setupScrollTracking();
     trackQStart(1);
   } catch (err) {
-    console.error('[loadReadingSession] failed:', err);
+    /* session load failed — toast shown to student */
     showToast('Having trouble connecting — please check your internet and try again.');
     document.getElementById('reading-loading').innerHTML =
       `<p style="color:var(--danger);padding:20px;text-align:center">Could not load passage. Please go back and try again.<br><small style="opacity:.6">${err?.message || ''}</small></p>`;

@@ -635,12 +635,10 @@
   </div>
   <div class="expect-list" id="si-expect-list"></div>
   <button class="btn mt16" id="btn-ready" onclick="
-    console.log('[Toody] btn-ready clicked, goToSession=', typeof window.goToSession);
     if (typeof window.goToSession === 'function') {
       window.goToSession();
     } else {
-      console.error('[Toody] window.goToSession is not defined — module may not have loaded');
-      alert('Session could not start. Please reload the page.');
+      showToast('Session could not start. Please reload the page.');
     }
   this.disabled=true;
   ">I'm ready — let's go <span class="arrow">→</span></button>
