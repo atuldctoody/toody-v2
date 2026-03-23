@@ -834,9 +834,17 @@ window.finishBriefing = async function () {
 };
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
-function initIELTSOverview() {
+async function initIELTSOverview() {
+  // ── DIAGNOSTIC LOGGING ──────────────────────────────────────────
+  console.trace('[IELTS-OVERVIEW] call stack');
+  let firestoreValue = '(read failed)';
+  try {
+    const snap = await getDoc(doc(db, 'students', currentUser.uid));
+    firestoreValue = snap.data()?.hasSeenIELTSOverview;
+  } catch (e) { firestoreValue = '(error: ' + e.message + ')'; }
+  console.log('[IELTS-OVERVIEW] called. hasSeenIELTSOverview (local) =', studentData?.hasSeenIELTSOverview, '| Firestore =', firestoreValue);
+  // ── END DIAGNOSTIC LOGGING ──────────────────────────────────────
   // GUARD: if already seen (flag true in studentData from Firestore), skip to home — never show twice
-  console.log('[initIELTSOverview] hasSeenIELTSOverview =', studentData?.hasSeenIELTSOverview);
   if (studentData?.hasSeenIELTSOverview) {
     console.log('[initIELTSOverview] already seen — routing to home');
     renderHome(); goTo('s-home'); return;
