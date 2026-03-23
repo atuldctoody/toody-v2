@@ -1120,7 +1120,7 @@ window.goToSession = function (forceSkillKey) {
   /* debug removed */
   if (plan.screen === 's-reading' && isFirstTimeSkill && !studentData.briefingSeen) {
     renderHome(); initBriefing();
-  } else if (shouldTeachFirst && (plan.screen === 's-reading' || plan.screen === 's-listening')) {
+  } else if (shouldTeachFirst && plan.screen === 's-reading') {
     loadTeachFirst(plan.skill);
   } else if (sessionCount > 0 && plan.screen === 's-reading') {
     loadWarmup(plan);
@@ -1579,8 +1579,7 @@ window.answerDrill = function (idx, val) {
   const qs2b = teachData.drillQuestions || teachData.confidenceQuestions || [];
   const hasNext = idx + 1 < qs2b.length;
   rf.innerHTML = (isRight ? `✅ Correct. ${boldify(q.explanation)}` : `❌ Answer: <strong>${q.answer}</strong>. ${boldify(q.explanation)}`)
-    + (hasNext ? `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderDrillQuestion(${idx + 1})">Next question →</button>` : '');
-  if (!hasNext) setTimeout(() => renderDrillQuestion(idx + 1), 1000);
+    + `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderDrillQuestion(${idx + 1})">${hasNext ? 'Next question →' : 'Continue →'}</button>`;
 };
 
 function saveLearningStyleSignal(type) {
@@ -2204,9 +2203,21 @@ window.answerTFNG = function (qnum, val) {
   const rf = document.getElementById(`rf${qnum}`);
   rf.classList.add('show', isRight ? 'good' : 'bad');
   const expl = q.explanation ? boldify(q.explanation) : (isRight ? 'Good work.' : 'Review the passage carefully.');
-  rf.innerHTML = isRight
-    ? `✅ Correct. ${expl}`
-    : `❌ The answer is <strong>${q.answer}</strong>. ${expl}`;
+  if (isRight) {
+    rf.innerHTML = `✅ Correct. ${expl}`;
+  } else {
+    const ERROR_REASON_PILLS = {
+      synonymTrap:         'Synonym trap — passage isn\'t as direct as it looks',
+      hedgingMissed:       'Hedging language — may / suggests / could',
+      negationOverlooked:  'Negation — not / never / rarely',
+      scopeError:          'Scope error — all vs some, always vs usually',
+      notGivenMarkedFalse: 'Not Given ≠ False — the passage is silent on this',
+      other:               'Reasoning error',
+    };
+    const pill = ERROR_REASON_PILLS[q.errorReason];
+    rf.innerHTML = `❌ The answer is <strong>${q.answer}</strong>. ${expl}`
+      + (pill ? `<br><span class="error-reason-pill">⚠ ${pill}</span>` : '');
+  }
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
@@ -2789,6 +2800,7 @@ window.finishListeningSession = async function () {
 // ── WRITING SESSION ───────────────────────────────────────────────
 async function loadWritingSession() {
   const day = studentData?.dayNumber || 6;
+  window._submitWritingRunning = false;
   writingTaskData = null;
   writingBandEst  = 0;
 

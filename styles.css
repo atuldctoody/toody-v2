@@ -326,6 +326,7 @@ a { color: inherit; text-decoration: none; }
 .result-flash.good   { background: var(--success-light); color: var(--success-text); border: 1.5px solid var(--success-mid); }
 .result-flash.bad    { background: var(--danger-light);  color: var(--danger-text); border: 1.5px solid var(--danger-mid); }
 .result-flash.mt16   { margin-top: 16px; }
+.error-reason-pill   { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 3px 8px; border-radius: 4px; }
 
 /* ── T/F/NG BUTTONS ── */
 .tfng {
