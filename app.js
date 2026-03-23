@@ -106,6 +106,7 @@ let confQIdx          = 0;     // Confidence builder question index
 let confCorrect       = 0;     // Confidence correct count
 // IELTS Overview
 let ieltsCard         = 0;
+let _ieltsModalShownThisSession = false; // set once, never reset — process-lifetime guarantee
 const IELTS_COLORS    = ['var(--accent-light)','var(--accent-light)','var(--success-light)','var(--yellow-light)','var(--danger-light)','var(--success-light)'];
 
 // ── SUBJECT-AGNOSTIC SCHEMA HELPERS ──────────────────────────────
@@ -848,9 +849,9 @@ window.finishBriefing = async function () {
 // Modal overlay — outside the navigation stack entirely. Cannot be
 // triggered by goTo(), auth state changes, or back-button history.
 function showIELTSModal() {
-  if (document.getElementById('ielts-modal').style.display === 'block') return;
-  // Synchronous guard — no awaits, no race condition possible
-  if (localStorage.getItem('hasSeenIELTSOverview') === 'true') return;
+  if (_ieltsModalShownThisSession) return;                               // process-lifetime guard — immune to DOM/localStorage state
+  _ieltsModalShownThisSession = true;
+  if (localStorage.getItem('hasSeenIELTSOverview') === 'true') return;  // returning user on same device
   localStorage.setItem('hasSeenIELTSOverview', 'true');
 
   // Fire-and-forget Firestore write — intentionally not awaited
