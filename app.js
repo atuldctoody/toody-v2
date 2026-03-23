@@ -1874,16 +1874,24 @@ Return ONLY this JSON:
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
 
+For each question, set "errorReason" to the reasoning trap this question is specifically designed to test. Valid values:
+- "synonymTrap" — statement paraphrases passage with near-synonym; student reads meaning not exact evidence
+- "hedgingMissed" — answer hinges on hedging language in passage (may, suggests, could, tends to)
+- "negationOverlooked" — answer hinges on a negation in passage or statement (not, never, rarely, without)
+- "scopeError" — statement claims more or less than passage actually states (all vs some, always vs usually)
+- "notGivenMarkedFalse" — passage is silent on claim; designed to catch students who mark silence as contradiction
+- "other" — does not fit a specific category above
+
 Return ONLY this JSON:
 {
   "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
   "topic": "2-4 word topic label",
   "questions": [
-    {"id": 1, "text": "statement", "answer": "True",  "explanation": "why", "keySentence": "exact sentence from passage"},
-    {"id": 2, "text": "statement", "answer": "False", "explanation": "why", "keySentence": "exact sentence from passage"},
-    {"id": 3, "text": "statement", "answer": "NG",    "explanation": "why", "keySentence": "exact sentence from passage"},
-    {"id": 4, "text": "statement", "answer": "True",  "explanation": "why", "keySentence": "exact sentence from passage"},
-    {"id": 5, "text": "statement", "answer": "False", "explanation": "why", "keySentence": "exact sentence from passage"}
+    {"id": 1, "text": "statement", "answer": "True",  "explanation": "name the exact word/phrase that confirms this", "keySentence": "exact sentence from passage", "errorReason": "synonymTrap"},
+    {"id": 2, "text": "statement", "answer": "False", "explanation": "name the exact word/phrase that contradicts this", "keySentence": "exact sentence from passage", "errorReason": "negationOverlooked"},
+    {"id": 3, "text": "statement", "answer": "NG",    "explanation": "name what the passage says and what it does NOT say", "keySentence": "exact sentence from passage", "errorReason": "notGivenMarkedFalse"},
+    {"id": 4, "text": "statement", "answer": "True",  "explanation": "name the exact word/phrase that confirms this", "keySentence": "exact sentence from passage", "errorReason": "hedgingMissed"},
+    {"id": 5, "text": "statement", "answer": "False", "explanation": "name the exact word/phrase that contradicts this", "keySentence": "exact sentence from passage", "errorReason": "scopeError"}
   ]
 }`
     };
@@ -2024,7 +2032,7 @@ window.answerTFNG = function (qnum, val) {
   trackQStart(qnum + 1);
 
   const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
-  sessionAnswers[qnum] = { val, isRight };
+  sessionAnswers[qnum] = { val, isRight, errorReason: isRight ? null : (q.errorReason || 'other') };
   if (isRight) sessionCorrect++;
 
   document.querySelectorAll(`#tfng${qnum} .tfng-btn`).forEach(b => {
@@ -2155,11 +2163,32 @@ async function finishReadingSession() {
     const newStreak = (studentData.streak || 0) + 1;
     const subjPath  = `brain.subjects.ielts-academic.skills.${skillId}`;
 
+    // Error reason tagging — TFNG only (SC has a different error model)
+    let errorReasonsUpdate = null;
+    if (!isSCSession) {
+      const prevER = prevSkill.errorReasons || {};
+      const mergedER = {
+        synonymTrap: 0, hedgingMissed: 0, negationOverlooked: 0,
+        scopeError: 0, notGivenMarkedFalse: 0, other: 0,
+        ...prevER,
+      };
+      sessionQuestions.forEach(q => {
+        const a = sessionAnswers[q.id];
+        if (a && !a.isRight) {
+          const key = a.errorReason;
+          if (key && Object.prototype.hasOwnProperty.call(mergedER, key)) mergedER[key]++;
+          else mergedER.other++;
+        }
+      });
+      errorReasonsUpdate = mergedER;
+    }
+
     await updateStudentDoc(currentUser.uid, {
       [`${subjPath}.accuracy`]:      newAccuracy,
       [`${subjPath}.attempted`]:     newAttempted,
       [`${subjPath}.lastPracticed`]: serverTimestamp(),
       [`${subjPath}.trend`]:         newAccuracy > (prevSkill.accuracy || 0) ? 'up' : newAccuracy < (prevSkill.accuracy || 0) ? 'down' : 'stable',
+      ...(errorReasonsUpdate ? { [`${subjPath}.errorReasons`]: errorReasonsUpdate } : {}),
       dayNumber:        (studentData.dayNumber || 1) + 1,
       recentSkills:     [skillKey, ...(studentData.recentSkills || [])].slice(0, 5),
       streak:           newStreak,
@@ -3539,6 +3568,22 @@ function buildContextSnippet() {
       return str;
     });
 
+  // Error reason analysis for reading-tfng
+  const ERROR_REASON_LABELS = {
+    synonymTrap:         'reads meaning not exact words (synonym trap)',
+    hedgingMissed:       'misses hedging language — may/suggests/could',
+    negationOverlooked:  'overlooks negation — not/never/rarely',
+    scopeError:          'misreads scope — statement claims more/less than passage states',
+    notGivenMarkedFalse: 'marks Not Given as False (most common T/F/NG error)',
+    other:               'unclassified reasoning failure',
+  };
+  const tfngErrors = ctxSkills['reading-tfng']?.errorReasons || {};
+  const topTfngErrors = Object.entries(tfngErrors)
+    .filter(([, c]) => c > 0)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 2)
+    .map(([k, c]) => `${ERROR_REASON_LABELS[k] || k} (×${c})`);
+
   // Behaviour pattern line
   const patterns = [];
   if (brain.avgTimePerQuestionSec) patterns.push(`${brain.avgTimePerQuestionSec}s avg per question`);
@@ -3571,6 +3616,7 @@ function buildContextSnippet() {
     `STUDENT: ${name} | Target: Band ${target} | Current estimate: Band ${current} | Week ${week} Day ${day}`,
     `STRONG: ${strong.length ? strong.join(', ') : 'No data yet — first session'}`,
     `WEAK: ${weakSkills.length ? weakSkills.join(', ') : 'No weak areas identified yet'}`,
+    ...(topTfngErrors.length ? [`READING ERROR PATTERNS: ${topTfngErrors.join('; ')} — target these specific failures in T/F/NG questions`] : []),
     `PATTERN: ${patterns.length ? patterns.join('. ') + '.' : 'No pattern data yet.'}${learningStyle ? ' ' + learningStyle : ''}`,
     '',
     'INSTRUCTION FOR THIS SESSION:',
