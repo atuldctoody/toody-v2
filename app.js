@@ -828,6 +828,9 @@ function _showBriefingCard(nextIdx, direction) {
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
+  window._finishBriefingCallCount = (window._finishBriefingCallCount || 0) + 1;
+  console.log('[FINISH-BRIEFING] call number:', window._finishBriefingCallCount);
+  console.trace('[FINISH-BRIEFING] call stack');
   // Only write briefingSeen here — hasSeenIELTSOverview is owned by initIELTSOverview()
   try {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
@@ -841,6 +844,9 @@ window.finishBriefing = async function () {
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 async function initIELTSOverview() {
+  window._ieltsOverviewCallCount = (window._ieltsOverviewCallCount || 0) + 1;
+  console.log('[IELTS-OVERVIEW] call number:', window._ieltsOverviewCallCount);
+  console.trace('[IELTS-OVERVIEW] call stack');
   // Trust nothing local. Read directly from Firestore every time.
   const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
   const freshData = freshSnap.data();
