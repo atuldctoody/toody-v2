@@ -9,10 +9,6 @@ import {
   orderBy, query, serverTimestamp
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-// ── PWA ──────────────────────────────────────────────────────────
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
-}
 
 // ── CONSTANTS ────────────────────────────────────────────────────
 const API_URL        = 'https://toody-api.vercel.app/api/generate';
@@ -845,22 +841,22 @@ window.finishBriefing = async function () {
 
 // ── IELTS OVERVIEW (one-time, after briefing) ─────────────────────
 async function initIELTSOverview() {
-  // GUARD: fresh Firestore read — never trust potentially stale local studentData for this check
-  const studentRef = doc(db, 'students', currentUser.uid);
-  const freshSnap = await getDoc(studentRef);
-  if (freshSnap.data()?.hasSeenIELTSOverview === true) {
-    console.trace('[IELTS-OVERVIEW] second call detected — already seen in Firestore, routing to home');
-    renderHome(); goTo('s-home'); return;
+  // Trust nothing local. Read directly from Firestore every time.
+  const freshSnap = await getDoc(doc(db, 'students', auth.currentUser.uid));
+  const freshData = freshSnap.data();
+  console.log('[IELTS-OVERVIEW] Firestore hasSeenIELTSOverview =', freshData?.hasSeenIELTSOverview);
+  if (freshData?.hasSeenIELTSOverview === true) {
+    console.log('[IELTS-OVERVIEW] already seen — going home');
+    goTo('s-home'); return;
   }
 
-  // Write flag with awaited call — proceed only after confirmed write
+  // Write flag first, awaited — only show screen after confirmed write
   try {
-    await updateDoc(studentRef, { hasSeenIELTSOverview: true });
-    studentData.hasSeenIELTSOverview = true;
+    await updateDoc(doc(db, 'students', auth.currentUser.uid), { hasSeenIELTSOverview: true });
+    if (studentData) studentData.hasSeenIELTSOverview = true;
     console.log('[IELTS-OVERVIEW] flag written successfully');
   } catch (err) {
     console.error('[IELTS-OVERVIEW] flag write failed:', err);
-    // Still set locally so the in-memory guard works for this session
     if (studentData) studentData.hasSeenIELTSOverview = true;
   }
 
