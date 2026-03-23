@@ -1,4 +1,5 @@
 import { auth, db } from './firebase-config.js';
+import { getVisionPrompt } from './api/vision-prompt.js';
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
   doc, getDoc, setDoc, updateDoc,
@@ -3584,10 +3585,13 @@ function buildContextSnippet() {
 
 // ── AI CALL ───────────────────────────────────────────────────────
 async function callAI(prompt) {
+  const vision  = getVisionPrompt(studentData);
   const snippet = buildContextSnippet();
-  const systemContent = snippet
-    ? `${snippet}\n\n---\n\n${prompt.system}`
-    : prompt.system;
+  const systemContent = [
+    vision,
+    snippet ? `\n---\n\n${snippet}` : '',
+    `\n---\n\n${prompt.system}`,
+  ].join('');
 
   return withRetry(async () => {
     const res = await fetch(API_URL, {

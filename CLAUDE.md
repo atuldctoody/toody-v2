@@ -1,17 +1,49 @@
 # Toody V2 — Claude Code Reference
 
-## 1. Project Overview
+---
 
-Toody is an AI-powered IELTS Academic preparation app. It is a 2-week MVP structured as 10 sessions delivered over 5 days per week (Mon–Fri). Each session targets one IELTS skill or sub-skill. The app is fully personalised: all content is AI-generated at runtime based on the student's target band, prior performance, and behaviour patterns stored in Firestore.
+## 1. What Toody Is
 
-The core loop:
+Toody is not an IELTS practice app. It is a personal coach.
+
+The distinction matters for every line of code written here. A practice app gives students content to work through. A coach gives students a mirror — it shows them exactly where their thinking breaks down and why. Every session Toody runs is a coaching intervention: it knows what the student got wrong last time, it knows what band they need, and it generates content specifically designed to close that gap.
+
+**The product mission in one sentence:** Get this specific student to their target band — not "help students prepare for IELTS" in general.
+
+**What makes Toody different from generic IELTS prep:**
+- Every passage, question, scenario, and evaluation is generated at runtime for one student
+- Difficulty is set to the student's target band — not a fixed level
+- Feedback names the exact reasoning failure, not just the correct answer
+- The AI knows the student's history and adapts — sessions are not interchangeable
+
+**The coaching loop:**
 1. Student completes a session (reading, listening, writing, or speaking)
 2. Results and behaviour are written to Firestore (`studentBrain`)
-3. On the next session, `studentBrain.contextSnippet` is injected into the AI prompt so the content adapts to the student's actual weaknesses
+3. On the next session, `buildContextSnippet()` constructs a personalised context block injected into every AI prompt — content adapts to actual weaknesses, not perceived ones
 
 ---
 
-## 2. Tech Stack
+## 2. How the Vision Is Enforced in Code
+
+Every AI call in `app.js` goes through `callAI()`. The system prompt for every call is built in three layers:
+
+```
+Layer 1 — Vision:   getVisionPrompt(studentData)      from api/vision-prompt.js
+Layer 2 — Context:  buildContextSnippet()              from app.js
+Layer 3 — Task:     prompt.system                      from the calling function
+```
+
+**`api/vision-prompt.js`** establishes Toody's coaching identity: who the student is, what band they're targeting, and what "good content" means for this product. This is the mission layer — it prevents generic content generation.
+
+**`buildContextSnippet()`** injects the student's live data: skill accuracy per sub-type, behaviour patterns (scroll-backs, answer changes, time-per-question), weak areas, and a plain-English summary of what the student needs most right now.
+
+**`prompt.system`** is the task-specific instruction written by each session-loading function (e.g. "You are an IELTS examiner. Generate a Summary Completion exercise...").
+
+> **Rule:** Never bypass `callAI()` for content generation. Adding a direct `fetch(API_URL, ...)` somewhere skips the vision and context layers and produces generic content.
+
+---
+
+## 3. Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -30,46 +62,47 @@ Firebase project: `toody-1ab05`
 
 ---
 
-## 3. File Structure
+## 4. File Structure
 
 ```
 toody-v2/
 ├── index.html          # Login page — Google Sign-In button, redirects to app.html on auth
-├── app.html            # Main app shell — all 14 screens as hidden <div class="screen"> elements
-├── app.js              # All client-side logic (~2100 lines) — routing, state, API calls, Firebase reads/writes
-├── styles.css          # All styling (~875 lines) — design system, screen layouts, component classes
+├── app.html            # Main app shell — all screens as hidden <div class="screen"> elements
+├── app.js              # All client-side logic — routing, state, API calls, Firebase reads/writes
+├── styles.css          # All styling — design system, screen layouts, component classes
 ├── firebase-config.js  # Firebase SDK initialisation — exports auth, db, googleProvider
-├── firebase.json       # Firebase Hosting config — serves current directory, ignores .dotfiles and .docx
+├── firebase.json       # Firebase Hosting config — serves current directory, ignores test files
 ├── manifest.json       # PWA manifest — name, icons, theme colour (#6557D4), standalone display
-├── sw.js               # Service Worker — caches app shell, bypasses Firebase/API calls (always network)
-├── icons/
-│   └── toody-logo.png  # App logo — used at 36px in header (icon only, no wordmark)
-└── CLAUDE.md           # This file
+├── sw.js               # Service Worker — caches app shell, bypasses Firebase/API calls
+├── api/
+│   └── vision-prompt.js  # Exports getVisionPrompt(studentData) — injected into every AI call
+└── icons/
+    └── toody-logo.png    # App logo — used at 36px in header, 80px on login screen
 ```
 
 ---
 
-## 4. Key Decisions — Locked
+## 5. Key Decisions — Locked
 
 ### Layout & PWA
 - **Mobile-first, 390px base width.** Max-width 430px. Never design for desktop breakpoints.
-- **PWA from day one.** Service worker installed on first load. App shell cached. Works offline for cached assets.
+- **PWA from day one.** Service worker installed on first load. App shell cached.
 
 ### Screen Architecture
 - **One shared screen per section type.** There is one `s-reading`, one `s-listening`, one `s-writing`, one `s-speaking` screen. Firebase (`studentData.dayNumber`) tells each screen what content to load and which variant to run. Do not create day-specific screens.
-- Routing is handled by `goTo(screenId)` — toggles `.active` class, forces `display:flex` if CSS override detected.
+- Routing is handled by `goTo(screenId)` — toggles `.active` class.
 - Screen IDs: `s-loading`, `s-onboarding`, `s-home`, `s-session-intro`, `s-teach`, `s-warmup`, `s-reading`, `s-toughlove`, `s-listening`, `s-writing`, `s-speaking`, `s-notebook`, `s-minimock`, `s-progress`
 
 ### Content
-- **No hardcoded content anywhere (except the Day 1 TRAP question).** Every passage, scenario, question set, and writing prompt is AI-generated at session start using the student's `contextSnippet`.
+- **No hardcoded content anywhere (except the Day 1 TRAP question).** Every passage, scenario, question set, and writing prompt is AI-generated at session start using the student's context.
 - The TRAP question on Day 1 is intentionally hardcoded — it tests True/False/Not Given reasoning on a specific NG edge case and must not be replaced with AI content.
 
 ### studentBrain (Firestore)
 - The `studentBrain` object in the student's Firestore document is the personalisation engine. It stores:
   - `skills` — accuracy and attempts per sub-skill (tfng, matchingHeadings, multipleChoice, formCompletion, task1, task2, part1)
   - `behaviourPatterns` — scroll behaviour, time-per-question, rereading count
-  - `contextSnippet` — a short plain-English summary injected into every AI prompt (e.g. "Student scored 60% on TF/NG. Tends to confuse True and Not Given. Weak on negative statements.")
-- Always update `studentBrain` after every session. Always inject `contextSnippet` into AI prompts.
+  - `contextSnippet` — a short plain-English summary injected into every AI prompt
+- Always update `studentBrain` after every session. Always inject `contextSnippet` via `buildContextSnippet()`.
 
 ### Design System
 | Token | Value |
@@ -82,11 +115,11 @@ toody-v2/
 | Shadow sm | `0 1px 4px rgba(0,0,0,.08)` |
 | Shadow | `0 4px 16px rgba(0,0,0,.10)` |
 
-- **Logo:** `icons/toody-logo.png` at `36px` height in the header. Icon only — no text wordmark next to it anywhere in the app.
+- **Logo:** `icons/toody-logo.png` at `36px` height in the header. Icon only — no text wordmark.
 
 ---
 
-## 5. Current Build Status
+## 6. Current Build Status
 
 ### Screens — Done
 | Screen | What it does |
@@ -97,7 +130,7 @@ toody-v2/
 | `s-session-intro` | Skill icon, label, expectations list, "I'm ready" button |
 | `s-teach` | Day 1 only — 3-phase teach-first: concept explanation → worked example → micro test |
 | `s-warmup` | Days 2–10 — one recall question from the previous session before loading the main session |
-| `s-reading` | AI passage + 5 TF/NG or Matching Headings questions, per-question feedback, submit |
+| `s-reading` | AI passage + 5 TF/NG or Summary Completion questions, per-question feedback, submit |
 | `s-toughlove` | Post-correct-answer reasoning check — student identifies the key sentence from 4 options |
 | `s-listening` | AI scenario + ElevenLabs audio + questions (Multiple Choice or Form Completion depending on day) |
 | `s-writing` | Task 1 or Task 2 prompt, textarea, live word count, AI band evaluation with 4 criteria |
@@ -108,23 +141,23 @@ toody-v2/
 ### Screens — In Progress / Incomplete
 | Screen | Status |
 |---|---|
-| `s-minimock` | Partially built — 4-section flow exists, results view exists, but no timed countdown (real IELTS is timed) |
-| Day 9 Drill | `DAY_PLAN[9]` has `screen: null` — currently re-runs the weakest skill with no drill-specific UI |
+| `s-minimock` | Partially built — 4-section flow exists, results view exists, but no timed countdown |
+| Day 9 Drill | Currently re-runs the weakest skill with no drill-specific UI |
 
 ### Known Bugs
-- `console.log` and `console.warn` statements are still present in `app.js` — strip before production
-- `alert()` is used for writing validation (line ~1364) and mic permission (line ~1554) — replace with in-app toast
-- Pronunciation criterion in speaking evaluation gives an artificial neutral score with a caveat — cannot assess from transcript text alone
-- Behaviour analytics are collected and saved to Firestore but never surfaced in any UI view
-- `studentBrain.contextSnippet` is written after sessions but not yet confirmed to be injected in all AI prompt paths — verify each `loadXxxSession()` function includes it
+- `console.log` and `console.warn` statements still present in `app.js` — strip before production
+- `alert()` used for writing validation and mic permission — replace with in-app toast
+- Pronunciation criterion in speaking evaluation gives an artificial neutral score — cannot assess from transcript text alone
+- Behaviour analytics collected and saved to Firestore but never surfaced in any UI view
 
 ---
 
-## 6. What NOT To Do
+## 7. What NOT To Do
 
-- **No hardcoded answers or question content** (except the Day 1 TRAP). Every question must come from the AI via `/api/generate`.
+- **No hardcoded answers or question content** (except the Day 1 TRAP). Every question must come from the AI via `callAI()`.
+- **Never bypass `callAI()`** for content generation — it carries the vision and context layers. A direct `fetch(API_URL)` produces generic content.
 - **No fake feedback.** If an AI evaluation call fails, show an error state — do not display made-up scores or placeholder band estimates.
-- **No binary mastery thresholds.** Do not gate content behind "you must score 80% to proceed". Progress is always forward; the difficulty and focus adapt via `contextSnippet`.
-- **No placeholder data shown to students.** If `studentData` hasn't loaded, show the loading screen. If a session hasn't been completed, show `—` or omit the field. Never show `0.0`, `null`, or `undefined` in UI.
-- **Do not add new screens for individual days.** If Day 9 needs special UI, add a conditional block inside the existing shared screen, not a new `s-drill` screen.
-- **Do not modify the TRAP question.** It is hardcoded intentionally and specifically designed to catch a particular reasoning error.
+- **No binary mastery thresholds.** Do not gate content behind "you must score 80% to proceed". Progress is always forward; difficulty adapts via `contextSnippet`.
+- **No placeholder data shown to students.** If `studentData` hasn't loaded, show the loading screen. Never show `0.0`, `null`, or `undefined` in UI.
+- **Do not add new screens for individual days.** Add conditional blocks inside existing shared screens.
+- **Do not modify the TRAP question.** It is hardcoded intentionally.
