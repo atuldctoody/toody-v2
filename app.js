@@ -1538,13 +1538,12 @@ window.teachReinforceDrill = function () {
   renderDrillQuestion(0);
 };
 
-function renderDrillQuestion(idx) {
+window.renderDrillQuestion = function renderDrillQuestion(idx) {
   const qs = teachData.drillQuestions || teachData.confidenceQuestions || [];
   if (idx >= qs.length) {
-    // Drill complete
+    // Drill complete — show score then go to confidence builder
     const contentEl = document.getElementById('teach-reinforce-content');
-    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p></div>`;
-    document.getElementById('teach-continue-micro-btn').classList.remove('hidden');
+    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p><button class="btn-secondary" style="margin-top:10px;display:block;margin-left:auto;margin-right:auto" onclick="renderConfidenceQuestion(0)">Continue →</button></div>`;
     return;
   }
   const q = qs[idx];
@@ -1592,7 +1591,7 @@ function saveLearningStyleSignal(type) {
 }
 
 // Confidence builder (min 8-10)
-function renderConfidenceQuestion(idx) {
+window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   confQIdx = idx;
   const qs = teachData.confidenceQuestions || [];
   if (idx >= qs.length) {
