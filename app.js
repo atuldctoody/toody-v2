@@ -60,7 +60,9 @@ let briefingCard      = 0;
 // Navigation history
 const screenHistory   = [];
 let   _goingBack      = false;
-const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2']);
+// Screens that must never appear in the back-navigation stack.
+// Onboarding/briefing/overview screens are one-way flows — once completed they are non-replayable.
+const NO_HISTORY_SCREENS = new Set(['s-loading','s-onboarding','s-welcome','s-home','s-phase2','s-briefing','s-ielts']);
 const BRIEFING_COLORS    = ['var(--accent-light)','var(--danger-light)','var(--success-light)','var(--yellow-light)','var(--accent-light)'];
 let pendingDate       = null;
 let pendingExperience = null;
@@ -469,7 +471,15 @@ window.goBack = function () {
   if (cur === 's-ielts'    && ieltsCard    > 0) { _showIELTSCard(ieltsCard    - 1, 'back'); return; }
   if (screenHistory.length === 0) return;
   _goingBack = true;
-  const prev = screenHistory.pop();
+  // Skip any completed one-way screens still in the stack (e.g. s-ielts, s-briefing pushed before this fix)
+  let prev;
+  do {
+    if (screenHistory.length === 0) { _goingBack = false; return; }
+    prev = screenHistory.pop();
+  } while (
+    (prev === 's-ielts'    && studentData?.hasSeenIELTSOverview) ||
+    (prev === 's-briefing' && studentData?.briefingSeen)
+  );
   goTo(prev);
 };
 
