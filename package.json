@@ -7,7 +7,8 @@
     "test": "playwright test",
     "test:report": "playwright test --reporter=html",
     "test:buttons": "playwright test tests/buttons.spec.js --reporter=line",
-    "predeploy": "npm run test:buttons"
+    "predeploy": "npm run test:buttons",
+    "deploy": "firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",
