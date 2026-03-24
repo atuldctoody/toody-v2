@@ -4678,10 +4678,11 @@ function initDevTools() {
   _attachLongPress('dev-logo-trigger', 3000, () => {
     console.log('long press triggered');
     const btn = document.getElementById('dev-reset-btn');
+    console.log('button element:', btn);
+    console.log('button display:', btn?.style.display);
+    console.log('button parent display:', btn?.parentElement?.style.display);
     if (!btn) return;
-    const hidden = btn.getAttribute('data-hidden') !== 'false';
-    btn.setAttribute('data-hidden', hidden ? 'false' : 'true');
-    btn.style.display = hidden ? 'block' : 'none';
+    btn.style.cssText = 'display:block !important; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:red; color:white; padding:10px 20px; z-index:99999; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer;';
   });
   // Streak long-press → skip onboarding/briefing and jump straight to home
   _attachLongPress('home-streak', 3000, () => {
