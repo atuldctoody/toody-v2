@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "playwright test",
-    "test:report": "playwright test --reporter=html"
+    "test:report": "playwright test --reporter=html",
+    "test:buttons": "playwright test tests/buttons.spec.js --reporter=line",
+    "predeploy": "npm run test:buttons"
   },
   "repository": {
     "type": "git",
