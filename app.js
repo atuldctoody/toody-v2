@@ -4676,8 +4676,12 @@ function _attachLongPress(elId, ms, cb) {
 function initDevTools() {
   // Logo long-press → reveal the reset button
   _attachLongPress('dev-logo-trigger', 3000, () => {
+    console.log('long press triggered');
     const btn = document.getElementById('dev-reset-btn');
-    if (btn) btn.style.display = btn.style.display === 'none' ? 'block' : 'none';
+    if (!btn) return;
+    const hidden = btn.getAttribute('data-hidden') !== 'false';
+    btn.setAttribute('data-hidden', hidden ? 'false' : 'true');
+    btn.style.display = hidden ? 'block' : 'none';
   });
   // Streak long-press → skip onboarding/briefing and jump straight to home
   _attachLongPress('home-streak', 3000, () => {
