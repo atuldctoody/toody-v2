@@ -489,6 +489,8 @@ onAuthStateChanged(auth, async user => {
   currentUser = user;
   window._finishBriefingRunning = false;
   window._finishIELTSOverviewRunning = false;
+  window._finishListeningRunning = false;
+  window._finishSpeakingRunning = false;
   initDevTools();
   await bootApp();
 });
@@ -2304,6 +2306,8 @@ window.continueTLToNotebook = function () { finishReadingSession(); };
 
 // ── READING FINISH ─────────────────────────────────────────────────
 async function finishReadingSession() {
+  console.log('finish session called for: reading');
+  try {
   const total     = sessionQuestions.length || 5;
   const accuracy  = Math.round((sessionCorrect / total) * 100);
   const day       = studentData.dayNumber || 1;
@@ -2423,6 +2427,12 @@ async function finishReadingSession() {
     renderNotebook(sessionCorrect, total, 'reading.tfng');
   };
   showSessionTip({ accuracy, behaviour, missedSubTypes, skillKey });
+  } catch(err) {
+    console.error('finishSession error:', err);
+    showToast('Something went wrong — please try again', 'error');
+    const finishBtn = document.querySelector('[onclick*="finish"], .btn-finish, #btn-finish');
+    if (finishBtn) finishBtn.disabled = false;
+  }
 }
 
 // ── LISTENING SESSION ─────────────────────────────────────────────
@@ -2718,8 +2728,12 @@ window.submitListening = function () {
 };
 
 window.finishListeningSession = async function () {
+  console.log('finish session called for: listening');
   if (window._finishListeningRunning) return;
   window._finishListeningRunning = true;
+  const listenFinishBtn = document.getElementById('listening-finish-btn');
+  if (listenFinishBtn) listenFinishBtn.disabled = true;
+  try {
   if (listenAudioEl) { listenAudioEl.pause(); listenAudioEl = null; }
   const total     = listenQuestions.length || 5;
   const accuracy  = Math.round((listenCorrect / total) * 100);
@@ -2808,6 +2822,12 @@ window.finishListeningSession = async function () {
     renderNotebook(listenCorrect, total, firestoreKey);
   };
   showSessionTip({ accuracy, behaviour: getBehaviourPayload(), missedSubTypes: listenMissed, skillKey: firestoreKey });
+  } catch(err) {
+    console.error('finishSession error:', err);
+    showToast('Something went wrong — please try again', 'error');
+    window._finishListeningRunning = false;
+    if (listenFinishBtn) listenFinishBtn.disabled = false;
+  }
 };
 
 // ── WRITING SESSION ───────────────────────────────────────────────
@@ -2943,6 +2963,8 @@ Return ONLY this JSON:
 };
 
 window.finishWritingSession = async function () {
+  console.log('finish session called for: writing');
+  try {
   const day     = studentData?.dayNumber || 6;
   const isTask1 = currentPlan?.skill !== 'writing.task2';
   const taskKey = isTask1 ? 'task1' : 'task2';
@@ -2996,6 +3018,12 @@ window.finishWritingSession = async function () {
     renderNotebookWriting();
   };
   showSessionTip({ accuracy: Math.round(writingBandEst * 10), behaviour: getBehaviourPayload(), missedSubTypes: {}, skillKey: 'writing' });
+  } catch(err) {
+    console.error('finishSession error:', err);
+    showToast('Something went wrong — please try again', 'error');
+    const finishBtn = document.querySelector('[onclick*="finish"], .btn-finish, #btn-finish');
+    if (finishBtn) finishBtn.disabled = false;
+  }
 };
 
 // ── SPEAKING SESSION ──────────────────────────────────────────────
@@ -3179,8 +3207,12 @@ Return ONLY this JSON:
 }
 
 window.finishSpeakingSession = async function () {
+  console.log('finish session called for: speaking');
   if (window._finishSpeakingRunning) return;
   window._finishSpeakingRunning = true;
+  const speakFinishBtn = document.getElementById('speaking-finish-btn');
+  if (speakFinishBtn) speakFinishBtn.disabled = true;
+  try {
   const day       = studentData?.dayNumber || 8;
   const behaviour = getBehaviourPayload();
   // For speaking, override durationSec with actual recording time
@@ -3234,6 +3266,12 @@ window.finishSpeakingSession = async function () {
     renderNotebookSpeaking();
   };
   showSessionTip({ accuracy: Math.round(speakingBandEst * 10), behaviour: getBehaviourPayload(), missedSubTypes: {}, skillKey: 'speaking' });
+  } catch(err) {
+    console.error('finishSession error:', err);
+    showToast('Something went wrong — please try again', 'error');
+    window._finishSpeakingRunning = false;
+    if (speakFinishBtn) speakFinishBtn.disabled = false;
+  }
 };
 
 // ── WEEK 1 REPORT ─────────────────────────────────────────────────

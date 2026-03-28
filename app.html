@@ -836,7 +836,7 @@
     <div class="card hidden" id="listening-results">
       <div class="card-label">Results</div>
       <div id="listening-results-body"></div>
-      <button class="btn mt16" onclick="this.disabled=true; finishListeningSession()">See my notebook <span class="arrow">→</span></button>
+      <button class="btn mt16" id="listening-finish-btn" onclick="finishListeningSession()">See my notebook <span class="arrow">→</span></button>
     </div>
   </div>
 </div>
@@ -956,7 +956,7 @@
       <div class="suggestion-label">💡 Top Suggestion</div>
       <div class="suggestion-text" id="speaking-suggestion"></div>
     </div>
-    <button class="btn" onclick="this.disabled=true; finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
+    <button class="btn" id="speaking-finish-btn" onclick="finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
   </div>
 </div>
 

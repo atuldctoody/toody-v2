@@ -44,6 +44,21 @@ test('Submit buttons are all responsive', async ({ page }) => {
   }
 });
 
+test('Session completion buttons are functional', async ({ page }) => {
+  await page.goto('https://toody-1ab05.web.app/app.html');
+
+  const finishBtns = page.locator('[onclick*="finish"], [onclick*="Finish"], button:has-text("Let\'s go"), button:has-text("Done for today"), button:has-text("Continue")');
+  const count = await finishBtns.count();
+  console.log(`Found ${count} finish buttons`);
+
+  for (let i = 0; i < count; i++) {
+    const btn = finishBtns.nth(i);
+    if (await btn.isVisible()) {
+      await expect(btn).toBeEnabled();
+    }
+  }
+});
+
 test('IELTS modal last card button advances to teach screen', async ({ page }) => {
   await page.goto('https://toody-1ab05.web.app/app.html');
   const finishBtn = page.locator('[onclick*="finishIELTSOverview"], button:has-text("show me how"), button:has-text("ready")');
