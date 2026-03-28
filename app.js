@@ -269,6 +269,26 @@ function showToast(message, duration = 3000) {
   }, duration);
 }
 
+// ── SAFE CLICK — async button wrapper ────────────────────────────
+// Disables the button, runs an async fn, re-enables on completion or error.
+// Prevents stuck-disabled buttons when async calls throw silently.
+window.safeClick = function(btn, asyncFn) {
+  if (btn.disabled) return;
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  Promise.resolve()
+    .then(() => asyncFn())
+    .catch(err => {
+      console.error('safeClick error:', err);
+      showToast('Something went wrong — please try again', 'error');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    });
+};
+
 // ── API RETRY ─────────────────────────────────────────────────────
 async function withRetry(fn, maxRetries = 3) {
   let lastErr;

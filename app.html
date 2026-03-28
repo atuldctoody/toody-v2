@@ -137,7 +137,7 @@
         <option value="9.0">9.0</option>
       </select>
     </div>
-    <button class="btn hidden" id="ob-finish-btn" onclick="finishOnboarding()">Start learning <span class="arrow">→</span></button>
+    <button class="btn hidden" id="ob-finish-btn" onclick="safeClick(this, finishOnboarding)">Start learning <span class="arrow">→</span></button>
     <div class="ob-saving hidden" id="ob-saving">
       <div class="spinner" style="width:22px;height:22px;border-width:3px"></div>
       <span>Setting up your account…</span>
@@ -237,7 +237,7 @@
           <div class="bc-pill-body">You can expand any pill for the full detail. After the overview, Day 1 begins immediately.</div>
         </div>
       </div>
-      <button class="bc-btn bc-btn-start" id="bc2-btn" onclick="finishBriefing()">Show me the overview <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" id="bc2-btn" onclick="safeClick(this, finishBriefing)">Show me the overview <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots (persistent, outside cards) -->
@@ -439,7 +439,7 @@
         </div>
       </div>
       <div class="bc-coach-note">"Reading accuracy is the fastest path to a higher band — because every correct answer counts equally."</div>
-      <button class="bc-btn bc-btn-start" id="ic5-btn" onclick="finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" id="ic5-btn" onclick="safeClick(this, finishIELTSOverview)">Let's start — Day 1 <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots -->
@@ -509,7 +509,7 @@
     <div class="session-card-skill" id="today-skill">True / False / Not Given</div>
     <div class="session-card-desc" id="today-desc">AI-generated passage + 5 questions.</div>
     <div class="session-card-reason" id="today-reason" style="font-size:12px;opacity:0.85;margin-bottom:var(--space-4);line-height:1.5"></div>
-    <button class="btn" onclick="this.disabled=true; startSession()">Let's go <span class="arrow">→</span></button>
+    <button class="btn" onclick="safeClick(this, startSession)">Let's go <span class="arrow">→</span></button>
   </div>
   <div class="card">
     <div class="card-label">Skill Snapshot</div>
@@ -734,7 +734,7 @@
       </div>
       <div class="result-flash" id="warmup-result"></div>
     </div>
-    <button class="btn hidden" id="warmup-continue-btn" onclick="continueFromWarmup()">Continue to today's session <span class="arrow">→</span></button>
+    <button class="btn hidden" id="warmup-continue-btn" onclick="safeClick(this, continueFromWarmup)">Continue to today's session <span class="arrow">→</span></button>
   </div>
 </div>
 
@@ -766,7 +766,7 @@
         <strong>True</strong> = passage confirms it &nbsp;|&nbsp; <strong>False</strong> = passage contradicts it &nbsp;|&nbsp; <strong>Not Given</strong> = passage doesn't say
       </p>
       <div id="questions-container"></div>
-      <button class="btn mt16" id="btn-reading-submit" disabled onclick="submitReading()">Submit answers <span class="arrow">→</span></button>
+      <button class="btn mt16" id="btn-reading-submit" disabled onclick="safeClick(this, submitReading)">Submit answers <span class="arrow">→</span></button>
     </div>
   </div>
 </div>
@@ -788,7 +788,7 @@
     <div class="hint-options" id="tl-hint-options"></div>
     <div class="result-flash mt16" id="tl-result"></div>
   </div>
-  <button class="btn" id="btn-tl-continue" disabled onclick="continueTLToNotebook()">See my notebook <span class="arrow">→</span></button>
+  <button class="btn" id="btn-tl-continue" disabled onclick="safeClick(this, continueTLToNotebook)">See my notebook <span class="arrow">→</span></button>
 </div>
 
 <!-- ══════════════════════ LISTENING ══════════════════════ -->
@@ -829,14 +829,14 @@
       <div class="card">
         <div class="card-label" id="listening-q-label">Questions</div>
         <div id="listening-questions"></div>
-        <button class="btn mt16" id="btn-listening-submit" disabled onclick="submitListening()">Submit answers <span class="arrow">→</span></button>
+        <button class="btn mt16" id="btn-listening-submit" disabled onclick="safeClick(this, submitListening)">Submit answers <span class="arrow">→</span></button>
       </div>
     </div>
 
     <div class="card hidden" id="listening-results">
       <div class="card-label">Results</div>
       <div id="listening-results-body"></div>
-      <button class="btn mt16" id="listening-finish-btn" onclick="finishListeningSession()">See my notebook <span class="arrow">→</span></button>
+      <button class="btn mt16" id="listening-finish-btn" onclick="safeClick(this, finishListeningSession)">See my notebook <span class="arrow">→</span></button>
     </div>
   </div>
 </div>
@@ -866,7 +866,7 @@
       </div>
       <textarea class="textarea-field" id="writing-textarea" placeholder="Write your response here…" oninput="updateWordCount()"></textarea>
       <div style="font-size:12px;color:var(--muted);margin-top:8px" id="writing-target-hint"></div>
-      <button class="btn mt8" id="btn-writing-submit" onclick="this.disabled=true; submitWriting()">Submit for evaluation <span class="arrow">→</span></button>
+      <button class="btn mt8" id="btn-writing-submit" onclick="safeClick(this, submitWriting)">Submit for evaluation <span class="arrow">→</span></button>
     </div>
   </div>
   <div id="writing-evaluating" class="screen-loading hidden"><div class="spinner"></div><p>Evaluating your response…</p></div>
@@ -886,7 +886,7 @@
       <div class="suggestion-label">💡 Top Suggestion</div>
       <div class="suggestion-text" id="writing-suggestion"></div>
     </div>
-    <button class="btn" onclick="finishWritingSession()">See my notebook <span class="arrow">→</span></button>
+    <button class="btn" onclick="safeClick(this, finishWritingSession)">See my notebook <span class="arrow">→</span></button>
   </div>
 </div>
 
@@ -956,7 +956,7 @@
       <div class="suggestion-label">💡 Top Suggestion</div>
       <div class="suggestion-text" id="speaking-suggestion"></div>
     </div>
-    <button class="btn" id="speaking-finish-btn" onclick="finishSpeakingSession()">See my notebook <span class="arrow">→</span></button>
+    <button class="btn" id="speaking-finish-btn" onclick="safeClick(this, finishSpeakingSession)">See my notebook <span class="arrow">→</span></button>
   </div>
 </div>
 
@@ -1047,7 +1047,7 @@
         <div class="expect-item"><div class="expect-icon">🎤</div><div class="expect-text"><strong>Speaking</strong> — Part 2 cue card. 7 min timed.</div></div>
       </div>
     </div>
-    <button class="btn mt16" onclick="startMiniMock()">Begin the Mock <span class="arrow">→</span></button>
+    <button class="btn mt16" onclick="safeClick(this, startMiniMock)">Begin the Mock <span class="arrow">→</span></button>
   </div>
   <div id="mock-results-view" class="hidden">
     <div class="overall-band-card" style="margin-top:16px">
@@ -1132,7 +1132,7 @@
         <span id="tip-action-text"></span>
       </div>
     </div>
-    <button class="btn hidden mt16" id="tip-done-btn" onclick="window.finishTip()">Got it — show me my notebook <span class="arrow">→</span></button>
+    <button class="btn hidden mt16" id="tip-done-btn" onclick="safeClick(this, window.finishTip)">Got it — show me my notebook <span class="arrow">→</span></button>
   </div>
 </div>
 
@@ -1192,7 +1192,7 @@
         </button>
       </div>
       <div class="mock-setup-note">Timer starts immediately. Sections auto-advance when time runs out. You can submit a section early.</div>
-      <button class="btn mt16" onclick="window.startFullMockGeneration()">Generate Mock Test →</button>
+      <button class="btn mt16" onclick="safeClick(this, window.startFullMockGeneration)">Generate Mock Test →</button>
     </div>
   </div>
 
@@ -1222,7 +1222,7 @@
       <!-- Section content rendered by JS -->
     </div>
     <div class="mock-test-footer">
-      <button class="btn mock-submit-btn" id="mock-submit-btn" onclick="window.submitMockSection()">Submit Section →</button>
+      <button class="btn mock-submit-btn" id="mock-submit-btn" onclick="safeClick(this, window.submitMockSection)">Submit Section →</button>
     </div>
   </div>
 
