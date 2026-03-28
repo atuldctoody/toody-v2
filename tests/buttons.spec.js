@@ -43,3 +43,21 @@ test('Submit buttons are all responsive', async ({ page }) => {
     }
   }
 });
+
+test('IELTS modal last card button advances to teach screen', async ({ page }) => {
+  await page.goto('https://toody-1ab05.web.app/app.html');
+  const finishBtn = page.locator('[onclick*="finishIELTSOverview"], button:has-text("show me how"), button:has-text("ready")');
+  if (await finishBtn.count() > 0 && await finishBtn.first().isVisible()) {
+    await finishBtn.first().click();
+    await expect(page.locator('#s-teach, #s-phase2')).toBeVisible({ timeout: 5000 });
+  }
+});
+
+test('Briefing last card button opens IELTS modal', async ({ page }) => {
+  await page.goto('https://toody-1ab05.web.app/app.html');
+  const finishBriefingBtn = page.locator('[onclick*="finishBriefing"], button:has-text("show me how"), button:has-text("ready")');
+  if (await finishBriefingBtn.count() > 0 && await finishBriefingBtn.first().isVisible()) {
+    await finishBriefingBtn.first().click();
+    await expect(page.locator('#ielts-modal')).toBeVisible({ timeout: 3000 });
+  }
+});

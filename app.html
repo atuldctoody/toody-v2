@@ -237,7 +237,7 @@
           <div class="bc-pill-body">You can expand any pill for the full detail. After the overview, Day 1 begins immediately.</div>
         </div>
       </div>
-      <button class="bc-btn bc-btn-start" onclick="this.disabled=true; finishBriefing()">Show me the overview <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" id="bc2-btn" onclick="finishBriefing()">Show me the overview <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots (persistent, outside cards) -->
@@ -439,7 +439,7 @@
         </div>
       </div>
       <div class="bc-coach-note">"Reading accuracy is the fastest path to a higher band — because every correct answer counts equally."</div>
-      <button class="bc-btn bc-btn-start" onclick="this.disabled=true; finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>
+      <button class="bc-btn bc-btn-start" id="ic5-btn" onclick="finishIELTSOverview()">Let's start — Day 1 <span class="arrow">→</span></button>
     </div>
 
     <!-- Progress dots -->
@@ -458,7 +458,7 @@
 <!-- ══════════════════════ HOME ══════════════════════ -->
 <div class="screen" id="s-home">
   <div class="nav">
-    <div class="logo"><div id="dev-logo-trigger" style="display:inline-flex;align-items:center;cursor:pointer;"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right">
       <div class="streak-badge" id="home-streak">🔥 0 days</div>
       <div class="day-badge" id="home-day-badge">0 done</div>
@@ -543,7 +543,7 @@
 <!-- ══════════════════════ SESSION INTRO ══════════════════════ -->
 <div class="screen" id="s-session-intro">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
   <div class="session-intro-skill">
@@ -579,7 +579,7 @@
 <!-- ══════════════════════ TEACH FIRST (Day 1) ══════════════════════ -->
 <div class="screen" id="s-teach">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar">
@@ -712,7 +712,7 @@
 <!-- ══════════════════════ WARMUP ══════════════════════ -->
 <div class="screen" id="s-warmup">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="warmup-day-badge">Day 2</div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot active"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
@@ -741,7 +741,7 @@
 <!-- ══════════════════════ READING ══════════════════════ -->
 <div class="screen" id="s-reading">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="reading-day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar">
@@ -774,7 +774,7 @@
 <!-- ══════════════════════ TOUGH LOVE ══════════════════════ -->
 <div class="screen" id="s-toughlove">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot active"></div><div class="phase-dot"></div></div>
   <div class="phase-label">Phase 2 — <span class="pl-name">Prove You Understood It</span></div>
@@ -794,7 +794,7 @@
 <!-- ══════════════════════ LISTENING ══════════════════════ -->
 <div class="screen" id="s-listening">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="listening-day-badge">Day 2</div></div>
   </div>
   <div class="phase-bar">
@@ -844,7 +844,7 @@
 <!-- ══════════════════════ WRITING ══════════════════════ -->
 <div class="screen" id="s-writing">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="writing-day-badge">Day 6</div></div>
   </div>
   <div class="phase-bar">
@@ -893,7 +893,7 @@
 <!-- ══════════════════════ SPEAKING ══════════════════════ -->
 <div class="screen" id="s-speaking">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="speaking-day-badge">Day 8</div></div>
   </div>
   <div class="phase-bar">
@@ -963,7 +963,7 @@
 <!-- ══════════════════════ NOTEBOOK ══════════════════════ -->
 <div class="screen" id="s-notebook">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge" id="nb-day-badge">Day 1</div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot done"></div><div class="phase-dot done"></div><div class="phase-dot active"></div></div>
@@ -1024,7 +1024,7 @@
 <!-- ══════════════════════ MINI MOCK ══════════════════════ -->
 <div class="screen" id="s-minimock">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><div class="day-badge">Day 10</div></div>
   </div>
   <div class="mock-progress">
@@ -1075,7 +1075,7 @@
 <!-- ══════════════════════ PROGRESS ══════════════════════ -->
 <div class="screen" id="s-progress">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
     <div class="nav-right"><button class="nav-btn" onclick="goToHome()">← Home</button></div>
   </div>
   <div class="home-greeting" style="padding-top:20px">
@@ -1117,7 +1117,7 @@
 <!-- ══════════════════════ SESSION TIP ══════════════════════ -->
 <div class="screen" id="s-tip">
   <div class="nav">
-    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" /></div>
+    <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
   </div>
   <div class="tip-wrap">
     <div class="tip-header">

@@ -487,6 +487,8 @@ onAuthStateChanged(auth, async user => {
     return;
   }
   currentUser = user;
+  window._finishBriefingRunning = false;
+  window._finishIELTSOverviewRunning = false;
   initDevTools();
   await bootApp();
 });
@@ -828,13 +830,18 @@ function _showBriefingCard(nextIdx, direction) {
   briefingCard = nextIdx;
   _setBriefingBg(nextIdx);
   _updateBriefingDots(nextIdx);
+  const nextBriefingBtn = document.querySelector('#bc-' + nextIdx + ' button');
+  if (nextBriefingBtn) nextBriefingBtn.disabled = false;
 }
 
 window.nextBriefingCard = function () { _showBriefingCard(briefingCard + 1, 'forward'); };
 
 window.finishBriefing = async function () {
+  console.log('finishBriefing called');
   if (window._finishBriefingRunning) return;
   window._finishBriefingRunning = true;
+  const btn = document.getElementById('bc2-btn');
+  if (btn) btn.disabled = true;
   try {
     await updateStudentDoc(currentUser.uid, { briefingSeen: true });
     if (studentData) studentData.briefingSeen = true;
@@ -908,11 +915,16 @@ function _showIELTSCard(nextIdx, direction) {
   });
   const backBtn = document.getElementById('ielts-modal-back');
   if (backBtn) backBtn.classList.toggle('hidden', nextIdx === 0);
+  const nextIELTSBtn = document.querySelector('#ic-' + nextIdx + ' button');
+  if (nextIELTSBtn) nextIELTSBtn.disabled = false;
 }
 
 window.finishIELTSOverview = function () {
+  console.log('finishIELTSOverview called');
   if (window._finishIELTSOverviewRunning) return;
   window._finishIELTSOverviewRunning = true;
+  const btn = document.getElementById('ic5-btn');
+  if (btn) btn.disabled = true;
   hideIELTSModal();
   loadTeachFirst('reading-tfng');
 };
@@ -4659,33 +4671,38 @@ window.goToHome = function () { renderHome(); goTo('s-home'); };
 // Long-press 3s on home logo  → shows the hidden reset button
 // Long-press 3s on streak     → skips straight to home (returning-student test)
 
-function _attachLongPress(elId, ms, cb) {
-  const el = document.getElementById(elId);
+function _attachLongPress(el, ms, cb) {
   if (!el) return;
   let t = null;
-  const start = () => { t = setTimeout(cb, ms); };
+  const start = (e) => { e.preventDefault(); t = setTimeout(cb, ms); };
   const cancel = () => { clearTimeout(t); t = null; };
-  el.addEventListener('touchstart',  start,  { passive: true });
-  el.addEventListener('touchend',    cancel);
-  el.addEventListener('touchcancel', cancel);
-  el.addEventListener('mousedown',   start);
-  el.addEventListener('mouseup',     cancel);
-  el.addEventListener('mouseleave',  cancel);
+  el.addEventListener('pointerdown',   start);
+  el.addEventListener('pointerup',     cancel);
+  el.addEventListener('pointercancel', cancel);
+  el.addEventListener('contextmenu',   (e) => e.preventDefault());
 }
 
 function initDevTools() {
-  // Logo long-press → reveal the reset button
-  _attachLongPress('dev-logo-trigger', 3000, () => {
-    console.log('long press triggered');
-    const btn = document.getElementById('dev-reset-btn');
-    console.log('button element:', btn);
-    console.log('button display:', btn?.style.display);
-    console.log('button parent display:', btn?.parentElement?.style.display);
-    if (!btn) return;
-    btn.style.cssText = 'display:block !important; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:red; color:white; padding:10px 20px; z-index:99999; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer;';
+  function toggleDevReset() {
+    console.log('logo long press detected');
+    console.log('3s complete - attempting to show reset button');
+    const devBtn = document.getElementById('dev-reset-btn');
+    console.log('dev-reset-btn found:', devBtn);
+    if (devBtn) {
+      devBtn.style.cssText = 'display:block !important; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#c0392b; color:white; padding:12px 24px; z-index:99999; border:none; border-radius:8px; font-size:14px; font-weight:bold;';
+      console.log('button forced visible');
+    } else {
+      console.log('ERROR: dev-reset-btn not found in DOM');
+    }
+  }
+
+  // Logo long-press on every screen → reveal the reset button
+  document.querySelectorAll('.dev-logo-trigger').forEach(el => {
+    _attachLongPress(el, 3000, () => { toggleDevReset(); });
   });
+
   // Streak long-press → skip onboarding/briefing and jump straight to home
-  _attachLongPress('home-streak', 3000, () => {
+  _attachLongPress(document.getElementById('home-streak'), 3000, () => {
     if (!studentData) return;
     renderHome();
     goTo('s-home');
