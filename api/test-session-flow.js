@@ -18,16 +18,17 @@
 //   npm run test:flow              — full run, exits 0 on all pass, 1 on any fail
 //   node api/test-session-flow.js  — same, run directly
 //
-// CJS module (package.json has "type": "commonjs").
-// Uses dynamic import() to load ESM api modules.
+// ESM module (api/package.json sets "type": "module").
 
-'use strict';
+import fs   from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const fs   = require('fs');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
 
-const API_URL   = 'https://toody-api.vercel.app/api/generate';
-const AUDIO_URL = 'https://toody-api.vercel.app/api/audio';
+const API_URL        = 'https://toody-api.vercel.app/api/generate';
+const AUDIO_URL      = 'https://toody-api.vercel.app/api/audio';
 const FIREBASE_PROJECT = 'toody-1ab05';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -71,7 +72,7 @@ async function runStep(label, fn) {
 
 async function stepGeneration() {
   const body = {
-    model:       'gpt-4o-mini',
+    model:    'gpt-4o-mini',
     messages: [
       {
         role:    'system',
@@ -118,8 +119,8 @@ Return ONLY this JSON:
   });
   assert(res.ok, `API returned ${res.status}`);
 
-  const data  = await res.json();
-  const raw   = data.choices?.[0]?.message?.content;
+  const data   = await res.json();
+  const raw    = data.choices?.[0]?.message?.content;
   assert(raw, 'No content in API response');
 
   const parsed = parseJson(raw);
@@ -172,7 +173,7 @@ async function stepExplanationQuality(passage, questions) {
   const explanations = questions.map(q => ({
     questionText:  q.text,
     passage,
-    studentAnswer: '',          // test context — student answer unknown
+    studentAnswer: '',
     correctAnswer: q.answer,
     explanation:   q.explanation,
     errorReason:   q.errorReason || '',
@@ -180,8 +181,7 @@ async function stepExplanationQuality(passage, questions) {
 
   const report = await scoreExplanations(explanations, API_URL);
 
-  assert(report !== null,
-    'scoreExplanations returned null');
+  assert(report !== null, 'scoreExplanations returned null');
   assert(Array.isArray(report.explanations),
     'explanationQuality.explanations is not an array');
   assert(report.explanations.length === questions.length,
@@ -214,8 +214,8 @@ async function stepAudio() {
 }
 
 async function stepWritingEval() {
-  const sampleTask   = 'Some people think that the best way to reduce crime is to give longer prison sentences. Others, however, believe there are better alternative ways of reducing crime. Discuss both views and give your own opinion.';
-  const sampleEssay  = `Crime is a major problem in many societies today. Some argue that harsher prison sentences deter criminals, while others believe rehabilitation and social investment are more effective. In this essay, I will discuss both perspectives before giving my own view.
+  const sampleTask  = 'Some people think that the best way to reduce crime is to give longer prison sentences. Others, however, believe there are better alternative ways of reducing crime. Discuss both views and give your own opinion.';
+  const sampleEssay = `Crime is a major problem in many societies today. Some argue that harsher prison sentences deter criminals, while others believe rehabilitation and social investment are more effective. In this essay, I will discuss both perspectives before giving my own view.
 
 Those who support longer sentences argue that they act as a powerful deterrent. When potential criminals know that the punishment is severe, they may think twice before committing an offence. Furthermore, keeping offenders in prison for longer periods prevents them from reoffending during that time, which provides a degree of protection to society.
 
@@ -231,7 +231,7 @@ In my opinion, a balanced approach is necessary. While serious crimes may requir
         content: 'You are an experienced IELTS examiner. Evaluate writing responses strictly but fairly using official band descriptors. Return valid JSON only.',
       },
       {
-        role:    'user',
+        role: 'user',
         content: `Evaluate this IELTS Writing Task 2 (Opinion Essay) response for a Band 6.0 target student.
 
 TASK PROMPT: ${sampleTask}
@@ -283,7 +283,7 @@ Return ONLY this JSON:
 
 function saveLocal(results) {
   try {
-    const dir = path.join(__dirname, '..', 'test-results');
+    const dir      = path.join(__dirname, '..', 'test-results');
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     const filename = `flow-${results.timestamp.replace(/[:.]/g, '-')}.json`;
     fs.writeFileSync(path.join(dir, filename), JSON.stringify(results, null, 2));
@@ -294,23 +294,22 @@ function saveLocal(results) {
 }
 
 async function saveFirestore(results) {
-  // Writes to systemTests/{timestamp} via Firestore REST API (no auth — works if
-  // Firestore rules allow public writes to this collection).
   try {
-    const docId  = results.timestamp.replace(/[:.]/g, '-');
-    const url    = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents/systemTests/${docId}`;
+    const docId = results.timestamp.replace(/[:.]/g, '-');
+    const url   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents/systemTests/${docId}`;
 
-    // Convert to Firestore REST field format
-    const fields = {};
     const toField = v => {
       if (typeof v === 'boolean') return { booleanValue: v };
       if (typeof v === 'number')  return { doubleValue:  v };
-      if (v === null)             return { nullValue:    'NULL_VALUE' };
+      if (v === null)             return { nullValue: 'NULL_VALUE' };
       return { stringValue: String(v) };
     };
+    const fields = {};
     Object.entries(results).forEach(([k, v]) => {
       if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
-        fields[k] = { mapValue: { fields: Object.fromEntries(Object.entries(v).map(([k2, v2]) => [k2, toField(v2)])) } };
+        fields[k] = { mapValue: { fields: Object.fromEntries(
+          Object.entries(v).map(([k2, v2]) => [k2, toField(v2)])
+        )}};
       } else {
         fields[k] = toField(v);
       }
@@ -321,17 +320,13 @@ async function saveFirestore(results) {
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ fields }),
     });
-
-    if (res.ok) {
-      console.log(`  Firestore: saved to systemTests/${docId}`);
-    }
-    // Silently ignore auth failures — Firestore rules may require auth
+    if (res.ok) console.log(`  Firestore: saved to systemTests/${docId}`);
   } catch { /* non-critical */ }
 }
 
 // ── Main ─────────────────────────────────────────────────────────────────────
 
-async function testSessionFlow() {
+export async function testSessionFlow() {
   const t0 = Date.now();
   console.log('\n── Toody Session Flow Test ──────────────────────────────────');
   console.log(`   ${new Date().toISOString()}\n`);
@@ -369,28 +364,22 @@ async function testSessionFlow() {
   const writing = await runStep('Writing Task 2 evaluation', stepWritingEval);
 
   const steps = {
-    generation:       { pass: gen.pass,     durationMs: gen.durationMs,     error: gen.error     || null },
-    verification:     { pass: verify.pass,  durationMs: verify.durationMs,  error: verify.error  || null, corrections: verify.corrections ?? null },
+    generation:         { pass: gen.pass,     durationMs: gen.durationMs,     error: gen.error     || null },
+    verification:       { pass: verify.pass,  durationMs: verify.durationMs,  error: verify.error  || null, corrections: verify.corrections ?? null },
     explanationQuality: { pass: quality.pass, durationMs: quality.durationMs, error: quality.error || null, sessionAvgScore: quality.sessionAvgScore ?? null },
-    audio:            { pass: audio.pass,   durationMs: audio.durationMs,   error: audio.error   || null },
-    writingEval:      { pass: writing.pass, durationMs: writing.durationMs, error: writing.error || null, overallBand: writing.overallBand ?? null },
+    audio:              { pass: audio.pass,   durationMs: audio.durationMs,   error: audio.error   || null },
+    writingEval:        { pass: writing.pass, durationMs: writing.durationMs, error: writing.error || null, overallBand: writing.overallBand ?? null },
   };
 
-  const overallPass    = Object.values(steps).every(s => s.pass);
+  const overallPass     = Object.values(steps).every(s => s.pass);
   const totalDurationMs = Date.now() - t0;
-
-  const passCount = Object.values(steps).filter(s => s.pass).length;
-  const total     = Object.keys(steps).length;
+  const passCount       = Object.values(steps).filter(s => s.pass).length;
+  const total           = Object.keys(steps).length;
 
   console.log(`\n── Result: ${passCount}/${total} steps passed ─────────────────────────────`);
   console.log(`   Total: ${totalDurationMs}ms | ${overallPass ? 'ALL PASS ✓' : 'FAILURES DETECTED ✗'}\n`);
 
-  const results = {
-    timestamp: new Date().toISOString(),
-    steps,
-    overallPass,
-    totalDurationMs,
-  };
+  const results = { timestamp: new Date().toISOString(), steps, overallPass, totalDurationMs };
 
   saveLocal(results);
   await saveFirestore(results);
@@ -399,16 +388,8 @@ async function testSessionFlow() {
 }
 
 // Allow direct execution: node api/test-session-flow.js
-if (require.main === module) {
+if (process.argv[1] === __filename) {
   testSessionFlow()
-    .then(r => {
-      console.log(JSON.stringify(r, null, 2));
-      process.exit(r.overallPass ? 0 : 1);
-    })
-    .catch(err => {
-      console.error('Fatal error:', err);
-      process.exit(1);
-    });
+    .then(r => { console.log(JSON.stringify(r, null, 2)); process.exit(r.overallPass ? 0 : 1); })
+    .catch(err => { console.error('Fatal error:', err); process.exit(1); });
 }
-
-module.exports = { testSessionFlow };

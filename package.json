@@ -7,7 +7,7 @@
     "test": "playwright test",
     "test:report": "playwright test --reporter=html",
     "test:buttons": "playwright test tests/buttons.spec.js --reporter=line",
-    "test:flow": "node -e \"require('./api/test-session-flow.js').testSessionFlow().then(r => { console.log(JSON.stringify(r, null, 2)); process.exit(r.overallPass ? 0 : 1); })\"",
+    "test:flow": "node --input-type=module --eval \"import('./api/test-session-flow.js').then(({testSessionFlow})=>testSessionFlow()).then(r=>{console.log(JSON.stringify(r,null,2));process.exit(r.overallPass?0:1);})\"",
     "predeploy": "npm run test:buttons",
     "deploy": "git add . && git commit -m \"deploy: latest fixes\" && git push && firebase deploy --only hosting"
   },

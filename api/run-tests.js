@@ -7,17 +7,15 @@
 // the toody-api Vercel project under /api/run-tests.js and removing the
 // http.createServer block at the bottom.
 //
-// CJS module — same runtime as test-session-flow.js.
+// ESM module (api/package.json sets "type": "module").
 
-'use strict';
-
-const http = require('http');
-const { testSessionFlow } = require('./test-session-flow.js');
+import http from 'http';
+import { testSessionFlow } from './test-session-flow.js';
 
 const PORT = process.env.PORT || 3001;
 
 // Vercel / serverless handler (export for when deployed as a function)
-async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'GET' && req.method !== 'POST') {
     res.writeHead(405, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ error: 'Method not allowed' }));
@@ -44,13 +42,13 @@ async function handler(req, res) {
   }
 }
 
-// Local server — only starts when run directly (not when required as a module)
-if (require.main === module) {
+// Local server — only starts when run directly
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
   const server = http.createServer(handler);
   server.listen(PORT, () => {
     console.log(`\nToody test server running at http://localhost:${PORT}/run-tests`);
     console.log('Press Ctrl+C to stop.\n');
   });
 }
-
-module.exports = handler;
