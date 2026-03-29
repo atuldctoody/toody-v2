@@ -1578,7 +1578,21 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
   if (idx >= qs.length) {
     // Drill complete — show score then go to confidence builder
     const contentEl = document.getElementById('teach-reinforce-content');
-    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. Nice work.</p><button class="btn-secondary" style="margin-top:10px;display:block;margin-left:auto;margin-right:auto" onclick="renderConfidenceQuestion(0)">Continue →</button></div>`;
+    const _drillAcc = qs.length > 0 ? Math.round((teachDrillCorrect / qs.length) * 100) : 0;
+    const _drillMsg = teachDrillCorrect === 0
+      ? 'Keep going — this is how you learn.'
+      : teachDrillCorrect === qs.length
+      ? 'Excellent. You\'ve got this skill.'
+      : (teachDrillCorrect === 1 && qs.length === 2)
+      ? 'Getting there. One more to go.'
+      : (teachDrillCorrect === 2 && qs.length === 2)
+      ? 'Nice work. Both correct.'
+      : _drillAcc >= 80
+      ? 'Strong session.'
+      : _drillAcc >= 50
+      ? 'Solid. Room to improve.'
+      : 'This is where Toody helps most. Let\'s keep going.';
+    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. ${_drillMsg}</p><button class="btn-secondary" style="margin-top:10px;display:block;margin-left:auto;margin-right:auto" onclick="renderConfidenceQuestion(0)">Continue →</button></div>`;
     return;
   }
   const q = qs[idx];
@@ -2226,6 +2240,7 @@ window.answerTFNG = function (qnum, val) {
   trackQStart(qnum + 1);
 
   const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
+  console.log(`answerTFNG q${qnum}: val="${val}" answer="${q.answer}" isRight=${isRight}`);
   sessionAnswers[qnum] = { val, isRight, errorReason: isRight ? null : (q.errorReason || 'other') };
   if (isRight) sessionCorrect++;
 
@@ -2236,9 +2251,10 @@ window.answerTFNG = function (qnum, val) {
   });
 
   const rf = document.getElementById(`rf${qnum}`);
+  rf.classList.remove('good', 'bad');
   rf.classList.add('show', isRight ? 'good' : 'bad');
   const expl = q.explanation ? boldify(q.explanation) : (isRight ? 'Good work.' : 'Review the passage carefully.');
-  if (isRight) {
+  if (isRight === true) {
     rf.innerHTML = `✅ Correct. ${expl}`;
   } else {
     const ERROR_REASON_PILLS = {
@@ -3417,11 +3433,15 @@ function renderNotebook(correct, total, skillKey) {
   if (!isMC)   setSkillBar('nb-mc-bar',   'nb-mc-pct',   (nbSkills['listening-multipleChoice']?.attempted  || 0) > 0 ? nbSkills['listening-multipleChoice'].accuracy    : null);
   if (!isFC)   setSkillBar('nb-fc-bar',   'nb-fc-pct',   (nbSkills['listening-formCompletion']?.attempted  || 0) > 0 ? nbSkills['listening-formCompletion'].accuracy     : null);
 
-  const assessment = accuracy >= 80
-    ? `${accuracy}% — strong session. You're building real exam instincts.`
-    : accuracy >= 60
-    ? `${accuracy}% today. Solid effort — Toody's tracking the pattern in your misses.`
-    : `${accuracy}% — that's the baseline. Toody now knows exactly where to focus.`;
+  const assessment = correct === 0
+    ? `${correct}/${total} — Keep going — this is how you learn.`
+    : correct === total
+    ? `${correct}/${total} — Excellent. You've got this skill.`
+    : accuracy >= 80
+    ? `${correct}/${total} — Strong session.`
+    : accuracy >= 50
+    ? `${correct}/${total} — Solid. Room to improve.`
+    : `${correct}/${total} — This is where Toody helps most. Let's keep going.`;
   document.getElementById('nb-assessment').textContent = assessment;
 
   // Worked example
