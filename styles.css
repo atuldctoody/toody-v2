@@ -887,6 +887,13 @@ a { color: inherit; text-decoration: none; }
 .writing-task-type  { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
 .writing-task-text  { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.7; }
 
+/* ── WRITING CHART ── */
+#writing-chart-container { margin: 0 16px 14px; }
+.writing-chart-wrap  { background: #fff; border: 1.5px solid var(--accent-mid); border-radius: var(--r); padding: 16px 16px 12px; }
+.writing-chart-title { font-size: 12px; font-weight: 600; color: var(--accent); text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+#writing-chart-canvas { max-height: 220px; }
+.writing-chart-fallback { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; font-size: 13px; color: var(--text); line-height: 1.6; }
+
 /* ── SPEAKING / RECORDING ── */
 .record-ui    { display: flex; flex-direction: column; align-items: center; padding: 20px 0 8px; gap: 12px; }
 .record-btn   { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 20px rgba(101,87,212,0.35); }

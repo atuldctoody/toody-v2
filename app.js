@@ -2905,8 +2905,8 @@ async function loadWritingSession() {
     system: 'You are an IELTS Writing examiner. Return valid JSON only, no markdown.',
     user: isTask1
       ? `Generate an IELTS Academic Writing Task 1 prompt for a Band ${band} student.
-Return ONLY this JSON:
-{"taskType":"Task 1","title":"Graph/Chart Description","prompt":"Describe the following [bar chart / line graph / table / pie chart]. The [chart] below shows [what it shows]. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.","dataDescription":"[describe the imaginary chart data in 2-3 sentences so the student knows what to write about]"}`
+Return ONLY this JSON (no extra fields, no markdown):
+{"taskType":"Task 1","title":"[short title]","prompt":"The [chart type] below shows [topic]. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.","dataDescription":"[2-3 sentence plain description of the data for accessibility]","chartData":{"type":"bar","labels":["Label1","Label2","Label3","Label4","Label5"],"datasets":[{"label":"[series name]","data":[10,20,30,40,50]}],"yAxisLabel":"[unit label e.g. Percentage (%)"],"unit":"[unit e.g. %]"}}`
       : `Generate an IELTS Academic Writing Task 2 prompt for a Band ${band} student.
 Return ONLY this JSON:
 {"taskType":"Task 2","title":"Opinion Essay","prompt":"[Essay question on a current topic]. Write at least 250 words. Give reasons for your answer and include any relevant examples from your own knowledge or experience."}`
@@ -2917,9 +2917,9 @@ Return ONLY this JSON:
     writingTaskData = parseAIJson(raw);
 
     document.getElementById('writing-task-type').textContent = writingTaskData.taskType || `Writing Task ${taskNum}`;
-    document.getElementById('writing-task-text').innerHTML   = writingTaskData.prompt
-      + (writingTaskData.dataDescription ? `<br/><br/><em style="color:var(--muted);font-size:12px">${writingTaskData.dataDescription}</em>` : '');
+    document.getElementById('writing-task-text').innerHTML   = writingTaskData.prompt || '';
     document.getElementById('writing-target-hint').textContent = `Target: at least ${minWords} words.`;
+    if (isTask1) renderWritingChart(writingTaskData);
     document.getElementById('writing-textarea').value = '';
     document.getElementById('writing-word-count').textContent = '0 words';
     document.getElementById('writing-word-count').className   = 'word-count-badge';
@@ -2933,6 +2933,91 @@ Return ONLY this JSON:
     document.getElementById('writing-loading').innerHTML =
       '<p style="color:var(--danger);padding:20px;text-align:center">Could not load writing task. Please go back and try again.</p>';
   }
+}
+
+let _writingChart = null;
+function renderWritingChart(taskData) {
+  const container = document.getElementById('writing-chart-container');
+  container.classList.add('hidden');
+  container.innerHTML = '';
+
+  // Destroy any previous Chart.js instance
+  if (_writingChart) { _writingChart.destroy(); _writingChart = null; }
+
+  const cd = taskData?.chartData;
+
+  // ── Fallback: styled table ────────────────────────────────────────────────
+  if (!cd || !Array.isArray(cd.labels) || !cd.labels.length ||
+      !Array.isArray(cd.datasets) || !cd.datasets[0]?.data?.length) {
+    const desc = taskData.dataDescription || '';
+    if (!desc) return;
+    container.innerHTML =
+      `<div class="writing-chart-fallback"><p>${desc}</p></div>`;
+    container.classList.remove('hidden');
+    return;
+  }
+
+  // ── Chart.js render ───────────────────────────────────────────────────────
+  const type    = ['bar','line','pie'].includes(cd.type) ? cd.type : 'bar';
+  const isPie   = type === 'pie';
+  const colors  = ['#6557D4','#34A0A4','#F4A261','#E76F51','#2A9D8F',
+                   '#E9C46A','#264653','#A8DADC','#457B9D','#1D3557'];
+  const ds      = cd.datasets[0];
+  const bgColors = isPie
+    ? ds.data.map((_, i) => colors[i % colors.length])
+    : colors[0];
+  const borderColors = isPie
+    ? ds.data.map((_, i) => colors[i % colors.length])
+    : colors[0];
+
+  const wrap = document.createElement('div');
+  wrap.className = 'writing-chart-wrap';
+  if (taskData.title) {
+    const ttl = document.createElement('div');
+    ttl.className = 'writing-chart-title';
+    ttl.textContent = taskData.title;
+    wrap.appendChild(ttl);
+  }
+  const canvas = document.createElement('canvas');
+  canvas.id = 'writing-chart-canvas';
+  wrap.appendChild(canvas);
+  container.appendChild(wrap);
+  container.classList.remove('hidden');
+
+  _writingChart = new Chart(canvas, {
+    type,
+    data: {
+      labels: cd.labels,
+      datasets: [{
+        label:           ds.label || '',
+        data:            ds.data,
+        backgroundColor: bgColors,
+        borderColor:     borderColors,
+        borderWidth:     isPie ? 1 : 2,
+        fill:            false,
+        tension:         0.3,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { display: isPie, position: 'bottom',
+          labels: { color: '#333', font: { size: 12 } } },
+        tooltip: { callbacks: {
+          label: ctx => ` ${ctx.parsed.y ?? ctx.parsed} ${cd.unit || ''}`.trim(),
+        }},
+      },
+      scales: isPie ? {} : {
+        x: { ticks: { color: '#555', font: { size: 11 } },
+             grid:  { display: false } },
+        y: { ticks: { color: '#555', font: { size: 11 } },
+             title: { display: !!cd.yAxisLabel, text: cd.yAxisLabel || '',
+                      color: '#555', font: { size: 11 } },
+             beginAtZero: true },
+      },
+    },
+  });
 }
 
 window.updateWordCount = function () {

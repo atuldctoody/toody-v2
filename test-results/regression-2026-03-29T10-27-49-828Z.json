@@ -1,56 +1,25 @@
 {
-  "timestamp": "2026-03-29T10:22:45.164Z",
+  "timestamp": "2026-03-29T10:27:49.828Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "overallPass": true,
-  "durationMs": 20299,
+  "durationMs": 22731,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 20196,
+      "durationMs": 22214,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Obesity and Public Health",
+          "topic": "Biodiversity Decline",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 4.5,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
-      "band": 6,
-      "pass": true,
-      "durationMs": 20263,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Urban Green Spaces",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
@@ -70,9 +39,40 @@
       }
     },
     {
+      "band": 6,
+      "pass": true,
+      "durationMs": 22690,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Multitasking in Learning",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.1,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
       "band": 7,
       "pass": true,
-      "durationMs": 18114,
+      "durationMs": 21869,
       "steps": {
         "generation": {
           "pass": true,
