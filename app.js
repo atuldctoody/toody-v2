@@ -1,7 +1,7 @@
 import { auth, db } from './firebase-config.js';
 import { getVisionPrompt }  from './api/vision-prompt.js';
-// NOTE: verifyAnswers is loaded via dynamic import() inside loadReadingSession()
-// to prevent a module-load failure from breaking the entire app.
+// NOTE: verifyAnswers and checkExplanations are loaded via dynamic import() inside
+// their call sites to prevent a module-load failure from breaking the entire app.
 import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import {
   doc, getDoc, setDoc, updateDoc,
@@ -2450,6 +2450,22 @@ async function finishReadingSession() {
   if (_readingSessionRef) generateAndSaveNarrative(currentUser.uid, _readingSessionRef, {
     skill: skillKey, day, accuracy, questionsCorrect: sessionCorrect, total, missedSubTypes, topic: sessionTopic,
   });
+
+  // Agent 3 — Explanation Quality Audit (fire-and-forget, never blocks UI)
+  if (_readingSessionRef && sessionQuestions.length) {
+    const _explData = sessionQuestions.map(q => ({
+      questionText:  q.text,
+      passage:       sessionPassage,
+      studentAnswer: sessionAnswers[q.id]?.val        || '',
+      correctAnswer: q.answer,
+      explanation:   q.explanation                    || '',
+      errorReason:   sessionAnswers[q.id]?.errorReason || '',
+    }));
+    import('./api/check-explanations.js')
+      .then(({ checkExplanations }) =>
+        checkExplanations(currentUser.uid, _readingSessionRef, _explData, API_URL))
+      .catch(() => { /* non-critical */ });
+  }
 
   if (mockMode) {
     mockResults.reading = { correct: sessionCorrect, total, accuracy };
