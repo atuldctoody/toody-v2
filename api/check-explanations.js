@@ -8,6 +8,10 @@
 // Never blocks the UI. Failures are silent — the session is already complete.
 // The output is mentor-facing: it surfaces weak explanations for review and
 // flags systematic prompt degradation before students see it at scale.
+//
+// Exports two functions:
+//   scoreExplanations(explanations, apiUrl) — pure API scoring, no Firestore (testable)
+//   checkExplanations(uid, sessionRef, explanations, apiUrl) — scoring + Firestore save
 
 const CHECK_SYSTEM = `You are a teaching quality auditor for an IELTS coaching product. Your job is to evaluate whether each explanation given to a student meets five specific teaching standards.
 
@@ -53,22 +57,18 @@ Return ONLY this JSON structure (no markdown, no preamble):
 {"explanations":[{"id":1,"BAND_APPROPRIATE":4,"LINGUISTIC_SPECIFICITY":2,"NON_LOCATIONAL":5,"TEACHES_THE_RULE":3,"CONCRETE_EXAMPLE":2,"avgScore":3.2,"failingCriteria":["LINGUISTIC_SPECIFICITY","CONCRETE_EXAMPLE"],"oneLineNote":"Name the specific word in the passage that shows uncertainty — do not just say the passage is unclear."}]}`;
 
 /**
- * Scores every explanation shown during a session against Toody's teaching
- * standards and saves a quality report to the session Firestore document.
+ * Calls the scoring API and returns the quality report.
+ * Pure function — no side effects, no Firestore. Safe to call from tests or CLI.
  *
- * Fire-and-forget — never awaited, never blocks the UI.
- *
- * @param {string}   uid          - Firebase Auth UID (for logging context)
- * @param {object}   sessionRef   - Firestore DocumentReference for the session
- * @param {Array}    explanations - Array of { questionText, passage, studentAnswer, correctAnswer, explanation, errorReason }
- * @param {string}   apiUrl       - The AI API endpoint URL
+ * @param {Array}  explanations - Array of { questionText, passage, studentAnswer, correctAnswer, explanation, errorReason }
+ * @param {string} apiUrl       - The AI API endpoint URL
+ * @returns {Promise<{ sessionAvgScore, explanationCount, weakCount, flagged, explanations } | null>}
  */
-export async function checkExplanations(uid, sessionRef, explanations, apiUrl) {
-  if (!explanations?.length || !apiUrl) return;
+export async function scoreExplanations(explanations, apiUrl) {
+  if (!explanations?.length || !apiUrl) return null;
 
-  // Only evaluate explanations that were actually shown (questions the student answered)
   const scoreable = explanations.filter(e => e.explanation?.trim());
-  if (!scoreable.length) return;
+  if (!scoreable.length) return null;
 
   const explanationList = scoreable
     .map((e, i) => [
@@ -82,61 +82,75 @@ export async function checkExplanations(uid, sessionRef, explanations, apiUrl) {
 
   const userMsg = `Evaluate the following explanations. Each was shown to a Band 5–6 IELTS student after answering a question.\n\n${explanationList}\n\nScore each explanation against all five criteria and return the JSON structure specified in your instructions.`;
 
+  const res = await fetch(apiUrl, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model:       'gpt-4o-mini',
+      messages:    [
+        { role: 'system', content: CHECK_SYSTEM },
+        { role: 'user',   content: userMsg      },
+      ],
+      max_tokens:  1000,
+      temperature: 0,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`check-explanations API call failed: ${res.status}`);
+
+  const data = await res.json();
+  let raw = (data.choices?.[0]?.message?.content || '').trim();
+  raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+  const result = JSON.parse(raw);
+
+  if (!result?.explanations?.length) throw new Error('check-explanations returned empty explanations array');
+
+  const report = result.explanations.map((r, i) => ({
+    questionText:    scoreable[i]?.questionText || '',
+    avgScore:        r.avgScore,
+    failingCriteria: r.failingCriteria || [],
+    oneLineNote:     r.oneLineNote     || '',
+    scores: {
+      BAND_APPROPRIATE:       r.BAND_APPROPRIATE,
+      LINGUISTIC_SPECIFICITY: r.LINGUISTIC_SPECIFICITY,
+      NON_LOCATIONAL:         r.NON_LOCATIONAL,
+      TEACHES_THE_RULE:       r.TEACHES_THE_RULE,
+      CONCRETE_EXAMPLE:       r.CONCRETE_EXAMPLE,
+    },
+  }));
+
+  const sessionAvg = Math.round(
+    (report.reduce((s, r) => s + (r.avgScore || 0), 0) / report.length) * 10
+  ) / 10;
+
+  return {
+    sessionAvgScore:  sessionAvg,
+    explanationCount: report.length,
+    weakCount:        report.filter(r => r.avgScore < 3).length,
+    flagged:          report.some(r => r.avgScore < 3),
+    explanations:     report,
+    checkedAt:        new Date().toISOString(),
+  };
+}
+
+/**
+ * Scores every explanation shown during a session against Toody's teaching
+ * standards and saves a quality report to the session Firestore document.
+ *
+ * Fire-and-forget — never awaited, never blocks the UI.
+ *
+ * @param {string}   uid          - Firebase Auth UID (for logging context)
+ * @param {object}   sessionRef   - Firestore DocumentReference for the session
+ * @param {Array}    explanations - Array of { questionText, passage, studentAnswer, correctAnswer, explanation, errorReason }
+ * @param {string}   apiUrl       - The AI API endpoint URL
+ */
+export async function checkExplanations(uid, sessionRef, explanations, apiUrl) {
   try {
-    const res = await fetch(apiUrl, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model:       'gpt-4o-mini',
-        messages:    [
-          { role: 'system', content: CHECK_SYSTEM },
-          { role: 'user',   content: userMsg      },
-        ],
-        max_tokens:  1000,
-        temperature: 0,  // deterministic — this is a quality audit, not creative generation
-      }),
-    });
-
-    if (!res.ok) return;  // non-critical, fail silently
-    const data = await res.json();
-    let raw = (data.choices?.[0]?.message?.content || '').trim();
-    raw = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
-    const result = JSON.parse(raw);
-
-    if (!result?.explanations?.length) return;
-
-    // Map scores back to the original question text for the saved report
-    const report = result.explanations.map((r, i) => ({
-      questionText:    scoreable[i]?.questionText || '',
-      avgScore:        r.avgScore,
-      failingCriteria: r.failingCriteria || [],
-      oneLineNote:     r.oneLineNote     || '',
-      scores: {
-        BAND_APPROPRIATE:      r.BAND_APPROPRIATE,
-        LINGUISTIC_SPECIFICITY: r.LINGUISTIC_SPECIFICITY,
-        NON_LOCATIONAL:        r.NON_LOCATIONAL,
-        TEACHES_THE_RULE:      r.TEACHES_THE_RULE,
-        CONCRETE_EXAMPLE:      r.CONCRETE_EXAMPLE,
-      },
-    }));
-
-    const sessionAvg = report.length
-      ? Math.round((report.reduce((s, r) => s + r.avgScore, 0) / report.length) * 10) / 10
-      : null;
-
-    const weakExplanations = report.filter(r => r.avgScore < 3);
+    const quality = await scoreExplanations(explanations, apiUrl);
+    if (!quality) return;
 
     // Save to the session document — mentor-facing, not shown to the student
     const { updateDoc } = await import('https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js');
-    await updateDoc(sessionRef, {
-      explanationQuality: {
-        sessionAvgScore:  sessionAvg,
-        explanationCount: report.length,
-        weakCount:        weakExplanations.length,
-        flagged:          weakExplanations.length > 0,
-        explanations:     report,
-        checkedAt:        new Date().toISOString(),
-      },
-    });
+    await updateDoc(sessionRef, { explanationQuality: quality });
   } catch { /* non-critical — explanation audit is additive only */ }
 }
