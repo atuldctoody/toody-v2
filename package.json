@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/atuldctoody/toody-v2#readme",
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.58.2",
+    "firebase-admin": "^13.7.0"
   }
 }

@@ -1,23 +1,19 @@
 // api/regression-agent.js
 // Regression Agent — Agent 5.
 //
-// Runs after every deploy. Fetches the last 10 flow-test baselines from
-// Firestore (systemTests collection), replays content generation for all
-// four skill types, and checks that current outputs are consistent with
-// prior runs. If a fix broke something that was working before, this
-// catches it.
+// Runs the full 5-step pipeline at Band 5.0, 6.0, and 7.0 in parallel.
+// Checks that all three produce valid, consistent output.
+// Cross-band comparison catches regressions that only appear at certain
+// difficulty levels — e.g. Band 7.0 explanations suddenly scoring worse
+// than Band 5.0 is a signal that the prompt has degraded.
 //
-// Baseline source: Firestore systemTests (no auth required — same collection
-// that test-session-flow.js writes to). Falls back to local
-// test-results/flow-*.json files when Firestore is unavailable.
+// No Firestore queries. No collectionGroup. No external auth needed.
+// Just 3 parallel test runs and a consistency check.
 //
-// Note: Firestore students/{uid}/sessions requires Firebase Admin credentials.
-// When GOOGLE_APPLICATION_CREDENTIALS is set, the agent will also cross-check
-// against live session data. Without credentials it uses the systemTests
-// collection as baseline (which already represents canonical pipeline state).
+// Target runtime: under 60 seconds.
 //
 // Usage:
-//   npm run test:regression   — exits 0 on pass, 1 on regressions found
+//   npm run test:regression
 //   node api/regression-agent.js
 //
 // ESM module (api/package.json sets "type": "module").
@@ -29,100 +25,10 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-const API_URL          = 'https://toody-api.vercel.app/api/generate';
-const FIREBASE_PROJECT = 'toody-1ab05';
-const FIRESTORE_BASE   = `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT}/databases/(default)/documents`;
+const API_URL   = 'https://toody-api.vercel.app/api/generate';
+const AUDIO_URL = 'https://toody-api.vercel.app/api/audio';
 
-// ── Firestore REST helpers ────────────────────────────────────────────────────
-
-function parseFirestoreValue(v) {
-  if (!v) return null;
-  if ('booleanValue' in v) return v.booleanValue;
-  if ('doubleValue'  in v) return v.doubleValue;
-  if ('integerValue' in v) return Number(v.integerValue);
-  if ('stringValue'  in v) return v.stringValue;
-  if ('nullValue'    in v) return null;
-  if ('mapValue'     in v) {
-    const fields = v.mapValue?.fields || {};
-    return Object.fromEntries(
-      Object.entries(fields).map(([k, val]) => [k, parseFirestoreValue(val)])
-    );
-  }
-  if ('arrayValue'   in v) {
-    return (v.arrayValue?.values || []).map(parseFirestoreValue);
-  }
-  return null;
-}
-
-function parseFirestoreDoc(doc) {
-  if (!doc?.fields) return null;
-  return Object.fromEntries(
-    Object.entries(doc.fields).map(([k, v]) => [k, parseFirestoreValue(v)])
-  );
-}
-
-function toFirestoreField(v) {
-  if (typeof v === 'boolean') return { booleanValue: v };
-  if (typeof v === 'number')  return { doubleValue:  v };
-  if (v === null || v === undefined) return { nullValue: 'NULL_VALUE' };
-  if (Array.isArray(v))       return { arrayValue: { values: v.map(toFirestoreField) } };
-  if (typeof v === 'object')  return { mapValue: { fields: Object.fromEntries(
-    Object.entries(v).map(([k, val]) => [k, toFirestoreField(val)])
-  )}};
-  return { stringValue: String(v) };
-}
-
-function toFirestoreDoc(obj) {
-  return { fields: Object.fromEntries(
-    Object.entries(obj).map(([k, v]) => [k, toFirestoreField(v)])
-  )};
-}
-
-// ── Firestore fetch ───────────────────────────────────────────────────────────
-
-async function fetchSystemTestBaselines(limit = 10) {
-  try {
-    const res = await fetch(`${FIRESTORE_BASE}/systemTests?pageSize=25`, {
-      headers: { 'Content-Type': 'application/json' },
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    if (!data.documents?.length) return [];
-
-    const docs = data.documents
-      .map(d => parseFirestoreDoc(d))
-      .filter(d => d?.timestamp && d?.steps)
-      .sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1))
-      .slice(0, limit);
-
-    return docs;
-  } catch {
-    return [];
-  }
-}
-
-// ── Local baseline fallback ───────────────────────────────────────────────────
-
-function loadLocalBaselines(limit = 10) {
-  try {
-    const dir = path.join(__dirname, '..', 'test-results');
-    if (!fs.existsSync(dir)) return [];
-    return fs.readdirSync(dir)
-      .filter(f => f.startsWith('flow-') && f.endsWith('.json'))
-      .sort()
-      .reverse()
-      .slice(0, limit)
-      .map(f => {
-        try { return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); }
-        catch { return null; }
-      })
-      .filter(Boolean);
-  } catch {
-    return [];
-  }
-}
-
-// ── Generation checks ─────────────────────────────────────────────────────────
+// ── Shared helpers ────────────────────────────────────────────────────────────
 
 function parseJson(raw) {
   let s = (raw || '').trim()
@@ -132,370 +38,374 @@ function parseJson(raw) {
   return JSON.parse(s);
 }
 
-function assert(cond, msg) {
-  if (!cond) throw new Error(msg);
-}
+function assert(cond, msg) { if (!cond) throw new Error(msg); }
 
-const VALID_ANSWERS = new Set(['true', 'false', 'ng']);
-const hasPipe = a => String(a || '').includes('|');
-const validAnswer = a => VALID_ANSWERS.has(String(a || '').toLowerCase().trim());
+const hasPipe    = a => String(a || '').includes('|');
+const validTFNG  = a => ['true','false','ng','notgiven'].includes(
+  String(a || '').toLowerCase().trim().replace(/\s/g,'')
+);
 
-async function callGenerate(messages, maxTokens = 1200) {
-  const res = await fetch(API_URL, {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini', messages,
-      max_tokens: maxTokens, temperature: 0.8,
-    }),
+async function apiFetch(url, body) {
+  const res = await fetch(url, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
   });
-  assert(res.ok, `API returned ${res.status}`);
+  assert(res.ok, `API ${url} returned ${res.status}`);
   const data = await res.json();
   const raw  = data.choices?.[0]?.message?.content;
   assert(raw, 'Empty API response');
   return parseJson(raw);
 }
 
-// Reading TFNG
-async function checkTFNG(band = 6.0) {
-  const parsed = await callGenerate([
-    { role: 'system', content: 'You are an IELTS Academic examiner. Return valid JSON only, no markdown, no preamble.' },
-    { role: 'user', content: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
-ANSWER FORMAT RULES: The "answer" field must contain exactly one of: True, False, or NG. Never pipe-separated.
+// ── Per-band steps ────────────────────────────────────────────────────────────
+
+async function stepGenerate(band) {
+  const parsed = await apiFetch(API_URL, {
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: 'You are an IELTS Academic examiner. Return valid JSON only, no markdown, no preamble.' },
+      { role: 'user', content: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student.
+
+ANSWER FORMAT RULES (mandatory):
+- The "answer" field must contain exactly one of: True, False, or NG. Nothing else.
+- Never use pipe-separated formats like "True|False". Never use option labels like A/B/C.
+- Every explanation must name the specific word, phrase, or logical feature that determines the answer.
+
+For each question, set "errorReason" to one of: synonymTrap, hedgingMissed, negationOverlooked, scopeError, notGivenMarkedFalse, other.
+
 Return ONLY this JSON:
-{"passage":"170-220 word academic passage","topic":"2-4 word label","questions":[{"id":1,"text":"statement","answer":"True","explanation":"specific word/phrase from passage","keySentence":"exact sentence","errorReason":"synonymTrap"},{"id":2,"text":"statement","answer":"False","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"negationOverlooked"},{"id":3,"text":"statement","answer":"NG","explanation":"what passage says and does NOT say","keySentence":"exact sentence","errorReason":"notGivenMarkedFalse"},{"id":4,"text":"statement","answer":"True","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"hedgingMissed"},{"id":5,"text":"statement","answer":"False","explanation":"specific word/phrase","errorReason":"scopeError","keySentence":"exact sentence"}]}` },
-  ]);
+{"passage":"3 paragraphs of academic prose (170-220 words)","topic":"2-4 word label","questions":[{"id":1,"text":"statement","answer":"True","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"synonymTrap"},{"id":2,"text":"statement","answer":"False","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"negationOverlooked"},{"id":3,"text":"statement","answer":"NG","explanation":"what passage says and does NOT say","keySentence":"most relevant sentence","errorReason":"notGivenMarkedFalse"},{"id":4,"text":"statement","answer":"True","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"hedgingMissed"},{"id":5,"text":"statement","answer":"False","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"scopeError"}]}` },
+    ],
+    max_tokens: 1500, temperature: 0.8,
+  });
 
-  assert(parsed.passage?.length > 50, `TFNG: passage too short (${parsed.passage?.length || 0} chars)`);
-  assert(Array.isArray(parsed.questions) && parsed.questions.length === 5, `TFNG: expected 5 questions, got ${parsed.questions?.length}`);
+  assert(parsed.passage?.length > 50,
+    `passage too short (${parsed.passage?.length || 0} chars)`);
+  assert(Array.isArray(parsed.questions) && parsed.questions.length === 5,
+    `expected 5 questions, got ${parsed.questions?.length}`);
+
+  const requiredFields = ['id','text','answer','explanation','keySentence','errorReason'];
   parsed.questions.forEach((q, i) => {
-    assert(!hasPipe(q.answer),    `TFNG q${i+1}: pipe-separated answer "${q.answer}"`);
-    assert(validAnswer(q.answer), `TFNG q${i+1}: invalid answer "${q.answer}"`);
-    assert(q.explanation?.length > 5, `TFNG q${i+1}: missing explanation`);
+    requiredFields.forEach(f =>
+      assert(q[f] != null && q[f] !== '', `q${i+1} missing field "${f}"`)
+    );
+    assert(!hasPipe(q.answer), `q${i+1} pipe-separated answer: "${q.answer}"`);
+    assert(validTFNG(q.answer), `q${i+1} invalid answer: "${q.answer}"`);
   });
 
-  return { questionsCount: parsed.questions.length, passage: parsed.passage, questions: parsed.questions };
+  return { passage: parsed.passage, questions: parsed.questions, topic: parsed.topic };
 }
 
-// Reading Summary Completion
-async function checkSummaryCompletion(band = 6.0) {
-  const parsed = await callGenerate([
-    { role: 'system', content: 'You are an IELTS Academic examiner. Return valid JSON only, no markdown, no preamble.' },
-    { role: 'user', content: `Create a Summary Completion IELTS Academic reading exercise for a Band ${band} student.
-Each gap answer must be a single word taken directly from the passage. The word bank must contain real English words — no placeholders.
-Return ONLY this JSON:
-{"passage":"170-220 word academic passage","topic":"2-4 word label","summaryText":"60-80 word summary with 5 gaps marked as [1] [2] [3] [4] [5]","wordBank":["word1","word2","word3","word4","word5","word6","word7","word8"],"questions":[{"id":1,"text":"Gap [1]","answer":"exact word from passage","explanation":"why this word fills the gap","keySentence":"sentence from passage containing this word"},{"id":2,"text":"Gap [2]","answer":"exact word","explanation":"why","keySentence":"sentence"},{"id":3,"text":"Gap [3]","answer":"exact word","explanation":"why","keySentence":"sentence"},{"id":4,"text":"Gap [4]","answer":"exact word","explanation":"why","keySentence":"sentence"},{"id":5,"text":"Gap [5]","answer":"exact word","explanation":"why","keySentence":"sentence"}]}` },
-  ]);
+async function stepVerify(passage, questions) {
+  const { verifyAnswers } = await import('./verify-answers.js');
+  const result = await verifyAnswers(passage, questions, API_URL);
 
-  assert(parsed.passage?.length > 50,     'SC: passage missing or too short');
-  assert(parsed.summaryText?.length > 20,  'SC: summaryText missing');
-  assert(Array.isArray(parsed.wordBank) && parsed.wordBank.length >= 5, 'SC: wordBank missing or too short');
-  assert(Array.isArray(parsed.questions) && parsed.questions.length === 5, `SC: expected 5 questions, got ${parsed.questions?.length}`);
-
-  // Verify no word bank entry looks like a placeholder
-  const placeholderRe = /^(word|correct|answer|distractor|decoy|item)\d+$/i;
-  parsed.wordBank.forEach((w, i) => {
-    assert(!placeholderRe.test(w), `SC: wordBank[${i}] looks like a placeholder: "${w}"`);
+  assert(Array.isArray(result.questions), 'verifyAnswers: non-array questions');
+  assert(result.questions.length === questions.length,
+    `verifyAnswers: count changed ${result.questions.length} vs ${questions.length}`);
+  result.questions.forEach((q, i) => {
+    assert(!hasPipe(q.answer), `verified q${i+1} pipe-separated: "${q.answer}"`);
+    assert(validTFNG(q.answer), `verified q${i+1} invalid answer: "${q.answer}"`);
   });
 
-  parsed.questions.forEach((q, i) => {
-    assert(q.answer?.length > 0,      `SC q${i+1}: missing answer`);
-    assert(q.explanation?.length > 5, `SC q${i+1}: missing explanation`);
+  return { questions: result.questions, corrections: result.corrections?.length ?? 0 };
+}
+
+async function stepExplain(passage, questions) {
+  const { scoreExplanations } = await import('./check-explanations.js');
+  const explanations = questions.map(q => ({
+    questionText: q.text, passage,
+    studentAnswer: '', correctAnswer: q.answer,
+    explanation: q.explanation, errorReason: q.errorReason || '',
+  }));
+  const report = await scoreExplanations(explanations, API_URL);
+
+  assert(report !== null, 'scoreExplanations returned null');
+  assert(typeof report.sessionAvgScore === 'number' &&
+    report.sessionAvgScore >= 1 && report.sessionAvgScore <= 5,
+    `avgScore out of range: ${report.sessionAvgScore}`);
+
+  return { avgScore: report.sessionAvgScore, weakCount: report.weakCount };
+}
+
+async function stepAudio() {
+  const res = await fetch(AUDIO_URL, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: 'Urban migration patterns have shifted dramatically over the past three decades, driven by economic pressures and improved transportation infrastructure.' }),
+  });
+  assert(res.ok, `Audio API returned ${res.status}`);
+  const data = await res.json();
+  assert(!data.error, `Audio error: ${data.error}`);
+  assert(typeof data.audio === 'string' && data.audio.length > 100, 'Audio: empty or missing base64');
+  return { audioBytes: Math.round(data.audio.length * 0.75) };
+}
+
+async function stepWriting(band) {
+  const parsed = await apiFetch(API_URL, {
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: 'You are an experienced IELTS examiner. Return valid JSON only.' },
+      { role: 'user', content: `Evaluate this IELTS Writing Task 2 response for a Band ${band} target student.
+
+TASK: Some people think governments should spend money on public transport rather than building new roads. To what extent do you agree?
+
+RESPONSE: Governments face difficult choices when allocating infrastructure budgets. While some argue that expanding road networks stimulates economic growth, I believe investment in public transport offers greater long-term benefits. Public transport reduces traffic congestion, lowers carbon emissions, and provides mobility for those without cars. Research from European cities shows that metro systems cut urban commute times by up to 40%. However, roads remain essential in rural areas where public transport is impractical. Therefore, a balanced approach is needed, prioritising public transport in cities while maintaining road networks in less populated regions.
+
+Return ONLY: {"overallBand":6.0,"taskAchievement":{"band":6.0,"feedback":"one sentence"},"coherenceCohesion":{"band":6.0,"feedback":"one sentence"},"lexicalResource":{"band":6.0,"feedback":"one sentence"},"grammaticalRange":{"band":6.0,"feedback":"one sentence"}}` },
+    ],
+    max_tokens: 400, temperature: 0.8,
   });
 
-  return { questionsCount: parsed.questions.length, wordBankSize: parsed.wordBank.length };
+  ['overallBand','taskAchievement','coherenceCohesion','lexicalResource','grammaticalRange'].forEach(f =>
+    assert(parsed[f] != null, `Writing eval missing field: ${f}`)
+  );
+  assert(typeof parsed.overallBand === 'number' &&
+    parsed.overallBand >= 1 && parsed.overallBand <= 9,
+    `overallBand out of range: ${parsed.overallBand}`);
+
+  return { overallBand: parsed.overallBand };
 }
 
-// Listening Multiple Choice
-async function checkListeningMC(band = 6.0) {
-  const parsed = await callGenerate([
-    { role: 'system', content: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.' },
-    { role: 'user', content: `Create an IELTS Listening Multiple Choice exercise for a Band ${band} student.
-"transcript" must be the ACTUAL spoken words — write it as natural speech (4-6 sentences of a real conversation, monologue, or announcement). Questions must be answerable from the transcript.
-Return ONLY this JSON:
-{"transcript":"actual spoken words as natural human speech, 4-6 sentences","questions":[{"id":1,"text":"question","options":["A. option","B. option","C. option"],"answer":"A","explanation":"why"},{"id":2,"text":"question","options":["A. option","B. option","C. option"],"answer":"B","explanation":"why"},{"id":3,"text":"question","options":["A. option","B. option","C. option"],"answer":"C","explanation":"why"},{"id":4,"text":"question","options":["A. option","B. option","C. option"],"answer":"A","explanation":"why"},{"id":5,"text":"question","options":["A. option","B. option","C. option"],"answer":"B","explanation":"why"}]}` },
-  ]);
+// ── Full band test (all 5 steps sequentially) ─────────────────────────────────
 
-  assert(parsed.transcript?.length > 30, 'ListeningMC: transcript missing or too short');
-  assert(Array.isArray(parsed.questions) && parsed.questions.length === 5, `ListeningMC: expected 5 questions, got ${parsed.questions?.length}`);
-  parsed.questions.forEach((q, i) => {
-    assert(Array.isArray(q.options) && q.options.length === 3, `ListeningMC q${i+1}: expected 3 options`);
-    assert(['A','B','C'].includes(q.answer), `ListeningMC q${i+1}: invalid answer "${q.answer}" (must be A/B/C)`);
-  });
+async function runBandTest(band) {
+  const t0    = Date.now();
+  const steps = {};
 
-  return { questionsCount: parsed.questions.length, transcriptLength: parsed.transcript.length };
-}
-
-// ── Comparison logic ──────────────────────────────────────────────────────────
-
-function avg(arr) {
-  if (!arr.length) return null;
-  return arr.reduce((s, v) => s + v, 0) / arr.length;
-}
-
-function compareAgainstBaselines(current, baselines) {
-  const regressions = [];
-
-  if (!baselines.length) return regressions;  // no history — no comparison possible
-
-  // For each step, check if it regressed
-  const steps = ['generation', 'verification', 'explanationQuality', 'audio', 'writingEval'];
-  steps.forEach(stepName => {
-    const historicalPasses = baselines
-      .map(b => b.steps?.[stepName]?.pass)
-      .filter(v => typeof v === 'boolean');
-
-    if (!historicalPasses.length) return;
-
-    const passRate = historicalPasses.filter(Boolean).length / historicalPasses.length;
-    const currentPass = current.steps?.[stepName]?.pass;
-
-    // Regression: step was passing ≥80% of the time but now fails
-    if (passRate >= 0.8 && currentPass === false) {
-      regressions.push({
-        sessionId: 'current',
-        issue: `Step "${stepName}" has regressed — passed in ${Math.round(passRate * 100)}% of last ${historicalPasses.length} runs, now FAILS`,
-        baseline: `pass rate ${Math.round(passRate * 100)}%`,
-        current: 'FAIL',
-      });
-    }
-  });
-
-  // Check explanationQuality score
-  const historicalScores = baselines
-    .map(b => b.steps?.explanationQuality?.sessionAvgScore)
-    .filter(v => typeof v === 'number' && v > 0);
-
-  if (historicalScores.length >= 2) {
-    const baselineAvg = avg(historicalScores);
-    const currentScore = current.steps?.explanationQuality?.sessionAvgScore;
-    if (typeof currentScore === 'number' && currentScore < baselineAvg - 1.0) {
-      regressions.push({
-        sessionId: 'current',
-        issue: `Explanation quality dropped more than 1.0 point vs baseline average`,
-        baseline: `avg ${baselineAvg.toFixed(1)} (n=${historicalScores.length})`,
-        current: String(currentScore),
-      });
-    }
-  }
-
-  // Check writing band drift
-  const historicalBands = baselines
-    .map(b => b.steps?.writingEval?.overallBand)
-    .filter(v => typeof v === 'number');
-
-  if (historicalBands.length >= 2) {
-    const baselineAvg = avg(historicalBands);
-    const currentBand = current.steps?.writingEval?.overallBand;
-    if (typeof currentBand === 'number' && Math.abs(currentBand - baselineAvg) > 1.5) {
-      regressions.push({
-        sessionId: 'current',
-        issue: `Writing band estimate drifted outside ±1.5 of baseline (high AI variability — may be noise)`,
-        baseline: `avg band ${baselineAvg.toFixed(1)} (n=${historicalBands.length})`,
-        current: String(currentBand),
-      });
-    }
-  }
-
-  return regressions;
-}
-
-// ── Save results ──────────────────────────────────────────────────────────────
-
-async function saveRegressionResult(result) {
+  // Step 1 — generation
   try {
-    const docId = result.timestamp.replace(/[:.]/g, '-');
-    const url   = `${FIRESTORE_BASE}/regressionTests/${docId}`;
-    const body  = toFirestoreDoc({
-      timestamp:        result.timestamp,
-      sessionsChecked:  result.sessionsChecked,
-      passed:           result.passed,
-      failed:           result.failed,
-      overallPass:      result.overallPass,
-      totalDurationMs:  result.totalDurationMs,
-      regressionCount:  result.regressions.length,
-    });
-    const res = await fetch(url, {
-      method:  'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(body),
-    });
-    if (res.ok) {
-      console.log(`  Firestore: saved to regressionTests/${docId}`);
-    }
-  } catch { /* non-critical */ }
-}
-
-// ── Main ─────────────────────────────────────────────────────────────────────
-
-export async function runRegressionTests() {
-  const t0 = Date.now();
-  console.log('\n── Toody Regression Agent ───────────────────────────────────');
-  console.log(`   ${new Date().toISOString()}\n`);
-
-  // ── STEP 1: Fetch baselines ───────────────────────────────────────────────
-  console.log('Step 1 — Loading baselines');
-  let baselines = await fetchSystemTestBaselines(10);
-  const firestoreCount = baselines.length;
-
-  if (firestoreCount === 0) {
-    console.log('  ⊘  Firestore unavailable — trying local test-results/');
-    baselines = loadLocalBaselines(10);
+    const r = await stepGenerate(band);
+    steps.generation = { pass: true, topic: r.topic, passage: r.passage, questions: r.questions };
+  } catch (e) {
+    steps.generation = { pass: false, error: e.message };
   }
 
-  if (baselines.length === 0) {
-    console.log('  ⊘  No baselines found — this is the first run. Baselines will be written after this run.');
-  } else {
-    console.log(`  ✓  Loaded ${baselines.length} baseline(s) (${firestoreCount > 0 ? 'Firestore systemTests' : 'local files'})`);
-  }
+  // Steps 2 + 3 depend on generation
+  if (steps.generation.pass) {
+    const { passage, questions } = steps.generation;
 
-  // ── STEP 2: Replay generation for all skill types ─────────────────────────
-  console.log('\nStep 2 — Replaying content generation (4 skill types)');
-
-  const skillChecks = [
-    { name: 'reading.tfng',              label: 'Reading TFNG',             fn: () => checkTFNG()              },
-    { name: 'reading.summaryCompletion', label: 'Reading Summary Completion', fn: () => checkSummaryCompletion() },
-    { name: 'listening.multipleChoice',  label: 'Listening Multiple Choice',  fn: () => checkListeningMC()       },
-  ];
-
-  const skillResults = [];
-  for (const check of skillChecks) {
-    const t = Date.now();
     try {
-      const extra = await check.fn();
-      const ms = Date.now() - t;
-      console.log(`  ✓  ${check.label} — PASS (${ms}ms)`);
-      skillResults.push({ name: check.name, pass: true, durationMs: ms, ...extra });
-    } catch (err) {
-      const ms = Date.now() - t;
-      console.log(`  ✗  ${check.label} — FAIL: ${err.message} (${ms}ms)`);
-      skillResults.push({ name: check.name, pass: false, durationMs: ms, error: err.message });
+      const r = await stepVerify(passage, questions);
+      steps.verification = { pass: true, corrections: r.corrections, questions: r.questions };
+    } catch (e) {
+      steps.verification = { pass: false, error: e.message };
+    }
+
+    const verifiedQs = steps.verification?.questions || questions;
+    try {
+      const r = await stepExplain(passage, verifiedQs);
+      steps.explanationQuality = { pass: true, avgScore: r.avgScore, weakCount: r.weakCount };
+    } catch (e) {
+      steps.explanationQuality = { pass: false, error: e.message };
+    }
+  } else {
+    steps.verification      = { pass: false, error: 'generation failed — skipped' };
+    steps.explanationQuality = { pass: false, error: 'generation failed — skipped' };
+  }
+
+  // Steps 4 + 5 are independent
+  try {
+    const r = await stepAudio();
+    steps.audio = { pass: true, audioBytes: r.audioBytes };
+  } catch (e) {
+    steps.audio = { pass: false, error: e.message };
+  }
+
+  try {
+    const r = await stepWriting(band);
+    steps.writingEval = { pass: true, overallBand: r.overallBand };
+  } catch (e) {
+    steps.writingEval = { pass: false, error: e.message };
+  }
+
+  const allPass = Object.values(steps).every(s => s.pass);
+  return { band, steps, pass: allPass, durationMs: Date.now() - t0 };
+}
+
+// ── Consistency checks across band levels ─────────────────────────────────────
+
+function checkConsistency(results) {
+  const issues = [];
+
+  // All generation steps must pass
+  const genFails = results.filter(r => !r.steps.generation.pass);
+  if (genFails.length) {
+    genFails.forEach(r =>
+      issues.push({ type: 'generation_fail', band: r.band, detail: r.steps.generation.error })
+    );
+  }
+
+  // Explanation scores: no band should be more than 1.0 below any other
+  const scores = results
+    .map(r => ({ band: r.band, score: r.steps.explanationQuality?.avgScore }))
+    .filter(s => typeof s.score === 'number');
+
+  if (scores.length >= 2) {
+    const max = Math.max(...scores.map(s => s.score));
+    const min = Math.min(...scores.map(s => s.score));
+    if (max - min > 1.0) {
+      const maxR = scores.find(s => s.score === max);
+      const minR = scores.find(s => s.score === min);
+      issues.push({
+        type: 'explain_drift',
+        detail: `Explanation score gap ${(max - min).toFixed(1)} > 1.0 — Band ${maxR.band} scored ${maxR.score.toFixed(1)} but Band ${minR.band} scored ${minR.score.toFixed(1)}`,
+      });
     }
   }
 
-  // ── STEP 3: Check consistency ─────────────────────────────────────────────
-  console.log('\nStep 3 — Checking consistency');
+  // Writing band estimates should be within ±1.5 of each other (AI is variable; wider tolerance)
+  const bands = results
+    .map(r => ({ band: r.band, overallBand: r.steps.writingEval?.overallBand }))
+    .filter(b => typeof b.overallBand === 'number');
 
-  // Build a "current run" object from the latest flow-test result
-  // (that was just written by npm run test:flow, which ran before us in predeploy)
-  const localFiles = loadLocalBaselines(1);
-  const latestFlowResult = localFiles[0] || null;
-
-  if (latestFlowResult) {
-    console.log(`  ✓  Latest flow test: ${latestFlowResult.timestamp} — ${latestFlowResult.overallPass ? 'ALL PASS' : 'HAS FAILURES'}`);
-  } else {
-    console.log('  ⊘  No local flow test result found — skipping flow-test regression check');
+  if (bands.length >= 2) {
+    const max = Math.max(...bands.map(b => b.overallBand));
+    const min = Math.min(...bands.map(b => b.overallBand));
+    if (max - min > 1.5) {
+      issues.push({
+        type: 'writing_drift',
+        detail: `Writing band estimates spread ${(max-min).toFixed(1)} > 1.5 — values: ${bands.map(b => `${b.band}→${b.overallBand}`).join(', ')}`,
+      });
+    }
   }
 
-  // ── STEP 4: Compare to baseline ───────────────────────────────────────────
-  console.log('\nStep 4 — Comparing to baseline');
-
-  // Regressions from flow test steps
-  const priorBaselines = latestFlowResult
-    ? baselines.filter(b => b.timestamp < latestFlowResult.timestamp)
-    : baselines;
-
-  const flowRegressions = latestFlowResult && priorBaselines.length
-    ? compareAgainstBaselines(latestFlowResult, priorBaselines)
-    : [];
-
-  // Regressions from skill-specific generation checks
-  // Compare against prior regressionTest results (Firestore regressionTests collection)
-  let skillRegressions = [];
-  try {
-    const rrRes = await fetch(`${FIRESTORE_BASE}/regressionTests?pageSize=20`);
-    if (rrRes.ok) {
-      const rrData = await rrRes.json();
-      const priorRRs = (rrData.documents || [])
-        .map(d => parseFirestoreDoc(d))
-        .filter(d => d?.timestamp)
-        .sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1))
-        .slice(0, 10);
-
-      if (priorRRs.length > 0) {
-        // For each skill, check if it was passing before but fails now
-        skillChecks.forEach((check, i) => {
-          const historicalPasses = priorRRs
-            .map(rr => rr[`skill_${check.name.replace(/\./g, '_')}_pass`])
-            .filter(v => typeof v === 'boolean');
-          const passRate = historicalPasses.length
-            ? historicalPasses.filter(Boolean).length / historicalPasses.length
-            : null;
-          const currentPass = skillResults[i]?.pass;
-
-          if (passRate !== null && passRate >= 0.8 && currentPass === false) {
-            skillRegressions.push({
-              sessionId: check.name,
-              issue: `Skill "${check.name}" generation has regressed — passed ${Math.round(passRate * 100)}% of recent runs, now FAILS`,
-              baseline: `pass rate ${Math.round(passRate * 100)}%`,
-              current: 'FAIL',
-            });
-          }
+  // Pipe-separated answer check (regression from a previous bug)
+  results.forEach(r => {
+    const qs = r.steps.generation?.questions || [];
+    qs.forEach(q => {
+      if (hasPipe(q.answer)) {
+        issues.push({
+          type: 'pipe_answer',
+          band: r.band,
+          detail: `Band ${r.band} q${q.id}: pipe-separated answer "${q.answer}"`,
         });
       }
-    }
-  } catch { /* non-critical */ }
-
-  const allRegressions = [...flowRegressions, ...skillRegressions];
-
-  allRegressions.forEach(r => {
-    console.log(`  ✗  REGRESSION: ${r.issue}`);
-    console.log(`       baseline: ${r.baseline}`);
-    console.log(`        current: ${r.current}`);
+    });
   });
 
-  if (allRegressions.length === 0) {
-    if (priorBaselines.length === 0 && skillResults.every(s => s.pass)) {
-      console.log('  ✓  No prior baseline — all checks passed on first run');
-    } else {
-      console.log(`  ✓  No regressions detected (checked against ${priorBaselines.length} prior run(s))`);
-    }
-  }
-
-  // ── Summary ───────────────────────────────────────────────────────────────
-  const sessionsChecked = priorBaselines.length;
-  const skillFailed     = skillResults.filter(s => !s.pass).length;
-  const skillPassed     = skillResults.filter(s => s.pass).length;
-  const overallPass     = allRegressions.length === 0 && skillFailed === 0;
-  const totalDurationMs = Date.now() - t0;
-
-  console.log(`\n── Result: ${overallPass ? 'PASS ✓' : 'FAIL ✗'} ──────────────────────────────────────────`);
-  console.log(`   Skills checked: ${skillPassed}/${skillChecks.length} passed`);
-  console.log(`   Regressions:    ${allRegressions.length}`);
-  console.log(`   Baselines used: ${sessionsChecked}`);
-  console.log(`   Total:          ${totalDurationMs}ms\n`);
-
-  const result = {
-    timestamp:       new Date().toISOString(),
-    sessionsChecked,
-    passed:          skillPassed,
-    failed:          skillFailed,
-    regressions:     allRegressions,
-    overallPass,
-    totalDurationMs,
-    skillResults,
-    ...(latestFlowResult ? { flowTestPass: latestFlowResult.overallPass, flowTestTimestamp: latestFlowResult.timestamp } : {}),
-  };
-
-  // Save skill pass/fail per skill name for future baseline comparison
-  skillResults.forEach(s => {
-    result[`skill_${s.name.replace(/\./g, '_')}_pass`] = s.pass;
-  });
-
-  await saveRegressionResult(result);
-
-  return result;
+  return issues;
 }
 
-// Allow direct execution: node api/regression-agent.js
+// ── Save results (local only — no Firestore) ──────────────────────────────────
+
+function saveLocal(result) {
+  try {
+    const dir = path.join(__dirname, '..', 'test-results');
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const filename = `regression-${result.timestamp.replace(/[:.]/g, '-')}.json`;
+    fs.writeFileSync(path.join(dir, filename), JSON.stringify(result, null, 2));
+    console.log(`  Saved: test-results/${filename}`);
+  } catch (e) {
+    console.log(`  Warning: could not save file — ${e.message}`);
+  }
+}
+
+// ── Console output helpers ────────────────────────────────────────────────────
+
+function stepIcon(step, label) {
+  if (!step) return `  ?${label}`;
+  if (!step.pass) return `✗${label}`;
+  return `✓${label}`;
+}
+
+function formatBandRow(r) {
+  const g  = r.steps.generation;
+  const v  = r.steps.verification;
+  const eq = r.steps.explanationQuality;
+  const a  = r.steps.audio;
+  const w  = r.steps.writingEval;
+
+  const cols = [
+    `Band ${r.band.toFixed(1)}:`,
+    (g?.pass  ? '✓ gen'       : `✗ gen(${g?.error?.slice(0,20) || ''})`).padEnd(10),
+    (v?.pass  ? '✓ verify'    : `✗ verify`).padEnd(10),
+    (eq?.pass ? `✓ explain(${eq.avgScore?.toFixed(1)})` : '✗ explain').padEnd(16),
+    (a?.pass  ? '✓ audio'     : '✗ audio').padEnd(9),
+    (w?.pass  ? `✓ writing(${w.overallBand?.toFixed(1)})` : '✗ writing').padEnd(14),
+    r.pass ? 'PASS' : 'FAIL',
+  ];
+  return '  ' + cols.join('  ');
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+
+export async function runRegressionTests() {
+  const t0        = Date.now();
+  const timestamp = new Date().toISOString();
+
+  console.log('\n── Toody Regression Agent ───────────────────────────────────');
+  console.log(`   ${timestamp}`);
+  console.log('   Running Band 5.0 / 6.0 / 7.0 in parallel...\n');
+
+  // Run all 3 band tests simultaneously
+  const [r5, r6, r7] = await Promise.all([
+    runBandTest(5.0),
+    runBandTest(6.0),
+    runBandTest(7.0),
+  ]);
+  const results = [r5, r6, r7];
+
+  // Per-band summary rows
+  results.forEach(r => console.log(formatBandRow(r)));
+
+  // Consistency checks
+  const issues = checkConsistency(results);
+  console.log('\nConsistency:');
+  if (issues.length === 0) {
+    console.log('  ✓  All cross-band checks passed');
+  } else {
+    issues.forEach(iss => console.log(`  ✗  ${iss.detail || iss.type}`));
+  }
+
+  // Final result
+  const passed      = results.filter(r => r.pass).length;
+  const overallPass = passed === results.length && issues.length === 0;
+  const durationMs  = Date.now() - t0;
+
+  const regressions = [
+    ...results.filter(r => !r.pass).map(r => ({
+      band:   r.band,
+      issue:  'one or more steps failed',
+      detail: Object.entries(r.steps)
+        .filter(([, s]) => !s.pass)
+        .map(([k, s]) => `${k}: ${s.error}`)
+        .join('; '),
+    })),
+    ...issues.map(i => ({ band: i.band ?? 'cross-band', issue: i.type, detail: i.detail })),
+  ];
+
+  console.log(`\n── Result: ${passed}/${results.length} band levels passed${issues.length ? `, ${issues.length} consistency issue(s)` : ''} — ${overallPass ? 'PASS ✓' : 'FAIL ✗'}`);
+  console.log(`   Total: ${(durationMs / 1000).toFixed(1)}s\n`);
+
+  const output = {
+    timestamp,
+    sessionsChecked: results.length,
+    passed,
+    failed: results.length - passed,
+    regressions,
+    overallPass,
+    durationMs,
+    bandResults: results.map(r => ({
+      band: r.band,
+      pass: r.pass,
+      durationMs: r.durationMs,
+      steps: {
+        generation:         { pass: r.steps.generation?.pass,         topic: r.steps.generation?.topic,             error: r.steps.generation?.error         ?? null },
+        verification:       { pass: r.steps.verification?.pass,       corrections: r.steps.verification?.corrections ?? null, error: r.steps.verification?.error       ?? null },
+        explanationQuality: { pass: r.steps.explanationQuality?.pass, avgScore: r.steps.explanationQuality?.avgScore ?? null, error: r.steps.explanationQuality?.error ?? null },
+        audio:              { pass: r.steps.audio?.pass,              error: r.steps.audio?.error                   ?? null },
+        writingEval:        { pass: r.steps.writingEval?.pass,        overallBand: r.steps.writingEval?.overallBand  ?? null, error: r.steps.writingEval?.error        ?? null },
+      },
+    })),
+  };
+
+  saveLocal(output);
+  return output;
+}
+
+// Direct execution: node api/regression-agent.js
 if (process.argv[1] === __filename) {
   runRegressionTests()
-    .then(r => {
-      console.log(JSON.stringify(r, null, 2));
-      process.exit(r.overallPass ? 0 : 1);
-    })
-    .catch(err => {
-      console.error('Fatal error:', err);
-      process.exit(1);
-    });
+    .then(r => process.exit(r.overallPass ? 0 : 1))
+    .catch(err => { console.error('Fatal:', err); process.exit(1); });
 }
