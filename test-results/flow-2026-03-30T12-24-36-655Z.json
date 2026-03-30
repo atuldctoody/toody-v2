@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-03-30T12:24:36.655Z",
+  "steps": {
+    "generation": {
+      "pass": true,
+      "durationMs": 12005,
+      "error": null
+    },
+    "verification": {
+      "pass": true,
+      "durationMs": 2748,
+      "error": null,
+      "corrections": 0
+    },
+    "explanationQuality": {
+      "pass": true,
+      "durationMs": 5714,
+      "error": null,
+      "sessionAvgScore": 4.3
+    },
+    "audio": {
+      "pass": true,
+      "durationMs": 1737,
+      "error": null
+    },
+    "writingEval": {
+      "pass": true,
+      "durationMs": 3785,
+      "error": null,
+      "overallBand": 6
+    }
+  },
+  "overallPass": true,
+  "totalDurationMs": 25992
+}
