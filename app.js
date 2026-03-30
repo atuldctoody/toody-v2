@@ -476,6 +476,31 @@ function goTo(id) {
   // Reset history when returning to home
   if (id === 's-home') screenHistory.length = 0;
 
+  // Reset primary CTA buttons on screen entry — no screen inherits disabled state from a previous visit
+  {
+    const _rb = (btnId) => {
+      const b = document.getElementById(btnId);
+      if (!b) return;
+      b.disabled = false;
+      b.style.opacity = '';
+      b.style.pointerEvents = '';
+      b.classList.remove('disabled', 'loading', 'btn-loading');
+    };
+    if (id === 's-session-intro') _rb('btn-ready');
+    if (id === 's-reading')       _rb('btn-reading-submit');
+    if (id === 's-listening')     _rb('listening-finish-btn');
+    if (id === 's-writing')       _rb('btn-writing-submit');
+    if (id === 's-speaking')      _rb('speaking-finish-btn');
+    if (id === 's-teach')         _rb('teach-start-session-btn');
+    if (id === 's-toughlove') {
+      _rb('btn-tl-continue');
+      document.querySelectorAll('.hint-btn').forEach(b => {
+        b.disabled = false; b.style.opacity = ''; b.style.pointerEvents = '';
+        b.classList.remove('disabled', 'loading', 'btn-loading');
+      });
+    }
+  }
+
   _updateBackBtn(id);
   window.scrollTo(0, 0);
 }

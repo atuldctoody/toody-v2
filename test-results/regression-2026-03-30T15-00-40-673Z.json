@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-03-30T14:31:41.803Z",
+  "timestamp": "2026-03-30T15:00:40.673Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.7 between Band 6 (3.3) and Band 5 (5.0) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 25888,
+  "durationMs": 27389,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 23650,
+      "durationMs": 24279,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Impact of Social Media",
+          "topic": "sustainability and industry",
           "error": null
         },
         "verification": {
@@ -27,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 5,
+          "avgScore": 4.1,
           "error": null
         },
         "audio": {
@@ -44,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 22472,
+      "durationMs": 26495,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy Trends",
+          "topic": "Cognitive Processing Speed",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.3,
+          "avgScore": 3.4,
           "error": null
         },
         "audio": {
@@ -75,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 25850,
+      "durationMs": 27347,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Biodiversity Importance",
           "error": null
         },
         "verification": {
@@ -89,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 5,
+          "avgScore": 4.8,
           "error": null
         },
         "audio": {

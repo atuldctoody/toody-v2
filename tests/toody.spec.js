@@ -192,6 +192,7 @@ async function setupMocks(page, student) {
         export function orderBy() { return {}; }
         export function query(c) { return c; }
         export function serverTimestamp() { return new Date().toISOString(); }
+        export async function deleteDoc() {}
       `,
     })
   );
@@ -528,5 +529,56 @@ test.describe('Test 8 — Navigation', () => {
     await page.locator('#s-session-intro .nav-btn').click();
     await page.waitForSelector('#s-home.active', { timeout: 5000 });
     await expect(page.locator('#s-home')).toHaveClass(/active/);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────
+// TEST 9 — Button state reset
+// ─────────────────────────────────────────────────────────────────
+test.describe('Test 9 — Button state reset', () => {
+  test('buttons reset correctly after navigating away and back', async ({ page }) => {
+    await loadApp(page, experiencedStudent);
+
+    // --- Round 1: first entry — btn-ready must be enabled ---
+    await page.evaluate(() => window.startSession && window.startSession());
+    await page.waitForSelector('#s-session-intro.active', { timeout: 8000 });
+    await expect(page.locator('#btn-ready')).not.toBeDisabled();
+
+    // Tap btn-ready — inline onclick sets this.disabled=true, then calls goToSession()
+    await page.click('#btn-ready');
+    // Wait for session navigation to complete (any skill screen)
+    await Promise.race([
+      page.waitForSelector('#s-reading.active',   { timeout: 15000 }),
+      page.waitForSelector('#s-listening.active',  { timeout: 15000 }),
+      page.waitForSelector('#s-writing.active',    { timeout: 15000 }),
+      page.waitForSelector('#s-speaking.active',   { timeout: 15000 }),
+      page.waitForSelector('#s-teach.active',      { timeout: 15000 }),
+      page.waitForSelector('#s-warmup.active',     { timeout: 15000 }),
+    ]);
+    // Navigate back to home
+    await page.evaluate(() => window.goToHome && window.goToHome());
+    await page.waitForSelector('#s-home.active', { timeout: 5000 });
+
+    // --- Round 2: re-entry — btn-ready must be reset, not stuck disabled ---
+    // Reset the startSession guard (3s cooldown) before re-entry
+    await page.evaluate(() => { window._startSessionRunning = false; window.startSession && window.startSession(); });
+    await page.waitForSelector('#s-session-intro.active', { timeout: 8000 });
+    await expect(page.locator('#btn-ready')).not.toBeDisabled();
+
+    // --- Round 3: repeat once more for consistency ---
+    await page.click('#btn-ready');
+    await Promise.race([
+      page.waitForSelector('#s-reading.active',   { timeout: 15000 }),
+      page.waitForSelector('#s-listening.active',  { timeout: 15000 }),
+      page.waitForSelector('#s-writing.active',    { timeout: 15000 }),
+      page.waitForSelector('#s-speaking.active',   { timeout: 15000 }),
+      page.waitForSelector('#s-teach.active',      { timeout: 15000 }),
+      page.waitForSelector('#s-warmup.active',     { timeout: 15000 }),
+    ]);
+    await page.evaluate(() => window.goToHome && window.goToHome());
+    await page.waitForSelector('#s-home.active', { timeout: 5000 });
+    await page.evaluate(() => { window._startSessionRunning = false; window.startSession && window.startSession(); });
+    await page.waitForSelector('#s-session-intro.active', { timeout: 8000 });
+    await expect(page.locator('#btn-ready')).not.toBeDisabled();
   });
 });
