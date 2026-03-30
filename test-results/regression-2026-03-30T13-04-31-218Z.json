@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-03-30T12:29:30.472Z",
+  "timestamp": "2026-03-30T13:04:31.218Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.5 between Band 6 (2.9) and Band 7 (4.4) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 22593,
+  "durationMs": 33779,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22389,
+      "durationMs": 31056,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "climate change and polar bears",
+          "topic": "Climate Change Awareness",
           "error": null
         },
         "verification": {
@@ -27,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -36,7 +34,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 5.5,
           "error": null
         }
       }
@@ -44,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 22468,
+      "durationMs": 33744,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Ecology and Well-being",
+          "topic": "Urban Green Spaces",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 2.9,
+          "avgScore": 3.9,
           "error": null
         },
         "audio": {
@@ -75,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 22557,
+      "durationMs": 32253,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy Advancements",
+          "topic": "Impact of AI",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.4,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -98,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }
