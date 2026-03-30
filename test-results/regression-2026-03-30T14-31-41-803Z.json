@@ -1,21 +1,23 @@
 {
-  "timestamp": "2026-03-30T14:16:50.249Z",
+  "timestamp": "2026-03-30T14:31:41.803Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 1.7 between Band 6 (3.3) and Band 5 (5.0) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 29097,
+  "durationMs": 25888,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 28009,
+      "durationMs": 23650,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "social media effects",
+          "topic": "Impact of Social Media",
           "error": null
         },
         "verification": {
@@ -25,7 +27,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.9,
+          "avgScore": 5,
           "error": null
         },
         "audio": {
@@ -42,11 +44,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 27586,
+      "durationMs": 22472,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Renewable Energy Trends",
           "error": null
         },
         "verification": {
@@ -73,21 +75,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 29034,
+      "durationMs": 25850,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Memory and Sleep",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 2,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 2.8,
+          "avgScore": 5,
           "error": null
         },
         "audio": {
