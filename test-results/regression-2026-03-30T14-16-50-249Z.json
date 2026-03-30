@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-03-30T13:10:44.842Z",
+  "timestamp": "2026-03-30T14:16:50.249Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 30076,
+  "durationMs": 29097,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 30070,
+      "durationMs": 28009,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "social media effects",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.9,
           "error": null
         },
         "audio": {
@@ -42,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 29164,
+      "durationMs": 27586,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Health Benefits of Green Tea",
+          "topic": "Climate Change Impact",
           "error": null
         },
         "verification": {
@@ -56,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.4,
+          "avgScore": 3.3,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 27485,
+      "durationMs": 29034,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces and Health",
+          "topic": "Memory and Sleep",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 2,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.7,
+          "avgScore": 2.8,
           "error": null
         },
         "audio": {
