@@ -30,6 +30,18 @@ CRITICAL DISTINCTION — FALSE vs NOT GIVEN:
 - Only mark NOT GIVEN when the passage is completely silent on the specific claim — when there is no evidence either confirming or contradicting it.
 - Do NOT mark FALSE as NOT GIVEN simply because the passage doesn't use the exact words of the statement. If the meaning directly contradicts, it is FALSE.
 
+NAMED TRAP CHECKS — apply every one of these before confirming any answer:
+
+INFERENCE TRAP: Does the statement claim causation (X caused Y, X led to Y) when the passage only shows sequence (X happened, then Y happened)? If the passage shows sequence but never explicitly states causation, the answer is NOT GIVEN — not TRUE. Look for: caused, led to, resulted in, was responsible for. If these words are absent from the passage, causation is not established.
+
+ADVERB OVERLOOK: Does the statement use an absolute qualifier (all, every, always, never, completely, entirely, only) when the passage uses a partial qualifier (most, many, some, often, usually, generally, tends to, in many cases)? A shift from partial to absolute is a direct contradiction — answer is FALSE, not NOT GIVEN. Check every quantifier and frequency word in both the statement and passage.
+
+ABSOLUTE QUALIFIER TRAP: Does the statement use always/never/all/every/completely but the passage uses usually/often/some/generally/varies/in most cases? The absolute claim is directly contradicted by the passage's partial language — answer is FALSE. This is a sub-type of ADVERB OVERLOOK but applies specifically to binary absolutes vs qualified statements.
+
+ASSUMPTION TRAP: Does the student's likely interpretation require a logical bridge the passage never explicitly built? Example: passage says cars were banned for safety reasons — statement says the area became quieter. Safety and silence are different concepts. If the passage does not connect them, the answer is NOT GIVEN. Ask: does the passage explicitly bridge the two concepts, or is the student filling a gap?
+
+CAUSAL ASSUMPTION TRAP: Does the passage say two things happened at the same time or in sequence, while the statement says one caused the other? Co-occurrence is not causation. If the passage says 'profits rose after the new policy' and the statement says 'the new policy caused profits to rise', the answer is NOT GIVEN unless the passage explicitly states a causal link using words like: caused, led to, resulted in, was due to, was attributed to, was responsible for.
+
 COMMON ERRORS TO CATCH:
 - Universal statements (always/never/all) the passage doesn't explicitly confirm → NOT GIVEN, not TRUE
 - Hedging language (suggests/may/could) that stops short of explicit confirmation → NOT GIVEN, not TRUE
