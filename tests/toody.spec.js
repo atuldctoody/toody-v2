@@ -290,7 +290,7 @@ test.describe('Test 1 — Login page', () => {
 // TEST 2 — Briefing cards
 // ─────────────────────────────────────────────────────────────────
 test.describe('Test 2 — Briefing cards', () => {
-  test('5 cards appear in correct order', async ({ page }) => {
+  test('3 cards appear in correct order', async ({ page }) => {
     await loadApp(page, newStudent);
 
     // startSession → session intro → I'm ready → briefing gate
@@ -299,33 +299,25 @@ test.describe('Test 2 — Briefing cards', () => {
     await page.click('#btn-ready');
     await page.waitForSelector('#s-briefing.active', { timeout: 8000 });
 
-    // Card 1 — THE BASICS
+    // Card 1 — THE INSIGHT
     await expect(page.locator('#bc-0')).not.toHaveClass(/hidden/);
-    await expect(page.locator('#bc-0 .bc-eyebrow')).toHaveText('THE BASICS');
-    await expect(page.locator('#bc-0 .bc-title')).toContainText('The Test at a Glance');
+    await expect(page.locator('#bc-0 .bc-eyebrow')).toHaveText('THE INSIGHT');
+    await expect(page.locator('#bc-0 .bc-title')).toContainText("What the examiner knows");
 
-    // 5 progress dots
-    await expect(page.locator('#briefing-dots .bc-dot')).toHaveCount(5);
+    // 3 progress dots
+    await expect(page.locator('#briefing-dots .bc-dot')).toHaveCount(3);
 
-    // Advance → Card 2 — THE INSIGHT
+    // Advance → Card 2 — YOUR PROGRAMME
     await page.click('#bc-0 .bc-btn');
     await expect(page.locator('#bc-1')).not.toHaveClass(/hidden/);
-    await expect(page.locator('#bc-1 .bc-eyebrow')).toHaveText('THE INSIGHT');
-    await expect(page.locator('#bc-1 .bc-title')).toContainText("What the examiner knows");
+    await expect(page.locator('#bc-1 .bc-eyebrow')).toHaveText('YOUR PROGRAMME');
+    await expect(page.locator('#bc-1 .bc-title')).toContainText('How Toody works');
 
-    // Advance → Card 3 — YOUR PROGRAMME
+    // Advance → Card 3 — NEXT UP
     await page.click('#bc-1 .bc-btn');
-    await expect(page.locator('#bc-2 .bc-eyebrow')).toHaveText('YOUR PROGRAMME');
-
-    // Advance → Card 4 — THE FORMAT
-    await page.click('#bc-2 .bc-btn');
-    await expect(page.locator('#bc-3 .bc-eyebrow')).toHaveText('THE FORMAT');
-    await expect(page.locator('#bc-3 .bc-title')).toContainText('The Computerised Test');
-
-    // Advance → Card 5 — STARTING TODAY
-    await page.click('#bc-3 .bc-btn');
-    await expect(page.locator('#bc-4 .bc-eyebrow')).toHaveText('STARTING TODAY');
-    await expect(page.locator('#bc-4 .bc-title')).toContainText("You're starting with Reading");
+    await expect(page.locator('#bc-2')).not.toHaveClass(/hidden/);
+    await expect(page.locator('#bc-2 .bc-eyebrow')).toHaveText('NEXT UP');
+    await expect(page.locator('#bc-2 .bc-title')).toContainText('A quick IELTS overview');
   });
 });
 
