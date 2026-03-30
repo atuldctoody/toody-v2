@@ -363,12 +363,56 @@ export async function testSessionFlow() {
   console.log('\nStep 5 — Writing evaluation');
   const writing = await runStep('Writing Task 2 evaluation', () => stepWritingEval(6.0));
 
+  // Step 6 — Passage quality agent (depends on Step 1 passage)
+  console.log('\nStep 6 — Passage quality agent');
+  let passageQuality = { pass: false, durationMs: 0, error: 'Step 1 failed — skipped' };
+  if (gen.pass && gen.passage) {
+    passageQuality = await runStep('Evaluate-passage agent', async () => {
+      const { evaluatePassage } = await import('./evaluate-passage.js');
+      const result = await evaluatePassage(gen.passage, 6.0, API_URL);
+
+      assert(result !== null && typeof result === 'object',
+        'evaluatePassage returned null or non-object');
+      assert(typeof result.pass === 'boolean',
+        `pass field is not boolean: ${result.pass}`);
+      assert(Array.isArray(result.failReasons),
+        `failReasons is not an array: ${result.failReasons}`);
+
+      if (result.avgScore !== null) {
+        assert(typeof result.avgScore === 'number',
+          `avgScore is not a number: ${result.avgScore}`);
+        assert(result.avgScore >= 1 && result.avgScore <= 5,
+          `avgScore out of range: ${result.avgScore}`);
+      }
+
+      // Log scores for visibility
+      if (result.scores) {
+        const s = result.scores;
+        console.log(`       argumentStructure:  ${s.argumentStructure}/5`);
+        console.log(`       academicVocabulary: ${s.academicVocabulary}/5`);
+        console.log(`       writersStance:      ${s.writersStance}/5`);
+        console.log(`       trapPotential:      ${s.trapPotential}/5`);
+        console.log(`       logicalIntegrity:   ${s.logicalIntegrity}/5`);
+        console.log(`       bandAppropriateness:${s.bandAppropriateness}/5`);
+        console.log(`       avg: ${result.avgScore} | pass: ${result.pass}`);
+      }
+      if (result.failReasons?.length) {
+        result.failReasons.forEach(r => console.log(`       ⚑  ${r}`));
+      }
+
+      return { avgScore: result.avgScore, passedGate: result.pass, failCount: result.failReasons.length };
+    });
+  } else {
+    console.log('  ⊘  Evaluate-passage — SKIPPED (Step 1 failed)');
+  }
+
   const steps = {
-    generation:         { pass: gen.pass,     durationMs: gen.durationMs,     error: gen.error     || null },
-    verification:       { pass: verify.pass,  durationMs: verify.durationMs,  error: verify.error  || null, corrections: verify.corrections ?? null },
-    explanationQuality: { pass: quality.pass, durationMs: quality.durationMs, error: quality.error || null, sessionAvgScore: quality.sessionAvgScore ?? null },
-    audio:              { pass: audio.pass,   durationMs: audio.durationMs,   error: audio.error   || null },
-    writingEval:        { pass: writing.pass, durationMs: writing.durationMs, error: writing.error || null, overallBand: writing.overallBand ?? null },
+    generation:         { pass: gen.pass,           durationMs: gen.durationMs,           error: gen.error           || null },
+    verification:       { pass: verify.pass,         durationMs: verify.durationMs,         error: verify.error        || null, corrections: verify.corrections ?? null },
+    explanationQuality: { pass: quality.pass,        durationMs: quality.durationMs,        error: quality.error       || null, sessionAvgScore: quality.sessionAvgScore ?? null },
+    audio:              { pass: audio.pass,          durationMs: audio.durationMs,          error: audio.error         || null },
+    writingEval:        { pass: writing.pass,        durationMs: writing.durationMs,        error: writing.error       || null, overallBand: writing.overallBand ?? null },
+    passageQuality:     { pass: passageQuality.pass, durationMs: passageQuality.durationMs, error: passageQuality.error || null, avgScore: passageQuality.avgScore ?? null, passedGate: passageQuality.passedGate ?? null },
   };
 
   const overallPass     = Object.values(steps).every(s => s.pass);

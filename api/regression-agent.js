@@ -96,6 +96,14 @@ Return ONLY this JSON:
   return { passage: parsed.passage, questions: parsed.questions, topic: parsed.topic };
 }
 
+async function stepPassageQuality(passage, band) {
+  const { evaluatePassage } = await import('./evaluate-passage.js');
+  const result = await evaluatePassage(passage, band, API_URL);
+  assert(typeof result.pass === 'boolean', `evaluatePassage: pass not boolean: ${result.pass}`);
+  assert(Array.isArray(result.failReasons), 'evaluatePassage: failReasons not array');
+  return { avgScore: result.avgScore, passedGate: result.pass, failReasons: result.failReasons, scores: result.scores };
+}
+
 async function stepVerify(passage, questions) {
   const { verifyAnswers } = await import('./verify-answers.js');
   const result = await verifyAnswers(passage, questions, API_URL);
@@ -180,9 +188,17 @@ async function runBandTest(band) {
     steps.generation = { pass: false, error: e.message };
   }
 
-  // Steps 2 + 3 depend on generation
+  // Steps 2 + 3 + passage quality depend on generation
   if (steps.generation.pass) {
     const { passage, questions } = steps.generation;
+
+    // Passage quality (soft warn only — does not affect pass/fail)
+    try {
+      const r = await stepPassageQuality(passage, band);
+      steps.passageQuality = { pass: true, avgScore: r.avgScore, passedGate: r.passedGate, failReasons: r.failReasons, scores: r.scores };
+    } catch (e) {
+      steps.passageQuality = { pass: false, error: e.message };
+    }
 
     try {
       const r = await stepVerify(passage, questions);
@@ -218,7 +234,9 @@ async function runBandTest(band) {
     steps.writingEval = { pass: false, error: e.message };
   }
 
-  const allPass = Object.values(steps).every(s => s.pass);
+  // passageQuality is soft-warn only — excluded from hard pass/fail
+  const coreSteps = Object.entries(steps).filter(([k]) => k !== 'passageQuality').map(([, s]) => s);
+  const allPass = coreSteps.every(s => s.pass);
   return { band, steps, pass: allPass, durationMs: Date.now() - t0 };
 }
 
@@ -279,6 +297,21 @@ function checkConsistency(results) {
     }
   }
 
+  // Passage quality per band — soft warn if avgScore < 3.0
+  results.forEach(r => {
+    const pq = r.steps.passageQuality;
+    if (!pq) return;
+    if (pq.avgScore !== null && typeof pq.avgScore === 'number' && pq.avgScore < 3.0) {
+      softWarns.push({
+        type:   'passage_quality_low',
+        detail: `⚠ PASSAGE QUALITY: Band ${r.band} passage scored ${pq.avgScore.toFixed(1)}/5 — below 3.0 threshold. Reasons: ${pq.failReasons?.join('; ') || 'none'}`,
+      });
+    }
+    if (pq.avgScore !== null && typeof pq.avgScore === 'number') {
+      console.log(`  ℹ   Band ${r.band} passage quality: ${pq.avgScore.toFixed(1)}/5 | gate: ${pq.passedGate ? 'PASS' : 'FAIL'}`);
+    }
+  });
+
   // Writing band spread — informational only
   const bands = results
     .map(r => ({ band: r.band, overallBand: r.steps.writingEval?.overallBand }))
@@ -317,6 +350,7 @@ function stepIcon(step, label) {
 
 function formatBandRow(r) {
   const g  = r.steps.generation;
+  const pq = r.steps.passageQuality;
   const v  = r.steps.verification;
   const eq = r.steps.explanationQuality;
   const a  = r.steps.audio;
@@ -325,6 +359,7 @@ function formatBandRow(r) {
   const cols = [
     `Band ${r.band.toFixed(1)}:`,
     (g?.pass  ? '✓ gen'       : `✗ gen(${g?.error?.slice(0,20) || ''})`).padEnd(10),
+    (pq?.pass ? `✓ pq(${pq.avgScore?.toFixed(1) ?? '?'})` : '✗ pq').padEnd(10),
     (v?.pass  ? '✓ verify'    : `✗ verify`).padEnd(10),
     (eq?.pass ? `✓ explain(${eq.avgScore?.toFixed(1)})` : '✗ explain').padEnd(16),
     (a?.pass  ? '✓ audio'     : '✗ audio').padEnd(9),

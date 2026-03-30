@@ -74,7 +74,8 @@ let sessionPassage     = '';
 let sessionAnswers     = {};   // { qnum: { val, isRight } }
 let sessionCorrect     = 0;
 let sessionTopic       = '';
-let sessionCorrections = [];   // Answer corrections from verifyAnswers() — logged to Firestore
+let sessionCorrections  = [];   // Answer corrections from verifyAnswers() — logged to Firestore
+let sessionPassageQuality = null; // Passage quality eval from evaluate-passage.js — logged to Firestore
 
 // Tough Love
 let tlQ           = null;
@@ -2124,11 +2125,42 @@ Return ONLY this JSON:
     };
   }
 
-  sessionCorrections = [];
+  sessionCorrections  = [];
+  sessionPassageQuality = null;
 
   try {
-    const raw    = await callAI(prompt);
-    const parsed = parseAIJson(raw);
+    let raw    = await callAI(prompt);
+    let parsed = parseAIJson(raw);
+
+    // ── Passage Quality Gate ───────────────────────────────────────────────────
+    // Runs evaluate-passage.js before any student sees the content.
+    // If the passage fails, regenerate once with the specific fix instruction.
+    // Non-fatal: errors here never block the session.
+    try {
+      const { evaluatePassage } = await import('./api/evaluate-passage.js');
+      const passageEval = await evaluatePassage(
+        parsed.passage,
+        studentData?.currentBand || 6.0,
+        API_URL
+      );
+      sessionPassageQuality = {
+        avgScore:    passageEval.avgScore,
+        scores:      passageEval.scores,
+        pass:        passageEval.pass,
+        regenerated: false,
+      };
+      if (!passageEval.pass && passageEval.regenerationInstruction) {
+        console.log('Passage quality fail — regenerating. Reason:', passageEval.failReasons);
+        const improvedPrompt = {
+          ...prompt,
+          user: prompt.user + '\n\nCRITICAL IMPROVEMENT REQUIRED: ' + passageEval.regenerationInstruction,
+        };
+        raw    = await callAI(improvedPrompt);
+        parsed = parseAIJson(raw);
+        sessionPassageQuality.regenerated = true;
+      }
+    } catch { /* non-fatal — continue with original passage */ }
+    // ──────────────────────────────────────────────────────────────────────────
 
     sessionPassage = parsed.passage;
     sessionTopic   = parsed.topic || 'Reading';
@@ -2412,7 +2444,8 @@ async function finishReadingSession() {
       missedSubTypes,
       durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
       behaviour,
-      ...(sessionCorrections.length ? { answerCorrections: sessionCorrections } : {}),
+      ...(sessionCorrections.length    ? { answerCorrections: sessionCorrections }   : {}),
+      ...(sessionPassageQuality        ? { passageQuality: sessionPassageQuality }   : {}),
     });
 
     const prevCorrect  = Math.round(((prevSkill.accuracy || 0) / 100) * (prevSkill.attempted || 0));
