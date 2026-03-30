@@ -3988,15 +3988,13 @@ window.goToProgress = async function () {
 function buildContextSnippet() {
   if (!studentData) return '';
 
-  const name    = studentData.preferredName || studentData.name?.split(' ')[0] || 'Student';
-  const target  = studentData.targetBand  || 6.5;
-  const current = studentData.currentBand || target;
-  const week    = studentData.weekNumber  || 1;
-  const day     = studentData.dayNumber   || 1;
+  const name      = studentData.preferredName || studentData.name?.split(' ')[0] || 'Student';
+  const target    = studentData.targetBand  || 6.5;
+  const current   = studentData.currentBand || target;
   const ctxSkills = getIELTSSkills();
-  const brain   = studentData.brain       || {};
-  const weak    = studentData.weakAreas   || [];
-  const purpose = studentData.purpose     || '';
+  const brain     = studentData.brain       || {};
+  const weak      = studentData.weakAreas   || [];
+  const purpose   = studentData.purpose     || '';
 
   const allSkills = [
     { key: 'reading-tfng',              name: 'T/F/Not Given',      s: ctxSkills['reading-tfng']              },
@@ -4034,6 +4032,28 @@ function buildContextSnippet() {
     .slice(0, 2)
     .map(([k, c]) => `${ERROR_REASON_LABELS[k] || k} (×${c})`);
 
+  // Teaching history per skill
+  const teachingHistory = [];
+  const skillsToCheck = ['reading-tfng', 'reading-summaryCompletion', 'listening-multipleChoice', 'listening-formCompletion'];
+  skillsToCheck.forEach(skillId => {
+    const skill = ctxSkills[skillId];
+    if (!skill) return;
+    const attempts        = skill.teachingAttempts       || 0;
+    const resolved        = skill.aiResolved             || false;
+    const accuracyBefore  = skill.accuracyBeforeTeaching || null;
+    const accuracyAfter   = skill.accuracy               || null;
+    const skillName       = allSkills.find(s => s.key === skillId)?.name || skillId;
+    if (attempts >= 1 && !resolved) {
+      const improvement = accuracyBefore && accuracyAfter ? Math.round(accuracyAfter - accuracyBefore) : null;
+      teachingHistory.push(
+        `${skillName}: taught ${attempts}x — ${improvement !== null ? (improvement > 0 ? `improved ${improvement}% but not resolved` : `no improvement after ${attempts} attempts — try different approach`) : 'unresolved'}`
+      );
+    }
+    if (skill.needsHuman) {
+      teachingHistory.push(`${skillName}: AI teaching ceiling reached — flag for human mentor`);
+    }
+  });
+
   // Behaviour pattern line
   const patterns = [];
   if (brain.avgTimePerQuestionSec) patterns.push(`${brain.avgTimePerQuestionSec}s avg per question`);
@@ -4054,7 +4074,7 @@ function buildContextSnippet() {
   }
 
   const targetPush = Math.min(9, parseFloat((current + 0.5).toFixed(1)));
-  const focusSkill = weak[0] ? weak[0].replace('-', ' ') : 'the student\'s weakest area';
+  const focusSkill  = weak[0] ? weak[0].replace('-', ' ') : 'the student\'s weakest area';
   const focusMissed = weak[0] ? (brain.topMissedSubType?.[toSkillId(weak[0])] || brain.topMissedSubType?.[weak[0]] || null) : null;
 
   const purposeNote = purpose === 'university'  ? 'Use academic/scientific passage topics (research, environment, technology, history).'
@@ -4062,11 +4082,23 @@ function buildContextSnippet() {
                     : purpose === 'work'        ? 'Use professional/workplace topics where relevant.'
                     : '';
 
+  // Specific trap instruction derived from top error pattern
+  const errorReasonToInstruction = {
+    synonymTrap:         'Use passages where the correct answer requires reading exact words, not paraphrasing. Warn: do not match meaning — match the exact claim.',
+    hedgingMissed:       'Use passages containing hedging language: may, suggests, could, appears to, is thought to. Explain: hedging = Not Given signal.',
+    negationOverlooked:  'Use passages with negation: not, never, rarely, fails to. Highlight negation words explicitly in explanations.',
+    scopeError:          'Use passages where statements overreach passage scope: all vs some, always vs usually. Target absolute qualifiers.',
+    notGivenMarkedFalse: 'Apply the Alternative Reality Test in every explanation. Ask: does the passage actively contradict this, or is it simply silent?',
+  };
+  const topErrorKey        = Object.entries(tfngErrors).sort((a, b) => b[1] - a[1])[0]?.[0];
+  const specificInstruction = topErrorKey ? errorReasonToInstruction[topErrorKey] : null;
+
   const lines = [
-    `STUDENT: ${name} | Target: Band ${target} | Current estimate: Band ${current} | Week ${week} Day ${day}`,
+    `STUDENT: ${name} | Target: Band ${target} | Current estimate: Band ${current} | Session ${brain.totalSessions || 1}`,
     `STRONG: ${strong.length ? strong.join(', ') : 'No data yet — first session'}`,
     `WEAK: ${weakSkills.length ? weakSkills.join(', ') : 'No weak areas identified yet'}`,
     ...(topTfngErrors.length ? [`READING ERROR PATTERNS: ${topTfngErrors.join('; ')} — target these specific failures in T/F/NG questions`] : []),
+    ...(teachingHistory.length ? [`TEACHING HISTORY: ${teachingHistory.join('. ')}`] : []),
     ...(() => {
       // Confidence signals — emit for any skill with ≥2 sessions of data
       const CP_SKILL_LABELS = {
@@ -4091,8 +4123,10 @@ function buildContextSnippet() {
     '',
     'INSTRUCTION FOR THIS SESSION:',
     '- Do NOT re-teach basics for strong skills',
-    `- Focus on ${focusSkill}${focusMissed ? ` — student consistently misses "${focusMissed}" answer type` : ''}`,
+    `- Primary target: ${focusSkill}${focusMissed ? ` — student consistently misses "${focusMissed}" answer type` : ''}`,
     `- Set difficulty at Band ${targetPush} — push slightly beyond current level`,
+    ...(specificInstruction ? [`- SPECIFIC TRAP TO TARGET: ${specificInstruction}`] : []),
+    ...(teachingHistory.some(t => t.includes('no improvement')) ? ['- Previous explanation approach failed — change the analogy, use a different example, do not repeat the same explanation'] : []),
     ...(purposeNote ? [`- TOPIC PREFERENCE: ${purposeNote}`] : []),
   ];
 
@@ -4101,11 +4135,10 @@ function buildContextSnippet() {
 
 // ── AI CALL ───────────────────────────────────────────────────────
 async function callAI(prompt) {
-  const vision  = getVisionPrompt(studentData);
-  const snippet = buildContextSnippet();
+  if (studentData) studentData._contextSnippet = buildContextSnippet();
+  const visionPrompt  = getVisionPrompt(studentData);
   const systemContent = [
-    vision,
-    snippet ? `\n---\n\n${snippet}` : '',
+    visionPrompt,
     `\n---\n\n${prompt.system}`,
   ].join('');
 
