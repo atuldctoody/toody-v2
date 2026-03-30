@@ -1062,6 +1062,14 @@ a { color: inherit; text-decoration: none; }
 @keyframes bc-enter-fwd  { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
 @keyframes bc-enter-back { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
 
+/* ── IELTS MODAL STATIC INFO CARDS ── */
+#ielts-modal             { background: var(--color-bg, #F4F4F9); }
+#ielts-modal .bc-pills   { gap: 12px; }
+.ic-pill                 { background: #fff; border-radius: 12px; border: 1px solid #E0DFF0; padding: 16px; box-shadow: 0 1px 4px rgba(26,24,41,0.06); }
+.ic-pill-label           { font-size: 11px; font-weight: 600; color: #6557D4; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+.ic-pill-body            { font-size: 15px; color: #1A1829; line-height: 1.6; }
+.ic-pill-body strong     { color: #6557D4; font-weight: 600; }
+
 /* ── TEACH BULLETS & STEP TEXT ── */
 .teach-bullets      { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
 .teach-bullets li   { font-size: 14px; line-height: 1.6; color: var(--text); padding-left: 18px; position: relative; }
