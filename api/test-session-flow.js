@@ -213,7 +213,7 @@ async function stepAudio() {
   return { audioBytes };
 }
 
-async function stepWritingEval() {
+async function stepWritingEval(band = 6.0) {
   const sampleTask  = 'Some people think that the best way to reduce crime is to give longer prison sentences. Others, however, believe there are better alternative ways of reducing crime. Discuss both views and give your own opinion.';
   const sampleEssay = `Crime is a major problem in many societies today. Some argue that harsher prison sentences deter criminals, while others believe rehabilitation and social investment are more effective. In this essay, I will discuss both perspectives before giving my own view.
 
@@ -228,11 +228,11 @@ In my opinion, a balanced approach is necessary. While serious crimes may requir
     messages: [
       {
         role:    'system',
-        content: 'You are an experienced IELTS examiner. Evaluate writing responses strictly but fairly using official band descriptors. Return valid JSON only.',
+        content: `You are an experienced IELTS examiner. Evaluate writing responses strictly but fairly using official band descriptors. You are evaluating a writing sample from a Band ${band} student. Your overall band score must reflect realistic performance for this level. A Band 5.0 student should return 4.5–5.5. A Band 6.0 student should return 5.5–6.5. A Band 7.0 student should return 6.5–7.5. Do not return the same band score for all student levels. Return valid JSON only.`,
       },
       {
         role: 'user',
-        content: `Evaluate this IELTS Writing Task 2 (Opinion Essay) response for a Band 6.0 target student.
+        content: `Evaluate this IELTS Writing Task 2 (Opinion Essay) response for a Band ${band} target student.
 
 TASK PROMPT: ${sampleTask}
 
@@ -361,7 +361,7 @@ export async function testSessionFlow() {
 
   // Step 5 — Writing evaluation (independent)
   console.log('\nStep 5 — Writing evaluation');
-  const writing = await runStep('Writing Task 2 evaluation', stepWritingEval);
+  const writing = await runStep('Writing Task 2 evaluation', () => stepWritingEval(6.0));
 
   const steps = {
     generation:         { pass: gen.pass,     durationMs: gen.durationMs,     error: gen.error     || null },

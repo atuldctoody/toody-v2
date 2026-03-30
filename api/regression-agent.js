@@ -144,7 +144,7 @@ async function stepWriting(band) {
   const parsed = await apiFetch(API_URL, {
     model: 'gpt-4o-mini',
     messages: [
-      { role: 'system', content: 'You are an experienced IELTS examiner. Return valid JSON only.' },
+      { role: 'system', content: `You are an experienced IELTS examiner. You are evaluating a writing sample from a Band ${band} student. Your overall band score must reflect realistic performance for this level. A Band 5.0 student should return 4.5–5.5. A Band 6.0 student should return 5.5–6.5. A Band 7.0 student should return 6.5–7.5. Do not return the same band score for all student levels. Return valid JSON only.` },
       { role: 'user', content: `Evaluate this IELTS Writing Task 2 response for a Band ${band} target student.
 
 TASK: Some people think governments should spend money on public transport rather than building new roads. To what extent do you agree?

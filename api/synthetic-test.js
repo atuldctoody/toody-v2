@@ -329,7 +329,7 @@ Return ONLY this JSON:
 
 // ── Step 6 — Mentor final verdict ─────────────────────────────────────────────
 
-async function step6MentorVerdict(contentEval, explanationEval, arjunRating, answers) {
+async function step6MentorVerdict(contentEval, explanationEval, arjunRating, answers, questionCount) {
   const score    = answers.filter(a => a.isCorrect).length;
   const accuracy = Math.round((score / answers.length) * 100);
 
@@ -343,7 +343,9 @@ async function step6MentorVerdict(contentEval, explanationEval, arjunRating, ans
       content: `Review this complete synthetic session report and give your final verdict.
 
 STUDENT: ${ARJUN.name} (Band ${ARJUN.currentBand} → ${ARJUN.targetBand})
-SESSION ACCURACY: ${score}/5 (${accuracy}%) — simulated based on ${ARJUN.name}'s weakness profile
+SESSION ACCURACY: ${score}/${questionCount} (${accuracy}%) — simulated based on ${ARJUN.name}'s weakness profile
+
+The session contains exactly ${questionCount} questions, numbered Q1 through Q${questionCount}. You may only reference question numbers that exist in this session. Do not invent or reference question numbers outside this range.
 
 CONTENT QUALITY (Mentor):
 ${JSON.stringify(contentEval, null, 2)}
@@ -358,7 +360,7 @@ learned something: ${arjunRating?.learnedSomethingNew ? 'Yes' : 'No'}
 would come back tomorrow: ${arjunRating?.wouldComeBackTomorrow ? 'Yes' : 'No'}
 student comment: "${arjunRating?.honestComment || ''}"
 
-Give your verdict. Top 3 improvements must be SPECIFIC — name the exact question number and exact word or phrase that needs to change. Not general advice.
+Give your verdict. Top 3 improvements must be SPECIFIC — name the exact question number (Q1–Q${questionCount} only) and exact word or phrase that needs to change. Not general advice.
 
 Return ONLY this JSON:
 {
@@ -563,7 +565,7 @@ export async function runSyntheticTest() {
   console.log('Step 6 — Mentor final verdict');
   let verdict;
   try {
-    verdict = await step6MentorVerdict(contentEval, explanationEval, arjunRating, answers);
+    verdict = await step6MentorVerdict(contentEval, explanationEval, arjunRating, answers, session.questions.length);
     console.log(`  ✓  Content quality:     ${scoreBar(verdict.contentQualityScore)}`);
     console.log(`     Teaching quality:    ${scoreBar(verdict.teachingEffectivenessScore)}`);
     console.log(`\n  Top 3 improvements:`);
