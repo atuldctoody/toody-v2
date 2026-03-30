@@ -109,7 +109,7 @@ let confCorrect       = 0;     // Confidence correct count
 // IELTS Overview
 let ieltsCard         = 0;
 let _ieltsModalShownThisSession = false; // set once, never reset — process-lifetime guarantee
-const IELTS_COLORS    = ['var(--accent-light)','var(--accent-light)','var(--success-light)','var(--yellow-light)','var(--danger-light)','var(--success-light)'];
+const IELTS_COLORS    = ['#F4F4F9'];
 
 // ── SUBJECT-AGNOSTIC SCHEMA HELPERS ──────────────────────────────
 // Converts 'reading.tfng' → 'reading-tfng'
@@ -330,6 +330,11 @@ window.togglePill = function (el) {
   const isOpen = el.classList.contains('open');
   el.closest('.bc-pills').querySelectorAll('.bc-pill-exp.open').forEach(p => p.classList.remove('open'));
   if (!isOpen) el.classList.add('open');
+};
+
+// IELTS modal expandable cards — independent toggle, any number open at once
+window.toggleCard = function (el) {
+  el.classList.toggle('expanded');
 };
 
 // ── ANSWER NORMALISER ────────────────────────────────────────────
@@ -947,7 +952,7 @@ window.finishIELTSOverview = function () {
   console.log('finishIELTSOverview called');
   if (window._finishIELTSOverviewRunning) return;
   window._finishIELTSOverviewRunning = true;
-  const btn = document.getElementById('ic5-btn');
+  const btn = document.getElementById('ic-last-btn');
   if (btn) btn.disabled = true;
   hideIELTSModal();
   loadTeachFirst('reading-tfng');

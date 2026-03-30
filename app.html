@@ -253,7 +253,7 @@
 
 <!-- ══════════════════════ IELTS OVERVIEW MODAL ══════════════════════ -->
 <!-- Fixed overlay — outside the screen navigation stack entirely -->
-<div id="ielts-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100dvh; z-index:9999; overflow-y:auto; transition:background 0.4s ease;">
+<div id="ielts-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100dvh; z-index:9999; overflow-y:auto; background:#F4F4F9;">
   <button id="ielts-modal-back" class="global-back-btn hidden" style="z-index:10000;" onclick="goBack()" aria-label="Go back">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -261,196 +261,195 @@
   </button>
   <div class="bc-wrap" id="ielts-wrap" style="max-width:430px; margin:0 auto;">
 
-    <!-- Card 1 -->
     <div class="bc active" id="ic-0">
       <div class="bc-top">
-        <div class="bc-icon">⏱️</div>
-        <div class="bc-eyebrow">THE BASICS</div>
-        <h2 class="bc-title">The Test at a Glance</h2>
+        <div class="bc-eyebrow">IELTS OVERVIEW</div>
+        <h2 class="bc-title">What you need to know</h2>
       </div>
       <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">STRUCTURE</div>
-          <div class="ic-pill-body"><strong>4 sections</strong> completed in one sitting — approximately <strong>3 hours total</strong>. Reading and Listening are back to back. Writing follows. Speaking is usually on a different day at most centres.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">LISTENING</div>
-          <div class="ic-pill-body"><strong>Listening:</strong> 30 minutes + 10 minutes to transfer answers. You hear each recording exactly once — no replay. In the computerised test you type or click answers in real time as you listen.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">READING</div>
-          <div class="ic-pill-body"><strong>Reading:</strong> 60 minutes, <strong>40 questions</strong>, 3 passages. 3 passages, increasing in difficulty. Around 13–14 questions per passage. No extra time to transfer answers in the computerised test.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">WRITING</div>
-          <div class="ic-pill-body"><strong>Writing:</strong> 60 minutes, 2 tasks — Task 2 is worth double Task 1. Task 1: describe a graph or diagram in at least 150 words (20 mins). Task 2: write an essay in at least 250 words (40 mins).</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">SPEAKING</div>
-          <div class="ic-pill-body"><strong>Speaking:</strong> 11–14 minutes — recorded on computer at most centres. 3 parts: personal questions, a 2-minute talk on a cue card topic, and a discussion. Some paper-based centres still use a human examiner.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">SCORING</div>
-          <div class="ic-pill-body">Each section scored <strong>Band 1–9</strong> — overall band is the average of all four. Scores go up in 0.5 increments, rounded to the nearest 0.5.</div>
-        </div>
-      </div>
-      <button class="bc-btn" onclick="this.disabled=true; nextIELTSCard()">Next <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Card 2 -->
-    <div class="bc hidden" id="ic-1">
-      <div class="bc-top">
-        <div class="bc-icon">🎯</div>
-        <div class="bc-eyebrow">THE SCORING</div>
-        <h2 class="bc-title">How Your Band Score Works</h2>
-      </div>
-      <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE SCALE</div>
-          <div class="ic-pill-body">Each section scored <strong>0–9 in 0.5 increments</strong>. There is no Band 0. Band 1 means non-user. Band 9 means expert. Most test-takers fall between 5.0 and 8.0.</div>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">STRUCTURE</span>
+              <span class="ic-pill-summary">4 sections, one sitting, approximately 3 hours total.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Reading and Listening are back to back with no break</li>
+              <li>Writing follows immediately after</li>
+              <li>Speaking is usually on a separate day at most test centres</li>
+              <li>You cannot go back to a previous section once time is called</li>
+            </ul>
+          </div>
         </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">OVERALL BAND</div>
-          <div class="ic-pill-body"><strong>Overall band = average</strong> of 4 sections, rounded to nearest 0.5. Unlike some exams, IELTS has no pass or fail — your score simply reflects your current English level. Institutions then set their own minimum requirements.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">EXAMPLE</div>
-          <div class="ic-pill-body">Example: 7.0 + 6.5 + 6.0 + 6.5 = <strong>Overall 6.5</strong>. If a section average falls between two bands (e.g. 6.375), it rounds to the nearest 0.5.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">REQUIREMENTS</div>
-          <div class="ic-pill-body">Most universities need <strong>Band 6.5–7.5 overall</strong> with no band below 6.0. Always check your specific institution's requirements — some courses (like medicine or law) require higher minimums in individual sections.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE STAKES</div>
-          <div class="ic-pill-body">Half a band can be the difference between <strong>an offer and a rejection</strong>. A 6.5 instead of 7.0 can close doors you don't know are closed. This is why Toody tracks your progress in 0.5-band increments.</div>
-        </div>
-      </div>
-      <button class="bc-btn" onclick="this.disabled=true; nextIELTSCard()">Next <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Card 3 -->
-    <div class="bc hidden" id="ic-2">
-      <div class="bc-top">
-        <div class="bc-icon">📋</div>
-        <div class="bc-eyebrow">THE CRITERIA</div>
-        <h2 class="bc-title">What actually determines your band score</h2>
-      </div>
-      <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">READING + LISTENING</div>
-          <div class="ic-pill-body"><strong>Reading + Listening:</strong> every correct answer counts equally — no partial marks. No bonus for harder questions. Every correct answer is worth exactly one mark. Speed and accuracy are both required.</div>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">LISTENING</span>
+              <span class="ic-pill-summary">30 minutes. You hear each recording exactly once — no replay.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>You have 10 extra minutes at the end to transfer and check your answers</li>
+              <li>In the computerised test you type or click answers in real time as you listen — no transfer time needed</li>
+              <li>4 recordings, 40 questions, increasing in difficulty</li>
+              <li>The biggest mistake: trying to understand every word. Listen for the answer, not the story.</li>
+            </ul>
+          </div>
         </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">WRITING</div>
-          <div class="ic-pill-body"><strong>Writing:</strong> scored on 4 criteria — structure and clarity matter as much as language. How you organise your answer and whether you addressed the task directly counts for half your Writing score.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">SPEAKING</div>
-          <div class="ic-pill-body"><strong>Speaking:</strong> scored on fluency first — confidence beats perfection. A student who speaks smoothly with some errors scores higher than one who speaks slowly and perfectly. Keep talking.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE TRUTH</div>
-          <div class="ic-pill-body">Examiners are not marking your <strong>knowledge</strong> — they are marking your <strong>English under pressure</strong>. You can discuss a topic you know nothing about and still score Band 8. They mark how precisely and fluently you express ideas, not the ideas themselves.</div>
-        </div>
-      </div>
-      <button class="bc-btn" onclick="this.disabled=true; nextIELTSCard()">Next <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Card 4 -->
-    <div class="bc hidden" id="ic-3">
-      <div class="bc-top">
-        <div class="bc-icon">💻</div>
-        <div class="bc-eyebrow">THE FORMAT</div>
-        <h2 class="bc-title">The Computerised Test</h2>
-      </div>
-      <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">READING</div>
-          <div class="ic-pill-body"><strong>Reading:</strong> scroll passages on screen, click answers — no underlining on paper. Use the on-screen highlighter to mark key details. Practise scanning efficiently — the passages are long and time is tight.</div>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">READING</span>
+              <span class="ic-pill-summary">60 minutes, 40 questions across 3 passages of increasing difficulty.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Around 13–14 questions per passage</li>
+              <li>No extra time to transfer answers — what you see on screen is what gets marked</li>
+              <li>The passages are long and academic — you are not expected to understand every word</li>
+              <li>The biggest mistake: reading the whole passage before looking at the questions. Read the question first, then find the answer.</li>
+            </ul>
+          </div>
         </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">LISTENING</div>
-          <div class="ic-pill-body"><strong>Listening:</strong> audio through headphones, type or click answers <strong>in real time</strong>. You can't pause or replay. Type fast enough to keep up — accuracy matters more than perfect spelling for short answers.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">WRITING</div>
-          <div class="ic-pill-body"><strong>Writing:</strong> type your essays — word count shown automatically. You can copy, paste, and edit freely. Always hit the minimums (150 for Task 1, 250 for Task 2) before submitting.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">SPEAKING</div>
-          <div class="ic-pill-body"><strong>Speaking:</strong> recorded in a booth — no examiner in the room. Speak clearly and at a natural pace into the microphone. Use Toody's speaking sessions to get comfortable with this format.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">TOOLS</div>
-          <div class="ic-pill-body">You can <strong>copy/paste</strong> in Writing and use the <strong>highlight tool</strong> in Reading. Both are free — no marks deducted. Use the highlighter to mark evidence as you answer each Reading question.</div>
-        </div>
-      </div>
-      <button class="bc-btn" onclick="this.disabled=true; nextIELTSCard()">Next <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Card 5 -->
-    <div class="bc hidden" id="ic-4">
-      <div class="bc-top">
-        <div class="bc-icon">💡</div>
-        <div class="bc-eyebrow">THE SHIFT</div>
-        <h2 class="bc-title">The One Thing Most Students Get Wrong</h2>
-      </div>
-      <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE MISTAKE</div>
-          <div class="ic-pill-body">Most students practise <strong>answering questions</strong> — not understanding <strong>why answers are right or wrong</strong>. Doing 100 practice tests without reviewing errors deeply just reinforces bad habits. Toody's feedback names the exact reasoning failure — not just the right answer.</div>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">WRITING</span>
+              <span class="ic-pill-summary">2 tasks. Task 1 is 150 words minimum. Task 2 is 250 words and worth double the marks.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Task 1: you are given a graph, chart, table or diagram and asked to describe what you see in your own words</li>
+              <li>Task 2: you are given a statement or question and asked to write an essay arguing a position or discussing both sides</li>
+              <li>Most students spend too long on Task 1 and run out of time on Task 2 — Task 2 is worth double so always prioritise it</li>
+              <li>You will not be penalised for going over the word count but going under will cost you marks</li>
+            </ul>
+          </div>
         </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE SHIFT</div>
-          <div class="ic-pill-body"><strong>Band 6</strong> students know the rules. <strong>Band 7</strong> students know how the <strong>examiner thinks</strong>. Rules tell you True means explicitly stated. Thinking like an examiner tells you why hedging language like "may suggest" will never be True.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">TOODY'S JOB</div>
-          <div class="ic-pill-body">Teach you to <strong>think like the examiner</strong> — not just answer like a student. Every piece of feedback names the exact reasoning error — not "you got this wrong" but "you read this as evidence when it's actually hedging language".</div>
-        </div>
-      </div>
-      <div class="bc-coach-note">"From this point, everything Toody teaches is examiner-first thinking."</div>
-      <button class="bc-btn" onclick="this.disabled=true; nextIELTSCard()">Next <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Card 6 -->
-    <div class="bc hidden" id="ic-5">
-      <div class="bc-top">
-        <div class="bc-icon">📖</div>
-        <div class="bc-eyebrow">STARTING TODAY</div>
-        <h2 class="bc-title">You're Starting with Reading</h2>
-      </div>
-      <div class="bc-pills">
-        <div class="ic-pill">
-          <div class="ic-pill-label">TODAY'S SKILL</div>
-          <div class="ic-pill-body">Today's skill: <strong>True / False / Not Given</strong> — the most misunderstood question type in IELTS Reading. T/F/NG tests whether a statement is confirmed, contradicted, or simply not addressed by the passage. The "not addressed" category is the one most students miss.</div>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">SPEAKING</span>
+              <span class="ic-pill-summary">3 parts, 11–14 minutes, recorded in a private booth with an examiner.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Part 1: familiar topics like family, work, hobbies and daily routine — 4 to 5 minutes</li>
+              <li>Part 2: you are given a card with a topic and 1 minute to prepare a 2-minute talk</li>
+              <li>Part 3: a deeper discussion linked to your Part 2 topic — more abstract questions</li>
+              <li>The biggest mistake: stopping when you don't know a word. Keep talking, find another way to say it — that is exactly what fluency means</li>
+            </ul>
+          </div>
         </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE CONFUSION</div>
-          <div class="ic-pill-body">Most students confuse <strong>False</strong> with <strong>Not Given</strong>. By the end of today, you won't. You'll be able to name the exact difference — not just know it, but explain and apply it under exam conditions.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE APPROACH</div>
-          <div class="ic-pill-body">Toody will teach the concept first, then examples, then real conditions. The teach-first approach means you understand the rule before you're tested on it. Most apps test first. Toody teaches first — then tests.</div>
-        </div>
-        <div class="ic-pill">
-          <div class="ic-pill-label">THE TIME</div>
-          <div class="ic-pill-body">The session takes about <strong>15–20 minutes</strong> — the first session sets the foundation. Day 1 is intentionally focused. The goal is concept clarity, not volume. Speed and stamina come after you understand what you're looking for.</div>
-        </div>
-      </div>
-      <div class="bc-coach-note">"Reading accuracy is the fastest path to a higher band — because every correct answer counts equally."</div>
-      <button class="bc-btn bc-btn-start" id="ic5-btn" onclick="safeClick(this, finishIELTSOverview)">Let's start — Day 1 <span class="arrow">→</span></button>
-    </div>
 
-    <!-- Progress dots -->
-    <div class="bc-dots" id="ielts-dots">
-      <span class="bc-dot active" id="id-dot-0"></span>
-      <span class="bc-dot" id="id-dot-1"></span>
-      <span class="bc-dot" id="id-dot-2"></span>
-      <span class="bc-dot" id="id-dot-3"></span>
-      <span class="bc-dot" id="id-dot-4"></span>
-      <span class="bc-dot" id="id-dot-5"></span>
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">THE FORMAT</span>
+              <span class="ic-pill-summary">The test is computerised — scroll passages, type essays, record Speaking in a booth.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Reading: scroll passages on screen, click your answers — no underlining on paper</li>
+              <li>Listening: audio through headphones, type or click answers in real time as you listen</li>
+              <li>Writing: type your essays — word count shown automatically</li>
+              <li>Speaking: recorded in a booth — no examiner in the room, just you and a microphone</li>
+              <li>You can copy/paste in Writing and use the highlight tool in Reading — use both</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">THE SCORES</span>
+              <span class="ic-pill-summary">Your overall band is the average of all 4 sections, rounded to the nearest 0.5.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Each section is scored from 1 to 9. Most universities require Band 6.5 or 7.0 overall</li>
+              <li>Your overall band is the average of all 4 sections — one weak section drags everything down</li>
+              <li>Example: if you score 8, 8, 8 but only 5 in Speaking — your overall band is 7.0, not 8.0</li>
+              <li>The goal is not to be perfect in one section — it is to be consistent across all four</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">THE CRITERIA</span>
+              <span class="ic-pill-summary">Every section is scored differently — knowing how changes how you prepare.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Reading &amp; Listening: every correct answer = 1 mark. No partial credit, no penalty for wrong answers. If you're unsure, eliminate the obviously wrong options first and commit to your best remaining choice — a considered guess beats a blank every time</li>
+              <li>Writing: scored on 4 things — did you answer the question fully, is your essay easy to follow, do you use a range of vocabulary, and is your grammar varied and accurate. Task 2 is worth double Task 1 marks</li>
+              <li>Speaking: scored on 4 things — can you speak without long pauses, does your answer make sense and stay on topic, do you use a range of words, and how accurate is your grammar. Fluency matters more than perfection</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">THE INSIGHT</span>
+              <span class="ic-pill-summary">Band 6 students answer what they think is right. Band 7 students find the evidence first.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Band 7 readers don't read faster — they read smarter. They scan for the answer before committing</li>
+              <li>Band 7 writers don't have better ideas — they have better structure. The examiner decides your band in the first paragraph</li>
+              <li>Band 7 speakers don't have perfect grammar — they keep talking when they don't know a word. That is what fluency looks like</li>
+              <li>The exam does not reward what you know. It rewards how you think under pressure</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ic-pill" onclick="toggleCard(this)">
+          <div class="ic-pill-head">
+            <div class="ic-pill-head-text">
+              <span class="ic-pill-label">STARTING TODAY</span>
+              <span class="ic-pill-summary">You're starting with Reading — the section most students underestimate.</span>
+            </div>
+            <span class="ic-pill-chevron">›</span>
+          </div>
+          <div class="ic-pill-expand">
+            <ul class="ic-pill-bullets">
+              <li>Most students think Reading is their strongest section until they see their actual score</li>
+              <li>The passages are designed to trap confident readers — being good at English is not enough</li>
+              <li>The questions test whether you can find evidence, not whether you understood the passage</li>
+              <li>We start here because the thinking skills Reading builds carry over into every other section</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <button class="bc-btn bc-btn-start" id="ic-last-btn" onclick="safeClick(this, finishIELTSOverview)">Let's start <span class="arrow">→</span></button>
     </div>
 
   </div>
@@ -1113,7 +1112,7 @@
   </div>
 </div>
 
-<script type="module" src="app.js?v=5"></script>
+<script type="module" src="app.js?v=6"></script>
 
 
 <!-- ══════════════════════ SESSION TIP ══════════════════════ -->
