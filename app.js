@@ -35,12 +35,14 @@ const DAY_PLAN = {
   8: SKILL_CATALOGUE[6], 9: SKILL_CATALOGUE[0], 10: SKILL_CATALOGUE[0],
 };
 
-// Day 1 trap question — hardcoded, no instructions, hooks on NG confusion
-const TRAP = {
-  passage: '"Researchers found that students who took short breaks during study sessions performed better on subsequent recall tests than those who studied continuously for the same total duration."',
-  statement: 'Studying without breaks reduces a student\'s ability to recall information.',
+// Hook trap question — hardcoded, no instructions, hooks on NG confusion
+const HOOK_TRAP = {
+  passage: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade. Researchers attribute this to stricter vehicle emission standards introduced in 2015.',
+  statement: 'The reduction in urban air pollution has improved the mental health of city residents.',
   answer: 'NG',
-  explanation: 'The passage says students with breaks performed better — but it never says the opposite group\'s recall was reduced. "Performing better" and "reduced ability" are different claims. The passage doesn\'t explicitly state that studying continuously reduces recall, so the answer is Not Given.'
+  explanation: 'The passage confirms pollution has decreased in major cities — but it says nothing about mental health. The statement introduces a new claim the passage never addresses. This is Not Given: the passage is simply silent on this point.',
+  keySentence: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade.',
+  insight: 'The trap here is assuming that \'less pollution\' logically means \'better mental health.\' It might — but the passage never says so. Not Given means the passage doesn\'t address the claim, not that the claim is wrong.',
 };
 
 // ── STATE ─────────────────────────────────────────────────────────
