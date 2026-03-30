@@ -1322,6 +1322,7 @@ async function loadTeachFirst(skillKey) {
   const skillCfg    = TEACHING_CONFIG['ielts-academic']?.skills[skillId] || TEACHING_CONFIG['ielts-academic']?.skills['reading-tfng'];
   const skillLabel  = skillCfg.name;
   const isMH        = skillId === 'reading-matchingHeadings';
+  const isTFNG      = skillId === 'reading-tfng';
 
   // ── TEACHING ATTEMPTS TRACKING ────────────────────────────────────
   // Record that Teach-First fired for this skill, and snapshot accuracy before teaching.
@@ -1349,7 +1350,7 @@ async function loadTeachFirst(skillKey) {
   const ans = skillCfg.answerFormat;
   const conceptPromptDetail = skillCfg.conceptPrompt;
 
-  const ansVals = isMH ? ['A','B','A'] : ['True','False','NG'];
+  const ansVals = isMH ? ['A','B','A'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
   const exSchema = (label, ansIdx) =>
     `{"label":"${label}","passage":"2 academic sentences","statement":"testable claim","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
@@ -1361,9 +1362,9 @@ Return ONLY this JSON:
 {
   "concept": ${conceptPromptDetail},
   "hookQuestion": {
-    "passage": "2 academic sentences — choose a tricky topic where the Not Given trap applies",
-    "statement": "a testable claim that looks True but is actually ${isMH ? 'False' : 'Not Given'}",
-    "answer": "${isMH ? 'False' : 'NG'}",
+    "passage": "2 academic sentences — choose a tricky topic where ${skillCfg.hookPromptHint}",
+    "statement": "${skillCfg.hookPromptHint}",
+    "answer": "${isMH ? 'False' : isTFNG ? 'NG' : 'False'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
   "workedExamples": [
@@ -1417,9 +1418,9 @@ function renderHookQuestion() {
   if (!hq) { window.startConceptPhase(); return; }
   document.getElementById('teach-hook-passage').textContent = hq.passage;
   document.getElementById('teach-hook-statement').textContent = hq.statement;
-  const isMH = teachSkillKey === 'reading.matchingHeadings';
+  const isTFNG_hook = teachSkillKey === 'reading.tfng' || teachSkillKey === 'reading-tfng';
   const ngBtn = document.querySelector('#teach-hook-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
+  if (ngBtn) ngBtn.classList.toggle('hidden', !isTFNG_hook);
   // Reset all buttons to neutral unselected state
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.classList.remove('correct', 'wrong', 'selected');
@@ -1809,9 +1810,9 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   document.getElementById('teach-conf-counter').textContent = `Question ${idx + 1} of 2`;
   document.getElementById('teach-conf-passage').textContent = q.passage;
   document.getElementById('teach-conf-statement').textContent = q.statement;
-  const isMH = teachSkillKey === 'reading.matchingHeadings';
+  const isTFNG_conf = teachSkillKey === 'reading.tfng' || teachSkillKey === 'reading-tfng';
   const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', isMH);
+  if (ngBtn) ngBtn.classList.toggle('hidden', !isTFNG_conf);
   document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
     b.disabled = false; b.classList.remove('correct', 'wrong');
   });
