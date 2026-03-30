@@ -45,6 +45,47 @@ const HOOK_TRAP = {
   insight: 'The trap here is assuming that \'less pollution\' logically means \'better mental health.\' It might — but the passage never says so. Not Given means the passage doesn\'t address the claim, not that the claim is wrong.',
 };
 
+// Hardcoded expert-verified T/F/NG worked examples.
+// Used in the Teach-First phase for reading-tfng instead of AI generation,
+// so every student sees the same battle-tested explanations for the three
+// core answer types. AI generates everything else (hook, concept, confidence,
+// drill). Only these three examples are locked.
+const TFNG_WORKED_EXAMPLES = [
+  {
+    label: 'Example 1 — The Direct Clash (clearly FALSE)',
+    passage: 'The construction of the Great Pyramid was completed in approximately 20 years using a workforce of skilled labourers, not slaves.',
+    statement: 'The Great Pyramid was built by people who were forced to work against their will.',
+    answer: 'False',
+    bandFiveAnswer: 'True',
+    bandFiveReason: 'They see "Great Pyramid" and "built" and assume ancient construction means forced labour.',
+    explanation: 'The passage says "skilled labourers" and specifically says "not slaves." The statement says "forced to work against their will" — that is the definition of a slave. The passage says A and the statement says Not A. They are directly contradicting each other. When two things directly contradict — that is False.',
+    trap: 'none — this is the clearest case. If a student gets this wrong they have a fundamental False vs Not Given confusion.',
+    teachingNote: 'This is the clearest case. True means the passage confirms it. False means the passage says the opposite. Here the passage explicitly says not slaves — the opposite of forced labour.',
+  },
+  {
+    label: 'Example 2 — The Missing Link (clearly NOT GIVEN)',
+    passage: 'Recent studies show that drinking green tea can lead to a significant reduction in high blood pressure among middle-aged adults.',
+    statement: 'Green tea is more effective at lowering blood pressure than black tea.',
+    answer: 'Not Given',
+    bandFiveAnswer: 'True',
+    bandFiveReason: 'They see green tea and blood pressure and assume the comparison with black tea is implied.',
+    explanation: 'Does the passage mention green tea? Yes. Does it mention blood pressure? Yes. Now look for black tea. Is it there? No. You might know from your own life that green tea is healthier — but the text does not compare the two. The text is completely silent about black tea. If the text is silent, you must be silent. We do not know, so it is Not Given.',
+    trap: 'INFERENCE TRAP — student uses outside knowledge to fill a gap the text never bridged.',
+    teachingNote: 'Not Given means the passage is simply missing this piece of the puzzle. The text does not say green tea is better or worse than black tea. It does not mention black tea at all. Silence is not agreement and silence is not contradiction.',
+  },
+  {
+    label: 'Example 3 — The Assumption Trap (NOT GIVEN that looks like False)',
+    passage: 'The local council has decided to ban all motor vehicles from the city centre during the annual summer festival to ensure pedestrian safety.',
+    statement: 'The city centre will be completely quiet during the summer festival.',
+    answer: 'Not Given',
+    bandFiveAnswer: 'False',
+    bandFiveReason: 'They think: a festival with no cars must be loud so quiet is False. Or no cars means less noise so True. Both are wrong for the same reason — they are guessing.',
+    explanation: 'This is the one that trips everyone up. You are thinking: no cars means quiet. Or: it is a festival so it will be loud. Stop. Does the text use the word quiet or noisy? No. It only talks about safety and vehicles. Maybe the festival has 500 drummers. Maybe it is a silent meditation festival. We have zero evidence about noise level. You are guessing based on logic. In IELTS guessing is a crime. If the evidence is not on the paper the answer is Not Given.',
+    trap: 'ASSUMPTION TRAP — student builds a logical bridge the passage never constructed. Safety and silence are different concepts.',
+    teachingNote: 'Ask yourself: can I underline the word quiet or noisy anywhere in the passage? No. Then I cannot say True or False about noise. The passage is silent on this point. That silence is Not Given.',
+  },
+];
+
 // ── STATE ─────────────────────────────────────────────────────────
 let currentUser  = null;
 let studentData  = null;
@@ -1346,6 +1387,12 @@ Return ONLY this JSON:
     const raw  = await callAI(prompt);
     teachData  = parseAIJson(raw);
 
+    // For reading-tfng, replace AI-generated worked examples with the hardcoded
+    // expert-verified set. Hook, concept, confidence, and drill remain AI-generated.
+    if (skillId === 'reading-tfng') {
+      teachData.workedExamples = TFNG_WORKED_EXAMPLES;
+    }
+
     // Render concept bullets
     const bullets = Array.isArray(teachData.concept)
       ? teachData.concept
@@ -1410,9 +1457,12 @@ function renderWorkedExampleAt(idx) {
   const examples = teachData.workedExamples || [];
   if (idx >= examples.length) { renderConfidenceQuestion(0); return; }
   const we = examples[idx];
-  const labels = ['Easy', 'Medium', 'Hard'];
 
-  document.getElementById('teach-ex-counter').textContent = `Example ${idx + 1} of 3 — ${labels[idx] || ''}`;
+  // Use the label from the example itself if present (hardcoded format),
+  // otherwise fall back to Easy/Medium/Hard (AI format).
+  const fallbackLabels = ['Easy', 'Medium', 'Hard'];
+  const counterLabel = we.label || `${fallbackLabels[idx] || ''}`;
+  document.getElementById('teach-ex-counter').textContent = `Example ${idx + 1} of 3 — ${counterLabel}`;
   document.getElementById('teach-ex-fill').style.width = `${((idx + 1) / 3) * 100}%`;
   document.getElementById('teach-we-passage').innerHTML = (we.passage || '')
     .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
@@ -1426,48 +1476,110 @@ function renderWorkedExampleAt(idx) {
   tryBtn.classList.add('hidden');
   tryBtn.textContent = idx < 2 ? 'Next example →' : 'Try on your own →';
 
-  const answerToChoice = { true: 'confirms', false: 'contradicts', ng: 'silent' };
-  const correctChoice  = answerToChoice[(we.answer || 'ng').toLowerCase()] || 'silent';
+  // Normalise answer to the three keys used by answerToChoice
+  const normAns = normaliseAnswer(we.answer || 'ng');
+  const answerToChoice = { true: 'confirms', false: 'contradicts', notgiven: 'silent', ng: 'silent' };
+  const correctChoice  = answerToChoice[normAns] || 'silent';
 
-  document.getElementById('teach-steps-container').innerHTML = `
-    <div class="predict-block" id="predict-0">
-      <div class="predict-prompt">What part of the passage is relevant here?</div>
-      <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
-      <div class="predict-reveal hidden" id="predict-reveal-0">
-        <div class="card" style="margin-top:12px">
-          <div class="card-label" style="color:var(--accent)">Step 1</div>
-          <div class="teach-step-text">${(we.steps || [])[0] || ''}</div>
+  // ── RICH FORMAT (hardcoded examples — explanation/bandFiveAnswer/teachingNote) ──
+  if (we.explanation) {
+    const answerLabel  = normAns === 'true' ? 'True' : normAns === 'false' ? 'False' : 'Not Given';
+    const wrongBadge   = we.bandFiveAnswer
+      ? `<div class="card" style="margin-top:12px;border:2px solid var(--danger)">
+           <div class="card-label" style="color:var(--danger)">⚠ What most students answer</div>
+           <div class="teach-step-text"><strong>${we.bandFiveAnswer}</strong> — ${we.bandFiveReason || ''}</div>
+         </div>`
+      : '';
+    const trapBadge    = we.trap && we.trap !== 'none — this is the clearest case. If a student gets this wrong they have a fundamental False vs Not Given confusion.'
+      ? `<div class="card" style="margin-top:8px;background:var(--surface-2,#f8f4ff)">
+           <div class="card-label" style="color:var(--accent)">Trap</div>
+           <div class="teach-step-text">${we.trap}</div>
+         </div>`
+      : '';
+    const teachNote    = we.teachingNote
+      ? `<div class="card" style="margin-top:8px;border:2px solid var(--success)">
+           <div class="card-label" style="color:var(--success)">✅ Key rule</div>
+           <div class="teach-step-text" style="font-weight:600">${we.teachingNote}</div>
+         </div>`
+      : '';
+
+    document.getElementById('teach-steps-container').innerHTML = `
+      <div class="predict-block" id="predict-0">
+        <div class="predict-prompt">What do most Band 5 students answer here — and why?</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-0">
+          ${wrongBadge}
         </div>
       </div>
-    </div>
-    <div class="predict-block hidden" id="predict-1">
-      <div class="predict-prompt">What is this statement actually claiming?</div>
-      <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Reveal <span class="arrow">→</span></button>
-      <div class="predict-reveal hidden" id="predict-reveal-1">
-        <div class="card" style="margin-top:12px">
-          <div class="card-label" style="color:var(--accent)">Step 2</div>
-          <div class="teach-step-text">${(we.steps || [])[1] || ''}</div>
+      <div class="predict-block hidden" id="predict-1">
+        <div class="predict-prompt">Here is the correct reasoning — step by step.</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Show reasoning <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-1">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">The reasoning</div>
+            <div class="teach-step-text">${we.explanation}</div>
+          </div>
+          ${trapBadge}
         </div>
       </div>
-    </div>
-    <div class="predict-block hidden" id="predict-2">
-      <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
-      <div class="step3-choices mt8">
-        <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
-        <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
-        <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
-      </div>
-      <div class="predict-reveal hidden" id="predict-reveal-2">
-        <div class="card" style="margin-top:12px">
-          <div class="card-label" style="color:var(--accent)">Step 3</div>
-          <div class="teach-step-text">${(we.steps || [])[2] || ''}</div>
+      <div class="predict-block hidden" id="predict-2">
+        <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
+        <div class="step3-choices mt8">
+          <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
+          <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
+          <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
         </div>
-        <div class="card" style="margin-top:8px;border:2px solid var(--success)">
-          <div class="card-label" style="color:var(--success)">✅ Answer</div>
-          <div class="teach-step-text" style="font-weight:600">${we.conclusion || ''}</div>
+        <div class="predict-reveal hidden" id="predict-reveal-2">
+          <div class="card" style="margin-top:12px;border:2px solid var(--success)">
+            <div class="card-label" style="color:var(--success)">✅ Answer: ${answerLabel}</div>
+            <div class="teach-step-text" style="font-weight:600">${we.teachingNote || ''}</div>
+          </div>
+          ${teachNote !== '' ? '' /* already shown above */ : ''}
+        </div>
+      </div>`;
+
+  // ── STANDARD FORMAT (AI-generated examples — steps[]/conclusion/insight) ──
+  } else {
+    document.getElementById('teach-steps-container').innerHTML = `
+      <div class="predict-block" id="predict-0">
+        <div class="predict-prompt">What part of the passage is relevant here?</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-0">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 1</div>
+            <div class="teach-step-text">${(we.steps || [])[0] || ''}</div>
+          </div>
         </div>
       </div>
-    </div>`;
+      <div class="predict-block hidden" id="predict-1">
+        <div class="predict-prompt">What is this statement actually claiming?</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Reveal <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-1">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 2</div>
+            <div class="teach-step-text">${(we.steps || [])[1] || ''}</div>
+          </div>
+        </div>
+      </div>
+      <div class="predict-block hidden" id="predict-2">
+        <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
+        <div class="step3-choices mt8">
+          <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
+          <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
+          <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
+        </div>
+        <div class="predict-reveal hidden" id="predict-reveal-2">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 3</div>
+            <div class="teach-step-text">${(we.steps || [])[2] || ''}</div>
+          </div>
+          <div class="card" style="margin-top:8px;border:2px solid var(--success)">
+            <div class="card-label" style="color:var(--success)">✅ Answer</div>
+            <div class="teach-step-text" style="font-weight:600">${we.conclusion || ''}</div>
+          </div>
+        </div>
+      </div>`;
+  }
 
   document.getElementById('teach-reinforce').classList.add('hidden');
   document.getElementById('teach-confidence').classList.add('hidden');
@@ -1493,9 +1605,10 @@ window.teachPickStep3 = function (choice, correct) {
     if (b.dataset.choice === choice && choice !== correct) b.classList.add('step3-wrong');
   });
   document.getElementById('predict-reveal-2').classList.remove('hidden');
-  // Show per-example insight
+  // Show per-example insight (AI format uses .insight; hardcoded format uses .teachingNote)
   const examples = teachData.workedExamples || [];
-  const insight = examples[workedExIdx]?.insight || '';
+  const we2   = examples[workedExIdx] || {};
+  const insight = we2.insight || (we2.explanation ? '' : ''); // rich format inlines note in reveal-2
   if (insight) {
     document.getElementById('teach-ex-insight-text').textContent = insight;
     document.getElementById('teach-ex-insight').classList.remove('hidden');
