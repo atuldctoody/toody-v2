@@ -1,17 +1,19 @@
 {
-  "timestamp": "2026-03-30T15:36:40.832Z",
+  "timestamp": "2026-03-30T18:30:43.272Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 1.7 between Band 6 (2.6) and Band 5 (4.3) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 29548,
+  "durationMs": 51474,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 26928,
+      "durationMs": 51470,
       "steps": {
         "generation": {
           "pass": true,
@@ -20,12 +22,12 @@
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 3,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4.3,
           "error": null
         },
         "audio": {
@@ -42,21 +44,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 25163,
+      "durationMs": 51031,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Technology in Education",
+          "topic": "Urban Heat Islands",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.4,
+          "avgScore": 2.6,
           "error": null
         },
         "audio": {
@@ -73,11 +75,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 29525,
+      "durationMs": 46461,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Cognitive Psychology and Learning",
           "error": null
         },
         "verification": {
@@ -87,7 +89,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.6,
+          "avgScore": 4.3,
           "error": null
         },
         "audio": {
