@@ -1,30 +1,30 @@
 {
-  "timestamp": "2026-03-29T10:27:49.828Z",
+  "timestamp": "2026-03-30T10:20:47.649Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "overallPass": true,
-  "durationMs": 22731,
+  "durationMs": 23205,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22214,
+      "durationMs": 19952,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Biodiversity Decline",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {
@@ -41,11 +41,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 22690,
+      "durationMs": 23184,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Multitasking in Learning",
+          "topic": "Climate Change Impact",
           "error": null
         },
         "verification": {
@@ -55,7 +55,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.1,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {
@@ -72,11 +72,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 21869,
+      "durationMs": 23183,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy",
+          "topic": "neuroplasticity and cognition",
           "error": null
         },
         "verification": {
@@ -86,7 +86,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.7,
+          "avgScore": 4.3,
           "error": null
         },
         "audio": {
