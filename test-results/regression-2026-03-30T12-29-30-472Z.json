@@ -1,31 +1,33 @@
 {
-  "timestamp": "2026-03-30T12:16:34.042Z",
+  "timestamp": "2026-03-30T12:29:30.472Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 1.5 between Band 6 (2.9) and Band 7 (4.4) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 29808,
+  "durationMs": 22593,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 27236,
+      "durationMs": 22389,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Animal Behavior Research",
+          "topic": "climate change and polar bears",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.9,
+          "avgScore": 4,
           "error": null
         },
         "audio": {
@@ -42,21 +44,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 29780,
+      "durationMs": 22468,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Society",
+          "topic": "Urban Ecology and Well-being",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 2.9,
           "error": null
         },
         "audio": {
@@ -73,21 +75,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 25267,
+      "durationMs": 22557,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Research",
+          "topic": "Renewable Energy Advancements",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {
