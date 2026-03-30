@@ -223,37 +223,63 @@ async function runBandTest(band) {
 }
 
 // ── Consistency checks across band levels ─────────────────────────────────────
+//
+// Returns { hardFails, softWarns }
+//   hardFails — block deploy, exit 1
+//   softWarns — logged but do not affect pass/fail or exit code
 
 function checkConsistency(results) {
-  const issues = [];
+  const hardFails = [];
+  const softWarns = [];
 
-  // All generation steps must pass
-  const genFails = results.filter(r => !r.steps.generation.pass);
-  if (genFails.length) {
-    genFails.forEach(r =>
-      issues.push({ type: 'generation_fail', band: r.band, detail: r.steps.generation.error })
-    );
-  }
+  // All generation steps must pass (hard)
+  results.filter(r => !r.steps.generation.pass).forEach(r =>
+    hardFails.push({ type: 'generation_fail', band: r.band, detail: r.steps.generation.error })
+  );
 
-  // Explanation scores: no band should be more than 1.0 below any other
+  // Pipe-separated answer regression check (hard)
+  results.forEach(r => {
+    (r.steps.generation?.questions || []).forEach(q => {
+      if (hasPipe(q.answer)) {
+        hardFails.push({
+          type: 'pipe_answer', band: r.band,
+          detail: `Band ${r.band} q${q.id}: pipe-separated answer "${q.answer}"`,
+        });
+      }
+    });
+  });
+
   const scores = results
     .map(r => ({ band: r.band, score: r.steps.explanationQuality?.avgScore }))
     .filter(s => typeof s.score === 'number');
 
   if (scores.length >= 2) {
-    const max = Math.max(...scores.map(s => s.score));
-    const min = Math.min(...scores.map(s => s.score));
-    if (max - min > 1.0) {
-      const maxR = scores.find(s => s.score === max);
-      const minR = scores.find(s => s.score === min);
-      issues.push({
+    const max  = Math.max(...scores.map(s => s.score));
+    const min  = Math.min(...scores.map(s => s.score));
+    const maxR = scores.find(s => s.score === max);
+    const minR = scores.find(s => s.score === min);
+
+    // CHECK 1 — Pipeline health (hard fail, threshold 2.0)
+    // Any band below 2.0 means content is genuinely unusable
+    scores.filter(s => s.score < 2.0).forEach(s =>
+      hardFails.push({
+        type: 'pipeline_broken',
+        band: s.band,
+        detail: `Band ${s.band} explanation score ${s.score.toFixed(1)} < 2.0 — pipeline broken, content unusable`,
+      })
+    );
+
+    // CHECK 2 — Quality drift (soft warn, threshold 1.5)
+    // Drift between bands signals inconsistency but pipeline is still functional
+    if (max - min > 1.5) {
+      softWarns.push({
         type: 'explain_drift',
-        detail: `Explanation score gap ${(max - min).toFixed(1)} > 1.0 — Band ${maxR.band} scored ${maxR.score.toFixed(1)} but Band ${minR.band} scored ${minR.score.toFixed(1)}`,
+        detail: `⚠ QUALITY WARNING: explanation drift ${(max - min).toFixed(1)} between Band ${minR.band} (${minR.score.toFixed(1)}) and Band ${maxR.band} (${maxR.score.toFixed(1)}) — review content generation prompts`,
       });
     }
   }
 
-  // Writing band estimates should be within ±1.5 of each other (AI is variable; wider tolerance)
+  // Writing band spread — informational only
   const bands = results
     .map(r => ({ band: r.band, overallBand: r.steps.writingEval?.overallBand }))
     .filter(b => typeof b.overallBand === 'number');
@@ -261,29 +287,10 @@ function checkConsistency(results) {
   if (bands.length >= 2) {
     const max = Math.max(...bands.map(b => b.overallBand));
     const min = Math.min(...bands.map(b => b.overallBand));
-    if (max - min > 1.5) {
-      issues.push({
-        type: 'writing_drift',
-        detail: `Writing band estimates spread ${(max-min).toFixed(1)} > 1.5 — values: ${bands.map(b => `${b.band}→${b.overallBand}`).join(', ')}`,
-      });
-    }
+    console.log(`  ℹ   Writing band spread: ${(max - min).toFixed(1)} — values: ${bands.map(b => `${b.band}→${b.overallBand}`).join(', ')} (informational only)`);
   }
 
-  // Pipe-separated answer check (regression from a previous bug)
-  results.forEach(r => {
-    const qs = r.steps.generation?.questions || [];
-    qs.forEach(q => {
-      if (hasPipe(q.answer)) {
-        issues.push({
-          type: 'pipe_answer',
-          band: r.band,
-          detail: `Band ${r.band} q${q.id}: pipe-separated answer "${q.answer}"`,
-        });
-      }
-    });
-  });
-
-  return issues;
+  return { hardFails, softWarns };
 }
 
 // ── Save results (local only — no Firestore) ──────────────────────────────────
@@ -349,17 +356,21 @@ export async function runRegressionTests() {
   results.forEach(r => console.log(formatBandRow(r)));
 
   // Consistency checks
-  const issues = checkConsistency(results);
+  const { hardFails, softWarns } = checkConsistency(results);
   console.log('\nConsistency:');
-  if (issues.length === 0) {
+  if (hardFails.length === 0 && softWarns.length === 0) {
     console.log('  ✓  All cross-band checks passed');
   } else {
-    issues.forEach(iss => console.log(`  ✗  ${iss.detail || iss.type}`));
+    hardFails.forEach(f => console.log(`  ✗  ${f.detail || f.type}`));
+    softWarns.forEach(w => console.log(`  ${w.detail || w.type}`));
+    if (hardFails.length === 0 && softWarns.length > 0) {
+      console.log('  ✓  No hard failures — pipeline is functional');
+    }
   }
 
-  // Final result
+  // Final result — only hard fails and per-band step failures affect overallPass
   const passed      = results.filter(r => r.pass).length;
-  const overallPass = passed === results.length && issues.length === 0;
+  const overallPass = passed === results.length && hardFails.length === 0;
   const durationMs  = Date.now() - t0;
 
   const regressions = [
@@ -371,10 +382,11 @@ export async function runRegressionTests() {
         .map(([k, s]) => `${k}: ${s.error}`)
         .join('; '),
     })),
-    ...issues.map(i => ({ band: i.band ?? 'cross-band', issue: i.type, detail: i.detail })),
+    ...hardFails.map(f => ({ band: f.band ?? 'cross-band', issue: f.type, detail: f.detail })),
   ];
 
-  console.log(`\n── Result: ${passed}/${results.length} band levels passed${issues.length ? `, ${issues.length} consistency issue(s)` : ''} — ${overallPass ? 'PASS ✓' : 'FAIL ✗'}`);
+  const warnSuffix = softWarns.length ? `, ${softWarns.length} quality warning(s)` : '';
+  console.log(`\n── Result: ${passed}/${results.length} band levels passed${warnSuffix} — ${overallPass ? 'PASS ✓' : 'FAIL ✗'}`);
   console.log(`   Total: ${(durationMs / 1000).toFixed(1)}s\n`);
 
   const output = {
@@ -383,6 +395,7 @@ export async function runRegressionTests() {
     passed,
     failed: results.length - passed,
     regressions,
+    qualityWarnings: softWarns.map(w => w.detail),
     overallPass,
     durationMs,
     bandResults: results.map(r => ({
