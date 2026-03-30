@@ -644,10 +644,7 @@
     <button class="btn-secondary mt10" style="width:100%;font-size:13px" onclick="window.goToMockHistory()">View Mock History</button>
   </div>
 
-  <!-- DEV ONLY — hidden reset button, revealed by 3s long-press on logo -->
-  <div style="text-align:center;padding:24px 0 8px">
-    <button id="dev-reset-btn" data-hidden="true" onclick="window.devResetAccount()" style="display:none;font-size:12px;font-weight:600;color:#c0392b;background:#fff0ee;border:1.5px solid #c0392b;border-radius:6px;padding:6px 14px;cursor:pointer">⚠ Reset account (dev)</button>
-  </div>
+  <!-- DEV ONLY — placeholder kept for layout; actual dev panel is the global overlay below -->
 </div>
 
 <!-- ══════════════════════ SESSION INTRO ══════════════════════ -->
@@ -1403,6 +1400,48 @@
       <div id="mock-history-list" class="mock-history-list"><!-- Rendered by JS --></div>
     </div>
   </div>
+
+<!-- ══════════════════════ DEV PANEL OVERLAY ══════════════════════ -->
+<!-- Revealed by 3-second long-press on any screen logo.             -->
+<div id="dev-panel-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999990;overflow-y:auto;padding:32px 16px 48px">
+  <div style="max-width:420px;margin:0 auto;background:#fff;border-radius:16px;padding:24px;position:relative">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="background:#6557D4;color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:3px 8px;border-radius:4px">DEV</span>
+        <span style="font-size:16px;font-weight:700;color:#1A1A2E">Developer Panel</span>
+      </div>
+      <button onclick="window.closeDevPanel()" style="background:none;border:none;font-size:22px;color:#888;cursor:pointer;line-height:1">×</button>
+    </div>
+
+    <!-- Section 1: Jump to Screen -->
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;color:#6557D4;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Jump to Screen</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button class="dev-jump-btn" onclick="window.devJumpTo('reading')">📖 Reading</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('listening')">🎧 Listening</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('writing')">✍️ Writing</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('speaking')">🎤 Speaking</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('teachfirst')">🧠 Teach-First</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('notebook')">📓 Notebook</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('mock')">🏁 Mock Test</button>
+        <button class="dev-jump-btn" onclick="window.devJumpTo('ieltsmodal')">ℹ️ IELTS Modal</button>
+        <button class="dev-jump-btn" style="grid-column:span 2" onclick="window.devJumpTo('briefing')">📋 Briefing Cards</button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr style="border:none;border-top:1px solid #E0DFF0;margin:0 0 20px">
+
+    <!-- Section 2: Reset -->
+    <div>
+      <div style="font-size:11px;font-weight:700;color:#c0392b;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px">Reset</div>
+      <button onclick="window.devResetAccount()" style="width:100%;padding:12px;background:#fff0ee;border:1.5px solid #c0392b;border-radius:8px;color:#c0392b;font-size:14px;font-weight:600;cursor:pointer">⚠ Full Reset — clears Firestore &amp; signs out</button>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>

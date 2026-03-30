@@ -1383,3 +1383,8 @@ a { color: inherit; text-decoration: none; }
 .spb-body  { display: flex; flex-direction: column; gap: 2px; flex: 1; }
 .spb-label { font-size: 13px; font-weight: 600; color: var(--text); }
 .spb-acc   { font-size: 11px; color: var(--muted); }
+
+
+/* ── DEV PANEL JUMP BUTTONS ── */
+.dev-jump-btn { padding: 10px 8px; background: #F4F4F9; border: 1px solid #E0DFF0; border-radius: 8px; font-size: 13px; font-weight: 500; color: #1A1A2E; cursor: pointer; text-align: center; }
+.dev-jump-btn:active { background: #E8E6F8; }

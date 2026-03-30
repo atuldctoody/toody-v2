@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-03-30T15:24:49.101Z",
+  "timestamp": "2026-03-30T15:36:40.832Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.6 between Band 7 (3.2) and Band 5 (4.8) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 25252,
+  "durationMs": 29548,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24939,
+      "durationMs": 26928,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Biodiversity and Conservation",
+          "topic": "Renewable Energy",
           "error": null
         },
         "verification": {
@@ -27,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -44,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 25215,
+      "durationMs": 25163,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Migration Patterns",
+          "topic": "Technology in Education",
           "error": null
         },
         "verification": {
@@ -58,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.1,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {
@@ -75,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 21977,
+      "durationMs": 29525,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy Trends",
+          "topic": "Climate Change Impact",
           "error": null
         },
         "verification": {
@@ -89,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.2,
+          "avgScore": 4.6,
           "error": null
         },
         "audio": {

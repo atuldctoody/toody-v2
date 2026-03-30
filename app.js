@@ -4894,22 +4894,12 @@ function _attachLongPress(el, ms, cb) {
 }
 
 function initDevTools() {
-  function toggleDevReset() {
-    console.log('logo long press detected');
-    console.log('3s complete - attempting to show reset button');
-    const devBtn = document.getElementById('dev-reset-btn');
-    console.log('dev-reset-btn found:', devBtn);
-    if (devBtn) {
-      devBtn.style.cssText = 'display:block !important; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#c0392b; color:white; padding:12px 24px; z-index:99999; border:none; border-radius:8px; font-size:14px; font-weight:bold;';
-      console.log('button forced visible');
-    } else {
-      console.log('ERROR: dev-reset-btn not found in DOM');
-    }
-  }
-
-  // Logo long-press on every screen → reveal the reset button
+  // Logo long-press on every screen → open the dev panel
   document.querySelectorAll('.dev-logo-trigger').forEach(el => {
-    _attachLongPress(el, 3000, () => { toggleDevReset(); });
+    _attachLongPress(el, 3000, () => {
+      const panel = document.getElementById('dev-panel-overlay');
+      if (panel) panel.style.display = 'block';
+    });
   });
 
   // Streak long-press → skip onboarding/briefing and jump straight to home
@@ -4919,6 +4909,59 @@ function initDevTools() {
     goTo('s-home');
   });
 }
+
+window.closeDevPanel = function () {
+  const panel = document.getElementById('dev-panel-overlay');
+  if (panel) panel.style.display = 'none';
+};
+
+window.devJumpTo = function (target) {
+  window.closeDevPanel();
+  sessionStorage.setItem('devMode', 'true');
+
+  // Ensure a default plan is set so load functions have a valid currentPlan
+  if (!currentPlan) currentPlan = SKILL_MAP['reading.tfng'] || SKILL_CATALOGUE[0];
+
+  switch (target) {
+    case 'reading':
+      currentPlan = { ...SKILL_MAP['reading.tfng'], reason: 'Dev jump' };
+      loadReadingSession();
+      break;
+    case 'listening':
+      currentPlan = { ...SKILL_MAP['listening.multipleChoice'], reason: 'Dev jump' };
+      loadListeningSession();
+      break;
+    case 'writing':
+      currentPlan = { ...SKILL_MAP['writing.task2'], reason: 'Dev jump' };
+      loadWritingSession();
+      break;
+    case 'speaking':
+      currentPlan = { ...SKILL_MAP['speaking.part1'], reason: 'Dev jump' };
+      loadSpeakingSession();
+      break;
+    case 'teachfirst':
+      loadTeachFirst('reading.tfng');
+      break;
+    case 'notebook':
+      renderNotebook(3, 5, 'reading.tfng');
+      goTo('s-notebook');
+      break;
+    case 'mock':
+      setupMiniMock();
+      goTo('s-minimock');
+      break;
+    case 'ieltsmodal': {
+      // Bypass show-once guards for dev inspection
+      _ieltsModalShownThisSession = false;
+      localStorage.removeItem('hasSeenIELTSOverview');
+      showIELTSModal();
+      break;
+    }
+    case 'briefing':
+      initBriefing();
+      break;
+  }
+};
 
 window.devResetAccount = async function () {
   if (!confirm('Reset account? This deletes all Firestore data and signs out.')) return;
