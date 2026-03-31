@@ -1679,6 +1679,36 @@ Return ONLY this JSON:
       teachData.workedExamples = TFNG_WORKED_EXAMPLES;
     }
 
+    // Verify drill + confidence questions for skills with T/F/NG or Y/N/NG answers.
+    // Each question has its own embedded passage, so we verify one at a time in parallel.
+    // Non-fatal: if verification fails the original AI-generated question is used.
+    if (cfg.answerButtons.includes('Not Given')) {
+      try {
+        const { verifyAnswers } = await import('./api/verify-answers.js');
+        // Adapt a single teach question to verifyAnswers input/output shape
+        const verifyTeachQ = async (q, idx) => {
+          const result = await verifyAnswers(
+            q.passage,
+            [{ id: idx + 1, text: q.statement, answer: q.answer, explanation: q.explanation }],
+            API_URL
+          );
+          const vq = result.questions?.[0];
+          return vq ? { ...q, answer: vq.answer, explanation: vq.explanation } : q;
+        };
+
+        const drillQs = teachData.drillQuestions       || [];
+        const confQs  = teachData.confidenceQuestions  || [];
+
+        const [verifiedDrill, verifiedConf] = await Promise.all([
+          Promise.all(drillQs.map((q, i) => verifyTeachQ(q, i).catch(() => q))),
+          Promise.all(confQs.map( (q, i) => verifyTeachQ(q, i).catch(() => q))),
+        ]);
+
+        if (verifiedDrill.length) teachData.drillQuestions      = verifiedDrill;
+        if (verifiedConf.length)  teachData.confidenceQuestions = verifiedConf;
+      } catch { /* non-fatal — original questions used */ }
+    }
+
     // Render concept bullets
     const bullets = Array.isArray(teachData.concept)
       ? teachData.concept
