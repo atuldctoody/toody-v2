@@ -62,6 +62,8 @@ TRUE: The passage explicitly and directly confirms the statement. The exact clai
 FALSE: The passage explicitly and directly contradicts the statement. The passage must actively say the opposite — not just fail to confirm it.
 NOT GIVEN: The passage does not address the specific claim. Silence is not contradiction.
 
+Cautious language means words that show the passage is not certain — like may, might, suggests, could, appears to, is thought to. When a passage uses cautious language, it is not stating a fact. Cautious language = the passage is leaving the door open. Not confirming and not contradicting = Not Given.
+
 The Golden Rule: FALSE = the text says the opposite. NOT GIVEN = the text is missing a piece of the puzzle.
 
 Named traps — you must recognise all of these and never generate questions that violate them:
@@ -240,5 +242,5 @@ STUDENT BRAIN CONTEXT
 
 ${studentContext}
 
-This is replaced at runtime by buildContextSnippet(). Every piece of content must be personalised to this student's specific error patterns, band level, and learning history. A student with hedgingMissed: 3 must see passages with hedging language. A student with inferenceError: 4 must see questions targeting causal assumptions. Generic content that ignores the studentBrain is a session failure.`;
+This is replaced at runtime by buildContextSnippet(). Every piece of content must be personalised to this student's specific error patterns, band level, and learning history. A student with cautiousLanguageMissed: 3 must see passages with cautious language. A student with inferenceError: 4 must see questions targeting causal assumptions. Generic content that ignores the studentBrain is a session failure.`;
 }

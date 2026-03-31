@@ -78,7 +78,7 @@ export async function verifyAnswers(passage, questions, apiUrl) {
     .map(q => `ID ${q.id}: Statement: "${q.text}" | Stated answer: "${q.answer}"`)
     .join('\n');
 
-  const userMsg = `Passage:\n${passage}\n\nQuestions to verify:\n${questionList}\n\nFor each question, independently determine the correct answer from the passage, then compare it to the stated answer. If they differ, set correctionNeeded to true and explain which specific rule was violated.\n\nReturn ONLY this JSON (no markdown, no preamble):\n{"questions":[{"id":1,"originalAnswer":"True","verifiedAnswer":"True","correctionNeeded":false,"correctionReason":""},{"id":2,"originalAnswer":"True","verifiedAnswer":"NG","correctionNeeded":true,"correctionReason":"The passage uses 'may suggest' — hedging language that does not explicitly confirm the statement, making it Not Given not True"}]}`;
+  const userMsg = `Passage:\n${passage}\n\nQuestions to verify:\n${questionList}\n\nFor each question, independently determine the correct answer from the passage, then compare it to the stated answer. If they differ, set correctionNeeded to true and explain which specific rule was violated.\n\nReturn ONLY this JSON (no markdown, no preamble):\n{"questions":[{"id":1,"originalAnswer":"True","verifiedAnswer":"True","correctionNeeded":false,"correctionReason":""},{"id":2,"originalAnswer":"True","verifiedAnswer":"NG","correctionNeeded":true,"correctionReason":"The passage uses 'may suggest' — cautious language that does not explicitly confirm the statement, making it Not Given not True"}]}`;
 
   try {
     const res = await fetch(apiUrl, {

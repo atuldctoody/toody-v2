@@ -42,7 +42,7 @@ const HOOK_TRAP = {
   answer: 'NG',
   explanation: 'The passage confirms pollution has decreased in major cities — but it says nothing about mental health. The statement introduces a new claim the passage never addresses. This is Not Given: the passage is simply silent on this point.',
   keySentence: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade.',
-  insight: "This is the Hedging Trap. The passage uses the word 'suggest' — not 'proves' or 'confirms.' When a passage hedges with words like suggest, may, could, or appears to, it is NOT confirming the statement as true. But it is also not contradicting it. The passage is simply uncertain. Uncertain = Not Given, not False. False means the passage says the opposite. This passage never says the opposite — it just hedges.",
+  insight: "This is the Cautious Language Trap. The passage uses the word 'suggest' — not 'proves' or 'confirms.' When a passage uses cautious language — words like suggest, may, could, or appears to — it is NOT confirming the statement as true. But it is also not contradicting it. The passage is simply uncertain. Uncertain = Not Given, not False. False means the passage says the opposite. This passage never says the opposite — it uses cautious language.",
 };
 
 // Hardcoded expert-verified T/F/NG worked examples.
@@ -117,7 +117,7 @@ const SKILL_MANIFEST = {
     hookStyle:        'tfng',
     workedExamples:   'hardcoded',
     conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`,
-    conceptPromptHint: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). Explanation bullets only — no illustrative examples embedded in the bullets. Use ** around 1-2 key words per bullet. CRITICAL: If any example appears it must follow these rules — a passage that uses reporting verbs to present a debate (argue, believe, suggest, contend) is NOT stating a fact: that answer is Not Given not False. A passage using hedging language (may, suggests, could, appears to) is NOT confirming a statement: that answer is Not Given not True. Only mark False when the passage explicitly states the opposite as fact.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). Explanation bullets only — no illustrative examples embedded in the bullets. Use ** around 1-2 key words per bullet. CRITICAL: If any example appears it must follow these rules — a passage that uses reporting verbs to present a debate (argue, believe, suggest, contend) is NOT stating a fact: that answer is Not Given not False. A passage using cautious language (may, suggests, could, appears to) is NOT confirming a statement: that answer is Not Given not True. Only mark False when the passage explicitly states the opposite as fact.`,
     hookPromptHint:   'a testable claim that looks True but is actually Not Given',
     prerequisite:     null,
     accuracyGate:     null,
@@ -1647,10 +1647,10 @@ Return ONLY this JSON:
 {
   "concept": ${conceptPromptDetail},${isTFNG ? `
   "conceptExamples": [
-    INSTRUCTION — these three examples must be completely unambiguous. A trained IELTS examiner would agree on every answer 100% of the time with zero debate. DO NOT use: hedged language (may, might, could, suggests), reported opinions (experts argue, some believe), or partial scope (some, most) in these examples — those belong in advanced trap examples, not foundational concept teaching.
-    {"passage": "2 academic sentences that explicitly and directly state a single clear fact — plain declarative language, no hedging words, no reporting verbs, stated as established knowledge", "statement": "a claim that uses the same or directly synonymous language to match the fact stated in the passage", "answer": "True", "explanation": "one sentence: passage explicitly states this — same meaning confirmed with no hedging"},
-    {"passage": "2 academic sentences that explicitly state the direct opposite of the statement as an established fact — a plain factual assertion, not a reported opinion, not hedged — the passage and statement directly contradict each other", "statement": "a claim that directly contradicts the fact stated in the passage", "answer": "False", "explanation": "one sentence: passage explicitly states the opposite as fact — direct unambiguous contradiction"},
-    {"passage": "2 academic sentences on a topic — the passage discusses the topic but never mentions the specific aspect in the statement at all — completely absent, not hedged, not reported opinion, simply not there", "statement": "a claim about a specific aspect that the passage never addresses at all", "answer": "NG", "explanation": "one sentence: the passage is completely silent on this specific claim — it never mentions it"}
+    INSTRUCTION — these three examples must be completely unambiguous. A trained IELTS examiner would agree on every answer 100% of the time with zero debate. DO NOT use: cautious language (may, might, could, suggests), reported opinions (experts argue, some believe), or partial scope (some, most) in these examples — those belong in advanced trap examples, not foundational concept teaching.
+    {"passage": "2 academic sentences that explicitly and directly state a single clear fact — plain declarative language, no cautious words, no reporting verbs, stated as established knowledge", "statement": "a claim that uses the same or directly synonymous language to match the fact stated in the passage", "answer": "True", "explanation": "one sentence: passage explicitly states this — same meaning confirmed with no cautious language"},
+    {"passage": "2 academic sentences that explicitly state the direct opposite of the statement as an established fact — a plain factual assertion, not a reported opinion, no cautious language — the passage and statement directly contradict each other", "statement": "a claim that directly contradicts the fact stated in the passage", "answer": "False", "explanation": "one sentence: passage explicitly states the opposite as fact — direct unambiguous contradiction"},
+    {"passage": "2 academic sentences on a topic — the passage discusses the topic but never mentions the specific aspect in the statement at all — completely absent, no cautious language, not reported opinion, simply not there", "statement": "a claim about a specific aspect that the passage never addresses at all", "answer": "NG", "explanation": "one sentence: the passage is completely silent on this specific claim — it never mentions it"}
   ],` : ''}
   "hookQuestion": {
     "passage": "${hookPassageDesc}",
@@ -2554,7 +2554,7 @@ ANSWER FORMAT RULES (mandatory):
 
 For each question, set "errorReason" to the reasoning trap this question is specifically designed to test. Valid values:
 - "synonymTrap" — statement paraphrases passage with near-synonym; student reads meaning not exact evidence
-- "hedgingMissed" — answer hinges on hedging language in passage (may, suggests, could, tends to)
+- "cautiousLanguageMissed" — answer hinges on cautious language in passage (may, suggests, could, tends to)
 - "negationOverlooked" — answer hinges on a negation in passage or statement (not, never, rarely, without)
 - "scopeError" — statement claims more or less than passage actually states (all vs some, always vs usually)
 - "notGivenMarkedFalse" — passage is silent on claim; designed to catch students who mark silence as contradiction
@@ -2573,7 +2573,7 @@ Return ONLY this JSON:
     {"id": 1, "text": "statement", "answer": "True",  "explanation": "name the exact word/phrase that confirms this", "keySentence": "exact sentence from passage", "errorReason": "synonymTrap"},
     {"id": 2, "text": "statement", "answer": "False", "explanation": "name the exact word/phrase that contradicts this", "keySentence": "exact sentence from passage", "errorReason": "negationOverlooked"},
     {"id": 3, "text": "statement", "answer": "NG",    "explanation": "name what the passage says and what it does NOT say", "keySentence": "exact sentence from passage", "errorReason": "notGivenMarkedFalse"},
-    {"id": 4, "text": "statement", "answer": "True",  "explanation": "name the exact word/phrase that confirms this", "keySentence": "exact sentence from passage", "errorReason": "hedgingMissed"},
+    {"id": 4, "text": "statement", "answer": "True",  "explanation": "name the exact word/phrase that confirms this", "keySentence": "exact sentence from passage", "errorReason": "cautiousLanguageMissed"},
     {"id": 5, "text": "statement", "answer": "False", "explanation": "name the exact word/phrase that contradicts this", "keySentence": "exact sentence from passage", "errorReason": "scopeError"}
   ]
 }`
@@ -2778,7 +2778,7 @@ window.answerTFNG = function (qnum, val) {
   } else {
     const ERROR_REASON_PILLS = {
       synonymTrap:         'Synonym trap — passage isn\'t as direct as it looks',
-      hedgingMissed:       'Hedging language — may / suggests / could',
+      cautiousLanguageMissed: 'Cautious language — may / suggests / could',
       negationOverlooked:  'Negation — not / never / rarely',
       scopeError:          'Scope error — all vs some, always vs usually',
       notGivenMarkedFalse: 'Not Given ≠ False — the passage is silent on this',
@@ -2915,7 +2915,7 @@ async function finishReadingSession() {
     if (!isSCSession) {
       const prevER = prevSkill.errorReasons || {};
       const mergedER = {
-        synonymTrap: 0, hedgingMissed: 0, negationOverlooked: 0,
+        synonymTrap: 0, cautiousLanguageMissed: 0, negationOverlooked: 0,
         scopeError: 0, notGivenMarkedFalse: 0, other: 0,
         ...prevER,
       };
@@ -4504,7 +4504,7 @@ function buildContextSnippet() {
   // Error reason analysis for reading-tfng
   const ERROR_REASON_LABELS = {
     synonymTrap:         'reads meaning not exact words (synonym trap)',
-    hedgingMissed:       'misses hedging language — may/suggests/could',
+    cautiousLanguageMissed: 'misses cautious language — may/suggests/could',
     negationOverlooked:  'overlooks negation — not/never/rarely',
     scopeError:          'misreads scope — statement claims more/less than passage states',
     notGivenMarkedFalse: 'marks Not Given as False (most common T/F/NG error)',
@@ -4570,7 +4570,7 @@ function buildContextSnippet() {
   // Specific trap instruction derived from top error pattern
   const errorReasonToInstruction = {
     synonymTrap:         'Use passages where the correct answer requires reading exact words, not paraphrasing. Warn: do not match meaning — match the exact claim.',
-    hedgingMissed:       'Use passages containing hedging language: may, suggests, could, appears to, is thought to. Explain: hedging = Not Given signal.',
+    cautiousLanguageMissed: 'Use passages containing cautious language: may, suggests, could, appears to, is thought to. Explain: cautious language = Not Given signal.',
     negationOverlooked:  'Use passages with negation: not, never, rarely, fails to. Highlight negation words explicitly in explanations.',
     scopeError:          'Use passages where statements overreach passage scope: all vs some, always vs usually. Target absolute qualifiers.',
     notGivenMarkedFalse: 'Apply the Alternative Reality Test in every explanation. Ask: does the passage actively contradict this, or is it simply silent?',
