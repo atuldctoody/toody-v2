@@ -117,7 +117,7 @@ const SKILL_MANIFEST = {
     hookStyle:        'tfng',
     workedExamples:   'hardcoded',
     conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`,
-    conceptPromptHint: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). Explanation bullets only — no illustrative examples embedded in the bullets. Use ** around 1-2 key words per bullet. CRITICAL: If any example appears it must follow these rules — a passage that uses reporting verbs to present a debate (argue, believe, suggest, contend) is NOT stating a fact: that answer is Not Given not False. A passage using hedging language (may, suggests, could, appears to) is NOT confirming a statement: that answer is Not Given not True. Only mark False when the passage explicitly states the opposite as fact.`,
     hookPromptHint:   'a testable claim that looks True but is actually Not Given',
     prerequisite:     null,
     accuracyGate:     null,
@@ -1645,7 +1645,11 @@ async function loadTeachFirst(skillKey) {
 
 Return ONLY this JSON:
 {
-  "concept": ${conceptPromptDetail},
+  "concept": ${conceptPromptDetail},${isTFNG ? `
+  "conceptExamples": [
+    {"passage": "2 academic sentences — must use reporting verbs to present a debate between two expert views (e.g. Some researchers argue X. Others contend Y.)", "statement": "a testable claim asserting one side of the debate as established fact", "answer": "NG", "explanation": "one sentence: passage presents a debate using reporting verbs — neither view is confirmed as fact — Neutral Author Trap"},
+    {"passage": "2 academic sentences — must use explicit unhedged language to state a fact directly with no argue, believe, suggest, may, or could", "statement": "a testable claim that directly and exactly matches the explicit fact in the passage", "answer": "True", "explanation": "one sentence: passage explicitly and directly states the fact with no hedging or reporting verbs"}
+  ],` : ''}
   "hookQuestion": {
     "passage": "${hookPassageDesc}",
     "statement": "${statementDesc}",
@@ -1696,28 +1700,48 @@ Return ONLY this JSON:
           return vq ? { ...q, answer: vq.answer, explanation: vq.explanation } : q;
         };
 
-        const drillQs = teachData.drillQuestions       || [];
-        const confQs  = teachData.confidenceQuestions  || [];
+        const drillQs     = teachData.drillQuestions       || [];
+        const confQs      = teachData.confidenceQuestions  || [];
+        const conceptExQs = teachData.conceptExamples      || [];
 
-        const [verifiedDrill, verifiedConf] = await Promise.all([
-          Promise.all(drillQs.map((q, i) => verifyTeachQ(q, i).catch(() => q))),
-          Promise.all(confQs.map( (q, i) => verifyTeachQ(q, i).catch(() => q))),
+        const [verifiedDrill, verifiedConf, verifiedConceptEx] = await Promise.all([
+          Promise.all(drillQs.map(    (q, i) => verifyTeachQ(q, i).catch(() => q))),
+          Promise.all(confQs.map(     (q, i) => verifyTeachQ(q, i).catch(() => q))),
+          Promise.all(conceptExQs.map((q, i) => verifyTeachQ(q, i).catch(() => q))),
         ]);
 
-        if (verifiedDrill.length) teachData.drillQuestions      = verifiedDrill;
-        if (verifiedConf.length)  teachData.confidenceQuestions = verifiedConf;
+        if (verifiedDrill.length)     teachData.drillQuestions      = verifiedDrill;
+        if (verifiedConf.length)      teachData.confidenceQuestions = verifiedConf;
+        if (verifiedConceptEx.length) teachData.conceptExamples     = verifiedConceptEx;
       } catch { /* non-fatal — original questions used */ }
     }
 
-    // Render concept bullets
+    // Render concept bullets + verified illustrative examples
     const bullets = Array.isArray(teachData.concept)
       ? teachData.concept
       : String(teachData.concept).split('\n').filter(p => p.trim());
     const boldify = s => s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    document.getElementById('teach-concept-body').innerHTML =
-      '<ul class="teach-bullets">' +
+    let conceptHtml = '<ul class="teach-bullets">' +
       bullets.map(b => `<li>${boldify(b.replace(/^[-•]\s*/, ''))}</li>`).join('') +
       '</ul>';
+
+    // Append verified concept examples (structured, verified — not raw AI text)
+    const conceptExamples = teachData.conceptExamples || [];
+    if (conceptExamples.length) {
+      conceptHtml += conceptExamples.map(ex => {
+        const normAns  = normaliseAnswer(ex.answer);
+        const ansLabel = normAns === 'notgiven' ? 'Not Given' : ex.answer;
+        const ansColor = normAns === 'true' ? 'var(--success)' : normAns === 'false' ? 'var(--danger)' : 'var(--accent)';
+        return `<div class="card" style="margin-top:10px;padding:12px 14px;">
+          <div class="card-label" style="color:${ansColor}">Example — answer: ${ansLabel}</div>
+          <div style="font-size:13px;font-style:italic;color:var(--muted);margin:6px 0 4px">${ex.passage}</div>
+          <div style="font-size:13px;margin-bottom:4px">Statement: "${ex.statement}"</div>
+          <div style="font-size:13px;font-weight:600;color:${ansColor}">→ ${ansLabel}. ${ex.explanation}</div>
+        </div>`;
+      }).join('');
+    }
+
+    document.getElementById('teach-concept-body').innerHTML = conceptHtml;
 
     document.getElementById('teach-loading').classList.add('hidden');
     renderHookQuestion();
