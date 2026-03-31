@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-03-31T17:17:44.085Z",
+  "timestamp": "2026-03-31T17:35:45.592Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 26860,
+  "durationMs": 29562,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 25144,
+      "durationMs": 25849,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 25730,
+      "durationMs": 29530,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Memory Systems",
+          "topic": "Impact of Technology",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.4,
+          "avgScore": 4,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 26827,
+      "durationMs": 27916,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Impact of Digital Technology on Learning",
           "error": null
         },
         "verification": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }

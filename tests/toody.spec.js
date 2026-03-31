@@ -574,3 +574,36 @@ test.describe('Test 9 — Button state reset', () => {
     await expect(page.locator('#btn-ready')).not.toBeDisabled();
   });
 });
+
+// ─────────────────────────────────────────────────────────────────
+// TEST 10 — Teach-First skill routing (regression guard)
+// ─────────────────────────────────────────────────────────────────
+test.describe('Test 10 — Teach-First skill routing', () => {
+  test('routes correctly for each skill type', async ({ page }) => {
+    await loadApp(page, teachFirstStudent);
+    await page.evaluate(() => window.goToSession('reading.tfng'));
+    await page.waitForSelector('#s-teach.active', { timeout: 8000 });
+
+    // ── reading.tfng: NG button must be visible ────────────────────
+    await page.waitForSelector('#teach-hook:not(.hidden)', { timeout: 20000 });
+    await expect(page.locator('#teach-hook-btns [data-mv="True"]')).toBeVisible();
+    await expect(page.locator('#teach-hook-btns [data-mv="False"]')).toBeVisible();
+    await expect(page.locator('#teach-hook-btns [data-mv="NG"]')).not.toHaveClass(/hidden/);
+
+    // ── reading.summaryCompletion: button set must be hidden (gapfill) ──
+    await page.evaluate(() => window.loadTeachFirst('reading.summaryCompletion'));
+    await page.waitForSelector('#teach-hook:not(.hidden)', { timeout: 20000 });
+    await expect(page.locator('#teach-hook-btns')).toHaveClass(/hidden/);
+    // Gap-fill statement (the blank sentence) must be present and populated
+    await expect(page.locator('#teach-hook-statement')).toBeVisible();
+    await expect(page.locator('#teach-hook-statement')).not.toBeEmpty();
+
+    // ── reading.matchingHeadings: letter buttons must be present, no NG ──
+    await page.evaluate(() => window.loadTeachFirst('reading.matchingHeadings'));
+    await page.waitForSelector('#teach-hook:not(.hidden)', { timeout: 20000 });
+    await expect(page.locator('#teach-hook-btns [data-mv="A"]')).toBeVisible();
+    await expect(page.locator('#teach-hook-btns [data-mv="B"]')).toBeVisible();
+    await expect(page.locator('#teach-hook-btns [data-mv="C"]')).toBeVisible();
+    await expect(page.locator('#teach-hook-btns [data-mv="NG"]')).toHaveCount(0);
+  });
+});

@@ -224,19 +224,38 @@ function renderHookQuestion() {
   if (!hq) { window.startConceptPhase(); return; }
   document.getElementById('teach-hook-passage').textContent = hq.passage;
   document.getElementById('teach-hook-statement').textContent = hq.statement;
-  const hookCfg = getSkillConfig(toSkillId(teachSkillKey));
-  const ngBtn = document.querySelector('#teach-hook-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', !hookCfg.answerButtons.includes('Not Given'));
+
+  const hookCfg       = getSkillConfig(toSkillId(teachSkillKey));
+  const btnsContainer = document.getElementById('teach-hook-btns');
+
+  if (hookCfg.hookStyle === 'matching') {
+    // Render letter option buttons (A, B, C, D, E) from skill config
+    btnsContainer.innerHTML = hookCfg.answerButtons.map(v =>
+      `<button class="tfng-btn" onclick="window.answerHook('${v}')" data-mv="${v}">${v}</button>`
+    ).join('');
+    btnsContainer.classList.remove('hidden');
+  } else if (hookCfg.hookStyle === 'gapfill') {
+    // No button-click answer for gap-fill; hide the button set
+    btnsContainer.classList.add('hidden');
+  } else {
+    // tfng: ensure True / False / NG buttons are present with correct NG visibility
+    btnsContainer.innerHTML =
+      `<button class="tfng-btn" onclick="window.answerHook('True')"  data-mv="True">✓ True</button>` +
+      `<button class="tfng-btn" onclick="window.answerHook('False')" data-mv="False">✗ False</button>` +
+      `<button class="tfng-btn" onclick="window.answerHook('NG')"    data-mv="NG">? Not Given</button>`;
+    btnsContainer.classList.remove('hidden');
+    const ngBtn = btnsContainer.querySelector('[data-mv="NG"]');
+    if (ngBtn) ngBtn.classList.toggle('hidden', !hookCfg.answerButtons.includes('Not Given'));
+  }
+
   // Reset all buttons to neutral unselected state
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.classList.remove('correct', 'wrong', 'selected');
+    b.disabled = false;
   });
   if (document.activeElement && document.activeElement !== document.body) {
     document.activeElement.blur();
   }
-  document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
-    b.disabled = false;
-  });
   document.getElementById('teach-hook-reveal').classList.add('hidden');
   document.getElementById('teach-hook').classList.remove('hidden');
 }
