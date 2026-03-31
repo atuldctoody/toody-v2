@@ -1,17 +1,19 @@
 {
-  "timestamp": "2026-03-31T12:55:58.521Z",
+  "timestamp": "2026-03-31T13:41:35.552Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 2.1 between Band 7 (2.8) and Band 5 (4.9) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 33733,
+  "durationMs": 31979,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 33725,
+      "durationMs": 30252,
       "steps": {
         "generation": {
           "pass": true,
@@ -25,7 +27,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.4,
+          "avgScore": 4.9,
           "error": null
         },
         "audio": {
@@ -42,21 +44,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 32364,
+      "durationMs": 28075,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces",
+          "topic": "Climate Change Research",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {
@@ -73,21 +75,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 30726,
+      "durationMs": 31917,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces",
+          "topic": "Artificial Intelligence Impact",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.2,
+          "avgScore": 2.8,
           "error": null
         },
         "audio": {
