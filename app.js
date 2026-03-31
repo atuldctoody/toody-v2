@@ -80,7 +80,7 @@ import {
 import {
   loadListeningSession, fetchListeningAudio, setupAudioPlayer,
   updateAudioProgress, showListeningQuestionsGate,
-  submitListening, finishListeningSession,
+  finishListeningSession,
 } from './modules/session-listening.js';
 
 // ── SESSION WRITING ───────────────────────────────────────────────
