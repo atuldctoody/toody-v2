@@ -1,26 +1,26 @@
 {
-  "timestamp": "2026-03-31T07:46:35.226Z",
+  "timestamp": "2026-03-31T09:51:18.897Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 25025,
+  "durationMs": 25727,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22819,
+      "durationMs": 24952,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Impact of Technology on Education",
+          "topic": "Photosynthesis and Its Importance",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 19730,
+      "durationMs": 22222,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impacts",
+          "topic": "Urban Green Spaces and Health",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 5,
+          "avgScore": 4,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 24997,
+      "durationMs": 25699,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Research",
+          "topic": "Environmental Influences on Behavior",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 3,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {
