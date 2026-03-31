@@ -85,7 +85,7 @@ export async function verifyAnswers(passage, questions, apiUrl) {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:       'gpt-4o-mini',
+        model:       'gpt-4o',
         messages:    [
           { role: 'system', content: VERIFY_SYSTEM },
           { role: 'user',   content: userMsg        },

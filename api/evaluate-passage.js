@@ -101,7 +101,7 @@ export async function evaluatePassage(passage, targetBand, apiUrl) {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:       'gpt-4o-mini',
+        model:       'gpt-4o',
         messages:    [
           { role: 'system', content: EVAL_SYSTEM(targetBand) },
           { role: 'user',   content: userPrompt              },
