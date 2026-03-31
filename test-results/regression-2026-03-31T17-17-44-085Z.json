@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-03-31T13:41:35.552Z",
+  "timestamp": "2026-03-31T17:17:44.085Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 2.1 between Band 7 (2.8) and Band 5 (4.9) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 31979,
+  "durationMs": 26860,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 30252,
+      "durationMs": 25144,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
@@ -27,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.9,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -44,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 28075,
+      "durationMs": 25730,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Research",
+          "topic": "Memory Systems",
           "error": null
         },
         "verification": {
@@ -58,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.8,
+          "avgScore": 3.4,
           "error": null
         },
         "audio": {
@@ -75,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 31917,
+      "durationMs": 26827,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Artificial Intelligence Impact",
+          "topic": "Climate Change Impact",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 2.8,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
