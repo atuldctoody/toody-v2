@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-03-31T06:02:01.799Z",
+  "timestamp": "2026-03-31T06:24:59.230Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 28709,
+  "durationMs": 28456,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 25738,
+      "durationMs": 25482,
       "steps": {
         "generation": {
           "pass": true,
@@ -20,12 +20,12 @@
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 2,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.6,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {
@@ -42,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 26105,
+      "durationMs": 23229,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Agriculture",
+          "topic": "Ancient Civilizations",
           "error": null
         },
         "verification": {
@@ -56,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 3.7,
           "error": null
         },
         "audio": {
@@ -73,16 +73,16 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 28666,
+      "durationMs": 28414,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Behavioral Economics",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
