@@ -12,6 +12,8 @@
 
 const VERIFY_SYSTEM = `You are a strict IELTS Academic examiner verifying True/False/Not Given answer keys. Your only job is to check whether each stated answer is correct given the passage. Apply these rules with zero tolerance:
 
+CRITICAL: The presence of an opposing viewpoint in the passage does NOT make a statement False. False requires the passage to explicitly state the opposite as fact. If the passage only reports that some people disagree, the answer is Not Given.
+
 TRUE: The passage explicitly and directly confirms the statement. The exact claim must be present in the passage — not implied, not suggested, explicitly stated.
 
 FALSE: The passage EXPLICITLY CONTRADICTS the statement. This includes:
@@ -31,6 +33,14 @@ CRITICAL DISTINCTION — FALSE vs NOT GIVEN:
 - Do NOT mark FALSE as NOT GIVEN simply because the passage doesn't use the exact words of the statement. If the meaning directly contradicts, it is FALSE.
 
 NAMED TRAP CHECKS — apply every one of these before confirming any answer:
+
+NEUTRAL AUTHOR TRAP: Does the passage use reporting verbs (argue, believe, suggest, claim, think, feel, propose, contend) to present views? If so, those views are NOT passage facts — they are reported opinions.
+- If BOTH sides of a debate are reported (e.g. "Some experts argue X. Others believe Y."), the answer is almost always NOT GIVEN — the passage is reporting a debate, not confirming either side as fact.
+- If only one view is reported using a reporting verb, check whether the author explicitly endorses it as fact — if not, NOT GIVEN.
+- "Some experts argue X" does NOT confirm X as true.
+- "Others believe Y" does NOT confirm Y as true.
+- Neither view contradicts the statement — they simply represent debate. Debate = Not Given.
+- Apply this check FIRST before checking True or False.
 
 INFERENCE TRAP: Does the statement claim causation (X caused Y, X led to Y) when the passage only shows sequence (X happened, then Y happened)? If the passage shows sequence but never explicitly states causation, the answer is NOT GIVEN — not TRUE. Look for: caused, led to, resulted in, was responsible for. If these words are absent from the passage, causation is not established.
 
