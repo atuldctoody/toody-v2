@@ -5450,6 +5450,9 @@ window.devJumpTo = function (target) {
       break;
     }
     case 'briefing':
+      // Clear show-once guards so the "Show me the overview" button works correctly
+      _ieltsModalShownThisSession = false;
+      localStorage.removeItem('hasSeenIELTSOverview');
       initBriefing();
       break;
   }
