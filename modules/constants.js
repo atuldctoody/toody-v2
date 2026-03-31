@@ -20,12 +20,6 @@ export const SKILL_CATALOGUE = [
 // Fast lookup by skill key
 export const SKILL_MAP = Object.fromEntries(SKILL_CATALOGUE.map(s => [s.skill, s]));
 
-// Legacy alias kept for any remaining references
-export const DAY_PLAN = {
-  1: SKILL_CATALOGUE[0], 2: SKILL_CATALOGUE[2], 3: SKILL_CATALOGUE[1],
-  4: SKILL_CATALOGUE[3], 6: SKILL_CATALOGUE[4], 7: SKILL_CATALOGUE[5],
-  8: SKILL_CATALOGUE[6], 9: SKILL_CATALOGUE[0], 10: SKILL_CATALOGUE[0],
-};
 
 // Hook trap question — hardcoded, no instructions, hooks on NG confusion
 export const HOOK_TRAP = {

@@ -7,7 +7,7 @@ import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/f
 // ── CONSTANTS ────────────────────────────────────────────────────
 import {
   API_URL, TRANSCRIBE_URL, AUDIO_URL,
-  SKILL_CATALOGUE, SKILL_MAP, DAY_PLAN,
+  SKILL_CATALOGUE, SKILL_MAP,
   HOOK_TRAP, TFNG_WORKED_EXAMPLES, SKILL_MANIFEST,
 } from './modules/constants.js';
 
