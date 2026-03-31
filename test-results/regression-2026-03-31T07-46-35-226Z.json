@@ -1,31 +1,31 @@
 {
-  "timestamp": "2026-03-31T06:24:59.230Z",
+  "timestamp": "2026-03-31T07:46:35.226Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 28456,
+  "durationMs": 25025,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 25482,
+      "durationMs": 22819,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "Impact of Technology on Education",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 2,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.4,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 23229,
+      "durationMs": 19730,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Ancient Civilizations",
+          "topic": "Climate Change Impacts",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.7,
+          "avgScore": 5,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 28414,
+      "durationMs": 24997,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Climate Change Research",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 3,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.2,
+          "avgScore": 4,
           "error": null
         },
         "audio": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }
