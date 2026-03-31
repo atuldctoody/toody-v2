@@ -1,33 +1,31 @@
 {
-  "timestamp": "2026-03-30T18:30:43.272Z",
+  "timestamp": "2026-03-31T06:02:01.799Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.7 between Band 6 (2.6) and Band 5 (4.3) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 51474,
+  "durationMs": 28709,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 51470,
+      "durationMs": 25738,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 3,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -44,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 51031,
+      "durationMs": 26105,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Heat Islands",
+          "topic": "Climate Change and Agriculture",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 2.6,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -75,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 46461,
+      "durationMs": 28666,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Cognitive Psychology and Learning",
+          "topic": "Behavioral Economics",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.2,
           "error": null
         },
         "audio": {
@@ -98,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
           "error": null
         }
       }
