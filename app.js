@@ -86,6 +86,298 @@ const TFNG_WORKED_EXAMPLES = [
   },
 ];
 
+// ── SKILL MANIFEST — single source of truth for all skill configuration ────
+// Every field that varies per skill lives here. No hardcoded skill comparisons
+// anywhere else in the app. To add a skill: add one entry here.
+//
+// Fields:
+//   id               — hyphen-id used in Firestore and SKILL_MANIFEST keys
+//   catalogueKey     — dot-notation key in SKILL_CATALOGUE/SKILL_MAP, or null if not yet deployed
+//   displayName      — short label shown in UI
+//   section          — 'Reading' | 'Listening' | 'Writing' | 'Speaking'
+//   icon             — emoji
+//   description      — one-line description for the home screen card
+//   answerButtons    — array of answer values (drives button rendering + NG visibility)
+//   hookStyle        — 'tfng'|'ynng'|'gapfill'|'multiplechoice'|'matching'|'shortanswer'|'openended'
+//   workedExamples   — 'hardcoded' | 'ai-generated'
+//   conceptBubble    — HTML string shown in the concept phase header bubble
+//   conceptPromptHint — AI prompt fragment for generating concept bullets
+//   hookPromptHint   — AI prompt fragment for the hook question statement
+//   prerequisite     — skillId that must be mastered before this skill unlocks, or null
+//   accuracyGate     — minimum accuracy % required on prerequisite, or null
+const SKILL_MANIFEST = {
+  'reading-tfng': {
+    id:               'reading-tfng',
+    catalogueKey:     'reading.tfng',
+    displayName:      'True / False / Not Given',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'AI-generated passage + 5 TF/NG questions. Toody explains every answer.',
+    answerButtons:    ['True', 'False', 'Not Given'],
+    hookStyle:        'tfng',
+    workedExamples:   'hardcoded',
+    conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`,
+    hookPromptHint:   'a testable claim that looks True but is actually Not Given',
+    prerequisite:     null,
+    accuracyGate:     null,
+  },
+  'reading-summaryCompletion': {
+    id:               'reading-summaryCompletion',
+    catalogueKey:     'reading.summaryCompletion',
+    displayName:      'Summary Completion',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Complete a gapped summary using a word bank.',
+    answerButtons:    [],
+    hookStyle:        'gapfill',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how Summary Completion works — and why students lose marks.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Summary Completion. Cover: what it tests (locating specific information), the #1 mistake (using wrong word form or changing meaning), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
+    hookPromptHint:   'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)',
+    prerequisite:     'reading-tfng',
+    accuracyGate:     75,
+  },
+  'reading-multipleChoice': {
+    id:               'reading-multipleChoice',
+    catalogueKey:     null,
+    displayName:      'Multiple Choice',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Choose the best answer from four options about a reading passage.',
+    answerButtons:    ['A', 'B', 'C', 'D'],
+    hookStyle:        'multiplechoice',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Reading Multiple Choice works — and how distractors are designed to mislead.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Reading Multiple Choice. Cover: how distractors work (mentioned but not the correct answer), how to check all options carefully, elimination strategy. Use ** around key terms.`,
+    hookPromptHint:   'a multiple choice question where the obvious option is a distractor',
+    prerequisite:     'reading-tfng',
+    accuracyGate:     75,
+  },
+  'reading-matchingHeadings': {
+    id:               'reading-matchingHeadings',
+    catalogueKey:     null,
+    displayName:      'Matching Headings',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Match headings to paragraphs — test main idea recognition.',
+    answerButtons:    ['A', 'B', 'C', 'D', 'E'],
+    hookStyle:        'matching',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how Matching Headings works — and the trap most students fall into.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Matching Headings. Cover: what it tests (main idea of paragraph, not details), the #1 trap (picking heading from a word match not the main idea), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
+    hookPromptHint:   'a testable claim that looks True but is actually False — a detail matches but not the main idea',
+    prerequisite:     'reading-tfng',
+    accuracyGate:     75,
+  },
+  'reading-matchingInformation': {
+    id:               'reading-matchingInformation',
+    catalogueKey:     null,
+    displayName:      'Matching Information',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Find which paragraph contains specific information.',
+    answerButtons:    ['A', 'B', 'C', 'D', 'E'],
+    hookStyle:        'matching',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Matching Information works.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Matching Information. Cover: scanning vs reading, how to match specific details to paragraphs, common mistakes. Use ** around key terms.`,
+    hookPromptHint:   'a matching information question where the detail appears in an unexpected paragraph',
+    prerequisite:     'reading-matchingHeadings',
+    accuracyGate:     75,
+  },
+  'reading-matchingFeatures': {
+    id:               'reading-matchingFeatures',
+    catalogueKey:     null,
+    displayName:      'Matching Features',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Match statements to a list of features — people, dates, or places.',
+    answerButtons:    ['A', 'B', 'C', 'D', 'E'],
+    hookStyle:        'matching',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Matching Features works.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Matching Features. Cover: types of features (names, dates, places), how to scan for specific entities, trap of similar-sounding features. Use ** around key terms.`,
+    hookPromptHint:   'a matching features question where two similar features could both apply',
+    prerequisite:     'reading-matchingHeadings',
+    accuracyGate:     75,
+  },
+  'reading-sentenceCompletion': {
+    id:               'reading-sentenceCompletion',
+    catalogueKey:     null,
+    displayName:      'Sentence Completion',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Complete sentences using words directly from the passage.',
+    answerButtons:    [],
+    hookStyle:        'gapfill',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Sentence Completion works — and the word limit trap.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Sentence Completion. Cover: always using words from the passage (not paraphrases), word limit rules (no more than 3 words), paraphrase detection. Use ** around key terms.`,
+    hookPromptHint:   'a sentence completion gap where using a paraphrase instead of the exact passage word loses the mark',
+    prerequisite:     'reading-summaryCompletion',
+    accuracyGate:     75,
+  },
+  'reading-shortAnswer': {
+    id:               'reading-shortAnswer',
+    catalogueKey:     null,
+    displayName:      'Short Answer',
+    section:          'Reading',
+    icon:             '📖',
+    description:      'Answer questions in three words or fewer from the passage.',
+    answerButtons:    [],
+    hookStyle:        'shortanswer',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Short Answer Questions work — and why students lose easy marks.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Short Answer Questions. Cover: strict word limit (NO MORE THAN 3 WORDS), must use exact words from passage, what happens if you exceed the limit. Use ** around key terms.`,
+    hookPromptHint:   'a short answer question where students exceed the word limit or paraphrase',
+    prerequisite:     'reading-summaryCompletion',
+    accuracyGate:     75,
+  },
+  'reading-yesNoNotGiven': {
+    id:               'reading-yesNoNotGiven',
+    catalogueKey:     null,
+    displayName:      'Yes / No / Not Given',
+    section:          'Reading',
+    icon:             '📖',
+    description:      "Decide if statements agree with the writer's views.",
+    answerButtons:    ['Yes', 'No', 'Not Given'],
+    hookStyle:        'ynng',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you <strong>exactly</strong> how Yes / No / Not Given works — and how it differs from True / False / Not Given.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about Yes/No/Not Given. Cover: YES means the writer agrees, NO means the writer disagrees (not a factual contradiction), Not Given means the writer doesn't address the claim, key difference from TFNG (opinion vs fact). Use ** around 1-2 key words per bullet.`,
+    hookPromptHint:   "a claim about the writer's opinion that looks like Yes but is actually Not Given",
+    prerequisite:     'reading-tfng',
+    accuracyGate:     75,
+  },
+  'listening-multipleChoice': {
+    id:               'listening-multipleChoice',
+    catalogueKey:     'listening.multipleChoice',
+    displayName:      'Multiple Choice',
+    section:          'Listening',
+    icon:             '🎧',
+    description:      'Pick the correct answer from detailed audio scenarios.',
+    answerButtons:    ['A', 'B', 'C'],
+    hookStyle:        'multiplechoice',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Listening Multiple Choice works — and the distractor trap.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Listening Multiple Choice. Cover: how distractors work (mentioned but not the answer), the importance of predicting before listening, and how to eliminate wrong options. Use ** around key terms.`,
+    hookPromptHint:   'a multiple choice question where the obvious answer is a distractor',
+    prerequisite:     null,
+    accuracyGate:     null,
+  },
+  'listening-formCompletion': {
+    id:               'listening-formCompletion',
+    catalogueKey:     'listening.formCompletion',
+    displayName:      'Form Completion',
+    section:          'Listening',
+    icon:             '🎧',
+    description:      'Complete a form from information in the audio.',
+    answerButtons:    [],
+    hookStyle:        'gapfill',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Listening Form Completion works — and how to avoid spelling traps.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Listening Form Completion. Cover: how answers are always spelled out or obvious, the importance of word limits, and common trap categories (numbers, names, spelling). Use ** around key terms.`,
+    hookPromptHint:   'a form completion gap where the word limit is the trap',
+    prerequisite:     'listening-multipleChoice',
+    accuracyGate:     75,
+  },
+  'writing-task1': {
+    id:               'writing-task1',
+    catalogueKey:     'writing.task1',
+    displayName:      'Task 1 — Graph Description',
+    section:          'Writing',
+    icon:             '✍️',
+    description:      'Describe an academic graph or chart in 150+ words.',
+    answerButtons:    [],
+    hookStyle:        'openended',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Writing Task 1 works — and the key features you must cover.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Writing Task 1. Cover: overview first, selecting key features, not describing every data point, avoiding personal opinion. Use ** around key terms.`,
+    hookPromptHint:   'a graph description task with a common mistake in selecting key trends',
+    prerequisite:     null,
+    accuracyGate:     null,
+  },
+  'writing-task2': {
+    id:               'writing-task2',
+    catalogueKey:     'writing.task2',
+    displayName:      'Task 2 — Opinion Essay',
+    section:          'Writing',
+    icon:             '✍️',
+    description:      'Write a 250-word academic opinion essay.',
+    answerButtons:    [],
+    hookStyle:        'openended',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Writing Task 2 works — and what examiners look for.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Writing Task 2. Cover: clear position in the introduction, one idea per paragraph, examples with specific details, not just listing ideas. Use ** around key terms.`,
+    hookPromptHint:   'a Task 2 essay with an unclear or missing position in the introduction',
+    prerequisite:     'writing-task1',
+    accuracyGate:     null,
+  },
+  'speaking-part1': {
+    id:               'speaking-part1',
+    catalogueKey:     'speaking.part1',
+    displayName:      'Part 1 — Personal Questions',
+    section:          'Speaking',
+    icon:             '🎤',
+    description:      'Answer personal questions. Transcribed and evaluated.',
+    answerButtons:    [],
+    hookStyle:        'openended',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Speaking Part 1 works — and what separates Band 6 from Band 7.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Speaking Part 1. Cover: extending answers (not just yes/no), natural language vs scripted phrases, giving examples and reasons. Use ** around key terms.`,
+    hookPromptHint:   'a personal question where students give one-word or one-sentence answers',
+    prerequisite:     null,
+    accuracyGate:     null,
+  },
+  'speaking-part2': {
+    id:               'speaking-part2',
+    catalogueKey:     null,
+    displayName:      'Part 2 — Long Turn',
+    section:          'Speaking',
+    icon:             '🎤',
+    description:      'Speak for 2 minutes on a given topic card.',
+    answerButtons:    [],
+    hookStyle:        'openended',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Speaking Part 2 works — and how to structure your 2-minute talk.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Speaking Part 2. Cover: using the 1-minute preparation time, covering all bullet points on the cue card, signposting your talk, what to do if you run out of things to say. Use ** around key terms.`,
+    hookPromptHint:   'a Part 2 cue card where students forget to cover all bullet points',
+    prerequisite:     'speaking-part1',
+    accuracyGate:     null,
+  },
+  'speaking-part3': {
+    id:               'speaking-part3',
+    catalogueKey:     null,
+    displayName:      'Part 3 — Discussion',
+    section:          'Speaking',
+    icon:             '🎤',
+    description:      'Discuss abstract topics with the examiner.',
+    answerButtons:    [],
+    hookStyle:        'openended',
+    workedExamples:   'ai-generated',
+    conceptBubble:    `Before we start, let me show you how IELTS Speaking Part 3 works — and how to develop abstract ideas coherently.`,
+    conceptPromptHint: `An array of 4-5 short bullet strings about IELTS Speaking Part 3. Cover: giving opinions with reasons, speculating about hypothetical scenarios, showing range of vocabulary and grammar. Use ** around key terms.`,
+    hookPromptHint:   'an abstract discussion question where students give surface-level answers',
+    prerequisite:     'speaking-part2',
+    accuracyGate:     null,
+  },
+};
+
+/**
+ * Returns the SKILL_MANIFEST entry for the given skillId.
+ * Falls back to reading-tfng with a console warning if the id is unknown.
+ */
+function getSkillConfig(skillId) {
+  if (!skillId) return SKILL_MANIFEST['reading-tfng'];
+  const cfg = SKILL_MANIFEST[skillId];
+  if (!cfg) {
+    console.warn(`getSkillConfig: unknown skillId "${skillId}", falling back to reading-tfng`);
+    return SKILL_MANIFEST['reading-tfng'];
+  }
+  return cfg;
+}
+
 // ── STATE ─────────────────────────────────────────────────────────
 let currentUser  = null;
 let studentData  = null;
@@ -192,66 +484,6 @@ function setIELTSSkillLocal(skillId, data) {
   };
 }
 
-// ── TEACHING CONFIG (modular per-skill teaching methodology) ──────
-// To add a new subject: add a top-level key (e.g. 'cambridge-igcse').
-// Core loadTeachFirst() reads from this config — no core code changes needed.
-const TEACHING_CONFIG = {
-  'ielts-academic': {
-    name: 'IELTS Academic',
-    skills: {
-      'reading-tfng': {
-        name:          'True / False / Not Given',
-        section:       'Reading',
-        hasNGButton:   true,
-        answerFormat:  'True|False|NG',
-        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how True / False / Not Given works — and the mistake most students make.`,
-        conceptPrompt: `An array of 4-5 short bullet strings about True/False/Not Given. Cover: True (passage confirms), False (passage contradicts), Not Given (passage is silent — NOT False!), the #1 mistake (confusing False with Not Given). No paragraph text. Use ** around 1-2 key words per bullet.`,
-        hookPromptHint: `a testable claim that looks True but is actually Not Given`,
-        workedExHint:   `True/False/Not Given reasoning`,
-      },
-      'reading-matchingHeadings': {
-        name:          'Matching Headings',
-        section:       'Reading',
-        hasNGButton:   false,
-        answerFormat:  'True|False',
-        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how Matching Headings works — and the trap most students fall into.`,
-        conceptPrompt: `An array of 4-5 short bullet strings about Matching Headings. Cover: what it tests (main idea of paragraph, not details), the #1 trap (picking heading from a word match not the main idea), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
-        hookPromptHint: `a testable claim that looks True but is actually False`,
-        workedExHint:   `Matching Headings reasoning`,
-      },
-      'reading-summaryCompletion': {
-        name:          'Summary Completion',
-        section:       'Reading',
-        hasNGButton:   false,
-        answerFormat:  'True|False',
-        conceptBubble: `Before we start, let me show you <strong>exactly</strong> how Summary Completion works — and why students lose marks.`,
-        conceptPrompt: `An array of 4-5 short bullet strings about Summary Completion. Cover: what it tests (locating specific information), the #1 mistake (using wrong word form or changing meaning), how to avoid it. No paragraph text. Use ** around 1-2 key words per bullet.`,
-        hookPromptHint: `a gap-fill claim where the wrong word form is the trap`,
-        workedExHint:   `Summary Completion reasoning`,
-      },
-      'listening-multipleChoice': {
-        name:          'Multiple Choice',
-        section:       'Listening',
-        hasNGButton:   false,
-        answerFormat:  'A|B|C',
-        conceptBubble: `Before we start, let me show you how IELTS Listening Multiple Choice works — and the distractor trap.`,
-        conceptPrompt: `An array of 4-5 short bullet strings about IELTS Listening Multiple Choice. Cover: how distractors work (mentioned but not the answer), the importance of predicting before listening, and how to eliminate wrong options. Use ** around key terms.`,
-        hookPromptHint: `a multiple choice question where the obvious answer is a distractor`,
-        workedExHint:   `Multiple Choice reasoning`,
-      },
-      'listening-formCompletion': {
-        name:          'Form Completion',
-        section:       'Listening',
-        hasNGButton:   false,
-        answerFormat:  'text',
-        conceptBubble: `Before we start, let me show you how IELTS Listening Form Completion works — and how to avoid spelling traps.`,
-        conceptPrompt: `An array of 4-5 short bullet strings about IELTS Listening Form Completion. Cover: how answers are always spelled out or obvious, the importance of word limits, and common trap categories (numbers, names, spelling). Use ** around key terms.`,
-        hookPromptHint: `a form completion gap where the word limit is the trap`,
-        workedExHint:   `Form Completion reasoning`,
-      },
-    }
-  }
-};
 // Session tip
 let tipNotebookFn     = null;
 
@@ -1122,16 +1354,33 @@ function renderSkillPicker() {
   const el = document.getElementById('home-skill-picker');
   if (!el) return;
   const skills = getIELTSSkills();
-  el.innerHTML = SKILL_CATALOGUE.map(s => {
-    const data = skills[toSkillId(s.skill)] || {};
-    const pct  = data.attempted > 0 ? (data.accuracy ?? data.bandEstimate !== undefined ? Math.round((data.bandEstimate||0)*10) : null) : null;
-    const acc  = data.attempted > 0 ? (data.accuracy !== undefined ? `${data.accuracy}%` : data.bandEstimate !== undefined ? `Band ${data.bandEstimate}` : '—') : 'Not tried';
-    const isActive = currentPlan?.skill === s.skill;
-    return `<button class="skill-pick-btn${isActive ? ' active' : ''}" onclick="window.pickSkill('${s.skill}')">
-      <span class="spb-icon">${s.icon}</span>
+  el.innerHTML = Object.values(SKILL_MANIFEST).map(cfg => {
+    const data      = skills[cfg.id] || {};
+    const acc       = data.attempted > 0
+      ? (data.accuracy !== undefined ? `${data.accuracy}%` : data.bandEstimate !== undefined ? `Band ${data.bandEstimate}` : '—')
+      : 'Not tried';
+    const isActive  = currentPlan?.skill === (cfg.catalogueKey || cfg.id);
+    const isDeployed = cfg.catalogueKey !== null;
+
+    // Lock if not deployed yet, or if first-time and prerequisite not met
+    let isLocked = !isDeployed;
+    if (isDeployed && cfg.prerequisite && cfg.accuracyGate) {
+      const prereqData = skills[cfg.prerequisite] || {};
+      if ((data.attempted || 0) === 0 && (prereqData.accuracy ?? 0) < cfg.accuracyGate) {
+        isLocked = true;
+      }
+    }
+
+    const lockLabel = !isDeployed
+      ? 'Coming soon'
+      : (cfg.prerequisite ? `Complete ${getSkillConfig(cfg.prerequisite).displayName} first` : 'Locked');
+
+    return `<button class="skill-pick-btn${isActive ? ' active' : ''}${isLocked ? ' locked' : ''}"
+      ${isLocked ? 'disabled' : `onclick="window.pickSkill('${cfg.catalogueKey}')"`}>
+      <span class="spb-icon">${cfg.icon}</span>
       <span class="spb-body">
-        <span class="spb-label">${s.label}</span>
-        <span class="spb-acc">${acc}</span>
+        <span class="spb-label">${cfg.displayName}</span>
+        <span class="spb-acc">${isLocked ? lockLabel : acc}</span>
       </span>
     </button>`;
   }).join('');
@@ -1221,6 +1470,18 @@ window.goToSession = function (forceSkillKey) {
 
   // Special plan types
   if (plan.skill === 'minimock') { setupMiniMock(); goTo('s-minimock'); return; }
+
+  // Prerequisite gate — blocks first-time access to locked skills
+  const _skillId = toSkillId(plan.skill || '');
+  const _mEntry  = SKILL_MANIFEST[_skillId];
+  if (_mEntry?.prerequisite && _mEntry?.accuracyGate) {
+    const _thisData  = getIELTSSkills()[_skillId] || {};
+    const _prereqData = getIELTSSkills()[_mEntry.prerequisite] || {};
+    if ((_thisData.attempted || 0) === 0 && (_prereqData.accuracy ?? 0) < _mEntry.accuracyGate) {
+      showToast(`Reach ${_mEntry.accuracyGate}% on ${getSkillConfig(_mEntry.prerequisite).displayName} to unlock this skill.`);
+      return;
+    }
+  }
 
   const isFirstTimeSkill = (getIELTSSkills()[toSkillId(plan.skill)]?.attempted || 0) === 0;
   const teachFirstDone = studentData[`teachFirstDone_${toSkillId(plan.skill)}`] === true;
@@ -1317,12 +1578,12 @@ async function loadTeachFirst(skillKey) {
   goTo('s-teach');
 
   const band = studentData?.targetBand || 6.5;
-  // Look up per-skill config from TEACHING_CONFIG (subject-agnostic)
-  const skillId     = toSkillId(skillKey);
-  const skillCfg    = TEACHING_CONFIG['ielts-academic']?.skills[skillId] || TEACHING_CONFIG['ielts-academic']?.skills['reading-tfng'];
-  const skillLabel  = skillCfg.name;
-  const isMH        = skillId === 'reading-matchingHeadings';
-  const isTFNG      = skillId === 'reading-tfng';
+  // Look up per-skill config from SKILL_MANIFEST
+  const skillId    = toSkillId(skillKey);
+  const cfg        = getSkillConfig(skillId);
+  const skillLabel = cfg.displayName;
+  const isMH       = cfg.hookStyle === 'matching';
+  const isTFNG     = cfg.answerButtons.includes('Not Given');
 
   // ── TEACHING ATTEMPTS TRACKING ────────────────────────────────────
   // Record that Teach-First fired for this skill, and snapshot accuracy before teaching.
@@ -1343,12 +1604,11 @@ async function loadTeachFirst(skillKey) {
 
   // Update the concept section header text from config
   const conceptBubble = document.querySelector('#teach-concept .toody-bubble');
-  if (conceptBubble) conceptBubble.innerHTML = skillCfg.conceptBubble;
+  if (conceptBubble) conceptBubble.innerHTML = cfg.conceptBubble;
   const strategyLabel = document.querySelector('#teach-concept .card-label');
   if (strategyLabel) strategyLabel.textContent = 'The Strategy';
 
-  const ans = skillCfg.answerFormat;
-  const conceptPromptDetail = skillCfg.conceptPrompt;
+  const conceptPromptDetail = cfg.conceptPromptHint;
 
   const ansVals = isMH ? ['A','B','A'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
 
@@ -1363,7 +1623,7 @@ async function loadTeachFirst(skillKey) {
   const statementDesc = isMH
     ? 'a testable claim that looks True but is actually False — a detail matches but not the main idea'
     : isTFNG
-    ? skillCfg.hookPromptHint
+    ? cfg.hookPromptHint
     : 'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)';
 
   const exStatementHint = isMH
@@ -1415,7 +1675,7 @@ Return ONLY this JSON:
 
     // For reading-tfng, replace AI-generated worked examples with the hardcoded
     // expert-verified set. Hook, concept, confidence, and drill remain AI-generated.
-    if (skillId === 'reading-tfng') {
+    if (cfg.workedExamples === 'hardcoded') {
       teachData.workedExamples = TFNG_WORKED_EXAMPLES;
     }
 
@@ -1443,9 +1703,9 @@ function renderHookQuestion() {
   if (!hq) { window.startConceptPhase(); return; }
   document.getElementById('teach-hook-passage').textContent = hq.passage;
   document.getElementById('teach-hook-statement').textContent = hq.statement;
-  const isTFNG_hook = teachSkillKey === 'reading.tfng' || teachSkillKey === 'reading-tfng';
+  const hookCfg = getSkillConfig(toSkillId(teachSkillKey));
   const ngBtn = document.querySelector('#teach-hook-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', !isTFNG_hook);
+  if (ngBtn) ngBtn.classList.toggle('hidden', !hookCfg.answerButtons.includes('Not Given'));
   // Reset all buttons to neutral unselected state
   document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
     b.classList.remove('correct', 'wrong', 'selected');
@@ -1666,7 +1926,7 @@ window.teachShowReinforce = function () {
 window.teachReinforceHear = function () {
   saveLearningStyleSignal('hear');
   const bullets = Array.isArray(teachData.concept) ? teachData.concept : [];
-  const skillLabel2 = teachSkillKey === 'reading.matchingHeadings' ? 'Matching Headings' : 'True, False, Not Given';
+  const skillLabel2 = getSkillConfig(toSkillId(teachSkillKey)).displayName;
   const text = `Here is how ${skillLabel2} reading works. ${bullets.map(b => b.replace(/\*\*/g, '')).join(' ')}`;
   const contentEl = document.getElementById('teach-reinforce-content');
   contentEl.innerHTML = '<div class="screen-loading" style="min-height:60px"><div class="spinner"></div><p>Generating audio…</p></div>';
@@ -1835,9 +2095,9 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   document.getElementById('teach-conf-counter').textContent = `Question ${idx + 1} of 2`;
   document.getElementById('teach-conf-passage').textContent = q.passage;
   document.getElementById('teach-conf-statement').textContent = q.statement;
-  const isTFNG_conf = teachSkillKey === 'reading.tfng' || teachSkillKey === 'reading-tfng';
+  const confCfg = getSkillConfig(toSkillId(teachSkillKey));
   const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', !isTFNG_conf);
+  if (ngBtn) ngBtn.classList.toggle('hidden', !confCfg.answerButtons.includes('Not Given'));
   document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
     b.disabled = false; b.classList.remove('correct', 'wrong');
   });
