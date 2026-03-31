@@ -42,7 +42,7 @@ const HOOK_TRAP = {
   answer: 'NG',
   explanation: 'The passage confirms pollution has decreased in major cities — but it says nothing about mental health. The statement introduces a new claim the passage never addresses. This is Not Given: the passage is simply silent on this point.',
   keySentence: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade.',
-  insight: 'The trap here is assuming that \'less pollution\' logically means \'better mental health.\' It might — but the passage never says so. Not Given means the passage doesn\'t address the claim, not that the claim is wrong.',
+  insight: "This is the Hedging Trap. The passage uses the word 'suggest' — not 'proves' or 'confirms.' When a passage hedges with words like suggest, may, could, or appears to, it is NOT confirming the statement as true. But it is also not contradicting it. The passage is simply uncertain. Uncertain = Not Given, not False. False means the passage says the opposite. This passage never says the opposite — it just hedges.",
 };
 
 // Hardcoded expert-verified T/F/NG worked examples.
@@ -1351,19 +1351,44 @@ async function loadTeachFirst(skillKey) {
   const conceptPromptDetail = skillCfg.conceptPrompt;
 
   const ansVals = isMH ? ['A','B','A'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
+
+  // Skill-specific passage and statement descriptions for the hook question
+  const hookPassageDesc = isMH
+    ? '2 academic sentences — choose a topic where one heading fits the main idea but another could mislead'
+    : isTFNG
+    ? '2 academic sentences — choose a tricky topic where the Not Given trap applies'
+    : '2 academic sentences from which a one-sentence summary can be drawn with one key term left blank';
+
+  // Skill-specific statement/example descriptions
+  const statementDesc = isMH
+    ? 'a testable claim that looks True but is actually False — a detail matches but not the main idea'
+    : isTFNG
+    ? skillCfg.hookPromptHint
+    : 'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)';
+
+  const exStatementHint = isMH
+    ? 'a heading choice where a distractor matches a detail but not the main idea'
+    : isTFNG
+    ? 'testable claim'
+    : 'a summary sentence with one blank gap and a wrong-form distractor visible';
+
+  const sysAnswerRule = isTFNG
+    ? 'CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated.'
+    : 'CRITICAL: Every "answer" field must be exactly one of: True or False — never pipe-separated or NG.';
+
   const exSchema = (label, ansIdx) =>
-    `{"label":"${label}","passage":"2 academic sentences","statement":"testable claim","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
+    `{"label":"${label}","passage":"2 academic sentences","statement":"${exStatementHint}","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
-    system: 'You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated like "True|False|NG".',
+    system: `You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. ${sysAnswerRule}`,
     user: `Generate a 10-minute interactive lesson on ${skillLabel} for a Band ${band} IELTS student.
 
 Return ONLY this JSON:
 {
   "concept": ${conceptPromptDetail},
   "hookQuestion": {
-    "passage": "2 academic sentences — choose a tricky topic where ${skillCfg.hookPromptHint}",
-    "statement": "${skillCfg.hookPromptHint}",
+    "passage": "${hookPassageDesc}",
+    "statement": "${statementDesc}",
     "answer": "${isMH ? 'False' : isTFNG ? 'NG' : 'False'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
@@ -2653,9 +2678,9 @@ async function finishReadingSession() {
   }
 
   tipNotebookFn = () => {
-    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    document.getElementById('nb-day-badge').textContent = `Session ${day}`;
     goTo('s-notebook');
-    renderNotebook(sessionCorrect, total, 'reading.tfng');
+    renderNotebook(sessionCorrect, total, skillKey);
   };
   showSessionTip({ accuracy, behaviour, missedSubTypes, skillKey });
   } catch(err) {
@@ -3048,7 +3073,7 @@ window.finishListeningSession = async function () {
     }
   });
   tipNotebookFn = () => {
-    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    document.getElementById('nb-day-badge').textContent = `Session ${day}`;
     goTo('s-notebook');
     renderNotebook(listenCorrect, total, firestoreKey);
   };
@@ -3329,7 +3354,7 @@ window.finishWritingSession = async function () {
   }
 
   tipNotebookFn = () => {
-    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    document.getElementById('nb-day-badge').textContent = `Session ${day}`;
     goTo('s-notebook');
     renderNotebookWriting();
   };
@@ -3577,7 +3602,7 @@ window.finishSpeakingSession = async function () {
   }
 
   tipNotebookFn = () => {
-    document.getElementById('nb-day-badge').textContent = `Day ${day}`;
+    document.getElementById('nb-day-badge').textContent = `Session ${day}`;
     goTo('s-notebook');
     renderNotebookSpeaking();
   };
@@ -3740,7 +3765,6 @@ function renderNotebook(correct, total, skillKey) {
     weEl.classList.add('hidden');
   }
 
-  renderTomorrowCard();
 }
 
 function renderNotebookWriting() {
@@ -3764,7 +3788,6 @@ function renderNotebookWriting() {
     `Writing Band Estimate: ${writingBandEst.toFixed(1)}. ${writingBandEst >= 7 ? 'Excellent — this is exam-ready writing.' : writingBandEst >= 6 ? 'Solid foundation. One targeted improvement can push you to 7.' : 'Keep practising. Toody has noted your specific gap areas.'}`;
 
   document.getElementById('nb-worked-example').classList.add('hidden');
-  renderTomorrowCard();
 }
 
 function renderNotebookSpeaking() {
@@ -3786,7 +3809,6 @@ function renderNotebookSpeaking() {
     `Speaking Band Estimate: ${speakingBandEst.toFixed(1)}. ${speakingBandEst >= 7 ? 'Impressive — you sound like a Band 7+ speaker.' : speakingBandEst >= 6 ? 'Good fluency. Focus on the suggestion above for your next session.' : 'Early days — every session builds your spoken fluency.'}`;
 
   document.getElementById('nb-worked-example').classList.add('hidden');
-  renderTomorrowCard();
 }
 
 function renderTomorrowCard() {
