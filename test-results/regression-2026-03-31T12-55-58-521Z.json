@@ -1,83 +1,21 @@
 {
-  "timestamp": "2026-03-31T09:51:18.897Z",
+  "timestamp": "2026-03-31T12:55:58.521Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 25727,
+  "durationMs": 33733,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24952,
+      "durationMs": 33725,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Photosynthesis and Its Importance",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 0,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 3.6,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
-      "band": 6,
-      "pass": true,
-      "durationMs": 22222,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Urban Green Spaces and Health",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 0,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 4,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
-      "band": 7,
-      "pass": true,
-      "durationMs": 25699,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Environmental Influences on Behavior",
+          "topic": "Renewable Energy",
           "error": null
         },
         "verification": {
@@ -96,7 +34,69 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 32364,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Urban Green Spaces",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.3,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 7,
+      "pass": true,
+      "durationMs": 30726,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Urban Green Spaces",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 3.2,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
           "error": null
         }
       }
