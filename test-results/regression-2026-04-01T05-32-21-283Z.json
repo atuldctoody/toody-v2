@@ -1,31 +1,31 @@
 {
-  "timestamp": "2026-04-01T04:26:31.626Z",
+  "timestamp": "2026-04-01T05:32:21.283Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 30253,
+  "durationMs": 31046,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 30244,
+      "durationMs": 31043,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Impact of Technology",
+          "topic": "Urban Green Spaces",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 3.7,
           "error": null
         },
         "audio": {
@@ -34,7 +34,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 5,
+          "overallBand": 6,
           "error": null
         }
       }
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 24852,
+      "durationMs": 30124,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy",
+          "topic": "Urban Ecology and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.1,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 24233,
+      "durationMs": 29740,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy Advancements",
+          "topic": "Remote Work Trends",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 4.7,
           "error": null
         },
         "audio": {
