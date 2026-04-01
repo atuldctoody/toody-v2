@@ -1,31 +1,33 @@
 {
-  "timestamp": "2026-04-01T06:07:49.322Z",
+  "timestamp": "2026-04-01T06:22:02.709Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 1.9 between Band 7 (3.1) and Band 6 (5.0) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 23950,
+  "durationMs": 23756,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 21788,
+      "durationMs": 22930,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Climate Change Dynamics",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3,
+          "avgScore": 4.1,
           "error": null
         },
         "audio": {
@@ -42,11 +44,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 22389,
+      "durationMs": 22290,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Wildlife Adaptation",
+          "topic": "Urban Green Spaces and Mental Health",
           "error": null
         },
         "verification": {
@@ -56,7 +58,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 5,
           "error": null
         },
         "audio": {
@@ -73,21 +75,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23923,
+      "durationMs": 23722,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Renewable Energy Development",
+          "topic": "Sleep and Cognition",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 3.1,
           "error": null
         },
         "audio": {
@@ -96,7 +98,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }

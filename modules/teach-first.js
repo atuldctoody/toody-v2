@@ -218,7 +218,7 @@ Return ONLY this JSON:
           teachData.hookQuestion.answer = hq.answer;
           if (hq.explanation) teachData.hookQuestion.insight = hq.explanation;
         }
-      } catch { /* non-fatal — original hook question used */ }
+      } catch (err) { console.warn('Hook verification failed, using original:', err?.message || err); }
     }
 
     // Render concept bullets + verified illustrative examples
