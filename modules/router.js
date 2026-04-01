@@ -61,10 +61,36 @@ export function pickNextSkill(forceSkillKey) {
   if (!candidates.length) candidates = scored.filter(s => !s.isLast);
   if (!candidates.length) candidates = scored;
 
-  // 1) Never-attempted first, prefer section least recently covered
+  // 1) Never-attempted first — section-aware, deterministic
   const never = candidates.filter(s => s.attempted === 0);
   if (never.length) {
-    const pick = never.sort((a, b) => (sectionLastIdx[b.section] ?? 0) - (sectionLastIdx[a.section] ?? 0))[0];
+    // Determine the last-played section so we can prefer staying in it
+    const lastSection = lastSkill
+      ? (SKILL_CATALOGUE.find(s => s.skill === lastSkill)?.section || null)
+      : null;
+
+    // Stay in the same section unless:
+    //   (a) every skill in that section has been attempted at least once, OR
+    //   (b) the section's average accuracy is already 75%+
+    let staySameSection = false;
+    if (lastSection) {
+      const sectionSkills = scored.filter(s => s.section === lastSection);
+      const allAttempted  = sectionSkills.every(s => s.attempted > 0);
+      const attemptedInSection = sectionSkills.filter(s => s.attempted > 0);
+      const sectionAcc = attemptedInSection.length
+        ? Math.round(attemptedInSection.reduce((sum, s) => sum + (s.accuracy || 0), 0) / attemptedInSection.length)
+        : 0;
+      staySameSection = !allAttempted && sectionAcc < 75;
+    }
+
+    // Stable sort: same-section group first, then SKILL_CATALOGUE order as tiebreaker
+    const catalogueIndex = Object.fromEntries(SKILL_CATALOGUE.map((s, i) => [s.skill, i]));
+    const pick = never.sort((a, b) => {
+      const aGroup = (staySameSection && a.section === lastSection) ? 0 : 1;
+      const bGroup = (staySameSection && b.section === lastSection) ? 0 : 1;
+      if (aGroup !== bGroup) return aGroup - bGroup;
+      return (catalogueIndex[a.skill] ?? 99) - (catalogueIndex[b.skill] ?? 99);
+    })[0];
     return { ...pick, reason: `You haven't tried ${pick.label} yet — let's see where you start.` };
   }
 

@@ -100,7 +100,7 @@ import {
 // ── NOTEBOOK ──────────────────────────────────────────────────────
 import {
   renderWeek1Report, renderNotebook,
-  renderNotebookWriting, renderNotebookSpeaking, renderTomorrowCard,
+  renderNotebookWriting, renderNotebookSpeaking,
 } from './modules/notebook.js';
 
 // ── MOCK ──────────────────────────────────────────────────────────
