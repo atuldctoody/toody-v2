@@ -1,12 +1,12 @@
 // api/verify-model-comparison.js
-// Compares Claude Sonnet vs GPT-4o Full on the verify-answers task.
+// Compares GPT-4o Full vs Claude Sonnet vs Claude Opus on the verify-answers task.
 //
 // Test design: each case provides the CORRECT answer as the stated answer.
 // A model that truly understands the rules will confirm it (correctionNeeded: false).
 // A naive model will wrongly dispute it — a false positive.
 // The 5 trap passages are chosen to maximally challenge naive models.
 //
-// 5 runs × 5 test cases × 2 models = 50 total API calls.
+// 5 runs × 5 test cases × 3 models = 75 total API calls.
 // ESM module (api/package.json declares "type": "module").
 
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
@@ -21,7 +21,8 @@ const RUNS          = 5;
 const GPT_API_URL   = 'https://toody-api.vercel.app/api/generate';
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY || '';
-const CLAUDE_MODEL  = 'claude-sonnet-4-5';
+const SONNET_MODEL  = 'claude-sonnet-4-5';
+const OPUS_MODEL    = 'claude-opus-4-5';
 const GPT_MODEL     = 'gpt-4o';
 
 // ── TEST CASES ────────────────────────────────────────────────────
@@ -149,39 +150,13 @@ function parseRaw(raw, tcId) {
   const q = (result.questions || []).find(x => Number(x.id) === tcId);
   if (!q) throw new Error(`id ${tcId} not found in response`);
   return {
-    verifiedAnswer:  String(q.verifiedAnswer  || '').trim(),
+    verifiedAnswer:   String(q.verifiedAnswer  || '').trim(),
     correctionNeeded: !!q.correctionNeeded,
     correctionReason: String(q.correctionReason || '').trim(),
   };
 }
 
 // ── MODEL CALLERS ────────────────────────────────────────────────
-async function callClaude(userMsg) {
-  const t0  = Date.now();
-  const res = await fetch(ANTHROPIC_URL, {
-    method:  'POST',
-    headers: {
-      'content-type':      'application/json',
-      'x-api-key':         ANTHROPIC_KEY,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model:       CLAUDE_MODEL,
-      system:      VERIFY_SYSTEM,
-      messages:    [{ role: 'user', content: userMsg }],
-      max_tokens:  500,
-      temperature: 0,
-    }),
-  });
-  if (!res.ok) {
-    const txt = await res.text().catch(() => '');
-    throw new Error(`Claude ${res.status}: ${txt.slice(0, 200)}`);
-  }
-  const data = await res.json();
-  const raw  = String(data.content?.[0]?.text || '').trim();
-  return { raw, latencyMs: Date.now() - t0 };
-}
-
 async function callGPT(userMsg) {
   const t0  = Date.now();
   const res = await fetch(GPT_API_URL, {
@@ -206,13 +181,67 @@ async function callGPT(userMsg) {
   return { raw, latencyMs: Date.now() - t0 };
 }
 
+// Call B — Claude Sonnet
+async function callClaude(userMsg) {
+  const t0  = Date.now();
+  const res = await fetch(ANTHROPIC_URL, {
+    method:  'POST',
+    headers: {
+      'content-type':      'application/json',
+      'x-api-key':         ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model:       SONNET_MODEL,
+      system:      VERIFY_SYSTEM,
+      messages:    [{ role: 'user', content: userMsg }],
+      max_tokens:  500,
+      temperature: 0,
+    }),
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(`Claude Sonnet ${res.status}: ${txt.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  const raw  = String(data.content?.[0]?.text || '').trim();
+  return { raw, latencyMs: Date.now() - t0 };
+}
+
+// Call C — Claude Opus
+async function callClaudeOpus(userMsg) {
+  const t0  = Date.now();
+  const res = await fetch(ANTHROPIC_URL, {
+    method:  'POST',
+    headers: {
+      'content-type':      'application/json',
+      'x-api-key':         ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model:       OPUS_MODEL,
+      system:      VERIFY_SYSTEM,
+      messages:    [{ role: 'user', content: userMsg }],
+      max_tokens:  500,
+      temperature: 0,
+    }),
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    throw new Error(`Claude Opus ${res.status}: ${txt.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  const raw  = String(data.content?.[0]?.text || '').trim();
+  return { raw, latencyMs: Date.now() - t0 };
+}
+
 // ── SINGLE CASE RUNNER ────────────────────────────────────────────
 async function runCase(tc, callFn, modelName, run) {
   const userMsg = buildUserMsg(tc);
   try {
     const { raw, latencyMs } = await callFn(userMsg);
     const { verifiedAnswer, correctionNeeded, correctionReason } = parseRaw(raw, tc.id);
-    const correct       = normalise(verifiedAnswer) === normalise(tc.correctAnswer);
+    const correct        = normalise(verifiedAnswer) === normalise(tc.correctAnswer);
     const correctionMade = correctionNeeded;
     // falsePositive: model wrongly disputed the correct answer AND its proposed answer is wrong
     const falsePositive  = correctionMade && !correct;
@@ -269,9 +298,9 @@ function calcStats(records) {
   }
 
   return {
-    accuracyPct:       Math.round((correct       / total) * 100),
+    accuracyPct:       Math.round((correct        / total)             * 100),
     consistencyPct:    Math.round((consistentCases / TEST_CASES.length) * 100),
-    falsePositiveRate: Math.round((falsePositive  / total) * 100),
+    falsePositiveRate: Math.round((falsePositive   / total)             * 100),
     avgLatencyMs,
     trapBreakdown,
     correct, total, falsePositive, consistentCases,
@@ -284,47 +313,64 @@ function pad(s, n, right = false) {
   return right ? str.padStart(n) : str.padEnd(n);
 }
 
-function printComparisonTable(claudeStats, gptStats) {
-  const claudeAvail = !!claudeStats;
-  const C = claudeAvail ? claudeStats : {};
+function printComparisonTable(gptStats, sonnetStats, opusStats) {
+  const sonnetAvail = !!sonnetStats;
+  const opusAvail   = !!opusStats;
   const G = gptStats;
+  const S = sonnetStats || {};
+  const O = opusStats   || {};
 
   const rows = [
-    ['Accuracy',            `${C.accuracyPct ?? '—'}%`,       `${G.accuracyPct}%`      ],
-    ['Consistency',         `${C.consistencyPct ?? '—'}%`,    `${G.consistencyPct}%`   ],
-    ['False Positive Rate', `${C.falsePositiveRate ?? '—'}%`, `${G.falsePositiveRate}%`],
-    ['Avg Latency',         C.avgLatencyMs != null ? `${C.avgLatencyMs}ms` : '—', `${G.avgLatencyMs}ms`],
+    ['Accuracy',
+      `${G.accuracyPct}%`,
+      sonnetAvail ? `${S.accuracyPct}%`       : '—',
+      opusAvail   ? `${O.accuracyPct}%`       : '—'],
+    ['Consistency',
+      `${G.consistencyPct}%`,
+      sonnetAvail ? `${S.consistencyPct}%`    : '—',
+      opusAvail   ? `${O.consistencyPct}%`    : '—'],
+    ['False Positive Rate',
+      `${G.falsePositiveRate}%`,
+      sonnetAvail ? `${S.falsePositiveRate}%` : '—',
+      opusAvail   ? `${O.falsePositiveRate}%` : '—'],
+    ['Avg Latency',
+      `${G.avgLatencyMs}ms`,
+      sonnetAvail ? `${S.avgLatencyMs}ms`     : '—',
+      opusAvail   ? `${O.avgLatencyMs}ms`     : '—'],
   ];
 
-  const colA = 21, colB = 18, colC = 14;
-  const line = `├${'─'.repeat(colA)}┼${'─'.repeat(colB)}┼${'─'.repeat(colC)}┤`;
-  const top  = `┌${'─'.repeat(colA)}┬${'─'.repeat(colB)}┬${'─'.repeat(colC)}┐`;
-  const bot  = `└${'─'.repeat(colA)}┴${'─'.repeat(colB)}┴${'─'.repeat(colC)}┘`;
+  const c1 = 21, c2 = 14, c3 = 15, c4 = 13;
+  const divider = `├${'─'.repeat(c1)}┼${'─'.repeat(c2)}┼${'─'.repeat(c3)}┼${'─'.repeat(c4)}┤`;
+  const top     = `┌${'─'.repeat(c1)}┬${'─'.repeat(c2)}┬${'─'.repeat(c3)}┬${'─'.repeat(c4)}┐`;
+  const bot     = `└${'─'.repeat(c1)}┴${'─'.repeat(c2)}┴${'─'.repeat(c3)}┴${'─'.repeat(c4)}┘`;
 
   console.log('\n' + top);
-  console.log(`│ ${pad('Metric', colA - 2)} │ ${pad('Claude Sonnet', colB - 2)} │ ${pad('GPT-4o Full', colC - 2)} │`);
-  console.log(line);
-  for (const [metric, cv, gv] of rows) {
-    console.log(`│ ${pad(metric, colA - 2)} │ ${pad(cv, colB - 2)} │ ${pad(gv, colC - 2)} │`);
+  console.log(`│ ${pad('Metric', c1-2)} │ ${pad('GPT-4o Full', c2-2)} │ ${pad('Claude Sonnet', c3-2)} │ ${pad('Claude Opus', c4-2)} │`);
+  console.log(divider);
+  for (const [metric, gv, sv, ov] of rows) {
+    console.log(`│ ${pad(metric, c1-2)} │ ${pad(gv, c2-2)} │ ${pad(sv, c3-2)} │ ${pad(ov, c4-2)} │`);
   }
   console.log(bot);
 
-  // Trap breakdown table
+  // Per trap breakdown
   console.log('\nPer trap type:');
-  const t2 = 22, t3 = 18, t4 = 14;
-  const tline = `├${'─'.repeat(t2)}┼${'─'.repeat(t3)}┼${'─'.repeat(t4)}┤`;
-  const ttop  = `┌${'─'.repeat(t2)}┬${'─'.repeat(t3)}┬${'─'.repeat(t4)}┐`;
-  const tbot  = `└${'─'.repeat(t2)}┴${'─'.repeat(t3)}┴${'─'.repeat(t4)}┘`;
+  const t1 = 22, t2 = 14, t3 = 15, t4 = 13;
+  const tdiv = `├${'─'.repeat(t1)}┼${'─'.repeat(t2)}┼${'─'.repeat(t3)}┼${'─'.repeat(t4)}┤`;
+  const ttop = `┌${'─'.repeat(t1)}┬${'─'.repeat(t2)}┬${'─'.repeat(t3)}┬${'─'.repeat(t4)}┐`;
+  const tbot = `└${'─'.repeat(t1)}┴${'─'.repeat(t2)}┴${'─'.repeat(t3)}┴${'─'.repeat(t4)}┘`;
 
   console.log(ttop);
-  console.log(`│ ${pad('Trap', t2 - 2)} │ ${pad('Claude Sonnet', t3 - 2)} │ ${pad('GPT-4o Full', t4 - 2)} │`);
-  console.log(tline);
+  console.log(`│ ${pad('Trap', t1-2)} │ ${pad('GPT-4o Full', t2-2)} │ ${pad('Claude Sonnet', t3-2)} │ ${pad('Claude Opus', t4-2)} │`);
+  console.log(tdiv);
   for (const tc of TEST_CASES) {
-    const cVal = claudeAvail
-      ? `${C.trapBreakdown[tc.trap]?.correct ?? '—'}/${C.trapBreakdown[tc.trap]?.total ?? RUNS}`
-      : '—';
     const gVal = `${G.trapBreakdown[tc.trap]?.correct ?? '—'}/${G.trapBreakdown[tc.trap]?.total ?? RUNS}`;
-    console.log(`│ ${pad(tc.trap, t2 - 2)} │ ${pad(cVal, t3 - 2)} │ ${pad(gVal, t4 - 2)} │`);
+    const sVal = sonnetAvail
+      ? `${S.trapBreakdown[tc.trap]?.correct ?? '—'}/${S.trapBreakdown[tc.trap]?.total ?? RUNS}`
+      : '—';
+    const oVal = opusAvail
+      ? `${O.trapBreakdown[tc.trap]?.correct ?? '—'}/${O.trapBreakdown[tc.trap]?.total ?? RUNS}`
+      : '—';
+    console.log(`│ ${pad(tc.trap, t1-2)} │ ${pad(gVal, t2-2)} │ ${pad(sVal, t3-2)} │ ${pad(oVal, t4-2)} │`);
   }
   console.log(tbot);
 }
@@ -332,103 +378,118 @@ function printComparisonTable(claudeStats, gptStats) {
 // ── MAIN ──────────────────────────────────────────────────────────
 async function runComparison() {
   const ts = new Date().toISOString();
-  console.log(`\n${'═'.repeat(60)}`);
+  console.log(`\n${'═'.repeat(62)}`);
   console.log('  Verify-answers Model Comparison');
   console.log(`  ${ts}`);
-  console.log(`  Claude Sonnet (${CLAUDE_MODEL}) vs GPT-4o Full`);
-  console.log(`  ${TEST_CASES.length} test cases × ${RUNS} runs each`);
+  console.log(`  GPT-4o Full vs Claude Sonnet (${SONNET_MODEL}) vs Claude Opus (${OPUS_MODEL})`);
+  console.log(`  ${TEST_CASES.length} test cases × ${RUNS} runs × 3 models = ${TEST_CASES.length * RUNS * 3} total calls`);
 
   const claudeAvail = !!ANTHROPIC_KEY;
   if (!claudeAvail) {
-    console.log('\n  ⚠  ANTHROPIC_API_KEY not set — Claude Sonnet tests skipped.');
-    console.log('     Set ANTHROPIC_API_KEY in your .env and re-run to include Claude.\n');
+    console.log('\n  ⚠  ANTHROPIC_API_KEY not set — Claude Sonnet and Opus tests skipped.');
+    console.log('     Set ANTHROPIC_API_KEY in your .env and re-run to include Claude models.\n');
   }
-  console.log(`${'═'.repeat(60)}\n`);
+  console.log(`${'═'.repeat(62)}\n`);
 
-  const allResults = [];   // flat array of all run records
+  const allResults = [];
 
   for (let run = 1; run <= RUNS; run++) {
-    console.log(`Run ${run}/${RUNS} — running ${TEST_CASES.length} cases in parallel...`);
+    console.log(`Run ${run}/${RUNS} — running ${TEST_CASES.length} cases × 3 models in parallel...`);
 
-    // All test cases × both models in parallel
     const runPromises = TEST_CASES.flatMap(tc => {
       const promises = [runCase(tc, callGPT, 'gpt-4o', run)];
-      if (claudeAvail) promises.push(runCase(tc, callClaude, 'claude-sonnet', run));
+      if (claudeAvail) {
+        promises.push(runCase(tc, callClaude,      'claude-sonnet', run));
+        promises.push(runCase(tc, callClaudeOpus,  'claude-opus',   run));
+      }
       return promises;
     });
 
     const runResults = await Promise.all(runPromises);
     allResults.push(...runResults);
 
-    // Per-run summary
     const gptRun    = runResults.filter(r => r.model === 'gpt-4o');
-    const claudeRun = runResults.filter(r => r.model === 'claude-sonnet');
+    const sonnetRun = runResults.filter(r => r.model === 'claude-sonnet');
+    const opusRun   = runResults.filter(r => r.model === 'claude-opus');
 
-    const gptCorrect    = gptRun.filter(r => r.correct).length;
-    const claudeCorrect = claudeRun.filter(r => r.correct).length;
+    const fmt = (arr) =>
+      `${arr.filter(r => r.correct).length}/${arr.length} correct, ${arr.filter(r => r.falsePositive).length} FP`;
 
-    const gptFP    = gptRun.filter(r => r.falsePositive).length;
-    const claudeFP = claudeRun.filter(r => r.falsePositive).length;
-
+    console.log(`  GPT-4o:        ${fmt(gptRun)}`);
     if (claudeAvail) {
-      console.log(`  GPT-4o:  ${gptCorrect}/${gptRun.length} correct, ${gptFP} false positives`);
-      console.log(`  Claude:  ${claudeCorrect}/${claudeRun.length} correct, ${claudeFP} false positives`);
-    } else {
-      console.log(`  GPT-4o:  ${gptCorrect}/${gptRun.length} correct, ${gptFP} false positives`);
+      console.log(`  Claude Sonnet: ${fmt(sonnetRun)}`);
+      console.log(`  Claude Opus:   ${fmt(opusRun)}`);
     }
 
-    // Per-case breakdown for this run
+    // Per-case breakdown
     for (const tc of TEST_CASES) {
       const g = gptRun.find(r => r.id === tc.id);
-      const c = claudeRun.find(r => r.id === tc.id);
-      const gIcon = g?.correct ? '✓' : g?.error ? 'E' : '✗';
-      const cIcon = claudeAvail ? (c?.correct ? '✓' : c?.error ? 'E' : '✗') : ' ';
-      const gAns  = g?.modelAnswer || (g?.error ? 'ERR' : '?');
-      const cAns  = claudeAvail ? (c?.modelAnswer || (c?.error ? 'ERR' : '?')) : '—';
-      console.log(`    [${tc.trap.padEnd(20)}] GPT:${gIcon}(${gAns.padEnd(9)}) Claude:${cIcon}(${cAns})`);
+      const s = sonnetRun.find(r => r.id === tc.id);
+      const o = opusRun.find(r => r.id === tc.id);
+
+      const icon = (r) => !r ? ' ' : r.error ? 'E' : r.correct ? '✓' : '✗';
+      const ans  = (r) => !r ? '—' : r.error ? 'ERR' : (r.modelAnswer || '?');
+
+      const trapPad = tc.trap.padEnd(20);
+      let line = `    [${trapPad}] GPT:${icon(g)}(${ans(g).padEnd(9)})`;
+      if (claudeAvail) {
+        line += ` Sonnet:${icon(s)}(${ans(s).padEnd(9)}) Opus:${icon(o)}(${ans(o)})`;
+      }
+      console.log(line);
     }
     console.log();
   }
 
   // ── Aggregate stats ───────────────────────────────────────────
   const gptAll    = allResults.filter(r => r.model === 'gpt-4o');
-  const claudeAll = allResults.filter(r => r.model === 'claude-sonnet');
+  const sonnetAll = allResults.filter(r => r.model === 'claude-sonnet');
+  const opusAll   = allResults.filter(r => r.model === 'claude-opus');
 
   const gptStats    = calcStats(gptAll);
-  const claudeStats = claudeAvail ? calcStats(claudeAll) : null;
+  const sonnetStats = claudeAvail ? calcStats(sonnetAll) : null;
+  const opusStats   = claudeAvail ? calcStats(opusAll)   : null;
 
-  // ── Print summary ─────────────────────────────────────────────
-  console.log(`${'─'.repeat(60)}`);
+  console.log(`${'─'.repeat(62)}`);
   console.log('  RESULTS SUMMARY');
-  console.log(`${'─'.repeat(60)}`);
-  printComparisonTable(claudeStats, gptStats);
+  console.log(`${'─'.repeat(62)}`);
+  printComparisonTable(gptStats, sonnetStats, opusStats);
 
-  // Errors
   const errors = allResults.filter(r => r.error);
   if (errors.length) {
     console.log(`\n  ⚠  ${errors.length} call(s) failed:`);
-    errors.forEach(e => console.log(`     Run ${e.run} | ${e.model} | Case ${e.id} (${e.trap}): ${e.error}`));
+    errors.forEach(e =>
+      console.log(`     Run ${e.run} | ${e.model} | Case ${e.id} (${e.trap}): ${e.error}`)
+    );
   }
 
   // ── Save results ──────────────────────────────────────────────
   if (!existsSync(RESULTS_DIR)) mkdirSync(RESULTS_DIR, { recursive: true });
-  const slug = ts.replace(/[:.]/g, '-').replace('T', 'T').slice(0, 23);
+  const slug    = ts.replace(/[:.]/g, '-').slice(0, 23);
   const outPath = resolve(RESULTS_DIR, `model-comparison-${slug}Z.json`);
 
   const output = {
     timestamp: ts,
-    config: { runs: RUNS, claudeModel: CLAUDE_MODEL, gptModel: GPT_MODEL, claudeAvail },
-    testCases: TEST_CASES.map(tc => ({ id: tc.id, trap: tc.trap, correctAnswer: tc.correctAnswer, explanation: tc.explanation })),
+    config: {
+      runs: RUNS,
+      gptModel:    GPT_MODEL,
+      sonnetModel: SONNET_MODEL,
+      opusModel:   OPUS_MODEL,
+      claudeAvail,
+    },
+    testCases: TEST_CASES.map(tc => ({
+      id: tc.id, trap: tc.trap, correctAnswer: tc.correctAnswer, explanation: tc.explanation,
+    })),
     summary: {
-      'claude-sonnet': claudeStats,
-      'gpt-4o':        gptStats,
+      'gpt-4o':         gptStats,
+      'claude-sonnet':  sonnetStats,
+      'claude-opus':    opusStats,
     },
     allResults,
   };
 
   writeFileSync(outPath, JSON.stringify(output, null, 2));
   console.log(`\n  Saved: ${outPath}`);
-  console.log(`${'═'.repeat(60)}\n`);
+  console.log(`${'═'.repeat(62)}\n`);
 
   return output;
 }
