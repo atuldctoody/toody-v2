@@ -10,6 +10,7 @@ import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } f
 import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob } from './utils.js';
 import { updateStudentDoc } from './firebase.js';
 import { showToast } from './ui.js';
+import { verifyAnswers } from '../api/verify-answers.js';
 
 // ── TEACH-FIRST STATE ─────────────────────────────────────────────
 let teachData         = null;  // AI-generated lesson content
@@ -154,8 +155,6 @@ Return ONLY this JSON:
     // Non-fatal: if verification fails the original AI-generated question is used.
     if (cfg.answerButtons.includes('Not Given')) {
       try {
-        const { verifyAnswers } = await import('./api/verify-answers.js');
-
         // Adapter for questions that carry an explanation field (drill, confidence, conceptExamples).
         const verifyTeachQ = async (q, idx) => {
           const result = await verifyAnswers(
@@ -207,7 +206,6 @@ Return ONLY this JSON:
     if (teachData.hookQuestion &&
         (cfg.answerButtons.includes('Not Given') || cfg.answerButtons.includes('False'))) {
       try {
-        const { verifyAnswers } = await import('./api/verify-answers.js');
         const hookResult = await verifyAnswers(
           teachData.hookQuestion.passage,
           [{ id: 1, text: teachData.hookQuestion.statement, answer: teachData.hookQuestion.answer, explanation: teachData.hookQuestion.insight || '' }],

@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-04-01T06:22:02.709Z",
+  "timestamp": "2026-04-01T06:29:16.330Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.9 between Band 7 (3.1) and Band 6 (5.0) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 23756,
+  "durationMs": 27482,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22930,
+      "durationMs": 23688,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Dynamics",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
@@ -44,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 22290,
+      "durationMs": 27448,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces and Mental Health",
+          "topic": "Climate Change and Energy",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 3,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 5,
+          "avgScore": 3.9,
           "error": null
         },
         "audio": {
@@ -75,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23722,
+      "durationMs": 23156,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Sleep and Cognition",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.1,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
