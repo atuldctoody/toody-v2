@@ -259,6 +259,7 @@ export async function loadReadingSession() {
   let prompt;
   if (isSCSession) {
     prompt = {
+      model: 'gpt-4o',
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a Summary Completion IELTS Academic reading exercise for a Band ${band} student.
 
@@ -284,6 +285,7 @@ Return ONLY this JSON:
     };
   } else {
     prompt = {
+      model: 'gpt-4o',
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
       user: `Create a True/False/Not Given IELTS Academic reading exercise for a Band ${band} student using CONSTRAINED MUTATION generation.
 

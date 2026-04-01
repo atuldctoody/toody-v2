@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-01T09:52:46.648Z",
+  "timestamp": "2026-04-01T10:17:57.290Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 34839,
+  "durationMs": 27621,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24986,
+      "durationMs": 22397,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Research",
+          "topic": "Microplastics in Marine Environments",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 2.7,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 34800,
+      "durationMs": 22374,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 3,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.1,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 26355,
+      "durationMs": 27589,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Neuroplasticity and Learning",
+          "topic": "Cognitive Plasticity",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.8,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {

@@ -384,7 +384,7 @@ export async function callAI(prompt) {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model:       'gpt-4o-mini',
+        model:       prompt.model || 'gpt-4o-mini',
         messages:    [
           { role: 'system', content: systemContent },
           { role: 'user',   content: prompt.user   }
