@@ -60,6 +60,10 @@ async function apiFetch(url, body) {
 // ── Per-band steps ────────────────────────────────────────────────────────────
 
 async function stepGenerate(band) {
+  const band6Instruction = band === 6.0 ? `
+
+BAND 6 CONTENT INSTRUCTION: Band 6 passages must be genuinely challenging — not simplified Band 7 content. Band 6 passages should contain: at least 2 instances of cautious language (may, suggests, could, appears to), at least 1 scope qualifier (some, most, certain, several), at least 1 causal language phrase (as a result, consequently, attributed to). Questions at Band 6 must target specific named traps — not generic comprehension. Explanations must name the specific reasoning failure, cite the exact passage phrase, and tell the student what to look for next time. Generic explanations at Band 6 are not acceptable.` : '';
+
   const parsed = await apiFetch(API_URL, {
     model: 'gpt-4o-mini',
     messages: [
@@ -71,7 +75,7 @@ ANSWER FORMAT RULES (mandatory):
 - Never use pipe-separated formats like "True|False". Never use option labels like A/B/C.
 - Every explanation must name the specific word, phrase, or logical feature that determines the answer.
 
-For each question, set "errorReason" to one of: synonymTrap, hedgingMissed, negationOverlooked, scopeError, notGivenMarkedFalse, other.
+For each question, set "errorReason" to one of: synonymTrap, hedgingMissed, negationOverlooked, scopeError, notGivenMarkedFalse, other.${band6Instruction}
 
 Return ONLY this JSON:
 {"passage":"3 paragraphs of academic prose (170-220 words)","topic":"2-4 word label","questions":[{"id":1,"text":"statement","answer":"True","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"synonymTrap"},{"id":2,"text":"statement","answer":"False","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"negationOverlooked"},{"id":3,"text":"statement","answer":"NG","explanation":"what passage says and does NOT say","keySentence":"most relevant sentence","errorReason":"notGivenMarkedFalse"},{"id":4,"text":"statement","answer":"True","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"hedgingMissed"},{"id":5,"text":"statement","answer":"False","explanation":"specific word/phrase","keySentence":"exact sentence","errorReason":"scopeError"}]}` },
