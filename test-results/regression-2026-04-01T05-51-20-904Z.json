@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-01T05:32:21.283Z",
+  "timestamp": "2026-04-01T05:51:20.904Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 31046,
+  "durationMs": 30584,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 31043,
+      "durationMs": 24847,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces",
+          "topic": "Climate Change Research",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.7,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {
@@ -42,16 +42,16 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 30124,
+      "durationMs": 30559,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Ecology and Biodiversity",
+          "topic": "Climate Change and Marine Life",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 2,
           "error": null
         },
         "explanationQuality": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 29740,
+      "durationMs": 24724,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Remote Work Trends",
+          "topic": "Climate Change Effects",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.7,
+          "avgScore": 4.1,
           "error": null
         },
         "audio": {
