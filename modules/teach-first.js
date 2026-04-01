@@ -265,15 +265,27 @@ function renderHookQuestion() {
   const hookCfg       = getSkillConfig(toSkillId(teachSkillKey));
   const btnsContainer = document.getElementById('teach-hook-btns');
 
+  // Clean up any previous text input wrap from a typed-answer skill
+  const prevTextWrap = document.getElementById('teach-hook-text-wrap');
+  if (prevTextWrap) prevTextWrap.remove();
+
   if (hookCfg.hookStyle === 'matching') {
     // Render letter option buttons (A, B, C, D, E) from skill config
     btnsContainer.innerHTML = hookCfg.answerButtons.map(v =>
       `<button class="tfng-btn" onclick="window.answerHook('${v}')" data-mv="${v}">${v}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
-  } else if (hookCfg.hookStyle === 'gapfill') {
-    // No button-click answer for gap-fill; hide the button set
+  } else if (hookCfg.hookStyle === 'gapfill' || hookCfg.hookStyle === 'shortanswer') {
     btnsContainer.classList.add('hidden');
+    // Inject text input for typed-answer hook questions
+    let inputWrap = document.createElement('div');
+    inputWrap.id = 'teach-hook-text-wrap';
+    btnsContainer.insertAdjacentElement('beforebegin', inputWrap);
+    inputWrap.innerHTML = `
+      <input type="text" id="hook-text-input" placeholder="Type your answer here..."
+        style="width:100%;padding:16px;border-radius:12px;border:1.5px solid #E0DFF0;font-size:15px;color:#1A1A2E;background:#fff;box-sizing:border-box;font-family:inherit">
+      <button class="btn mt8" onclick="window.answerHook(document.getElementById('hook-text-input').value)">Submit answer →</button>
+    `;
   } else {
     // tfng: ensure True / False / NG buttons are present with correct NG visibility
     btnsContainer.innerHTML =
@@ -300,11 +312,29 @@ function renderHookQuestion() {
 window.answerHook = function (val) {
   const hq = teachData.hookQuestion;
   if (!hq) return;
-  document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
-    b.disabled = true;
-    if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(hq.answer)) b.classList.add('correct');
-    else if (b.dataset.mv === val) b.classList.add('wrong');
-  });
+  const hookCfg    = getSkillConfig(toSkillId(teachSkillKey));
+  const isTextInput = hookCfg.hookStyle === 'gapfill' || hookCfg.hookStyle === 'shortanswer';
+  if (isTextInput) {
+    const inputEl   = document.getElementById('hook-text-input');
+    const inputWrap = document.getElementById('teach-hook-text-wrap');
+    if (inputEl) inputEl.disabled = true;
+    const submitBtn = inputWrap?.querySelector('.btn');
+    if (submitBtn) submitBtn.disabled = true;
+    const isRight = normaliseAnswer(val) === normaliseAnswer(hq.answer);
+    if (inputEl) inputEl.style.borderColor = isRight ? 'var(--success)' : 'var(--danger)';
+    if (!isRight && inputWrap) {
+      const fb = document.createElement('div');
+      fb.style.cssText = 'font-size:13px;color:var(--danger);margin-top:6px;font-weight:600';
+      fb.textContent = `Answer: ${hq.answer}`;
+      inputWrap.appendChild(fb);
+    }
+  } else {
+    document.querySelectorAll('#teach-hook-btns .tfng-btn').forEach(b => {
+      b.disabled = true;
+      if (normaliseAnswer(b.dataset.mv) === normaliseAnswer(hq.answer)) b.classList.add('correct');
+      else if (b.dataset.mv === val) b.classList.add('wrong');
+    });
+  }
   document.getElementById('teach-hook-insight').textContent = hq.insight || '';
   document.getElementById('teach-hook-reveal').classList.remove('hidden');
   window.scrollTo(0, document.body.scrollHeight);
@@ -621,6 +651,10 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
       <div class="result-flash" id="drill-result-${idx}"></div>
     </div>`;
   contentEl.classList.remove('hidden');
+  // Hide NG button for skills that do not use Not Given answers
+  const drillCfg  = getSkillConfig(toSkillId(teachSkillKey));
+  const drillNgBtn = document.querySelector(`#drill-card-${idx} [data-dv="NG"]`);
+  if (drillNgBtn) drillNgBtn.classList.toggle('hidden', !drillCfg.answerButtons.includes('Not Given'));
 };
 
 window.answerDrill = function (idx, val) {

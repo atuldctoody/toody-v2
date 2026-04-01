@@ -1,21 +1,52 @@
 {
-  "timestamp": "2026-04-01T07:24:42.074Z",
+  "timestamp": "2026-04-01T09:52:46.648Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 30980,
+  "durationMs": 34839,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24464,
+      "durationMs": 24986,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "climate change",
+          "topic": "Climate Change Research",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 2.7,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 34800,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Urban Green Spaces",
           "error": null
         },
         "verification": {
@@ -40,44 +71,13 @@
       }
     },
     {
-      "band": 6,
-      "pass": true,
-      "durationMs": 30942,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Emotional Intelligence",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 1,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 3.8,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
       "band": 7,
       "pass": true,
-      "durationMs": 28317,
+      "durationMs": 26355,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Social Capital",
+          "topic": "Neuroplasticity and Learning",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {

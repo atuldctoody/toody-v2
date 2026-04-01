@@ -214,3 +214,13 @@ export function renderTomorrowCard() {
   document.getElementById('nb-tomorrow-title').textContent = next.label;
   document.getElementById('nb-tomorrow-desc').textContent  = next.desc;
 }
+
+window.notebookGoHome = function (btn) {
+  btn.disabled = true;
+  try {
+    goToHome();
+  } catch (e) {
+    console.error('Back to Home navigation failed:', e);
+    btn.disabled = false;
+  }
+};
