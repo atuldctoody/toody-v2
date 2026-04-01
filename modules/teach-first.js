@@ -149,13 +149,14 @@ Return ONLY this JSON:
       teachData.workedExamples = TFNG_WORKED_EXAMPLES;
     }
 
-    // Verify drill + confidence questions for skills with T/F/NG or Y/N/NG answers.
-    // Each question has its own embedded passage, so we verify one at a time in parallel.
+    // Verify drill + confidence + conceptExamples + worked examples for T/F/NG and Y/N/NG skills.
+    // Each question has its own embedded passage, so we verify each one independently in parallel.
     // Non-fatal: if verification fails the original AI-generated question is used.
     if (cfg.answerButtons.includes('Not Given')) {
       try {
         const { verifyAnswers } = await import('./api/verify-answers.js');
-        // Adapt a single teach question to verifyAnswers input/output shape
+
+        // Adapter for questions that carry an explanation field (drill, confidence, conceptExamples).
         const verifyTeachQ = async (q, idx) => {
           const result = await verifyAnswers(
             q.passage,
@@ -166,20 +167,58 @@ Return ONLY this JSON:
           return vq ? { ...q, answer: vq.answer, explanation: vq.explanation } : q;
         };
 
-        const drillQs     = teachData.drillQuestions       || [];
-        const confQs      = teachData.confidenceQuestions  || [];
-        const conceptExQs = teachData.conceptExamples      || [];
+        // GAP 2 — adapter for AI-generated worked examples (steps/conclusion format).
+        // Only the answer field is updated — explanation is intentionally NOT spread back,
+        // because adding it would trigger the rich-format renderer branch in renderWorkedExampleAt().
+        const verifyWorkedQ = async (q, i) => {
+          const result = await verifyAnswers(
+            q.passage,
+            [{ id: i + 1, text: q.statement, answer: q.answer, explanation: '' }],
+            API_URL
+          );
+          const vq = result.questions?.[0];
+          return vq ? { ...q, answer: vq.answer } : q;
+        };
 
-        const [verifiedDrill, verifiedConf, verifiedConceptEx] = await Promise.all([
+        const drillQs     = teachData.drillQuestions      || [];
+        const confQs      = teachData.confidenceQuestions || [];
+        const conceptExQs = teachData.conceptExamples     || [];
+        // Skip hardcoded worked examples (reading-tfng) — already expert-verified.
+        const workedQs    = cfg.workedExamples !== 'hardcoded' ? (teachData.workedExamples || []) : [];
+
+        const [verifiedDrill, verifiedConf, verifiedConceptEx, verifiedWorked] = await Promise.all([
           Promise.all(drillQs.map(    (q, i) => verifyTeachQ(q, i).catch(() => q))),
           Promise.all(confQs.map(     (q, i) => verifyTeachQ(q, i).catch(() => q))),
           Promise.all(conceptExQs.map((q, i) => verifyTeachQ(q, i).catch(() => q))),
+          Promise.all(workedQs.map(   (q, i) => verifyWorkedQ(q, i).catch(() => q))),
         ]);
 
         if (verifiedDrill.length)     teachData.drillQuestions      = verifiedDrill;
         if (verifiedConf.length)      teachData.confidenceQuestions = verifiedConf;
         if (verifiedConceptEx.length) teachData.conceptExamples     = verifiedConceptEx;
+        if (verifiedWorked.length)    teachData.workedExamples      = verifiedWorked;
       } catch { /* non-fatal — original questions used */ }
+    }
+
+    // GAP 1 — verify hookQuestion for T/F/NG and Y/N/NG skills before it is rendered.
+    // The hook is intentionally verified separately so it runs regardless of whether
+    // the bulk verification block above was entered.
+    // Non-fatal: if verification fails the original AI-generated hook is used.
+    if (teachData.hookQuestion &&
+        (cfg.answerButtons.includes('Not Given') || cfg.answerButtons.includes('False'))) {
+      try {
+        const { verifyAnswers } = await import('./api/verify-answers.js');
+        const hookResult = await verifyAnswers(
+          teachData.hookQuestion.passage,
+          [{ id: 1, text: teachData.hookQuestion.statement, answer: teachData.hookQuestion.answer, explanation: teachData.hookQuestion.insight || '' }],
+          API_URL
+        );
+        const hq = hookResult.questions?.[0];
+        if (hq) {
+          teachData.hookQuestion.answer = hq.answer;
+          if (hq.explanation) teachData.hookQuestion.insight = hq.explanation;
+        }
+      } catch { /* non-fatal — original hook question used */ }
     }
 
     // Render concept bullets + verified illustrative examples
