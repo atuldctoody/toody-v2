@@ -58,6 +58,12 @@ export function devJumpTo(target) {
   // Ensure a default plan is set so load functions have a valid currentPlan
   if (!currentPlan) setCurrentPlan(SKILL_MAP['reading.tfng'] || SKILL_CATALOGUE[0]);
 
+  // 'teachfirst:skillId' — jump to any skill's Teach-First bypassing all prerequisite gates
+  if (target.startsWith('teachfirst:')) {
+    loadTeachFirst(target.slice('teachfirst:'.length));
+    return;
+  }
+
   switch (target) {
     case 'reading':
       setCurrentPlan({ ...SKILL_MAP['reading.tfng'], reason: 'Dev jump' });
