@@ -90,7 +90,7 @@ export function saveLearningStyleSignal(type) {
   if (studentData.brain) studentData.brain.learningStyleSignal = updated;
 }
 
-export async function updateStudentBrain(behaviour, accuracy, skillKey) {
+export async function updateStudentBrain(behaviour, accuracy, skillKey, questionResults = null) {
   if (!currentUser) return;
   try {
     const prev  = studentData?.brain || {};
@@ -119,6 +119,19 @@ export async function updateStudentBrain(behaviour, accuracy, skillKey) {
     const newConsec  = accuracy >= 80 ? prevConsec + 1 : 0;
     const isStrong   = newConsec >= 3;
 
+    // Per-logicType error accumulation — tracks which mutation types a student misses most
+    let errorsByLogicType = null;
+    if (skillId && questionResults && questionResults.length > 0) {
+      const prevEBLT = prevSkillBrain.errorsByLogicType || {};
+      const merged   = { ...prevEBLT };
+      questionResults.forEach(({ logicType, isRight }) => {
+        if (!isRight && logicType) {
+          merged[logicType] = (merged[logicType] || 0) + 1;
+        }
+      });
+      errorsByLogicType = merged;
+    }
+
     const skillBrainUpdate = skillId ? {
       avgTimePerQ:    ema(prevSkillBrain.avgTimePerQ    || 0, behaviour.avgTimePerQuestionSec),
       scrollsBackPct: ema(prevSkillBrain.scrollsBackPct || 0, behaviour.scrolledBackToPassage ? 100 : 0),
@@ -129,6 +142,7 @@ export async function updateStudentBrain(behaviour, accuracy, skillKey) {
       isStrong,
       aiResolved,
       needsHuman,
+      ...(errorsByLogicType ? { errorsByLogicType } : {}),
     } : null;
 
     const updatedSubjSkills = {
