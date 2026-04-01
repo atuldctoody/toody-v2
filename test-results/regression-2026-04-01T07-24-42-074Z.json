@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-01T06:29:16.330Z",
+  "timestamp": "2026-04-01T07:24:42.074Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 27482,
+  "durationMs": 30980,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 23688,
+      "durationMs": 24464,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "climate change",
           "error": null
         },
         "verification": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 27448,
+      "durationMs": 30942,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Energy",
+          "topic": "Emotional Intelligence",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 3,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.9,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23156,
+      "durationMs": 28317,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "Social Capital",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4,
           "error": null
         },
         "audio": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
           "error": null
         }
       }
