@@ -1,0 +1,389 @@
+[
+  {
+    "id": "f3983cfd-7c04-4c3e-98f4-87f97149e877",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a fascinating field that explores the intricate and diverse ecosystems within our oceans. One of the most notable aspects of marine ecosystems is the role of coral reefs. Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor. This staggering statistic highlights the significance of these ecosystems in maintaining marine biodiversity. Furthermore, coral reefs act as natural barriers, protecting coastal areas from erosion and storm surges. \n\nIn addition to coral reefs, the deep sea presents a unique environment that has intrigued scientists for decades. Bioluminescence occurs in over 90% of deep-sea creatures as an adaptation to the absence of sunlight in their environment. This remarkable phenomenon allows species to communicate, attract mates, and deter predators in the pitch-black depths of the ocean. Recent studies suggest that rising ocean temperatures may accelerate the metabolism of certain deep-sea organisms, though further research is needed to confirm this hypothesis. Understanding these changes is crucial, as they could have profound implications for deep-sea biodiversity and ecosystems. \n\nMarine mammals, such as whales and seals, also play integral roles in oceanic ecosystems. Most marine mammals typically return to the same breeding grounds each year, demonstrating strong site fidelity to their natal regions. This behavior ensures that they exploit familiar environments that are conducive to raising offspring, thus maintaining population stability. The fidelity to natal regions can also make these species vulnerable to environmental changes and human disturbances, highlighting the need for conservation efforts. \n\nThe interconnectedness of marine ecosystems is further exemplified by the impact of sea otters on kelp forests. Following the introduction of sea otters to the coastal ecosystem in 1995, kelp forest coverage increased by 40% over the subsequent decade. Sea otters are keystone species that help control sea urchin populations, which in turn allows kelp forests to thrive. This example underscores the importance of preserving species that have balancing effects on their ecosystems.\n\nOverall, the complexity and interdependence of marine life demand continued research and conservation efforts to safeguard these vital ecosystems against the threats of climate change and human activities.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs serve as crucial living environments for around a quarter of marine species.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "anchorText": "provide essential habitats",
+        "complexityLevel": 2,
+        "explanation": "The passage confirms this using synonyms: 'provide essential habitats' = 'serve as crucial living environments' and '25%' = 'a quarter'.",
+        "errorReason": "synonymTrap",
+        "keySentence": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Rising ocean temperatures definitely increase the metabolic rate of deep-sea organisms.",
+        "answer": "Not Given",
+        "logicType": "CAUTIOUS_LANGUAGE",
+        "passageAnchor": "Recent studies suggest that rising ocean temperatures may accelerate the metabolism of certain deep-sea organisms, though further research is needed to confirm this hypothesis.",
+        "anchorText": "may accelerate",
+        "complexityLevel": 3,
+        "explanation": "The passage uses cautious language 'may accelerate' and states further research is needed, so definitive confirmation is not provided.",
+        "errorReason": "cautiousLanguageMissed",
+        "keySentence": "Recent studies suggest that rising ocean temperatures may accelerate the metabolism of certain deep-sea organisms, though further research is needed to confirm this hypothesis.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "Bioluminescence does not occur in the majority of deep-sea creatures.",
+        "answer": "False",
+        "logicType": "NEGATION_INVERSION",
+        "passageAnchor": "Bioluminescence occurs in over 90% of deep-sea creatures as an adaptation to the absence of sunlight in their environment.",
+        "anchorText": "occurs in over 90%",
+        "complexityLevel": 2,
+        "explanation": "The passage states bioluminescence occurs in over 90% of deep-sea creatures, which is the majority, directly contradicting the statement's negation.",
+        "errorReason": "negationOverlooked",
+        "keySentence": "Bioluminescence occurs in over 90% of deep-sea creatures as an adaptation to the absence of sunlight in their environment.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "All marine mammals always return to the same breeding grounds annually.",
+        "answer": "False",
+        "logicType": "SCOPE_QUALIFIER",
+        "passageAnchor": "Most marine mammals typically return to the same breeding grounds each year, demonstrating strong site fidelity to their natal regions.",
+        "anchorText": "Most marine mammals typically",
+        "complexityLevel": 4,
+        "explanation": "The passage uses qualifiers 'most' and 'typically' indicating exceptions exist, while the statement uses absolutes 'all' and 'always'.",
+        "errorReason": "scopeError",
+        "keySentence": "Most marine mammals typically return to the same breeding grounds each year, demonstrating strong site fidelity to their natal regions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The reintroduction of sea otters caused kelp forests to expand by 40%.",
+        "answer": "Not Given",
+        "logicType": "CAUSAL_ASSUMPTION",
+        "passageAnchor": "Following the introduction of sea otters to the coastal ecosystem in 1995, kelp forest coverage increased by 40% over the subsequent decade.",
+        "anchorText": "Following the introduction",
+        "complexityLevel": 4,
+        "explanation": "The passage presents a temporal sequence using 'following' but does not establish causation; the kelp increase may have resulted from other factors.",
+        "errorReason": "notGivenMarkedFalse",
+        "keySentence": "Following the introduction of sea otters to the coastal ecosystem in 1995, kelp forest coverage increased by 40% over the subsequent decade.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-01T16:07:21.724Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "CAUTIOUS_LANGUAGE": 1,
+        "NEGATION_INVERSION": 1,
+        "SCOPE_QUALIFIER": 1,
+        "CAUSAL_ASSUMPTION": 1
+      },
+      "complexityProfile": {
+        "avg": 3,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "f1b8a7c3-43dd-4ed1-aaba-655c83314c8d",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a rapidly evolving field that plays a crucial role in understanding the complexities of ocean ecosystems and their inhabitants. One of the most remarkable features of marine ecosystems is coral reefs. Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor. This makes them vital for maintaining the biodiversity of marine life. However, these ecosystems are under threat from various anthropogenic activities, including climate change and pollution. Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals. This presents a significant challenge as it could disrupt the balance of marine food webs and lead to declines in fish populations. Additionally, deep-sea organisms exhibit fascinating adaptations to their environment. Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage. This adaptation highlights the unique evolutionary paths taken by marine species to survive in the deep ocean's harsh conditions. Marine mammals also showcase incredible physiological adaptations. Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours. These adaptations are crucial for their survival, allowing them to hunt efficiently and evade predators. Conservation efforts have shown promising results in some areas. Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020. This underscores the importance of protective measures in reversing some of the damage inflicted on marine ecosystems. As marine biology continues to advance, it is essential to integrate scientific findings into conservation policies to ensure the sustainability of oceanic ecosystems for future generations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs serve as crucial living environments for around a quarter of marine species.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "anchorText": "provide essential habitats",
+        "complexityLevel": 2,
+        "explanation": "The passage confirms this using synonyms: 'provide essential habitats' = 'serve as crucial living environments' and '25%' = 'a quarter'.",
+        "errorReason": "synonymTrap",
+        "keySentence": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Ocean acidification impairs the capacity of some fish species to identify predators using their sense of smell.",
+        "answer": "Not Given",
+        "logicType": "CAUTIOUS_LANGUAGE",
+        "passageAnchor": "Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals.",
+        "anchorText": "may be affecting",
+        "complexityLevel": 3,
+        "explanation": "The passage uses cautious language 'may be affecting' which indicates possibility, while the statement presents it as established fact.",
+        "errorReason": "cautiousLanguageMissed",
+        "keySentence": "Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "Bioluminescence is not present in the majority of deep-sea creatures.",
+        "answer": "False",
+        "logicType": "NEGATION_INVERSION",
+        "passageAnchor": "Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage.",
+        "anchorText": "occurs in over 90%",
+        "complexityLevel": 2,
+        "explanation": "The passage states bioluminescence occurs in over 90% of deep-sea organisms, directly contradicting the statement that it is not present in the majority.",
+        "errorReason": "negationOverlooked",
+        "keySentence": "Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "All marine mammals are able to hold their breath for prolonged durations underwater.",
+        "answer": "False",
+        "logicType": "SCOPE_QUALIFIER",
+        "passageAnchor": "Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours.",
+        "anchorText": "Most marine mammals",
+        "complexityLevel": 4,
+        "explanation": "The passage uses the qualifier 'most' indicating not all marine mammals have this ability, while the statement incorrectly claims 'all' do.",
+        "errorReason": "scopeError",
+        "keySentence": "Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The establishment of marine protected areas caused fish populations to increase by 40% over a five-year period.",
+        "answer": "Not Given",
+        "logicType": "CAUSAL_ASSUMPTION",
+        "passageAnchor": "Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020.",
+        "anchorText": "Following the implementation",
+        "complexityLevel": 4,
+        "explanation": "The passage shows temporal sequence using 'following' but does not establish causation, while the statement assumes the protected areas caused the increase.",
+        "errorReason": "notGivenMarkedFalse",
+        "keySentence": "Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-01T16:07:14.195Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "CAUTIOUS_LANGUAGE": 1,
+        "NEGATION_INVERSION": 1,
+        "SCOPE_QUALIFIER": 1,
+        "CAUSAL_ASSUMPTION": 1
+      },
+      "complexityProfile": {
+        "avg": 3,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "414c167e-17d4-4e33-bf45-8cfeffb29938",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a field that explores the vast diversity of life within ocean environments, contributing significantly to our understanding of ecological dynamics and conservation needs. One of the most remarkable ecosystems within the marine environment is the coral reef. Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor. This underscores their critical role in maintaining marine biodiversity. However, these ecosystems face numerous threats, including climate change and ocean acidification. Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals, posing a threat to their survival and the overall health of reef ecosystems.\n\nIn addition to coral reefs, the deep-sea environment presents another fascinating aspect of marine biology. Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage. This adaptation highlights the complex interactions and survival strategies developed by marine organisms in response to their environment. The study of such phenomena not only enriches our knowledge of marine life but also inspires technological innovations, such as bio-inspired lighting and communication systems.\n\nMarine mammals contribute another layer of complexity to the understanding of marine biology. Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours. This physiological adaptation enables them to dive deep and exploit resources unavailable to other marine animals, illustrating the diverse strategies of marine life to thrive in varied oceanic conditions.\n\nConservation efforts have become increasingly crucial as human activities continue to impact marine environments. Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020. This positive outcome demonstrates the effectiveness of protected areas in enhancing marine biodiversity and suggests that strategic conservation measures can lead to significant ecological benefits.\n\nOverall, the field of marine biology provides invaluable insights into the intricate relationships and adaptations of marine organisms. By continuing to study and protect these diverse systems, we can ensure the sustainability of oceanic life for future generations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs offer crucial living environments for around a quarter of marine species.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "anchorText": "provide essential habitats",
+        "complexityLevel": 2,
+        "explanation": "The passage confirms this using synonyms: 'provide essential habitats' = 'offer crucial living environments' and '25%' = 'a quarter'.",
+        "errorReason": "synonymTrap",
+        "keySentence": "Coral reefs provide essential habitats for approximately 25% of all marine species, despite occupying less than 1% of the ocean floor.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Ocean acidification impairs the capacity of some fish species to sense predators using smell.",
+        "answer": "Not Given",
+        "logicType": "CAUTIOUS_LANGUAGE",
+        "passageAnchor": "Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals.",
+        "anchorText": "may be affecting",
+        "complexityLevel": 3,
+        "explanation": "The passage uses cautious language 'may be affecting' indicating possibility, while the statement presents it as established fact.",
+        "errorReason": "cautiousLanguageMissed",
+        "keySentence": "Recent studies suggest that increased ocean acidification may be affecting the ability of certain fish species to detect predators through olfactory signals.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "Bioluminescence does not occur in the majority of deep-sea creatures.",
+        "answer": "False",
+        "logicType": "NEGATION_INVERSION",
+        "passageAnchor": "Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage.",
+        "anchorText": "occurs in over 90%",
+        "complexityLevel": 2,
+        "explanation": "The passage states bioluminescence occurs in over 90% of deep-sea organisms, directly contradicting the statement that it does not occur in the majority.",
+        "errorReason": "negationOverlooked",
+        "keySentence": "Bioluminescence occurs in over 90% of deep-sea organisms, serving functions such as prey attraction, communication, and camouflage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "All marine mammals are able to hold their breath for prolonged durations.",
+        "answer": "False",
+        "logicType": "SCOPE_QUALIFIER",
+        "passageAnchor": "Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours.",
+        "anchorText": "Most",
+        "complexityLevel": 4,
+        "explanation": "The passage uses the qualifier 'most' indicating not all marine mammals have this ability, while the statement incorrectly claims 'all' do.",
+        "errorReason": "scopeError",
+        "keySentence": "Most marine mammals can hold their breath for extended periods, with some species capable of remaining submerged for up to two hours.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The establishment of marine protected areas caused fish populations to increase by 40%.",
+        "answer": "Not Given",
+        "logicType": "CAUSAL_ASSUMPTION",
+        "passageAnchor": "Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020.",
+        "anchorText": "Following",
+        "complexityLevel": 4,
+        "explanation": "The passage shows temporal sequence using 'following' but does not establish causation, while the statement assumes the protected areas caused the increase.",
+        "errorReason": "notGivenMarkedFalse",
+        "keySentence": "Following the implementation of marine protected areas in 2015, researchers observed a 40% increase in fish populations within these zones by 2020.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-01T16:07:17.528Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "CAUTIOUS_LANGUAGE": 1,
+        "NEGATION_INVERSION": 1,
+        "SCOPE_QUALIFIER": 1,
+        "CAUSAL_ASSUMPTION": 1
+      },
+      "complexityProfile": {
+        "avg": 3,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  }
+]
