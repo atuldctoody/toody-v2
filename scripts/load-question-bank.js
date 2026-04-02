@@ -1,5 +1,5 @@
 // scripts/load-question-bank.js
-// Uploads approved question-bank sets from data/question-bank.json to Firestore.
+// Uploads approved question-bank sets to Firestore — supports all 11 question types.
 //
 // Authentication: set GOOGLE_APPLICATION_CREDENTIALS to your service account key JSON path,
 // or pass --key-file <path> as a CLI flag.
@@ -8,30 +8,70 @@
 //   node scripts/load-question-bank.js [options]
 //
 // Flags:
+//   --type     TYPE    Question type to load (default: tfng). See VALID_TYPES below.
 //   --dry-run          Show what would be uploaded without writing to Firestore
-//   --band   N         Only upload sets for a specific band (e.g. 6.0)
-//   --key-file PATH    Path to Firebase service account key JSON (overrides GOOGLE_APPLICATION_CREDENTIALS)
+//   --band     N       Only upload sets for a specific band (e.g. 6.0)
+//   --key-file PATH    Path to Firebase service account key JSON
 
-import { readFileSync }               from 'fs';
-import { resolve, dirname }           from 'path';
-import { fileURLToPath }              from 'url';
-import { initializeApp, cert }        from 'firebase-admin/app';
-import { getFirestore, FieldValue }   from 'firebase-admin/firestore';
+import { readFileSync, existsSync } from 'fs';
+import { resolve, dirname }         from 'path';
+import { fileURLToPath }            from 'url';
+import { initializeApp, cert }      from 'firebase-admin/app';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT      = resolve(__dirname, '..');
+
+const VALID_TYPES = [
+  'tfng', 'ynng', 'summary-completion', 'sentence-completion',
+  'multiple-choice', 'short-answer', 'matching-headings',
+  'matching-information', 'matching-features', 'listening-mc', 'listening-form',
+];
+
+const TYPE_BANK_FILES = {
+  'tfng':                 'data/question-bank-tfng.json',
+  'ynng':                 'data/question-bank-ynng.json',
+  'summary-completion':   'data/question-bank-summary-completion.json',
+  'sentence-completion':  'data/question-bank-sentence-completion.json',
+  'multiple-choice':      'data/question-bank-multiple-choice.json',
+  'short-answer':         'data/question-bank-short-answer.json',
+  'matching-headings':    'data/question-bank-matching-headings.json',
+  'matching-information': 'data/question-bank-matching-information.json',
+  'matching-features':    'data/question-bank-matching-features.json',
+  'listening-mc':         'data/question-bank-listening-mc.json',
+  'listening-form':       'data/question-bank-listening-form.json',
+};
+
+const TYPE_COLLECTIONS = {
+  'tfng':                 'questionBank-tfng',
+  'ynng':                 'questionBank-ynng',
+  'summary-completion':   'questionBank-summary-completion',
+  'sentence-completion':  'questionBank-sentence-completion',
+  'multiple-choice':      'questionBank-multiple-choice',
+  'short-answer':         'questionBank-short-answer',
+  'matching-headings':    'questionBank-matching-headings',
+  'matching-information': 'questionBank-matching-information',
+  'matching-features':    'questionBank-matching-features',
+  'listening-mc':         'questionBank-listening-mc',
+  'listening-form':       'questionBank-listening-form',
+};
 
 // ── CLI ───────────────────────────────────────────────────────────────────────
 
 function parseArgs() {
   const args = process.argv.slice(2);
-  const opts = { dryRun: false, band: null, keyFile: null };
+  const opts = { type: 'tfng', dryRun: false, band: null, keyFile: null };
   for (let i = 0; i < args.length; i++) {
     switch (args[i]) {
-      case '--dry-run':  opts.dryRun  = true;                     break;
-      case '--band':     opts.band    = parseFloat(args[++i]);    break;
-      case '--key-file': opts.keyFile = args[++i];                break;
+      case '--type':     opts.type    = args[++i];                  break;
+      case '--dry-run':  opts.dryRun  = true;                       break;
+      case '--band':     opts.band    = parseFloat(args[++i]);      break;
+      case '--key-file': opts.keyFile = args[++i];                  break;
     }
+  }
+  if (!VALID_TYPES.includes(opts.type)) {
+    console.error(`Error: unknown --type "${opts.type}". Valid types: ${VALID_TYPES.join(', ')}`);
+    process.exit(1);
   }
   return opts;
 }
@@ -66,10 +106,17 @@ function initFirebase(keyFile) {
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const opts = parseArgs();
+  const opts       = parseArgs();
+  const bankFile   = TYPE_BANK_FILES[opts.type];
+  const collId     = TYPE_COLLECTIONS[opts.type];
 
-  // Load bank
-  const bankPath = resolve(ROOT, 'data', 'question-bank.json');
+  // For tfng: fall back to legacy question-bank.json if type-specific file doesn't exist
+  let bankPath = resolve(ROOT, bankFile);
+  if (opts.type === 'tfng' && !existsSync(bankPath)) {
+    const legacy = resolve(ROOT, 'data', 'question-bank.json');
+    if (existsSync(legacy)) bankPath = legacy;
+  }
+
   let bank;
   try {
     bank = JSON.parse(readFileSync(bankPath, 'utf8'));
@@ -79,7 +126,7 @@ async function main() {
   }
 
   if (!Array.isArray(bank)) {
-    console.error('Error: question-bank.json is not a JSON array.');
+    console.error(`Error: ${bankFile} is not a JSON array.`);
     process.exit(1);
   }
 
@@ -93,12 +140,12 @@ async function main() {
   const totalQuestions = sets.reduce((n, s) => n + (s.questions?.length || 0), 0);
 
   console.log('\nToody Question Bank Loader');
+  console.log(`Type:  ${opts.type}  →  ${collId}`);
   console.log(`Mode:  ${opts.dryRun ? 'DRY RUN (no writes)' : 'LIVE'}`);
   if (opts.band !== null) console.log(`Band filter: ${opts.band}`);
   console.log(`Bank: ${totalSets} approved sets / ${totalQuestions} questions\n`);
 
   if (opts.dryRun) {
-    // Show preview without touching Firestore
     console.log('Sets that would be uploaded:');
     sets.forEach((s, i) => {
       const qCount = s.questions?.length || 0;
@@ -114,7 +161,7 @@ async function main() {
 
   // Init Firebase
   const db         = initFirebase(opts.keyFile);
-  const collection = db.collection('questionBank');
+  const collection = db.collection(collId);
 
   // Fetch existing IDs in one query — avoid duplicates
   process.stdout.write('Fetching existing Firestore IDs... ');
@@ -163,7 +210,7 @@ async function main() {
   console.log(`Uploaded: ${uploaded} new set${uploaded !== 1 ? 's' : ''}`);
   console.log(`Skipped:  ${skipped} already in Firestore`);
   console.log(`Total active in bank: ${totalActive} sets / ${activeQs} questions`);
-  console.log(`Collection: questionBank`);
+  console.log(`Collection: ${collId}`);
   console.log(`${SEP}\n`);
 }
 

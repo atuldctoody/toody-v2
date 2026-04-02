@@ -1,0 +1,724 @@
+[
+  {
+    "id": "668c775f-c444-43fd-b6cd-bacf91498953",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy refers to the power generated from natural resources that are constantly replenished. These include sunlight, wind, rain, tides, and geothermal heat. Unlike fossil fuels, which are finite and contribute significantly to greenhouse gas emissions, renewable energy sources are considered more environmentally friendly and sustainable. Solar energy, for example, harnesses sunlight through solar panels and converts it into electricity. This method is increasingly popular due to the declining cost of solar panel production and its minimal environmental impact. Wind energy, captured using wind turbines, is another significant renewable source. Although it requires specific geographical conditions to be efficient, advancements in technology have made wind farms more viable across various regions. Despite these benefits, renewable energy systems face challenges, such as the intermittent nature of some resources, which requires effective energy storage solutions. Moreover, the initial setup costs and infrastructure development can be considerable, although they are often offset by long-term savings and governmental incentives. Overall, transitioning to renewable energy is a key strategy in reducing carbon footprints and achieving energy security in the future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is one main advantage of solar energy mentioned in the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is the most affordable energy source available.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "It eliminates all greenhouse gas emissions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "It does not require any specific geographical conditions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Its environmental impact is minimal.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because the passage mentions that solar energy has a minimal environmental impact. Option B is incorrect as geographical conditions are mentioned in relation to wind energy, not solar. Option C is incorrect because the passage does not claim solar energy eliminates all emissions. Option D overstates the affordability of solar energy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "According to the passage, what is a challenge associated with renewable energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The complete reliance on governmental incentives.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "The high cost of fossil fuels.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "The finite availability of sunlight and wind.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "The intermittent nature of some resources.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because the intermittent nature of renewable resources is explicitly mentioned as a challenge. Option B is incorrect because it reverses the concept of renewability. Option C is irrelevant as the passage discusses the cost of renewable, not fossil fuels. Option D overstates the role of governmental incentives.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What role do technological advancements play in wind energy according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They completely eliminate the need for geographical considerations.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "They reduce the cost of solar panel production.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "They increase the intermittency of wind energy.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "They make wind farms viable in more regions.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because the passage states that technological advancements have made wind farms more viable in various regions. Option B overstates the impact by suggesting complete elimination of geographical needs. Option C incorrectly links technological advancements in wind energy to solar panel production. Option D reverses the impact of technology on wind energy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does the passage describe the relationship between fossil fuels and greenhouse gases?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Fossil fuels significantly contribute to greenhouse gas emissions.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Fossil fuels have no impact on greenhouse gas levels.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Greenhouse gases are primarily produced by solar energy.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Fossil fuels are a renewable source of energy.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as the passage explicitly states that fossil fuels significantly contribute to greenhouse gas emissions. Option B reverses this relationship. Option C overstates by incorrectly categorizing fossil fuels as renewable. Option D incorrectly attributes greenhouse gas production to solar energy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is one reason the passage gives for the popularity of solar energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The declining cost of solar panel production.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The environmental impact of wind energy.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "The unlimited availability of solar panels.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "The absence of any setup costs.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct because the passage mentions the declining cost as a factor in solar energy's popularity. Option B overstates the availability of panels. Option C reverses the statement about costs, as setup costs do exist. Option D is irrelevant as it pertains to wind energy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 6,
+        "text": "What does the passage suggest about the future of renewable energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It contributes to increased greenhouse gas emissions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "B",
+            "text": "It will completely replace all other energy sources soon.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It is a temporary solution until fossil fuels are replenished.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is essential for reducing carbon footprints.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct as the passage indicates that renewable energy is key to reducing carbon footprints. Option B overstates the transition by suggesting complete replacement. Option C reverses the nature of renewables as a solution. Option D misrepresents the impact of renewables.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:17:53.486Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "ef41d741-691d-4dc8-9338-27f0614e74d9",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy involves the actions that governments take in the economic field. It covers the systems for setting levels of taxation, government budgets, the money supply, and interest rates, as well as the labor market, national ownership, and many other areas of government interventions into the economy. Governments use economic policies to influence the economy. For instance, fiscal policy may be used to stimulate an economy by increasing government spending or cutting taxes. Monetary policy, meanwhile, involves managing the nation's money supply and interest rates to control inflation and stabilize the currency. However, the effectiveness of these policies can vary. Some economists argue that too much intervention may lead to inefficiencies, while others suggest that without government action, markets may fail to address significant economic challenges. Balancing these perspectives is crucial for policymakers to ensure sustainable economic growth.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the primary purpose of economic policy according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To ensure all economic challenges are addressed",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "To decrease government intervention",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "To increase government spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "To influence the economy through government actions",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A is correct as it paraphrases the passage's description of economic policy as a tool to influence the economy. B is incorrect as it mentions only one part of fiscal policy. C reverses the passage's meaning, which discusses both intervention and its potential issues. D exaggerates the passage's claim, which does not guarantee solving all economic challenges.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "According to the passage, what might be a downside of too much government intervention?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It will reduce government spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "It can stabilize the currency",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It can lead to inefficiencies",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "It is always beneficial for economic growth",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "A is correct as it accurately reflects the passage's point about inefficiencies. B reverses the idea, as intervention does not necessarily reduce spending. C overstates the passage's claims about intervention benefits. D mentions a potential outcome of monetary policy, not intervention's downside.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "How does the passage suggest fiscal policy can stimulate the economy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By decreasing interest rates",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "By controlling the money supply",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "By addressing all economic challenges directly",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "By cutting taxes or increasing government spending",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A correctly paraphrases how fiscal policy can stimulate the economy. B is related to monetary policy, not fiscal. C reverses the methods associated with fiscal policy. D exaggerates the passage's claims.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What does the passage imply about the role of policymakers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They should avoid any form of government intervention",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "They primarily focus on reducing inflation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "They must balance different economic perspectives",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "They are responsible for solving all economic problems",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "A is correct as it accurately reflects the need for policymakers to balance perspectives. B reverses the notion of intervention's necessity. C mentions an aspect of monetary policy but not the overall role. D overstates the passage's claims about policymakers' responsibilities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is one argument mentioned in the passage for government intervention?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It reduces the money supply and stabilizes the economy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "Intervention always leads to economic success",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It focuses solely on national ownership",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Markets may fail to address significant challenges",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A correctly paraphrases an argument for intervention. B overstates the passage's claims about intervention. C reverses the cause and effect mentioned in the passage. D mentions a component of intervention but not an argument for it.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:17:43.552Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.3,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "6b93fec1-357c-4753-b206-d5c9d5bf4ec4",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "The Role of Memory in Emotional Experiences",
+    "passage": "Memory plays a crucial role in how individuals process and respond to emotional experiences. Research in psychology suggests that memories of emotional events are often more vivid and long-lasting than neutral events. This phenomenon is attributed to the activation of the amygdala, a brain region involved in emotion processing, which enhances the encoding of emotional memories. However, the accuracy of these memories can be influenced by various factors, including stress levels at the time of the event and during recall. Interestingly, while positive emotions are generally associated with more accurate memories, negative emotions can lead to distortions. Additionally, the retrieval of emotional memories can impact current mood and future behavior. For instance, recalling a happy memory can elevate mood, while recalling a negative event may exacerbate feelings of distress.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What role does the amygdala play in memory processing?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It ensures all memories are vivid and long-lasting.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "It prevents the encoding of emotional memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "It stores all types of memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It enhances the storage of emotional memories.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because the passage states that the amygdala enhances the encoding of emotional memories. Option B mentions memory storage but not specific to the amygdala. Option C reverses the role by saying it prevents encoding, which is incorrect. Option D overstates by implying all memories are vivid and long-lasting.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "How do positive emotions affect memory accuracy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They cause memories to fade quickly.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "They have no effect on memory accuracy.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "They always distort memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "They generally lead to more accurate memories.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because the passage indicates that positive emotions are linked with more accurate memories. Option B reverses the effect by suggesting distortion. Option C incorrectly suggests no effect, and option D overstates by claiming quick fading.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What can impact the accuracy of emotional memories?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Stress levels during the event and recall.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Only the initial emotional response.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "The absence of the amygdala.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "The duration of the memory.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as the passage mentions stress levels as a factor affecting memory accuracy. Option B is incorrect as the duration is not discussed. Option C reverses the role of the amygdala, and option D overstates by focusing solely on the initial response.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What is the effect of recalling a happy memory?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It completely changes personality.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "It has no effect on future behavior.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It can cause distress.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It can improve mood.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct because recalling happy memories is said to elevate mood. Option B reverses the effect by suggesting distress. Option C is incorrect as it contradicts the passage, and option D overstates by claiming a complete personality change.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "How do negative emotions affect memory?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They make memories more vivid.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "B",
+            "text": "They enhance all memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "They completely erase memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "They can lead to memory distortions.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct as the passage indicates negative emotions can distort memories. Option B reverses by suggesting enhancement. Option C is incorrect as it doesn't specify distortion, and option D overstates by claiming memory erasure.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:17:47.752Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  }
+]

@@ -1,0 +1,240 @@
+[
+  {
+    "id": "2a24cbba-d9bc-49f1-a282-b0f862945a4c",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Cognitive Development in Children",
+    "passage": "Cognitive development in children is a complex process that involves the maturation of thought processes and the tools available for understanding the world. Jean Piaget, a prominent psychologist, proposed that this development occurs through a series of stages. Each stage is characterized by distinct cognitive capabilities. For example, in the sensorimotor stage, infants learn through physical interaction with their environment. As children grow, they enter the preoperational stage, where symbolic thought emerges, allowing them to use language and mental imagery. However, they still struggle with understanding the perspectives of others. In the concrete operational stage, logical thinking becomes more apparent, and children begin to grasp the concept of conservation. Finally, the formal operational stage is marked by the ability to engage in abstract reasoning, which is crucial for problem-solving and scientific thinking. Piaget's theory has significantly influenced our understanding of child psychology, although some researchers argue that cognitive development is more continuous than stage-like.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "sensorimotor",
+        "explanation": "The sensorimotor stage involves learning through physical interaction.",
+        "keySentence": "For example, in the sensorimotor stage, infants learn through physical interaction with their environment.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sensorimotor",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "symbolic",
+        "explanation": "Symbolic thought allows for language use and mental imagery.",
+        "keySentence": "As children grow, they enter the preoperational stage, where symbolic thought emerges, allowing them to use language and mental imagery.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "symbolic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "concrete",
+        "explanation": "The concrete operational stage is characterized by logical thinking.",
+        "keySentence": "In the concrete operational stage, logical thinking becomes more apparent, and children begin to grasp the concept of conservation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "concrete",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "formal",
+        "explanation": "The formal operational stage is marked by abstract reasoning.",
+        "keySentence": "Finally, the formal operational stage is marked by the ability to engage in abstract reasoning, which is crucial for problem-solving and scientific thinking.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "formal",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "continuous",
+        "explanation": "Some researchers argue that cognitive development is more continuous than stage-like.",
+        "keySentence": "Piaget's theory has significantly influenced our understanding of child psychology, although some researchers argue that cognitive development is more continuous than stage-like.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "continuous",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Jean Piaget's theory of cognitive development describes how children progress through distinct stages. In the initial [1] stage, infants learn via physical interaction. The next stage sees the emergence of [2] thought, enhancing language use. Logical thinking is evident in the [3] operational stage, where children understand conservation. Abstract reasoning, key in [4], is developed last. Some suggest development is more [5] than stage-like.",
+      "wordBank": [
+        "sensorimotor",
+        "symbolic",
+        "concrete",
+        "formal",
+        "continuous",
+        "linear",
+        "fixed",
+        "sequential"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:55.870Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.2,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 5,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "9170c73c-2a0e-4aac-947e-c3eaca5a3f7d",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "In a groundbreaking discovery, archaeologists have unearthed an ancient settlement that sheds new light on prehistoric human life. The settlement, located in a remote area, consists of several well-preserved structures and artifacts. These findings suggest a complex society with advanced knowledge of agriculture and craftsmanship. Excavations revealed pottery fragments and tools that indicate a high degree of specialization among the inhabitants. The site also includes evidence of trade, with materials not native to the region. This discovery challenges previous assumptions about the social and economic structures of prehistoric communities. Researchers plan to conduct further studies to gain deeper insights into the lives of these early inhabitants.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "groundbreaking",
+        "explanation": "The summary uses 'made a discovery' which is synonymous with 'groundbreaking discovery' mentioned in the passage.",
+        "keySentence": "In a groundbreaking discovery, archaeologists have unearthed an ancient settlement that sheds new light on prehistoric human life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "groundbreaking",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "well-preserved",
+        "explanation": "The summary refers to 'includes structures' which corresponds to 'well-preserved structures' found in the passage.",
+        "keySentence": "The settlement, located in a remote area, consists of several well-preserved structures and artifacts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "well-preserved",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "knowledge",
+        "explanation": "The summary's 'advanced' is linked to 'advanced knowledge of agriculture and craftsmanship' in the passage.",
+        "keySentence": "These findings suggest a complex society with advanced knowledge of agriculture and craftsmanship.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "knowledge",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "native",
+        "explanation": "The passage mentions 'materials not native to the region', indicating non-native materials were found.",
+        "keySentence": "The site also includes evidence of trade, with materials not native to the region.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "native",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "structures",
+        "explanation": "The passage challenges 'previous assumptions about the social and economic structures' of communities.",
+        "keySentence": "This discovery challenges previous assumptions about the social and economic structures of prehistoric communities.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "structures",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Archaeologists have made a [1] discovery of an ancient settlement that offers new insights into prehistoric human life. The site includes [2] structures and artifacts, suggesting a complex society with advanced [3]. Evidence of trade was found, indicating materials not [4] to the area. This challenges earlier beliefs about prehistoric [5].",
+      "wordBank": [
+        "groundbreaking",
+        "well-preserved",
+        "knowledge",
+        "native",
+        "structures",
+        "primitive",
+        "tools",
+        "local"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:57.403Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  }
+]

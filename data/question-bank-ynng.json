@@ -1,0 +1,310 @@
+[
+  {
+    "id": "9550ea62-d7a0-44d5-9ac2-d83ecdfc8c29",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "The discovery of the Denisovan cave paintings in Siberia is undoubtedly one of the most significant archaeological breakthroughs of the past decade. These remarkable artworks provide a unique window into the cognitive and cultural capabilities of an ancient hominin group long overshadowed by their more famous relatives, the Neanderthals and early modern humans. I believe these findings compel us to reassess our understanding of prehistoric human development and migration patterns.\n\nIn my view, the stratigraphic evidence at the site strongly supports the conclusion that these paintings predate the Bronze Age. Critics have suggested that the artifacts date to the Bronze Age, but this interpretation is clearly flawed given the stratigraphic evidence. The layers above and below the paintings contain no Bronze Age material, indicating that these artworks were created much earlier.\n\nMoreover, the discovery site has yielded a wealth of other artifacts, including tools and remnants of structures. Several archaeologists have argued that the settlement was abandoned due to climate change, while others contend that warfare was the primary cause. It is clear that both factors could have played a role, but further research is warranted to ascertain the precise sequence of events that led to the site's desertion.\n\nThe intricate burial practices observed at the site could arguably indicate a hierarchical social structure among these early communities. The presence of grave goods and differentiated burial sites suggests a society with complex social stratification. Such findings are crucial as they challenge the simplistic view of prehistoric communities as purely egalitarian.\n\nProponents of the early migration theory cite radiocarbon dating as conclusive evidence, whereas skeptics point to contamination issues that may have compromised the samples. It is vital to address these concerns through rigorous methodological scrutiny to ensure the reliability of these dates. In my opinion, resolving these debates is essential to constructing an accurate narrative of human prehistory.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes the Denisovan cave paintings represent a major archaeological discovery.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "The discovery of the Denisovan cave paintings in Siberia is undoubtedly one of the most significant archaeological breakthroughs of the past decade.",
+        "anchorText": "undoubtedly",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — the author's definite opinion marker 'undoubtedly' shows clear agreement with the significance claim.",
+        "reasoning": {
+          "step_1_locate": "The discovery of the Denisovan cave paintings in Siberia is undoubtedly one of the most significant archaeological breakthroughs of the past decade.",
+          "step_2_compare": "Author says: undoubtedly one of the most significant archaeological breakthroughs. Statement claims: writer believes it represents a major archaeological discovery.",
+          "step_3_logic": "DIRECT_MATCH — the author's definite opinion marker 'undoubtedly' shows clear agreement with the significance claim.",
+          "step_4_eliminate": "Not 'No' because the author explicitly affirms significance. Not 'Not Given' because 'undoubtedly' is a clear authorial stance, not neutral reporting."
+        },
+        "keySentence": "The discovery of the Denisovan cave paintings in Siberia is undoubtedly one of the most significant archaeological breakthroughs of the past decade.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer agrees with critics who date the artifacts to the Bronze Age.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "Critics have suggested that the artifacts date to the Bronze Age, but this interpretation is clearly flawed given the stratigraphic evidence.",
+        "anchorText": "clearly flawed",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — the author explicitly calls the critics' interpretation 'clearly flawed', showing direct disagreement.",
+        "reasoning": {
+          "step_1_locate": "Critics have suggested that the artifacts date to the Bronze Age, but this interpretation is clearly flawed given the stratigraphic evidence.",
+          "step_2_compare": "Author says: this interpretation is clearly flawed. Statement claims: writer agrees with critics.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author explicitly calls the critics' interpretation 'clearly flawed', showing direct disagreement.",
+          "step_4_eliminate": "Not 'Yes' because the author rejects rather than supports the Bronze Age dating. Not 'Not Given' because 'clearly flawed' is an explicit authorial judgment, not neutral reporting."
+        },
+        "keySentence": "Critics have suggested that the artifacts date to the Bronze Age, but this interpretation is clearly flawed given the stratigraphic evidence.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes climate change caused the abandonment of the settlement.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Several archaeologists have argued that the settlement was abandoned due to climate change, while others contend that warfare was the primary cause.",
+        "anchorText": "have argued / contend",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_REPORTING — the author presents two competing views from researchers without endorsing either position.",
+        "reasoning": {
+          "step_1_locate": "Several archaeologists have argued that the settlement was abandoned due to climate change, while others contend that warfare was the primary cause.",
+          "step_2_compare": "Author says: archaeologists have argued [climate change] / others contend [warfare]. Statement claims: writer believes climate change was the cause.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author presents two competing views from researchers without endorsing either position.",
+          "step_4_eliminate": "Not 'Yes' because the author only reports others' arguments, not their own belief. Not 'No' because the author doesn't reject climate change, just doesn't take a stance."
+        },
+        "keySentence": "Several archaeologists have argued that the settlement was abandoned due to climate change, while others contend that warfare was the primary cause.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that the burial practices prove a hierarchical social structure existed.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The intricate burial practices observed at the site could arguably indicate a hierarchical social structure among these early communities.",
+        "anchorText": "could arguably",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_UNCERTAINTY — 'could arguably' expresses tentative possibility, not the definite certainty claimed in the statement.",
+        "reasoning": {
+          "step_1_locate": "The intricate burial practices observed at the site could arguably indicate a hierarchical social structure among these early communities.",
+          "step_2_compare": "Author says: could arguably indicate. Statement claims: writer is certain that practices prove hierarchy.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — 'could arguably' expresses tentative possibility, not the definite certainty claimed in the statement.",
+          "step_4_eliminate": "Not 'Yes' because 'could arguably' shows uncertainty, not certainty. Not 'No' because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "The intricate burial practices observed at the site could arguably indicate a hierarchical social structure among these early communities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the early migration theory based on radiocarbon dating evidence.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of the early migration theory cite radiocarbon dating as conclusive evidence, whereas skeptics point to contamination issues that may have compromised the samples.",
+        "anchorText": "Proponents / whereas skeptics",
+        "complexityLevel": 5,
+        "explanation": "BALANCED_NEUTRALITY — the author presents both sides using parallel structure without endorsing either position.",
+        "reasoning": {
+          "step_1_locate": "Proponents of the early migration theory cite radiocarbon dating as conclusive evidence, whereas skeptics point to contamination issues that may have compromised the samples.",
+          "step_2_compare": "Author says: Proponents cite [evidence] whereas skeptics point to [problems]. Statement claims: writer supports the early migration theory.",
+          "step_3_logic": "BALANCED_NEUTRALITY — the author presents both sides using parallel structure without endorsing either position.",
+          "step_4_eliminate": "Not 'Yes' because the author never states personal support for the theory. Not 'No' because the author doesn't reject it either, just reports both perspectives."
+        },
+        "keySentence": "Proponents of the early migration theory cite radiocarbon dating as conclusive evidence, whereas skeptics point to contamination issues that may have compromised the samples.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:36.177Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.6,
+        "min": 2,
+        "max": 5
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "bcecaa11-d1d3-461c-94fa-f86801c50c8c",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy has become a pivotal point of discussion in contemporary energy policy debates. With the increasing urgency to combat climate change, it is clear that transitioning to sustainable energy sources is no longer just an option but a necessity. However, I firmly reject the notion that renewable energy sources cannot provide reliable baseload power for industrial economies. Technological advancements, particularly in energy storage, have made it increasingly feasible for renewables to meet the demands traditionally satisfied by fossil fuels. \n\nRecent studies from the International Energy Agency indicate that solar panel efficiency has improved by 40% over the past decade, though critics argue this progress remains insufficient for meeting global climate targets. In my view, while the improvement is promising, it is vital to continue investing in research and development to enhance efficiency further. The rapid decline in battery storage costs could arguably transform the economic viability of wind and solar energy within the next two decades. This transformation could significantly alter the energy landscape, making renewable sources more competitive and accessible. \n\nProponents of nuclear energy emphasize its capacity for continuous power generation without carbon emissions, while environmental groups highlight the unresolved challenges of radioactive waste disposal and decommissioning costs. While nuclear energy does offer a potential bridge in the transition to a low-carbon future, I believe the risks and long-term environmental impacts require careful consideration and management. \n\nIt is absolutely essential that governments implement carbon pricing mechanisms to accelerate the transition away from fossil fuels. Such policies would not only incentivize the adoption of cleaner technologies but also reflect the true environmental costs of carbon emissions. In my opinion, without decisive governmental action, the pace of change may be too slow to avert the most severe consequences of climate change. In conclusion, embracing a diversified energy mix that includes renewables, alongside effective policy frameworks, is imperative for a sustainable future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that renewable energy sources are incapable of supplying consistent power to industrial economies.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, I firmly reject the notion that renewable energy sources cannot provide reliable baseload power for industrial economies.",
+        "anchorText": "I firmly reject the notion",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The author explicitly rejects exactly what the statement claims they believe.",
+        "reasoning": {
+          "step_1_locate": "However, I firmly reject the notion that renewable energy sources cannot provide reliable baseload power for industrial economies.",
+          "step_2_compare": "Author says: I firmly reject the notion that renewables cannot provide reliable baseload power. Statement claims: writer believes renewables are incapable of supplying consistent power.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author explicitly rejects exactly what the statement claims they believe.",
+          "step_4_eliminate": "Not Yes because the author rejects this view, not supports it. Not Not Given because 'I firmly reject' is an explicit personal stance, not neutral reporting."
+        },
+        "keySentence": "However, I firmly reject the notion that renewable energy sources cannot provide reliable baseload power for industrial economies.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer contends that carbon pricing policies are necessary for speeding up the shift from fossil fuels.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is absolutely essential that governments implement carbon pricing mechanisms to accelerate the transition away from fossil fuels.",
+        "anchorText": "It is absolutely essential",
+        "complexityLevel": 3,
+        "explanation": "SEMANTIC_MATCH — 'absolutely essential' = 'necessary', 'accelerate the transition' = 'speeding up the shift', same core claim.",
+        "reasoning": {
+          "step_1_locate": "It is absolutely essential that governments implement carbon pricing mechanisms to accelerate the transition away from fossil fuels.",
+          "step_2_compare": "Author says: It is absolutely essential that governments implement carbon pricing to accelerate transition. Statement claims: writer contends carbon pricing is necessary for speeding up the shift.",
+          "step_3_logic": "SEMANTIC_MATCH — 'absolutely essential' = 'necessary', 'accelerate the transition' = 'speeding up the shift', same core claim.",
+          "step_4_eliminate": "Not No because the author supports this view rather than contradicting it. Not Not Given because 'absolutely essential' is a clear personal judgment, not neutral reporting."
+        },
+        "keySentence": "It is absolutely essential that governments implement carbon pricing mechanisms to accelerate the transition away from fossil fuels.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that improvements in solar panel efficiency are inadequate for achieving global climate goals.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies from the International Energy Agency indicate that solar panel efficiency has improved by 40% over the past decade, though critics argue this progress remains insufficient for meeting global climate targets.",
+        "anchorText": "studies indicate / critics argue",
+        "complexityLevel": 4,
+        "explanation": "ATTRIBUTION_TO_OTHERS — The author attributes the view to 'critics' without endorsing or rejecting it personally.",
+        "reasoning": {
+          "step_1_locate": "Recent studies from the International Energy Agency indicate that solar panel efficiency has improved by 40% over the past decade, though critics argue this progress remains insufficient for meeting global climate targets.",
+          "step_2_compare": "Author says: critics argue progress is insufficient (reporting others' views). Statement claims: writer believes improvements are inadequate.",
+          "step_3_logic": "ATTRIBUTION_TO_OTHERS — The author attributes the view to 'critics' without endorsing or rejecting it personally.",
+          "step_4_eliminate": "Not Yes because the author never claims this as their own belief. Not No because the author doesn't contradict this view either, just reports it neutrally."
+        },
+        "keySentence": "Recent studies from the International Energy Agency indicate that solar panel efficiency has improved by 40% over the past decade, though critics argue this progress remains insufficient for meeting global climate targets.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that falling battery costs will make wind and solar energy economically viable in the coming twenty years.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The rapid decline in battery storage costs could arguably transform the economic viability of wind and solar energy within the next two decades.",
+        "anchorText": "could arguably",
+        "complexityLevel": 4,
+        "explanation": "CERTAINTY_MISMATCH — 'could arguably' expresses possibility without commitment, while statement claims definite certainty.",
+        "reasoning": {
+          "step_1_locate": "The rapid decline in battery storage costs could arguably transform the economic viability of wind and solar energy within the next two decades.",
+          "step_2_compare": "Author says: could arguably transform viability (hedged possibility). Statement claims: writer is certain this will happen.",
+          "step_3_logic": "CERTAINTY_MISMATCH — 'could arguably' expresses possibility without commitment, while statement claims definite certainty.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject the possibility, just doesn't commit to it definitively."
+        },
+        "keySentence": "The rapid decline in battery storage costs could arguably transform the economic viability of wind and solar energy within the next two decades.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the view that nuclear energy's benefits outweigh its waste management problems.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of nuclear energy emphasize its capacity for continuous power generation without carbon emissions, while environmental groups highlight the unresolved challenges of radioactive waste disposal and decommissioning costs.",
+        "anchorText": "Proponents emphasize / while environmental groups highlight",
+        "complexityLevel": 5,
+        "explanation": "NEUTRAL_BALANCE — Author presents opposing views with equal weight using parallel structure, never indicating personal preference.",
+        "reasoning": {
+          "step_1_locate": "Proponents of nuclear energy emphasize its capacity for continuous power generation without carbon emissions, while environmental groups highlight the unresolved challenges of radioactive waste disposal and decommissioning costs.",
+          "step_2_compare": "Author says: proponents emphasize benefits, environmental groups highlight problems (balanced reporting). Statement claims: writer supports the benefits-outweigh-problems view.",
+          "step_3_logic": "NEUTRAL_BALANCE — Author presents opposing views with equal weight using parallel structure, never indicating personal preference.",
+          "step_4_eliminate": "Not Yes because the author never endorses the pro-nuclear position. Not No because the author doesn't reject it either, maintaining strict neutrality between both camps."
+        },
+        "keySentence": "Proponents of nuclear energy emphasize its capacity for continuous power generation without carbon emissions, while environmental groups highlight the unresolved challenges of radioactive waste disposal and decommissioning costs.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:35.964Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.6,
+        "min": 2,
+        "max": 5
+      },
+      "flaggedForReview": []
+    }
+  }
+]
