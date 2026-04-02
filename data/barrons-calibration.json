@@ -1,0 +1,922 @@
+[
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 24,
+    "answer": "No",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6: \"Leather hoses with couplings that joined the lengths together were hand-sewn in the Netherlands",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 25,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6 explains that steam engine fire trucks were used from about the 1850s until the early 1900s, when the trucks became motorized.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 26,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "World War I is mentioned, but its particular effect on London is not.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 33,
+    "answer": "True",
+    "paragraphRef": "Opening sentence",
+    "passageQuote": "The term Luddite is used to refer to a person who is opposed to new technology.",
+    "explanation": "Opening sentence: \"The term Luddite is used to refer to a person who is opposed to new technology.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 34,
+    "answer": "True",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "",
+    "explanation": "Paragraph 1: \"These weavers made lace and stockings by hand . . . . In the 1800s, automated power looms and stocking frames were introduced",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 35,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "In the spring of that year, several factory owners were killed during Luddite riots, and a number of textile workers died as well.",
+    "explanation": "Paragraph 4: \"In the spring of that year, several factory owners were killed during Luddite riots, and a number of textile workers died as well.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 36,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "The article describes Luddite activity in England but does not mention whether it occurred in other countries.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 37,
+    "answer": "True",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "",
+    "explanation": "Paragraph 3 discusses possible explanations of who Ned Ludd was and implies that none of them is accepted as fact.",
+    "logicType": "CAUSAL_ASSUMPTION"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 38,
+    "answer": "False",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "In 1816, a bad harvest and economic downturn led to a small revival of rioting.",
+    "explanation": "Paragraph 5: \"In 1816, a bad harvest and economic downturn led to a small revival of rioting.\"",
+    "logicType": "CAUSAL_ASSUMPTION"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 39,
+    "answer": "False",
+    "paragraphRef": "Paragraphs 2 and 5",
+    "passageQuote": "",
+    "explanation": "According to Paragraphs 2 and 5, most Luddite activity occurred in the years 1811 and 1812.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 1,
+    "module": "academic",
+    "questionNumber": 40,
+    "answer": "Not Given",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6 describes Neo-Luddites as people concerned about technological advances but does not give any specifics about their activities.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 14,
+    "answer": "No",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "",
+    "explanation": "Paragraph 1: \"It is not related to intellectual ability",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 15,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "Children are generally diagnosed with dyslexia during the elementary school years when they are learning how to read and spell.",
+    "explanation": "Paragraph 1: \"Children are generally diagnosed with dyslexia during the elementary school years when they are learning how to read and spell.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 16,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "",
+    "explanation": "Paragraph 2: \"Many dyslexic children read letters and words backwards .",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 17,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "Genetic research with twins is mentioned, but a tendency for dyslexia between twins is not.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 18,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no mention of drug treatment for dyslexia.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 19,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "Dyslexic children often exhibit behavior that seems abnor mal but is caused by frustration at their own inability to perform at the same level as their peers.",
+    "explanation": "Paragraph 5: \"Dyslexic children often exhibit behavior that seems abnor mal but is caused by frustration at their own inability to perform at the same level as their peers.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 2,
+    "module": "academic",
+    "questionNumber": 20,
+    "answer": "No",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6 explains that dysgraphia describes difficulty with writing; difficulty with math is called dyscalculia.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 24,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "by the 1830s, approximately 75 percent of the working class had learned to read.",
+    "explanation": "Paragraph 2: \"by the 1830s, approximately 75 percent of the working class had learned to read.\"",
+    "logicType": "QUALIFIER_SHIFT"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 25,
+    "answer": "No",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "Though few children's books were available. . . .",
+    "explanation": "Paragraph 2: \"Though few children's books were available. . . .\"",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 26,
+    "answer": "No",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "Controversy still exists over whether Thomas Prest's character was based on a real person.",
+    "explanation": "Paragraph 3: \"Controversy still exists over whether Thomas Prest's character was based on a real person.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 27,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "during the Civil War, soldiers quickly became the most avid dime novel readers.",
+    "explanation": "Paragraph 5: \"during the Civil War, soldiers quickly became the most avid dime novel readers.\"",
+    "logicType": "QUALIFIER_SHIFT"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 37,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "The big bang is mentioned, but the time of its occurrence is not.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 38,
+    "answer": "True",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "A number of theories proposed that the first black holes were essentially",
+    "explanation": "Paragraph 7: \"A number of theories proposed that the first black holes were essentially \"seeds,\" which then gravitationally attracted . . . matter . . . . This allowed them to grow into the super-massive black holes.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 39,
+    "answer": "False",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "The new simulations do not definitively invalidate the seed theory, but they make it far less likely.",
+    "explanation": "Paragraph 7: \"The new simulations do not definitively invalidate the seed theory, but they make it far less likely.\"",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 3,
+    "module": "academic",
+    "questionNumber": 40,
+    "answer": "False",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "it is known that black holes a billion times more mas sive than our sun did exist in the early universe.",
+    "explanation": "Paragraph 7: \"it is known that black holes a billion times more mas sive than our sun did exist in the early universe.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 4,
+    "module": "academic",
+    "questionNumber": 14,
+    "answer": "False",
+    "paragraphRef": "paragraph 1",
+    "passageQuote": "",
+    "explanation": "According to paragraph 1, the cacao plant is native to the Amazon and",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 4,
+    "module": "academic",
+    "questionNumber": 15,
+    "answer": "True",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "it requires a humid climate and regular rainfall.",
+    "explanation": "Paragraph 1: \"it requires a humid climate and regular rainfall.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 4,
+    "module": "academic",
+    "questionNumber": 16,
+    "answer": "False",
+    "paragraphRef": "paragraph 1",
+    "passageQuote": "",
+    "explanation": "According to paragraph 1, the entire plant, with 6,000 flowers, pro duces only twenty pods.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 4,
+    "module": "academic",
+    "questionNumber": 17,
+    "answer": "True",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "Instead, the first cacao-based drink was probably pro duced by fermenting the pulp. . . .",
+    "explanation": "Paragraph 2: \"Instead, the first cacao-based drink was probably pro duced by fermenting the pulp. . . . \"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 4,
+    "module": "academic",
+    "questionNumber": 18,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no mention of whether the drinks were served hot or cold.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 15,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "The passage does not mention when people began drinking coffee.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 16,
+    "answer": "False",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "Many of the world's people, including children, ingest it in some form daily.",
+    "explanation": "Paragraph 2: \"Many of the world's people, including children, ingest it in some form daily.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 17,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "",
+    "explanation": "Paragraph 4 discusses the effect of caffeine on nerve cells.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 18,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "",
+    "explanation": "Paragraph 4 explains how caffeine contributes to increased heart rate.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 19,
+    "answer": "True",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "Caffeine. . . .is, after all, a mildly habit-forming stimulant. . . .",
+    "explanation": "Paragraph 5: \"Caffeine. . . .is, after all, a mildly habit-forming stimulant. . . . \" Habit-forming means the same as addictive.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 20,
+    "answer": "False",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6 explains how caffeine may help lower the incidence of Alzheimer's disease.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 21,
+    "answer": "True",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "",
+    "explanation": "Paragraph 7 explains how caffeine may help lower the incidence of non melanoma skin cancers.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 22,
+    "answer": "False",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "",
+    "explanation": "Paragraph 7 explains how caffeine may help decrease, not increase, the incidence of endometrial cancer.",
+    "logicType": "NEGATIVE_REFRAME"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 23,
+    "answer": "True",
+    "paragraphRef": "Paragraph 8",
+    "passageQuote": "As a component of numerous over-the-counter diet pills and pain relievers, caffeine increases their effectiveness and helps the body absorb them more quickly.",
+    "explanation": "Paragraph 8: \"As a component of numerous over-the-counter diet pills and pain relievers, caffeine increases their effectiveness and helps the body absorb them more quickly.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 37,
+    "answer": "True",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "Walking stick insects are virtually indistinguishable from twigs. . . .",
+    "explanation": "Paragraph 7: \"Walking stick insects are virtually indistinguishable from twigs. . . . \"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 38,
+    "answer": "True",
+    "paragraphRef": "Paragraph 8",
+    "passageQuote": "Paragraph 8:",
+    "explanation": "\"Paragraph 8: \"Predators bypass the foul-tasting monarch butterfly, but they also avoid the tasty look-alike viceroy butterfly.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 39,
+    "answer": "False",
+    "paragraphRef": "Paragraph 8",
+    "passageQuote": "Coral snake impersonators, like the harmless scarlet snake, have the same red, black, and yellow bands but in a different order. . . .",
+    "explanation": "Paragraph 8: \"Coral snake impersonators, like the harmless scarlet snake, have the same red, black, and yellow bands but in a different order. . . . \"",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 5,
+    "module": "academic",
+    "questionNumber": 40,
+    "answer": "Not Given",
+    "paragraphRef": "Paragraph 8",
+    "passageQuote": "",
+    "explanation": "Paragraph 8 mentions the shape of a pattern on the hawk moth caterpillar but does not mention its coloring.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 6,
+    "answer": "True",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "the honeybee, which collects nectar as well as pollen for food.",
+    "explanation": "Paragraph 3: \"the honeybee, which collects nectar as well as pollen for food.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 7,
+    "answer": "Not Given",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "landing platform",
+    "explanation": "Paragraph 4 mentions a butterfly's need for a \"landing platform\" but does not mention what a butterfly does if there is no place to land on a flower.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 8,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "many moths are active at night and thus are attracted to flowers that are pale or white, have a strong fragrance. . . .",
+    "explanation": "Paragraph 4: \"many moths are active at night and thus are attracted to flowers that are pale or white, have a strong fragrance. . . . \"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 9,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "flowers that attract these tiny birds also have strong stems and are designed for pollen to be brushed on the hummingbirds' heads as they sip nectar.",
+    "explanation": "Paragraph 4: \"flowers that attract these tiny birds also have strong stems and are designed for pollen to be brushed on the hummingbirds' heads as they sip nectar.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 10,
+    "answer": "True",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "Many bee attractors also have nectar guides, which are spots near the center of each flower that reflect ultraviolet light, making it eas ier for the bees to find the nectar.",
+    "explanation": "Paragraph 5: \"Many bee attractors also have nectar guides, which are spots near the center of each flower that reflect ultraviolet light, making it eas ier for the bees to find the nectar.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 11,
+    "answer": "False",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "Bees are also attracted to flowers with a mintlike or sweet smell.",
+    "explanation": "Paragraph 5: \"Bees are also attracted to flowers with a mintlike or sweet smell.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 12,
+    "answer": "False",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6: \"While many staple crops such as rice, corn, canola, and",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 13,
+    "answer": "True",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "Over 30 percent of the world's crops require the work of pollinator species.",
+    "explanation": "Paragraph 6: \"Over 30 percent of the world's crops require the work of pollinator species.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 14,
+    "answer": "Not Given",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "",
+    "explanation": "Paragraph 7 mentions the decline of the honeybee population and concern for effects that may have, but it does not mention any specific eco nomic effects.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 37,
+    "answer": "False",
+    "paragraphRef": "",
+    "passageQuote": "The system . . . has incorporated symbols for math, sci ence, and music.",
+    "explanation": "Paragraph F: \"The system . . . has incorporated symbols for math, sci ence, and music.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 38,
+    "answer": "True",
+    "paragraphRef": "",
+    "passageQuote": "has been adapted to dozens of languages, including many with non-Roman alphabets, such as Chinese and Japanese.",
+    "explanation": "Paragraph F: \"has been adapted to dozens of languages, including many with non-Roman alphabets, such as Chinese and Japanese.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 39,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no comparison made between the reading speed of Braille readers and sighted readers.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 6,
+    "module": "academic",
+    "questionNumber": 40,
+    "answer": "True",
+    "paragraphRef": "",
+    "passageQuote": "knowledge of Braille has declined in recent years as tech nology has provided innovations, such as recorded books and computers with synthetic speech.",
+    "explanation": "Paragraph F: \"knowledge of Braille has declined in recent years as tech nology has provided innovations, such as recorded books and computers with synthetic speech.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 8,
+    "answer": "False",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "",
+    "explanation": "Paragraph 2: The museum has reduced hours during the winter months.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 9,
+    "answer": "False",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "",
+    "explanation": "Paragraph 3: We know that children are allowed because it is stated that they must be accompanied by an adult.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 10,
+    "answer": "True",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "Guided tours are included in the cost of admission.",
+    "explanation": "Paragraph 3: \"Guided tours are included in the cost of admission.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 11,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "Guided tours are mentioned in the third paragraph, but their length is not mentioned.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 12,
+    "answer": "True",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "",
+    "explanation": "Paragraph 4 mentions the Farm Museum Gift Shop.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 13,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "Classes are discussed in the fifth paragraph, but no discount is mentioned.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 7,
+    "module": "general-training",
+    "questionNumber": 14,
+    "answer": "True",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "",
+    "explanation": "Paragraph 5 mentions that classes are offered in the evenings and that they take place in the Main Building.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 34,
+    "answer": "No",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "A full cycle of the moon typically lasts just under one calendar month. . . .",
+    "explanation": "Paragraph 5: \"A full cycle of the moon typically lasts just under one calendar month. . . . \"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 35,
+    "answer": "No",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "When two full moons occur in one calendar month the second one is called a blue moon.",
+    "explanation": "Paragraph 5: \"When two full moons occur in one calendar month the second one is called a blue moon.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 36,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "Within one cycle, the moon's",
+    "explanation": "Paragraph 5: \"Within one cycle, the moon's \"age\" is calculated from the last day of the new moon. . .the moon is approximately fifteen days old dur ing the full moon phase.\"",
+    "logicType": "QUALIFIER_SHIFT"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 37,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "At new moon, the moon and sun rise and set at almost the same time.",
+    "explanation": "Paragraph 6: \"At new moon, the moon and sun rise and set at almost the same time.\"",
+    "logicType": "QUALIFIER_SHIFT"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 38,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "The Islamic Calendar is mentioned, but the number of months in it is not.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 39,
+    "answer": "Yes",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "The planets Venus and Mercury have similar phases. . . .",
+    "explanation": "Paragraph 7: \"The planets Venus and Mercury have similar phases. . . .\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 8,
+    "module": "general-training",
+    "questionNumber": 40,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "The planets Venus and Mercury are mentioned, but their moons are not.",
+    "logicType": "NOT_GIVEN_TOPIC_ADJACENT"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 8,
+    "answer": "False",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "You may either visit the website or call the Community Center to register.",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 9,
+    "answer": "True",
+    "paragraphRef": "",
+    "passageQuote": "calculate the amount of money you owe. This will include the cost of your classes plus a $15 registration fee.",
+    "explanation": "In Part 1: \"calculate the amount of money you owe. This will include the cost of your classes plus a $15 registration fee.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 10,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "Differences in the costs of the different classes is not mentioned.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 11,
+    "answer": "True",
+    "paragraphRef": "",
+    "passageQuote": "In addition, if your address is outside of the city, you will have to pay a nonresident fee of $25 per class.",
+    "explanation": "In Part 1: \"In addition, if your address is outside of the city, you will have to pay a nonresident fee of $25 per class.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 12,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no mention of a limit on classes.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 13,
+    "answer": "True",
+    "paragraphRef": "",
+    "passageQuote": "No refunds will be made after the start of the second class.",
+    "explanation": "In Part 2: \"No refunds will be made after the start of the second class.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 14,
+    "answer": "False",
+    "paragraphRef": "",
+    "passageQuote": "Classes offered by the Community Center are for adults only.",
+    "explanation": "In Part 2: \"Classes offered by the Community Center are for adults only.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 21,
+    "answer": "False",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "",
+    "explanation": "Paragraph 2 explains that the program is open to full-time students but not part-time students.",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 22,
+    "answer": "True",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "Before applying for a work-study position, the stu dent must demonstrate financial need.",
+    "explanation": "Paragraph 3 states, \"Before applying for a work-study position, the stu dent must demonstrate financial need.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 23,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no mention of such a requirement.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 24,
+    "answer": "False",
+    "paragraphRef": "Paragraph 4",
+    "passageQuote": "Students both with and without an employment history are eligible for the program.",
+    "explanation": "Paragraph 4 states, \"Students both with and without an employment history are eligible for the program.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 25,
+    "answer": "False",
+    "paragraphRef": "Paragraph 5",
+    "passageQuote": "While we make every effort to place all Work--Study Program students in a job, there are no guarantees.",
+    "explanation": "Paragraph 5 states, \"While we make every effort to place all Work--Study Program students in a job, there are no guarantees.\"",
+    "logicType": "CONCESSIVE_TRAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 26,
+    "answer": "True",
+    "paragraphRef": "Paragraph 6",
+    "passageQuote": "",
+    "explanation": "Paragraph 6 explains that work-study students must have passing grades in order to stay in the program.",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 10,
+    "module": "general-training",
+    "questionNumber": 27,
+    "answer": "True",
+    "paragraphRef": "Paragraph 7",
+    "passageQuote": "Students wishing to continue in the program after one year must resubmit their applications.",
+    "explanation": "Paragraph 7 states, \"Students wishing to continue in the program after one year must resubmit their applications.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 21,
+    "answer": "False",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "All full-time employees are entitled to a minimum of two weeks of annual leave time.",
+    "explanation": "Paragraph 1: \"All full-time employees are entitled to a minimum of two weeks of annual leave time.\"",
+    "logicType": "CAUSAL_ASSUMPTION"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 22,
+    "answer": "True",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "the employee must complete the Request for Annual Leave Form and submit it to his or her supervisor a minimum of thirty days in advance.",
+    "explanation": "Paragraph 1: \"the employee must complete the Request for Annual Leave Form and submit it to his or her supervisor a minimum of thirty days in advance.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 23,
+    "answer": "Not Given",
+    "paragraphRef": "",
+    "passageQuote": "",
+    "explanation": "There is no information on annual leave for part-time employees.",
+    "logicType": "NOT_GIVEN_NO_EVIDENCE"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 24,
+    "answer": "True",
+    "paragraphRef": "Paragraph 1",
+    "passageQuote": "Personal leave days must be used within the calendar year, or they will be forfeited.",
+    "explanation": "Paragraph 1: \"Personal leave days must be used within the calendar year, or they will be forfeited.\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 25,
+    "answer": "True",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "The company pays 50 percent of the monthly premiums . . . .",
+    "explanation": "Paragraph 2: \"The company pays 50 percent of the monthly premiums . . . .\"",
+    "logicType": "SYNONYM_SWAP"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 26,
+    "answer": "False",
+    "paragraphRef": "Paragraph 2",
+    "passageQuote": "Part-time employees are also eligible for the company- sponsored health plans; the company pays 25 percent of the premiums.",
+    "explanation": "Paragraph 2: \"Part-time employees are also eligible for the company- sponsored health plans; the company pays 25 percent of the premiums.\"",
+    "logicType": "DIRECT_CONTRADICTION"
+  },
+  {
+    "testNumber": 12,
+    "module": "general-training",
+    "questionNumber": 27,
+    "answer": "False",
+    "paragraphRef": "Paragraph 3",
+    "passageQuote": "Employees may . . . contribute . . . up to 5 percent of their salary.",
+    "explanation": "Paragraph 3: \"Employees may . . . contribute . . . up to 5 percent of their salary.\" This means they can choose any amount from zero up to 5 per cent but no higher.",
+    "logicType": "CONCESSIVE_TRAP"
+  }
+]
