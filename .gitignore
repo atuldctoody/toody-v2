@@ -12,6 +12,9 @@ firebase-debug.log
 firebase-debug.*.log
 .firebaserc.backup
 
+# Firebase service account keys — never commit
+data/*firebase-adminsdk*.json
+
 # Temp lock files (Word/Excel open file locks)
 ~$*
 
