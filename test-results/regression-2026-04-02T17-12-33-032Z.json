@@ -1,17 +1,79 @@
 {
-  "timestamp": "2026-04-02T16:23:36.209Z",
+  "timestamp": "2026-04-02T17:12:33.032Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 24009,
+  "durationMs": 32916,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24001,
+      "durationMs": 27572,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Climate Change and Marine Biodiversity",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.3,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 5.5,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 32888,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Urban Environmental Impact",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 1,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 3.8,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 7,
+      "pass": true,
+      "durationMs": 28552,
       "steps": {
         "generation": {
           "pass": true,
@@ -34,69 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
-      "band": 6,
-      "pass": true,
-      "durationMs": 23831,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Impact of Climate Change",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 1,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 3.6,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
-      "band": 7,
-      "pass": true,
-      "durationMs": 23217,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Climate Change Effects",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 0,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 4.4,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }

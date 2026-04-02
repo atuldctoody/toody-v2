@@ -4,9 +4,9 @@
 import { SKILL_MANIFEST, SKILL_MAP } from './constants.js';
 import { studentData, currentUser, getIELTSSkills, calcBandEstimate, isMockUnlocked } from './state.js';
 import { goTo, pickNextSkill, setCurrentPlan, currentPlan } from './router.js';
-import { getSkillConfig, getExamDaysRemaining } from './utils.js';
+import { getSkillConfig, getExamDaysRemaining, accToBand } from './utils.js';
 import { setSkillBar, renderBehaviourAnalytics } from './ui.js';
-import { db } from './firebase.js';
+import { db, updateStudentDoc } from './firebase.js';
 import {
   getDocs, collection, orderBy, query,
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
@@ -38,7 +38,7 @@ export function renderHome() {
 
   // Replace day badge with band estimate or session count
   const badgeEl = document.getElementById('home-day-badge');
-  if (badgeEl) badgeEl.textContent = bandEst !== null ? `Band ~${bandEst}` : `${sessionCount} done`;
+  if (badgeEl) badgeEl.textContent = bandEst !== null ? `Band ~${bandEst}` : `${sessionCount} sessions done`;
 
   // Band progress bar
   const progressCard = document.getElementById('home-band-progress');
@@ -102,6 +102,12 @@ export function renderHome() {
   if (mockCard) mockCard.style.display = mockUnlocked ? '' : 'none';
 
   renderSkillSnapshot();
+
+  // Band history chart (async — fires in background)
+  renderBandChart();
+
+  // Week 1 completion check (async — fires in background)
+  checkWeek1Completion();
 }
 
 export function renderSkillPicker() {
@@ -263,3 +269,166 @@ export async function goToProgress() {
   }
 }
 window.goToProgress = goToProgress;
+
+// ── BAND HISTORY CHART ────────────────────────────────────────────
+async function renderBandChart() {
+  const chartCard    = document.getElementById('home-band-chart');
+  const chartContent = document.getElementById('home-band-chart-content');
+  const pillEl       = document.getElementById('home-band-chart-pill');
+  if (!chartCard || !chartContent || !currentUser) return;
+
+  try {
+    const snap = await getDocs(
+      query(collection(db, 'students', currentUser.uid, 'sessions'), orderBy('date', 'asc'))
+    );
+
+    // Extract band per session (skip writing/speaking sessions with no accuracy)
+    const points = [];
+    snap.docs.forEach((d, i) => {
+      const s    = d.data();
+      const band = s.bandEstimate != null
+        ? parseFloat(s.bandEstimate)
+        : s.accuracy != null
+        ? accToBand(s.accuracy)
+        : null;
+      if (band != null && band >= 4.0 && band <= 9.0) {
+        points.push({ n: points.length + 1, band });
+      }
+    });
+
+    if (points.length < 3) {
+      chartCard.classList.remove('hidden');
+      chartContent.innerHTML = `<p style="font-size:13px;color:var(--muted);text-align:center;padding:8px 0">Complete ${3 - points.length} more session${3 - points.length !== 1 ? 's' : ''} to see your progress chart.</p>`;
+      return;
+    }
+
+    const currentBand = points[points.length - 1].band;
+    if (pillEl) pillEl.textContent = `Current ~${currentBand}`;
+
+    // SVG dimensions — mobile first
+    const W = 340, H = 120, PL = 34, PR = 10, PT = 12, PB = 24;
+    const chartW = W - PL - PR;
+    const chartH = H - PT - PB;
+
+    const bandMin = 4.0, bandMax = 9.0, bandRange = bandMax - bandMin;
+    const xScale = (n) => PL + ((n - 1) / Math.max(points.length - 1, 1)) * chartW;
+    const yScale = (b) => PT + chartH - ((b - bandMin) / bandRange) * chartH;
+
+    // Y-axis ticks at each 0.5 band
+    const ticks = [];
+    for (let b = 4.5; b <= 9.0; b += 1.0) ticks.push(b);
+
+    const tickLines = ticks.map(b => {
+      const y = yScale(b);
+      return `<line x1="${PL}" y1="${y}" x2="${W - PR}" y2="${y}" stroke="var(--border)" stroke-width="1"/>
+              <text x="${PL - 4}" y="${y + 4}" font-size="9" fill="var(--muted)" text-anchor="end">${b.toFixed(1)}</text>`;
+    }).join('');
+
+    // X-axis session labels (only label first, middle, last if > 5 points)
+    const labelIdxs = points.length <= 5
+      ? points.map((_, i) => i)
+      : [0, Math.floor((points.length - 1) / 2), points.length - 1];
+    const xLabels = labelIdxs.map(i => {
+      const p = points[i];
+      return `<text x="${xScale(p.n)}" y="${H - 4}" font-size="9" fill="var(--muted)" text-anchor="middle">${p.n}</text>`;
+    }).join('');
+
+    // Polyline
+    const linePoints = points.map(p => `${xScale(p.n)},${yScale(p.band)}`).join(' ');
+
+    // Dots — highlight current band
+    const dots = points.map((p, i) => {
+      const isLast  = i === points.length - 1;
+      const cx = xScale(p.n), cy = yScale(p.band);
+      return isLast
+        ? `<circle cx="${cx}" cy="${cy}" r="5" fill="var(--accent)" stroke="#fff" stroke-width="2"/>`
+        : `<circle cx="${cx}" cy="${cy}" r="3" fill="var(--accent)" opacity="0.5"/>`;
+    }).join('');
+
+    const svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;display:block;overflow:visible" xmlns="http://www.w3.org/2000/svg">
+      ${tickLines}
+      <polyline points="${linePoints}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${dots}
+      ${xLabels}
+      <text x="${PL - 4}" y="${H - 4}" font-size="9" fill="var(--muted)" text-anchor="end">n</text>
+    </svg>`;
+
+    chartContent.innerHTML = svg;
+    chartCard.classList.remove('hidden');
+  } catch { /* non-critical — chart stays hidden */ }
+}
+
+// ── WEEK 1 COMPLETION CHECK ───────────────────────────────────────
+async function checkWeek1Completion() {
+  if (!studentData || !currentUser) return;
+  if (studentData.week1Completed) return;
+
+  const skills = getIELTSSkills();
+
+  const tfngDone    = (skills['reading-tfng']?.attempted          || 0) >= 1;
+  const listeningDone = (skills['listening-multipleChoice']?.attempted || 0) >= 1
+                     || (skills['listening-formCompletion']?.attempted  || 0) >= 1;
+  const writingDone = (skills['writing-task2']?.attempted          || 0) >= 1;
+  const speakingDone= (skills['speaking-part1']?.attempted         || 0) >= 1;
+
+  if (!tfngDone || !listeningDone || !writingDone || !speakingDone) return;
+
+  // Compute overall average accuracy across attempted skills
+  const attempted = Object.values(skills).filter(s => (s?.attempted || 0) > 0);
+  if (attempted.length === 0) return;
+  const avgAcc = Math.round(attempted.reduce((sum, s) => sum + (s.accuracy || 0), 0) / attempted.length);
+  if (avgAcc < 55) return;
+
+  // All conditions met — mark and navigate
+  try {
+    await updateStudentDoc(currentUser.uid, { week1Completed: true });
+    if (studentData) studentData.week1Completed = true;
+  } catch { /* non-critical */ }
+
+  // Populate the screen
+  const bandEst = calcBandEstimate();
+  const streak  = studentData.streak || 0;
+  const el = (id) => document.getElementById(id);
+
+  if (el('w1c-streak'))    el('w1c-streak').textContent  = `🔥 ${streak} day${streak !== 1 ? 's' : ''}`;
+  if (el('w1c-band'))      el('w1c-band').textContent    = bandEst !== null ? `~${bandEst}` : '—';
+  if (el('w1c-band-note')) el('w1c-band-note').textContent = bandEst !== null
+    ? `Estimated from ${attempted.length} skill${attempted.length !== 1 ? 's' : ''} · Target: Band ${studentData.targetBand || '—'}`
+    : 'Complete more sessions to sharpen this estimate.';
+
+  // Delta: first vs latest session accuracy
+  let deltaHtml = 'Keep practising to build a clearer picture of your progress.';
+  const sessionCount = (studentData.dayNumber || 1) - 1;
+  if (sessionCount >= 2) {
+    const gap = studentData.targetBand
+      ? `${Math.max(0, ((studentData.targetBand - (bandEst || 0)) * 10) / 10).toFixed(1)} bands to go`
+      : '';
+    deltaHtml = `${sessionCount} sessions completed this week.${gap ? ` <strong>${gap}</strong> to reach your target.` : ''}`;
+  }
+  if (el('w1c-delta')) el('w1c-delta').innerHTML = deltaHtml;
+
+  // Strongest / weakest
+  const ranked = attempted
+    .map(s => ({ label: s.label || '—', accuracy: s.accuracy || 0 }))
+    .sort((a, b) => b.accuracy - a.accuracy);
+  const skillEntries = Object.entries(skills).filter(([, v]) => (v?.attempted || 0) > 0);
+  const rankedEntries = skillEntries
+    .map(([id, v]) => ({ id, acc: v.accuracy || 0 }))
+    .sort((a, b) => b.acc - a.acc);
+  const strongest = rankedEntries[0];
+  const weakest   = rankedEntries[rankedEntries.length - 1];
+  const skillName = (id) => SKILL_MAP[id.replace('-', '.')]?.label || id;
+  let skillsHtml = '';
+  if (strongest) skillsHtml += `✅ <strong>Strongest:</strong> ${skillName(strongest.id)} — ${strongest.acc}%<br>`;
+  if (weakest && weakest.id !== strongest?.id) skillsHtml += `📌 <strong>Focus area:</strong> ${skillName(weakest.id)} — ${weakest.acc}%`;
+  if (el('w1c-skills')) el('w1c-skills').innerHTML = skillsHtml || 'Practice more skills to see your summary.';
+
+  goTo('s-week1-complete');
+}
+
+window.week1KeepGoing = function () {
+  const { renderHome } = await import('./home.js').catch(() => ({ renderHome: () => {} }));
+  renderHome();
+  goTo('s-home');
+};
+window.week1KeepGoing = function () { goTo('s-home'); };

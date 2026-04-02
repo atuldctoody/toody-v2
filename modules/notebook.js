@@ -58,11 +58,11 @@ export function renderWeek1Report() {
 
   // Week 2 plan
   const planItems = [
-    { icon: '✍️', day: 6, text: `<strong>Day 6</strong> — Writing Task 1 (Graph Description)` },
-    { icon: '✍️', day: 7, text: `<strong>Day 7</strong> — Writing Task 2 (Opinion Essay)` },
-    { icon: '🎤', day: 8, text: `<strong>Day 8</strong> — Speaking Part 1` },
-    { icon: '🎯', day: 9, text: `<strong>Day 9</strong> — Focused Drill on ${weak2[0]?.name || 'your weakest skill'}` },
-    { icon: '🏁', day: 10, text: `<strong>Day 10</strong> — Mini Mock across all 4 sections` },
+    { icon: '✍️', day: 6, text: `Writing Task 1 (Graph Description)` },
+    { icon: '✍️', day: 7, text: `Writing Task 2 (Opinion Essay)` },
+    { icon: '🎤', day: 8, text: `Speaking Part 1` },
+    { icon: '🎯', day: 9, text: `Focused Drill — ${weak2[0]?.name || 'your weakest skill'}` },
+    { icon: '🏁', day: 10, text: `Mini Mock across all 4 sections` },
   ];
   document.getElementById('w1-week2-plan').innerHTML = planItems.map(p =>
     `<div class="expect-item" style="padding:6px 0">

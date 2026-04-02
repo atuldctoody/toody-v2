@@ -316,7 +316,7 @@
       <div class="bc-top">
         <div class="bc-icon">📚</div>
         <div class="bc-eyebrow">NEXT UP</div>
-        <h2 class="bc-title">A quick IELTS overview — then Day 1 begins</h2>
+        <h2 class="bc-title">A quick IELTS overview</h2>
       </div>
       <div class="bc-pills">
         <div class="ic-pill" onclick="toggleCard(this)">
@@ -343,7 +343,7 @@
           </div>
           <div class="ic-pill-expand">
             <ul class="ic-pill-bullets">
-              <li>You can expand any card for the full detail. After the overview, Day 1 begins immediately.</li>
+              <li>You can expand any card for the full detail. After the overview, your first session starts now.</li>
             </ul>
           </div>
         </div>
@@ -621,6 +621,17 @@
     <div class="session-card-reason" id="today-reason" style="font-size:12px;opacity:0.85;margin-bottom:var(--space-4);line-height:1.5"></div>
     <button class="btn" onclick="safeClick(this, startSession)">Let's go <span class="arrow">→</span></button>
   </div>
+  <!-- Band score history chart — shown after 3+ sessions -->
+  <div id="home-band-chart" class="card hidden" style="margin-top:var(--space-4)">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-2)">
+      <span class="card-label" style="margin-bottom:0">Band History</span>
+      <span id="home-band-chart-pill" style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--accent);color:#fff"></span>
+    </div>
+    <div id="home-band-chart-content" style="min-height:130px;display:flex;align-items:center;justify-content:center">
+      <div style="font-size:13px;color:var(--muted)">Loading…</div>
+    </div>
+  </div>
+
   <div class="card">
     <div class="card-label">Skill Snapshot</div>
     <div id="home-skill-snapshot"><div style="font-size:13px;color:var(--muted);text-align:center;padding:10px 0">Complete your first session to see your skill data.</div></div>
@@ -687,7 +698,7 @@
 <div class="screen" id="s-teach">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge">Day 1</div></div>
+    <div class="nav-right"><div class="day-badge">Session</div></div>
   </div>
   <div class="phase-bar">
     <div class="phase-dot active"></div>
@@ -820,7 +831,7 @@
 <div class="screen" id="s-warmup">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge" id="warmup-day-badge">Day 2</div></div>
+    <div class="nav-right"><div class="day-badge" id="warmup-day-badge">Session</div></div>
   </div>
   <div class="phase-bar"><div class="phase-dot active"></div><div class="phase-dot"></div><div class="phase-dot"></div></div>
   <div class="phase-label">Phase 1 — <span class="pl-name">Memory Check</span> &nbsp;·&nbsp; ~2 min</div>
@@ -849,7 +860,7 @@
 <div class="screen" id="s-reading">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge" id="reading-day-badge">Day 1</div></div>
+    <div class="nav-right"><div class="day-badge" id="reading-day-badge">Session</div></div>
   </div>
   <div class="phase-bar">
     <div class="phase-dot" id="reading-p1-dot"></div>
@@ -902,7 +913,7 @@
 <div class="screen" id="s-listening">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge" id="listening-day-badge">Day 2</div></div>
+    <div class="nav-right"><div class="day-badge" id="listening-day-badge">Session</div></div>
   </div>
   <div class="phase-bar">
     <div class="phase-dot" id="listening-p1-dot"></div>
@@ -952,7 +963,7 @@
 <div class="screen" id="s-writing">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge" id="writing-day-badge">Day 6</div></div>
+    <div class="nav-right"><div class="day-badge" id="writing-day-badge">Session</div></div>
   </div>
   <div class="phase-bar">
     <div class="phase-dot" id="writing-p1-dot"></div>
@@ -1002,7 +1013,7 @@
 <div class="screen" id="s-speaking">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge" id="speaking-day-badge">Day 8</div></div>
+    <div class="nav-right"><div class="day-badge" id="speaking-day-badge">Session</div></div>
   </div>
   <div class="phase-bar">
     <div class="phase-dot" id="speaking-p1-dot"></div>
@@ -1128,7 +1139,7 @@
 <div class="screen" id="s-minimock">
   <div class="nav">
     <div class="logo"><div class="dev-logo-trigger"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" draggable="false" oncontextmenu="return false;" style="pointer-events:none;" /></div></div>
-    <div class="nav-right"><div class="day-badge">Day 10</div></div>
+    <div class="nav-right"><div class="day-badge">Mock Test</div></div>
   </div>
   <div class="mock-progress">
     <div class="mock-step" id="mock-step-reading"></div>
@@ -1139,7 +1150,7 @@
   <div id="mock-intro-view">
     <div class="toody-msg" style="padding-top:16px">
       <div class="toody-avatar">🏁</div>
-      <div class="toody-bubble">Day 10 — the Mini Mock. Four sections. Timed. This is the closest thing to the real exam before you sit it. Give it everything.</div>
+      <div class="toody-bubble">Time to test yourself — the Mini Mock. Four sections. Timed. This is the closest thing to the real exam before you sit it. Give it everything.</div>
     </div>
     <div class="card">
       <div class="card-label">What to Expect</div>
@@ -1481,6 +1492,43 @@
     </div>
 
   </div>
+</div>
+
+<!-- ── WEEK 1 COMPLETION MOMENT ──────────────────────────────────── -->
+<div class="screen" id="s-week1-complete">
+  <div class="nav">
+    <div class="logo"><img class="logo-mark" src="icons/toody-logo.png?v=4" alt="Toody" style="pointer-events:none;" /></div>
+    <div class="nav-right">
+      <div class="streak-badge" id="w1c-streak">🔥 0 days</div>
+    </div>
+  </div>
+
+  <div style="padding:24px var(--space-4) 0;text-align:center">
+    <div style="font-size:48px;margin-bottom:12px">🎓</div>
+    <h2 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px">Week 1 Complete</h2>
+    <p style="font-size:14px;color:var(--muted);line-height:1.6">You've completed your first week of IELTS preparation with Toody.</p>
+  </div>
+
+  <!-- Current band estimate -->
+  <div class="card" style="margin-top:24px;text-align:center">
+    <div class="card-label">Your band estimate</div>
+    <div id="w1c-band" style="font-size:52px;font-weight:700;color:var(--accent);line-height:1;margin:8px 0">—</div>
+    <div id="w1c-band-note" style="font-size:13px;color:var(--muted)"></div>
+  </div>
+
+  <!-- Progress delta -->
+  <div class="card" id="w1c-delta-card" style="margin-top:var(--space-3)">
+    <div class="card-label">Progress this week</div>
+    <div id="w1c-delta" style="font-size:14px;color:var(--text);line-height:1.7"></div>
+  </div>
+
+  <!-- Strongest / weakest skill -->
+  <div class="card" style="margin-top:var(--space-3)">
+    <div class="card-label">Skill summary</div>
+    <div id="w1c-skills" style="font-size:14px;color:var(--text);line-height:1.7"></div>
+  </div>
+
+  <button class="btn" style="margin-top:var(--space-4)" onclick="window.week1KeepGoing()">Keep going <span class="arrow">→</span></button>
 </div>
 
 </body>
