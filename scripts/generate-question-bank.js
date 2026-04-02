@@ -837,8 +837,135 @@ async function stageVerification(passage, questions) {
 
 // ── STAGE 3 — PASSAGE QUALITY GATE ───────────────────────────────────────────
 
-async function stageQualityGate(passage, band) {
+async function stageQualityGate(type, passage, band) {
+  if (type === 'listening-mc' || type === 'listening-form') {
+    return stageQualityGate_listening(passage, band);
+  }
+  if (type === 'matching-headings' || type === 'matching-information' || type === 'matching-features') {
+    return stageQualityGate_structural(type, passage, band);
+  }
   return evaluatePassage(passage, band, VERCEL_URL);
+}
+
+async function stageQualityGate_structural(type, passage, band) {
+  const typeLabels = {
+    'matching-headings':   'Matching Headings (5 labeled paragraphs A-E, each with distinct main idea)',
+    'matching-information':'Matching Information (5 labeled paragraphs A-E, each containing specific locatable information)',
+    'matching-features':   'Matching Features (passage attributing views/findings to 3 named people or categories)',
+  };
+  const typeLabel = typeLabels[type] || type;
+
+  const res = await fetch(VERCEL_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are an IELTS examiner. Return valid JSON only, no markdown, no preamble.' },
+        { role: 'user',   content:
+`Evaluate this IELTS ${typeLabel} content for Band ${band}. Score each criterion 1 (pass) or 0 (fail):
+
+1. distinctSections    — Are all sections/paragraphs clearly distinct in topic and content? No section should overlap another.
+2. mainIdeaClarity     — Does each section have ONE clear main idea that can be captured in a short heading or located precisely?
+3. bandAppropriate     — Is vocabulary and sentence complexity appropriate for Band ${band}?
+4. tractability        — Can a student at Band ${band} answer correctly by reading carefully, without needing inference or specialist knowledge?
+5. distractorQuality   — (Matching Headings only) Are distractor headings plausible but clearly wrong on close reading? Skip for other types (score 1).
+
+Content:
+${passage}
+
+Return JSON:
+{
+  "scores": {
+    "distinctSections": 0|1,
+    "mainIdeaClarity": 0|1,
+    "bandAppropriate": 0|1,
+    "tractability": 0|1,
+    "distractorQuality": 0|1
+  },
+  "totalMet": number,
+  "pass": boolean,
+  "failReasons": ["criterion that failed", ...]
+}
+
+Pass if totalMet >= 3.` },
+      ],
+      max_tokens: 400, temperature: 0,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Structural quality gate API error: ${res.status}`);
+  const data   = await res.json();
+  const raw    = data.choices?.[0]?.message?.content || '';
+  const parsed = safeParseJson(raw);
+
+  const scores   = parsed.scores || {};
+  const totalMet = parsed.totalMet ?? Object.values(scores).filter(v => v === 1).length;
+  const pass     = parsed.pass ?? (totalMet >= 3);
+
+  return {
+    pass,
+    avgScore:    totalMet,
+    scores,
+    failReasons: parsed.failReasons || [],
+  };
+}
+
+async function stageQualityGate_listening(script, band) {
+  const res = await fetch(VERCEL_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are an IELTS Listening examiner. Return valid JSON only, no markdown, no preamble.' },
+        { role: 'user',   content:
+`Evaluate this IELTS Listening dialogue script for Band ${band}. Score each criterion 1 (poor) or 0 (fail):
+
+1. naturalDialogue     — Do speakers sound like real people? (not reading aloud, varied register, natural turn-taking)
+2. clearAudioCues      — Are answers findable from listening alone — not from reading between the lines?
+3. appropriateTraps    — Does the dialogue include self-correction or answer-change moments ("actually...", "no wait...")?
+4. bandVocabulary      — Is vocabulary conversational and appropriate for Band ${band}?
+5. gapAnswerability    — Can each form gap / question be answered from the dialogue without inference?
+
+Script:
+${script}
+
+Return JSON:
+{
+  "scores": {
+    "naturalDialogue": 0|1,
+    "clearAudioCues": 0|1,
+    "appropriateTraps": 0|1,
+    "bandVocabulary": 0|1,
+    "gapAnswerability": 0|1
+  },
+  "totalMet": number,
+  "pass": boolean,
+  "failReasons": ["criterion that failed", ...]
+}
+
+Pass if totalMet >= 3.` },
+      ],
+      max_tokens: 400, temperature: 0,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Listening quality gate API error: ${res.status}`);
+  const data   = await res.json();
+  const raw    = data.choices?.[0]?.message?.content || '';
+  const parsed = safeParseJson(raw);
+
+  const scores   = parsed.scores || {};
+  const totalMet = parsed.totalMet ?? Object.values(scores).filter(v => v === 1).length;
+  const pass     = parsed.pass ?? (totalMet >= 3);
+
+  return {
+    pass,
+    avgScore:    totalMet,  // repurpose avgScore field for summary display
+    scores,
+    failReasons: parsed.failReasons || [],
+  };
 }
 
 // ── STAGE 4 — STUDENT SIMULATION ──────────────────────────────────────────────
@@ -893,13 +1020,52 @@ IMPORTANT: Return ONLY a valid JSON array. No explanation, no preamble, just JSO
   });
 }
 
+async function stageStudentSimulation_matchingHeadings(passage, questions, apiKey, extraData) {
+  const paragraphs = extraData?.paragraphs || [];
+  const headings   = extraData?.headings   || [];
+
+  const headingList = headings.map(h => `  ${h.id}. ${h.text}`).join('\n');
+  const paraList    = paragraphs.map(p => `Paragraph ${p.label}:\n${p.text}`).join('\n\n');
+
+  const raw = await anthropicCall(apiKey, 'claude-sonnet-4-5', 0.3, 600,
+    `You are an IELTS student completing a Matching Headings task.
+
+Your job: match each paragraph to the heading that best captures its MAIN IDEA — not a detail mentioned in passing. Some headings are distractors that match only one sentence. Read the WHOLE paragraph before deciding.
+
+Headings (use the number when answering):
+${headingList}
+
+Paragraphs:
+${paraList}
+
+Return a JSON array — one entry per paragraph, in paragraph order:
+[{ "paragraphNumber": 1, "paragraphLabel": "A", "selectedHeading": "3", "reasoning": "one sentence explaining why" }]
+
+IMPORTANT: Return ONLY valid JSON. No explanation, no preamble, no markdown.`);
+
+  const simAnswers = safeParseJson(raw);
+  if (!Array.isArray(simAnswers)) throw new Error('Stage 4 matching-headings: response not array');
+
+  return simAnswers.map(s => {
+    // questions[i].text = "Paragraph A", questions[i].answer = "3"
+    const bankQ   = questions.find(q => q.text === `Paragraph ${s.paragraphLabel}` || q.id === s.paragraphNumber);
+    const correct = bankQ?.answer;
+    const matched = String(s.selectedHeading).trim() === String(correct || '').trim();
+    return { questionId: bankQ?.id ?? s.paragraphNumber, studentAnswer: s.selectedHeading, bankAnswer: correct ?? '?', confidence: 'medium', matched };
+  });
+}
+
 async function stageStudentSimulation_generic(type, passage, questions, apiKey, extraData) {
+  // Matching Headings gets a dedicated simulation with full paragraph + heading text
+  if (type === 'matching-headings') {
+    return stageStudentSimulation_matchingHeadings(passage, questions, apiKey, extraData);
+  }
+
   const SIM_INSTRUCTIONS = {
     'summary-completion':  `Fill each gap using only words from the word bank. Word bank: [${(extraData?.wordBank || []).join(', ')}]. Summary: ${extraData?.summaryText || ''}. Return JSON: [{ "questionId": 1, "answer": "word" }]`,
     'sentence-completion': `Complete each sentence using one word from the passage. Return JSON: [{ "questionId": 1, "answer": "word" }]`,
     'multiple-choice':     `Choose the best answer (A/B/C/D) for each question. Return JSON: [{ "questionId": 1, "answer": "A" }]`,
     'short-answer':        `Answer each question in 1-2 words only. Return JSON: [{ "questionId": 1, "answer": "short answer" }]`,
-    'matching-headings':   `Match each paragraph to a heading number. Return JSON: [{ "questionId": 1, "answer": "3" }] — use heading id numbers.`,
     'matching-information':`Match each statement to a paragraph letter (A/B/C/D/E). Return JSON: [{ "questionId": 1, "answer": "B" }]`,
     'matching-features':   `Match each statement to the correct person/category: [${(extraData?.features || []).join(' / ')}]. Return JSON: [{ "questionId": 1, "answer": "Dr Smith" }]`,
     'listening-mc':        `Choose the best answer (A/B/C/D) for each question based on the audio script. Return JSON: [{ "questionId": 1, "answer": "A" }]`,
@@ -1035,7 +1201,7 @@ async function generateOneSet(idx, total, type, topic, band, apiKey, leadType) {
 
       // Stage 3
       log('⟳ Stage 3: Quality gate...');
-      const quality = await stageQualityGate(passage, band);
+      const quality = await stageQualityGate(type, passage, band);
       if (!quality.pass) {
         const reasons = (quality.failReasons || []).join('; ') || `avg ${quality.avgScore ?? 'n/a'}`;
         log(`✗ Rejected — quality_gate (${reasons})`);
