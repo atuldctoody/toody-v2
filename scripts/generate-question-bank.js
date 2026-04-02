@@ -143,7 +143,9 @@ async function runPool(taskFns, concurrency) {
 // Each pair specifies the exact fact sentence, the statement the student reads,
 // the answer, and the anchor text — before any passage exists.
 
-async function stageLogicMatrix(topic, band, apiKey) {
+// leadType: one of LOGIC_TYPES — determines which logic type leads (Q1).
+// The remaining 4 questions always use the balanced 4-type rotation.
+async function stageLogicMatrix(topic, band, apiKey, leadType) {
   // Sample 10 Barron's examples as calibration context for this call
   const barronsSample = barrons.length
     ? barrons.slice(0, 10).map(e => `Q: ${e.explanation} → Logic: ${e.logicType}`).join('\n')
@@ -151,6 +153,27 @@ async function stageLogicMatrix(topic, band, apiKey) {
   const barronsContext = barronsSample
     ? `\nReference these verified explanation patterns from Barron's IELTS when constructing reasoning:\n${barronsSample}\nMatch this explanation style and reasoning depth.\n`
     : '';
+
+  // Build the 5-question type list: lead first, then the other 4 in fixed order
+  const ALL_TYPES = [
+    'SYNONYM_SUBSTITUTION',
+    'DIRECT_CONTRADICTION',
+    'NOT_GIVEN_NO_EVIDENCE',
+    'CONCESSIVE_TRAP',
+    'NOT_GIVEN_TOPIC_ADJACENT',
+  ];
+  const others = ALL_TYPES.filter(t => t !== leadType);
+  const typeList = [leadType, ...others];
+
+  const TYPE_INSTRUCTIONS = {
+    SYNONYM_SUBSTITUTION:    'answer: True (passage confirms using a precise synonym — not a semantic cousin)',
+    DIRECT_CONTRADICTION:    'answer: False (passage explicitly states the opposite fact)',
+    NOT_GIVEN_NO_EVIDENCE:   'answer: Not Given (topic is present in passage but the specific claim is never made)',
+    CONCESSIVE_TRAP:         'answer: ALWAYS False — NEVER Not Given, NEVER True. Pattern: passage says "Although X, Y" where Y directly contradicts the statement. The student reads X and thinks True, but Y is the truth. Example: passage says "Although the railway was a great technical achievement, it did not make a profit." Statement: "The railway was financially successful." Answer: False — the main clause after "although" directly contradicts the statement.',
+    NOT_GIVEN_TOPIC_ADJACENT:'answer: Not Given (related topic mentioned but the exact claim the student reads is never addressed)',
+  };
+
+  const qLines = typeList.map((t, i) => `- Q${i + 1}: ${t} → ${TYPE_INSTRUCTIONS[t]}`).join('\n');
 
   const res = await fetch(ANTHROPIC_URL, {
     method:  'POST',
@@ -169,11 +192,9 @@ async function stageLogicMatrix(topic, band, apiKey) {
 `Generate exactly 5 T/F/NG logic pairs for a Band ${band} IELTS Academic reading question set about ${topic}.
 ${barronsContext}
 Use this exact distribution (calibrated against 92 verified Barron's/Cambridge questions):
-- Q1: SYNONYM_SUBSTITUTION → answer: True (passage confirms using a precise synonym — not a semantic cousin)
-- Q2: DIRECT_CONTRADICTION → answer: False (passage explicitly states the opposite fact)
-- Q3: NOT_GIVEN_NO_EVIDENCE → answer: Not Given (topic is present in passage but the specific claim is never made)
-- Q4: CONCESSIVE_TRAP → answer: False (passage says "Although X, Y" — statement asserts X, but Y is the truth)
-- Q5: NOT_GIVEN_TOPIC_ADJACENT → answer: Not Given (related topic mentioned but the exact claim the student reads is never addressed)
+${qLines}
+
+CRITICAL RULE — CONCESSIVE_TRAP: The answer must ALWAYS be "False". Never "Not Given", never "True". The passage must contain an explicit "Although X, Y" or equivalent concessive structure where Y directly contradicts the statement. If you cannot construct a clear False answer using this pattern, do not use CONCESSIVE_TRAP.
 
 For each pair return:
 {
@@ -402,14 +423,14 @@ function buildEntry({ topic, band, passage, questions, corrections, quality, sim
 
 // ── GENERATE ONE SET ──────────────────────────────────────────────────────────
 
-async function generateOneSet(idx, total, topic, band, apiKey) {
+async function generateOneSet(idx, total, topic, band, apiKey, leadType) {
   const prefix = `[${String(idx).padStart(String(total).length)}/${total}]`;
   const log    = msg => process.stdout.write(`${prefix} ${msg}\n`);
 
   try {
     // Stage 0
-    log('⟳ Stage 0: Logic matrix...');
-    const logicPairs = await stageLogicMatrix(topic, band, apiKey);
+    log(`⟳ Stage 0: Logic matrix (lead: ${leadType})...`);
+    const logicPairs = await stageLogicMatrix(topic, band, apiKey, leadType);
 
     // Stage 1
     log('⟳ Stage 1: Passage generation...');
@@ -557,6 +578,49 @@ async function main() {
   const existingApproved = opts.append ? loadBank(OUT_PATH) : [];
   const existingRejected = opts.append ? loadBank(REJ_PATH) : [];
 
+  // ── BATCH PLANNER ───────────────────────────────────────────────
+  // Weighted lead-type distribution calibrated to real IELTS frequencies
+  // (data/barrons-calibration.json — 92 verified questions):
+  //   SYNONYM_SUBSTITUTION    40%  (most common True mechanism)
+  //   DIRECT_CONTRADICTION    20%
+  //   NOT_GIVEN_NO_EVIDENCE   15%
+  //   CONCESSIVE_TRAP         15%
+  //   NOT_GIVEN_TOPIC_ADJACENT 10%
+  function buildLeadTypePlan(count) {
+    const weights = [
+      { type: 'SYNONYM_SUBSTITUTION',    weight: 0.40 },
+      { type: 'DIRECT_CONTRADICTION',    weight: 0.20 },
+      { type: 'NOT_GIVEN_NO_EVIDENCE',   weight: 0.15 },
+      { type: 'CONCESSIVE_TRAP',         weight: 0.15 },
+      { type: 'NOT_GIVEN_TOPIC_ADJACENT',weight: 0.10 },
+    ];
+    // Assign lead types proportionally — fill slots by floor count, then top up
+    const slots = weights.map(w => ({ type: w.type, n: Math.floor(count * w.weight) }));
+    let assigned = slots.reduce((s, x) => s + x.n, 0);
+    // Fill remaining slots by largest fractional remainder
+    const remainders = weights.map((w, i) => ({
+      i, frac: (count * w.weight) - slots[i].n,
+    })).sort((a, b) => b.frac - a.frac);
+    for (let r = 0; assigned < count; r++, assigned++) slots[remainders[r % remainders.length].i].n++;
+    // Expand to array and shuffle
+    const plan = slots.flatMap(s => Array(s.n).fill(s.type));
+    for (let i = plan.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [plan[i], plan[j]] = [plan[j], plan[i]];
+    }
+    return plan;
+  }
+
+  const leadTypePlan = buildLeadTypePlan(opts.count);
+
+  console.log('Lead-type batch plan:');
+  const planCount = {};
+  leadTypePlan.forEach(t => { planCount[t] = (planCount[t] || 0) + 1; });
+  Object.entries(planCount).sort((a,b) => b[1]-a[1]).forEach(([t,n]) =>
+    console.log(`  ${t.padEnd(26)} × ${n}`)
+  );
+  console.log('');
+
   // Build topic list up front so each task has its topic bound at creation time
   const topicPool = opts.topic ? null : [...RANDOM_TOPICS];
   function pickTopic() {
@@ -567,8 +631,9 @@ async function main() {
   }
 
   const taskFns = Array.from({ length: opts.count }, (_, i) => {
-    const topic = pickTopic();
-    return () => generateOneSet(i + 1, opts.count, topic, opts.band, apiKey);
+    const topic    = pickTopic();
+    const leadType = leadTypePlan[i];
+    return () => generateOneSet(i + 1, opts.count, topic, opts.band, apiKey, leadType);
   });
 
   const results = await runPool(taskFns, opts.concurrency);

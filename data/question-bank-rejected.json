@@ -385,5 +385,164 @@
       "flaggedForReview": []
     },
     "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "0e4b1abf-c484-4c18-9b60-d22d578f11b0",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy is a crucial tool for governments and international institutions to manage and stabilize economies. At the heart of domestic economic policy, central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies. By raising or lowering interest rates, central banks can influence borrowing, spending, and investment, thereby stabilizing prices and maintaining economic equilibrium. On the international stage, the International Monetary Fund was established in 1944 to promote international monetary cooperation and exchange rate stability. This institution plays a vital role in supporting countries facing balance of payments problems and ensuring the smooth functioning of the global economy. Fiscal policy also plays a significant role in economic management. Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes than lower earners, which can help reduce income inequality and provide governments with the necessary revenue to fund public services. However, policymakers must carefully balance taxation to avoid stifling economic growth. In times of economic crisis, unconventional monetary policies such as quantitative easing are sometimes employed. Although quantitative easing can stimulate economic growth in the short term, most economists agree it poses significant long-term risks to financial stability. This approach involves central banks purchasing government securities to inject liquidity into the economy, but excessive reliance on it can lead to asset bubbles and increased debt levels. Moreover, economic policy is not confined to national borders. Trade liberalization policies have been implemented across Southeast Asian nations since the 1990s, reducing tariff barriers between member states. Such policies have fostered increased trade and investment in the region, contributing to rapid economic growth. However, they also require careful management to ensure that the benefits of globalization are widely distributed among populations. Overall, economic policy remains a complex and multifaceted area requiring careful consideration of both domestic and international factors to ensure sustainable development and stability.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Interest rate adjustments are the main tool central banks use to control inflation.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+        "anchorText": "primary mechanism",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'primary mechanism' and 'main tool' mean exactly the same thing. The passage confirms what the statement claims using different words.",
+        "reasoning": {
+          "step_1_locate": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+          "step_2_compare": "Passage says: 'primary mechanism for controlling inflation'. Statement says: 'main tool central banks use to control inflation'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'primary mechanism' and 'main tool' mean exactly the same thing. The passage confirms what the statement claims using different words.",
+          "step_4_eliminate": "Not False because the passage directly supports this claim. Not Not Given because the passage explicitly mentions this relationship between interest rates and inflation control."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The International Monetary Fund was founded in 1945.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The International Monetary Fund was established in 1944 to promote international monetary cooperation and exchange rate stability.",
+        "anchorText": "1944",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage gives a specific year (1944) that directly contradicts the year in the statement (1945). One year difference makes this factually wrong.",
+        "reasoning": {
+          "step_1_locate": "The International Monetary Fund was established in 1944 to promote international monetary cooperation and exchange rate stability.",
+          "step_2_compare": "Passage says: 'established in 1944'. Statement says: 'founded in 1945'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage gives a specific year (1944) that directly contradicts the year in the statement (1945). One year difference makes this factually wrong.",
+          "step_4_eliminate": "Not True because the dates don't match. Not Not Given because the passage clearly states when the IMF was established."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The International Monetary Fund was established in 1944 to promote international monetary cooperation and exchange rate stability.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Progressive taxation systems are more effective at reducing income inequality than flat tax systems.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes than lower earners.",
+        "anchorText": "percentage of their income",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage explains how progressive taxation works but never makes any claim about whether it is more effective than other systems. The comparison to flat tax is never mentioned.",
+        "reasoning": {
+          "step_1_locate": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes than lower earners.",
+          "step_2_compare": "Passage says: 'higher earners pay a larger percentage'. Statement says: 'more effective at reducing income inequality than flat tax systems'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage explains how progressive taxation works but never makes any claim about whether it is more effective than other systems. The comparison to flat tax is never mentioned.",
+          "step_4_eliminate": "Not True because no comparison of effectiveness is made. Not False because the passage doesn't say progressive taxation is less effective either."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes than lower earners.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Quantitative easing stimulates economic growth.",
+        "answer": "Not Given",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although quantitative easing can stimulate economic growth in the short term, most economists agree it poses significant long-term risks to financial stability.",
+        "anchorText": "Although...short term",
+        "complexityLevel": 4,
+        "explanation": "The passage states quantitative easing can stimulate economic growth in the short term, but does not explicitly state it does not stimulate growth at all, making the statement Not Given.",
+        "reasoning": {
+          "step_1_locate": "Although quantitative easing can stimulate economic growth in the short term, most economists agree it poses significant long-term risks to financial stability.",
+          "step_2_compare": "Passage says: 'Although...can stimulate economic growth in the short term...poses significant long-term risks'. Statement says: 'stimulates economic growth' (no qualifier).",
+          "step_3_logic": "CONCESSIVE_TRAP — The passage admits short-term growth BUT the main message is about long-term risks. The statement removes the time qualifier and the warning, making it false because it misrepresents the passage's actual position.",
+          "step_4_eliminate": "Not True because the statement ignores the critical 'short term' qualifier and the main point about risks. Not Not Given because the passage does discuss quantitative easing's effects on growth."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although quantitative easing can stimulate economic growth in the short term, most economists agree it poses significant long-term risks to financial stability.",
+        "verified": false,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "Trade liberalization in Southeast Asia has increased foreign direct investment in the region.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Trade liberalization policies have been implemented across Southeast Asian nations since the 1990s, reducing tariff barriers between member states.",
+        "anchorText": "Southeast Asian nations",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about trade liberalization in Southeast Asia (same topic), but it only mentions tariff reduction. The specific claim about foreign direct investment is never made anywhere in the passage.",
+        "reasoning": {
+          "step_1_locate": "Trade liberalization policies have been implemented across Southeast Asian nations since the 1990s, reducing tariff barriers between member states.",
+          "step_2_compare": "Passage says: 'reducing tariff barriers between member states'. Statement says: 'increased foreign direct investment in the region'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about trade liberalization in Southeast Asia (same topic), but it only mentions tariff reduction. The specific claim about foreign direct investment is never made anywhere in the passage.",
+          "step_4_eliminate": "Not True because foreign direct investment is never mentioned. Not False because the passage doesn't say investment decreased or remained unchanged either."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Trade liberalization policies have been implemented across Southeast Asian nations since the 1990s, reducing tariff barriers between member states.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:39:25.514Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 1,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
   }
 ]

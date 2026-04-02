@@ -1,1 +1,2214 @@
-[]
+[
+  {
+    "id": "14f416a0-1eb8-40f6-ab43-ab1ac5420e07",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has evolved significantly over the decades, encompassing various subfields that offer insights into the complex nature of human language. One such subfield is corpus linguistics, which involves the systematic analysis of large collections of naturally occurring texts stored in electronic databases. This approach allows researchers to observe patterns and trends within language use, providing empirical data that can support or challenge theoretical models of language. Another pivotal area of linguistic research is grounded in Chomsky's theory of Universal Grammar, which proposes that humans are born with an innate capacity for language acquisition. This theory suggests that despite the diversity of languages, there exists a common structural basis underlying all human languages, guiding the way individuals learn and utilize language. Complementing these perspectives is sociolinguistic research, which examines how social factors such as class, gender, and ethnicity influence language variation. By studying these influences, sociolinguists aim to understand the dynamic relationship between language and society, revealing how linguistic diversity is shaped by cultural and social contexts. In the realm of psycholinguistics, although early psycholinguistic experiments focused primarily on reading processes, contemporary research emphasizes spoken language comprehension and production. This shift reflects a broader understanding of the cognitive processes involved in everyday language use, highlighting the importance of real-time communication. Furthermore, advances in neurolinguistics have provided deeper insights into the brain's role in language processing. Neurolinguistic studies using fMRI technology have identified specific brain regions associated with syntactic processing, including Broca's area in the left frontal lobe. These findings underscore the biological underpinnings of language, linking cognitive theories with tangible neurological evidence. Together, these diverse strands of linguistic research contribute to a more comprehensive understanding of language as a fundamental human attribute, highlighting its multifaceted nature and the various factors that influence its development and use.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Corpus linguistics examines extensive compilations of authentic texts held in digital repositories.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Corpus linguistics involves the systematic analysis of large collections of naturally occurring texts stored in electronic databases.",
+        "anchorText": "systematic analysis of large collections",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — Every key term has been replaced with its exact synonym: analysis→examines, large→extensive, collections→compilations, naturally occurring→authentic, electronic databases→digital repositories.",
+        "reasoning": {
+          "step_1_locate": "Corpus linguistics involves the systematic analysis of large collections of naturally occurring texts stored in electronic databases.",
+          "step_2_compare": "Passage says: 'systematic analysis of large collections of naturally occurring texts stored in electronic databases'. Statement says: 'examines extensive compilations of authentic texts held in digital repositories'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — Every key term has been replaced with its exact synonym: analysis→examines, large→extensive, collections→compilations, naturally occurring→authentic, electronic databases→digital repositories.",
+          "step_4_eliminate": "Not False because the meaning is identical, just reworded. Not Not Given because every detail is confirmed in the passage."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Corpus linguistics involves the systematic analysis of large collections of naturally occurring texts stored in electronic databases.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Chomsky's Universal Grammar theory suggests that language acquisition ability is learned through environmental exposure.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Chomsky's theory of Universal Grammar proposes that humans are born with an innate capacity for language acquisition.",
+        "anchorText": "innate capacity",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — Innate means you are born with it naturally; learned through environment means you acquire it from outside. These are opposite explanations.",
+        "reasoning": {
+          "step_1_locate": "Chomsky's theory of Universal Grammar proposes that humans are born with an innate capacity for language acquisition.",
+          "step_2_compare": "Passage says: 'born with an innate capacity'. Statement says: 'learned through environmental exposure'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — Innate means you are born with it naturally; learned through environment means you acquire it from outside. These are opposite explanations.",
+          "step_4_eliminate": "Not True because innate and learned are contradictory. Not Not Given because the passage directly addresses how language capacity is acquired."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Chomsky's theory of Universal Grammar proposes that humans are born with an innate capacity for language acquisition.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Sociolinguistic studies have found that gender has a stronger influence on language variation than social class.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Sociolinguistic research examines how social factors such as class, gender, and ethnicity influence language variation.",
+        "anchorText": "social factors such as class, gender, and ethnicity",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage lists factors that influence language but never ranks them or compares their strength. The comparison claim is never made.",
+        "reasoning": {
+          "step_1_locate": "Sociolinguistic research examines how social factors such as class, gender, and ethnicity influence language variation.",
+          "step_2_compare": "Passage says: 'class, gender, and ethnicity influence language variation'. Statement says: 'gender has a stronger influence than social class'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage lists factors that influence language but never ranks them or compares their strength. The comparison claim is never made.",
+          "step_4_eliminate": "Not True because no comparison of strength is mentioned. Not False because the passage doesn't say the opposite either — it simply doesn't address which factor is stronger."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Sociolinguistic research examines how social factors such as class, gender, and ethnicity influence language variation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Current psycholinguistic research concentrates mainly on reading processes.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although early psycholinguistic experiments focused primarily on reading processes, contemporary research emphasizes spoken language comprehension and production.",
+        "anchorText": "Although...focused primarily on reading processes, contemporary research emphasizes spoken language",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals a contrast. Early research did reading; current research does spoken language. The statement wrongly applies the old focus to current research.",
+        "reasoning": {
+          "step_1_locate": "Although early psycholinguistic experiments focused primarily on reading processes, contemporary research emphasizes spoken language comprehension and production.",
+          "step_2_compare": "Passage says: 'contemporary research emphasizes spoken language'. Statement says: 'Current psycholinguistic research concentrates mainly on reading processes'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals a contrast. Early research did reading; current research does spoken language. The statement wrongly applies the old focus to current research.",
+          "step_4_eliminate": "Not True because contemporary means current, and current research emphasizes spoken language, not reading. Not Not Given because the passage explicitly states what contemporary research emphasizes."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although early psycholinguistic experiments focused primarily on reading processes, contemporary research emphasizes spoken language comprehension and production.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Neurolinguistic research has demonstrated that Broca's area is more active during syntactic processing than during semantic processing.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Neurolinguistic studies using fMRI technology have identified specific brain regions associated with syntactic processing, including Broca's area in the left frontal lobe.",
+        "anchorText": "specific brain regions associated with syntactic processing, including Broca's area",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage discusses Broca's area and syntactic processing, but semantic processing is never mentioned. The comparison between the two processing types is never made.",
+        "reasoning": {
+          "step_1_locate": "Neurolinguistic studies using fMRI technology have identified specific brain regions associated with syntactic processing, including Broca's area in the left frontal lobe.",
+          "step_2_compare": "Passage says: 'Broca's area associated with syntactic processing'. Statement says: 'Broca's area is more active during syntactic processing than during semantic processing'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage discusses Broca's area and syntactic processing, but semantic processing is never mentioned. The comparison between the two processing types is never made.",
+          "step_4_eliminate": "Not True because no comparison with semantic processing exists in the passage. Not False because the passage doesn't contradict this — it simply never addresses semantic processing at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Neurolinguistic studies using fMRI technology have identified specific brain regions associated with syntactic processing, including Broca's area in the left frontal lobe.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:12.096Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "37dcf315-6b8c-41ed-b6ef-cd4d0f338a44",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "The global shift towards renewable energy sources is crucial for achieving a sustainable future. As concerns over climate change grow, countries are increasingly investing in renewable energy technologies to reduce their carbon footprint and reliance on fossil fuels. Solar energy stands at the forefront of this transition. Solar panels convert sunlight directly into electricity through photovoltaic cells, offering a clean and inexhaustible energy supply. This technology has seen rapid advancements, making solar power more accessible and affordable worldwide.\n\nSimilarly, wind energy has emerged as a significant player in the renewable energy sector. Wind turbines generate power only when wind speeds exceed 3 meters per second, which necessitates strategic placement in regions with consistent wind patterns. The efficiency of wind farms continues to improve, contributing substantially to the energy grids of many nations.\n\nNorway serves as a remarkable example of the potential of renewable energy, particularly hydroelectric power. Hydroelectric dams in Norway supply approximately 95% of the country's electricity needs, showcasing the feasibility of large-scale renewable energy implementation. This reliance on hydroelectric power not only ensures energy security but also positions Norway as a leader in sustainable energy practices.\n\nBeyond hydro, solar, and wind energy, geothermal energy presents another renewable option. Although geothermal energy is renewable, it can only be harnessed efficiently in regions with significant volcanic or tectonic activity. This limitation confines its widespread applicability but offers substantial energy potential in geologically active areas, such as Iceland and parts of the United States.\n\nFurthermore, biomass energy provides a versatile renewable energy source. Biomass energy involves burning organic materials such as wood, agricultural waste, and dedicated energy crops to produce heat and electricity. This method of energy production is particularly beneficial in regions with abundant organic waste, supporting both waste management and energy needs.\n\nIn conclusion, the integration of diverse renewable energy sources is essential to meet global energy demands sustainably. By harnessing the unique advantages of each type of renewable energy, nations can reduce their environmental impact and secure a more resilient energy future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Photovoltaic cells transform sunlight straight into electrical energy.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Solar panels convert sunlight directly into electricity through photovoltaic cells.",
+        "anchorText": "convert sunlight directly into electricity",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — The passage and statement say the exact same thing using different words: convert=transform, directly=straight, electricity=electrical energy.",
+        "reasoning": {
+          "step_1_locate": "Solar panels convert sunlight directly into electricity through photovoltaic cells.",
+          "step_2_compare": "Passage says: 'convert sunlight directly into electricity through photovoltaic cells'. Statement says: 'Photovoltaic cells transform sunlight straight into electrical energy'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — The passage and statement say the exact same thing using different words: convert=transform, directly=straight, electricity=electrical energy.",
+          "step_4_eliminate": "Not False because the passage confirms this exact process. Not Not Given because photovoltaic cells converting sunlight is explicitly stated."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Solar panels convert sunlight directly into electricity through photovoltaic cells.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Wind turbines can produce electricity at wind speeds below 3 meters per second.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Wind turbines generate power only when wind speeds exceed 3 meters per second.",
+        "anchorText": "only when wind speeds exceed 3 meters per second",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says turbines work only above 3 m/s. The statement claims they work below 3 m/s. These are opposite facts.",
+        "reasoning": {
+          "step_1_locate": "Wind turbines generate power only when wind speeds exceed 3 meters per second.",
+          "step_2_compare": "Passage says: 'only when wind speeds exceed 3 meters per second'. Statement says: 'at wind speeds below 3 meters per second'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says turbines work only above 3 m/s. The statement claims they work below 3 m/s. These are opposite facts.",
+          "step_4_eliminate": "Not True because the passage says 'only when...exceed', which means not below. Not Not Given because the exact speed threshold is clearly stated."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Wind turbines generate power only when wind speeds exceed 3 meters per second.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Hydroelectric dams in Sweden provide most of the nation's power requirements.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Hydroelectric dams in Norway supply approximately 95% of the country's electricity needs.",
+        "anchorText": "in Norway",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about Norway's hydroelectric power, but Sweden is never mentioned anywhere. We cannot assume information about one country applies to another.",
+        "reasoning": {
+          "step_1_locate": "Hydroelectric dams in Norway supply approximately 95% of the country's electricity needs.",
+          "step_2_compare": "Passage says: 'Hydroelectric dams in Norway supply approximately 95%'. Statement says: 'Hydroelectric dams in Sweden provide most of the nation's power'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about Norway's hydroelectric power, but Sweden is never mentioned anywhere. We cannot assume information about one country applies to another.",
+          "step_4_eliminate": "Not True because Sweden is not mentioned in the passage. Not False because we have no information to contradict it—the passage simply doesn't discuss Sweden at all."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Hydroelectric dams in Norway supply approximately 95% of the country's electricity needs.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "Geothermal energy can be efficiently harnessed in any location because it is a renewable resource.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although geothermal energy is renewable, it can only be harnessed efficiently in regions with significant volcanic or tectonic activity.",
+        "anchorText": "Although geothermal energy is renewable",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The passage says 'Although X is true, Y is the limitation.' Students see X (renewable) in both texts and think it's True, but miss that Y (location restriction) contradicts 'any location'.",
+        "reasoning": {
+          "step_1_locate": "Although geothermal energy is renewable, it can only be harnessed efficiently in regions with significant volcanic or tectonic activity.",
+          "step_2_compare": "Passage says: 'it can only be harnessed efficiently in regions with significant volcanic or tectonic activity'. Statement says: 'can be efficiently harnessed in any location'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The passage says 'Although X is true, Y is the limitation.' Students see X (renewable) in both texts and think it's True, but miss that Y (location restriction) contradicts 'any location'.",
+          "step_4_eliminate": "Not True because 'any location' contradicts 'only in regions with volcanic/tectonic activity'. Not Not Given because the passage explicitly limits where geothermal works efficiently."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although geothermal energy is renewable, it can only be harnessed efficiently in regions with significant volcanic or tectonic activity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Biomass energy production releases fewer greenhouse gases than fossil fuel combustion.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Biomass energy involves burning organic materials such as wood, agricultural waste, and dedicated energy crops to produce heat and electricity.",
+        "anchorText": "organic materials such as wood, agricultural waste, and dedicated energy crops",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage discusses biomass energy (the topic is there), but never mentions greenhouse gases or makes any comparison with fossil fuels. The environmental impact is simply not addressed.",
+        "reasoning": {
+          "step_1_locate": "Biomass energy involves burning organic materials such as wood, agricultural waste, and dedicated energy crops to produce heat and electricity.",
+          "step_2_compare": "Passage says: 'involves burning organic materials...to produce heat and electricity'. Statement says: 'releases fewer greenhouse gases than fossil fuel combustion'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage discusses biomass energy (the topic is there), but never mentions greenhouse gases or makes any comparison with fossil fuels. The environmental impact is simply not addressed.",
+          "step_4_eliminate": "Not True because no comparison to fossil fuels appears in the passage. Not False because the passage doesn't say biomass releases more emissions either—it just doesn't discuss emissions at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Biomass energy involves burning organic materials such as wood, agricultural waste, and dedicated energy crops to produce heat and electricity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:12.402Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.8,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "db3b9acc-e84e-453c-b28e-1ddcbf69f542",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a field that encompasses the study of a diverse range of organisms inhabiting the ocean, from the smallest plankton to the largest whales. Among the myriad of marine life forms, coral reefs are particularly significant due to their role in supporting biodiversity. Coral polyps secrete calcium carbonate to form hard exoskeletons that gradually build reef structures over thousands of years. These reefs provide habitat and protection for many marine species, making them critical for maintaining ecological balance in ocean ecosystems. In contrast to the communal nature of coral reefs, the giant Pacific octopus is a solitary creature that actively avoids contact with other octopuses except during the brief mating season. This behavior highlights the diverse survival strategies employed by marine organisms. Another fascinating aspect of marine life is the phenomenon of bioluminescence. Bioluminescent organisms in the deep ocean produce light through chemical reactions involving luciferin and luciferase enzymes, which they use primarily for attracting prey and communicating with potential mates. This adaptation demonstrates the complex evolutionary paths marine species have taken to thrive in various oceanic environments. Seahorses, for instance, exhibit unique anatomical traits. Although seahorses possess gills like other fish, they are extremely poor swimmers due to their upright posture and lack of a caudal fin. This limitation necessitates a lifestyle closely tied to coral or seagrass habitats where they can anchor themselves with their prehensile tails. Marine biologists have documented over 30 different species of dolphins in oceans worldwide, with the bottlenose dolphin being the most extensively studied due to its coastal habitat and adaptability to captivity. The extensive research on dolphins has contributed significantly to our understanding of marine mammal intelligence and social behavior. In summary, marine biology reveals the incredible diversity and adaptability of oceanic life forms, each uniquely suited to their environment and playing vital roles in the Earth's marine ecosystems.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral polyps produce calcium carbonate to create their hard outer shells.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Coral polyps secrete calcium carbonate to form hard exoskeletons that gradually build reef structures over thousands of years.",
+        "anchorText": "secrete calcium carbonate",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'secrete' means 'produce', 'form' means 'create', and 'exoskeletons' means 'hard outer shells'. The meaning is identical.",
+        "reasoning": {
+          "step_1_locate": "Coral polyps secrete calcium carbonate to form hard exoskeletons that gradually build reef structures over thousands of years.",
+          "step_2_compare": "Passage says: 'secrete calcium carbonate to form hard exoskeletons'. Statement says: 'produce calcium carbonate to create their hard outer shells'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'secrete' means 'produce', 'form' means 'create', and 'exoskeletons' means 'hard outer shells'. The meaning is identical.",
+          "step_4_eliminate": "Not False because the passage confirms this exact process. Not Not Given because the passage explicitly describes this mechanism."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Coral polyps secrete calcium carbonate to form hard exoskeletons that gradually build reef structures over thousands of years.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Giant Pacific octopuses are social animals that live in groups.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The giant Pacific octopus is a solitary creature that actively avoids contact with other octopuses except during the brief mating season.",
+        "anchorText": "solitary creature",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — Solitary means alone, which is the exact opposite of social and living in groups. The passage gives the opposite fact.",
+        "reasoning": {
+          "step_1_locate": "The giant Pacific octopus is a solitary creature that actively avoids contact with other octopuses except during the brief mating season.",
+          "step_2_compare": "Passage says: 'solitary creature that actively avoids contact'. Statement says: 'social animals that live in groups'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — Solitary means alone, which is the exact opposite of social and living in groups. The passage gives the opposite fact.",
+          "step_4_eliminate": "Not True because solitary contradicts social. Not Not Given because the passage clearly describes their social behavior as solitary."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The giant Pacific octopus is a solitary creature that actively avoids contact with other octopuses except during the brief mating season.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Deep ocean bioluminescent organisms use light production to defend themselves against predators more frequently than for any other purpose.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Bioluminescent organisms in the deep ocean produce light through chemical reactions involving luciferin and luciferase enzymes, which they use primarily for attracting prey and communicating with potential mates.",
+        "anchorText": "primarily for attracting prey and communicating",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about bioluminescence but never mentions defense against predators or compares how often different purposes occur.",
+        "reasoning": {
+          "step_1_locate": "Bioluminescent organisms in the deep ocean produce light through chemical reactions involving luciferin and luciferase enzymes, which they use primarily for attracting prey and communicating with potential mates.",
+          "step_2_compare": "Passage says: 'primarily for attracting prey and communicating'. Statement says: 'defend themselves against predators more frequently than for any other purpose'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about bioluminescence but never mentions defense against predators or compares how often different purposes occur.",
+          "step_4_eliminate": "Not True because defense is never mentioned as the primary purpose. Not False because the passage doesn't say defense is NOT the most frequent use—it simply never discusses it."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Bioluminescent organisms in the deep ocean produce light through chemical reactions involving luciferin and luciferase enzymes, which they use primarily for attracting prey and communicating with potential mates.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "Seahorses are strong swimmers because they have gills like other fish.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although seahorses possess gills like other fish, they are extremely poor swimmers due to their upright posture and lack of a caudal fin.",
+        "anchorText": "Although seahorses possess gills",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals a contrast. Yes, they have gills, BUT they are poor swimmers, not strong ones. The statement picks the wrong part of the sentence.",
+        "reasoning": {
+          "step_1_locate": "Although seahorses possess gills like other fish, they are extremely poor swimmers due to their upright posture and lack of a caudal fin.",
+          "step_2_compare": "Passage says: 'Although seahorses possess gills... they are extremely poor swimmers'. Statement says: 'strong swimmers because they have gills'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals a contrast. Yes, they have gills, BUT they are poor swimmers, not strong ones. The statement picks the wrong part of the sentence.",
+          "step_4_eliminate": "Not True because the passage says 'extremely poor swimmers', not strong. Not Not Given because the passage directly addresses their swimming ability."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although seahorses possess gills like other fish, they are extremely poor swimmers due to their upright posture and lack of a caudal fin.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The bottlenose dolphin is the most intelligent species among all documented dolphin species.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Marine biologists have documented over 30 different species of dolphins in oceans worldwide, with the bottlenose dolphin being the most extensively studied due to its coastal habitat and adaptability to captivity.",
+        "anchorText": "most extensively studied",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — Bottlenose dolphins are mentioned and studied a lot, but the passage never discusses or compares intelligence levels between dolphin species.",
+        "reasoning": {
+          "step_1_locate": "Marine biologists have documented over 30 different species of dolphins in oceans worldwide, with the bottlenose dolphin being the most extensively studied due to its coastal habitat and adaptability to captivity.",
+          "step_2_compare": "Passage says: 'most extensively studied due to its coastal habitat and adaptability to captivity'. Statement says: 'most intelligent species'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — Bottlenose dolphins are mentioned and studied a lot, but the passage never discusses or compares intelligence levels between dolphin species.",
+          "step_4_eliminate": "Not True because intelligence is never mentioned. Not False because the passage doesn't say they are NOT the most intelligent—it simply never addresses intelligence at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Marine biologists have documented over 30 different species of dolphins in oceans worldwide, with the bottlenose dolphin being the most extensively studied due to its coastal habitat and adaptability to captivity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:13.117Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "ba18fd77-bb03-473f-9700-6b6337dcf6bb",
+    "band": 6,
+    "topic": "Archaeological Discovery in Crete",
+    "passage": "The island of Crete has long been a focal point for understanding the complexities of ancient civilizations. A recent archaeological excavation has further illuminated the rich tapestry of history that characterizes this region. Archaeologists unearthed a collection of bronze tools dating back to 1200 BCE at the excavation site in Crete. This significant find provides valuable insight into the technological advancements of the period and suggests that the inhabitants possessed a sophisticated level of craftsmanship. Dr. Helena Morrison led the excavation team that worked at the site for three consecutive summers between 2019 and 2021. Her team's meticulous work has brought to light several intriguing discoveries that challenge previous understandings of the era. Among the findings, the pottery fragments were found scattered across multiple chambers, indicating they were used for everyday domestic purposes rather than ceremonial functions. This suggests a more nuanced understanding of daily life in Bronze Age Crete, where practicality often accompanied ritualistic traditions. One of the most compelling aspects of the excavation was a burial chamber initially thought to contain royal remains. Although initial reports suggested the burial chamber contained royal remains, subsequent DNA analysis revealed the skeleton belonged to a high-ranking merchant rather than nobility. This revelation shifts the narrative from one of monarchical dominance to a broader recognition of the commercial class's influence during this period. The discovery has prompted renewed interest in Bronze Age trade networks, with several universities now planning collaborative research projects to map ancient commercial routes across the Aegean Sea. Such initiatives aim to deepen the understanding of how trade facilitated cultural and technological exchanges across regions, further emphasizing Crete's role as a central node in ancient maritime networks. This excavation not only adds depth to the historical record but also invites a reevaluation of socio-economic dynamics in ancient societies. It underscores the importance of interdisciplinary collaboration in piecing together the multifaceted history of human civilization.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Bronze tools from 1200 BCE were discovered by archaeologists in Crete.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Archaeologists unearthed a collection of bronze tools dating back to 1200 BCE at the excavation site in Crete.",
+        "anchorText": "unearthed",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'unearthed' and 'discovered' mean exactly the same thing in archaeology context, and all other facts match perfectly.",
+        "reasoning": {
+          "step_1_locate": "Archaeologists unearthed a collection of bronze tools dating back to 1200 BCE at the excavation site in Crete.",
+          "step_2_compare": "Passage says: 'unearthed a collection of bronze tools dating back to 1200 BCE'. Statement says: 'Bronze tools from 1200 BCE were discovered'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'unearthed' and 'discovered' mean exactly the same thing in archaeology context, and all other facts match perfectly.",
+          "step_4_eliminate": "Not False because the passage directly confirms this with a synonym. Not Not Given because the exact information about bronze tools, date, and location is all stated."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Archaeologists unearthed a collection of bronze tools dating back to 1200 BCE at the excavation site in Crete.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The pottery fragments discovered at the site were primarily used for ceremonial functions.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The pottery fragments were found scattered across multiple chambers, indicating they were used for everyday domestic purposes rather than ceremonial functions.",
+        "anchorText": "everyday domestic purposes rather than ceremonial",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage uses the word 'rather than' to explicitly reject ceremonial use and confirm domestic use instead.",
+        "reasoning": {
+          "step_1_locate": "The pottery fragments were found scattered across multiple chambers, indicating they were used for everyday domestic purposes rather than ceremonial functions.",
+          "step_2_compare": "Passage says: 'everyday domestic purposes rather than ceremonial functions'. Statement says: 'primarily used for ceremonial functions'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage uses the word 'rather than' to explicitly reject ceremonial use and confirm domestic use instead.",
+          "step_4_eliminate": "Not True because the passage says the opposite. Not Not Given because the passage directly addresses whether the pottery was ceremonial or domestic."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The pottery fragments were found scattered across multiple chambers, indicating they were used for everyday domestic purposes rather than ceremonial functions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Dr. Helena Morrison had previously conducted archaeological research in other Mediterranean locations before leading this excavation.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Dr. Helena Morrison led the excavation team that worked at the site for three consecutive summers between 2019 and 2021.",
+        "anchorText": "Dr. Helena Morrison",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — Dr. Morrison is mentioned, but the passage never discusses her career history or any previous work she did anywhere else.",
+        "reasoning": {
+          "step_1_locate": "Dr. Helena Morrison led the excavation team that worked at the site for three consecutive summers between 2019 and 2021.",
+          "step_2_compare": "Passage says: 'Dr. Helena Morrison led the excavation team'. Statement says: 'had previously conducted archaeological research in other Mediterranean locations'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — Dr. Morrison is mentioned, but the passage never discusses her career history or any previous work she did anywhere else.",
+          "step_4_eliminate": "Not True because there is zero evidence about her past research. Not False because the passage doesn't say she had no previous experience either."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Dr. Helena Morrison led the excavation team that worked at the site for three consecutive summers between 2019 and 2021.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The skeleton found in the burial chamber was identified as belonging to royalty.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although initial reports suggested the burial chamber contained royal remains, subsequent DNA analysis revealed the skeleton belonged to a high-ranking merchant rather than nobility.",
+        "anchorText": "Although...suggested...subsequent analysis revealed",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals that the first idea (royal remains) was wrong, and the real answer comes after: it was a merchant, not royalty.",
+        "reasoning": {
+          "step_1_locate": "Although initial reports suggested the burial chamber contained royal remains, subsequent DNA analysis revealed the skeleton belonged to a high-ranking merchant rather than nobility.",
+          "step_2_compare": "Passage says: 'subsequent DNA analysis revealed the skeleton belonged to a high-ranking merchant rather than nobility'. Statement says: 'was identified as belonging to royalty'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals that the first idea (royal remains) was wrong, and the real answer comes after: it was a merchant, not royalty.",
+          "step_4_eliminate": "Not True because the final identification was merchant, not royal. Not Not Given because the passage directly addresses and answers what the skeleton was."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although initial reports suggested the burial chamber contained royal remains, subsequent DNA analysis revealed the skeleton belonged to a high-ranking merchant rather than nobility.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The discovery has led to increased government funding for Bronze Age archaeological projects in the region.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The discovery has prompted renewed interest in Bronze Age trade networks, with several universities now planning collaborative research projects to map ancient commercial routes across the Aegean Sea.",
+        "anchorText": "Bronze Age trade networks",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the related topic of new research interest, but funding sources (especially government funding) are never mentioned at all.",
+        "reasoning": {
+          "step_1_locate": "The discovery has prompted renewed interest in Bronze Age trade networks, with several universities now planning collaborative research projects to map ancient commercial routes across the Aegean Sea.",
+          "step_2_compare": "Passage says: 'renewed interest' and 'universities now planning collaborative research projects'. Statement says: 'increased government funding'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the related topic of new research interest, but funding sources (especially government funding) are never mentioned at all.",
+          "step_4_eliminate": "Not True because government funding is never mentioned. Not False because the passage doesn't say funding didn't increase either."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The discovery has prompted renewed interest in Bronze Age trade networks, with several universities now planning collaborative research projects to map ancient commercial routes across the Aegean Sea.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:50.802Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "5359c722-9b1c-4d9c-b516-690fb998f73a",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Climate science has made significant advances in understanding the complex interactions within Earth's systems and the impact of anthropogenic activities on the global climate. One of the critical methods of studying past climates involves the analysis of ice cores. Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric composition spanning 800,000 years. These cores reveal the natural variability of Earth's climate, offering insights into the cycles of glacial and interglacial periods. However, the current rate of climate change is unprecedented in the modern era. Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating after 1993. This rise is largely attributed to the melting of ice sheets and glaciers, as well as the thermal expansion of seawater as it warms. The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies. These reports serve as a crucial resource for policymakers, providing scientific evidence needed to develop strategies for mitigation and adaptation. Although natural climate variability can cause short-term temperature fluctuations, the long-term warming trend observed since the mid-20th century is primarily driven by human activities, particularly the emission of greenhouse gases such as carbon dioxide and methane. This anthropogenic influence is projected to have severe implications for the planet's future climate. Climate models project that Arctic sea ice could disappear entirely during summer months by the end of this century under high-emission scenarios. Such changes would not only disrupt Arctic ecosystems but also contribute to global sea level rise and alter weather patterns worldwide. In light of these findings, the imperative for international cooperation and stringent climate policies has never been more urgent. The scientific community continues to emphasize the need for immediate and sustained efforts to curb emissions and protect vulnerable regions from the most severe impacts of climate change.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Antarctic ice cores offer researchers an uninterrupted chronicle of atmospheric composition covering 800,000 years.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric composition spanning 800,000 years.",
+        "anchorText": "provide scientists with a continuous record",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — Every key word is replaced with its exact synonym: provide=offer, scientists=researchers, continuous=uninterrupted, record=chronicle, spanning=covering. The meaning is identical.",
+        "reasoning": {
+          "step_1_locate": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric composition spanning 800,000 years.",
+          "step_2_compare": "Passage says: 'provide scientists with a continuous record spanning 800,000 years'. Statement says: 'offer researchers an uninterrupted chronicle covering 800,000 years'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — Every key word is replaced with its exact synonym: provide=offer, scientists=researchers, continuous=uninterrupted, record=chronicle, spanning=covering. The meaning is identical.",
+          "step_4_eliminate": "Not False because no contradiction exists between the passage and statement. Not Not Given because the passage directly confirms every detail with synonym matches."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric composition spanning 800,000 years.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The rate of global sea level rise has been slowing down since 1993.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating after 1993.",
+        "anchorText": "accelerating after 1993",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — Accelerating means getting faster; slowing down means getting slower. These are opposite facts about the same time period (after/since 1993).",
+        "reasoning": {
+          "step_1_locate": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating after 1993.",
+          "step_2_compare": "Passage says: 'rate of increase accelerating after 1993'. Statement says: 'rate has been slowing down since 1993'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — Accelerating means getting faster; slowing down means getting slower. These are opposite facts about the same time period (after/since 1993).",
+          "step_4_eliminate": "Not True because accelerating and slowing down are opposites. Not Not Given because the passage directly addresses the rate change after 1993."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating after 1993.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The IPCC assessment reports are more accurate than reports produced by individual national climate agencies.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies.",
+        "anchorText": "releases comprehensive assessment reports every six to seven years",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us the IPCC exists and what it does, but never mentions national climate agencies or makes any comparison about accuracy between different types of reports.",
+        "reasoning": {
+          "step_1_locate": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies.",
+          "step_2_compare": "Passage says: 'IPCC releases comprehensive assessment reports synthesizing thousands of studies'. Statement says: 'IPCC reports are more accurate than national agency reports'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us the IPCC exists and what it does, but never mentions national climate agencies or makes any comparison about accuracy between different types of reports.",
+          "step_4_eliminate": "Not True because no comparison to national agencies appears in the passage. Not False because the passage doesn't deny this comparison either—it simply never discusses it."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Natural climate variability is the primary cause of the warming trend observed since the mid-20th century.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although natural climate variability can cause short-term temperature fluctuations, the long-term warming trend observed since the mid-20th century is primarily driven by human activities.",
+        "anchorText": "Although natural climate variability can cause short-term temperature fluctuations",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' introduces something that is true but less important. Natural variability exists (true), BUT human activities are the main cause. The statement picks the wrong part as primary.",
+        "reasoning": {
+          "step_1_locate": "Although natural climate variability can cause short-term temperature fluctuations, the long-term warming trend observed since the mid-20th century is primarily driven by human activities.",
+          "step_2_compare": "Passage says: 'Although natural climate variability can cause fluctuations, [the trend] is primarily driven by human activities'. Statement says: 'Natural climate variability is the primary cause'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' introduces something that is true but less important. Natural variability exists (true), BUT human activities are the main cause. The statement picks the wrong part as primary.",
+          "step_4_eliminate": "Not True because the passage says human activities are primary, not natural variability. Not Not Given because the passage directly identifies what is primarily responsible."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although natural climate variability can cause short-term temperature fluctuations, the long-term warming trend observed since the mid-20th century is primarily driven by human activities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The complete disappearance of Arctic sea ice would cause polar bear populations to become extinct within fifty years.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Climate models project that Arctic sea ice could disappear entirely during summer months by the end of this century under high-emission scenarios.",
+        "anchorText": "Arctic sea ice could disappear entirely during summer months",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — Arctic sea ice is mentioned, which is related to polar bears, but the passage never discusses polar bears, their survival, or any consequences of ice disappearance on wildlife.",
+        "reasoning": {
+          "step_1_locate": "Climate models project that Arctic sea ice could disappear entirely during summer months by the end of this century under high-emission scenarios.",
+          "step_2_compare": "Passage says: 'Arctic sea ice could disappear entirely during summer months by end of century'. Statement says: 'disappearance would cause polar bear extinction within fifty years'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — Arctic sea ice is mentioned, which is related to polar bears, but the passage never discusses polar bears, their survival, or any consequences of ice disappearance on wildlife.",
+          "step_4_eliminate": "Not True because polar bears are never mentioned in the passage. Not False because the passage doesn't deny this claim either—it simply discusses ice, not animals."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Climate models project that Arctic sea ice could disappear entirely during summer months by the end of this century under high-emission scenarios.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:52.232Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "0317d054-c41d-4cb5-a82a-44a09371b173",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has long been a subject of human fascination and scientific inquiry. With advancements in technology, the scope and ambition of space missions have significantly expanded. The International Space Station orbits Earth at an average altitude of approximately 408 kilometers above sea level, serving as a hub for international collaboration and scientific research in microgravity. This multinational project has paved the way for more ambitious endeavors beyond Earth's orbit. NASA's Artemis program aims to land the first woman and first person of color on the Moon by 2025, marking a pivotal step in promoting diversity in space exploration. Such milestones not only highlight the progress made in gender and racial inclusion but also emphasize humanity's renewed interest in lunar exploration.\n\nBeyond the Moon, Mars has emerged as a prime candidate for future exploration. Although Mars rovers have discovered evidence of ancient water on the planet's surface, scientists have not yet found definitive proof of past or present life. This tantalizing possibility continues to drive missions aimed at uncovering the planet's secrets. In the private sector, SpaceX's Starship rocket is designed to carry up to 100 passengers on long-duration interplanetary flights to destinations such as Mars. If successful, these missions could usher in a new era of human colonization of other planets, transforming science fiction into reality.\n\nSimultaneously, advancements in space telescopes are enhancing our understanding of the universe. The James Webb Space Telescope, launched in December 2021, uses infrared technology to observe the earliest galaxies formed after the Big Bang. This cutting-edge instrument provides unprecedented insights into the formation of stars and galaxies, offering clues about the origins of the universe. Such scientific endeavors underscore the importance of space exploration in expanding our knowledge and pushing the boundaries of human capability. As we stand on the brink of these new frontiers, the continued collaboration between governments, private companies, and scientific communities will be crucial in realizing the full potential of space exploration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The International Space Station circles the planet at roughly 408 kilometers above sea level.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "The International Space Station orbits Earth at an average altitude of approximately 408 kilometers above sea level.",
+        "anchorText": "408 kilometers",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'orbits Earth' means the same as 'circles the planet', and 'approximately' means the same as 'roughly'. The core fact (408 kilometers altitude) is identical.",
+        "reasoning": {
+          "step_1_locate": "The International Space Station orbits Earth at an average altitude of approximately 408 kilometers above sea level.",
+          "step_2_compare": "Passage says: 'orbits Earth at an average altitude of approximately 408 kilometers'. Statement says: 'circles the planet at roughly 408 kilometers'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'orbits Earth' means the same as 'circles the planet', and 'approximately' means the same as 'roughly'. The core fact (408 kilometers altitude) is identical.",
+          "step_4_eliminate": "Not False because the numerical value and meaning match exactly. Not Not Given because the passage directly provides this specific altitude measurement."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "The International Space Station orbits Earth at an average altitude of approximately 408 kilometers above sea level.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The Artemis program will send the first human beings to the Moon.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "NASA's Artemis program aims to land the first woman and first person of color on the Moon by 2025.",
+        "anchorText": "first woman and first person of color",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says 'first woman' and 'first person of color', which means other humans have already been to the Moon before. The statement wrongly claims these will be the first humans ever.",
+        "reasoning": {
+          "step_1_locate": "NASA's Artemis program aims to land the first woman and first person of color on the Moon by 2025.",
+          "step_2_compare": "Passage says: 'first woman and first person of color on the Moon'. Statement says: 'first human beings to the Moon'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says 'first woman' and 'first person of color', which means other humans have already been to the Moon before. The statement wrongly claims these will be the first humans ever.",
+          "step_4_eliminate": "Not True because the passage specifies categories of 'first' (woman, person of color), not first humans overall. Not Not Given because the passage explicitly addresses who Artemis will send."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "NASA's Artemis program aims to land the first woman and first person of color on the Moon by 2025.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "SpaceX has already sold tickets to private citizens for Starship flights to Mars.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "SpaceX's Starship rocket is designed to carry up to 100 passengers on long-duration interplanetary flights to destinations such as Mars.",
+        "anchorText": "up to 100 passengers",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us what Starship can do (carry 100 people to Mars), but it never tells us whether SpaceX has sold any tickets yet. Design capability is different from actual ticket sales.",
+        "reasoning": {
+          "step_1_locate": "SpaceX's Starship rocket is designed to carry up to 100 passengers on long-duration interplanetary flights to destinations such as Mars.",
+          "step_2_compare": "Passage says: 'designed to carry up to 100 passengers' to Mars. Statement says: 'has already sold tickets to private citizens' for Mars flights.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us what Starship can do (carry 100 people to Mars), but it never tells us whether SpaceX has sold any tickets yet. Design capability is different from actual ticket sales.",
+          "step_4_eliminate": "Not True because the passage never mentions ticket sales. Not False because the passage doesn't say tickets have NOT been sold either—it simply doesn't discuss this topic at all."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "SpaceX's Starship rocket is designed to carry up to 100 passengers on long-duration interplanetary flights to destinations such as Mars.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Mars rovers have found definitive proof of past life on the planet.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although Mars rovers have discovered evidence of ancient water on the planet's surface, scientists have not yet found definitive proof of past or present life.",
+        "anchorText": "Although...have not yet found",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' introduces a contrast. The passage mentions water discovery (positive finding) BUT then says no proof of life has been found. Students who only read the first part might think life was discovered, but the main point after 'Although' is that life proof is still missing.",
+        "reasoning": {
+          "step_1_locate": "Although Mars rovers have discovered evidence of ancient water on the planet's surface, scientists have not yet found definitive proof of past or present life.",
+          "step_2_compare": "Passage says: 'have not yet found definitive proof of past or present life'. Statement says: 'have found definitive proof of past life'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' introduces a contrast. The passage mentions water discovery (positive finding) BUT then says no proof of life has been found. Students who only read the first part might think life was discovered, but the main point after 'Although' is that life proof is still missing.",
+          "step_4_eliminate": "Not True because the passage clearly states 'have not yet found definitive proof'. Not Not Given because the passage directly addresses whether proof of life has been found."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although Mars rovers have discovered evidence of ancient water on the planet's surface, scientists have not yet found definitive proof of past or present life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The James Webb Space Telescope cost more to build than the Hubble Space Telescope.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The James Webb Space Telescope, launched in December 2021, uses infrared technology to observe the earliest galaxies formed after the Big Bang.",
+        "anchorText": "infrared technology",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the James Webb Telescope (same topic), but it only mentions when it launched and what technology it uses. It never mentions money, budget, or cost, and it never compares it to Hubble's price.",
+        "reasoning": {
+          "step_1_locate": "The James Webb Space Telescope, launched in December 2021, uses infrared technology to observe the earliest galaxies formed after the Big Bang.",
+          "step_2_compare": "Passage says: information about James Webb's launch and technology. Statement says: comparison of James Webb's cost versus Hubble's cost.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the James Webb Telescope (same topic), but it only mentions when it launched and what technology it uses. It never mentions money, budget, or cost, and it never compares it to Hubble's price.",
+          "step_4_eliminate": "Not True because no cost information appears in the passage. Not False because the passage doesn't say James Webb cost less either—cost is simply never discussed."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The James Webb Space Telescope, launched in December 2021, uses infrared technology to observe the earliest galaxies formed after the Big Bang.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:38:52.335Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "173bffce-996b-41b6-8846-57b9a9831585",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience, the study of the nervous system, has made remarkable strides in understanding the complexities of the human brain. A pivotal concept in this field is neuroplasticity, which refers to the brain's ability to reorganize itself by forming new neural connections throughout life. This adaptability allows the brain to recover from injuries, learn new information, and adjust to new experiences. Neuroplasticity is not only a testament to the brain's resilience but also a foundation for rehabilitation therapies following neurological damage. \n\nAnother fascinating aspect of the brain's architecture is its ability to store and retrieve memories. The hippocampus, located in the temporal lobe, plays a crucial role in converting short-term memories into long-term storage. This process is essential for learning and retaining information over time. The hippocampus's functionality underscores the importance of memory consolidation in our daily lives, influencing how we learn and recall past events. \n\nWithin the realm of neurotransmitters, dopamine emerges as a critical chemical messenger. Dopamine is a neurotransmitter associated with reward, motivation, and pleasure responses in the brain. Its role in the brain's reward system explains why certain activities are pleasurable and motivating, reinforcing behaviors that are beneficial for survival and well-being. Imbalances in dopamine levels have been linked to various disorders, including Parkinson's disease and addiction, highlighting its significance in maintaining neurological health. \n\nA significant shift in our understanding of the brain occurred with the discovery of neurogenesis in adults. Although early researchers believed that adult brains could not generate new neurons, recent studies have demonstrated that neurogenesis continues in specific brain regions throughout adulthood. This finding has profound implications for therapies aimed at enhancing cognitive function and treating neurodegenerative diseases. \n\nFurthermore, the discovery of mirror neurons in the 1990s has added a new dimension to our understanding of social cognition and empathy. Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action. This mirroring mechanism is thought to underlie our ability to understand others' intentions and emotions, facilitating social interactions and learning through observation.\n\nIn conclusion, advancements in neuroscience continue to unravel the mysteries of the human brain, offering insights into its remarkable capabilities and potential for recovery. These discoveries not only enhance our understanding of human behavior and cognition but also pave the way for innovative treatments and interventions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Neuroplasticity is the capacity of the brain to create new pathways between neurons during a person's lifetime.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Neuroplasticity refers to the brain's ability to reorganize itself by forming new neural connections throughout life.",
+        "anchorText": "reorganize itself by forming new neural connections",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'forming connections' = 'create pathways', 'throughout life' = 'during a person's lifetime', 'neural' = 'between neurons'. All words mean exactly the same thing.",
+        "reasoning": {
+          "step_1_locate": "Neuroplasticity refers to the brain's ability to reorganize itself by forming new neural connections throughout life.",
+          "step_2_compare": "Passage says: 'forming new neural connections throughout life'. Statement says: 'create new pathways between neurons during a person's lifetime'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'forming connections' = 'create pathways', 'throughout life' = 'during a person's lifetime', 'neural' = 'between neurons'. All words mean exactly the same thing.",
+          "step_4_eliminate": "Not False because the passage confirms this exact idea. Not Not Given because the passage directly states this fact using different words."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Neuroplasticity refers to the brain's ability to reorganize itself by forming new neural connections throughout life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The hippocampus is responsible for transforming long-term memories into short-term recall.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The hippocampus, located in the temporal lobe, plays a crucial role in converting short-term memories into long-term storage.",
+        "anchorText": "short-term memories into long-term storage",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The direction is completely opposite. Passage says short→long. Statement says long→short. This is factually wrong.",
+        "reasoning": {
+          "step_1_locate": "The hippocampus, located in the temporal lobe, plays a crucial role in converting short-term memories into long-term storage.",
+          "step_2_compare": "Passage says: 'converting short-term memories into long-term storage'. Statement says: 'transforming long-term memories into short-term recall'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The direction is completely opposite. Passage says short→long. Statement says long→short. This is factually wrong.",
+          "step_4_eliminate": "Not True because the direction is reversed. Not Not Given because the passage clearly explains what the hippocampus does, just in the opposite direction."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The hippocampus, located in the temporal lobe, plays a crucial role in converting short-term memories into long-term storage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Dopamine levels are higher in individuals who engage in regular physical exercise compared to sedentary people.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Dopamine is a neurotransmitter associated with reward, motivation, and pleasure responses in the brain.",
+        "anchorText": "reward, motivation, and pleasure responses",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us what dopamine does, but never mentions exercise or compares dopamine levels between different groups of people.",
+        "reasoning": {
+          "step_1_locate": "Dopamine is a neurotransmitter associated with reward, motivation, and pleasure responses in the brain.",
+          "step_2_compare": "Passage says: dopamine is 'associated with reward, motivation, and pleasure responses'. Statement says: 'Dopamine levels are higher in individuals who engage in regular physical exercise'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us what dopamine does, but never mentions exercise or compares dopamine levels between different groups of people.",
+          "step_4_eliminate": "Not True because the passage never mentions exercise or dopamine levels in different people. Not False because the passage doesn't contradict this either—it simply doesn't discuss it."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Dopamine is a neurotransmitter associated with reward, motivation, and pleasure responses in the brain.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Scientists have established that adult brains cannot produce new neurons.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although early researchers believed that adult brains could not generate new neurons, recent studies have demonstrated that neurogenesis continues in specific brain regions throughout adulthood.",
+        "anchorText": "Although early researchers believed... recent studies have demonstrated",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals that the first part is old/wrong information. The passage says early researchers were wrong, but recent studies proved new neurons DO form. The statement claims the old wrong belief is true.",
+        "reasoning": {
+          "step_1_locate": "Although early researchers believed that adult brains could not generate new neurons, recent studies have demonstrated that neurogenesis continues in specific brain regions throughout adulthood.",
+          "step_2_compare": "Passage says: 'Although early researchers believed [no new neurons]... recent studies have demonstrated that neurogenesis continues'. Statement says: 'Scientists have established that adult brains cannot produce new neurons'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals that the first part is old/wrong information. The passage says early researchers were wrong, but recent studies proved new neurons DO form. The statement claims the old wrong belief is true.",
+          "step_4_eliminate": "Not True because the passage explicitly says recent studies proved the opposite. Not Not Given because the passage directly addresses whether adult brains make new neurons—they do."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although early researchers believed that adult brains could not generate new neurons, recent studies have demonstrated that neurogenesis continues in specific brain regions throughout adulthood.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Mirror neurons are more active in people with high levels of empathy than in those with low empathy.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+        "anchorText": "fire both when an individual performs an action and when they observe",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — Mirror neurons are mentioned, and empathy seems related to observing others, but the passage never compares mirror neuron activity between high-empathy and low-empathy people.",
+        "reasoning": {
+          "step_1_locate": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+          "step_2_compare": "Passage says: mirror neurons 'fire both when an individual performs an action and when they observe someone else'. Statement says: 'Mirror neurons are more active in people with high levels of empathy'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — Mirror neurons are mentioned, and empathy seems related to observing others, but the passage never compares mirror neuron activity between high-empathy and low-empathy people.",
+          "step_4_eliminate": "Not True because the passage never mentions empathy levels or compares different people. Not False because the passage doesn't deny this connection—it just never discusses it at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:39:28.019Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.7,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 5,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "47df641c-cefb-4182-8ab9-5d7c3b12ac6b",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology, as a scientific discipline, has evolved significantly over the years, shedding light on various aspects of human behavior and cognition. One of the most influential therapeutic approaches to emerge from psychological research is cognitive behavioral therapy (CBT). Cognitive behavioral therapy helps patients identify and challenge negative thought patterns that contribute to anxiety disorders. By restructuring these thought processes, CBT empowers individuals to manage anxiety more effectively, showcasing the profound impact of psychological interventions on mental health. \n\nIn parallel, the realm of cognitive psychology has explored the intricate relationship between sleep and memory. Research conducted in 2019 found that sleep deprivation impairs short-term memory but does not significantly affect long-term memory consolidation. This finding underscores the complexity of memory processes and highlights the importance of adequate sleep for optimal cognitive functioning, particularly in tasks requiring immediate recall. \n\nAnother fascinating discovery that has captured the interest of psychologists is the role of mirror neurons. Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action. This neural mechanism provides insight into human empathy and learning, suggesting that the ability to understand and imitate others is deeply rooted in our neural architecture. \n\nHistorically, intelligence was viewed as a static trait, unchangeable after birth. Although early psychologists believed that intelligence was fixed at birth, modern research demonstrates that cognitive abilities can be enhanced through targeted mental exercises and environmental enrichment. This paradigm shift has profound implications for educational practices and lifelong learning, emphasizing the potential for cognitive growth throughout an individual's life. \n\nThe psychological phenomenon known as the placebo effect further illustrates the power of belief on physiological health. The placebo effect demonstrates that patients often experience real physiological improvements when they believe they are receiving treatment, even when given inactive substances. This effect not only highlights the mind-body connection but also poses ethical considerations in clinical trials and medical treatments. \n\nIn conclusion, psychology continues to unravel the complexities of the human mind, offering insights into therapeutic techniques, cognitive processes, and the profound influence of belief on health. Each discovery contributes to a deeper understanding of human potential and the capacity for change.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Cognitive behavioral therapy assists patients in recognizing and questioning harmful thinking habits linked to anxiety disorders.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Cognitive behavioral therapy helps patients identify and challenge negative thought patterns that contribute to anxiety disorders.",
+        "anchorText": "identify and challenge negative thought patterns",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — The statement uses different words with identical meanings: identify=recognize, challenge=question, negative thought patterns=harmful thinking habits.",
+        "reasoning": {
+          "step_1_locate": "Cognitive behavioral therapy helps patients identify and challenge negative thought patterns that contribute to anxiety disorders.",
+          "step_2_compare": "Passage says: 'identify and challenge negative thought patterns'. Statement says: 'recognizing and questioning harmful thinking habits'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — The statement uses different words with identical meanings: identify=recognize, challenge=question, negative thought patterns=harmful thinking habits.",
+          "step_4_eliminate": "Not False because the passage directly confirms this claim with exact synonyms. Not Not Given because the passage explicitly states this relationship between CBT and anxiety treatment."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Cognitive behavioral therapy helps patients identify and challenge negative thought patterns that contribute to anxiety disorders.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Studies from 2019 showed that lack of sleep damages both short-term and long-term memory consolidation.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Research conducted in 2019 found that sleep deprivation impairs short-term memory but does not significantly affect long-term memory consolidation.",
+        "anchorText": "does not significantly affect long-term memory",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says long-term memory is NOT affected, but the statement claims BOTH types are damaged.",
+        "reasoning": {
+          "step_1_locate": "Research conducted in 2019 found that sleep deprivation impairs short-term memory but does not significantly affect long-term memory consolidation.",
+          "step_2_compare": "Passage says: 'does not significantly affect long-term memory consolidation'. Statement says: 'damages both short-term and long-term memory consolidation'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says long-term memory is NOT affected, but the statement claims BOTH types are damaged.",
+          "step_4_eliminate": "Not True because the passage explicitly denies impact on long-term memory. Not Not Given because the passage directly addresses both memory types and their relationship to sleep deprivation."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Research conducted in 2019 found that sleep deprivation impairs short-term memory but does not significantly affect long-term memory consolidation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The discovery of mirror neurons in the 1990s led to breakthroughs in treating autism spectrum disorders.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+        "anchorText": "discovered in the 1990s",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about mirror neurons and when they were discovered, but never mentions autism, treatment, or any medical breakthroughs.",
+        "reasoning": {
+          "step_1_locate": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+          "step_2_compare": "Passage says: 'Mirror neurons, discovered in the 1990s, fire both when...' Statement says: 'discovery of mirror neurons in the 1990s led to breakthroughs in treating autism'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about mirror neurons and when they were discovered, but never mentions autism, treatment, or any medical breakthroughs.",
+          "step_4_eliminate": "Not True because the passage never mentions autism or treatment applications. Not False because the passage doesn't deny this connection either—it simply never discusses it."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Mirror neurons, discovered in the 1990s, fire both when an individual performs an action and when they observe someone else performing the same action.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Psychologists have established that intelligence is determined at birth and cannot be changed.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although early psychologists believed that intelligence was fixed at birth, modern research demonstrates that cognitive abilities can be enhanced through targeted mental exercises and environmental enrichment.",
+        "anchorText": "Although early psychologists believed... modern research demonstrates",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals the passage is rejecting the old belief. The statement repeats the OLD wrong belief, ignoring what modern research actually shows.",
+        "reasoning": {
+          "step_1_locate": "Although early psychologists believed that intelligence was fixed at birth, modern research demonstrates that cognitive abilities can be enhanced through targeted mental exercises and environmental enrichment.",
+          "step_2_compare": "Passage says: 'Although early psychologists believed [fixed at birth], modern research demonstrates [can be enhanced]'. Statement says: 'intelligence is determined at birth and cannot be changed'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals the passage is rejecting the old belief. The statement repeats the OLD wrong belief, ignoring what modern research actually shows.",
+          "step_4_eliminate": "Not True because modern research contradicts this claim. Not Not Given because the passage explicitly addresses whether intelligence can change, stating it can be enhanced."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although early psychologists believed that intelligence was fixed at birth, modern research demonstrates that cognitive abilities can be enhanced through targeted mental exercises and environmental enrichment.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The placebo effect is more powerful in treating chronic pain than in treating acute injuries.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The placebo effect demonstrates that patients often experience real physiological improvements when they believe they are receiving treatment, even when given inactive substances.",
+        "anchorText": "patients often experience real physiological improvements",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage mentions the placebo effect works, but never compares different types of pain or injury conditions.",
+        "reasoning": {
+          "step_1_locate": "The placebo effect demonstrates that patients often experience real physiological improvements when they believe they are receiving treatment, even when given inactive substances.",
+          "step_2_compare": "Passage says: 'patients often experience real physiological improvements [from placebo]'. Statement says: 'placebo effect is more powerful in treating chronic pain than acute injuries'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage mentions the placebo effect works, but never compares different types of pain or injury conditions.",
+          "step_4_eliminate": "Not True because the passage never makes this comparison between chronic and acute conditions. Not False because the passage doesn't deny this either—it simply discusses placebo effects generally without comparing condition types."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The placebo effect demonstrates that patients often experience real physiological improvements when they believe they are receiving treatment, even when given inactive substances.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:39:30.224Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "862ece40-d24f-4ac1-8936-ade26268507a",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has become a focal point for cities worldwide as they grapple with challenges such as population growth, environmental sustainability, and efficient resource utilization. Different cities have adopted unique strategies to address these issues, reflecting diverse priorities and contexts. Urban planners in Singapore implemented a comprehensive public transportation network that reduced private vehicle usage by 40% between 2005 and 2015. This approach not only alleviated traffic congestion but also contributed to lower carbon emissions, setting a benchmark for sustainable urban mobility. Similarly, the Melbourne urban renewal project prioritized the construction of residential buildings before developing commercial infrastructure. By focusing on housing first, Melbourne ensured that the growing population had adequate living spaces, thereby creating a stable foundation for subsequent commercial growth. In contrast, Tokyo's vertical expansion strategy involved constructing high-rise buildings to accommodate population growth without expanding the city's geographical footprint. This method effectively addressed the scarcity of land while maintaining urban density, showcasing innovative urban design in land-constrained environments. Meanwhile, in Europe, cities like Berlin and Barcelona have undertaken projects that emphasize community engagement and sustainability. Although initial surveys suggested residents opposed the Berlin mixed-use development plan, the final referendum showed 68% approval from local communities. This shift highlights the importance of involving residents in the planning process to align development goals with community needs. Barcelona's superblock initiative redesigned nine-block areas to restrict through traffic and create pedestrian-friendly zones with increased green space. This project has enhanced the quality of life by promoting environmental sustainability and social interaction. These varied strategies underscore the importance of tailoring urban development plans to specific local contexts while addressing global challenges. As cities continue to evolve, the lessons learned from these examples offer valuable insights into creating sustainable, livable urban environments.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Singapore's urban planners decreased the use of personal cars by 40% over a ten-year period starting in 2005.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Urban planners in Singapore implemented a comprehensive public transportation network that reduced private vehicle usage by 40% between 2005 and 2015.",
+        "anchorText": "reduced private vehicle usage by 40%",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'reduced' means 'decreased', 'private vehicle usage' means 'use of personal cars', and 'between 2005 and 2015' is a ten-year period starting in 2005. All facts match exactly.",
+        "reasoning": {
+          "step_1_locate": "Urban planners in Singapore implemented a comprehensive public transportation network that reduced private vehicle usage by 40% between 2005 and 2015.",
+          "step_2_compare": "Passage says: 'reduced private vehicle usage by 40% between 2005 and 2015'. Statement says: 'decreased the use of personal cars by 40% over a ten-year period starting in 2005'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'reduced' means 'decreased', 'private vehicle usage' means 'use of personal cars', and 'between 2005 and 2015' is a ten-year period starting in 2005. All facts match exactly.",
+          "step_4_eliminate": "Not False because the numbers and dates are identical. Not Not Given because the passage directly confirms this specific claim with exact figures."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Urban planners in Singapore implemented a comprehensive public transportation network that reduced private vehicle usage by 40% between 2005 and 2015.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "In Melbourne's urban renewal project, commercial infrastructure was built prior to residential buildings.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The Melbourne urban renewal project prioritized the construction of residential buildings before developing commercial infrastructure.",
+        "anchorText": "before developing commercial infrastructure",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says residential came first, then commercial. The statement reverses this order completely, saying commercial came first.",
+        "reasoning": {
+          "step_1_locate": "The Melbourne urban renewal project prioritized the construction of residential buildings before developing commercial infrastructure.",
+          "step_2_compare": "Passage says: 'residential buildings before developing commercial infrastructure'. Statement says: 'commercial infrastructure was built prior to residential buildings'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says residential came first, then commercial. The statement reverses this order completely, saying commercial came first.",
+          "step_4_eliminate": "Not True because the sequence is reversed. Not Not Given because the passage clearly states which came first."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The Melbourne urban renewal project prioritized the construction of residential buildings before developing commercial infrastructure.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Tokyo's vertical expansion strategy was more cost-effective than horizontal expansion would have been.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Tokyo's vertical expansion strategy involved constructing high-rise buildings to accommodate population growth without expanding the city's geographical footprint.",
+        "anchorText": "population growth",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us Tokyo built upward to handle population growth, but it never mentions costs or compares vertical to horizontal expansion financially.",
+        "reasoning": {
+          "step_1_locate": "Tokyo's vertical expansion strategy involved constructing high-rise buildings to accommodate population growth without expanding the city's geographical footprint.",
+          "step_2_compare": "Passage says: 'constructing high-rise buildings to accommodate population growth'. Statement says: 'was more cost-effective than horizontal expansion'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us Tokyo built upward to handle population growth, but it never mentions costs or compares vertical to horizontal expansion financially.",
+          "step_4_eliminate": "Not True because cost comparison is never mentioned. Not False because the passage doesn't say it was less cost-effective either."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Tokyo's vertical expansion strategy involved constructing high-rise buildings to accommodate population growth without expanding the city's geographical footprint.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Residents in Berlin opposed the mixed-use development plan according to survey results.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although initial surveys suggested residents opposed the Berlin mixed-use development plan, the final referendum showed 68% approval from local communities.",
+        "anchorText": "Although initial surveys suggested residents opposed",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' signals that what comes after it is the real truth. Initial surveys showed opposition, BUT the actual referendum showed 68% approval. The statement ignores the 'but' part.",
+        "reasoning": {
+          "step_1_locate": "Although initial surveys suggested residents opposed the Berlin mixed-use development plan, the final referendum showed 68% approval from local communities.",
+          "step_2_compare": "Passage says: 'Although initial surveys suggested residents opposed... the final referendum showed 68% approval'. Statement says: 'Residents in Berlin opposed the mixed-use development plan'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' signals that what comes after it is the real truth. Initial surveys showed opposition, BUT the actual referendum showed 68% approval. The statement ignores the 'but' part.",
+          "step_4_eliminate": "Not True because the final result was approval, not opposition. Not Not Given because the passage clearly states the final outcome was 68% approval."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although initial surveys suggested residents opposed the Berlin mixed-use development plan, the final referendum showed 68% approval from local communities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "Barcelona's superblock initiative led to a measurable improvement in air quality within the redesigned areas.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Barcelona's superblock initiative redesigned nine-block areas to restrict through traffic and create pedestrian-friendly zones with increased green space.",
+        "anchorText": "restrict through traffic",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about related topics (less traffic, more green space) that might affect air quality, but it never actually mentions air quality or any measurements of it.",
+        "reasoning": {
+          "step_1_locate": "Barcelona's superblock initiative redesigned nine-block areas to restrict through traffic and create pedestrian-friendly zones with increased green space.",
+          "step_2_compare": "Passage says: 'restrict through traffic and create pedestrian-friendly zones with increased green space'. Statement says: 'led to a measurable improvement in air quality'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about related topics (less traffic, more green space) that might affect air quality, but it never actually mentions air quality or any measurements of it.",
+          "step_4_eliminate": "Not True because air quality is never mentioned in the passage. Not False because the passage doesn't say air quality didn't improve either."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Barcelona's superblock initiative redesigned nine-block areas to restrict through traffic and create pedestrian-friendly zones with increased green space.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:40:05.655Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "ce10cacd-3c73-4b21-943c-d0a08af797c1",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a diverse field that explores the intricate ecosystems of our oceans, which cover more than 70% of the Earth's surface. One of the most intriguing aspects of marine life is the variety of feeding strategies employed by different species to survive in their unique environments. For instance, coral polyps are carnivorous organisms that feed primarily on zooplankton and small fish during nighttime hours. This nocturnal feeding habit is crucial for their survival and contributes to the vibrant ecosystems of coral reefs. The Great Barrier Reef, one of the most famous marine ecosystems, supports approximately 1,500 species of fish and provides critical breeding grounds for endangered sea turtles. Such biodiversity highlights the complex interdependencies between species and their habitats.\n\nIn the depths of the ocean, where sunlight cannot penetrate, marine organisms have evolved fascinating adaptations. The bioluminescent capabilities of deep-sea jellyfish enable them to attract prey in the aphotic zone. This ability not only aids in their survival but also adds to the mysterious allure of the deep sea. These organisms illuminate the dark oceanic world, creating a spectacle that remains largely unexplored.\n\nMarine biologists have documented over 200 species of seahorses in tropical and temperate coastal waters worldwide. The diversity of seahorse species underscores the adaptability of marine life to various environmental conditions. Seahorses are known for their unique reproductive strategy, where males carry and nurture the young, a rare trait in the animal kingdom.\n\nFurthermore, the ocean is home to some of the largest creatures on Earth. Although whale sharks are the largest fish species in the ocean, reaching lengths of up to 12 meters, they pose no threat to humans as they feed exclusively on plankton and small fish. This gentle nature contrasts sharply with their massive size and serves as a reminder of the ocean's vast and varied inhabitants.\n\nIn conclusion, marine biology reveals the remarkable adaptations and interactions of oceanic life forms. From the vibrant coral reefs to the enigmatic deep-sea dwellers, each organism plays a vital role in maintaining the balance of marine ecosystems. The study of these organisms not only enhances our understanding of life under the sea but also emphasizes the importance of conserving these habitats for future generations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral polyps are herbivorous organisms.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Coral polyps are carnivorous organisms that feed primarily on zooplankton and small fish during nighttime hours.",
+        "anchorText": "carnivorous",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage uses the exact opposite word. Carnivorous means meat-eating, herbivorous means plant-eating. These are mutually exclusive categories.",
+        "reasoning": {
+          "step_1_locate": "Coral polyps are carnivorous organisms that feed primarily on zooplankton and small fish during nighttime hours.",
+          "step_2_compare": "Passage says: carnivorous organisms. Statement says: herbivorous organisms.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage uses the exact opposite word. Carnivorous means meat-eating, herbivorous means plant-eating. These are mutually exclusive categories.",
+          "step_4_eliminate": "Not True because carnivorous and herbivorous are opposite terms. Not Not Given because the passage directly addresses what coral polyps eat."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Coral polyps are carnivorous organisms that feed primarily on zooplankton and small fish during nighttime hours.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Deep-sea jellyfish use bioluminescence to attract prey in areas without light.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "The bioluminescent capabilities of deep-sea jellyfish enable them to attract prey in the aphotic zone.",
+        "anchorText": "aphotic zone",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — Aphotic zone is the technical term that means exactly 'areas without light'. This is a precise scientific synonym, not just a similar concept.",
+        "reasoning": {
+          "step_1_locate": "The bioluminescent capabilities of deep-sea jellyfish enable them to attract prey in the aphotic zone.",
+          "step_2_compare": "Passage says: aphotic zone. Statement says: areas without light.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — Aphotic zone is the technical term that means exactly 'areas without light'. This is a precise scientific synonym, not just a similar concept.",
+          "step_4_eliminate": "Not False because the meaning is identical, just using common language instead of scientific terminology. Not Not Given because the passage explicitly mentions where jellyfish attract prey."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "The bioluminescent capabilities of deep-sea jellyfish enable them to attract prey in the aphotic zone.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Seahorses are more diverse in tropical waters than in temperate waters.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Marine biologists have documented over 200 species of seahorses in tropical and temperate coastal waters worldwide.",
+        "anchorText": "documented over 200 species",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us seahorses live in both places but never makes any comparison about which location has more species. The word 'more' creates a comparison that doesn't exist in the text.",
+        "reasoning": {
+          "step_1_locate": "Marine biologists have documented over 200 species of seahorses in tropical and temperate coastal waters worldwide.",
+          "step_2_compare": "Passage says: seahorses in tropical and temperate coastal waters. Statement says: more diverse in tropical waters than in temperate waters.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us seahorses live in both places but never makes any comparison about which location has more species. The word 'more' creates a comparison that doesn't exist in the text.",
+          "step_4_eliminate": "Not True because no comparison of diversity is made. Not False because the passage doesn't say they are equally diverse or that temperate waters have more species."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Marine biologists have documented over 200 species of seahorses in tropical and temperate coastal waters worldwide.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Whale sharks are dangerous to humans.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although whale sharks are the largest fish species in the ocean, reaching lengths of up to 12 meters, they pose no threat to humans as they feed exclusively on plankton and small fish.",
+        "anchorText": "pose no threat",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' introduces their large size (which might make students think they're dangerous), but the main clause after the comma clearly states they pose no threat. Students who only read the first part will choose True, but the actual answer comes from the second part.",
+        "reasoning": {
+          "step_1_locate": "Although whale sharks are the largest fish species in the ocean, reaching lengths of up to 12 meters, they pose no threat to humans as they feed exclusively on plankton and small fish.",
+          "step_2_compare": "Passage says: pose no threat to humans. Statement says: dangerous to humans.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' introduces their large size (which might make students think they're dangerous), but the main clause after the comma clearly states they pose no threat. Students who only read the first part will choose True, but the actual answer comes from the second part.",
+          "step_4_eliminate": "Not True because the main clause explicitly says they pose no threat. Not Not Given because the passage directly addresses whether they threaten humans."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although whale sharks are the largest fish species in the ocean, reaching lengths of up to 12 meters, they pose no threat to humans as they feed exclusively on plankton and small fish.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Sea turtle populations have increased since the Great Barrier Reef became a protected area.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The Great Barrier Reef supports approximately 1,500 species of fish and provides critical breeding grounds for endangered sea turtles.",
+        "anchorText": "breeding grounds for endangered sea turtles",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — Sea turtles and the Great Barrier Reef are both mentioned, making this seem relevant. But the passage only says the reef is important for breeding, not whether turtle numbers went up or down after protection. The time-based comparison about 'increased since' is never addressed.",
+        "reasoning": {
+          "step_1_locate": "The Great Barrier Reef supports approximately 1,500 species of fish and provides critical breeding grounds for endangered sea turtles.",
+          "step_2_compare": "Passage says: provides critical breeding grounds for endangered sea turtles. Statement says: populations have increased since the reef became protected.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — Sea turtles and the Great Barrier Reef are both mentioned, making this seem relevant. But the passage only says the reef is important for breeding, not whether turtle numbers went up or down after protection. The time-based comparison about 'increased since' is never addressed.",
+          "step_4_eliminate": "Not True because no population increase is mentioned. Not False because the passage doesn't say populations decreased or stayed the same."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The Great Barrier Reef supports approximately 1,500 species of fish and provides critical breeding grounds for endangered sea turtles.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:44:25.550Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "82ebd332-b266-4afc-9e2c-8de030a52bed",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has long sought to understand the mechanisms of language acquisition and the diversity of language use across different contexts. One of the pivotal studies in this area was conducted by researchers at the University of Edinburgh, who performed a longitudinal study tracking language acquisition in bilingual children over a five-year period. Their findings contribute to a broader understanding of how bilingualism develops over time, providing insights that could inform educational practices and language policy. \n\nFurthermore, the phenomenon of code-switching, where speakers alternate between two languages within a single conversation, has been documented in multilingual communities worldwide. This practice not only reflects the flexibility and adaptability of language users but also highlights the complex interplay between language and identity. Code-switching is often employed as a strategic tool for navigating social relationships and cultural contexts, illustrating the dynamic nature of language use in society.\n\nThe theoretical underpinnings of language acquisition have also been the subject of extensive debate. Chomsky's Universal Grammar theory proposes that humans are born with an innate capacity for language acquisition, rather than learning language purely through environmental exposure. This perspective has fueled discussions regarding the extent to which language is a natural human instinct versus a socially acquired skill. \n\nModern advancements in linguistics, such as corpus linguistics, have revolutionized the study of language patterns through large-scale data analysis. Although corpus linguistics has revolutionized the study of language patterns through large-scale data analysis, it cannot capture the nuanced pragmatic meanings that emerge in face-to-face interactions. This limitation underscores the importance of combining quantitative and qualitative approaches in linguistic research to gain a comprehensive understanding of language phenomena.\n\nIn addition, sociolinguistic research has identified significant variations in pronunciation and vocabulary across different social classes in urban British communities. These variations not only serve as linguistic markers of social identity but also reflect broader social and economic structures. By examining these patterns, researchers can gain insights into the complex relationships between language, society, and culture.\n\nOverall, linguistic research continues to evolve, integrating diverse methodologies and theoretical perspectives to explore the multifaceted nature of human language. By examining both individual and societal language practices, researchers can better understand the fundamental role language plays in human interaction and cognition.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The Edinburgh study on bilingual children was the longest linguistic research project ever conducted at the university.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Researchers at the University of Edinburgh conducted a longitudinal study tracking language acquisition in bilingual children over a five-year period.",
+        "anchorText": "five-year period",
+        "complexityLevel": 2,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us the study lasted five years, but it never compares this to other projects or claims it was the longest one.",
+        "reasoning": {
+          "step_1_locate": "Researchers at the University of Edinburgh conducted a longitudinal study tracking language acquisition in bilingual children over a five-year period.",
+          "step_2_compare": "Passage says: 'five-year period'. Statement says: 'longest linguistic research project ever conducted at the university'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us the study lasted five years, but it never compares this to other projects or claims it was the longest one.",
+          "step_4_eliminate": "Not True because no comparison to other projects is made. Not False because the passage doesn't say it wasn't the longest—it simply never addresses this claim at all."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Researchers at the University of Edinburgh conducted a longitudinal study tracking language acquisition in bilingual children over a five-year period.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Code-switching involves speakers changing from one language to another during the same conversation.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "The phenomenon of code-switching, where speakers alternate between two languages within a single conversation, has been documented in multilingual communities worldwide.",
+        "anchorText": "alternate between two languages",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — 'Alternate between' and 'changing from one to another' mean exactly the same thing, and 'within a single conversation' matches 'during the same conversation'.",
+        "reasoning": {
+          "step_1_locate": "The phenomenon of code-switching, where speakers alternate between two languages within a single conversation, has been documented in multilingual communities worldwide.",
+          "step_2_compare": "Passage says: 'alternate between two languages within a single conversation'. Statement says: 'changing from one language to another during the same conversation'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'Alternate between' and 'changing from one to another' mean exactly the same thing, and 'within a single conversation' matches 'during the same conversation'.",
+          "step_4_eliminate": "Not False because the meanings match perfectly. Not Not Given because the passage explicitly defines code-switching with this exact behavior."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "The phenomenon of code-switching, where speakers alternate between two languages within a single conversation, has been documented in multilingual communities worldwide.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "According to Chomsky's Universal Grammar theory, language is acquired entirely through environmental exposure.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Chomsky's Universal Grammar theory proposes that humans are born with an innate capacity for language acquisition, rather than learning language purely through environmental exposure.",
+        "anchorText": "rather than learning language purely through environmental exposure",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage uses 'rather than' to show environmental exposure is NOT how language is acquired according to this theory, but the statement claims the exact opposite.",
+        "reasoning": {
+          "step_1_locate": "Chomsky's Universal Grammar theory proposes that humans are born with an innate capacity for language acquisition, rather than learning language purely through environmental exposure.",
+          "step_2_compare": "Passage says: 'rather than learning language purely through environmental exposure'. Statement says: 'language is acquired entirely through environmental exposure'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage uses 'rather than' to show environmental exposure is NOT how language is acquired according to this theory, but the statement claims the exact opposite.",
+          "step_4_eliminate": "Not True because the passage directly rejects environmental-only learning. Not Not Given because the passage explicitly addresses and contradicts this claim."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Chomsky's Universal Grammar theory proposes that humans are born with an innate capacity for language acquisition, rather than learning language purely through environmental exposure.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Corpus linguistics is able to analyze the pragmatic meanings that occur in face-to-face conversations.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although corpus linguistics has revolutionized the study of language patterns through large-scale data analysis, it cannot capture the nuanced pragmatic meanings that emerge in face-to-face interactions.",
+        "anchorText": "Although...it cannot capture",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' introduces a positive point about corpus linguistics, which might trick you into thinking the statement is true, but the main clause after the comma says it CANNOT do what the statement claims.",
+        "reasoning": {
+          "step_1_locate": "Although corpus linguistics has revolutionized the study of language patterns through large-scale data analysis, it cannot capture the nuanced pragmatic meanings that emerge in face-to-face interactions.",
+          "step_2_compare": "Passage says: 'it cannot capture the nuanced pragmatic meanings that emerge in face-to-face interactions'. Statement says: 'is able to analyze the pragmatic meanings that occur in face-to-face conversations'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' introduces a positive point about corpus linguistics, which might trick you into thinking the statement is true, but the main clause after the comma says it CANNOT do what the statement claims.",
+          "step_4_eliminate": "Not True because the passage explicitly says 'cannot capture' these meanings. Not Not Given because the passage directly addresses this capability and denies it."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although corpus linguistics has revolutionized the study of language patterns through large-scale data analysis, it cannot capture the nuanced pragmatic meanings that emerge in face-to-face interactions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Social class differences in language use are more pronounced in British cities than in rural areas.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Sociolinguistic research has identified significant variations in pronunciation and vocabulary across different social classes in urban British communities.",
+        "anchorText": "urban British communities",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about urban areas, which is related to the statement's topic, but it never mentions rural areas or makes any comparison between the two.",
+        "reasoning": {
+          "step_1_locate": "Sociolinguistic research has identified significant variations in pronunciation and vocabulary across different social classes in urban British communities.",
+          "step_2_compare": "Passage says: 'variations...in urban British communities'. Statement says: 'more pronounced in British cities than in rural areas'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about urban areas, which is related to the statement's topic, but it never mentions rural areas or makes any comparison between the two.",
+          "step_4_eliminate": "Not True because no comparison to rural areas exists in the passage. Not False because the passage doesn't deny this comparison—it simply never discusses rural areas at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Sociolinguistic research has identified significant variations in pronunciation and vocabulary across different social classes in urban British communities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:44:22.877Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.4,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "d835007c-0e6c-4636-b0d4-7f0f11a7d240",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy plays a pivotal role in shaping the trajectory of nations by influencing growth, stability, and equitable distribution of resources. Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies. By manipulating interest rates, they can either stimulate borrowing and investment or curb excessive spending, thus maintaining price stability. However, the complexity of global markets often necessitates a multi-faceted approach to economic management. \n\nFor developing nations, economic growth remains a critical objective. The International Monetary Fund reported that developing nations experienced an average GDP growth rate of 4.2% in 2022. This growth can be attributed to a variety of factors, including increased foreign investment and improvements in technology. Nonetheless, sustaining such growth requires careful policy formulation that considers both domestic and international challenges. \n\nIn the realm of fiscal policy, progressive taxation systems require higher earners to pay a larger percentage of their income in taxes, which governments use to fund public services and infrastructure. This approach aims to reduce income inequality and provide the necessary resources for societal development. Effective tax policies can bolster economic resilience by ensuring that essential services such as healthcare, education, and transportation are adequately funded. \n\nThe role of monetary policy was particularly scrutinized following the 2008 financial crisis. Although quantitative easing was widely adopted by major economies during this period, research from the Bank of International Settlements concluded that it failed to stimulate significant long-term economic growth. This finding has prompted policymakers to explore alternative strategies that might yield more sustainable outcomes. \n\nAnother crucial element of economic policy is trade. Trade liberalization policies implemented in the 1990s led to increased cross-border commerce between European Union member states, with total intra-EU trade volume rising by 67% between 1993 and 2000. Such policies have facilitated market expansion and competition, contributing to economic dynamism within the region. However, the benefits of trade liberalization must be balanced against the need to protect domestic industries and labor markets. \n\nIn conclusion, economic policy encompasses a range of tools and strategies aimed at fostering growth, stability, and equity. Policymakers must navigate complex economic landscapes, balancing short-term demands with long-term objectives to ensure sustainable development.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Interest rate adjustments are the main tool central banks use to control inflation.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+        "anchorText": "primary mechanism",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_SUBSTITUTION — 'primary mechanism' and 'main tool' mean exactly the same thing. The passage confirms what the statement claims using different words.",
+        "reasoning": {
+          "step_1_locate": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+          "step_2_compare": "Passage says: 'primary mechanism for controlling inflation'. Statement says: 'main tool central banks use to control inflation'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'primary mechanism' and 'main tool' mean exactly the same thing. The passage confirms what the statement claims using different words.",
+          "step_4_eliminate": "Not False because the passage directly supports this claim. Not Not Given because the passage explicitly mentions this relationship between interest rates and inflation control."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Central banks utilize interest rate adjustments as their primary mechanism for controlling inflation in modern economies.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Developing nations had an average GDP growth rate below 4% in 2022 according to the International Monetary Fund.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The International Monetary Fund reported that developing nations experienced an average GDP growth rate of 4.2% in 2022.",
+        "anchorText": "4.2%",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — 4.2% is not below 4%. The passage gives an exact number that proves the statement wrong.",
+        "reasoning": {
+          "step_1_locate": "The International Monetary Fund reported that developing nations experienced an average GDP growth rate of 4.2% in 2022.",
+          "step_2_compare": "Passage says: '4.2% in 2022'. Statement says: 'below 4% in 2022'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — 4.2% is not below 4%. The passage gives an exact number that proves the statement wrong.",
+          "step_4_eliminate": "Not True because 4.2% is above 4%, not below it. Not Not Given because the passage provides the exact percentage figure."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The International Monetary Fund reported that developing nations experienced an average GDP growth rate of 4.2% in 2022.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Progressive taxation systems are more effective at reducing income inequality than flat tax systems.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes, which governments use to fund public services and infrastructure.",
+        "anchorText": "fund public services and infrastructure",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage explains how progressive taxation works but never makes any comparison with flat tax systems or discusses effectiveness at reducing inequality.",
+        "reasoning": {
+          "step_1_locate": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes, which governments use to fund public services and infrastructure.",
+          "step_2_compare": "Passage says: 'higher earners pay larger percentage' and 'fund public services'. Statement says: 'more effective at reducing income inequality than flat tax systems'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage explains how progressive taxation works but never makes any comparison with flat tax systems or discusses effectiveness at reducing inequality.",
+          "step_4_eliminate": "Not True because no comparison to flat tax systems appears in the passage. Not False because the passage doesn't contradict this either—it simply never addresses the comparison at all."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Progressive taxation systems require higher earners to pay a larger percentage of their income in taxes, which governments use to fund public services and infrastructure.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Quantitative easing successfully stimulated long-term economic growth during the 2008 financial crisis.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although quantitative easing was widely adopted by major economies during the 2008 financial crisis, research from the Bank of International Settlements concluded that it failed to stimulate significant long-term economic growth.",
+        "anchorText": "failed to stimulate significant long-term economic growth",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — Students see 'widely adopted' in the Although clause and think it was successful. But the main clause after 'although' says it FAILED. The passage directly contradicts the statement.",
+        "reasoning": {
+          "step_1_locate": "Although quantitative easing was widely adopted by major economies during the 2008 financial crisis, research from the Bank of International Settlements concluded that it failed to stimulate significant long-term economic growth.",
+          "step_2_compare": "Passage says: 'failed to stimulate significant long-term economic growth'. Statement says: 'successfully stimulated long-term economic growth'.",
+          "step_3_logic": "CONCESSIVE_TRAP — Students see 'widely adopted' in the Although clause and think it was successful. But the main clause after 'although' says it FAILED. The passage directly contradicts the statement.",
+          "step_4_eliminate": "Not True because the passage explicitly says it failed, not succeeded. Not Not Given because the passage directly addresses whether it stimulated growth and gives a clear answer: no."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although quantitative easing was widely adopted by major economies during the 2008 financial crisis, research from the Bank of International Settlements concluded that it failed to stimulate significant long-term economic growth.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Trade liberalization in the 1990s increased commerce between European Union countries and Asian markets.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Trade liberalization policies implemented in the 1990s led to increased cross-border commerce between European Union member states, with total intra-EU trade volume rising by 67% between 1993 and 2000.",
+        "anchorText": "European Union member states",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about EU trade liberalization in the 1990s, which makes you think the answer is there. But it only mentions trade WITHIN the EU, never trade with Asia.",
+        "reasoning": {
+          "step_1_locate": "Trade liberalization policies implemented in the 1990s led to increased cross-border commerce between European Union member states, with total intra-EU trade volume rising by 67% between 1993 and 2000.",
+          "step_2_compare": "Passage says: 'between European Union member states' (intra-EU trade). Statement says: 'between European Union countries and Asian markets'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about EU trade liberalization in the 1990s, which makes you think the answer is there. But it only mentions trade WITHIN the EU, never trade with Asia.",
+          "step_4_eliminate": "Not True because the passage never mentions Asian markets at all. Not False because the passage doesn't say this didn't happen—it just focuses on intra-EU trade only."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Trade liberalization policies implemented in the 1990s led to increased cross-border commerce between European Union member states, with total intra-EU trade volume rising by 67% between 1993 and 2000.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:44:24.753Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "369e865f-b7bb-4eff-857b-61ed8af39aec",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has undergone significant transformations over the past decades, reflecting shifts in societal priorities and technological advancements. Although urban planners initially celebrated the construction of elevated highways through city centers in the 1960s as a triumph of modern engineering, these structures ultimately fragmented communities and decreased property values in surrounding neighborhoods. This realization has prompted a reevaluation of urban planning strategies, leading to innovative approaches aimed at enhancing the quality of life in metropolitan areas. One such approach is the adoption of mixed-use developments, which integrate residential, commercial, and recreational spaces within a single area. These developments have become increasingly popular in metropolitan regions seeking to reduce automobile dependency, thereby promoting a more sustainable urban lifestyle. By encouraging residents to live, work, and play within the same vicinity, mixed-use developments help decrease traffic congestion and pollution. Furthermore, the city's comprehensive zoning reform was implemented in 2018, replacing regulations that had been in place since 1974. This reform was designed to accommodate the changing needs of modern urban environments, facilitating the creation of more flexible and adaptive spaces. Another innovative strategy is the implementation of green roofs, which involve planting vegetation on building tops. These roofs help regulate building temperatures and manage stormwater runoff in dense urban environments, contributing to the overall sustainability of cities. In addition, transit-oriented development encourages high-density construction near public transportation hubs, and several cities have reported increased ridership following such projects. This approach not only enhances public transport efficiency but also stimulates economic activity around transit stations by attracting businesses and residential developments. Collectively, these strategies illustrate a paradigm shift in urban development, emphasizing sustainability, community integration, and efficient land use. As cities continue to grow, these innovative approaches will play a crucial role in shaping urban landscapes that are both livable and resilient.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Elevated highways built through city centers in the 1960s improved the value of nearby properties.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although urban planners initially celebrated the construction of elevated highways through city centers in the 1960s as a triumph of modern engineering, these structures ultimately fragmented communities and decreased property values in surrounding neighborhoods.",
+        "anchorText": "ultimately fragmented communities and decreased property values",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'although' introduces what planners thought at first, but the main part of the sentence tells us what actually happened, which is the opposite of the statement.",
+        "reasoning": {
+          "step_1_locate": "Although urban planners initially celebrated the construction of elevated highways through city centers in the 1960s as a triumph of modern engineering, these structures ultimately fragmented communities and decreased property values in surrounding neighborhoods.",
+          "step_2_compare": "Passage says: 'decreased property values in surrounding neighborhoods'. Statement says: 'improved the value of nearby properties'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'although' introduces what planners thought at first, but the main part of the sentence tells us what actually happened, which is the opposite of the statement.",
+          "step_4_eliminate": "Not True because the passage clearly says property values decreased, not improved. Not Not Given because the passage directly addresses property values and states they decreased."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although urban planners initially celebrated the construction of elevated highways through city centers in the 1960s as a triumph of modern engineering, these structures ultimately fragmented communities and decreased property values in surrounding neighborhoods.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Mixed-use developments aim to decrease reliance on cars.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Mixed-use developments, which integrate residential, commercial, and recreational spaces within a single area, have become increasingly popular in metropolitan regions seeking to reduce automobile dependency.",
+        "anchorText": "reduce automobile dependency",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_SUBSTITUTION — 'Reduce' means the same as 'decrease', and 'automobile dependency' means the same as 'reliance on cars'. The meaning is identical.",
+        "reasoning": {
+          "step_1_locate": "Mixed-use developments, which integrate residential, commercial, and recreational spaces within a single area, have become increasingly popular in metropolitan regions seeking to reduce automobile dependency.",
+          "step_2_compare": "Passage says: 'reduce automobile dependency'. Statement says: 'decrease reliance on cars'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'Reduce' means the same as 'decrease', and 'automobile dependency' means the same as 'reliance on cars'. The meaning is identical.",
+          "step_4_eliminate": "Not False because the passage confirms this exact idea using different words. Not Not Given because the passage explicitly mentions reducing automobile dependency as a goal."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Mixed-use developments, which integrate residential, commercial, and recreational spaces within a single area, have become increasingly popular in metropolitan regions seeking to reduce automobile dependency.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The city's zoning reform was introduced in 1974.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The city's comprehensive zoning reform was implemented in 2018, replacing regulations that had been in place since 1974.",
+        "anchorText": "implemented in 2018",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage gives us the exact year of the reform (2018), and the statement gives a different year (1974). 1974 was when the OLD rules started, not the reform.",
+        "reasoning": {
+          "step_1_locate": "The city's comprehensive zoning reform was implemented in 2018, replacing regulations that had been in place since 1974.",
+          "step_2_compare": "Passage says: 'zoning reform was implemented in 2018'. Statement says: 'zoning reform was introduced in 1974'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage gives us the exact year of the reform (2018), and the statement gives a different year (1974). 1974 was when the OLD rules started, not the reform.",
+          "step_4_eliminate": "Not True because the years are completely different. Not Not Given because the passage clearly states when the reform happened."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The city's comprehensive zoning reform was implemented in 2018, replacing regulations that had been in place since 1974.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Green roofs reduce noise pollution in urban areas.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Green roofs, which involve planting vegetation on building tops, help regulate building temperatures and manage stormwater runoff in dense urban environments.",
+        "anchorText": "help regulate building temperatures and manage stormwater runoff",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about green roofs and lists some benefits, but noise pollution is never mentioned at all. We cannot say if it's true or false.",
+        "reasoning": {
+          "step_1_locate": "Green roofs, which involve planting vegetation on building tops, help regulate building temperatures and manage stormwater runoff in dense urban environments.",
+          "step_2_compare": "Passage says: 'regulate building temperatures and manage stormwater runoff'. Statement says: 'reduce noise pollution'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about green roofs and lists some benefits, but noise pollution is never mentioned at all. We cannot say if it's true or false.",
+          "step_4_eliminate": "Not True because the passage never mentions noise pollution as a benefit. Not False because the passage doesn't say green roofs do NOT reduce noise—it simply never discusses this topic."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Green roofs, which involve planting vegetation on building tops, help regulate building temperatures and manage stormwater runoff in dense urban environments.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Transit-oriented development has led to reduced traffic congestion in several cities.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Transit-oriented development encourages high-density construction near public transportation hubs, and several cities have reported increased ridership following such projects.",
+        "anchorText": "increased ridership",
+        "complexityLevel": 4,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about more people using public transport, which is related to traffic, but it never actually tells us if traffic congestion went down. These are connected ideas but not the same thing.",
+        "reasoning": {
+          "step_1_locate": "Transit-oriented development encourages high-density construction near public transportation hubs, and several cities have reported increased ridership following such projects.",
+          "step_2_compare": "Passage says: 'increased ridership'. Statement says: 'reduced traffic congestion'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about more people using public transport, which is related to traffic, but it never actually tells us if traffic congestion went down. These are connected ideas but not the same thing.",
+          "step_4_eliminate": "Not True because the passage never mentions traffic congestion being reduced. Not False because the passage doesn't say traffic congestion stayed the same or increased—it just doesn't discuss congestion at all."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Transit-oriented development encourages high-density construction near public transportation hubs, and several cities have reported increased ridership following such projects.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:44:57.793Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 3,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "2c423212-7d85-4c8e-8005-10d4d836d1ab",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration remains a pivotal aspect of modern scientific endeavors, pushing the boundaries of human knowledge and technological capabilities. The quest to explore beyond our planet has led to remarkable achievements and ongoing challenges. The International Space Station orbits Earth at an altitude of approximately 408 kilometers above sea level, serving as a testament to international cooperation in space exploration. It functions as a microgravity laboratory where scientific research contributes to our understanding of space and its potential benefits to life on Earth. \n\nNotably, NASA's Voyager 1 spacecraft, launched in 1977, became the first human-made object to enter interstellar space in August 2012. This milestone marked a significant leap in our ability to explore the far reaches of our solar system and beyond. The data sent back by Voyager 1 continues to provide invaluable insights into the heliosphere and the nature of interstellar space. \n\nMars exploration has also seen significant advancements. The Mars Perseverance rover, which landed on the red planet in February 2021, is equipped with advanced cameras and scientific instruments to search for signs of ancient microbial life. This mission reflects our enduring curiosity about the potential for life beyond Earth and the geological history of Mars. \n\nPrivate companies have also become key players in space exploration. Although SpaceX's Starship prototype achieved several successful test flights in 2023, the vehicle has not yet completed a full orbital mission without experiencing critical system failures. These endeavors underscore the complexities and risks associated with developing new space technologies, but they also highlight the potential for future breakthroughs in space travel. \n\nChina has made significant strides in its space program as well. China's Chang'e 5 mission successfully returned lunar samples to Earth in December 2020, marking the first time moon rocks had been collected since the Soviet Luna 24 mission in 1976. This achievement not only demonstrates China's growing capabilities in space exploration but also contributes to our understanding of the Moon's composition and history.\n\nIn conclusion, the pursuit of space exploration continues to inspire awe and foster collaboration among nations. Each mission, whether governmental or private, contributes to the broader goal of expanding humanity's presence in space, demonstrating both the achievements and the challenges that lie ahead.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The International Space Station circles the planet at a height of roughly 408 kilometers.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "The International Space Station orbits Earth at an altitude of approximately 408 kilometers above sea level.",
+        "anchorText": "orbits Earth at an altitude of approximately 408 kilometers",
+        "complexityLevel": 1,
+        "explanation": "SYNONYM_SUBSTITUTION — orbits = circles, altitude = height, approximately = roughly, Earth = planet. All words mean the same thing.",
+        "reasoning": {
+          "step_1_locate": "The International Space Station orbits Earth at an altitude of approximately 408 kilometers above sea level.",
+          "step_2_compare": "Passage says: 'orbits Earth at an altitude of approximately 408 kilometers'. Statement says: 'circles the planet at a height of roughly 408 kilometers'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — orbits = circles, altitude = height, approximately = roughly, Earth = planet. All words mean the same thing.",
+          "step_4_eliminate": "Not False because the numbers and facts match exactly. Not Not Given because the passage directly states this information."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "The International Space Station orbits Earth at an altitude of approximately 408 kilometers above sea level.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Voyager 1 entered interstellar space in 2015.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "NASA's Voyager 1 spacecraft, launched in 1977, became the first human-made object to enter interstellar space in August 2012.",
+        "anchorText": "August 2012",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage gives a specific year (2012) that is different from the year in the statement (2015). The facts directly oppose each other.",
+        "reasoning": {
+          "step_1_locate": "NASA's Voyager 1 spacecraft, launched in 1977, became the first human-made object to enter interstellar space in August 2012.",
+          "step_2_compare": "Passage says: 'enter interstellar space in August 2012'. Statement says: 'entered interstellar space in 2015'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage gives a specific year (2012) that is different from the year in the statement (2015). The facts directly oppose each other.",
+          "step_4_eliminate": "Not True because 2012 and 2015 are different years. Not Not Given because the passage clearly mentions when Voyager 1 entered interstellar space."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "NASA's Voyager 1 spacecraft, launched in 1977, became the first human-made object to enter interstellar space in August 2012.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The Perseverance rover has discovered definitive proof of past life on Mars.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "The Mars Perseverance rover, which landed on the red planet in February 2021, is equipped with advanced cameras and scientific instruments to search for signs of ancient microbial life.",
+        "anchorText": "search for signs of ancient microbial life",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about Perseverance and its mission to search for life, but it never tells us if the rover actually found anything or not.",
+        "reasoning": {
+          "step_1_locate": "The Mars Perseverance rover, which landed on the red planet in February 2021, is equipped with advanced cameras and scientific instruments to search for signs of ancient microbial life.",
+          "step_2_compare": "Passage says: 'to search for signs of ancient microbial life'. Statement says: 'has discovered definitive proof of past life'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about Perseverance and its mission to search for life, but it never tells us if the rover actually found anything or not.",
+          "step_4_eliminate": "Not True because the passage only mentions searching, not discovering. Not False because the passage doesn't say it failed to find proof either."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "The Mars Perseverance rover, which landed on the red planet in February 2021, is equipped with advanced cameras and scientific instruments to search for signs of ancient microbial life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "SpaceX's Starship has successfully completed a full orbital mission.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although SpaceX's Starship prototype achieved several successful test flights in 2023, the vehicle has not yet completed a full orbital mission without experiencing critical system failures.",
+        "anchorText": "has not yet completed a full orbital mission without experiencing critical system failures",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' tricks you into reading about successful test flights, but the main point after the comma says it has NOT completed a full orbital mission. The statement is the opposite of what the passage actually says.",
+        "reasoning": {
+          "step_1_locate": "Although SpaceX's Starship prototype achieved several successful test flights in 2023, the vehicle has not yet completed a full orbital mission without experiencing critical system failures.",
+          "step_2_compare": "Passage says: 'has not yet completed a full orbital mission without experiencing critical system failures'. Statement says: 'has successfully completed a full orbital mission'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' tricks you into reading about successful test flights, but the main point after the comma says it has NOT completed a full orbital mission. The statement is the opposite of what the passage actually says.",
+          "step_4_eliminate": "Not True because the passage clearly says 'has not yet completed'. Not Not Given because the passage directly addresses whether a full orbital mission was completed."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although SpaceX's Starship prototype achieved several successful test flights in 2023, the vehicle has not yet completed a full orbital mission without experiencing critical system failures.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The lunar samples collected by Chang'e 5 contained minerals not found in samples from previous missions.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "China's Chang'e 5 mission successfully returned lunar samples to Earth in December 2020, marking the first time moon rocks had been collected since the Soviet Luna 24 mission in 1976.",
+        "anchorText": "returned lunar samples to Earth",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the Chang'e 5 mission and lunar samples, but it never tells us anything about what minerals were inside those samples or how they were different from old samples.",
+        "reasoning": {
+          "step_1_locate": "China's Chang'e 5 mission successfully returned lunar samples to Earth in December 2020, marking the first time moon rocks had been collected since the Soviet Luna 24 mission in 1976.",
+          "step_2_compare": "Passage says: 'successfully returned lunar samples to Earth'. Statement says: 'samples contained minerals not found in samples from previous missions'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about the Chang'e 5 mission and lunar samples, but it never tells us anything about what minerals were inside those samples or how they were different from old samples.",
+          "step_4_eliminate": "Not True because the passage never mentions mineral content. Not False because the passage doesn't say the samples were the same as previous ones either."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "China's Chang'e 5 mission successfully returned lunar samples to Earth in December 2020, marking the first time moon rocks had been collected since the Soviet Luna 24 mission in 1976.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:45:01.785Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.3,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.6,
+        "min": 1,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  }
+]
