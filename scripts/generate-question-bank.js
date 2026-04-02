@@ -104,7 +104,8 @@ function safeParseJson(raw) {
     .replace(/^```(?:json)?\s*/i, '')
     .replace(/\s*```\s*$/i, '')
     .trim();
-  return JSON.parse(cleaned);
+  const sanitized = cleaned.replace(/[\x00-\x1F\x7F]/g, ' ').trim();
+  return JSON.parse(sanitized);
 }
 
 function loadBank(relPath) {
@@ -423,79 +424,97 @@ function buildEntry({ topic, band, passage, questions, corrections, quality, sim
 
 // ── GENERATE ONE SET ──────────────────────────────────────────────────────────
 
+function isNetworkError(err) {
+  const msg = (err.message || '').toLowerCase();
+  return /fetch failed|econnreset|etimedout|connection reset/.test(msg);
+}
+
 async function generateOneSet(idx, total, topic, band, apiKey, leadType) {
+  const MAX_RETRIES = 2;
+  const RETRY_DELAY = 3000;
   const prefix = `[${String(idx).padStart(String(total).length)}/${total}]`;
   const log    = msg => process.stdout.write(`${prefix} ${msg}\n`);
 
-  try {
-    // Stage 0
-    log(`⟳ Stage 0: Logic matrix (lead: ${leadType})...`);
-    const logicPairs = await stageLogicMatrix(topic, band, apiKey, leadType);
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      await new Promise(r => setTimeout(r, RETRY_DELAY));
+      log(`⟳ Retry ${attempt}/${MAX_RETRIES} after network error...`);
+    }
 
-    // Stage 1
-    log('⟳ Stage 1: Passage generation...');
-    const { passage, topic: resolvedTopic, questions } = await stagePassageGeneration(topic, logicPairs, band);
+    try {
+      // Stage 0
+      log(`⟳ Stage 0: Logic matrix (lead: ${leadType})...`);
+      const logicPairs = await stageLogicMatrix(topic, band, apiKey, leadType);
 
-    // Stage 2
-    log('⟳ Stage 2: Verification...');
-    const { questions: verifiedQs, corrections } = await stageVerification(passage, questions);
+      // Stage 1
+      log('⟳ Stage 1: Passage generation...');
+      const { passage, topic: resolvedTopic, questions } = await stagePassageGeneration(topic, logicPairs, band);
 
-    // Stage 3
-    log('⟳ Stage 3: Quality gate...');
-    const quality = await stageQualityGate(passage, band);
-    if (!quality.pass) {
+      // Stage 2
+      log('⟳ Stage 2: Verification...');
+      const { questions: verifiedQs, corrections } = await stageVerification(passage, questions);
+
+      // Stage 3
+      log('⟳ Stage 3: Quality gate...');
+      const quality = await stageQualityGate(passage, band);
+      if (!quality.pass) {
+        const entry = buildEntry({
+          topic: resolvedTopic, band, passage, questions: verifiedQs,
+          corrections, quality, simulation: null, rejectedReason: 'quality_gate',
+        });
+        const reasons = (quality.failReasons || []).join('; ') || `avg ${quality.avgScore ?? 'n/a'}`;
+        log(`✗ Rejected — quality_gate (${reasons})`);
+        return { status: 'rejected', reason: 'quality_gate', entry };
+      }
+
+      // Stage 4
+      log('⟳ Stage 4: Student simulation...');
+      const simulation = await stageStudentSimulation(passage, verifiedQs, apiKey);
+      const mismatches = simulation.filter(s => !s.matched);
+
+      const status         = mismatches.length >= 2 ? 'rejected' : 'approved';
+      const rejectedReason = status === 'rejected' ? 'student_simulation_fail' : null;
+
       const entry = buildEntry({
         topic: resolvedTopic, band, passage, questions: verifiedQs,
-        corrections, quality, simulation: null, rejectedReason: 'quality_gate',
+        corrections, quality, simulation, rejectedReason,
       });
-      const reasons = (quality.failReasons || []).join('; ') || `avg ${quality.avgScore ?? 'n/a'}`;
-      log(`✗ Rejected — quality_gate (${reasons})`);
-      return { status: 'rejected', reason: 'quality_gate', entry };
+
+      if (status === 'approved') {
+        const warnSuffix    = mismatches.length === 1
+          ? ` (1 ambiguous Q — warning logged)`
+          : '';
+        const avgComplexity = entry.meta.complexityProfile.avg ?? '?';
+        const simScore      = `${5 - mismatches.length}/5`;
+        log(`✓ ${resolvedTopic} | quality ${quality.avgScore} | corrections ${corrections.length} | simulation ${simScore} | complexity avg ${avgComplexity}${warnSuffix}`);
+      } else {
+        const mismatchDesc = mismatches
+          .map(m => `Q${m.questionId} student=${m.studentAnswer} bank=${m.bankAnswer}`)
+          .join(', ');
+        log(`✗ Rejected — student_simulation_fail (${mismatches.length} mismatches: ${mismatchDesc})`);
+      }
+
+      return { status, reason: rejectedReason, entry };
+
+    } catch (err) {
+      if (attempt < MAX_RETRIES && isNetworkError(err)) {
+        log(`⚠ Network error (attempt ${attempt + 1}): ${err.message}`);
+        continue;
+      }
+      log(`✗ Rejected — pipeline_error: ${err.message}`);
+      return {
+        status: 'rejected',
+        reason: 'pipeline_error',
+        entry:  {
+          id:             randomUUID(),
+          topic,
+          band,
+          rejectedReason: 'pipeline_error',
+          error:          err.message,
+          meta:           { generatedAt: new Date().toISOString() },
+        },
+      };
     }
-
-    // Stage 4
-    log('⟳ Stage 4: Student simulation...');
-    const simulation = await stageStudentSimulation(passage, verifiedQs, apiKey);
-    const mismatches = simulation.filter(s => !s.matched);
-
-    const status         = mismatches.length >= 2 ? 'rejected' : 'approved';
-    const rejectedReason = status === 'rejected' ? 'student_simulation_fail' : null;
-
-    const entry = buildEntry({
-      topic: resolvedTopic, band, passage, questions: verifiedQs,
-      corrections, quality, simulation, rejectedReason,
-    });
-
-    if (status === 'approved') {
-      const warnSuffix    = mismatches.length === 1
-        ? ` (1 ambiguous Q — warning logged)`
-        : '';
-      const avgComplexity = entry.meta.complexityProfile.avg ?? '?';
-      const simScore      = `${5 - mismatches.length}/5`;
-      log(`✓ ${resolvedTopic} | quality ${quality.avgScore} | corrections ${corrections.length} | simulation ${simScore} | complexity avg ${avgComplexity}${warnSuffix}`);
-    } else {
-      const mismatchDesc = mismatches
-        .map(m => `Q${m.questionId} student=${m.studentAnswer} bank=${m.bankAnswer}`)
-        .join(', ');
-      log(`✗ Rejected — student_simulation_fail (${mismatches.length} mismatches: ${mismatchDesc})`);
-    }
-
-    return { status, reason: rejectedReason, entry };
-
-  } catch (err) {
-    log(`✗ Rejected — pipeline_error: ${err.message}`);
-    return {
-      status: 'rejected',
-      reason: 'pipeline_error',
-      entry:  {
-        id:            randomUUID(),
-        topic,
-        band,
-        rejectedReason: 'pipeline_error',
-        error:          err.message,
-        meta:           { generatedAt: new Date().toISOString() },
-      },
-    };
   }
 }
 
