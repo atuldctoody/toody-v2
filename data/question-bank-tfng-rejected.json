@@ -1,0 +1,112 @@
+[
+  {
+    "id": "8280232a-c87b-471f-a31b-4bdd576a0202",
+    "type": "tfng",
+    "topic": "Climate Science",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7funTJWBguazPaVnpu\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.591Z"
+    }
+  },
+  {
+    "id": "504033bd-afc5-4c8b-8771-391e616aa980",
+    "type": "tfng",
+    "topic": "Neuroscience",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fugza5BYKM9k8nggz\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.510Z"
+    }
+  },
+  {
+    "id": "88cb587d-5038-4445-be72-8db522c921e3",
+    "type": "tfng",
+    "topic": "Renewable Energy",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fuowL5MJ6VjAoZNvP\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.515Z"
+    }
+  },
+  {
+    "id": "8a6593e6-46c6-4787-82c1-e325eca2ba46",
+    "type": "tfng",
+    "topic": "Space Exploration",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fwDXTo9RAr8ZoV3nk\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.802Z"
+    }
+  },
+  {
+    "id": "597eebc9-c434-4bf0-b82f-2ea97408bff0",
+    "type": "tfng",
+    "topic": "Linguistic Research",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fwF1QpbJU2YcXxvco\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.798Z"
+    }
+  },
+  {
+    "id": "04999f3d-a096-426a-86b9-129dcc60ab4c",
+    "type": "tfng",
+    "topic": "Marine Biology",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fwfofaiVZ3WMySNLV\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:42.901Z"
+    }
+  },
+  {
+    "id": "076fee0b-f755-4ff8-a5ee-b49ab9c03e13",
+    "type": "tfng",
+    "topic": "Archaeological Discovery",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fxUvhQJzerBtGDVqZ\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:43.102Z"
+    }
+  },
+  {
+    "id": "d8b5c92f-ec7a-4b7a-b348-a7987505f683",
+    "type": "tfng",
+    "topic": "Economic Policy",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fxWuZn4Wh2e5rfKjL\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:43.354Z"
+    }
+  },
+  {
+    "id": "18483ba7-686d-4be3-9d7d-2bb68aba9933",
+    "type": "tfng",
+    "topic": "Urban Development",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fxywPzJu5X2HcMb9y\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:43.283Z"
+    }
+  },
+  {
+    "id": "742429e2-a6c6-4f1c-928c-9f0a2c9aeb84",
+    "type": "tfng",
+    "topic": "Psychology",
+    "band": 6.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 400 {\"type\":\"error\",\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.\"},\"request_id\":\"req_011CZf7fyjagk3ybRK9jjdJA\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T14:38:43.436Z"
+    }
+  }
+]

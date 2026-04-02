@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-04-02T13:01:04.492Z",
+  "timestamp": "2026-04-02T15:59:48.642Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 31194,
+  "durationMs": 32235,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 26479,
+      "durationMs": 25294,
       "steps": {
         "generation": {
           "pass": true,
@@ -20,12 +20,12 @@
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 27262,
+      "durationMs": 32175,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Climate Change and Agriculture",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -73,16 +73,16 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 31154,
+      "durationMs": 25980,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Cognitive Science Insights",
+          "topic": "Climate Change Impact",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }

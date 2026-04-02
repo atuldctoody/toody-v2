@@ -49,6 +49,7 @@ export async function loadTeachFirst(skillKey) {
   const skillLabel = cfg.displayName;
   const isMH       = cfg.hookStyle === 'matching';
   const isYNNG     = cfg.hookStyle === 'ynng';
+  const isMC       = cfg.hookStyle === 'multiplechoice';
   const isTFNG     = cfg.answerButtons.includes('Not Given') && !isYNNG;
 
   // ── TEACHING ATTEMPTS TRACKING ────────────────────────────────────
@@ -76,7 +77,7 @@ export async function loadTeachFirst(skillKey) {
 
   const conceptPromptDetail = cfg.conceptPromptHint;
 
-  const ansVals = isMH ? ['A','B','A'] : isYNNG ? ['Yes','No','Not Given'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
+  const ansVals = isMH ? ['A','B','A'] : isYNNG ? ['Yes','No','Not Given'] : isTFNG ? ['True','False','NG'] : isMC ? ['A','B','C'] : ['True','False','True'];
 
   // Skill-specific passage and statement descriptions for the hook question
   const hookPassageDesc = isMH
@@ -85,6 +86,8 @@ export async function loadTeachFirst(skillKey) {
     ? "2 academic sentences written in first person, clearly expressing the author's opinions"
     : isTFNG
     ? '2 academic sentences — choose a tricky topic where the Not Given trap applies'
+    : isMC
+    ? '3-4 sentences — a scenario with enough information to answer one question, where the obvious-sounding option is a distractor'
     : '2 academic sentences from which a one-sentence summary can be drawn with one key term left blank';
 
   // Skill-specific statement/example descriptions
@@ -92,22 +95,30 @@ export async function loadTeachFirst(skillKey) {
     ? 'a testable claim that looks True but is actually False — a detail matches but not the main idea'
     : (isYNNG || isTFNG)
     ? cfg.hookPromptHint
+    : isMC
+    ? 'the question stem — what is the student asked to identify or choose?'
     : 'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)';
 
   const exStatementHint = isMH
     ? 'a heading choice where a distractor matches a detail but not the main idea'
     : isTFNG
     ? 'testable claim'
+    : isMC
+    ? 'the question stem asking about the passage'
     : 'a summary sentence with one blank gap and a wrong-form distractor visible';
 
   const sysAnswerRule = isYNNG
     ? 'CRITICAL: Every "answer" field must be exactly ONE value (Yes, No, or Not Given) — never True/False/NG.'
     : isTFNG
     ? 'CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated.'
+    : isMC
+    ? 'CRITICAL: Every "answer" field must be exactly ONE letter (A, B, C, or D) matching the correct option.'
     : 'CRITICAL: Every "answer" field must be exactly one of: True or False — never pipe-separated or NG.';
 
-  const exSchema = (label, ansIdx) =>
-    `{"label":"${label}","passage":"2 academic sentences","statement":"${exStatementHint}","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
+  const mcOptSchema = '"options":[{"label":"A","text":"option A text"},{"label":"B","text":"option B text"},{"label":"C","text":"option C text"},{"label":"D","text":"option D text"}],';
+  const exSchema = (label, ansIdx) => isMC
+    ? `{"label":"${label}","passage":"3-4 sentences — enough detail to answer a multiple choice question","statement":"${exStatementHint}",${mcOptSchema}"answer":"${ansVals[ansIdx]}","steps":["Read the question: what are you looking for in the passage?","Scan the passage: which sentence directly answers the question?","Eliminate: why are the distractors wrong?"],"insight":"One sentence: the key reasoning move that separates the correct answer from the distractors."}`
+    : `{"label":"${label}","passage":"2 academic sentences","statement":"${exStatementHint}","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
     system: `You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. ${sysAnswerRule}`,
@@ -124,8 +135,9 @@ Return ONLY this JSON:
   ],` : ''}
   "hookQuestion": {
     "passage": "${hookPassageDesc}",
-    "statement": "${statementDesc}",
-    "answer": "${isMH ? 'False' : isYNNG ? 'Not Given' : isTFNG ? 'NG' : 'False'}",
+    "statement": "${statementDesc}",${isMC ? `
+    "options": [{"label":"A","text":"option A"},{"label":"B","text":"option B"},{"label":"C","text":"option C"},{"label":"D","text":"option D"}],` : ''}
+    "answer": "${isMH ? 'False' : isYNNG ? 'Not Given' : isTFNG ? 'NG' : isMC ? 'B' : 'False'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
   "workedExamples": [
@@ -134,12 +146,12 @@ Return ONLY this JSON:
     ${exSchema('Hard — the exact sub-type where most Band 6 students fail', 2)}
   ],
   "confidenceQuestions": [
-    {"passage": "2 academic sentences — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable claim", "answer": "${ansVals[0]}", "explanation": "one sentence"},
-    {"passage": "2 academic sentences on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable claim", "answer": "${ansVals[1]}", "explanation": "one sentence"}
+    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"},
+    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[1]}", "explanation": "one sentence"}
   ],
   "drillQuestions": [
-    {"passage": "2 academic sentences", "statement": "a testable claim", "answer": "${ansVals[2]}", "explanation": "one sentence"},
-    {"passage": "2 academic sentences on a different topic", "statement": "another testable claim", "answer": "${ansVals[0]}", "explanation": "one sentence"}
+    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'}", "statement": "a testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[2]}", "explanation": "one sentence"},
+    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic", "statement": "another testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"}
   ]
 }`,
     maxTokens: 3500
@@ -276,10 +288,29 @@ function renderHookQuestion() {
   const prevTextWrap = document.getElementById('teach-hook-text-wrap');
   if (prevTextWrap) prevTextWrap.remove();
 
+  // Clean up injected MC options list from a previous MC skill
+  document.getElementById('teach-hook-mc-opts')?.remove();
+
   if (hookCfg.hookStyle === 'matching') {
     // Render letter option buttons (A, B, C, D, E) from skill config
     btnsContainer.innerHTML = hookCfg.answerButtons.map(v =>
       `<button class="tfng-btn" onclick="window.answerHook('${v}')" data-mv="${v}">${v}</button>`
+    ).join('');
+    btnsContainer.classList.remove('hidden');
+  } else if (hookCfg.hookStyle === 'multiplechoice') {
+    // Render options list above letter buttons
+    const opts = hq.options || [];
+    if (opts.length) {
+      const optDiv = document.createElement('div');
+      optDiv.id = 'teach-hook-mc-opts';
+      optDiv.style.cssText = 'margin-bottom:12px';
+      optDiv.innerHTML = opts.map(o =>
+        `<div style="padding:10px 14px;margin-bottom:6px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:14px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+      ).join('');
+      btnsContainer.insertAdjacentElement('beforebegin', optDiv);
+    }
+    btnsContainer.innerHTML = ['A','B','C','D'].map(l =>
+      `<button class="tfng-btn" onclick="window.answerHook('${l}')" data-mv="${l}">${l}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
   } else if (hookCfg.hookStyle === 'gapfill' || hookCfg.hookStyle === 'shortanswer') {
@@ -388,8 +419,57 @@ function renderWorkedExampleAt(idx) {
   const answerToChoice = { true: 'confirms', false: 'contradicts', notgiven: 'silent', ng: 'silent', yes: 'confirms', no: 'contradicts' };
   const correctChoice  = answerToChoice[normAns] || 'silent';
 
+  const weHookStyle = getSkillConfig(toSkillId(teachSkillKey)).hookStyle;
+
+  // ── MC FORMAT (multiplechoice hookStyle — options + elimination flow) ──
+  if (weHookStyle === 'multiplechoice' && (we.options || we.steps)) {
+    const opts = we.options || [];
+    const optsHtml = opts.map(o =>
+      `<div style="padding:10px 14px;margin-bottom:6px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:14px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+    ).join('');
+    document.getElementById('teach-steps-container').innerHTML = `
+      <div style="margin-bottom:12px">${optsHtml}</div>
+      <div class="predict-block" id="predict-0">
+        <div class="predict-prompt">Which part of the passage contains the answer?</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-0">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 1</div>
+            <div class="teach-step-text">${(we.steps || [])[0] || ''}</div>
+          </div>
+        </div>
+      </div>
+      <div class="predict-block hidden" id="predict-1">
+        <div class="predict-prompt">Which option does the passage support?</div>
+        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Show reasoning <span class="arrow">→</span></button>
+        <div class="predict-reveal hidden" id="predict-reveal-1">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 2</div>
+            <div class="teach-step-text">${(we.steps || [])[1] || ''}</div>
+          </div>
+        </div>
+      </div>
+      <div class="predict-block hidden" id="predict-2">
+        <div class="predict-prompt">Pick the correct answer.</div>
+        <div class="tfng mt8">
+          ${['A','B','C','D'].map(l =>
+            `<button class="tfng-btn" data-choice="${l}" onclick="window.teachPickMCStep3('${l}','${(we.answer||'').toUpperCase()}')">${l}</button>`
+          ).join('')}
+        </div>
+        <div class="predict-reveal hidden" id="predict-reveal-2">
+          <div class="card" style="margin-top:12px">
+            <div class="card-label" style="color:var(--accent)">Step 3</div>
+            <div class="teach-step-text">${(we.steps || [])[2] || ''}</div>
+          </div>
+          <div class="card" style="margin-top:8px;border:2px solid var(--success)">
+            <div class="card-label" style="color:var(--success)">✅ Answer: ${we.answer || ''}</div>
+            <div class="teach-step-text" style="font-weight:600">${we.insight || ''}</div>
+          </div>
+        </div>
+      </div>`;
+
   // ── RICH FORMAT (hardcoded examples — explanation/bandFiveAnswer/teachingNote) ──
-  if (we.explanation) {
+  } else if (we.explanation) {
     const answerLabel  = normAns === 'true' || normAns === 'yes' ? (normAns === 'yes' ? 'Yes' : 'True') : normAns === 'false' || normAns === 'no' ? (normAns === 'no' ? 'No' : 'False') : 'Not Given';
     const wrongBadge   = we.bandFiveAnswer
       ? `<div class="card" style="margin-top:12px;border:2px solid var(--danger)">
@@ -503,6 +583,23 @@ window.teachRevealStep = function (stepIdx) {
   // Show next step
   const nextBlock = document.getElementById(`predict-${stepIdx + 1}`);
   if (nextBlock) nextBlock.classList.remove('hidden');
+};
+
+window.teachPickMCStep3 = function (choice, correct) {
+  document.querySelectorAll('#predict-2 .tfng-btn').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.choice === correct)              b.classList.add('correct');
+    if (b.dataset.choice === choice && choice !== correct) b.classList.add('wrong');
+  });
+  document.getElementById('predict-reveal-2').classList.remove('hidden');
+  const examples = teachData.workedExamples || [];
+  const we2 = examples[workedExIdx] || {};
+  if (we2.insight) {
+    document.getElementById('teach-ex-insight-text').textContent = we2.insight;
+    document.getElementById('teach-ex-insight').classList.remove('hidden');
+  }
+  document.getElementById('teach-try-btn').classList.remove('hidden');
+  window.scrollTo(0, document.body.scrollHeight);
 };
 
 window.teachPickStep3 = function (choice, correct) {
@@ -716,8 +813,28 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   document.getElementById('teach-conf-passage').textContent = q.passage;
   document.getElementById('teach-conf-statement').textContent = q.statement;
   const confCfg = getSkillConfig(toSkillId(teachSkillKey));
-  const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
-  if (ngBtn) ngBtn.classList.toggle('hidden', !confCfg.answerButtons.includes('Not Given'));
+
+  // For MC: inject options list + replace buttons with A/B/C/D
+  document.getElementById('teach-conf-mc-opts')?.remove();
+  const confBtnsEl = document.getElementById('teach-conf-btns');
+  if (confCfg.hookStyle === 'multiplechoice') {
+    const opts = q.options || [];
+    if (opts.length) {
+      const optDiv = document.createElement('div');
+      optDiv.id = 'teach-conf-mc-opts';
+      optDiv.style.cssText = 'margin-bottom:12px';
+      optDiv.innerHTML = opts.map(o =>
+        `<div style="padding:10px 14px;margin-bottom:6px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:14px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+      ).join('');
+      confBtnsEl.insertAdjacentElement('beforebegin', optDiv);
+    }
+    confBtnsEl.innerHTML = ['A','B','C','D'].map(l =>
+      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+    ).join('');
+  } else {
+    const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
+    if (ngBtn) ngBtn.classList.toggle('hidden', !confCfg.answerButtons.includes('Not Given'));
+  }
   document.querySelectorAll('#teach-conf-btns .tfng-btn').forEach(b => {
     b.disabled = false; b.classList.remove('correct', 'wrong');
   });
