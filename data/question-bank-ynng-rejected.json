@@ -1311,5 +1311,2318 @@
     "meta": {
       "generatedAt": "2026-04-02T07:47:08.593Z"
     }
+  },
+  {
+    "id": "1ac9ae3e-2d1e-4843-86f6-3ae0c39d4553",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Recent studies by the International Climate Research Institute have found that Arctic ice loss is accelerating at unprecedented rates, with some researchers suggesting this could trigger irreversible tipping points in global weather systems. I believe this alarming trend underscores the urgency of addressing climate change more aggressively. It is evident that immediate policy intervention is essential if we are to prevent catastrophic climate outcomes within the next three decades. In my view, governments must prioritize climate policies that are both ambitious and enforceable. \n\nThe notion that technological innovation alone can solve the climate crisis without significant behavioral change is fundamentally flawed and ignores the scale of transformation required. While technology plays a crucial role, it is clear that societal changes are equally important. Reducing our carbon footprint demands a shift in both individual and collective behaviors, not just advancements in technology. \n\nFurthermore, the correlation between solar activity cycles and recent temperature variations could arguably indicate that natural factors play a more significant role than current models acknowledge. However, I believe it is vital to focus on human-induced factors, as they are within our control and have been conclusively shown to drive recent climate changes. Ignoring these would only delay necessary actions. \n\nWhile some climate scientists argue that carbon capture technology represents our best hope for meeting emission targets, others contend that it diverts resources from proven renewable energy solutions, with both perspectives offering compelling evidence for their positions. In my view, a balanced approach that incorporates both carbon capture and renewable energy investments is essential. We must harness every possible solution to address this multifaceted issue. It is critical that we not only invest in technological advancements but also foster a global culture of sustainability.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that Arctic ice loss will trigger irreversible tipping points in global weather systems.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Climate Research Institute have found that Arctic ice loss is accelerating at unprecedented rates, with some researchers suggesting this could trigger irreversible tipping points in global weather systems.",
+        "anchorText": "researchers suggesting",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_AUTHOR — The author reports what researchers suggest but never endorses or rejects this view personally.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Climate Research Institute have found that Arctic ice loss is accelerating at unprecedented rates, with some researchers suggesting this could trigger irreversible tipping points in global weather systems.",
+          "step_2_compare": "Author says: 'some researchers suggesting this could trigger irreversible tipping points'. Statement claims: 'The writer believes that Arctic ice loss will trigger irreversible tipping points'.",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author reports what researchers suggest but never endorses or rejects this view personally.",
+          "step_4_eliminate": "Not Yes because the author only reports others' views without personal endorsement. Not No because the author doesn't contradict or dispute the researchers' suggestion."
+        },
+        "keySentence": "Recent studies by the International Climate Research Institute have found that Arctic ice loss is accelerating at unprecedented rates, with some researchers suggesting this could trigger irreversible tipping points in global weather systems.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks that immediate policy intervention is necessary to prevent catastrophic climate outcomes.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that immediate policy intervention is essential if we are to prevent catastrophic climate outcomes within the next three decades.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "AUTHOR_AGREES — The opinion marker 'It is evident that' shows the author's clear personal position supporting immediate intervention.",
+        "reasoning": {
+          "step_1_locate": "It is evident that immediate policy intervention is essential if we are to prevent catastrophic climate outcomes within the next three decades.",
+          "step_2_compare": "Author says: 'It is evident that immediate policy intervention is essential'. Statement claims: 'The writer thinks that immediate policy intervention is necessary'.",
+          "step_3_logic": "AUTHOR_AGREES — The opinion marker 'It is evident that' shows the author's clear personal position supporting immediate intervention.",
+          "step_4_eliminate": "Not No because the author explicitly supports rather than contradicts the need for intervention. Not Not Given because 'It is evident that' is a definite opinion marker showing the author's view."
+        },
+        "keySentence": "It is evident that immediate policy intervention is essential if we are to prevent catastrophic climate outcomes within the next three decades.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that technological innovation alone can solve the climate crisis.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that technological innovation alone can solve the climate crisis without significant behavioral change is fundamentally flawed and ignores the scale of transformation required.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 4,
+        "explanation": "AUTHOR_DISAGREES — The author explicitly rejects the idea by calling it 'fundamentally flawed', which directly opposes the statement.",
+        "reasoning": {
+          "step_1_locate": "The notion that technological innovation alone can solve the climate crisis without significant behavioral change is fundamentally flawed and ignores the scale of transformation required.",
+          "step_2_compare": "Author says: 'The notion that technological innovation alone can solve the climate crisis is fundamentally flawed'. Statement claims: 'The writer agrees that technological innovation alone can solve the climate crisis'.",
+          "step_3_logic": "AUTHOR_DISAGREES — The author explicitly rejects the idea by calling it 'fundamentally flawed', which directly opposes the statement.",
+          "step_4_eliminate": "Not Yes because the author calls this notion flawed rather than supporting it. Not Not Given because 'is fundamentally flawed' is a clear opinion marker showing definite disagreement."
+        },
+        "keySentence": "The notion that technological innovation alone can solve the climate crisis without significant behavioral change is fundamentally flawed and ignores the scale of transformation required.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes that natural factors play a more significant role in temperature variations than current models acknowledge.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The correlation between solar activity cycles and recent temperature variations could arguably indicate that natural factors play a more significant role than current models acknowledge.",
+        "anchorText": "could arguably indicate",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_OPINION — The author uses tentative language ('could arguably') without committing to belief in this claim.",
+        "reasoning": {
+          "step_1_locate": "The correlation between solar activity cycles and recent temperature variations could arguably indicate that natural factors play a more significant role than current models acknowledge.",
+          "step_2_compare": "Author says: 'could arguably indicate that natural factors play a more significant role'. Statement claims: 'The writer believes that natural factors play a more significant role'.",
+          "step_3_logic": "HEDGED_OPINION — The author uses tentative language ('could arguably') without committing to belief in this claim.",
+          "step_4_eliminate": "Not Yes because 'could arguably' is speculative rather than a definite endorsement. Not No because the author doesn't reject the possibility, only presents it tentatively."
+        },
+        "keySentence": "The correlation between solar activity cycles and recent temperature variations could arguably indicate that natural factors play a more significant role than current models acknowledge.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes that carbon capture technology represents our best hope for meeting emission targets.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some climate scientists argue that carbon capture technology represents our best hope for meeting emission targets, others contend that it diverts resources from proven renewable energy solutions, with both perspectives offering compelling evidence for their positions.",
+        "anchorText": "with both perspectives offering compelling evidence",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_REPORTING — The author presents opposing views equally without taking a personal stance on which is correct.",
+        "reasoning": {
+          "step_1_locate": "While some climate scientists argue that carbon capture technology represents our best hope for meeting emission targets, others contend that it diverts resources from proven renewable energy solutions, with both perspectives offering compelling evidence for their positions.",
+          "step_2_compare": "Author says: 'some climate scientists argue [position A], others contend [position B], with both perspectives offering compelling evidence'. Statement claims: 'The writer believes that carbon capture technology represents our best hope'.",
+          "step_3_logic": "BALANCED_REPORTING — The author presents opposing views equally without taking a personal stance on which is correct.",
+          "step_4_eliminate": "Not Yes because the author attributes this view to 'some climate scientists' rather than endorsing it personally. Not No because the author doesn't reject carbon capture, only presents it as one of two valid perspectives."
+        },
+        "keySentence": "While some climate scientists argue that carbon capture technology represents our best hope for meeting emission targets, others contend that it diverts resources from proven renewable energy solutions, with both perspectives offering compelling evidence for their positions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:50:49.875Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "e6dfbd42-33cc-4546-8d8e-32959c96529d",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has seen remarkable advancements in recent decades, reshaping our understanding of how language functions and evolves. It is evident that corpus linguistics has fundamentally transformed our understanding of language variation across different social contexts. By analyzing large language datasets, researchers can uncover patterns and shifts in language use that were previously obscured. This method has provided invaluable insights into dialectology, sociolinguistics, and language change, allowing for a more nuanced appreciation of linguistic diversity. \n\nMoreover, the study of language acquisition has undergone a significant paradigm shift. The notion that children acquire language purely through imitation is clearly misguided, as recent neurolinguistic evidence demonstrates innate grammatical processing capabilities. I believe this points towards a more complex interaction between innate faculties and environmental input, challenging long-held assumptions about language learning. In my view, understanding this interplay is crucial for developing effective language teaching methodologies. \n\nControversies also abound in theoretical linguistics. Several prominent researchers argue that universal grammar theory provides the most coherent framework for explaining cross-linguistic syntactic patterns, though others contend that usage-based models offer superior explanatory power. It is clear that this debate reflects deeper philosophical orientations about the nature of language itself. I believe that a pluralistic approach, which acknowledges the strengths of both perspectives, might offer the most comprehensive understanding. \n\nFurthermore, the decline in minority language speakers could arguably be attributed to globalization pressures, though definitive causal relationships remain difficult to establish. It is vital to recognize the cultural and cognitive benefits of linguistic diversity, as language death represents not just a loss of communication tools but also the erosion of cultural heritage. In my opinion, proactive measures to support minority languages are essential to maintaining global linguistic diversity. \n\nFinally, the perennial debate between prescriptive and descriptive approaches to grammar persists. Proponents of prescriptive grammar maintain that standardized rules preserve linguistic clarity and facilitate communication, while descriptive linguists emphasize that all language varieties possess equal structural complexity and communicative validity. In my view, embracing both perspectives allows for a richer understanding of language as a dynamic and evolving entity, balancing the need for clarity with an appreciation for diversity.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes corpus linguistics has changed how we understand language variation in social contexts.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that corpus linguistics has fundamentally transformed our understanding of language variation across different social contexts.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "PARAPHRASE_MATCH — 'fundamentally transformed' matches 'changed', 'understanding of language variation' matches the statement's claim.",
+        "reasoning": {
+          "step_1_locate": "It is evident that corpus linguistics has fundamentally transformed our understanding of language variation across different social contexts.",
+          "step_2_compare": "Author says: It is evident that corpus linguistics has fundamentally transformed our understanding. Statement claims: The writer believes corpus linguistics has changed how we understand language variation.",
+          "step_3_logic": "PARAPHRASE_MATCH — 'fundamentally transformed' matches 'changed', 'understanding of language variation' matches the statement's claim.",
+          "step_4_eliminate": "Not No because the author explicitly agrees rather than contradicts. Not Not Given because 'it is evident that' is a clear opinion marker showing the author's personal view."
+        },
+        "keySentence": "It is evident that corpus linguistics has fundamentally transformed our understanding of language variation across different social contexts.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer agrees that children learn language only by copying what they hear.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that children acquire language purely through imitation is clearly misguided, as recent neurolinguistic evidence demonstrates innate grammatical processing capabilities.",
+        "anchorText": "clearly misguided",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — 'purely through imitation' equals 'only by copying', and author calls this 'clearly misguided'.",
+        "reasoning": {
+          "step_1_locate": "The notion that children acquire language purely through imitation is clearly misguided, as recent neurolinguistic evidence demonstrates innate grammatical processing capabilities.",
+          "step_2_compare": "Author says: The notion that children acquire language purely through imitation is clearly misguided. Statement claims: The writer agrees that children learn language only by copying.",
+          "step_3_logic": "DIRECT_CONTRADICTION — 'purely through imitation' equals 'only by copying', and author calls this 'clearly misguided'.",
+          "step_4_eliminate": "Not Yes because the author explicitly disagrees with imitation-only theory. Not Not Given because 'clearly misguided' is an unambiguous opinion marker showing the author's rejection."
+        },
+        "keySentence": "The notion that children acquire language purely through imitation is clearly misguided, as recent neurolinguistic evidence demonstrates innate grammatical processing capabilities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes universal grammar theory best explains syntactic patterns across languages.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Several prominent researchers argue that universal grammar theory provides the most coherent framework for explaining cross-linguistic syntactic patterns, though others contend that usage-based models offer superior explanatory power.",
+        "anchorText": "researchers argue / others contend",
+        "complexityLevel": 4,
+        "explanation": "ATTRIBUTION_WITHOUT_ENDORSEMENT — author attributes views to external sources without indicating personal agreement with either side.",
+        "reasoning": {
+          "step_1_locate": "Several prominent researchers argue that universal grammar theory provides the most coherent framework for explaining cross-linguistic syntactic patterns, though others contend that usage-based models offer superior explanatory power.",
+          "step_2_compare": "Author says: Researchers argue [view A], others contend [view B]. Statement claims: The writer believes universal grammar theory is best.",
+          "step_3_logic": "ATTRIBUTION_WITHOUT_ENDORSEMENT — author attributes views to external sources without indicating personal agreement with either side.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows the author agrees with universal grammar theory. Not No because the author doesn't reject it either, only reports what researchers say."
+        },
+        "keySentence": "Several prominent researchers argue that universal grammar theory provides the most coherent framework for explaining cross-linguistic syntactic patterns, though others contend that usage-based models offer superior explanatory power.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that globalization causes minority language decline.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in minority language speakers could arguably be attributed to globalization pressures, though definitive causal relationships remain difficult to establish.",
+        "anchorText": "could arguably be attributed",
+        "complexityLevel": 3,
+        "explanation": "CERTAINTY_MISMATCH — 'could arguably' and 'remain difficult to establish' indicate uncertainty, while statement claims 'certain'.",
+        "reasoning": {
+          "step_1_locate": "The decline in minority language speakers could arguably be attributed to globalization pressures, though definitive causal relationships remain difficult to establish.",
+          "step_2_compare": "Author says: could arguably be attributed to globalization. Statement claims: The writer is certain that globalization causes decline.",
+          "step_3_logic": "CERTAINTY_MISMATCH — 'could arguably' and 'remain difficult to establish' indicate uncertainty, while statement claims 'certain'.",
+          "step_4_eliminate": "Not Yes because hedging language prevents definite agreement. Not No because the author doesn't reject the globalization link, just avoids committing to it."
+        },
+        "keySentence": "The decline in minority language speakers could arguably be attributed to globalization pressures, though definitive causal relationships remain difficult to establish.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the prescriptive grammar approach to language standards.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of prescriptive grammar maintain that standardized rules preserve linguistic clarity and facilitate communication, while descriptive linguists emphasize that all language varieties possess equal structural complexity and communicative validity.",
+        "anchorText": "Proponents maintain / linguists emphasize",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — author gives equal weight to opposing views without endorsing either through opinion markers.",
+        "reasoning": {
+          "step_1_locate": "Proponents of prescriptive grammar maintain that standardized rules preserve linguistic clarity and facilitate communication, while descriptive linguists emphasize that all language varieties possess equal structural complexity and communicative validity.",
+          "step_2_compare": "Author says: Proponents maintain [view A], while linguists emphasize [view B]. Statement claims: The writer supports prescriptive grammar.",
+          "step_3_logic": "BALANCED_PRESENTATION — author gives equal weight to opposing views without endorsing either through opinion markers.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows author agreement with prescriptivism. Not No because the author doesn't criticize prescriptivism, only reports what its proponents say."
+        },
+        "keySentence": "Proponents of prescriptive grammar maintain that standardized rules preserve linguistic clarity and facilitate communication, while descriptive linguists emphasize that all language varieties possess equal structural complexity and communicative validity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:51:30.830Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "e7dfec20-bee4-4604-96ed-fd3df2215d5d",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology has long been a field of intense debate, with various theories and methods vying for dominance. It is evident that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents. This form of therapy focuses on altering negative thought patterns and behaviors, and I believe it empowers young individuals to develop coping mechanisms that can last a lifetime. In contrast, the notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as I contend that environmental influences play an equally crucial role in cognitive development. The interaction between genetics and environment cannot be underestimated, as various studies have shown how nurturing environments can significantly enhance intellectual growth. \n\nFurthermore, recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though critics argue that the sample sizes in these experiments remain too small to draw definitive conclusions. I find these preliminary findings intriguing, as they open the door to non-traditional methods of psychological treatment that are less invasive and more holistic. It is clear that further research is needed to validate these outcomes conclusively. \n\nMoreover, the rise in social media usage among young people could arguably be linked to increased rates of depression, though the causal relationship remains difficult to establish definitively. In my view, it is vital to approach this issue with caution, as the digital landscape is constantly evolving and its effects on mental health are complex and multifaceted. \n\nProponents of positive psychology maintain that focusing on strengths rather than weaknesses leads to better therapeutic outcomes, while traditional psychoanalysts insist that exploring past trauma remains essential for genuine healing. I am inclined to agree with both perspectives, as a balanced approach that incorporates elements of both positive reinforcement and trauma exploration may offer the most comprehensive therapeutic benefits. It is vital for practitioners to remain adaptable, integrating diverse methods tailored to individual needs. In conclusion, psychology as a discipline must continue to evolve, embracing innovative research and diverse methodologies to address the complexities of the human mind.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes cognitive behavioral therapy is the best way to treat anxiety in teenagers.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "PARAPHRASE_MATCH — 'most effective treatment approach' = 'best way to treat', 'adolescents' = 'teenagers', 'anxiety disorders' = 'anxiety'",
+        "reasoning": {
+          "step_1_locate": "It is evident that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+          "step_2_compare": "Author says: 'It is evident that' CBT is most effective. Statement claims: writer believes CBT is best for treating anxiety in teenagers.",
+          "step_3_logic": "PARAPHRASE_MATCH — 'most effective treatment approach' = 'best way to treat', 'adolescents' = 'teenagers', 'anxiety disorders' = 'anxiety'",
+          "step_4_eliminate": "Not No because the author explicitly supports this view with 'it is evident'. Not NG because the author commits to a definite position rather than reporting others' views."
+        },
+        "keySentence": "It is evident that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer agrees that genetics alone determine intelligence levels.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as I contend that environmental influences play an equally crucial role in cognitive development.",
+        "anchorText": "I contend that",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — author calls the genetics-only position 'fundamentally flawed' and argues for environmental factors",
+        "reasoning": {
+          "step_1_locate": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as I contend that environmental influences play an equally crucial role in cognitive development.",
+          "step_2_compare": "Author says: genetic-only view is 'fundamentally flawed' and 'I contend' environment is equally important. Statement claims: writer agrees genetics alone determine intelligence.",
+          "step_3_logic": "DIRECT_CONTRADICTION — author calls the genetics-only position 'fundamentally flawed' and argues for environmental factors",
+          "step_4_eliminate": "Not Yes because author explicitly rejects genetics-only view. Not NG because author takes a clear personal stance with 'I contend' rather than remaining neutral."
+        },
+        "keySentence": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as I contend that environmental influences play an equally crucial role in cognitive development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes meditation changes the physical structure of the brain.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though critics argue that the sample sizes in these experiments remain too small to draw definitive conclusions.",
+        "anchorText": "studies suggest / critics argue",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — author presents both research findings and criticism without endorsing either position",
+        "reasoning": {
+          "step_1_locate": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though critics argue that the sample sizes in these experiments remain too small to draw definitive conclusions.",
+          "step_2_compare": "Author says: studies 'suggest' this and critics 'argue' against it. Statement claims: the writer personally believes meditation changes brain structure.",
+          "step_3_logic": "NEUTRAL_REPORTING — author presents both research findings and criticism without endorsing either position",
+          "step_4_eliminate": "Not Yes because no opinion marker shows author's personal agreement. Not No because author doesn't reject the claim, only reports others' views without taking sides."
+        },
+        "keySentence": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though critics argue that the sample sizes in these experiments remain too small to draw definitive conclusions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that social media causes depression in young people.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The rise in social media usage among young people could arguably be linked to increased rates of depression, though the causal relationship remains difficult to establish definitively.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_VS_CERTAIN — 'could arguably' and 'difficult to establish' show uncertainty, contradicting the statement's claim of certainty",
+        "reasoning": {
+          "step_1_locate": "The rise in social media usage among young people could arguably be linked to increased rates of depression, though the causal relationship remains difficult to establish definitively.",
+          "step_2_compare": "Author says: 'could arguably be linked' and causal relationship is 'difficult to establish'. Statement claims: writer is certain about causation.",
+          "step_3_logic": "HEDGED_VS_CERTAIN — 'could arguably' and 'difficult to establish' show uncertainty, contradicting the statement's claim of certainty",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows speculation, not certainty. Not No because author doesn't reject the link, just avoids committing to it definitively."
+        },
+        "keySentence": "The rise in social media usage among young people could arguably be linked to increased rates of depression, though the causal relationship remains difficult to establish definitively.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the positive psychology approach over traditional psychoanalysis.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of positive psychology maintain that focusing on strengths rather than weaknesses leads to better therapeutic outcomes, while traditional psychoanalysts insist that exploring past trauma remains essential for genuine healing.",
+        "anchorText": "Proponents maintain / psychoanalysts insist",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — author gives equal weight to both sides without endorsing either position",
+        "reasoning": {
+          "step_1_locate": "Proponents of positive psychology maintain that focusing on strengths rather than weaknesses leads to better therapeutic outcomes, while traditional psychoanalysts insist that exploring past trauma remains essential for genuine healing.",
+          "step_2_compare": "Author says: positive psychology proponents 'maintain' one view while psychoanalysts 'insist' on another. Statement claims: writer personally supports positive psychology.",
+          "step_3_logic": "BALANCED_PRESENTATION — author gives equal weight to both sides without endorsing either position",
+          "step_4_eliminate": "Not Yes because no opinion marker shows author favors positive psychology. Not No because author doesn't reject positive psychology, just presents both views neutrally."
+        },
+        "keySentence": "Proponents of positive psychology maintain that focusing on strengths rather than weaknesses leads to better therapeutic outcomes, while traditional psychoanalysts insist that exploring past trauma remains essential for genuine healing.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:53:35.349Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "f06f4a5d-e764-4a2e-a0f0-dbf3b6b1fc56",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 834 (line 1 column 835)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:57:10.762Z"
+    }
+  },
+  {
+    "id": "708fcbe9-bc61-4157-87c0-43d084f1e324",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology, a field that delves into the complexities of oceanic life and ecosystems, holds significant importance in understanding our planet's health. One of the pressing issues in marine biology today is the decline in coral reef biodiversity. The decline in coral reef biodiversity could arguably be attributed to rising ocean temperatures, though multiple factors may be at play. In my view, addressing this issue requires a multifaceted approach that considers not just temperature changes, but also pollution and overfishing. \n\nFurthermore, it is vital that marine protected areas be expanded significantly if we are to preserve deep-sea ecosystems for future generations. The establishment of these protected areas stands as a crucial step towards ensuring that marine life continues to thrive, undisturbed by human activities. I believe this expansion is not just necessary but urgent, given the current rate of oceanic degradation. \n\nAnother critical concern is the impact of commercial fishing practices on marine mammal populations. The notion that commercial fishing practices have minimal impact on marine mammal populations is clearly misguided, given the overwhelming evidence of bycatch-related deaths. It is clear that stricter regulations and sustainable fishing practices must be implemented to mitigate this issue. \n\nIn recent years, intriguing discoveries have been made regarding marine life intelligence. Recent studies by marine biologists have found that octopuses demonstrate problem-solving abilities comparable to some vertebrates, though the implications of this research remain debated among scientists. This revelation challenges our understanding of intelligence in the animal kingdom and opens up new avenues for research. \n\nLastly, conservation efforts remain a topic of debate among marine ecologists. Some marine ecologists argue that kelp forest restoration should be prioritized over other conservation efforts, while others contend that a more holistic approach addressing multiple ecosystems simultaneously would be more effective. In my view, a balanced strategy that incorporates both focused and broad conservation efforts might be the key to achieving sustainable results.\n\nOverall, marine biology not only offers insights into the richness of life beneath the waves but also presents us with challenges that require immediate and sustained action. The future health of our oceans, and consequently our planet, hinges on the decisions we make today.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that rising ocean temperatures are the main cause of declining coral reef biodiversity.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in coral reef biodiversity could arguably be attributed to rising ocean temperatures, though multiple factors may be at play.",
+        "anchorText": "could arguably be attributed",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_OPINION — The author presents a possibility without committing to it as their definite belief.",
+        "reasoning": {
+          "step_1_locate": "The decline in coral reef biodiversity could arguably be attributed to rising ocean temperatures, though multiple factors may be at play.",
+          "step_2_compare": "Author says: could arguably be attributed (hedged). Statement claims: the writer believes (definite view).",
+          "step_3_logic": "HEDGED_OPINION — The author presents a possibility without committing to it as their definite belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not belief. Not No because the author doesn't reject the connection, just doesn't commit to it."
+        },
+        "keySentence": "The decline in coral reef biodiversity could arguably be attributed to rising ocean temperatures, though multiple factors may be at play.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks marine protected areas need to be substantially increased.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that marine protected areas be expanded significantly if we are to preserve deep-sea ecosystems for future generations.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "AUTHOR_AGREES — The author's explicit opinion marker 'It is vital' directly supports the statement's claim.",
+        "reasoning": {
+          "step_1_locate": "It is vital that marine protected areas be expanded significantly if we are to preserve deep-sea ecosystems for future generations.",
+          "step_2_compare": "Author says: It is vital that marine protected areas be expanded significantly. Statement claims: marine protected areas need to be substantially increased.",
+          "step_3_logic": "AUTHOR_AGREES — The author's explicit opinion marker 'It is vital' directly supports the statement's claim.",
+          "step_4_eliminate": "Not No because the author clearly supports expansion. Not NG because 'It is vital' is an explicit personal stance, not neutral reporting."
+        },
+        "keySentence": "It is vital that marine protected areas be expanded significantly if we are to preserve deep-sea ecosystems for future generations.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that commercial fishing has little effect on marine mammal numbers.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that commercial fishing practices have minimal impact on marine mammal populations is clearly misguided, given the overwhelming evidence of bycatch-related deaths.",
+        "anchorText": "is clearly misguided",
+        "complexityLevel": 4,
+        "explanation": "AUTHOR_DISAGREES — The author explicitly calls the minimal impact view 'clearly misguided', which directly contradicts the statement.",
+        "reasoning": {
+          "step_1_locate": "The notion that commercial fishing practices have minimal impact on marine mammal populations is clearly misguided, given the overwhelming evidence of bycatch-related deaths.",
+          "step_2_compare": "Author says: minimal impact is clearly misguided. Statement claims: writer agrees fishing has little effect.",
+          "step_3_logic": "AUTHOR_DISAGREES — The author explicitly calls the minimal impact view 'clearly misguided', which directly contradicts the statement.",
+          "step_4_eliminate": "Not Yes because the author rejects this view. Not NG because 'clearly misguided' is an explicit disagreement, not neutral reporting."
+        },
+        "keySentence": "The notion that commercial fishing practices have minimal impact on marine mammal populations is clearly misguided, given the overwhelming evidence of bycatch-related deaths.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes octopuses possess intelligence similar to certain vertebrates.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by marine biologists have found that octopuses demonstrate problem-solving abilities comparable to some vertebrates, though the implications of this research remain debated among scientists.",
+        "anchorText": "have found",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_AUTHOR — The author reports research findings without adding personal opinion markers about whether they agree.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by marine biologists have found that octopuses demonstrate problem-solving abilities comparable to some vertebrates, though the implications of this research remain debated among scientists.",
+          "step_2_compare": "Author says: marine biologists have found (reporting others). Statement claims: the writer believes (author's view).",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author reports research findings without adding personal opinion markers about whether they agree.",
+          "step_4_eliminate": "Not Yes because there's no author opinion marker like 'I believe' or 'clearly'. Not No because the author doesn't contradict it, just reports neutrally."
+        },
+        "keySentence": "Recent studies by marine biologists have found that octopuses demonstrate problem-solving abilities comparable to some vertebrates, though the implications of this research remain debated among scientists.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports prioritizing kelp forest restoration above other conservation initiatives.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Some marine ecologists argue that kelp forest restoration should be prioritized over other conservation efforts, while others contend that a more holistic approach addressing multiple ecosystems simultaneously would be more effective.",
+        "anchorText": "Some argue... while others contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_REPORTING — The author presents two opposing views equally without taking a personal stance on either.",
+        "reasoning": {
+          "step_1_locate": "Some marine ecologists argue that kelp forest restoration should be prioritized over other conservation efforts, while others contend that a more holistic approach addressing multiple ecosystems simultaneously would be more effective.",
+          "step_2_compare": "Author says: Some argue X, others contend Y (balanced reporting). Statement claims: the writer supports X (author's position).",
+          "step_3_logic": "BALANCED_REPORTING — The author presents two opposing views equally without taking a personal stance on either.",
+          "step_4_eliminate": "Not Yes because the author never endorses the prioritization view. Not No because the author doesn't reject it either, just presents both sides neutrally."
+        },
+        "keySentence": "Some marine ecologists argue that kelp forest restoration should be prioritized over other conservation efforts, while others contend that a more holistic approach addressing multiple ecosystems simultaneously would be more effective.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:58:44.483Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "fcf4d760-acde-4a93-85f7-bd69ed64372b",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:59:18.796Z"
+    }
+  },
+  {
+    "id": "ce7d206c-85f9-4950-ad10-c3775e5c6fa9",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:59:53.306Z"
+    }
+  },
+  {
+    "id": "c41f00b2-05ce-4f6f-84e3-4d2504afd4c9",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience, the study of the nervous system and brain, has made significant strides over the past few decades, yet many misconceptions persist. The notion that we use only 10% of our brain capacity is, without question, one of the most persistent myths in popular neuroscience. This misconception not only undermines public understanding but also trivializes the complexity and potential of human cognition. In my view, it is clear that a more informed public could lead to greater appreciation and support for scientific research. \n\nMoreover, I believe it is vital that neuroscience education be integrated into secondary school curricula to combat widespread misconceptions about brain function. A foundational understanding of how our brains operate can empower individuals to make informed decisions about mental health and lifestyle choices affecting cognitive well-being. \n\nRecent studies from the Max Planck Institute suggest that neuroplasticity continues well into old age, challenging earlier assumptions about cognitive decline. This revelation offers hope and underscores the importance of lifelong learning and mental engagement. It is clear that maintaining cognitive activities can potentially mitigate age-related cognitive impairments. \n\nFurthermore, the relationship between sleep deprivation and memory consolidation could arguably be more significant than previously documented in clinical literature. Sleep is often undervalued in our fast-paced society, yet its impact on memory and learning is profound. Prioritizing sleep could not only enhance cognitive function but also improve mental health outcomes. \n\nArtificial intelligence (AI) also presents a frontier for neuroscientific exploration. While some neuroscientists argue that artificial intelligence will eventually replicate human consciousness, others contend that subjective experience remains fundamentally irreducible to computational processes. I believe that while AI can simulate many aspects of human cognition, the essence of consciousness may remain elusive, rooted in biological complexity that we are only beginning to understand. \n\nIn conclusion, the advancement of neuroscience offers profound insights into the human condition. It is crucial that we dispel myths, embrace ongoing research, and integrate this knowledge into educational frameworks to foster a more informed and scientifically literate society.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that the claim about humans using only 10% of brain capacity has scientific merit.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that we use only 10% of our brain capacity is, without question, one of the most persistent myths in popular neuroscience.",
+        "anchorText": "without question",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — the author definitively labels it a myth, which is the opposite of having scientific merit.",
+        "reasoning": {
+          "step_1_locate": "The notion that we use only 10% of our brain capacity is, without question, one of the most persistent myths in popular neuroscience.",
+          "step_2_compare": "Author says: without question, this is one of the most persistent myths. Statement claims: the writer believes this claim has scientific merit.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author definitively labels it a myth, which is the opposite of having scientific merit.",
+          "step_4_eliminate": "Not Yes because the author explicitly rejects this notion as a myth. Not Not Given because 'without question' is a clear opinion marker showing the author's definite stance."
+        },
+        "keySentence": "The notion that we use only 10% of our brain capacity is, without question, one of the most persistent myths in popular neuroscience.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks neuroscience should be taught in high schools.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that neuroscience education be integrated into secondary school curricula to combat widespread misconceptions about brain function.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — 'vital' is a strong opinion marker indicating necessity, and secondary school curricula equals high schools.",
+        "reasoning": {
+          "step_1_locate": "It is vital that neuroscience education be integrated into secondary school curricula to combat widespread misconceptions about brain function.",
+          "step_2_compare": "Author says: It is vital that neuroscience education be integrated into secondary school curricula. Statement claims: the writer thinks neuroscience should be taught in high schools.",
+          "step_3_logic": "DIRECT_MATCH — 'vital' is a strong opinion marker indicating necessity, and secondary school curricula equals high schools.",
+          "step_4_eliminate": "Not No because the author explicitly supports this with 'vital'. Not Not Given because 'It is vital that' is an unambiguous opinion marker showing the author's view."
+        },
+        "keySentence": "It is vital that neuroscience education be integrated into secondary school curricula to combat widespread misconceptions about brain function.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that brain plasticity persists in elderly individuals.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies from the Max Planck Institute suggest that neuroplasticity continues well into old age, challenging earlier assumptions about cognitive decline.",
+        "anchorText": "studies from the Max Planck Institute suggest",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_REPORTING — the author reports research findings without adding personal endorsement or critique.",
+        "reasoning": {
+          "step_1_locate": "Recent studies from the Max Planck Institute suggest that neuroplasticity continues well into old age, challenging earlier assumptions about cognitive decline.",
+          "step_2_compare": "Author says: studies suggest [finding]. Statement claims: the writer agrees with this finding.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author reports research findings without adding personal endorsement or critique.",
+          "step_4_eliminate": "Not Yes because 'studies suggest' attributes the view to researchers, not the author. Not No because there is no contradiction or disagreement expressed by the author."
+        },
+        "keySentence": "Recent studies from the Max Planck Institute suggest that neuroplasticity continues well into old age, challenging earlier assumptions about cognitive decline.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that sleep deprivation has a greater impact on memory than earlier research indicated.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The relationship between sleep deprivation and memory consolidation could arguably be more significant than previously documented in clinical literature.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_UNCERTAINTY — 'could arguably' signals possibility and debate, not certainty or definite commitment.",
+        "reasoning": {
+          "step_1_locate": "The relationship between sleep deprivation and memory consolidation could arguably be more significant than previously documented in clinical literature.",
+          "step_2_compare": "Author says: could arguably be more significant. Statement claims: the writer is certain about greater impact.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — 'could arguably' signals possibility and debate, not certainty or definite commitment.",
+          "step_4_eliminate": "Not Yes because 'could arguably' expresses uncertainty, not certainty. Not No because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "The relationship between sleep deprivation and memory consolidation could arguably be more significant than previously documented in clinical literature.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes that artificial intelligence cannot replicate human consciousness.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some neuroscientists argue that artificial intelligence will eventually replicate human consciousness, others contend that subjective experience remains fundamentally irreducible to computational processes.",
+        "anchorText": "some argue... others contend",
+        "complexityLevel": 5,
+        "explanation": "BALANCED_NEUTRALITY — the author presents opposing views equally without personal endorsement of either side.",
+        "reasoning": {
+          "step_1_locate": "While some neuroscientists argue that artificial intelligence will eventually replicate human consciousness, others contend that subjective experience remains fundamentally irreducible to computational processes.",
+          "step_2_compare": "Author says: some argue [position A], others contend [position B]. Statement claims: the writer believes position B.",
+          "step_3_logic": "BALANCED_NEUTRALITY — the author presents opposing views equally without personal endorsement of either side.",
+          "step_4_eliminate": "Not Yes because the author attributes this view to 'others', not themselves. Not No because the author doesn't reject this view, just reports it alongside the opposing view."
+        },
+        "keySentence": "While some neuroscientists argue that artificial intelligence will eventually replicate human consciousness, others contend that subjective experience remains fundamentally irreducible to computational processes.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:01:17.987Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.6,
+        "min": 2,
+        "max": 5
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "6b797283-4a31-486c-a8e2-5c3889e67d3e",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has undergone a significant transformation over the past few decades, reflecting the complexity of human language and its acquisition. The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development. Children often generate novel sentences they have never heard before, indicating that language learning involves more than mere mimicry. This suggests that innate mechanisms play a crucial role in language acquisition. Recent studies by Chomsky and his colleagues suggest that universal grammar may be hardwired into the human brain, though other researchers have proposed alternative explanations based on statistical learning. I believe that the debate between these perspectives highlights the need for comprehensive research that considers both innate and learned elements of language.\n\nMoreover, it is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms. Such integration can provide a more holistic view of how language operates within the brain and how it is influenced by cognitive processes. For instance, neurological studies can reveal how different areas of the brain are activated during language tasks, while cognitive psychology can offer insights into how language influences thought processes.\n\nThe decline in minority languages could arguably be attributed to globalization, though the relationship between these phenomena remains complex and multifaceted. As dominant languages spread through media and commerce, smaller languages face the risk of extinction, which might lead to a loss of cultural diversity. It is clear that preserving linguistic diversity requires targeted efforts and policies that support minority language communities.\n\nIn the realm of linguistic methodology, proponents of corpus linguistics argue that large-scale data analysis provides objective insights into language patterns, while critics contend that such approaches overlook the social and contextual dimensions of communication. I believe that while large datasets can reveal trends and frequencies in language use, they must be complemented with qualitative analyses that consider the nuanced ways in which language functions within society.\n\nOverall, the field of linguistics stands at the intersection of various disciplines, and its future advancements depend on embracing both quantitative data and qualitative insights to unravel the complexities of human language.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that imitation is the primary mechanism through which children learn language.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+        "anchorText": "in my view, fundamentally flawed",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — the author's explicit negative opinion marker contradicts the positive claim in the statement.",
+        "reasoning": {
+          "step_1_locate": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+          "step_2_compare": "Author says: imitation theory is fundamentally flawed. Statement claims: writer believes imitation is the primary mechanism.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author's explicit negative opinion marker contradicts the positive claim in the statement.",
+          "step_4_eliminate": "Not Yes because the author calls the theory 'fundamentally flawed'. Not Not Given because 'in my view' is a clear personal opinion marker."
+        },
+        "keySentence": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer contends that linguistic research should integrate methods from other scientific disciplines.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+        "anchorText": "It is vital",
+        "complexityLevel": 3,
+        "explanation": "PARAPHRASE_MATCH — the statement accurately paraphrases the author's explicit opinion using 'contends' to match 'it is vital'.",
+        "reasoning": {
+          "step_1_locate": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+          "step_2_compare": "Author says: It is vital to adopt interdisciplinary approaches. Statement claims: writer contends research should integrate methods from other disciplines.",
+          "step_3_logic": "PARAPHRASE_MATCH — the statement accurately paraphrases the author's explicit opinion using 'contends' to match 'it is vital'.",
+          "step_4_eliminate": "Not No because the author clearly supports interdisciplinary approaches. Not Not Given because 'it is vital' is an explicit opinion marker showing the author's stance."
+        },
+        "keySentence": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that universal grammar is an innate feature of human cognition.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by Chomsky and his colleagues suggest that universal grammar may be hardwired into the human brain, though other researchers have proposed alternative explanations based on statistical learning.",
+        "anchorText": "suggest / have proposed",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_REPORTING — the author presents others' views using neutral reporting verbs without adding personal opinion markers.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by Chomsky and his colleagues suggest that universal grammar may be hardwired into the human brain, though other researchers have proposed alternative explanations based on statistical learning.",
+          "step_2_compare": "Author says: [reports what studies suggest and what researchers propose]. Statement claims: writer believes universal grammar is innate.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author presents others' views using neutral reporting verbs without adding personal opinion markers.",
+          "step_4_eliminate": "Not Yes because there's no author opinion marker like 'I believe' or 'clearly'. Not No because the author doesn't contradict the claim, just reports research neutrally."
+        },
+        "keySentence": "Recent studies by Chomsky and his colleagues suggest that universal grammar may be hardwired into the human brain, though other researchers have proposed alternative explanations based on statistical learning.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that globalization is responsible for the loss of minority languages.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in minority languages could arguably be attributed to globalization, though the relationship between these phenomena remains complex and multifaceted.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGE_VS_CERTAINTY — the author's tentative language ('could arguably', 'remains complex') contradicts the statement's claim of certainty.",
+        "reasoning": {
+          "step_1_locate": "The decline in minority languages could arguably be attributed to globalization, though the relationship between these phenomena remains complex and multifaceted.",
+          "step_2_compare": "Author says: could arguably be attributed (hedged). Statement claims: writer is certain about the cause.",
+          "step_3_logic": "HEDGE_VS_CERTAINTY — the author's tentative language ('could arguably', 'remains complex') contradicts the statement's claim of certainty.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject the connection, just presents it tentatively."
+        },
+        "keySentence": "The decline in minority languages could arguably be attributed to globalization, though the relationship between these phenomena remains complex and multifaceted.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the use of corpus linguistics over traditional qualitative methods.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of corpus linguistics argue that large-scale data analysis provides objective insights into language patterns, while critics contend that such approaches overlook the social and contextual dimensions of communication.",
+        "anchorText": "argue / contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — the author gives equal weight to both sides using parallel structure without endorsing either position.",
+        "reasoning": {
+          "step_1_locate": "Proponents of corpus linguistics argue that large-scale data analysis provides objective insights into language patterns, while critics contend that such approaches overlook the social and contextual dimensions of communication.",
+          "step_2_compare": "Author says: [proponents argue X, critics contend Y]. Statement claims: writer supports corpus linguistics over qualitative methods.",
+          "step_3_logic": "BALANCED_PRESENTATION — the author gives equal weight to both sides using parallel structure without endorsing either position.",
+          "step_4_eliminate": "Not Yes because the author doesn't express support for either side. Not No because the author doesn't reject corpus linguistics, just presents both perspectives neutrally."
+        },
+        "keySentence": "Proponents of corpus linguistics argue that large-scale data analysis provides objective insights into language patterns, while critics contend that such approaches overlook the social and contextual dimensions of communication.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:01:58.173Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "d5ce6ef0-85ae-4a6c-9345-ead33e17cb3a",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:03:51.088Z"
+    }
+  },
+  {
+    "id": "71bc46da-0376-43d3-a39f-2191807d82f1",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:05:04.951Z"
+    }
+  },
+  {
+    "id": "2273df28-eac3-4577-903c-cec5ba36b4b5",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:05:39.958Z"
+    }
+  },
+  {
+    "id": "6af48bc7-0334-49be-a307-8eb63cacfd8c",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T08:06:30.228Z"
+    }
+  },
+  {
+    "id": "3270b382-8058-49a7-89d0-d7aa7dfafa6c",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience, the intricate study of the nervous system, has made remarkable strides in recent decades, significantly altering our understanding of the human brain. However, I firmly reject the notion that neuroplasticity diminishes significantly after childhood, as mounting evidence demonstrates that the adult brain retains remarkable capacity for structural reorganization throughout life. This revelation opens new avenues for cognitive rehabilitation and lifelong learning, challenging the outdated belief that the brain's adaptability is predominantly a childhood phenomenon. \n\nIn my view, it is clear that the integration of practical experience in neuroscience education is crucial. It is vital that neuroscience education programs incorporate hands-on laboratory experience, as theoretical knowledge alone cannot adequately prepare students for research careers. The complexity of neural mechanisms requires an immersive learning approach where students can directly engage with experimental procedures, developing the skills necessary to advance in this dynamic field.\n\nThe potential of neuroscience to enhance mental well-being is another area of growing interest. Recent studies by the Cambridge Neuroscience Institute suggest that meditation practices can increase grey matter density in the hippocampus, though researchers acknowledge that longitudinal data remains limited. This finding indicates a promising link between mindfulness practices and brain health, promoting further investigation into non-pharmacological interventions for cognitive enhancement.\n\nSleep, a fundamental component of brain health, is also under intense scrutiny. The correlation between sleep deprivation and impaired cognitive function could arguably be explained by disrupted glymphatic clearance, though alternative mechanisms may also contribute to this phenomenon. It is imperative that further research explores these pathways to better understand how sleep impacts brain function and overall health.\n\nArtificial intelligence has recently entered the conversation, raising questions about its relationship to human cognition. While some neuroscientists argue that artificial intelligence models successfully replicate human neural processing, others contend that current AI systems fundamentally lack the biological complexity necessary for genuine cognition. I believe that although AI has made impressive progress, it remains a tool rather than an equivalent to the human mind, highlighting the unique intricacies of biological systems that technology has yet to replicate.\n\nOverall, neuroscience continues to unveil the complexities of the human brain, offering profound insights and challenges that redefine our understanding of cognition and consciousness.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that neuroplasticity diminishes significantly after childhood.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, I firmly reject the notion that neuroplasticity diminishes significantly after childhood, as mounting evidence demonstrates that the adult brain retains remarkable capacity for structural reorganization throughout life.",
+        "anchorText": "I firmly reject the notion",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — The author's explicit rejection of the idea means they hold the opposite view to what the statement claims.",
+        "reasoning": {
+          "step_1_locate": "However, I firmly reject the notion that neuroplasticity diminishes significantly after childhood, as mounting evidence demonstrates that the adult brain retains remarkable capacity for structural reorganization throughout life.",
+          "step_2_compare": "Author says: I firmly reject the notion that neuroplasticity diminishes significantly after childhood. Statement claims: The writer believes that neuroplasticity diminishes significantly after childhood.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author's explicit rejection of the idea means they hold the opposite view to what the statement claims.",
+          "step_4_eliminate": "Not Yes because the author rejects rather than supports this view. Not Not Given because the author explicitly states their personal position using 'I firmly reject'."
+        },
+        "keySentence": "However, I firmly reject the notion that neuroplasticity diminishes significantly after childhood, as mounting evidence demonstrates that the adult brain retains remarkable capacity for structural reorganization throughout life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer believes neuroscience education programs should include practical laboratory work.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that neuroscience education programs incorporate hands-on laboratory experience, as theoretical knowledge alone cannot adequately prepare students for research careers.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "PARAPHRASE_MATCH — The statement accurately paraphrases the author's expressed opinion using different words (practical laboratory work = hands-on laboratory experience).",
+        "reasoning": {
+          "step_1_locate": "It is vital that neuroscience education programs incorporate hands-on laboratory experience, as theoretical knowledge alone cannot adequately prepare students for research careers.",
+          "step_2_compare": "Author says: It is vital that neuroscience education programs incorporate hands-on laboratory experience. Statement claims: The writer believes neuroscience education programs should include practical laboratory work.",
+          "step_3_logic": "PARAPHRASE_MATCH — The statement accurately paraphrases the author's expressed opinion using different words (practical laboratory work = hands-on laboratory experience).",
+          "step_4_eliminate": "Not No because the author supports rather than opposes this view. Not Not Given because 'It is vital that' is a clear opinion marker showing the author's personal stance."
+        },
+        "keySentence": "It is vital that neuroscience education programs incorporate hands-on laboratory experience, as theoretical knowledge alone cannot adequately prepare students for research careers.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that meditation increases grey matter density in the hippocampus.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the Cambridge Neuroscience Institute suggest that meditation practices can increase grey matter density in the hippocampus, though researchers acknowledge that longitudinal data remains limited.",
+        "anchorText": "studies suggest / researchers acknowledge",
+        "complexityLevel": 4,
+        "explanation": "ATTRIBUTION_WITHOUT_ENDORSEMENT — The author reports others' findings using neutral language (studies suggest, researchers acknowledge) without adding personal opinion markers.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the Cambridge Neuroscience Institute suggest that meditation practices can increase grey matter density in the hippocampus, though researchers acknowledge that longitudinal data remains limited.",
+          "step_2_compare": "Author says: Studies suggest [finding] and researchers acknowledge [limitation]. Statement claims: The writer believes that meditation increases grey matter density.",
+          "step_3_logic": "ATTRIBUTION_WITHOUT_ENDORSEMENT — The author reports others' findings using neutral language (studies suggest, researchers acknowledge) without adding personal opinion markers.",
+          "step_4_eliminate": "Not Yes because there is no opinion marker showing the author's personal belief. Not No because the author doesn't contradict this view, they simply report it neutrally."
+        },
+        "keySentence": "Recent studies by the Cambridge Neuroscience Institute suggest that meditation practices can increase grey matter density in the hippocampus, though researchers acknowledge that longitudinal data remains limited.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that disrupted glymphatic clearance explains the link between sleep deprivation and cognitive impairment.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The correlation between sleep deprivation and impaired cognitive function could arguably be explained by disrupted glymphatic clearance, though alternative mechanisms may also contribute to this phenomenon.",
+        "anchorText": "could arguably / may also",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_VS_CERTAIN — The author presents a tentative possibility using hedging language, while the statement claims certainty, which the author never expresses.",
+        "reasoning": {
+          "step_1_locate": "The correlation between sleep deprivation and impaired cognitive function could arguably be explained by disrupted glymphatic clearance, though alternative mechanisms may also contribute to this phenomenon.",
+          "step_2_compare": "Author says: could arguably be explained / may also contribute. Statement claims: The writer is certain that disrupted glymphatic clearance explains the link.",
+          "step_3_logic": "HEDGED_VS_CERTAIN — The author presents a tentative possibility using hedging language, while the statement claims certainty, which the author never expresses.",
+          "step_4_eliminate": "Not Yes because 'could arguably' and 'may' indicate uncertainty, not certainty. Not No because the author doesn't reject this explanation, they simply don't commit to it definitively."
+        },
+        "keySentence": "The correlation between sleep deprivation and impaired cognitive function could arguably be explained by disrupted glymphatic clearance, though alternative mechanisms may also contribute to this phenomenon.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes that artificial intelligence models successfully replicate human neural processing.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some neuroscientists argue that artificial intelligence models successfully replicate human neural processing, others contend that current AI systems fundamentally lack the biological complexity necessary for genuine cognition.",
+        "anchorText": "some argue / others contend",
+        "complexityLevel": 5,
+        "explanation": "BALANCED_PRESENTATION — The author presents two opposing views equally without opinion markers indicating personal agreement with either side.",
+        "reasoning": {
+          "step_1_locate": "While some neuroscientists argue that artificial intelligence models successfully replicate human neural processing, others contend that current AI systems fundamentally lack the biological complexity necessary for genuine cognition.",
+          "step_2_compare": "Author says: Some argue [position A], others contend [position B]. Statement claims: The writer believes [position A].",
+          "step_3_logic": "BALANCED_PRESENTATION — The author presents two opposing views equally without opinion markers indicating personal agreement with either side.",
+          "step_4_eliminate": "Not Yes because the author attributes this view to 'some neuroscientists' without endorsing it. Not No because the author doesn't reject this view, they simply present it alongside an opposing view without taking sides."
+        },
+        "keySentence": "While some neuroscientists argue that artificial intelligence models successfully replicate human neural processing, others contend that current AI systems fundamentally lack the biological complexity necessary for genuine cognition.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:07:51.100Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.6,
+        "min": 2,
+        "max": 5
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "fd72437e-5928-416c-91d2-031c14d7148a",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology, a field that delves into the wonders of oceanic life, offers insights that are both fascinating and crucial for the preservation of our planet's health. Recent studies by marine biologists at the University of Queensland have found that coral reefs demonstrate remarkable resilience to temperature fluctuations when fish populations remain diverse. I believe this underscores the importance of maintaining biodiversity as a buffer against climate change impacts on marine ecosystems. Furthermore, it is evident that protecting deep-sea hydrothermal vents should be a priority for international conservation efforts, given their unique ecosystems and vulnerability to mining operations. These vents host species that are not found anywhere else on Earth, and their destruction would mean the loss of invaluable biological information and resources. \n\nIn regards to whale migration, the notion that whale migration patterns are driven solely by water temperature is clearly oversimplified. Recent tracking data demonstrates the critical role of prey availability and breeding site fidelity. This complexity in migration behavior highlights the intricate balance of marine ecosystems and the need for comprehensive conservation strategies. \n\nMoreover, the decline in seahorse populations could arguably be reversed through stricter regulation of traditional medicine markets, though the effectiveness of such measures remains uncertain. In my view, addressing the demand side of the market is as crucial as regulating the supply to ensure these species' survival. \n\nSome marine ecologists contend that establishing marine protected areas (MPAs) is the most effective strategy for biodiversity conservation, while others maintain that sustainable fishing practices can achieve similar outcomes without restricting access. It is vital to consider both approaches, as MPAs can offer refuge and recovery zones for marine life, whereas sustainable practices can promote coexistence between human activities and marine conservation. Balancing these strategies could lead to a more holistic approach to preserving the ocean's riches for future generations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that diverse fish populations help coral reefs withstand temperature changes.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by marine biologists at the University of Queensland have found that coral reefs demonstrate remarkable resilience to temperature fluctuations when fish populations remain diverse.",
+        "anchorText": "studies by marine biologists... have found",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_AUTHOR — The author is reporting the findings of others without endorsing or rejecting them personally.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by marine biologists at the University of Queensland have found that coral reefs demonstrate remarkable resilience to temperature fluctuations when fish populations remain diverse.",
+          "step_2_compare": "Author says: researchers found [claim]. Statement claims: the writer believes [same claim].",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author is reporting the findings of others without endorsing or rejecting them personally.",
+          "step_4_eliminate": "Not Yes because the author never uses opinion markers showing personal agreement. Not No because the author doesn't contradict the research findings."
+        },
+        "keySentence": "Recent studies by marine biologists at the University of Queensland have found that coral reefs demonstrate remarkable resilience to temperature fluctuations when fish populations remain diverse.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks that deep-sea hydrothermal vents deserve priority in conservation planning.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that protecting deep-sea hydrothermal vents should be a priority for international conservation efforts, given their unique ecosystems and vulnerability to mining operations.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "AUTHOR_AGREES — The phrase 'it is evident that' signals the author's clear personal position supporting the claim.",
+        "reasoning": {
+          "step_1_locate": "It is evident that protecting deep-sea hydrothermal vents should be a priority for international conservation efforts, given their unique ecosystems and vulnerability to mining operations.",
+          "step_2_compare": "Author says: it is evident that [vents should be a priority]. Statement claims: writer thinks [vents deserve priority].",
+          "step_3_logic": "AUTHOR_AGREES — The phrase 'it is evident that' signals the author's clear personal position supporting the claim.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts the claim. Not Not Given because 'it is evident that' is an explicit opinion marker showing the author's view."
+        },
+        "keySentence": "It is evident that protecting deep-sea hydrothermal vents should be a priority for international conservation efforts, given their unique ecosystems and vulnerability to mining operations.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that water temperature is the only factor determining whale migration routes.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that whale migration patterns are driven solely by water temperature is clearly oversimplified, as recent tracking data demonstrates the critical role of prey availability and breeding site fidelity.",
+        "anchorText": "is clearly oversimplified",
+        "complexityLevel": 4,
+        "explanation": "AUTHOR_DISAGREES — The author explicitly contradicts the single-factor explanation by calling it oversimplified.",
+        "reasoning": {
+          "step_1_locate": "The notion that whale migration patterns are driven solely by water temperature is clearly oversimplified, as recent tracking data demonstrates the critical role of prey availability and breeding site fidelity.",
+          "step_2_compare": "Author says: the notion [that temperature is the sole driver] is clearly oversimplified. Statement claims: writer agrees [temperature is the only factor].",
+          "step_3_logic": "AUTHOR_DISAGREES — The author explicitly contradicts the single-factor explanation by calling it oversimplified.",
+          "step_4_eliminate": "Not Yes because the author rejects rather than supports the claim. Not Not Given because 'clearly oversimplified' is an explicit opinion marker showing disagreement."
+        },
+        "keySentence": "The notion that whale migration patterns are driven solely by water temperature is clearly oversimplified, as recent tracking data demonstrates the critical role of prey availability and breeding site fidelity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is convinced that regulating traditional medicine markets will restore seahorse populations.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in seahorse populations could arguably be reversed through stricter regulation of traditional medicine markets, though the effectiveness of such measures remains uncertain.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_OPINION — The author presents a possibility using tentative language rather than expressing conviction.",
+        "reasoning": {
+          "step_1_locate": "The decline in seahorse populations could arguably be reversed through stricter regulation of traditional medicine markets, though the effectiveness of such measures remains uncertain.",
+          "step_2_compare": "Author says: decline could arguably be reversed. Statement claims: writer is convinced [regulation will restore populations].",
+          "step_3_logic": "HEDGED_OPINION — The author presents a possibility using tentative language rather than expressing conviction.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not conviction. Not No because the author doesn't reject the possibility, just avoids committing to it."
+        },
+        "keySentence": "The decline in seahorse populations could arguably be reversed through stricter regulation of traditional medicine markets, though the effectiveness of such measures remains uncertain.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the view that marine protected areas are more effective than sustainable fishing practices.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Some marine ecologists contend that establishing marine protected areas is the most effective strategy for biodiversity conservation, while others maintain that sustainable fishing practices can achieve similar outcomes without restricting access.",
+        "anchorText": "Some... contend... while others maintain",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_REPORTING — The author presents two opposing views without endorsing either position.",
+        "reasoning": {
+          "step_1_locate": "Some marine ecologists contend that establishing marine protected areas is the most effective strategy for biodiversity conservation, while others maintain that sustainable fishing practices can achieve similar outcomes without restricting access.",
+          "step_2_compare": "Author says: some contend [MPAs best], while others maintain [sustainable fishing works]. Statement claims: writer supports [MPAs are more effective].",
+          "step_3_logic": "BALANCED_REPORTING — The author presents two opposing views without endorsing either position.",
+          "step_4_eliminate": "Not Yes because the author never indicates support for either view. Not No because the author doesn't reject the MPA position, just reports it neutrally alongside the alternative."
+        },
+        "keySentence": "Some marine ecologists contend that establishing marine protected areas is the most effective strategy for biodiversity conservation, while others maintain that sustainable fishing practices can achieve similar outcomes without restricting access.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:08:31.237Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "441df474-667c-4c17-b97d-ffbe1ae7c268",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research, a field that seeks to unravel the complexities of language, continually evolves as new theories and evidence emerge. The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development. Children often construct novel sentences they have never heard before, indicating an intrinsic ability to generate language beyond mere repetition. This suggests that imitation, while a component of language learning, cannot be the sole mechanism at play. \n\nFurthermore, I believe it is clear that linguistic research must not exist in isolation. It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms. Such integration can provide a more comprehensive picture of how humans comprehend, produce, and acquire language. Recent studies by the Cambridge Linguistics Institute have found that bilingual children demonstrate enhanced executive function, though some researchers argue this advantage diminishes in adulthood. This finding underscores the need for a holistic approach that considers the cognitive benefits of bilingualism alongside its developmental trajectory. \n\nThe decline in indigenous languages could arguably be linked to globalization, though the relationship between economic integration and linguistic diversity remains complex. As communities become more interconnected, dominant languages often overshadow minority languages, leading to a gradual erosion of linguistic diversity. This trend raises important questions about cultural preservation and the role of language in maintaining heritage. \n\nIn the ongoing debate about language acquisition, proponents of universal grammar maintain that all humans share innate linguistic structures, while critics contend that language emerges entirely from social interaction and cultural transmission. I believe this dichotomy highlights the richness of linguistic research, inviting scholars to explore how biological predispositions and environmental factors intertwine to shape language. Ultimately, the study of language not only enhances our understanding of communication but also offers insights into the human mind and society.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that imitation is the primary mechanism through which children learn language.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+        "anchorText": "in my view, fundamentally flawed",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — the author's explicit negative opinion marker contradicts the positive claim in the statement.",
+        "reasoning": {
+          "step_1_locate": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+          "step_2_compare": "Author says: imitation theory is fundamentally flawed. Statement claims: writer believes imitation is the primary mechanism.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author's explicit negative opinion marker contradicts the positive claim in the statement.",
+          "step_4_eliminate": "Not Yes because the author calls the theory 'fundamentally flawed'. Not Not Given because 'in my view' is a clear personal opinion marker."
+        },
+        "keySentence": "The notion that children acquire language purely through imitation is, in my view, fundamentally flawed and fails to account for the creative aspects of language development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer contends that linguistic research should integrate methods from other scientific disciplines.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 3,
+        "explanation": "PARAPHRASE_MATCH — the statement accurately paraphrases the author's explicit opinion using 'contends' to match 'it is vital'.",
+        "reasoning": {
+          "step_1_locate": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+          "step_2_compare": "Author says: it is vital to adopt interdisciplinary approaches. Statement claims: writer contends research should integrate methods from other disciplines.",
+          "step_3_logic": "PARAPHRASE_MATCH — the statement accurately paraphrases the author's explicit opinion using 'contends' to match 'it is vital'.",
+          "step_4_eliminate": "Not No because the author clearly supports this view. Not Not Given because 'it is vital' is an unambiguous opinion marker showing the author's stance."
+        },
+        "keySentence": "It is vital that linguistic researchers adopt interdisciplinary approaches, incorporating insights from neuroscience and cognitive psychology to fully understand language processing mechanisms.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that bilingualism provides permanent cognitive advantages throughout life.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the Cambridge Linguistics Institute have found that bilingual children demonstrate enhanced executive function, though some researchers argue this advantage diminishes in adulthood.",
+        "anchorText": "have found / some researchers argue",
+        "complexityLevel": 4,
+        "explanation": "ATTRIBUTION_WITHOUT_ENDORSEMENT — the author attributes views to external sources without adding personal opinion markers.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the Cambridge Linguistics Institute have found that bilingual children demonstrate enhanced executive function, though some researchers argue this advantage diminishes in adulthood.",
+          "step_2_compare": "Author says: [reports others' findings only]. Statement claims: writer believes advantages are permanent.",
+          "step_3_logic": "ATTRIBUTION_WITHOUT_ENDORSEMENT — the author attributes views to external sources without adding personal opinion markers.",
+          "step_4_eliminate": "Not Yes because there's no opinion marker showing the author's belief. Not No because the author doesn't contradict permanence, just reports conflicting research."
+        },
+        "keySentence": "Recent studies by the Cambridge Linguistics Institute have found that bilingual children demonstrate enhanced executive function, though some researchers argue this advantage diminishes in adulthood.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that globalization causes indigenous language loss.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in indigenous languages could arguably be linked to globalization, though the relationship between economic integration and linguistic diversity remains complex.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 3,
+        "explanation": "CERTAINTY_MISMATCH — hedging language ('could arguably') prevents definite commitment, while statement requires certainty.",
+        "reasoning": {
+          "step_1_locate": "The decline in indigenous languages could arguably be linked to globalization, though the relationship between economic integration and linguistic diversity remains complex.",
+          "step_2_compare": "Author says: could arguably be linked (hedged). Statement claims: writer is certain about causation.",
+          "step_3_logic": "CERTAINTY_MISMATCH — hedging language ('could arguably') prevents definite commitment, while statement requires certainty.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject the link, just presents it tentatively."
+        },
+        "keySentence": "The decline in indigenous languages could arguably be linked to globalization, though the relationship between economic integration and linguistic diversity remains complex.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the theory that language ability is biologically innate in humans.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of universal grammar maintain that all humans share innate linguistic structures, while critics contend that language emerges entirely from social interaction and cultural transmission.",
+        "anchorText": "Proponents maintain / critics contend",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_PRESENTATION — author attributes opposing views to different groups without personal endorsement of either position.",
+        "reasoning": {
+          "step_1_locate": "Proponents of universal grammar maintain that all humans share innate linguistic structures, while critics contend that language emerges entirely from social interaction and cultural transmission.",
+          "step_2_compare": "Author says: [presents both sides equally]. Statement claims: writer supports the innate theory.",
+          "step_3_logic": "NEUTRAL_PRESENTATION — author attributes opposing views to different groups without personal endorsement of either position.",
+          "step_4_eliminate": "Not Yes because the author doesn't endorse the innate view, only reports it. Not No because the author doesn't reject it either, maintaining neutrality."
+        },
+        "keySentence": "Proponents of universal grammar maintain that all humans share innate linguistic structures, while critics contend that language emerges entirely from social interaction and cultural transmission.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:09:10.657Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "b2153da2-2646-43a9-b7c2-c126a50f5101",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:11:25.325Z"
+    }
+  },
+  {
+    "id": "bce6c85c-ea09-41bf-a688-84358ed1cc91",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "In recent years, the shift towards renewable energy has gained significant momentum, and I believe this is a crucial development for the future of our planet. The transition to renewable energy sources could arguably reduce global carbon emissions by up to 70% within the next three decades, though the exact figure remains subject to numerous variables including technological advancement and political commitment. It is clear that harnessing the power of the sun and wind offers a sustainable path forward. In my view, it is vital that governments prioritize investment in solar and wind infrastructure over fossil fuel subsidies if we are to meet international climate targets. The long-term benefits of such investment are undeniable, both in terms of environmental impact and economic growth. Critics contend that renewable energy cannot meet baseload power demands, but this view is clearly outdated given recent advances in battery storage technology and grid management systems. These innovations demonstrate that renewables are not only viable but essential. Recent studies from the International Energy Agency suggest that offshore wind farms may pose risks to marine ecosystems, while environmental groups argue that these concerns are overstated compared to the damage caused by oil extraction. I believe that while vigilance is necessary, the potential environmental benefits of wind energy far outweigh these risks. Additionally, proponents of nuclear energy maintain that it provides a reliable low-carbon alternative to fossil fuels, whereas opponents emphasize the unresolved issues of radioactive waste disposal and the potential for catastrophic accidents. In my opinion, the focus should remain on developing and refining renewable energy technologies, which offer a safer and more sustainable solution. The path forward is not without challenges, but it is clear that renewable energy holds the key to a cleaner, more resilient future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that renewable energy will definitely reduce global carbon emissions by 70% within thirty years.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The transition to renewable energy sources could arguably reduce global carbon emissions by up to 70% within the next three decades, though the exact figure remains subject to numerous variables including technological advancement and political commitment.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_TO_DEFINITE — The author presents a possibility with hedging language, but the statement claims the writer holds a definite belief.",
+        "reasoning": {
+          "step_1_locate": "The transition to renewable energy sources could arguably reduce global carbon emissions by up to 70% within the next three decades, though the exact figure remains subject to numerous variables including technological advancement and political commitment.",
+          "step_2_compare": "Author says: 'could arguably reduce'. Statement claims: 'writer believes that renewable energy will definitely reduce'.",
+          "step_3_logic": "HEDGED_TO_DEFINITE — The author presents a possibility with hedging language, but the statement claims the writer holds a definite belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not definite belief. Not No because the author doesn't reject this possibility, just presents it tentatively."
+        },
+        "keySentence": "The transition to renewable energy sources could arguably reduce global carbon emissions by up to 70% within the next three decades, though the exact figure remains subject to numerous variables including technological advancement and political commitment.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks that government investment should focus on solar and wind energy rather than fossil fuels.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments prioritize investment in solar and wind infrastructure over fossil fuel subsidies if we are to meet international climate targets.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — The author's explicit opinion directly aligns with the statement's claim about the writer's view.",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments prioritize investment in solar and wind infrastructure over fossil fuel subsidies if we are to meet international climate targets.",
+          "step_2_compare": "Author says: 'It is vital that governments prioritize investment in solar and wind infrastructure over fossil fuel subsidies'. Statement claims: 'writer thinks that government investment should focus on solar and wind energy rather than fossil fuels'.",
+          "step_3_logic": "DIRECT_MATCH — The author's explicit opinion directly aligns with the statement's claim about the writer's view.",
+          "step_4_eliminate": "Not No because the author clearly supports this position. Not NG because 'It is vital that' is an explicit opinion marker showing the author's personal stance."
+        },
+        "keySentence": "It is vital that governments prioritize investment in solar and wind infrastructure over fossil fuel subsidies if we are to meet international climate targets.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that renewable energy sources are unable to provide baseload power.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "Critics contend that renewable energy cannot meet baseload power demands, but this view is clearly outdated given recent advances in battery storage technology and grid management systems.",
+        "anchorText": "but this view is clearly outdated",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — The author explicitly calls the view outdated, which directly contradicts the statement's claim that the writer agrees with it.",
+        "reasoning": {
+          "step_1_locate": "Critics contend that renewable energy cannot meet baseload power demands, but this view is clearly outdated given recent advances in battery storage technology and grid management systems.",
+          "step_2_compare": "Author says: 'this view is clearly outdated'. Statement claims: 'writer agrees that renewable energy sources are unable to provide baseload power'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author explicitly calls the view outdated, which directly contradicts the statement's claim that the writer agrees with it.",
+          "step_4_eliminate": "Not Yes because the author rejects this view as outdated. Not NG because 'clearly outdated' is an explicit opinion marker showing the author's disagreement."
+        },
+        "keySentence": "Critics contend that renewable energy cannot meet baseload power demands, but this view is clearly outdated given recent advances in battery storage technology and grid management systems.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes that offshore wind farms are harmful to marine life.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies from the International Energy Agency suggest that offshore wind farms may pose risks to marine ecosystems, while environmental groups argue that these concerns are overstated compared to the damage caused by oil extraction.",
+        "anchorText": "studies suggest / groups argue",
+        "complexityLevel": 4,
+        "explanation": "REPORTING_WITHOUT_STANCE — The author neutrally reports what others say without adding personal opinion markers about their own belief.",
+        "reasoning": {
+          "step_1_locate": "Recent studies from the International Energy Agency suggest that offshore wind farms may pose risks to marine ecosystems, while environmental groups argue that these concerns are overstated compared to the damage caused by oil extraction.",
+          "step_2_compare": "Author says: 'studies suggest' and 'groups argue' (reporting others' views). Statement claims: 'writer believes that offshore wind farms are harmful'.",
+          "step_3_logic": "REPORTING_WITHOUT_STANCE — The author neutrally reports what others say without adding personal opinion markers about their own belief.",
+          "step_4_eliminate": "Not Yes because the author never states personal agreement. Not No because the author never states personal disagreement, only reports others' views."
+        },
+        "keySentence": "Recent studies from the International Energy Agency suggest that offshore wind farms may pose risks to marine ecosystems, while environmental groups argue that these concerns are overstated compared to the damage caused by oil extraction.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports nuclear energy as a solution to climate change.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of nuclear energy maintain that it provides a reliable low-carbon alternative to fossil fuels, whereas opponents emphasize the unresolved issues of radioactive waste disposal and the potential for catastrophic accidents.",
+        "anchorText": "Proponents maintain / opponents emphasize",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NO_STANCE — The author presents opposing viewpoints with equal weight using neutral reporting verbs, never revealing personal support or opposition.",
+        "reasoning": {
+          "step_1_locate": "Proponents of nuclear energy maintain that it provides a reliable low-carbon alternative to fossil fuels, whereas opponents emphasize the unresolved issues of radioactive waste disposal and the potential for catastrophic accidents.",
+          "step_2_compare": "Author says: 'Proponents maintain' and 'opponents emphasize' (balanced reporting). Statement claims: 'writer supports nuclear energy'.",
+          "step_3_logic": "BALANCED_NO_STANCE — The author presents opposing viewpoints with equal weight using neutral reporting verbs, never revealing personal support or opposition.",
+          "step_4_eliminate": "Not Yes because there's no opinion marker showing the author supports nuclear energy. Not No because there's no opinion marker showing the author opposes it either."
+        },
+        "keySentence": "Proponents of nuclear energy maintain that it provides a reliable low-carbon alternative to fossil fuels, whereas opponents emphasize the unresolved issues of radioactive waste disposal and the potential for catastrophic accidents.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:12:06.332Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "1df56f81-3605-43b5-823a-15fc211acafb",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology, as a field, continually evolves with new research and insights shedding light on the complexities of human behavior and mental processes. I believe that one of the most significant areas of development in recent years is the understanding of stress management. Recent studies by neuroscientists at Stanford University have found that mindfulness meditation can reduce cortisol levels by up to 30% in chronically stressed individuals. This finding highlights the importance of integrating holistic approaches into conventional treatment plans. It is vital for mental health professionals to consider these non-pharmacological interventions, as they offer sustainable and effective strategies for managing stress. \n\nIn the realm of mental health treatment, it is evident that cognitive behavioral therapy represents a crucial advancement in treating anxiety disorders, offering patients practical tools that medication alone cannot provide. Cognitive behavioral therapy, or CBT, empowers individuals to identify and modify dysfunctional thought patterns, which in turn can lead to more adaptive behavior and emotional regulation. In my view, this approach not only addresses the symptoms of anxiety but also equips patients with skills that promote long-term mental health resilience.\n\nThe concept of intelligence has long intrigued psychologists, and the ongoing debate about its origins persists. The notion that intelligence is fixed at birth is fundamentally flawed, as decades of research have conclusively demonstrated the brain's remarkable capacity for neuroplasticity throughout the lifespan. This understanding opens up opportunities for educational and therapeutic interventions that can enhance cognitive abilities, regardless of age.\n\nSocial media's impact on mental health, particularly among adolescents, is another area of growing concern. The correlation between social media usage and depression in adolescents could arguably be explained by pre-existing vulnerabilities rather than causation, though more longitudinal research is needed. It is clear that while social media platforms have become integral to social interaction, their role in affecting mental well-being requires further investigation to understand the nuances involved.\n\nFinally, the debate surrounding early childhood intervention programs continues. Proponents argue that early childhood intervention programs yield significant long-term benefits for cognitive development, while critics contend that such programs show minimal lasting effects once children enter formal schooling. In my view, the potential benefits of these programs cannot be underestimated, as they lay the foundation for lifelong learning and adaptation, particularly when tailored to individual needs.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that mindfulness meditation is effective in reducing stress hormones.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by neuroscientists at Stanford University have found that mindfulness meditation can reduce cortisol levels by up to 30% in chronically stressed individuals.",
+        "anchorText": "studies by neuroscientists at Stanford University have found",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — The author is merely reporting research findings without adding personal endorsement or opinion.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by neuroscientists at Stanford University have found that mindfulness meditation can reduce cortisol levels by up to 30% in chronically stressed individuals.",
+          "step_2_compare": "Author says: 'studies have found'. Statement claims: 'the writer believes'.",
+          "step_3_logic": "NEUTRAL_REPORTING — The author is merely reporting research findings without adding personal endorsement or opinion.",
+          "step_4_eliminate": "Not Yes because there is no opinion marker showing the author's agreement. Not No because the author doesn't contradict the claim, just reports it neutrally."
+        },
+        "keySentence": "Recent studies by neuroscientists at Stanford University have found that mindfulness meditation can reduce cortisol levels by up to 30% in chronically stressed individuals.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks cognitive behavioral therapy is an important development in anxiety treatment.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that cognitive behavioral therapy represents a crucial advancement in treating anxiety disorders, offering patients practical tools that medication alone cannot provide.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_AGREEMENT — The author explicitly endorses CBT as a crucial advancement, which matches the statement's claim about importance.",
+        "reasoning": {
+          "step_1_locate": "It is evident that cognitive behavioral therapy represents a crucial advancement in treating anxiety disorders, offering patients practical tools that medication alone cannot provide.",
+          "step_2_compare": "Author says: 'It is evident that [CBT] represents a crucial advancement'. Statement claims: 'writer thinks [CBT] is an important development'.",
+          "step_3_logic": "DIRECT_AGREEMENT — The author explicitly endorses CBT as a crucial advancement, which matches the statement's claim about importance.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts the claim. Not Not Given because 'it is evident that' is a clear opinion marker showing the author's view."
+        },
+        "keySentence": "It is evident that cognitive behavioral therapy represents a crucial advancement in treating anxiety disorders, offering patients practical tools that medication alone cannot provide.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer accepts that intelligence levels are determined genetically from birth.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that intelligence is fixed at birth is fundamentally flawed, as decades of research have conclusively demonstrated the brain's remarkable capacity for neuroplasticity throughout the lifespan.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 4,
+        "explanation": "DIRECT_CONTRADICTION — The author rejects the concept of fixed intelligence, while the statement claims the author accepts it.",
+        "reasoning": {
+          "step_1_locate": "The notion that intelligence is fixed at birth is fundamentally flawed, as decades of research have conclusively demonstrated the brain's remarkable capacity for neuroplasticity throughout the lifespan.",
+          "step_2_compare": "Author says: 'intelligence fixed at birth is fundamentally flawed'. Statement claims: 'writer accepts that intelligence levels are determined genetically from birth'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author rejects the concept of fixed intelligence, while the statement claims the author accepts it.",
+          "step_4_eliminate": "Not Yes because the author opposes rather than supports the claim. Not Not Given because 'fundamentally flawed' is an explicit opinion marker showing disagreement."
+        },
+        "keySentence": "The notion that intelligence is fixed at birth is fundamentally flawed, as decades of research have conclusively demonstrated the brain's remarkable capacity for neuroplasticity throughout the lifespan.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes that social media does not cause depression in teenagers.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The correlation between social media usage and depression in adolescents could arguably be explained by pre-existing vulnerabilities rather than causation, though more longitudinal research is needed.",
+        "anchorText": "could arguably be explained",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_SPECULATION — The author suggests a possibility using tentative language without making a firm claim about causation.",
+        "reasoning": {
+          "step_1_locate": "The correlation between social media usage and depression in adolescents could arguably be explained by pre-existing vulnerabilities rather than causation, though more longitudinal research is needed.",
+          "step_2_compare": "Author says: 'could arguably be explained by pre-existing vulnerabilities'. Statement claims: 'writer believes social media does not cause depression'.",
+          "step_3_logic": "HEDGED_SPECULATION — The author suggests a possibility using tentative language without making a firm claim about causation.",
+          "step_4_eliminate": "Not Yes because the author doesn't definitively state this belief. Not No because the author doesn't reject the idea either, just presents it as one possible explanation."
+        },
+        "keySentence": "The correlation between social media usage and depression in adolescents could arguably be explained by pre-existing vulnerabilities rather than causation, though more longitudinal research is needed.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the implementation of early childhood intervention programs.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents argue that early childhood intervention programs yield significant long-term benefits for cognitive development, while critics contend that such programs show minimal lasting effects once children enter formal schooling.",
+        "anchorText": "Proponents argue... while critics contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NEUTRALITY — The author presents opposing viewpoints without endorsing either side or revealing personal support.",
+        "reasoning": {
+          "step_1_locate": "Proponents argue that early childhood intervention programs yield significant long-term benefits for cognitive development, while critics contend that such programs show minimal lasting effects once children enter formal schooling.",
+          "step_2_compare": "Author says: 'Proponents argue [benefits]... critics contend [minimal effects]'. Statement claims: 'writer supports intervention programs'.",
+          "step_3_logic": "BALANCED_NEUTRALITY — The author presents opposing viewpoints without endorsing either side or revealing personal support.",
+          "step_4_eliminate": "Not Yes because the author never states support for the programs. Not No because the author doesn't oppose them either, just reports both perspectives neutrally."
+        },
+        "keySentence": "Proponents argue that early childhood intervention programs yield significant long-term benefits for cognitive development, while critics contend that such programs show minimal lasting effects once children enter formal schooling.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:12:47.108Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "92f80622-64a7-4a7f-a4eb-ad086d9c9ab8",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:13:57.478Z"
+    }
+  },
+  {
+    "id": "1429709f-17c8-45c6-afe6-68ff6b7ca176",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 7,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:19:00.907Z"
+    }
+  },
+  {
+    "id": "f4242931-cc88-4ff9-a79d-d237cb91d8c6",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 7,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:21:37.463Z"
+    }
+  },
+  {
+    "id": "02295ebf-c04a-4abc-b41a-69bbaca92bda",
+    "type": "ynng",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "Urban development is a pressing issue facing cities worldwide, as populations continue to swell and available land becomes increasingly scarce. I believe that the shift towards vertical urban expansion could arguably represent the most sustainable solution to accommodate growing metropolitan populations without encroaching on agricultural land. By building upwards rather than outwards, cities can preserve essential rural spaces while providing adequate housing and amenities for their inhabitants. However, it is clear that this approach must be carefully managed to avoid the pitfalls of overcrowding and social isolation. It is vital that urban planners prioritize the integration of green spaces within high-density developments, as these areas serve not merely as aesthetic features but as essential infrastructure for mental health and community cohesion. Such spaces provide much-needed relief from the urban hustle and offer a sanctuary for relaxation and social interaction. On a different note, the advent of smart city technologies promises to transform urban living, but the notion that smart city technologies will automatically solve urban inequality is fundamentally flawed. Technological solutions without accompanying social policies merely digitize existing disparities, and it is crucial to address these issues holistically. In my view, the focus should be on creating inclusive urban environments that leverage technology to enhance, rather than undermine, social equity. Recent studies by the Urban Development Institute suggest that mixed-use zoning increases property values by up to 23% while simultaneously reducing traffic congestion, though critics contend that such developments accelerate gentrification. This highlights the complexity of urban planning, where benefits in one area may lead to challenges in another. Finally, the debate between proponents and opponents of urban sprawl continues to shape development strategies. Proponents of urban sprawl argue that low-density development offers residents more living space and connection to nature, while opponents maintain that such expansion creates unsustainable car dependency and destroys ecosystems. In my view, a balanced approach that incorporates elements of both vertical expansion and thoughtful, low-density development is necessary to create resilient and livable urban environments.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes vertical urban expansion is the most sustainable solution for growing cities.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The shift towards vertical urban expansion could arguably represent the most sustainable solution to accommodate growing metropolitan populations without encroaching on agricultural land.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_OPINION — The modal verb 'could' combined with 'arguably' shows the author is presenting a possibility rather than stating a firm belief.",
+        "reasoning": {
+          "step_1_locate": "The shift towards vertical urban expansion could arguably represent the most sustainable solution to accommodate growing metropolitan populations without encroaching on agricultural land.",
+          "step_2_compare": "Author says: 'could arguably represent the most sustainable solution'. Statement claims: writer believes it IS the most sustainable solution.",
+          "step_3_logic": "HEDGED_OPINION — The modal verb 'could' combined with 'arguably' shows the author is presenting a possibility rather than stating a firm belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' indicates uncertainty, not belief. Not No because the author doesn't contradict this view, just presents it tentatively."
+        },
+        "keySentence": "The shift towards vertical urban expansion could arguably represent the most sustainable solution to accommodate growing metropolitan populations without encroaching on agricultural land.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks green spaces should be a priority in high-density urban planning.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that urban planners prioritize the integration of green spaces within high-density developments, as these areas serve not merely as aesthetic features but as essential infrastructure for mental health and community cohesion.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 4,
+        "explanation": "AUTHOR_AGREES — 'It is vital that' is a strong prescriptive statement showing the author's clear position on what should happen.",
+        "reasoning": {
+          "step_1_locate": "It is vital that urban planners prioritize the integration of green spaces within high-density developments, as these areas serve not merely as aesthetic features but as essential infrastructure for mental health and community cohesion.",
+          "step_2_compare": "Author says: 'It is vital that urban planners prioritize the integration of green spaces'. Statement claims: writer thinks green spaces should be a priority.",
+          "step_3_logic": "AUTHOR_AGREES — 'It is vital that' is a strong prescriptive statement showing the author's clear position on what should happen.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts this view. Not Not Given because 'it is vital' is an explicit opinion marker showing the author's stance."
+        },
+        "keySentence": "It is vital that urban planners prioritize the integration of green spaces within high-density developments, as these areas serve not merely as aesthetic features but as essential infrastructure for mental health and community cohesion.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that smart city technologies will automatically address urban inequality.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that smart city technologies will automatically solve urban inequality is fundamentally flawed, as technological solutions without accompanying social policies merely digitize existing disparities.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_DISAGREES — The phrase 'is fundamentally flawed' is a strong negative evaluation showing the author's direct opposition to the idea.",
+        "reasoning": {
+          "step_1_locate": "The notion that smart city technologies will automatically solve urban inequality is fundamentally flawed, as technological solutions without accompanying social policies merely digitize existing disparities.",
+          "step_2_compare": "Author says: the notion 'is fundamentally flawed'. Statement claims: writer agrees with this notion.",
+          "step_3_logic": "AUTHOR_DISAGREES — The phrase 'is fundamentally flawed' is a strong negative evaluation showing the author's direct opposition to the idea.",
+          "step_4_eliminate": "Not Yes because the author explicitly rejects this view. Not Not Given because 'fundamentally flawed' is a clear opinion marker showing disagreement."
+        },
+        "keySentence": "The notion that smart city technologies will automatically solve urban inequality is fundamentally flawed, as technological solutions without accompanying social policies merely digitize existing disparities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes mixed-use zoning is beneficial for urban areas.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the Urban Development Institute suggest that mixed-use zoning increases property values by up to 23% while simultaneously reducing traffic congestion, though critics contend that such developments accelerate gentrification.",
+        "anchorText": "studies suggest / critics contend",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_AUTHOR — The author reports others' views using attribution phrases but never indicates their own stance on whether the benefits outweigh the drawbacks.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the Urban Development Institute suggest that mixed-use zoning increases property values by up to 23% while simultaneously reducing traffic congestion, though critics contend that such developments accelerate gentrification.",
+          "step_2_compare": "Author says: 'studies suggest' and 'critics contend'. Statement claims: the writer believes mixed-use zoning is beneficial.",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author reports others' views using attribution phrases but never indicates their own stance on whether the benefits outweigh the drawbacks.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows the author's agreement. Not No because the author doesn't express disagreement, only reports conflicting views from others."
+        },
+        "keySentence": "Recent studies by the Urban Development Institute suggest that mixed-use zoning increases property values by up to 23% while simultaneously reducing traffic congestion, though critics contend that such developments accelerate gentrification.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the opponents' view that urban sprawl is environmentally damaging.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of urban sprawl argue that low-density development offers residents more living space and connection to nature, while opponents maintain that such expansion creates unsustainable car dependency and destroys ecosystems.",
+        "anchorText": "Proponents argue / opponents maintain",
+        "complexityLevel": 5,
+        "explanation": "BALANCED_REPORTING — The author uses parallel attribution phrases to present both sides equally without any evaluative language indicating personal preference.",
+        "reasoning": {
+          "step_1_locate": "Proponents of urban sprawl argue that low-density development offers residents more living space and connection to nature, while opponents maintain that such expansion creates unsustainable car dependency and destroys ecosystems.",
+          "step_2_compare": "Author says: 'Proponents argue' and 'opponents maintain'. Statement claims: writer supports the opponents' view.",
+          "step_3_logic": "BALANCED_REPORTING — The author uses parallel attribution phrases to present both sides equally without any evaluative language indicating personal preference.",
+          "step_4_eliminate": "Not Yes because the author never endorses the opponents' position. Not No because the author doesn't reject it either, simply presenting both perspectives neutrally."
+        },
+        "keySentence": "Proponents of urban sprawl argue that low-density development offers residents more living space and connection to nature, while opponents maintain that such expansion creates unsustainable car dependency and destroys ecosystems.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:22:18.374Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.8,
+        "min": 3,
+        "max": 5
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "431f7598-8fe6-4c9c-bd00-736257de671a",
+    "type": "ynng",
+    "band": 7,
+    "topic": "Archaeological Discovery",
+    "passage": "Recent archaeological discoveries at the site have ignited a vigorous debate among scholars. I believe that the findings, particularly the pottery fragments, offer an intriguing glimpse into the past. While some archaeologists maintain that the pottery fragments indicate a permanent settlement, others contend they merely suggest seasonal occupation by nomadic groups. In my view, the presence of these artifacts suggests a level of permanence, as the craftsmanship and volume are consistent with settled communities. However, the debate remains unresolved, highlighting the need for further research. \n\nIt is vital that future excavations employ ground-penetrating radar technology before any physical digging commences, as this approach clearly minimizes damage to fragile artifacts. Such non-invasive methods are essential to preserve the integrity of the site and ensure that valuable information is not inadvertently lost. I believe that the integration of modern technology into archaeological practices will revolutionize our understanding of ancient cultures. \n\nFurthermore, the claim that these burial practices originated in the Mediterranean region is fundamentally flawed, as recent carbon dating conclusively demonstrates a Central Asian origin predating Mediterranean examples by at least 400 years. This finding, I argue, reshapes our understanding of cultural diffusion and the exchange of burial customs across ancient civilizations. The evidence suggests a more complex web of interactions than previously thought. \n\nAnother significant discovery involves the stone tools uncovered at the site. Researchers at the University of Cambridge found that the stone tools were manufactured using advanced knapping techniques, leading them to propose that the inhabitants possessed sophisticated technological knowledge. It is clear that such expertise indicates a high level of cognitive development and adaptation to environmental challenges. \n\nMoreover, the unusual concentration of obsidian blades in the western chamber could arguably indicate a ritual significance, though it may simply reflect practical storage considerations. In my view, the context of these findings should be carefully analyzed to avoid hasty conclusions. The possibility of ritual use adds a fascinating dimension to our understanding of the cultural practices of the time. In conclusion, these discoveries offer a rich tapestry of information that warrants careful interpretation and further study.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes the pottery fragments prove permanent settlement at the site.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some archaeologists maintain that the pottery fragments indicate a permanent settlement, others contend they merely suggest seasonal occupation by nomadic groups.",
+        "anchorText": "some...others contend",
+        "complexityLevel": 3,
+        "explanation": "BALANCED_REPORTING — the writer reports two opposing expert views without endorsing either side.",
+        "reasoning": {
+          "step_1_locate": "While some archaeologists maintain that the pottery fragments indicate a permanent settlement, others contend they merely suggest seasonal occupation by nomadic groups.",
+          "step_2_compare": "Author says: some maintain X, others contend Y. Statement claims: writer believes X is true.",
+          "step_3_logic": "BALANCED_REPORTING — the writer reports two opposing expert views without endorsing either side.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows the author's personal agreement. Not No because the author doesn't reject the permanent settlement theory, just presents both sides neutrally."
+        },
+        "keySentence": "While some archaeologists maintain that the pottery fragments indicate a permanent settlement, others contend they merely suggest seasonal occupation by nomadic groups.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks ground-penetrating radar should be used before excavation begins.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that future excavations employ ground-penetrating radar technology before any physical digging commences, as this approach clearly minimizes damage to fragile artifacts.",
+        "anchorText": "It is vital...clearly",
+        "complexityLevel": 4,
+        "explanation": "AUTHOR_AGREES — 'it is vital' is a strong prescriptive opinion marker showing the author's direct endorsement.",
+        "reasoning": {
+          "step_1_locate": "It is vital that future excavations employ ground-penetrating radar technology before any physical digging commences, as this approach clearly minimizes damage to fragile artifacts.",
+          "step_2_compare": "Author says: it is vital that radar be used before digging. Statement claims: writer thinks radar should be used before excavation.",
+          "step_3_logic": "AUTHOR_AGREES — 'it is vital' is a strong prescriptive opinion marker showing the author's direct endorsement.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts this view. Not Not Given because 'it is vital' is an explicit personal stance, not neutral reporting."
+        },
+        "keySentence": "It is vital that future excavations employ ground-penetrating radar technology before any physical digging commences, as this approach clearly minimizes damage to fragile artifacts.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer accepts that the burial practices came from the Mediterranean.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The claim that these burial practices originated in the Mediterranean region is fundamentally flawed, as recent carbon dating conclusively demonstrates a Central Asian origin predating Mediterranean examples by at least 400 years.",
+        "anchorText": "is fundamentally flawed...conclusively demonstrates",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_DISAGREES — 'fundamentally flawed' is a strong rejection marker showing direct contradiction.",
+        "reasoning": {
+          "step_1_locate": "The claim that these burial practices originated in the Mediterranean region is fundamentally flawed, as recent carbon dating conclusively demonstrates a Central Asian origin predating Mediterranean examples by at least 400 years.",
+          "step_2_compare": "Author says: Mediterranean origin claim is fundamentally flawed. Statement claims: writer accepts Mediterranean origin.",
+          "step_3_logic": "AUTHOR_DISAGREES — 'fundamentally flawed' is a strong rejection marker showing direct contradiction.",
+          "step_4_eliminate": "Not Yes because the author rejects rather than accepts this theory. Not Not Given because 'fundamentally flawed' is an explicit opinion marker, not neutral reporting."
+        },
+        "keySentence": "The claim that these burial practices originated in the Mediterranean region is fundamentally flawed, as recent carbon dating conclusively demonstrates a Central Asian origin predating Mediterranean examples by at least 400 years.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes the inhabitants had sophisticated technological knowledge.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Researchers at the University of Cambridge found that the stone tools were manufactured using advanced knapping techniques, leading them to propose that the inhabitants possessed sophisticated technological knowledge.",
+        "anchorText": "Researchers...found...leading them to propose",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_AUTHOR — the author reports others' findings using 'researchers found' and 'them to propose' without adding personal endorsement.",
+        "reasoning": {
+          "step_1_locate": "Researchers at the University of Cambridge found that the stone tools were manufactured using advanced knapping techniques, leading them to propose that the inhabitants possessed sophisticated technological knowledge.",
+          "step_2_compare": "Author says: researchers propose X. Statement claims: writer believes X.",
+          "step_3_logic": "NEUTRAL_AUTHOR — the author reports others' findings using 'researchers found' and 'them to propose' without adding personal endorsement.",
+          "step_4_eliminate": "Not Yes because no marker shows author agreement with the researchers' proposal. Not No because the author doesn't contradict the researchers, just reports their view neutrally."
+        },
+        "keySentence": "Researchers at the University of Cambridge found that the stone tools were manufactured using advanced knapping techniques, leading them to propose that the inhabitants possessed sophisticated technological knowledge.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer is certain the obsidian blades had ritual significance.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The unusual concentration of obsidian blades in the western chamber could arguably indicate a ritual significance, though it may simply reflect practical storage considerations.",
+        "anchorText": "could arguably...may simply",
+        "complexityLevel": 5,
+        "explanation": "HEDGED_OPINION — 'could arguably' and 'may simply' are hedging markers showing the author presents possibilities without definite commitment.",
+        "reasoning": {
+          "step_1_locate": "The unusual concentration of obsidian blades in the western chamber could arguably indicate a ritual significance, though it may simply reflect practical storage considerations.",
+          "step_2_compare": "Author says: could arguably indicate ritual use, may simply be storage. Statement claims: writer is certain about ritual significance.",
+          "step_3_logic": "HEDGED_OPINION — 'could arguably' and 'may simply' are hedging markers showing the author presents possibilities without definite commitment.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject ritual significance, just presents it as one uncertain possibility alongside another."
+        },
+        "keySentence": "The unusual concentration of obsidian blades in the western chamber could arguably indicate a ritual significance, though it may simply reflect practical storage considerations.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:23:49.436Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.8,
+        "min": 3,
+        "max": 5
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "d53b6242-2bf9-4e7c-8c2d-23ba17641d9c",
+    "type": "ynng",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "Marine biology, as a field, is at the forefront of understanding and addressing the challenges facing our oceans today. It is evident that coral bleaching represents the most pressing threat to marine biodiversity in tropical ecosystems. The increasing frequency of bleaching events, largely driven by rising sea temperatures, poses a severe risk to coral reef health, which in turn affects the myriad species that depend on these complex habitats. I believe that urgent action is needed to mitigate climate change impacts to preserve these vital ecosystems.\n\nAnother area of concern is the emerging interest in deep-sea mining. The notion that deep-sea mining can be conducted without significant ecological damage is, in my view, fundamentally flawed. The deep ocean is one of the least understood environments on Earth, and disturbing its fragile ecosystems could have unforeseen consequences. It is clear that more research is needed before such activities are pursued.\n\nRecent studies by marine biologists at Stanford University suggest that octopus intelligence rivals that of certain mammalian species. This finding challenges our understanding of marine life and highlights the complex cognitive abilities of octopuses. It is vital that we continue to study and protect such intelligent species, as they offer invaluable insights into the evolution of intelligence.\n\nThe decline in shark populations could arguably be linked to the disruption of entire marine food webs, though definitive evidence remains elusive. Sharks play a critical role as apex predators, and their reduction can lead to imbalances that affect many other marine organisms. I believe we must prioritize conservation efforts to stabilize shark populations and ensure the health of marine ecosystems.\n\nFinally, while some marine conservationists advocate for complete fishing bans in protected zones, others contend that sustainable fishing practices can coexist with conservation goals, and both perspectives merit serious consideration. It is clear that a balanced approach is necessary, one that considers the livelihoods of coastal communities while ensuring the long-term sustainability of marine resources. In my view, fostering collaboration between scientists, policymakers, and local stakeholders is crucial to achieving effective marine conservation.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes coral bleaching is the greatest danger to marine biodiversity in tropical regions.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that coral bleaching represents the most pressing threat to marine biodiversity in tropical ecosystems.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_MATCH — 'most pressing threat' and 'greatest danger' are equivalent expressions of the same view.",
+        "reasoning": {
+          "step_1_locate": "It is evident that coral bleaching represents the most pressing threat to marine biodiversity in tropical ecosystems.",
+          "step_2_compare": "Author says: coral bleaching is the most pressing threat. Statement claims: coral bleaching is the greatest danger.",
+          "step_3_logic": "SYNONYM_MATCH — 'most pressing threat' and 'greatest danger' are equivalent expressions of the same view.",
+          "step_4_eliminate": "Not No because the author explicitly agrees rather than contradicts. Not Not Given because 'it is evident that' is a clear opinion marker showing the author's personal stance."
+        },
+        "keySentence": "It is evident that coral bleaching represents the most pressing threat to marine biodiversity in tropical ecosystems.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks deep-sea mining can be carried out with minimal environmental impact.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that deep-sea mining can be conducted without significant ecological damage is, in my view, fundamentally flawed.",
+        "anchorText": "in my view, fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — the author explicitly calls the notion flawed, which directly opposes the statement's claim.",
+        "reasoning": {
+          "step_1_locate": "The notion that deep-sea mining can be conducted without significant ecological damage is, in my view, fundamentally flawed.",
+          "step_2_compare": "Author says: the idea is fundamentally flawed. Statement claims: the writer thinks it can be done with minimal impact.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author explicitly calls the notion flawed, which directly opposes the statement's claim.",
+          "step_4_eliminate": "Not Yes because the author rejects rather than supports the view. Not Not Given because 'in my view, fundamentally flawed' is an explicit personal opinion marker."
+        },
+        "keySentence": "The notion that deep-sea mining can be conducted without significant ecological damage is, in my view, fundamentally flawed.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that octopuses are as intelligent as some mammals.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by marine biologists at Stanford University suggest that octopus intelligence rivals that of certain mammalian species.",
+        "anchorText": "studies by marine biologists suggest",
+        "complexityLevel": 4,
+        "explanation": "ATTRIBUTION_WITHOUT_ENDORSEMENT — the author reports others' findings without adding personal agreement or disagreement.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by marine biologists at Stanford University suggest that octopus intelligence rivals that of certain mammalian species.",
+          "step_2_compare": "Author says: studies suggest this. Statement claims: the writer agrees with this.",
+          "step_3_logic": "ATTRIBUTION_WITHOUT_ENDORSEMENT — the author reports others' findings without adding personal agreement or disagreement.",
+          "step_4_eliminate": "Not Yes because there is no opinion marker showing the author's agreement. Not No because the author doesn't contradict the claim, only reports it neutrally."
+        },
+        "keySentence": "Recent studies by marine biologists at Stanford University suggest that octopus intelligence rivals that of certain mammalian species.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that declining shark numbers cause disruption to marine food webs.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in shark populations could arguably be linked to the disruption of entire marine food webs, though definitive evidence remains elusive.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "CERTAINTY_MISMATCH — 'could arguably' indicates uncertainty, while the statement requires certainty.",
+        "reasoning": {
+          "step_1_locate": "The decline in shark populations could arguably be linked to the disruption of entire marine food webs, though definitive evidence remains elusive.",
+          "step_2_compare": "Author says: could arguably be linked. Statement claims: the writer is certain about the link.",
+          "step_3_logic": "CERTAINTY_MISMATCH — 'could arguably' indicates uncertainty, while the statement requires certainty.",
+          "step_4_eliminate": "Not Yes because the author hedges rather than commits. Not No because the author doesn't reject the link, only presents it tentatively."
+        },
+        "keySentence": "The decline in shark populations could arguably be linked to the disruption of entire marine food webs, though definitive evidence remains elusive.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the view that fishing should be completely banned in marine protected areas.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some marine conservationists advocate for complete fishing bans in protected zones, others contend that sustainable fishing practices can coexist with conservation goals, and both perspectives merit serious consideration.",
+        "anchorText": "both perspectives merit serious consideration",
+        "complexityLevel": 5,
+        "explanation": "BALANCED_NEUTRALITY — the author explicitly validates both opposing views without choosing one.",
+        "reasoning": {
+          "step_1_locate": "While some marine conservationists advocate for complete fishing bans in protected zones, others contend that sustainable fishing practices can coexist with conservation goals, and both perspectives merit serious consideration.",
+          "step_2_compare": "Author says: both perspectives merit consideration. Statement claims: the writer supports complete bans.",
+          "step_3_logic": "BALANCED_NEUTRALITY — the author explicitly validates both opposing views without choosing one.",
+          "step_4_eliminate": "Not Yes because the author doesn't endorse the ban position specifically. Not No because the author doesn't reject it either, treating both views as equally valid."
+        },
+        "keySentence": "While some marine conservationists advocate for complete fishing bans in protected zones, others contend that sustainable fishing practices can coexist with conservation goals, and both perspectives merit serious consideration.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:25:49.682Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.6,
+        "min": 2,
+        "max": 5
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "3fd6c722-4599-47fa-b00b-27caa1003334",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 7,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:27:43.836Z"
+    }
+  },
+  {
+    "id": "e3574a3d-2451-4a52-a734-ca1c40597368",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 7,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:30:18.022Z"
+    }
   }
 ]

@@ -85,6 +85,22 @@ export function devJumpTo(target) {
       setCurrentPlan({ ...SKILL_MAP['reading.sentenceCompletion'], skill: 'reading.sentenceCompletion', screen: 's-reading', reason: 'Dev jump' });
       loadReadingSession();
       break;
+    case 'reading-matching-info':
+      setCurrentPlan({ ...SKILL_MAP['reading.matchingInformation'], skill: 'reading.matchingInformation', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-matching-features':
+      setCurrentPlan({ ...SKILL_MAP['reading.matchingFeatures'], skill: 'reading.matchingFeatures', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-matching-headings':
+      setCurrentPlan({ ...SKILL_MAP['reading.matchingHeadings'], skill: 'reading.matchingHeadings', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-short-answer':
+      setCurrentPlan({ ...SKILL_MAP['reading.shortAnswer'], skill: 'reading.shortAnswer', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
     case 'listening':
       setCurrentPlan({ ...SKILL_MAP['listening.multipleChoice'], reason: 'Dev jump' });
       loadListeningSession();

@@ -62,9 +62,17 @@ let sessionSummary       = '';   // SC summary text
 let sessionWordBank      = [];   // SC word bank
 
 // Additional session type flags
-let isYNNGSession         = false;  // Yes / No / Not Given
-let isMCSession           = false;  // Reading Multiple Choice
-let isSentenceCompSession = false;  // Sentence Completion
+let isYNNGSession             = false;  // Yes / No / Not Given
+let isMCSession               = false;  // Reading Multiple Choice
+let isSentenceCompSession     = false;  // Sentence Completion
+let isMatchingInfoSession     = false;  // Matching Information
+let isMatchingFeaturesSession = false;  // Matching Features
+let isMatchingHeadingsSession = false;  // Matching Headings
+let isShortAnswerSession      = false;  // Short Answer
+
+// Extra state for matching/short-answer sessions
+let sessionMatchingFeatures   = [];  // feature names for Matching Features
+let sessionMatchingHeadings   = [];  // heading options for Matching Headings
 
 // ── BEHAVIOUR TRACKING STATE ──────────────────────────────────────
 let bhvSessionStart   = 0;
@@ -315,6 +323,12 @@ export async function loadReadingSession() {
   isYNNGSession                = false;
   isMCSession                  = false;
   isSentenceCompSession        = false;
+  isMatchingInfoSession        = false;
+  isMatchingFeaturesSession    = false;
+  isMatchingHeadingsSession    = false;
+  isShortAnswerSession         = false;
+  sessionMatchingFeatures      = [];
+  sessionMatchingHeadings      = [];
   sessionLogicValidationPassed = false;
   sessionIsVerified            = false;
   sessionFromBank              = false;
@@ -330,11 +344,15 @@ export async function loadReadingSession() {
   submitBtn.textContent = 'Submit answers →';
   submitBtn.onclick = () => window.submitReading();
 
-  const skillKey        = currentPlan?.skill || 'reading.tfng';
-  isSCSession           = (skillKey === 'reading.summaryCompletion');
-  isYNNGSession         = (skillKey === 'reading.yesNoNotGiven');
-  isMCSession           = (skillKey === 'reading.multipleChoice');
-  isSentenceCompSession = (skillKey === 'reading.sentenceCompletion');
+  const skillKey            = currentPlan?.skill || 'reading.tfng';
+  isSCSession               = (skillKey === 'reading.summaryCompletion');
+  isYNNGSession             = (skillKey === 'reading.yesNoNotGiven');
+  isMCSession               = (skillKey === 'reading.multipleChoice');
+  isSentenceCompSession     = (skillKey === 'reading.sentenceCompletion');
+  isMatchingInfoSession     = (skillKey === 'reading.matchingInformation');
+  isMatchingFeaturesSession = (skillKey === 'reading.matchingFeatures');
+  isMatchingHeadingsSession = (skillKey === 'reading.matchingHeadings');
+  isShortAnswerSession      = (skillKey === 'reading.shortAnswer');
 
   const _scDay = (studentData?.dayNumber || 1) - 1;
   document.getElementById('reading-p1-dot').className = _scDay > 0 ? 'phase-dot done' : 'phase-dot';
@@ -521,6 +539,97 @@ export async function loadReadingSession() {
       console.warn('SC bank lookup failed — falling back to AI:', err.message);
     }
   }
+  // ── Bank fast-path: Matching Information ─────────────────────────────────
+  if (isMatchingInfoSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-matching-information',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+        sessionPassage   = bankSet.passage;
+        sessionTopic     = bankSet.topic;
+        sessionFromBank  = true;
+        sessionBankSetId = bankSet.id;
+        sessionQuestions = bankSet.questions.map(q => ({
+          id: q.id, text: q.text, answer: q.answer, explanation: q.explanation, fromBank: true,
+        }));
+        renderMatchingInfoSession({ passage: sessionPassage, questions: sessionQuestions });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking(); setupScrollTracking(); trackQStart(1);
+        return;
+      }
+    } catch (err) { console.warn('Matching Info bank lookup failed — falling back to AI:', err.message); }
+  }
+
+  // ── Bank fast-path: Matching Features ────────────────────────────────────
+  if (isMatchingFeaturesSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-matching-features',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+        sessionPassage          = bankSet.passage;
+        sessionTopic            = bankSet.topic;
+        sessionFromBank         = true;
+        sessionBankSetId        = bankSet.id;
+        sessionMatchingFeatures = bankSet.extraData?.features || [];
+        sessionQuestions        = bankSet.questions.map(q => ({
+          id: q.id, text: q.text, answer: q.answer, explanation: q.explanation, fromBank: true,
+        }));
+        renderMatchingFeaturesSession({
+          passage: sessionPassage, questions: sessionQuestions, features: sessionMatchingFeatures,
+        });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking(); setupScrollTracking(); trackQStart(1);
+        return;
+      }
+    } catch (err) { console.warn('Matching Features bank lookup failed — falling back to AI:', err.message); }
+  }
+
+  // ── Bank fast-path: Matching Headings (AI fallback — only 2 bank sets) ──
+  if (isMatchingHeadingsSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-matching-headings',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+        sessionPassage          = bankSet.passage;
+        sessionTopic            = bankSet.topic;
+        sessionFromBank         = true;
+        sessionBankSetId        = bankSet.id;
+        sessionMatchingHeadings = bankSet.extraData?.headings || [];
+        const paragraphs        = bankSet.extraData?.paragraphs || [];
+        sessionQuestions        = bankSet.questions.map(q => ({
+          id: q.id, text: q.text, answer: q.answer, explanation: q.explanation, fromBank: true,
+        }));
+        renderMatchingHeadingsSession({
+          passage: sessionPassage, questions: sessionQuestions,
+          headings: sessionMatchingHeadings, paragraphs,
+        });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking(); setupScrollTracking(); trackQStart(1);
+        return;
+      }
+    } catch (err) { console.warn('Matching Headings bank lookup failed — falling back to AI:', err.message); }
+  }
   // ─────────────────────────────────────────────────────────────────────────
 
   let prompt;
@@ -584,6 +693,117 @@ Return ONLY this JSON:
     {"id": 3, "text": "...", "options": [...], "answer": "B", "explanation": "..."},
     {"id": 4, "text": "...", "options": [...], "answer": "C", "explanation": "..."},
     {"id": 5, "text": "...", "options": [...], "answer": "D", "explanation": "..."}
+  ]
+}`,
+    };
+  } else if (isMatchingInfoSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Matching Information IELTS Academic reading exercise for a Band ${band} student.
+
+RULES:
+- The passage must have exactly 5 labeled sections: A, B, C, D, E — each a distinct paragraph.
+- Each question identifies a specific piece of information and asks which section (A–E) contains it.
+- Answers must be exactly "A", "B", "C", "D", or "E".
+- Distribute answers across sections — do not put all answers in one section.
+
+Return ONLY this JSON:
+{
+  "passage": "A. First paragraph (50–70 words)\\n\\nB. Second paragraph (50–70 words)\\n\\nC. Third paragraph (50–70 words)\\n\\nD. Fourth paragraph (50–70 words)\\n\\nE. Fifth paragraph (50–70 words)",
+  "topic": "2-4 word topic label",
+  "questions": [
+    {"id": 1, "text": "specific information to locate", "answer": "A", "explanation": "Section A states that..."},
+    {"id": 2, "text": "specific information to locate", "answer": "C", "explanation": "Section C mentions..."},
+    {"id": 3, "text": "specific information to locate", "answer": "B", "explanation": "Section B describes..."},
+    {"id": 4, "text": "specific information to locate", "answer": "E", "explanation": "Section E notes..."},
+    {"id": 5, "text": "specific information to locate", "answer": "D", "explanation": "Section D states..."}
+  ]
+}`,
+    };
+  } else if (isMatchingFeaturesSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Matching Features IELTS Academic reading exercise for a Band ${band} student.
+
+RULES:
+- The passage discusses exactly 3 distinct people, researchers, or organisations (the "features").
+- Each of the 5 questions is a statement attributed to one of the 3 features.
+- Answers must be one of the exact feature names (e.g. "Dr Smith").
+- Each feature must be used at least once but does NOT need to be used equally.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of academic prose (170–220 words total) discussing 3 named people/researchers",
+  "topic": "2-4 word topic label",
+  "features": ["Feature One", "Feature Two", "Feature Three"],
+  "questions": [
+    {"id": 1, "text": "statement attributed to one feature", "answer": "Feature One", "explanation": "The passage states that Feature One..."},
+    {"id": 2, "text": "statement attributed to one feature", "answer": "Feature Two", "explanation": "Feature Two is described as..."},
+    {"id": 3, "text": "statement attributed to one feature", "answer": "Feature Three", "explanation": "Feature Three..."},
+    {"id": 4, "text": "statement attributed to one feature", "answer": "Feature One", "explanation": "Feature One also..."},
+    {"id": 5, "text": "statement attributed to one feature", "answer": "Feature Two", "explanation": "Feature Two further..."}
+  ]
+}`,
+    };
+  } else if (isMatchingHeadingsSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Matching Headings IELTS Academic reading exercise for a Band ${band} student.
+
+RULES:
+- The passage must have exactly 5 labeled paragraphs: A, B, C, D, E.
+- Provide exactly 7 headings numbered 1–7: 5 correct (one per paragraph) + 2 distractors.
+- Distractors must seem plausible but focus on a detail, not the paragraph's main idea.
+- Each question asks which heading (1–7) best matches the paragraph's main idea.
+- "answer" must be the heading number as a string ("1", "2", etc.).
+
+Return ONLY this JSON:
+{
+  "passage": "A. First paragraph (60–80 words)\\n\\nB. Second paragraph (60–80 words)\\n\\nC. Third paragraph (60–80 words)\\n\\nD. Fourth paragraph (60–80 words)\\n\\nE. Fifth paragraph (60–80 words)",
+  "topic": "2-4 word topic label",
+  "headings": [
+    {"id": 1, "text": "Heading matching paragraph A"},
+    {"id": 2, "text": "Heading matching paragraph B"},
+    {"id": 3, "text": "Heading matching paragraph C"},
+    {"id": 4, "text": "Heading matching paragraph D"},
+    {"id": 5, "text": "Heading matching paragraph E"},
+    {"id": 6, "text": "Distractor heading — detail from passage, not main idea"},
+    {"id": 7, "text": "Distractor heading — related topic not covered"}
+  ],
+  "questions": [
+    {"id": 1, "text": "Paragraph A", "answer": "1", "explanation": "Heading 1 matches paragraph A because..."},
+    {"id": 2, "text": "Paragraph B", "answer": "2", "explanation": "Heading 2 matches paragraph B because..."},
+    {"id": 3, "text": "Paragraph C", "answer": "3", "explanation": "Heading 3 matches paragraph C because..."},
+    {"id": 4, "text": "Paragraph D", "answer": "4", "explanation": "Heading 4 matches paragraph D because..."},
+    {"id": 5, "text": "Paragraph E", "answer": "5", "explanation": "Heading 5 matches paragraph E because..."}
+  ]
+}`,
+    };
+  } else if (isShortAnswerSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Short Answer IELTS Academic reading exercise for a Band ${band} student.
+
+RULES:
+- Each question requires an answer of NO MORE THAN THREE WORDS taken directly from the passage.
+- The answer must be the exact words from the passage — no paraphrasing.
+- Questions should require scanning the passage carefully, not just skimming.
+- Display the word limit reminder in the question text.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
+  "topic": "2-4 word topic label",
+  "questions": [
+    {"id": 1, "text": "Question? (NO MORE THAN THREE WORDS)", "answer": "exact words from passage", "explanation": "which passage sentence contains the answer", "keySentence": "exact sentence from passage"},
+    {"id": 2, "text": "Question? (NO MORE THAN THREE WORDS)", "answer": "exact words from passage", "explanation": "...", "keySentence": "..."},
+    {"id": 3, "text": "Question? (NO MORE THAN THREE WORDS)", "answer": "exact words from passage", "explanation": "...", "keySentence": "..."},
+    {"id": 4, "text": "Question? (NO MORE THAN THREE WORDS)", "answer": "exact words from passage", "explanation": "...", "keySentence": "..."},
+    {"id": 5, "text": "Question? (NO MORE THAN THREE WORDS)", "answer": "exact words from passage", "explanation": "...", "keySentence": "..."}
   ]
 }`,
     };
@@ -725,7 +945,8 @@ Return ONLY this JSON:
     // For TFNG sessions only: verify every question has a valid logicType and
     // a passageAnchor that is a verbatim substring of the passage.
     // On failure, regenerate once with an explicit correction instruction.
-    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession) {
+    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession &&
+        !isMatchingInfoSession && !isMatchingFeaturesSession && !isMatchingHeadingsSession && !isShortAnswerSession) {
       try {
         const tagsOk = validateLogicTags(parsed.passage, parsed.questions);
         if (!tagsOk) {
@@ -773,6 +994,20 @@ Return ONLY this JSON:
     } else if (isSentenceCompSession) {
       sessionQuestions = parsed.questions;
       renderSentenceCompletionSession(parsed);
+    } else if (isMatchingInfoSession) {
+      sessionQuestions = parsed.questions;
+      renderMatchingInfoSession(parsed);
+    } else if (isMatchingFeaturesSession) {
+      sessionMatchingFeatures = parsed.features || [];
+      sessionQuestions = parsed.questions;
+      renderMatchingFeaturesSession(parsed);
+    } else if (isMatchingHeadingsSession) {
+      sessionMatchingHeadings = parsed.headings || [];
+      sessionQuestions = parsed.questions;
+      renderMatchingHeadingsSession(parsed);
+    } else if (isShortAnswerSession) {
+      sessionQuestions = parsed.questions;
+      renderShortAnswerSession(parsed);
     } else {
       // Run the Answer Verification Agent before showing anything to the student.
       let verified = { questions: parsed.questions, corrections: [] };
@@ -1122,9 +1357,254 @@ function submitSentenceComp() {
   window.scrollTo(0, document.body.scrollHeight);
 }
 
+// ── MATCHING INFORMATION RENDERER ────────────────────────────────
+export function renderMatchingInfoSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully. The passage is divided into sections A–E. Match each piece of information to the correct section.';
+  document.getElementById('reading-q-label').textContent = 'Matching Information';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'For each statement, tap the <strong>section letter</strong> (A–E) that contains that information.';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  const sectionLabels = ['A', 'B', 'C', 'D', 'E'];
+  document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => {
+    const btns = sectionLabels.map(l =>
+      `<button class="tfng-btn" data-v="${l}" onclick="answerMatchingInfo(${q.id},'${l}')">${l}</button>`
+    ).join('');
+    return `
+      <div class="q-block" id="qb${q.id}">
+        <div class="q-num">${q.id}</div>
+        <div class="q-text">${q.text}</div>
+        <div class="q-sub">Which section contains this information?</div>
+        <div class="tfng" id="mi${q.id}">${btns}</div>
+        <div class="result-flash" id="rf${q.id}"></div>
+      </div>`;
+  }).join('');
+}
+
+window.answerMatchingInfo = function (qnum, val) {
+  if (sessionAnswers[qnum]) return;
+  const q = sessionQuestions.find(x => x.id === qnum);
+  if (!q) return;
+  trackQAnswer(qnum); trackQStart(qnum + 1);
+  const isRight = val === q.answer;
+  sessionAnswers[qnum] = { val, isRight };
+  if (isRight) sessionCorrect++;
+  document.querySelectorAll(`#mi${qnum} .tfng-btn`).forEach(b => {
+    b.disabled = true;
+    if (b.dataset.v === q.answer)         b.classList.add('correct');
+    else if (b.dataset.v === val && !isRight) b.classList.add('wrong');
+  });
+  const rf = document.getElementById(`rf${qnum}`);
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight
+    ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
+    document.getElementById('btn-reading-submit').disabled = false;
+  }
+};
+
+// ── MATCHING FEATURES RENDERER ────────────────────────────────────
+export function renderMatchingFeaturesSession({ passage, questions, features }) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully. Match each statement to the correct person or category.';
+  document.getElementById('reading-q-label').textContent = 'Matching Features';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Tap the <strong>name or category</strong> that each statement refers to.';
+
+  document.getElementById('reading-passage').innerHTML = (passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  const featureList = features || sessionMatchingFeatures;
+  document.getElementById('questions-container').innerHTML = (questions || []).map(q => {
+    const btns = featureList.map(f =>
+      `<button class="mc-option" data-v="${f}" onclick="answerMatchingFeatures(${q.id},this)">
+        <span>${f}</span>
+      </button>`
+    ).join('');
+    return `
+      <div class="q-block" id="qb${q.id}">
+        <div class="q-num">${q.id}</div>
+        <div class="q-text">${q.text}</div>
+        <div id="mf${q.id}" style="margin-top:10px">${btns}</div>
+        <div class="result-flash" id="rf${q.id}"></div>
+      </div>`;
+  }).join('');
+}
+
+window.answerMatchingFeatures = function (qnum, btn) {
+  if (sessionAnswers[qnum]) return;
+  const q = sessionQuestions.find(x => x.id === qnum);
+  if (!q) return;
+  const val = btn.dataset.v;
+  trackQAnswer(qnum); trackQStart(qnum + 1);
+  const isRight = val === q.answer;
+  sessionAnswers[qnum] = { val, isRight };
+  if (isRight) sessionCorrect++;
+  document.querySelectorAll(`#mf${qnum} .mc-option`).forEach(b => {
+    b.disabled = true;
+    if (b.dataset.v === q.answer)             b.classList.add('correct');
+    else if (b.dataset.v === val && !isRight) b.classList.add('wrong');
+  });
+  const rf = document.getElementById(`rf${qnum}`);
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight
+    ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
+    document.getElementById('btn-reading-submit').disabled = false;
+  }
+};
+
+// ── MATCHING HEADINGS RENDERER ────────────────────────────────────
+const ROMAN = ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'];
+
+export function renderMatchingHeadingsSession({ passage, questions, headings, paragraphs }) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage. Choose the best heading for each paragraph from the list below.';
+  document.getElementById('reading-q-label').textContent = 'Matching Headings';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Select one heading per paragraph. Each heading can only be used <strong>once</strong>.';
+
+  const headingList = headings || sessionMatchingHeadings;
+  const headingHtml = headingList.map(h =>
+    `<div style="margin:4px 0;font-size:13px"><span style="font-weight:700;color:var(--accent);min-width:20px;display:inline-block">${ROMAN[h.id - 1]}</span> ${h.text}</div>`
+  ).join('');
+
+  const selectOpts = headingList.map(h =>
+    `<option value="${h.id}">${ROMAN[h.id - 1]}: ${h.text.length > 55 ? h.text.slice(0, 55) + '…' : h.text}</option>`
+  ).join('');
+
+  // If paragraphs extraData available, show them individually; otherwise use passage text
+  const passageHtml = (paragraphs && paragraphs.length)
+    ? paragraphs.map(p => `<p><strong>${p.label}.</strong> ${p.text}</p>`).join('')
+    : (passage || '').split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  document.getElementById('reading-passage').innerHTML = passageHtml;
+
+  document.getElementById('questions-container').innerHTML = `
+    <div style="background:#F4F4F9;border-radius:10px;padding:12px 14px;margin-bottom:16px">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">List of Headings</div>
+      ${headingHtml}
+    </div>
+    ${(questions || []).map(q => `
+      <div class="q-block" id="qb${q.id}">
+        <div class="q-num">${q.id}</div>
+        <div class="q-text">${q.text}</div>
+        <select id="mh-sel-${q.id}" class="sc-gap-select" onchange="onMatchingHeadingsChange()"
+          style="margin-top:10px;width:100%;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;background:#fff;color:var(--text);font-family:inherit">
+          <option value="">— Select a heading —</option>
+          ${selectOpts}
+        </select>
+        <div class="result-flash" id="rf${q.id}"></div>
+      </div>`).join('')}`;
+}
+
+window.onMatchingHeadingsChange = function () {
+  const allFilled = sessionQuestions.every(q => {
+    const el = document.getElementById(`mh-sel-${q.id}`);
+    return el && el.value !== '';
+  });
+  document.getElementById('btn-reading-submit').disabled = !allFilled;
+};
+
+function submitMatchingHeadings() {
+  sessionCorrect = 0;
+  sessionQuestions.forEach(q => {
+    const el      = document.getElementById(`mh-sel-${q.id}`);
+    const val     = el ? el.value : '';
+    const isRight = val === q.answer;
+    if (isRight) sessionCorrect++;
+    sessionAnswers[q.id] = { val, isRight };
+    if (el) { el.disabled = true; el.style.borderColor = isRight ? 'var(--success)' : 'var(--danger)'; }
+    const rf = document.getElementById(`rf${q.id}`);
+    if (rf) {
+      const chosenHeading = sessionMatchingHeadings.find(h => String(h.id) === val);
+      const correctHeading = sessionMatchingHeadings.find(h => String(h.id) === q.answer);
+      rf.classList.add('show', isRight ? 'good' : 'bad');
+      rf.innerHTML = isRight
+        ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
+        : `❌ The correct heading is <strong>${correctHeading ? ROMAN[correctHeading.id - 1] + ': ' + correctHeading.text : q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+    }
+  });
+  const btn = document.getElementById('btn-reading-submit');
+  btn.textContent = 'Continue to notebook →';
+  btn.disabled = false;
+  btn.onclick = () => finishReadingSession();
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+// ── SHORT ANSWER RENDERER ─────────────────────────────────────────
+export function renderShortAnswerSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully, then answer each question using words directly from the passage.';
+  document.getElementById('reading-q-label').textContent = 'Short Answer';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Use words <strong>directly from the passage</strong>. <strong>NO MORE THAN THREE WORDS</strong> per answer.';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => `
+    <div class="q-block" id="qb${q.id}">
+      <div class="q-num">${q.id}</div>
+      <div class="q-text">${q.text}</div>
+      <div style="margin-top:10px">
+        <input type="text" id="sa-input-${q.id}" placeholder="Type your answer (max 3 words)…"
+          style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;color:var(--text);background:#fff;box-sizing:border-box;font-family:inherit"
+          oninput="onShortAnswerInput()" />
+      </div>
+      <div class="result-flash" id="rf${q.id}"></div>
+    </div>
+  `).join('');
+}
+
+window.onShortAnswerInput = function () {
+  const allFilled = sessionQuestions.every(q => {
+    const el = document.getElementById(`sa-input-${q.id}`);
+    return el && el.value.trim() !== '';
+  });
+  document.getElementById('btn-reading-submit').disabled = !allFilled;
+};
+
+function submitShortAnswer() {
+  sessionCorrect = 0;
+  sessionQuestions.forEach(q => {
+    const el      = document.getElementById(`sa-input-${q.id}`);
+    const val     = el ? el.value.trim() : '';
+    const correct = q.answer || '';
+    const isRight = normaliseAnswer(val) === normaliseAnswer(correct);
+    if (isRight) sessionCorrect++;
+    sessionAnswers[q.id] = { val, isRight };
+    if (el) {
+      el.disabled = true;
+      el.style.borderColor = isRight ? 'var(--success)' : 'var(--danger)';
+    }
+    const rf = document.getElementById(`rf${q.id}`);
+    if (rf) {
+      rf.classList.add('show', isRight ? 'good' : 'bad');
+      rf.innerHTML = isRight
+        ? `✅ Correct.`
+        : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+    }
+  });
+  const btn = document.getElementById('btn-reading-submit');
+  btn.textContent = 'Continue to notebook →';
+  btn.disabled = false;
+  btn.onclick = () => finishReadingSession();
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
 window.submitReading = function () {
-  if (isSCSession || isSentenceCompSession) {
-    if (isSentenceCompSession) { submitSentenceComp(); return; }
+  if (isSCSession || isSentenceCompSession || isShortAnswerSession || isMatchingHeadingsSession) {
+    if (isSentenceCompSession)      { submitSentenceComp();       return; }
+    if (isShortAnswerSession)       { submitShortAnswer();        return; }
+    if (isMatchingHeadingsSession)  { submitMatchingHeadings();   return; }
     submitSCSession();
     return;
   }
@@ -1235,7 +1715,8 @@ export async function finishReadingSession() {
       ...(sessionCorrections.length    ? { answerCorrections: sessionCorrections }   : {}),
       ...(sessionPassageQuality        ? { passageQuality: sessionPassageQuality }   : {}),
       // Only log logic-type metadata for T/F/NG sessions (where it is generated)
-      ...(!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession && sessionQuestions.length ? {
+      ...(!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession &&
+          !isMatchingInfoSession && !isMatchingFeaturesSession && !isMatchingHeadingsSession && !isShortAnswerSession && sessionQuestions.length ? {
         logicTypes:           sessionQuestions.map(q => ({ id: q.id, logicType: q.logicType || null })),
         passageAnchors:       sessionQuestions.map(q => ({ id: q.id, passageAnchor: q.passageAnchor || null })),
         logicValidationPassed: sessionLogicValidationPassed,
@@ -1254,7 +1735,8 @@ export async function finishReadingSession() {
 
     // Error reason tagging — TFNG only (all other session types have different error models)
     let errorReasonsUpdate = null;
-    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession) {
+    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession &&
+        !isMatchingInfoSession && !isMatchingFeaturesSession && !isMatchingHeadingsSession && !isShortAnswerSession) {
       const prevER = prevSkill.errorReasons || {};
       const mergedER = {
         synonymTrap: 0, cautiousLanguageMissed: 0, negationOverlooked: 0,
@@ -1305,7 +1787,8 @@ export async function finishReadingSession() {
 
     const snap = await getStudentDoc(currentUser.uid);
     setStudentData(snap.data());
-    const questionResults = (!isSCSession && !isMCSession && !isSentenceCompSession)
+    const questionResults = (!isSCSession && !isMCSession && !isSentenceCompSession &&
+      !isMatchingInfoSession && !isMatchingFeaturesSession && !isMatchingHeadingsSession && !isShortAnswerSession)
       ? sessionQuestions.map(q => ({ logicType: q.logicType || null, isRight: sessionAnswers[q.id]?.isRight || false }))
       : null;
     await updateStudentBrain(behaviour, accuracy, skillKey, questionResults);

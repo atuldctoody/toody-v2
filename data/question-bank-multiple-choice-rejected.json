@@ -799,5 +799,1163 @@
       "flaggedForReview": []
     },
     "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "eb04b9c8-33da-42ac-8302-26df11fd20b5",
+    "type": "multiple-choice",
+    "topic": "Urban Development",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Expected ',' or '}' after property value in JSON at position 1227 (line 1 column 1228)",
+    "meta": {
+      "generatedAt": "2026-04-02T08:49:18.302Z"
+    }
+  },
+  {
+    "id": "41471009-9d89-41d7-b13a-b8be4266d0e7",
+    "type": "multiple-choice",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the actions that governments take in the economic field. It covers the systems for setting interest rates, government budgets, labor market regulations, national ownership, and many other areas of government interventions into the economy. A primary goal of economic policy is to improve the economic well-being of a nation's citizens. This often involves monetary policy, which is managed by a country's central bank, and fiscal policy, which is set by the government. Monetary policy involves managing the money supply and interest rates to influence the economy, while fiscal policy involves the use of government spending and taxation. One key aspect of monetary policy is controlling inflation. By adjusting interest rates, central banks can either encourage spending and investment by lowering rates or control inflation by raising them. Fiscal policy, on the other hand, deals with government revenue and expenditure. When a government wants to stimulate the economy, it might increase spending or cut taxes. However, these policies can also lead to increased deficits and debt if not managed carefully.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is a primary goal of economic policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Enhancing citizens' economic welfare",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Decreasing government intervention",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Managing national ownership",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Eliminating all debt and deficits",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because the passage states that improving the economic well-being of citizens is a primary goal. B is incorrect as national ownership is mentioned but not as a primary goal. C reverses the idea by suggesting less intervention, whereas policy involves active management. D overstates by suggesting complete elimination of debt, which the passage does not claim.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "What role does the central bank play in economic policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Eliminating inflation completely",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Creating labor market regulations",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Deciding government spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Regulating money supply and interest rates",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A is correct as it paraphrases the passage's description of the central bank's role in managing money supply and interest rates. B incorrectly attributes government fiscal responsibilities to the central bank. C mentions something related but not specific to the central bank's role. D overstates by suggesting complete elimination of inflation, which the passage does not state.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "How does fiscal policy attempt to influence the economy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By controlling interest rates",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "By managing national ownership policies",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "By adjusting taxes and government expenditures",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "By solely increasing taxation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "A is correct as it explains the passage's view on fiscal policy using government revenue and expenditure. B reverses monetary policy aspects with fiscal policy. C overstates by suggesting only tax increases, while fiscal policy involves both taxing and spending adjustments. D mentions national ownership, not specific to fiscal policy.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "What is a potential risk of poorly managed fiscal policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Increasing deficits and debt",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Encouraging national ownership",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Lowering interest rates excessively",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Reducing government intervention completely",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as the passage warns about deficits and debt from mismanaged fiscal policy. B misattributes a monetary policy tool. C overstates by suggesting complete removal of intervention, which is not indicated. D mentions national ownership, but not in the context of fiscal policy.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "What is one method used in monetary policy to control inflation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Removing all taxes",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Setting labor market regulations",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Increasing government spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Adjusting interest rates",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A is correct as adjusting interest rates is how the passage describes controlling inflation. B reverses the relationship, as spending is fiscal policy. C overstates by suggesting complete tax removal, which isn't discussed. D mentions labor regulations, unrelated to monetary policy.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:49:37.726Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "f6738f9d-6340-481c-b9f6-4eee8245e0ee",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has traditionally focused on understanding the structure and function of language, examining syntax, morphology, and phonetics. Recent advancements, however, have shifted some attention towards sociolinguistics, which explores how language interacts with social factors. This includes studying how language varies among different communities and the social implications of these variations. Another area gaining prominence is psycholinguistics, where researchers investigate the cognitive processes that underlie language use. This field aims to understand how language is acquired, processed, and produced by the human brain. Moreover, computational linguistics is becoming increasingly relevant, as it applies algorithms to analyze linguistic data, aiding in machine translation and natural language processing. While each of these fields has its distinct focus, they contribute to a comprehensive understanding of language in both theoretical and practical contexts.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the main focus of sociolinguistics?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The cognitive processes in language use.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "The role of language in all human interactions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "The structure of language.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The relationship between language and society.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct as it paraphrases the passage's mention of sociolinguistics exploring language's interaction with social factors. Option B is a distractor because it mentions a different focus area. Option C reverses the meaning by describing psycholinguistics. Option D overstates by suggesting a broader application than the passage describes.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Which field of study is concerned with the cognitive processes of language?",
+        "options": [
+          {
+            "label": "A",
+            "text": "All linguistic fields.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Phonetics.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Sociolinguistics.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Psycholinguistics.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct as it correctly identifies psycholinguistics as focusing on cognitive processes. Option B is mentioned but not related to cognitive processes. Option C reverses the meaning by inaccurately linking phonetics. Option D overstates by suggesting all fields cover cognitive processes.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "What is the role of computational linguistics according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Understanding syntax and morphology.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "B",
+            "text": "Applying algorithms to analyze linguistic data.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "C",
+            "text": "Solving all language processing problems.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "Studying language variations among communities.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "B",
+        "explanation": "Option A is correct as it paraphrases the role of computational linguistics in applying algorithms. Option B mentions another area of study. Option C reverses by describing sociolinguistics. Option D overstates by suggesting an unrealistic goal.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Which of the following fields has gained increased relevance recently?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Syntax and phonetics.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "Morphology.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "All fields of linguistics.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "Computational linguistics.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A is correct as it reflects the passage's mention of computational linguistics becoming more relevant. Option B is mentioned but not as increasingly relevant. Option C reverses by focusing on traditional areas. Option D overstates by implying universal increase in relevance.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "How does psycholinguistics contribute to linguistic research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By studying language structure.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "B",
+            "text": "By analyzing social implications of language.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "By examining how language is processed by the brain.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "By providing solutions to language acquisition challenges.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "Option A is correct as it paraphrases the passage about psycholinguistics' focus on brain processing. Option B describes another field. Option C reverses by describing structural study. Option D overstates by suggesting definitive solutions.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 6,
+        "text": "What is a common goal among different linguistic research fields?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A comprehensive understanding of language.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Focusing solely on syntax.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Overcoming all language-related challenges.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Identifying universal grammar rules.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it captures the passage's emphasis on a comprehensive understanding. Option B is a focus area but not the common goal. Option C reverses by overstating challenges tackled. Option D overstates by implying a universal goal.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T08:59:01.929Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "1015a237-82e3-4bb5-978a-4209f017a74b",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Recent advances in neuroscience have significantly improved our understanding of how the human brain functions. One of the key areas of research has been the study of neural plasticity, which refers to the brain's ability to reorganize itself by forming new neural connections throughout life. This ability is critical for learning, memory, and recovery from brain injuries. Another significant focus has been on the role of neurotransmitters, the chemical messengers that transmit signals across synapses. Imbalances in neurotransmitter levels are linked to various neurological disorders, including depression and schizophrenia. Additionally, the development of neuroimaging techniques, such as fMRI, has allowed scientists to observe brain activity in real time, providing valuable insights into brain processes and aiding in the diagnosis of mental health conditions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is neural plasticity primarily responsible for?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Healing all types of neurological disorders",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Transmitting signals across synapses",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "The brain's ability to form new connections",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "Preventing brain injuries",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "A is correct because neural plasticity involves forming new connections. B is incorrect because neurotransmitters, not plasticity, transmit signals. C is wrong as plasticity aids recovery, not prevention. D exaggerates plasticity's role.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "How have neuroimaging techniques benefited neuroscience?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By studying neurotransmitter imbalances",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "B",
+            "text": "By curing mental health conditions",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "By allowing real-time observation of brain activity",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "D",
+            "text": "By preventing neurological disorders",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "C",
+        "explanation": "A is correct as neuroimaging provides real-time insights. B overstates the capability, C misattributes the benefit, and D reverses it.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "What is one impact of neurotransmitter imbalances?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They automatically heal neurological disorders",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "They can be linked to mental health disorders",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "C",
+            "text": "They help in forming new neural connections",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "They are solely responsible for brain injuries",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "B",
+        "explanation": "A is correct as imbalances relate to disorders. B falsely attributes sole responsibility. C misinterprets their function. D overstates their effect.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "What advancement allows scientists to diagnose mental health conditions more effectively?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Real-time neurotransmitter analysis",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Neural plasticity",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Chemical messengers",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Neuroimaging techniques",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "A is correct as neuroimaging aids diagnosis. B and C are mentioned but unrelated. D overstates the current capabilities.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "What does the passage suggest about the future of neuroscience?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It will focus solely on neurotransmitters",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "B",
+            "text": "It will continue to evolve with new technologies",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "C",
+            "text": "It will completely cure all neurological disorders",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "It will eliminate the need for medication",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "B",
+        "explanation": "A is correct as the passage implies ongoing development. B overstates, C is incorrect, and D misrepresents the scope.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 6,
+        "text": "Why is neurotransmitter research important according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It helps understand neurological disorders",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It can immediately treat brain injuries",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It is unrelated to mental health conditions",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It solely focuses on synapse function",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as neurotransmitter research relates to disorders. B overstates, C reverses, and D limits the scope.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:02:35.324Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e24dd8cf-ebcf-42be-b10f-b2dd2e6dc70e",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of marine organisms, their behaviors, and interactions with the environment. The oceans cover over 70% of the Earth's surface, providing a vast and complex habitat for a wide range of species. Marine biologists often explore the impact of human activity on these ecosystems, focusing on issues such as pollution, climate change, and overfishing. For instance, coral reefs, often referred to as the 'rainforests of the sea', are particularly vulnerable to changes in water temperature and acidity. These changes can lead to coral bleaching, a phenomenon where corals lose their vibrant colors and vital symbiotic algae. Research in marine biology not only enhances our understanding of the marine environment but also informs conservation efforts to protect these vital ecosystems. Advances in technology, such as remote sensing and underwater robotics, have significantly expanded the scope of marine research, allowing scientists to study previously inaccessible areas of the ocean. This increased ability to gather data has led to new insights into the behavior and distribution of marine life, contributing to more effective management and preservation strategies.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is a primary focus of marine biology according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The study of interactions between marine organisms and their environment.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The reduction of human impact on terrestrial ecosystems.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Eliminating all forms of marine pollution.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "The development of new technology for deep-sea exploration.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage's focus on the interaction between marine organisms and their environment. B mentions technology, which is part of marine research but not the primary focus. C reverses the marine context to terrestrial. D overstates by implying complete elimination of pollution, which is not claimed.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "What challenge faced by coral reefs is highlighted in the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Coral bleaching due to changes in water conditions.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Complete destruction of coral reefs by human actions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "Increased biodiversity resulting from human activity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "The spread of invasive species in reef areas.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A accurately paraphrases the issue of coral bleaching due to environmental changes. B mentions invasive species, which is not discussed. C incorrectly suggests increased biodiversity, reversing the passage's concern about ecosystem vulnerability. D exaggerates the claim by suggesting complete destruction.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "How has technology impacted marine research according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It has expanded research capabilities to previously unreachable ocean areas.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It focuses solely on coral reef ecosystems.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It has completely replaced traditional methods of marine study.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "It has limited the scope of marine research to coastal regions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage's point about technology expanding research scopes. B overstates by suggesting complete replacement of traditional methods. C reverses the effect of technology by suggesting limitations. D mentions coral reefs but does not address the broader impact on research.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "What role does marine biology play in conservation efforts?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It ensures all marine species are completely protected.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "It is limited to studying ocean currents and their effects.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It focuses mainly on terrestrial ecosystem management.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It provides essential data that informs protection strategies.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A accurately paraphrases the passage's role of marine biology in informing conservation. B overstates by suggesting complete protection. C reverses by focusing on terrestrial management. D mentions ocean currents, but the passage discusses broader roles.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "What is implied about the future of marine biology research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It will continue to evolve with technological advancements.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It will soon eliminate all challenges facing marine ecosystems.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It will become less significant as terrestrial issues gain attention.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is primarily concerned with studying current marine biodiversity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly implies the ongoing evolution of marine research with new technologies. B overstates by suggesting all challenges will be eliminated. C reverses the significance of marine research. D mentions biodiversity but misses the focus on technological impact.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:03:59.714Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "4d6395b1-fe40-476f-8ac1-c04e22eda1c5",
+    "type": "multiple-choice",
+    "band": 7,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research is a diverse field that investigates the structure, use, and psychology of language. One area of focus is psycholinguistics, which examines how language is processed in the brain. Researchers have discovered that language comprehension and production are heavily influenced by cognitive abilities and neural patterns. Another exciting subfield is sociolinguistics, which explores how social factors such as age, ethnicity, and social class impact language variation and change. Studies in this area reveal that language is not static; it evolves as societies change. Finally, computational linguistics uses algorithms to simulate human language processing. This has applications in developing technologies like speech recognition and machine translation, which are becoming increasingly sophisticated and are influencing how humans interact with machines.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is a key focus of psycholinguistics?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The complete transformation of languages over time",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "How language varies across different societies",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "The influence of technology on language",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The cognitive processes involved in language use",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          }
+        ],
+        "answer": "D",
+        "explanation": "Option A correctly paraphrases the passage's description of psycholinguistics. Option B misleads by mentioning technology, which is related to computational linguistics. Option C reverses the focus by describing sociolinguistics. Option D exaggerates the concept of language change.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "According to the passage, what does sociolinguistics study?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The variation and evolution of language in social contexts",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The brain's role in understanding language",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Technological impacts on language processing",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The static nature of language over time",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is a paraphrased answer about sociolinguistics. Option B incorrectly describes psycholinguistics. Option C is related to computational linguistics. Option D incorrectly states that language is static, contradicting the passage.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "What do computational linguists aim to achieve?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Completely replace human communication with machines",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "Simulate human language processing through technology",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "C",
+            "text": "Analyze social influences on dialects",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Focus solely on language comprehension",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "B",
+        "explanation": "Option A encapsulates the goal of computational linguistics. Option B is related to sociolinguistics. Option C narrows the focus incorrectly. Option D exaggerates the role of computational linguistics.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "How does the passage describe language change?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Driven solely by technological advancements",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "B",
+            "text": "As an evolutionary process influenced by societal shifts",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "C",
+            "text": "Independent of social factors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "As a fixed outcome of historical events",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "B",
+        "explanation": "Option A correctly paraphrases the passage. Option B reverses the concept by claiming language is fixed. Option C overstates technology's role. Option D contradicts the passage by ignoring social factors.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "What is one application of computational linguistics mentioned in the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Development of speech recognition technologies",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Examining the evolution of language over centuries",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Analyzing the impact of social class on language",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Creating new languages for human-machine interaction",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A reflects the passage's mention of speech recognition. Option B incorrectly focuses on historical evolution. Option C is related to sociolinguistics. Option D overstates the creation of new languages.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 6,
+        "text": "What does the passage suggest about the relationship between language and society?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Language evolves in response to societal changes",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Language is completely independent of social factors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Language change is primarily driven by technological advancements",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "D",
+            "text": "Society has only a minor influence on language variation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage. Option B reverses the relationship. Option C overemphasizes technology's role. Option D minimizes society's influence, which is not supported by the passage.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:16:53.500Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
   }
 ]

@@ -1,0 +1,2556 @@
+[
+  {
+    "id": "fd1dcf7f-6cdf-41fb-a8d1-76ee2339cb62",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience is the scientific study of the nervous system. It is a multidisciplinary branch of biology that combines physiology, anatomy, molecular biology, and other fields to understand the complex processes of the brain and nervous system. The human brain is a highly intricate organ that controls every aspect of human behavior, from basic motor skills to complex cognitive functions. Neuroscientists use a variety of methods to study the brain, including imaging techniques like MRI and PET scans, which allow them to observe brain activity in real-time. These methods have revolutionized our understanding of how the brain works, leading to advancements in treating neurological disorders such as Alzheimer's and Parkinson's disease. Despite these advancements, there is still much to learn about the brain's vast network of neurons and how they communicate to regulate bodily functions and behavior.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Neuroscience is a branch of biology that studies the _____ system.",
+        "answer": "nervous",
+        "explanation": "The passage defines neuroscience as the study of the nervous system.",
+        "keySentence": "Neuroscience is the scientific study of the nervous system.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: MRI and PET scans help neuroscientists to observe _____ activity.",
+        "answer": "brain",
+        "explanation": "The passage mentions imaging techniques like MRI and PET scans that allow observation of brain activity.",
+        "keySentence": "Neuroscientists use a variety of methods to study the brain, including imaging techniques like MRI and PET scans, which allow them to observe brain activity in real-time.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The brain is described as a highly _____ organ.",
+        "answer": "intricate",
+        "explanation": "The passage describes the brain as a highly intricate organ, emphasizing its complexity.",
+        "keySentence": "The human brain is a highly intricate organ that controls every aspect of human behavior.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Neuroscientists aim to _____ the complex processes of the brain.",
+        "answer": "understand",
+        "explanation": "The passage notes that neuroscience combines various disciplines to understand the brain's processes.",
+        "keySentence": "It is a multidisciplinary branch of biology that combines physiology, anatomy, molecular biology, and other fields to understand the complex processes of the brain and nervous system.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: There is still much to learn about the brain's network of _____ and their communication.",
+        "answer": "neurons",
+        "explanation": "The passage states that there is still much to learn about the brain's vast network of neurons.",
+        "keySentence": "Despite these advancements, there is still much to learn about the brain's vast network of neurons and how they communicate to regulate bodily functions and behavior.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:19:34.767Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "83206ed4-d6d7-4e6e-851e-18cfaf569021",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has been a subject of human interest and curiosity for centuries. The development of technology has enabled humans to explore beyond Earth, paving the way for numerous discoveries. One of the primary objectives of space exploration is to gather information about other celestial bodies and the possibility of life beyond our planet. This quest for knowledge has led to the successful deployment of satellites, space probes, and manned missions to the Moon and Mars. However, space exploration is not without its challenges. The vast distances, harsh environments, and high costs present significant obstacles. Despite these challenges, international cooperation and advancements in technology continue to push the boundaries of what is possible, allowing for a better understanding of our universe and our place within it.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The development of technology has enabled humans to explore beyond _____ .",
+        "answer": "Earth",
+        "explanation": "The passage explicitly states that the development of technology has enabled exploration beyond Earth.",
+        "keySentence": "The development of technology has enabled humans to explore beyond Earth, paving the way for numerous discoveries.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: One of the primary objectives of space exploration is to gather information about other _____ bodies.",
+        "answer": "celestial",
+        "explanation": "The passage mentions that one of the primary objectives is to gather information about other celestial bodies.",
+        "keySentence": "One of the primary objectives of space exploration is to gather information about other celestial bodies and the possibility of life beyond our planet.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: This quest for knowledge has led to the successful deployment of satellites, space probes, and _____ missions.",
+        "answer": "manned",
+        "explanation": "The passage indicates that the quest for knowledge has led to successful deployments including manned missions.",
+        "keySentence": "This quest for knowledge has led to the successful deployment of satellites, space probes, and manned missions to the Moon and Mars.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: The vast distances, harsh environments, and high costs present significant _____ .",
+        "answer": "obstacles",
+        "explanation": "Grammatically, the sentence needs a noun to indicate what is presented by vast distances, harsh environments, and high costs.",
+        "keySentence": "The vast distances, harsh environments, and high costs present significant obstacles.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: International cooperation and advancements in technology continue to push the _____ of what is possible.",
+        "answer": "boundaries",
+        "explanation": "The sentence requires a noun in plural form to complete the idea of pushing limits in space exploration.",
+        "keySentence": "Despite these challenges, international cooperation and advancements in technology continue to push the boundaries of what is possible, allowing for a better understanding of our universe and our place within it.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:19:44.535Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "3cc4c7b3-fb82-4bcb-9678-3bfd6cf604e8",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the study of organisms in the ocean or other marine bodies of water. Given that oceans cover over 70% of the Earth's surface, they offer a diverse environment for marine life. Marine biologists explore the interactions and behaviors of species ranging from the smallest plankton to the largest whales. The ocean's biodiversity is crucial not only for the marine ecosystem but also for human life. Many pharmaceuticals are derived from marine organisms, and these compounds can be essential in treating human diseases. Furthermore, marine ecosystems play a vital role in carbon dioxide absorption, helping to mitigate climate change. However, these ecosystems are threatened by pollution, overfishing, and climate change, which can lead to the loss of biodiversity and the destruction of habitats.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Marine biologists study organisms that live in the _____ or other marine bodies of water.",
+        "answer": "ocean",
+        "explanation": "The passage states that marine biology is the study of organisms in the ocean or other marine bodies of water.",
+        "keySentence": "Marine biology is the study of organisms in the ocean or other marine bodies of water.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Oceans cover over _____ percent of the Earth's surface.",
+        "answer": "70",
+        "explanation": "The passage mentions that oceans cover over 70% of the Earth's surface.",
+        "keySentence": "Given that oceans cover over 70% of the Earth's surface, they offer a diverse environment for marine life.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Marine ecosystems help mitigate climate change by absorbing _____ dioxide.",
+        "answer": "carbon",
+        "explanation": "Marine ecosystems play a role in absorbing carbon dioxide, which helps mitigate climate change.",
+        "keySentence": "Furthermore, marine ecosystems play a vital role in carbon dioxide absorption, helping to mitigate climate change.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Marine organisms provide compounds that can be _____ in treating human diseases.",
+        "answer": "essential",
+        "explanation": "The passage indicates that compounds from marine organisms can be crucial or essential in treating diseases.",
+        "keySentence": "Many pharmaceuticals are derived from marine organisms, and these compounds can be essential in treating human diseases.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Pollution and overfishing are _____ the ocean's biodiversity.",
+        "answer": "threatening",
+        "explanation": "The passage suggests that pollution and overfishing are threats to marine biodiversity.",
+        "keySentence": "However, these ecosystems are threatened by pollution, overfishing, and climate change, which can lead to the loss of biodiversity and the destruction of habitats.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:20:05.535Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e11d9b1f-65c2-4f20-88d0-3ad728501b23",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses various aspects of human experience, including perception, cognition, emotion, and interpersonal relationships. One of the key areas of focus in psychology is understanding how individuals process information and make decisions. Cognitive psychology, for example, examines mental processes such as memory, problem-solving, and language use. In recent years, there has been growing interest in positive psychology, which explores the factors that contribute to human happiness and well-being. This branch of psychology aims to identify and promote strengths and virtues that enable individuals and communities to thrive. Additionally, the field of developmental psychology investigates how people grow and change over the course of their lives, from infancy through old age. It looks at how different factors, such as genetics and environment, influence development and behavior.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: One area of psychology that studies mental processes is called _____.",
+        "answer": "cognitive",
+        "explanation": "Cognitive psychology is specifically mentioned as the area examining mental processes.",
+        "keySentence": "Cognitive psychology, for example, examines mental processes such as memory, problem-solving, and language use.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Positive psychology focuses on factors that contribute to human _____.",
+        "answer": "happiness",
+        "explanation": "Positive psychology is noted for exploring factors contributing to happiness and well-being.",
+        "keySentence": "In recent years, there has been growing interest in positive psychology, which explores the factors that contribute to human happiness and well-being.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Developmental psychology investigates how people grow and _____ over time.",
+        "answer": "change",
+        "explanation": "The passage specifies that developmental psychology studies how people grow and change.",
+        "keySentence": "Additionally, the field of developmental psychology investigates how people grow and change over the course of their lives, from infancy through old age.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Psychology is considered a scientific study because it involves the _____ of the mind and behavior.",
+        "answer": "study",
+        "explanation": "The passage refers to psychology as the scientific study of mind and behavior, requiring a noun form.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Positive psychology aims to identify and promote strengths and _____ that help communities thrive.",
+        "answer": "virtues",
+        "explanation": "The passage explains that positive psychology identifies and promotes strengths and virtues, so the answer needs to be in noun form.",
+        "keySentence": "This branch of psychology aims to identify and promote strengths and virtues that enable individuals and communities to thrive.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:20:15.422Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "4ce9ddcf-6b2c-4560-9ebb-c99391caa83b",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources are becoming increasingly important in the quest for sustainable development. Solar and wind energy are two of the most popular forms of renewable energy. Solar energy is harnessed through the use of photovoltaic panels, which convert sunlight directly into electricity. Wind energy, on the other hand, is captured using turbines that are driven by the natural movement of the air. Both these sources are environmentally friendly as they produce no direct emissions and have a minimal impact on the ecosystem. However, the initial cost of installing solar panels and wind turbines can be quite high, which may deter some individuals and organizations from adopting these technologies. Governments around the world are providing incentives and subsidies to encourage the use of renewable energy. These measures aim to reduce the financial burden on users, making renewable energy more accessible and cost-effective in the long term.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Solar energy is captured using _____ panels.",
+        "answer": "photovoltaic",
+        "explanation": "The passage states that solar energy is harnessed through photovoltaic panels.",
+        "keySentence": "Solar energy is harnessed through the use of photovoltaic panels, which convert sunlight directly into electricity.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Wind energy is captured using _____ that are driven by the natural movement of the air.",
+        "answer": "turbines",
+        "explanation": "The passage mentions that wind energy is captured using turbines.",
+        "keySentence": "Wind energy, on the other hand, is captured using turbines that are driven by the natural movement of the air.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Renewable energy sources are generally considered to be _____ friendly.",
+        "answer": "environmentally",
+        "explanation": "The passage indicates that renewable energy sources are environmentally friendly.",
+        "keySentence": "Both these sources are environmentally friendly as they produce no direct emissions and have a minimal impact on the ecosystem.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Governments are providing _____ to reduce the financial burden on users.",
+        "answer": "subsidies",
+        "explanation": "The passage mentions that governments are providing incentives and subsidies.",
+        "keySentence": "Governments around the world are providing incentives and subsidies to encourage the use of renewable energy.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: The initial cost of installing solar panels can be quite _____ for some individuals.",
+        "answer": "high",
+        "explanation": "The passage states that the initial cost of installing solar panels and wind turbines can be quite high.",
+        "keySentence": "However, the initial cost of installing solar panels and wind turbines can be quite high, which may deter some individuals and organizations from adopting these technologies.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:20:38.990Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "c5afbc1b-f35c-4f16-b8f1-2f5feb2d23f7",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the strategies and actions that governments employ to manage their country's economy. These policies are crucial in ensuring economic stability, growth, and the equitable distribution of resources. One of the primary tools in economic policy is fiscal policy, which involves government spending and taxation decisions to influence the economy. Another significant aspect is monetary policy, controlled by the central bank, which regulates the money supply and interest rates. Both fiscal and monetary policies aim to achieve macroeconomic objectives such as controlling inflation, reducing unemployment, and promoting economic growth. However, these policies must be carefully balanced to avoid negative outcomes such as budget deficits or economic bubbles. In recent years, many governments have faced challenges in implementing effective economic policies due to global economic uncertainties and the increasing complexity of international trade.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: One of the primary tools in economic policy is _____ policy.",
+        "answer": "fiscal",
+        "explanation": "The passage states that one of the primary tools in economic policy is fiscal policy.",
+        "keySentence": "One of the primary tools in economic policy is fiscal policy, which involves government spending and taxation decisions to influence the economy.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Monetary policy is controlled by the _____ bank.",
+        "answer": "central",
+        "explanation": "The passage mentions that monetary policy is controlled by the central bank.",
+        "keySentence": "Another significant aspect is monetary policy, controlled by the central bank, which regulates the money supply and interest rates.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Fiscal and monetary policies aim to achieve _____ objectives.",
+        "answer": "macroeconomic",
+        "explanation": "The passage describes that fiscal and monetary policies aim to achieve macroeconomic objectives.",
+        "keySentence": "Both fiscal and monetary policies aim to achieve macroeconomic objectives such as controlling inflation, reducing unemployment, and promoting economic growth.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Economic policies must be carefully _____ to avoid negative outcomes.",
+        "answer": "balanced",
+        "explanation": "The passage implies that economic policies must be balanced to avoid negative outcomes like budget deficits.",
+        "keySentence": "However, these policies must be carefully balanced to avoid negative outcomes such as budget deficits or economic bubbles.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Many governments face challenges due to global economic _____ and complexity.",
+        "answer": "uncertainties",
+        "explanation": "The passage states that governments face challenges due to global economic uncertainties and complexity.",
+        "keySentence": "In recent years, many governments have faced challenges in implementing effective economic policies due to global economic uncertainties and the increasing complexity of international trade.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:20:59.285Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "ba310851-ea14-4a67-8720-61c63ed3a858",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Archaeological Discovery",
+    "passage": "In 2021, a team of archaeologists made a groundbreaking discovery in the deserts of Egypt, unearthing what is believed to be an ancient city dating back over 3,000 years. The city, which has been named 'The Rise of Aten', was found near Luxor and is thought to have been established during the reign of Amenhotep III. This find has been hailed as one of the most significant archaeological discoveries since the tomb of Tutankhamun. The city was meticulously planned, with streets lined with houses, workshops, and administrative buildings. The discovery of pottery, tools, and jewelry in the area suggests that it was a bustling center of activity. Archaeologists are particularly excited about the potential insights the city could provide into the daily lives of its inhabitants, as well as its role in the broader context of ancient Egyptian civilization. Despite the excitement, many challenges remain in excavating such a site, including the preservation of delicate artifacts and the harsh desert environment.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The ancient city was discovered in the _____ of Egypt.",
+        "answer": "deserts",
+        "explanation": "The word 'deserts' is used to describe the location where the city was found.",
+        "keySentence": "In 2021, a team of archaeologists made a groundbreaking discovery in the deserts of Egypt.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The city was established during the reign of _____ III.",
+        "answer": "Amenhotep",
+        "explanation": "Amenhotep III is specified as the ruler during whose reign the city was established.",
+        "keySentence": "The city, which has been named 'The Rise of Aten', was found near Luxor and is thought to have been established during the reign of Amenhotep III.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Archaeologists found _____, tools, and jewelry at the site.",
+        "answer": "pottery",
+        "explanation": "The word 'pottery' is part of the list of items discovered at the site.",
+        "keySentence": "The discovery of pottery, tools, and jewelry in the area suggests that it was a bustling center of activity.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: The discovery is considered to be one of the most _____ archaeological finds since the tomb of Tutankhamun.",
+        "answer": "significant",
+        "explanation": "The adjective 'significant' is used to describe the importance of the discovery.",
+        "keySentence": "This find has been hailed as one of the most significant archaeological discoveries since the tomb of Tutankhamun.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: The site may provide _____ into the daily lives of its inhabitants.",
+        "answer": "insights",
+        "explanation": "The noun 'insights' fits grammatically and is mentioned as a potential outcome of the discovery.",
+        "keySentence": "Archaeologists are particularly excited about the potential insights the city could provide into the daily lives of its inhabitants.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:21:36.734Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "472933a6-e71c-43a8-83cc-e2f5604d25eb",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Climate Science",
+    "passage": "Climate science focuses on understanding the different factors that influence the Earth's climate and how they interact. One critical aspect of climate science is the study of greenhouse gases, which trap heat in the atmosphere and contribute to global warming. Carbon dioxide, methane, and nitrous oxide are the primary greenhouse gases emitted by human activities. Researchers also investigate the effects of climate change on ecosystems, which can lead to shifts in species distributions and biodiversity loss. Moreover, scientists examine the role of oceans in regulating climate, as they absorb significant amounts of carbon dioxide and heat. Understanding these complex interactions is essential for developing effective strategies to mitigate the impacts of climate change.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: One critical aspect of climate science is the study of _____ gases.",
+        "answer": "greenhouse",
+        "explanation": "The passage states that the study of greenhouse gases is a critical aspect of climate science.",
+        "keySentence": "One critical aspect of climate science is the study of greenhouse gases, which trap heat in the atmosphere and contribute to global warming.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Carbon dioxide, methane, and nitrous oxide are the primary greenhouse gases emitted by _____ activities.",
+        "answer": "human",
+        "explanation": "The passage mentions these gases are primarily emitted by human activities.",
+        "keySentence": "Carbon dioxide, methane, and nitrous oxide are the primary greenhouse gases emitted by human activities.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Scientists examine the role of _____ in regulating climate.",
+        "answer": "oceans",
+        "explanation": "The passage highlights the role of oceans in regulating climate.",
+        "keySentence": "Moreover, scientists examine the role of oceans in regulating climate, as they absorb significant amounts of carbon dioxide and heat.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Understanding complex _____ is essential for developing effective climate strategies.",
+        "answer": "interactions",
+        "explanation": "The sentence requires a noun form to match the context of understanding different factors.",
+        "keySentence": "Understanding these complex interactions is essential for developing effective strategies to mitigate the impacts of climate change.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Ecosystems can experience shifts in species distributions and biodiversity _____ due to climate change.",
+        "answer": "loss",
+        "explanation": "The sentence requires a noun form to complete the phrase about the negative impacts on biodiversity.",
+        "keySentence": "Researchers also investigate the effects of climate change on ecosystems, which can lead to shifts in species distributions and biodiversity loss.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:21:57.801Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "d71469b7-2fd4-4407-953d-4bcc334542d9",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience is a rapidly evolving field that focuses on the study of the brain and its functions. The human brain is an incredibly complex organ, responsible for controlling various bodily functions and processes. Researchers in this field use a variety of techniques to explore the intricate workings of the brain. One of the major advances in neuroscience has been the development of brain imaging technologies, such as MRI and PET scans, which allow scientists to observe brain activity in real time. These technologies have provided valuable insights into how different areas of the brain are involved in specific tasks and behaviors. Despite the progress made, there are still many mysteries to unravel, and ongoing research is crucial to understanding neurological disorders and developing effective treatments.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The human brain is described as an _____ organ.",
+        "answer": "complex",
+        "explanation": "The passage mentions 'The human brain is an incredibly complex organ'.",
+        "keySentence": "The human brain is an incredibly complex organ, responsible for controlling various bodily functions and processes.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Researchers use various _____ to study the brain.",
+        "answer": "techniques",
+        "explanation": "The passage states 'Researchers in this field use a variety of techniques'.",
+        "keySentence": "Researchers in this field use a variety of techniques to explore the intricate workings of the brain.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Brain imaging technologies such as MRI and PET scans help scientists observe brain _____ in real time.",
+        "answer": "activity",
+        "explanation": "The passage refers to observing 'brain activity in real time'.",
+        "keySentence": "One of the major advances in neuroscience has been the development of brain imaging technologies, such as MRI and PET scans, which allow scientists to observe brain activity in real time.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Despite the progress, many _____ remain to be solved in neuroscience.",
+        "answer": "mysteries",
+        "explanation": "The passage indicates there are still many 'mysteries to unravel'.",
+        "keySentence": "Despite the progress made, there are still many mysteries to unravel, and ongoing research is crucial to understanding neurological disorders and developing effective treatments.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Ongoing research is important for _____ neurological disorders.",
+        "answer": "understanding",
+        "explanation": "The passage describes ongoing research as crucial to 'understanding neurological disorders'.",
+        "keySentence": "Despite the progress made, there are still many mysteries to unravel, and ongoing research is crucial to understanding neurological disorders and developing effective treatments.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:22:07.382Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "1fd6993a-bb06-4d69-9693-5d0633bdf507",
+    "type": "sentence-completion",
+    "topic": "Renewable Energy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Expected ',' or '}' after property value in JSON at position 1016 (line 1 column 1017)",
+    "meta": {
+      "generatedAt": "2026-04-02T09:22:28.476Z"
+    }
+  },
+  {
+    "id": "3ea46556-ddef-4ec4-a812-de06b4029aba",
+    "type": "sentence-completion",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of behavior and mental processes. It aims to understand individuals and groups by establishing general principles and researching specific cases. The field is broad and can address various aspects such as cognition, emotion, perception, and motivation. For instance, cognitive psychology explores the ways people perceive, think, and solve problems. This branch examines mental functions such as memory and language processing. On the other hand, emotional psychology focuses on understanding how emotions influence behavior and decision-making. Emotions can be powerful drivers of actions and often affect social interactions and personal relationships. Finally, developmental psychology examines the psychological growth of individuals across their lifespan. It considers various stages of life, from infancy to adulthood, and how people adapt to changes over time.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Psychology aims to establish general _____ and research specific cases.",
+        "answer": "principles",
+        "explanation": "The passage states that psychology aims to understand individuals and groups by establishing general principles.",
+        "keySentence": "It aims to understand individuals and groups by establishing general principles and researching specific cases.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Cognitive psychology explores how people perceive, think, and solve _____.",
+        "answer": "problems",
+        "explanation": "The passage mentions that cognitive psychology explores the ways people perceive, think, and solve problems.",
+        "keySentence": "For instance, cognitive psychology explores the ways people perceive, think, and solve problems.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Emotional psychology studies the influence of emotions on behavior and _____.",
+        "answer": "decision-making",
+        "explanation": "The passage describes emotional psychology as focusing on how emotions influence behavior and decision-making.",
+        "keySentence": "On the other hand, emotional psychology focuses on understanding how emotions influence behavior and decision-making.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence with the correct form: Developmental psychology examines the psychological _____ of individuals.",
+        "answer": "growth",
+        "explanation": "The passage uses the noun 'growth' to describe what developmental psychology examines.",
+        "keySentence": "Finally, developmental psychology examines the psychological growth of individuals across their lifespan.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence with the correct form: Emotions can be powerful _____ of actions.",
+        "answer": "drivers",
+        "explanation": "The passage refers to emotions as 'drivers' of actions, indicating the noun form is needed.",
+        "keySentence": "Emotions can be powerful drivers of actions and often affect social interactions and personal relationships.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:23:02.161Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "022bce4e-4a39-45fb-97f2-04bca4889f01",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources are essential for reducing dependency on fossil fuels. Solar power, which harnesses energy from the sun, has become increasingly popular due to advancements in photovoltaic technology. Wind energy is another significant renewable source, utilizing the natural wind flow to generate electricity. Hydroelectric power, generated by harnessing the energy of flowing water, is the most widely used form of renewable energy globally. Biomass energy, derived from organic materials, offers an alternative to traditional fossil fuels while also reducing waste. The transition to renewable energy is crucial for achieving sustainable development and combating climate change.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Solar power harnesses energy from the _____ to generate electricity.",
+        "answer": "sun",
+        "explanation": "The passage states that solar power harnesses energy from the sun.",
+        "keySentence": "Solar power, which harnesses energy from the sun, has become increasingly popular due to advancements in photovoltaic technology.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Wind energy is generated by utilizing the natural _____ flow.",
+        "answer": "wind",
+        "explanation": "The passage mentions that wind energy utilizes the natural wind flow to generate electricity.",
+        "keySentence": "Wind energy is another significant renewable source, utilizing the natural wind flow to generate electricity.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Hydroelectric power is the most widely used form of renewable energy _____.",
+        "answer": "globally",
+        "explanation": "The passage describes hydroelectric power as the most widely used form of renewable energy globally.",
+        "keySentence": "Hydroelectric power, generated by harnessing the energy of flowing water, is the most widely used form of renewable energy globally.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Biomass energy is derived from organic _____.",
+        "answer": "materials",
+        "explanation": "The passage indicates that biomass energy is derived from organic materials.",
+        "keySentence": "Biomass energy, derived from organic materials, offers an alternative to traditional fossil fuels while also reducing waste.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: The transition to renewable energy is crucial for achieving _____ development.",
+        "answer": "sustainable",
+        "explanation": "The passage states that the transition to renewable energy is crucial for achieving sustainable development.",
+        "keySentence": "The transition to renewable energy is crucial for achieving sustainable development and combating climate change.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:24:20.755Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.7,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "34a5f2cf-94be-4396-b860-5d28f30091a5",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has significantly evolved over the past few decades. Initially driven by the Cold War competition, nations like the United States and the Soviet Union invested heavily in space programs. This rivalry led to remarkable achievements, such as the Apollo moon landing in 1969. In recent years, the focus has shifted towards international cooperation and the involvement of private companies. Today, missions aim to explore Mars, with the goal of establishing a human presence there. Technological advancements have made space travel more feasible and cost-effective, allowing for more frequent missions. As a result, our understanding of the universe continues to expand, revealing new insights into the cosmos. The future of space exploration promises even more groundbreaking discoveries, with plans for lunar bases and potential missions beyond our solar system.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The Apollo moon _____ in 1969 was a remarkable achievement.",
+        "answer": "landing",
+        "explanation": "The word 'landing' completes the sentence by specifying the event that occurred in 1969.",
+        "keySentence": "This rivalry led to remarkable achievements, such as the Apollo moon landing in 1969.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Initially, space exploration was driven by the _____ War competition.",
+        "answer": "Cold",
+        "explanation": "The word 'Cold' is necessary to describe the specific war that influenced early space exploration efforts.",
+        "keySentence": "Initially driven by the Cold War competition, nations like the United States and the Soviet Union invested heavily in space programs.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Recent space missions aim to explore _____.",
+        "answer": "Mars",
+        "explanation": "The word 'Mars' completes the sentence by specifying the planet that current missions are targeting.",
+        "keySentence": "Today, missions aim to explore Mars, with the goal of establishing a human presence there.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Private companies are becoming increasingly _____ in space exploration.",
+        "answer": "involved",
+        "explanation": "The adjective 'involved' is needed to describe how private companies are participating in space exploration.",
+        "keySentence": "In recent years, the focus has shifted towards international cooperation and the involvement of private companies.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Technological _____ have made space travel more feasible.",
+        "answer": "advancements",
+        "explanation": "The noun 'advancements' is required to describe the progress in technology that has facilitated space travel.",
+        "keySentence": "Technological advancements have made space travel more feasible and cost-effective, allowing for more frequent missions.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:25:06.463Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "dabf6c06-f572-4024-80e7-006c600dd19d",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "Archaeologists have recently uncovered a remarkable site in the remote regions of Northern Africa. This site, believed to be over 4,000 years old, contains a series of intricately carved stone structures that are thought to have been used for ceremonial purposes. The discovery has provided valuable insights into the lifestyle and beliefs of the ancient civilization that once inhabited the area. Among the notable findings are a set of tools made from bone and flint, which suggest that the people in this region were skilled in crafting and tool-making. Additionally, several clay tablets with inscriptions have been unearthed, offering clues about the language and communication methods used by these ancient people. The team of researchers is now focused on analyzing the artifacts and translating the inscriptions to gain a deeper understanding of this ancient society.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The archaeological site in Northern Africa is estimated to be _____ years old.",
+        "answer": "4,000",
+        "explanation": "The passage states that the site is believed to be over 4,000 years old.",
+        "keySentence": "This site, believed to be over 4,000 years old, contains a series of intricately carved stone structures.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The stone structures at the site are thought to have been used for _____ purposes.",
+        "answer": "ceremonial",
+        "explanation": "The passage mentions that the structures are thought to have been used for ceremonial purposes.",
+        "keySentence": "contains a series of intricately carved stone structures that are thought to have been used for ceremonial purposes.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The discovery in Northern Africa offers insights into the lifestyle and _____ of an ancient civilization.",
+        "answer": "beliefs",
+        "explanation": "The passage specifies that the discovery provides insights into the lifestyle and beliefs of the ancient civilization.",
+        "keySentence": "The discovery has provided valuable insights into the lifestyle and beliefs of the ancient civilization that once inhabited the area.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: The tools found at the site suggest that the ancient people were skilled in _____ and tool-making.",
+        "answer": "crafting",
+        "explanation": "The passage indicates that the tools suggest skills in crafting and tool-making.",
+        "keySentence": "Among the notable findings are a set of tools made from bone and flint, which suggest that the people in this region were skilled in crafting and tool-making.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Researchers are currently focused on _____ the artifacts and inscriptions to understand the society better.",
+        "answer": "analyzing",
+        "explanation": "The passage states that researchers are analyzing the artifacts and inscriptions.",
+        "keySentence": "The team of researchers is now focused on analyzing the artifacts and translating the inscriptions to gain a deeper understanding of this ancient society.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:25:29.814Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "67c9de4a-0815-4205-bd5b-2eba372ddb4a",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the actions that governments take in the economic field. It covers the systems for setting levels of taxation, government budgets, the money supply, and interest rates as well as the labor market, national ownership, and many other areas of government interventions into the economy. One of the primary objectives of economic policy is to achieve stable economic growth. Governments aim to control inflation and reduce unemployment through various fiscal and monetary measures. Fiscal policy involves changes in government spending and tax rates, while monetary policy is concerned with managing the interest rates and money supply. The effectiveness of economic policy often depends on the coordination between different government departments and the timely implementation of measures. Challenges such as external economic shocks, political instability, and fluctuating global markets can significantly impact the success of these policies.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Economic policy includes actions taken by governments to manage _____ rates.",
+        "answer": "interest",
+        "explanation": "The passage specifies that economic policy covers the systems for setting levels of 'interest rates'.",
+        "keySentence": "It covers the systems for setting levels of taxation, government budgets, the money supply, and interest rates...",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: One of the goals of economic policy is to maintain stable economic _____.",
+        "answer": "growth",
+        "explanation": "The passage mentions 'stable economic growth' as a primary objective of economic policy.",
+        "keySentence": "One of the primary objectives of economic policy is to achieve stable economic growth.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Monetary policy is primarily concerned with managing the money _____.",
+        "answer": "supply",
+        "explanation": "The passage indicates that monetary policy deals with managing the 'money supply'.",
+        "keySentence": "while monetary policy is concerned with managing the interest rates and money supply.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Economic policy effectiveness often relies on the _____ of different government departments.",
+        "answer": "coordination",
+        "explanation": "The passage states that the effectiveness depends on coordination, thus requiring a noun form.",
+        "keySentence": "The effectiveness of economic policy often depends on the coordination between different government departments...",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: External economic shocks can _____ impact the success of economic policies.",
+        "answer": "significantly",
+        "explanation": "The passage uses 'significantly impact', requiring an adverb to match the grammatical form.",
+        "keySentence": "Challenges such as external economic shocks, political instability, and fluctuating global markets can significantly impact the success of these policies.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:25:56.648Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "bed0439b-09e5-4b72-8bcc-98cac1ccb650",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy refers to the power sourced from naturally replenishing resources. Unlike fossil fuels, which are finite, renewables such as solar, wind, and hydroelectric power are plentiful and sustainable. The global shift towards renewable energy is driven by the need to combat climate change and reduce greenhouse gas emissions. Solar energy, harnessed through photovoltaic cells, is one of the most rapidly growing sectors. Wind energy, captured by turbines, has also seen significant advancements and is now a major contributor to electricity grids in many countries. Hydroelectric power, generated by harnessing the energy of flowing water, remains a staple in the renewable energy portfolio. Governments around the world are investing heavily in renewable energy infrastructure, recognizing its potential to provide clean, reliable, and affordable power to millions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Renewable energy is sourced from resources that are _____ replenishing.",
+        "answer": "naturally",
+        "explanation": "The word 'naturally' describes how the resources replenish, as mentioned in the passage.",
+        "keySentence": "Renewable energy refers to the power sourced from naturally replenishing resources.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Solar energy is harnessed through _____ cells.",
+        "answer": "photovoltaic",
+        "explanation": "Photovoltaic cells are specifically mentioned as the means of harnessing solar energy.",
+        "keySentence": "Solar energy, harnessed through photovoltaic cells, is one of the most rapidly growing sectors.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Wind energy is captured by _____ turbines.",
+        "answer": "wind",
+        "explanation": "The passage states that wind energy is captured by wind turbines.",
+        "keySentence": "Wind energy, captured by turbines, has also seen significant advancements and is now a major contributor to electricity grids in many countries.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence with the correct form: Governments are _____ in renewable energy infrastructure.",
+        "answer": "investing",
+        "explanation": "The sentence requires a verb in the continuous tense to match 'are'.",
+        "keySentence": "Governments around the world are investing heavily in renewable energy infrastructure, recognizing its potential to provide clean, reliable, and affordable power to millions.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence with the correct form: Hydroelectric power remains a _____ in the renewable energy portfolio.",
+        "answer": "staple",
+        "explanation": "The sentence requires a noun to indicate that hydroelectric power is a mainstay.",
+        "keySentence": "Hydroelectric power, generated by harnessing the energy of flowing water, remains a staple in the renewable energy portfolio.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:04.632Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "34d54b4e-c8a3-4be9-89b0-a3ac4a0f8888",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Climate science is the study of the Earth's climate, the long-term patterns of temperature, humidity, wind, and other atmospheric conditions. Over the past century, the burning of fossil fuels has significantly increased the levels of greenhouse gases in the atmosphere, leading to global warming and climate change. Scientists use a variety of methods to study climate change, including satellite data, climate models, and historical climate records. These tools help predict future climate patterns and assess the potential impacts on natural ecosystems and human societies. The Intergovernmental Panel on Climate Change (IPCC) regularly publishes reports that summarize the latest scientific understanding of climate change, providing a basis for policy decisions. Mitigation and adaptation strategies are crucial to address the challenges posed by a changing climate, with efforts focusing on reducing carbon emissions and enhancing resilience to climate impacts.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The increase in greenhouse gases is primarily due to the burning of _____ .",
+        "answer": "fossil fuels",
+        "explanation": "The passage states that the burning of fossil fuels has significantly increased the levels of greenhouse gases.",
+        "keySentence": "Over the past century, the burning of fossil fuels has significantly increased the levels of greenhouse gases in the atmosphere.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Scientists use satellite data and _____ models to study climate change.",
+        "answer": "climate",
+        "explanation": "The passage mentions that scientists use climate models as one of the methods to study climate change.",
+        "keySentence": "Scientists use a variety of methods to study climate change, including satellite data, climate models, and historical climate records.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The IPCC reports provide a basis for policy _____ .",
+        "answer": "decisions",
+        "explanation": "The passage indicates that the IPCC reports provide a basis for policy decisions.",
+        "keySentence": "The Intergovernmental Panel on Climate Change (IPCC) regularly publishes reports that summarize the latest scientific understanding of climate change, providing a basis for policy decisions.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Mitigation and adaptation strategies are crucial in addressing climate _____ .",
+        "answer": "challenges",
+        "explanation": "The passage states that mitigation and adaptation strategies address the challenges posed by a changing climate.",
+        "keySentence": "Mitigation and adaptation strategies are crucial to address the challenges posed by a changing climate, with efforts focusing on reducing carbon emissions and enhancing resilience to climate impacts.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Efforts focus on reducing emissions and enhancing _____ to climate impacts.",
+        "answer": "resilience",
+        "explanation": "The passage discusses enhancing resilience as part of efforts to address climate impacts.",
+        "keySentence": "Mitigation and adaptation strategies are crucial to address the challenges posed by a changing climate, with efforts focusing on reducing carbon emissions and enhancing resilience to climate impacts.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:13.437Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "05b1a886-281c-4a52-96ae-61eca65915e4",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses various aspects such as cognition, emotion, motivation, and personality. The field aims to understand individuals and groups by establishing general principles and researching specific cases. Modern psychology has roots in philosophy and biology, emerging as a distinct field in the late 19th century. Today, psychologists employ diverse methodologies, ranging from experimental to observational, to explore the complexities of mental processes. A significant area of interest within psychology is cognitive development, which examines how thinking evolves over time. Jean Piaget, a prominent figure in developmental psychology, proposed theories on how children acquire knowledge and understand the world around them. His work has profoundly influenced educational practices and child development theories.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Psychology studies both the mind and _____.",
+        "answer": "behavior",
+        "explanation": "The passage states that psychology is the scientific study of the mind and behavior.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Theories by Jean Piaget have had a significant impact on _____ practices.",
+        "answer": "educational",
+        "explanation": "The passage notes that Piaget's work has influenced educational practices.",
+        "keySentence": "His work has profoundly influenced educational practices and child development theories.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Cognitive development explores how _____ changes over time.",
+        "answer": "thinking",
+        "explanation": "The passage mentions that cognitive development examines how thinking evolves over time.",
+        "keySentence": "A significant area of interest within psychology is cognitive development, which examines how thinking evolves over time.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Psychology aims to _____ individuals and groups by establishing general principles.",
+        "answer": "understand",
+        "explanation": "A verb is needed to fit the grammar and context of aiming to comprehend individuals and groups.",
+        "keySentence": "The field aims to understand individuals and groups by establishing general principles and researching specific cases.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Jean Piaget is known for his theories on child _____.",
+        "answer": "development",
+        "explanation": "A noun form is required to match the context of Piaget's theories regarding children.",
+        "keySentence": "Jean Piaget, a prominent figure in developmental psychology, proposed theories on how children acquire knowledge and understand the world around them.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:27.061Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "996d7460-8270-41d9-8027-e98cb9e02029",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has always fascinated humanity, driving us to explore beyond our planet. The first significant milestone was the launch of Sputnik 1, the world's first artificial satellite, by the Soviet Union in 1957. This achievement marked the beginning of the space age and led to rapid advancements in technology and exploration. In 1969, NASA's Apollo 11 mission successfully landed humans on the moon, a monumental event that demonstrated the potential of human ingenuity and determination. Today, space agencies focus on Mars exploration, aiming to uncover the secrets of the Red Planet. Rover missions have already provided a wealth of information, revealing the planet's geological history and the potential for past life. Private companies are also playing a significant role, with ambitious plans to commercialize space travel, making it accessible to civilians in the future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The launch of Sputnik 1 marked the beginning of the _____ age.",
+        "answer": "space",
+        "explanation": "The passage states that Sputnik 1's launch marked the beginning of the 'space age'.",
+        "keySentence": "This achievement marked the beginning of the space age and led to rapid advancements in technology and exploration.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The Apollo 11 mission was a _____ event in space exploration.",
+        "answer": "monumental",
+        "explanation": "The passage refers to the Apollo 11 mission as a 'monumental event'.",
+        "keySentence": "In 1969, NASA's Apollo 11 mission successfully landed humans on the moon, a monumental event that demonstrated the potential of human ingenuity and determination.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Rover missions on Mars have revealed the planet's geological history and the potential for _____ life.",
+        "answer": "past",
+        "explanation": "The passage mentions the potential for 'past life' on Mars as revealed by rover missions.",
+        "keySentence": "Rover missions have already provided a wealth of information, revealing the planet's geological history and the potential for past life.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Space agencies today are focusing on the _____ of Mars.",
+        "answer": "exploration",
+        "explanation": "The grammatical form required is a noun, and the passage discusses the 'exploration' of Mars.",
+        "keySentence": "Today, space agencies focus on Mars exploration, aiming to uncover the secrets of the Red Planet.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Private companies are aiming to _____ space travel and make it accessible to civilians.",
+        "answer": "commercialize",
+        "explanation": "The sentence requires a verb form, and the passage mentions private companies' plans to 'commercialize' space travel.",
+        "keySentence": "Private companies are also playing a significant role, with ambitious plans to commercialize space travel, making it accessible to civilians in the future.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:35.661Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "7e69c0f8-c278-4382-a8ad-64e3ef3d8502",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has evolved significantly over the last few decades, adapting to the rapid changes in technology and society. The field now encompasses a wide range of sub-disciplines, including psycholinguistics, sociolinguistics, and computational linguistics. Each of these areas focuses on different aspects of language, from cognitive processes to social interactions, and the development of language processing technologies. Advances in computational power have allowed researchers to analyze vast datasets, offering new insights into language patterns and usage. This has led to a deeper understanding of language acquisition, language change, and multilingualism. Furthermore, interdisciplinary collaboration has become a hallmark of modern linguistic research, integrating insights from psychology, anthropology, and computer science. These collaborative efforts have not only enriched linguistic theories but also contributed to practical applications such as improved language learning tools and more accurate translation software.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Linguistic research has seen significant changes due to advancements in _____ and society.",
+        "answer": "technology",
+        "explanation": "The word 'technology' is used in the passage to describe one of the factors influencing changes in linguistic research.",
+        "keySentence": "Linguistic research has evolved significantly over the last few decades, adapting to the rapid changes in technology and society.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Psycholinguistics is one of the many _____ within the field of linguistic research.",
+        "answer": "sub-disciplines",
+        "explanation": "The passage lists psycholinguistics as a sub-discipline within linguistic research.",
+        "keySentence": "The field now encompasses a wide range of sub-disciplines, including psycholinguistics, sociolinguistics, and computational linguistics.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Advances in computational power allow researchers to analyze large _____ of language data.",
+        "answer": "datasets",
+        "explanation": "The passage mentions that computational power enables the analysis of vast datasets.",
+        "keySentence": "Advances in computational power have allowed researchers to analyze vast datasets, offering new insights into language patterns and usage.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Interdisciplinary _____ is crucial to modern linguistic research.",
+        "answer": "collaboration",
+        "explanation": "The grammatical form required is a noun to fit the sentence correctly and 'collaboration' is mentioned in the passage.",
+        "keySentence": "Furthermore, interdisciplinary collaboration has become a hallmark of modern linguistic research.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Technological improvements have led to more _____ translation software.",
+        "answer": "accurate",
+        "explanation": "An adjective is needed to describe the software, and 'accurate' is used in the context of translation software in the passage.",
+        "keySentence": "These collaborative efforts have not only enriched linguistic theories but also contributed to practical applications such as improved language learning tools and more accurate translation software.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:47.435Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "6268dbf0-b753-4530-aaf9-0e2e59718881",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience is an interdisciplinary field concerned with the study of the nervous system. It examines the development, structure, and function of neurons and neural circuits. Research in this area has revealed that the brain is remarkably plastic, meaning it has the capacity to change and adapt in response to new information, sensory experiences, and even injury. Scientists have discovered that neural plasticity is a key element in learning and memory. Moreover, studies show that the brain's ability to reorganize itself by forming new neural connections is essential for recovery after brain injuries. Neuroscientists employ a variety of techniques, from molecular and cellular studies to imaging and behavioral experiments, to understand how these complex processes occur. The advancements in neuroscience have significant implications for medicine, particularly in developing treatments for neurological disorders such as Alzheimer's disease and epilepsy.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Neuroscience studies the _______ system.",
+        "answer": "nervous",
+        "explanation": "The passage begins by stating that neuroscience is concerned with the study of the nervous system.",
+        "keySentence": "Neuroscience is an interdisciplinary field concerned with the study of the nervous system.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Neural plasticity is crucial for _______ and memory.",
+        "answer": "learning",
+        "explanation": "The passage explains that neural plasticity is key to learning and memory.",
+        "keySentence": "Scientists have discovered that neural plasticity is a key element in learning and memory.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The brain can _______ itself by forming new neural connections.",
+        "answer": "reorganize",
+        "explanation": "The passage mentions that the brain's ability to reorganize itself is essential for recovery.",
+        "keySentence": "Moreover, studies show that the brain's ability to reorganize itself by forming new neural connections is essential for recovery after brain injuries.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence with a noun: Techniques in neuroscience include molecular studies and _______ experiments.",
+        "answer": "behavioral",
+        "explanation": "The sentence requires a noun to match the grammatical context, and 'behavioral experiments' is mentioned in the passage.",
+        "keySentence": "Neuroscientists employ a variety of techniques, from molecular and cellular studies to imaging and behavioral experiments, to understand how these complex processes occur.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence with a verb: New treatments for Alzheimer's disease and epilepsy are being _______ based on neuroscience advancements.",
+        "answer": "developed",
+        "explanation": "The verb 'developed' fits grammatically in the context of the sentence and refers to the development of treatments mentioned in the passage.",
+        "keySentence": "The advancements in neuroscience have significant implications for medicine, particularly in developing treatments for neurological disorders such as Alzheimer's disease and epilepsy.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:26:58.289Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "cb43e720-c466-48f7-a57c-ee5347e6b33a",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "Archaeologists recently unearthed a remarkable ancient city buried beneath the sands of Egypt. This city, believed to be over 3,000 years old, provides invaluable insights into the daily lives of its inhabitants. Excavation teams have discovered numerous artefacts, including pottery, tools, and jewellery, which suggest a thriving community with advanced craftsmanship. The city's layout offers a glimpse into its social hierarchy, with distinct areas for the elite and commoners. Further analysis revealed that the city's sudden abandonment might have been due to a severe drought. Researchers continue to study the site's architecture and artefacts to understand more about the civilization's cultural practices and eventual decline.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The ancient city was discovered beneath the sands of _____.",
+        "answer": "Egypt",
+        "explanation": "The passage states that the ancient city was buried beneath the sands of Egypt.",
+        "keySentence": "Archaeologists recently unearthed a remarkable ancient city buried beneath the sands of Egypt.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The city is believed to be over _____ years old.",
+        "answer": "3,000",
+        "explanation": "The passage mentions that the city is believed to be over 3,000 years old.",
+        "keySentence": "This city, believed to be over 3,000 years old, provides invaluable insights into the daily lives of its inhabitants.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The sudden abandonment of the city might have been caused by a severe _____.",
+        "answer": "drought",
+        "explanation": "The passage suggests a severe drought as a possible cause for the city's sudden abandonment.",
+        "keySentence": "Further analysis revealed that the city's sudden abandonment might have been due to a severe drought.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: The artefacts found suggest a community with advanced _____.",
+        "answer": "craftsmanship",
+        "explanation": "The passage indicates that the artefacts suggest advanced craftsmanship.",
+        "keySentence": "Excavation teams have discovered numerous artefacts, including pottery, tools, and jewellery, which suggest a thriving community with advanced craftsmanship.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: The study of the site aims to understand more about the civilization's cultural _____.",
+        "answer": "practices",
+        "explanation": "The passage notes that researchers are studying the site to understand more about the civilization's cultural practices.",
+        "keySentence": "Researchers continue to study the site's architecture and artefacts to understand more about the civilization's cultural practices and eventual decline.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:27:09.759Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "9b079440-42f0-40df-b770-6abc6a2111cf",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "The dream of exploring beyond our planet has fascinated humans for centuries. The initial steps in space exploration began with the launch of satellites, which provided unprecedented information about Earth's atmosphere. Following this, the moon landing marked a major milestone, showcasing human capability in technological advancement. As exploration continued, Mars emerged as a primary target due to its potential for past or present life. Recent missions have focused on understanding the Martian environment and assessing its capacity to support human life. Space agencies are now collaborating on projects aimed at establishing a sustainable human presence on Mars, which could pave the way for further interplanetary exploration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The initial steps in space exploration began with the launch of _____.",
+        "answer": "satellites",
+        "explanation": "The passage explicitly states that the initial steps in space exploration began with the launch of satellites.",
+        "keySentence": "The initial steps in space exploration began with the launch of satellites, which provided unprecedented information about Earth's atmosphere.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The moon landing marked a major _____.",
+        "answer": "milestone",
+        "explanation": "The passage describes the moon landing as a major milestone, indicating its significance in space exploration.",
+        "keySentence": "Following this, the moon landing marked a major milestone, showcasing human capability in technological advancement.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Mars has emerged as a primary target due to its potential for past or present _____.",
+        "answer": "life",
+        "explanation": "The passage mentions Mars as a target due to its potential for past or present life.",
+        "keySentence": "As exploration continued, Mars emerged as a primary target due to its potential for past or present life.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Recent missions have focused on understanding the Martian _____ and assessing its capacity to support human life.",
+        "answer": "environment",
+        "explanation": "The word 'environment' is needed here to fit grammatically and logically with 'understanding the Martian'.",
+        "keySentence": "Recent missions have focused on understanding the Martian environment and assessing its capacity to support human life.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Space agencies are now collaborating on projects aimed at establishing a _____ human presence on Mars.",
+        "answer": "sustainable",
+        "explanation": "The adjective 'sustainable' is required to describe the type of human presence intended on Mars.",
+        "keySentence": "Space agencies are now collaborating on projects aimed at establishing a sustainable human presence on Mars, which could pave the way for further interplanetary exploration.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:27:20.315Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "ba498ba2-91f7-42c1-bf10-b126b9c41a54",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses various subfields such as cognitive psychology, which explores mental processes like perception, memory, and problem-solving. Another important area is developmental psychology, which examines how people grow and change throughout their lifespan. Additionally, social psychology looks at how individuals influence and are influenced by others. Each of these branches applies distinct methodologies to understand the intricacies of human thought and behavior. For instance, cognitive psychologists might use experiments to study decision-making processes, while social psychologists could conduct surveys to explore attitudes. Understanding these psychological aspects is crucial for developing effective interventions and enhancing well-being.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Psychology is the scientific study of the mind and _____.",
+        "answer": "behavior",
+        "explanation": "The passage explicitly states that psychology is the study of the mind and behavior.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Cognitive psychology explores mental processes like perception, memory, and _____.",
+        "answer": "problem-solving",
+        "explanation": "The passage mentions that cognitive psychology focuses on mental processes, including problem-solving.",
+        "keySentence": "It encompasses various subfields such as cognitive psychology, which explores mental processes like perception, memory, and problem-solving.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Social psychology examines how individuals influence and are _____ by others.",
+        "answer": "influenced",
+        "explanation": "The passage describes social psychology as the study of how individuals both influence and are influenced.",
+        "keySentence": "Additionally, social psychology looks at how individuals influence and are influenced by others.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Each branch of psychology applies distinct _____ to understand human thought.",
+        "answer": "methodologies",
+        "explanation": "The passage indicates that different branches of psychology use distinct methodologies.",
+        "keySentence": "Each of these branches applies distinct methodologies to understand the intricacies of human thought and behavior.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Understanding psychological aspects is crucial for developing effective _____.",
+        "answer": "interventions",
+        "explanation": "The passage states that understanding psychological aspects is vital for developing interventions.",
+        "keySentence": "Understanding these psychological aspects is crucial for developing effective interventions and enhancing well-being.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:27:30.068Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "70780649-f017-4b28-a9f1-b58780d99696",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given that in biology, many phyla, families, and genera have some species that live in the sea and others that live on land, marine biology classifies species based on the environment rather than on taxonomy. A large proportion of all life on Earth exists in the ocean. The ocean is a complex ecosystem which is affected by various environmental factors such as temperature, salinity, and nutrient levels. Marine biologists study these factors to understand the vast diversity of life forms living in the sea. Furthermore, marine biology investigates how ocean life forms adapt to their environment. For instance, certain species have developed unique adaptations to survive in extreme conditions, such as the deep sea. These adaptations can include bioluminescence, special respiratory systems, and efficient energy conservation methods. The study of marine biology not only helps us understand the ocean's biodiversity but also provides insights into the potential impacts of climate change on marine ecosystems.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Marine biology is primarily concerned with organisms that exist in _____ environments.",
+        "answer": "marine",
+        "explanation": "The passage states that marine biology is the study of organisms in marine bodies of water.",
+        "keySentence": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Marine biology categorizes species based on their _____ rather than taxonomy.",
+        "answer": "environment",
+        "explanation": "The passage explains that marine biology classifies species by the environment they inhabit.",
+        "keySentence": "Marine biology classifies species based on the environment rather than on taxonomy.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The ocean is a complex ecosystem influenced by temperature, salinity, and _____ levels.",
+        "answer": "nutrient",
+        "explanation": "The passage lists nutrient levels as one of the factors affecting the ocean ecosystem.",
+        "keySentence": "The ocean is a complex ecosystem which is affected by various environmental factors such as temperature, salinity, and nutrient levels.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Marine biologists study how ocean life forms _____ to their environment.",
+        "answer": "adapt",
+        "explanation": "The passage discusses the investigation into how life forms adapt to their marine environment.",
+        "keySentence": "Marine biology investigates how ocean life forms adapt to their environment.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Some species have developed _____ to survive in extreme conditions, like the deep sea.",
+        "answer": "adaptations",
+        "explanation": "The passage mentions that certain species have developed adaptations for survival.",
+        "keySentence": "For instance, certain species have developed unique adaptations to survive in extreme conditions, such as the deep sea.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:27:55.330Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "0b5cb5bb-977f-4e94-99b5-cde1c779c58d",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the actions that governments take in the economic field. These actions include setting interest rates, taxation, government budgets, and the labor market, among other areas. The primary goal of economic policy is to influence the economy. For instance, during a recession, governments may increase spending to stimulate growth. Conversely, in times of inflation, they might reduce spending or increase taxes to cool down the economy. Economic policies can be classified into macroeconomic and microeconomic categories. Macroeconomic policies focus on the economy as a whole, targeting national income, growth, and inflation. Microeconomic policies, on the other hand, aim at specific sectors or industries, enhancing efficiency and productivity. The effectiveness of economic policies often depends on the timely and appropriate application of these measures.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: During a recession, governments may increase _____ to stimulate growth.",
+        "answer": "spending",
+        "explanation": "The passage mentions that during a recession, governments may increase spending to stimulate growth.",
+        "keySentence": "For instance, during a recession, governments may increase spending to stimulate growth.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Economic policies can be classified into macroeconomic and _____ categories.",
+        "answer": "microeconomic",
+        "explanation": "The passage states that economic policies are classified into macroeconomic and microeconomic categories.",
+        "keySentence": "Economic policies can be classified into macroeconomic and microeconomic categories.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Macroeconomic policies target national income, growth, and _____.",
+        "answer": "inflation",
+        "explanation": "The passage specifies that macroeconomic policies target national income, growth, and inflation.",
+        "keySentence": "Macroeconomic policies focus on the economy as a whole, targeting national income, growth, and inflation.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: The _____ of economic policies often depends on timely application.",
+        "answer": "effectiveness",
+        "explanation": "The passage uses the noun 'effectiveness' to describe the outcome of economic policies, which fits grammatically into the sentence.",
+        "keySentence": "The effectiveness of economic policies often depends on the timely and appropriate application of these measures.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Economic policies aim to influence the _____ as a whole.",
+        "answer": "economy",
+        "explanation": "The passage describes the aim of macroeconomic policies as targeting the economy as a whole.",
+        "keySentence": "Macroeconomic policies focus on the economy as a whole, targeting national income, growth, and inflation.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:28:05.570Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "572bdd54-08d2-4d5f-ab43-4deaf91ee1d1",
+    "type": "sentence-completion",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has dramatically transformed cities across the globe. Over the last few decades, the focus has shifted towards creating sustainable urban environments that cater to the growing population. One of the critical challenges faced by urban developers is managing the balance between infrastructure expansion and environmental conservation. In many cities, green spaces are being integrated into urban planning to enhance the quality of life for residents. Additionally, there is an increasing emphasis on public transportation systems to reduce the reliance on private vehicles and decrease pollution. The role of technology in urban planning is also becoming more significant, with smart city initiatives aiming to improve efficiency and connectivity.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: One of the primary challenges in urban development is managing the balance between infrastructure expansion and _____ conservation.",
+        "answer": "environmental",
+        "explanation": "The passage specifically mentions the challenge of balancing infrastructure expansion with environmental conservation.",
+        "keySentence": "One of the critical challenges faced by urban developers is managing the balance between infrastructure expansion and environmental conservation.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Urban planners are increasingly incorporating _____ spaces into city designs.",
+        "answer": "green",
+        "explanation": "The passage states that green spaces are being integrated into urban planning.",
+        "keySentence": "In many cities, green spaces are being integrated into urban planning to enhance the quality of life for residents.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The role of _____ is becoming more significant in urban planning.",
+        "answer": "technology",
+        "explanation": "Technology is highlighted as having an increasing role in urban planning, particularly with smart city initiatives.",
+        "keySentence": "The role of technology in urban planning is also becoming more significant, with smart city initiatives aiming to improve efficiency and connectivity.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: There is a growing emphasis on _____ systems to reduce reliance on private vehicles.",
+        "answer": "public transportation",
+        "explanation": "Grammatically, the blank requires a noun phrase that fits with 'systems'. The passage specifies public transportation systems as a focus.",
+        "keySentence": "Additionally, there is an increasing emphasis on public transportation systems to reduce the reliance on private vehicles and decrease pollution.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Smart city initiatives aim to improve _____ and connectivity.",
+        "answer": "efficiency",
+        "explanation": "The blank requires a noun to pair with 'connectivity', which is 'efficiency' as stated in the passage.",
+        "keySentence": "The role of technology in urban planning is also becoming more significant, with smart city initiatives aiming to improve efficiency and connectivity.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:28:15.424Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "6600f182-3aef-4bef-8f5e-291f43c146ce",
+    "type": "sentence-completion",
+    "band": 7,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has been a significant endeavor for humanity, unlocking mysteries beyond our planet. The first human in space was Yuri Gagarin, who orbited Earth on April 12, 1961. This milestone marked the beginning of human spaceflight, leading to numerous missions and advancements. In recent years, private companies have entered the arena, accelerating the pace of exploration. Technological innovations have made space travel more efficient and less costly. Furthermore, the potential for discovering extraterrestrial life continues to drive scientific inquiry. As missions aim for Mars and beyond, international collaboration remains crucial. The shared goal of understanding our universe fosters cooperation among nations, enhancing the collective knowledge of space.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The first human to orbit the Earth was _____ Gagarin.",
+        "answer": "Yuri",
+        "explanation": "Yuri Gagarin is mentioned as the first human in space, which fits the context of the sentence.",
+        "keySentence": "The first human in space was Yuri Gagarin, who orbited Earth on April 12, 1961.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: Private companies have recently accelerated the pace of _____.",
+        "answer": "exploration",
+        "explanation": "The passage mentions private companies entering the space exploration arena, accelerating its pace.",
+        "keySentence": "In recent years, private companies have entered the arena, accelerating the pace of exploration.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: Discovering extraterrestrial life is a potential that continues to drive scientific _____.",
+        "answer": "inquiry",
+        "explanation": "The passage discusses the potential for discovering extraterrestrial life as a driving force for scientific inquiry.",
+        "keySentence": "Furthermore, the potential for discovering extraterrestrial life continues to drive scientific inquiry.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Technological _____ have made space travel more efficient and less costly.",
+        "answer": "innovations",
+        "explanation": "The passage refers to technological innovations improving the efficiency and cost of space travel, requiring a noun form.",
+        "keySentence": "Technological innovations have made space travel more efficient and less costly.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: International _____ remains crucial as missions aim for Mars and beyond.",
+        "answer": "collaboration",
+        "explanation": "The passage highlights the importance of international collaboration, requiring a noun form to fit the sentence.",
+        "keySentence": "As missions aim for Mars and beyond, international collaboration remains crucial.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:29:31.066Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "49431cc1-2dc9-484a-b750-c0571fa94be8",
+    "type": "sentence-completion",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "Urban development has rapidly evolved over the past few decades, transforming cities into bustling hubs of economic activity and cultural exchange. The rise of skyscrapers and expansive public transport systems has become emblematic of modern urban landscapes. However, this growth often comes at a cost, as it can lead to increased pollution and strain on local resources. To combat these issues, cities around the world are investing in sustainable development practices. Green technology, such as solar panels and energy-efficient buildings, is being integrated into urban planning to reduce the environmental impact. Moreover, community engagement plays a crucial role in shaping urban policies, ensuring that development meets the needs of all residents. By prioritizing inclusivity and sustainability, cities aim to create environments where both people and the planet can thrive.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: The transformation of cities into hubs of economic activity and cultural exchange is a result of rapid _____ over recent decades.",
+        "answer": "evolution",
+        "explanation": "The passage states that urban development has rapidly evolved over the past few decades.",
+        "keySentence": "Urban development has rapidly evolved over the past few decades, transforming cities into bustling hubs of economic activity and cultural exchange.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "development",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The construction of skyscrapers and extensive public transport systems is a symbol of the modern _____ landscape.",
+        "answer": "urban",
+        "explanation": "The passage describes skyscrapers and public transport systems as emblematic of modern urban landscapes.",
+        "keySentence": "The rise of skyscrapers and expansive public transport systems has become emblematic of modern urban landscapes.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "urban",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The integration of green technology into urban planning helps to reduce the environmental _____ of cities.",
+        "answer": "impact",
+        "explanation": "The passage mentions that green technology is used to reduce the environmental impact of urban areas.",
+        "keySentence": "Green technology, such as solar panels and energy-efficient buildings, is being integrated into urban planning to reduce the environmental impact.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "impact",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Cities are investing in sustainable development practices to address the _____ caused by urban growth.",
+        "answer": "challenges",
+        "explanation": "The passage discusses how sustainable development practices are used to combat issues from urban growth, implying challenges.",
+        "keySentence": "To combat these issues, cities around the world are investing in sustainable development practices.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "pollution",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Effective urban development policies require active _____ from the community.",
+        "answer": "engagement",
+        "explanation": "The passage highlights the importance of community engagement in shaping urban policies.",
+        "keySentence": "Moreover, community engagement plays a crucial role in shaping urban policies, ensuring that development meets the needs of all residents.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "engagement",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:30:44.287Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "4e581780-9730-4946-bc1c-c63cc83b4f54",
+    "type": "sentence-completion",
+    "band": 7,
+    "topic": "Space Exploration",
+    "passage": "The quest for knowledge beyond our planet has led to remarkable advancements in technology and science. Space exploration has not only broadened our understanding of the universe but has also driven innovation in various fields. One significant achievement was the Apollo moon landing, which demonstrated human capability to reach celestial bodies. Moreover, the development of the International Space Station represents a collaborative effort among nations to conduct research in a microgravity environment. Despite the high costs and risks, the benefits of space exploration, such as satellite communications and Earth monitoring, are invaluable. Future missions aim to explore Mars and beyond, with the hope of uncovering signs of life and expanding human presence in space.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Complete the sentence: Space exploration has led to advancements in technology and _____.",
+        "answer": "science",
+        "explanation": "The passage mentions that space exploration has led to advancements in both technology and science.",
+        "keySentence": "Space exploration has not only broadened our understanding of the universe but has also driven innovation in various fields.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Complete the sentence: The Apollo moon landing was a significant _____ of human capability.",
+        "answer": "achievement",
+        "explanation": "The passage describes the Apollo moon landing as a significant achievement.",
+        "keySentence": "One significant achievement was the Apollo moon landing, which demonstrated human capability to reach celestial bodies.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Complete the sentence: The International Space Station is an example of a _____ effort.",
+        "answer": "collaborative",
+        "explanation": "The passage states that the International Space Station represents a collaborative effort among nations.",
+        "keySentence": "Moreover, the development of the International Space Station represents a collaborative effort among nations to conduct research in a microgravity environment.",
+        "mutationType": "EXACT_WORD",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Complete the sentence: Future missions aim to _____ Mars and beyond.",
+        "answer": "explore",
+        "explanation": "The grammatical form required is a verb that fits the sentence structure 'aim to explore'.",
+        "keySentence": "Future missions aim to explore Mars and beyond, with the hope of uncovering signs of life and expanding human presence in space.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Complete the sentence: Space exploration provides invaluable benefits, such as satellite _____ and Earth monitoring.",
+        "answer": "communications",
+        "explanation": "The passage mentions satellite communications as one of the benefits of space exploration.",
+        "keySentence": "Despite the high costs and risks, the benefits of space exploration, such as satellite communications and Earth monitoring, are invaluable.",
+        "mutationType": "GRAMMAR_FIT",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T09:32:12.450Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "EXACT_WORD": 3,
+        "GRAMMAR_FIT": 2
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  }
+]

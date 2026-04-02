@@ -1,17 +1,17 @@
 {
-  "timestamp": "2026-04-02T07:56:54.047Z",
+  "timestamp": "2026-04-02T13:01:04.492Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 24537,
+  "durationMs": 31194,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22996,
+      "durationMs": 26479,
       "steps": {
         "generation": {
           "pass": true,
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.6,
+          "avgScore": 4.8,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 24035,
+      "durationMs": 27262,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Carbon Emissions",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 2,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.6,
+          "avgScore": 4.8,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 24503,
+      "durationMs": 31154,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Effects",
+          "topic": "Cognitive Science Insights",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4.4,
           "error": null
         },
         "audio": {

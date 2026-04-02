@@ -1,0 +1,103 @@
+[
+  {
+    "id": "eccf2877-f845-4b06-bbe9-d50b2f614622",
+    "type": "listening-form",
+    "band": 7,
+    "topic": "Climate Science",
+    "passage": "John: Hi Emma, did you get a chance to look at the new climate science report? Emma: Yes, I did, John. It's fascinating. Did you read about the average global temperature increase? John: I did. The report mentions an increase of about 1.5 degrees... actually, no wait, it's 1.2 degrees Celsius since pre-industrial times. Emma: Exactly, and they also discussed the impact on sea levels in Greenland. John: Oh yes, that's right. The report highlighted a rise of approximately 12 centimeters. Emma: Sorry, I mean, it's actually 20 centimeters over the past century. John: Good catch. They also talked about specific regions, right? Emma: Yes, the report focuses extensively on the Great Barrier Reef. John: That's right. The correct spelling is G-R-E-A-T B-A-R-R-I-E-R R-E-E-F, isn't it? Emma: Exactly. And what about the data from the Arctic region? John: The report refers to a lot of data from the Svalbard region. Emma: That's a tricky one to spell, it's S-V-A-L-B-A-R-D. John: Yes, that's correct. And did you notice the section on greenhouse gases? Emma: Yes, they mentioned that the concentration of carbon dioxide has reached 42 percent higher than pre-industrial levels. John: Or should I say, forty-two percent? Emma: Either way works! It's quite alarming.",
+    "questions": [
+      {
+        "id": 1,
+        "label": "Average global temperature increase since pre-industrial times",
+        "answer": "1.2 degrees Celsius",
+        "explanation": "John corrects himself from 1.5 to 1.2 degrees Celsius",
+        "mutationType": "FIRST_MENTION_TRAP",
+        "trapDetail": "1.5 degrees Celsius vs 1.2 degrees Celsius",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1.2 degrees Celsius",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "label": "Region with significant sea level rise",
+        "answer": "Greenland",
+        "explanation": "Emma mentions the impact on sea levels in Greenland",
+        "mutationType": "SPELLING_PRECISION",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Greenland",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "label": "Sea level rise over the past century",
+        "answer": "20 centimeters",
+        "explanation": "Emma corrects herself from 12 to 20 centimeters",
+        "mutationType": "FIRST_MENTION_TRAP",
+        "trapDetail": "12 centimeters vs 20 centimeters",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "20 centimeters",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "label": "Region with extensive focus in the report",
+        "answer": "Great Barrier Reef",
+        "explanation": "John and Emma confirm the spelling of Great Barrier Reef",
+        "mutationType": "SPELLING_PRECISION",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Great Barrier Reef",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "label": "Increase in carbon dioxide concentration",
+        "answer": "42",
+        "alternateAnswer": "forty-two",
+        "explanation": "Emma states the concentration of carbon dioxide is 42 percent higher",
+        "mutationType": "NUMBER_FORMAT",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "42 percent",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "extraData": {
+      "formTitle": "Climate Science Report Form"
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T12:30:36.605Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": null,
+        "scores": null
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "FIRST_MENTION_TRAP": 2,
+        "SPELLING_PRECISION": 2,
+        "NUMBER_FORMAT": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  }
+]

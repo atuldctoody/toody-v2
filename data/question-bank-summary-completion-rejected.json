@@ -98,5 +98,4245 @@
       "flaggedForReview": []
     },
     "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "d9310128-5ef3-4ca9-840d-e13d62c7232c",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses various subfields including cognitive psychology, which focuses on mental processes such as perception and memory. Another important area is developmental psychology, which examines how individuals grow and change throughout their lives. Social psychology investigates how people influence and are influenced by others. Research in these areas helps us understand complex human behaviors and the underlying mechanisms. For instance, cognitive psychologists study the processes involved in decision-making, while social psychologists might explore how group dynamics affect individual actions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "mind",
+        "explanation": "The passage states that psychology is the study of the mind and behavior.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "developmental",
+        "explanation": "Developmental psychology examines growth and change throughout life.",
+        "keySentence": "Another important area is developmental psychology, which examines how individuals grow and change throughout their lives.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "social",
+        "explanation": "Social psychology investigates the influence of people on each other.",
+        "keySentence": "Social psychology investigates how people influence and are influenced by others.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "complex",
+        "explanation": "The passage mentions that research helps understand complex human behaviors.",
+        "keySentence": "Research in these areas helps us understand complex human behaviors and the underlying mechanisms.",
+        "mutationType": "none",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "group",
+        "explanation": "Social psychologists focus on group dynamics affecting individual actions.",
+        "keySentence": "Social psychologists might explore how group dynamics affect individual actions.",
+        "mutationType": "none",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology examines the [1] and behavior, covering subfields like cognitive and [2] psychology. Cognitive psychology deals with mental processes like perception, while [3] psychology looks into social influences. Research in these fields aids in understanding [4] human behaviors and mechanisms. For example, cognitive psychologists study decision-making processes, whereas social psychologists focus on [5] dynamics.",
+      "wordBank": [
+        "mind",
+        "developmental",
+        "social",
+        "complex",
+        "group",
+        "brain",
+        "learning",
+        "individual"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:34:45.005Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "70dcb492-ce8f-4f42-84c6-074d4c428b04",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy is becoming increasingly important as the world seeks to combat climate change. Solar power, harnessed from the sun's rays, is one of the fastest-growing renewable sources. Wind energy is another key player in reducing carbon emissions, with many countries investing heavily in wind farms. Hydropower, which uses water to generate electricity, remains a significant source of renewable energy. However, the reliance on natural resources poses challenges, such as the availability of sunlight and wind. Renewable energy technologies continue to evolve, improving efficiency and reducing costs, making them more accessible globally.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "Solar",
+        "explanation": "Solar power is described as one of the fastest-growing renewable sources.",
+        "keySentence": "Solar power, harnessed from the sun's rays, is one of the fastest-growing renewable sources.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "Wind",
+        "explanation": "Wind energy is highlighted as key in reducing carbon emissions.",
+        "keySentence": "Wind energy is another key player in reducing carbon emissions, with many countries investing heavily in wind farms.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "Hydropower",
+        "explanation": "Hydropower is mentioned as a significant source of renewable energy.",
+        "keySentence": "Hydropower, which uses water to generate electricity, remains a significant source of renewable energy.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "accessible",
+        "explanation": "Advancements make renewable energy more accessible, not expensive.",
+        "keySentence": "Renewable energy technologies continue to evolve, improving efficiency and reducing costs, making them more accessible globally.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sunlight",
+        "explanation": "The availability of sunlight is a challenge for solar power.",
+        "keySentence": "However, the reliance on natural resources poses challenges, such as the availability of sunlight and wind.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy is crucial in addressing climate change. [1] power is growing rapidly, while [2] energy is essential in cutting emissions. [3] power is still a significant contributor. Despite the reliance on natural resources, advancements are enhancing efficiency and making renewable energy more [4]. However, challenges remain, such as the availability of [5].",
+      "wordBank": [
+        "Solar",
+        "Wind",
+        "Hydropower",
+        "accessible",
+        "sunlight",
+        "geothermal",
+        "coal",
+        "expensive"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:35:08.077Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "dc7277c4-3e7c-4c1a-a3b5-d2730829e8ca",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the ocean, marine biology classifies species based on the environment rather than taxonomy. Marine biologists often focus on particular ecosystems, such as coral reefs or kelp forests, due to the diversity and complexity of life forms in these areas. The study of marine biology also includes the impact of human activities, such as pollution and overfishing, which threaten marine ecosystems. Understanding these impacts is crucial for developing conservation strategies and ensuring the sustainability of marine resources.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "environment",
+        "explanation": "Marine biology classifies species based on the environment rather than taxonomy.",
+        "keySentence": "Marine biology classifies species based on the environment rather than taxonomy.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "coral",
+        "explanation": "Coral reefs are one of the ecosystems focused on by marine biologists.",
+        "keySentence": "Marine biologists often focus on particular ecosystems, such as coral reefs or kelp forests.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "pollution",
+        "explanation": "Pollution is one of the human activities impacting marine ecosystems.",
+        "keySentence": "The study of marine biology also includes the impact of human activities, such as pollution and overfishing.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "resources",
+        "explanation": "The passage refers to the sustainability of marine resources.",
+        "keySentence": "Understanding these impacts is crucial for developing conservation strategies and ensuring the sustainability of marine resources.",
+        "mutationType": "Careful Reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sustainability",
+        "explanation": "The passage discusses ensuring the sustainability of marine resources.",
+        "keySentence": "Understanding these impacts is crucial for developing conservation strategies and ensuring the sustainability of marine resources.",
+        "mutationType": "Careful Reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology involves the study of oceanic life, classified by [1] rather than taxonomy. Researchers often concentrate on specific ecosystems like [2] reefs or kelp forests. Human activities, including [3] and overfishing, pose threats to these environments. Conservation strategies aim to protect marine [4] and ensure their [5].",
+      "wordBank": [
+        "environment",
+        "coral",
+        "pollution",
+        "resources",
+        "sustainability",
+        "taxonomy",
+        "destruction",
+        "animals"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:35:17.695Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "98430283-7366-4d37-81e1-064a7b07840a",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Climate Science",
+    "passage": "Climate science explores the complex interactions between the Earth's atmosphere, oceans, and biosphere. Recent studies have highlighted the role of greenhouse gases in exacerbating global warming. These gases, including carbon dioxide and methane, trap heat in the atmosphere, leading to a rise in global temperatures. Furthermore, the melting of polar ice caps has been identified as a critical indicator of climate change. This melting contributes to rising sea levels, which pose a threat to coastal communities. Scientists emphasize the importance of reducing emissions and adopting sustainable practices to mitigate these adverse effects.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "biosphere",
+        "explanation": "The passage mentions the Earth's atmosphere, oceans, and biosphere as components of climate science.",
+        "keySentence": "Climate science explores the complex interactions between the Earth's atmosphere, oceans, and biosphere.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "global",
+        "explanation": "The passage refers to global warming being exacerbated by greenhouse gases.",
+        "keySentence": "Recent studies have highlighted the role of greenhouse gases in exacerbating global warming.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "melting",
+        "explanation": "Melting of polar ice caps is identified as an indicator of climate change.",
+        "keySentence": "Furthermore, the melting of polar ice caps has been identified as a critical indicator of climate change.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "sustainable",
+        "explanation": "Sustainable practices are suggested to mitigate adverse effects.",
+        "keySentence": "Scientists emphasize the importance of reducing emissions and adopting sustainable practices to mitigate these adverse effects.",
+        "mutationType": "DISTRACTOR_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "coastal",
+        "explanation": "Coastal communities are threatened by rising sea levels.",
+        "keySentence": "This melting contributes to rising sea levels, which pose a threat to coastal communities.",
+        "mutationType": "DISTRACTOR_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science examines the intricate relationships between the atmosphere, oceans, and [1]. Greenhouse gases like carbon dioxide increase [2] warming by trapping heat. Polar ice cap [3] is a key sign of climate change, causing sea levels to rise. To reduce these effects, scientists suggest cutting emissions and using [4] practices. Rising sea levels endanger [5] communities.",
+      "wordBank": [
+        "biosphere",
+        "global",
+        "melting",
+        "sustainable",
+        "coastal",
+        "solar",
+        "temperature",
+        "urban"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:35:39.476Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "478e010d-4ee5-4ae1-9510-9d1ca47ad403",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "Governments around the world utilize various economic policies to stabilize their economies. Fiscal policy, which involves government spending and taxation, is a primary tool. By adjusting tax rates and public spending, governments can influence economic growth and control inflation. Monetary policy, managed by central banks, involves controlling the money supply and interest rates to maintain price stability. Both fiscal and monetary policies are crucial for economic balance, but they must be carefully coordinated to avoid negative impacts such as high unemployment or excessive inflation.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "taxation",
+        "explanation": "Fiscal policy involves government spending and taxation.",
+        "keySentence": "Fiscal policy, which involves government spending and taxation, is a primary tool.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "economic growth",
+        "explanation": "Adjusting tax rates and public spending influences economic growth.",
+        "keySentence": "By adjusting tax rates and public spending, governments can influence economic growth and control inflation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "central banks",
+        "explanation": "Monetary policy is managed by central banks.",
+        "keySentence": "Monetary policy, managed by central banks, involves controlling the money supply and interest rates to maintain price stability.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "high",
+        "explanation": "Proper coordination prevents high unemployment.",
+        "keySentence": "Both fiscal and monetary policies are crucial for economic balance, but they must be carefully coordinated to avoid negative impacts such as high unemployment or excessive inflation.",
+        "mutationType": "careful reading needed",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "excessive",
+        "explanation": "Proper coordination prevents excessive inflation.",
+        "keySentence": "Both fiscal and monetary policies are crucial for economic balance, but they must be carefully coordinated to avoid negative impacts such as high unemployment or excessive inflation.",
+        "mutationType": "careful reading needed",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Governments employ different economic policies for stability. A major tool is fiscal policy, which includes [1] and public spending adjustments. This can influence [2] and inflation control. Monetary policy, handled by [3], manages the money supply and interest rates. Proper coordination of both policies is vital to prevent issues like [4] unemployment or [5] inflation.",
+      "wordBank": [
+        "taxation",
+        "economic growth",
+        "central banks",
+        "high",
+        "excessive",
+        "recession",
+        "banks",
+        "low"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:35:48.903Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "b10b62e5-0105-44f7-af6b-030a4b0f5a6e",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has significantly advanced technology and broadened our understanding of the universe. Initially, the race to space was driven by competition between superpowers, resulting in rapid advancements. However, over time, collaboration between nations has become crucial. The International Space Station (ISS) epitomizes this cooperation, serving as a hub for scientific research and international partnership. Meanwhile, private companies have entered the scene, innovating and reducing costs. SpaceX, for example, has developed reusable rockets, making space travel more economical. As exploration continues, ethical considerations about space colonization and resource management are increasingly important.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "exploration",
+        "explanation": "The passage mentions 'space exploration' leading to technological advances and broadening understanding, aligning with the summary's context.",
+        "keySentence": "Space exploration has significantly advanced technology and broadened our understanding of the universe.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "cooperation",
+        "explanation": "The passage describes international cooperation as crucial, matching the summary's context of transformation.",
+        "keySentence": "However, over time, collaboration between nations has become crucial.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "scene",
+        "explanation": "The passage notes private companies entering the scene, relating to the summary's mention of contribution.",
+        "keySentence": "Meanwhile, private companies have entered the scene, innovating and reducing costs.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "ethical",
+        "explanation": "Ethical issues are mentioned in the passage regarding space exploration, aligning with the summary's context.",
+        "keySentence": "As exploration continues, ethical considerations about space colonization and resource management are increasingly important.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "resource",
+        "explanation": "Resource management is highlighted in the passage as a significant consideration, fitting the summary's context.",
+        "keySentence": "As exploration continues, ethical considerations about space colonization and resource management are increasingly important.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "The development of [1] has greatly impacted technology and expanded our knowledge of the universe. What began as a competition has transformed into international [2], exemplified by the ISS. Private firms have also contributed to the [3] by lowering costs. As we advance, [4] issues surrounding space colonization and [5] management are becoming more significant.",
+      "wordBank": [
+        "exploration",
+        "cooperation",
+        "scene",
+        "ethical",
+        "resource",
+        "competition",
+        "development",
+        "economical"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:09.889Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "80db69ec-724f-4413-9393-97338508a3c3",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience explores the intricate workings of the brain and nervous system. Researchers in this field aim to decipher how neural circuits function and contribute to behavior. A significant focus is on understanding synaptic connections, which are crucial for communication between neurons. Advances in technology have enabled scientists to map these networks with remarkable precision. Despite these advancements, many aspects of brain functioning, such as consciousness and memory, remain elusive and are subjects of ongoing investigation.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "intricate",
+        "explanation": "The summary paraphrases the passage's 'intricate workings' with 'systems'.",
+        "keySentence": "Neuroscience explores the intricate workings of the brain and nervous system.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "circuits",
+        "explanation": "The summary paraphrases the passage's 'neural circuits' with 'neural'.",
+        "keySentence": "Researchers in this field aim to decipher how neural circuits function and contribute to behavior.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "synaptic",
+        "explanation": "The summary uses 'links' to paraphrase the passage's 'synaptic connections'.",
+        "keySentence": "A significant focus is on understanding synaptic connections, which are crucial for communication between neurons.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "mapping",
+        "explanation": "'Mapping' is used in the passage to describe the detailed study of neural networks, which is paraphrased in the summary.",
+        "keySentence": "Advances in technology have enabled scientists to map these networks with remarkable precision.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "consciousness",
+        "explanation": "'Consciousness' is mentioned in the passage as a complex aspect that remains not fully understood.",
+        "keySentence": "Despite these advancements, many aspects of brain functioning, such as consciousness and memory, remain elusive and are subjects of ongoing investigation.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "The field of neuroscience delves into the [1] systems of the brain. Scientists work on understanding neural [2] and their impact on actions. A key area of study is the role of [3] links in neuron communication. Technological progress has allowed for detailed [4] of these networks. However, certain elements like [5] and memory are still not fully understood.",
+      "wordBank": [
+        "intricate",
+        "circuits",
+        "synaptic",
+        "mapping",
+        "consciousness",
+        "simple",
+        "cells",
+        "analysis"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:18.184Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "3f3484f5-2123-4c35-91cd-22847abc5ae7",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the actions that governments take in the economic field. It encompasses systems for setting interest rates, government budgets, labor market regulations, national ownership, and many other areas of government interventions into the economy. A crucial aspect of economic policy is monetary policy, which involves managing the money supply and interest rates to influence economic activity. Fiscal policy, on the other hand, uses government spending and taxation to influence the economy. Both policies are utilized to stabilize the economy, aiming for low inflation, low unemployment, and steady growth. However, the effectiveness of these policies can be influenced by external factors, such as global economic trends and unexpected events.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "interest rates",
+        "explanation": "The passage explains that economic policy includes setting interest rates.",
+        "keySentence": "It encompasses systems for setting interest rates, government budgets, labor market regulations...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "monetary",
+        "explanation": "Monetary policy is specifically mentioned as a crucial aspect of economic policy.",
+        "keySentence": "A crucial aspect of economic policy is monetary policy, which involves managing the money supply and interest rates...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "fiscal",
+        "explanation": "Fiscal policy is discussed in terms of government spending and taxation.",
+        "keySentence": "Fiscal policy, on the other hand, uses government spending and taxation to influence the economy.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "external",
+        "explanation": "The passage states that the effectiveness of policies can be influenced by external factors.",
+        "keySentence": "However, the effectiveness of these policies can be influenced by external factors...",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "unexpected",
+        "explanation": "Unexpected events are cited as factors that can affect policy effectiveness.",
+        "keySentence": "...and unexpected events.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Economic policy includes government actions like setting [1], managing budgets, and labor market rules. A key component is [2] policy, focused on money supply and interest rates, while [3] policy deals with spending and taxes. These policies aim to stabilize the economy but can be affected by [4] factors such as global trends and [5] events.",
+      "wordBank": [
+        "interest rates",
+        "monetary",
+        "fiscal",
+        "external",
+        "unexpected",
+        "internal",
+        "anticipated",
+        "domestic"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:41.150Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "998e5890-5d60-4079-bade-03bb172a19cb",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a branch of science that deals with organisms inhabiting the ocean and other saline water environments. Researchers in this field study the complex interactions among marine life forms and their habitats. One significant area of research is the impact of climate change on coral reefs, which are vital ecosystems providing shelter and food for numerous marine species. As ocean temperatures rise, coral bleaching occurs, severely affecting these ecosystems. Additionally, marine biologists investigate the role of plankton, which are crucial for the oceanic food chain. Plankton not only serve as a primary food source for many species but also play a significant role in carbon sequestration, thus influencing global climate patterns.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "shelter",
+        "explanation": "Coral reefs provide shelter for marine species, as stated in the passage.",
+        "keySentence": "coral reefs, which are vital ecosystems providing shelter and food for numerous marine species",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "bleaching",
+        "explanation": "The passage discusses coral bleaching as a result of rising ocean temperatures.",
+        "keySentence": "As ocean temperatures rise, coral bleaching occurs, severely affecting these ecosystems.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "food chain",
+        "explanation": "Plankton are crucial for the oceanic food chain, according to the passage.",
+        "keySentence": "Plankton not only serve as a primary food source for many species but also play a significant role in carbon sequestration.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "sequestration",
+        "explanation": "Plankton's role in carbon sequestration is highlighted in the passage, not absorption.",
+        "keySentence": "Plankton not only serve as a primary food source for many species but also play a significant role in carbon sequestration, thus influencing global climate patterns.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "interactions",
+        "explanation": "The passage mentions understanding intricate interactions in marine biology.",
+        "keySentence": "Researchers in this field study the complex interactions among marine life forms and their habitats.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology focuses on the study of organisms living in saline environments. A key area is the effect of climate change on coral reefs, which are essential as they offer [1] and sustenance to various marine species. Rising ocean temperatures lead to coral [2], damaging these ecosystems. Researchers also examine the importance of plankton, which are vital in the marine [3]. They are not only a food source but also contribute to carbon [4], impacting global climate. Marine biologists' work helps us understand these intricate [5].",
+      "wordBank": [
+        "shelter",
+        "habitats",
+        "bleaching",
+        "warming",
+        "food chain",
+        "network",
+        "sequestration",
+        "absorption"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:04.928Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "83d71db5-d453-415e-aab0-12b365822217",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "Psychology is a multifaceted discipline that includes a wide range of sub-fields such as human development, sports, health, clinical, social behavior, and cognitive processes. The study of psychology aims to understand and explain thoughts, emotions, and behaviors. Cognitive psychology, for instance, is concerned with how people acquire, process, and store information. Psychologists employ various methodologies to explore the complexities of human mind and behavior. These methods include both qualitative and quantitative approaches, providing a comprehensive understanding of mental processes. Despite the advances in the field, certain areas like mental illness still pose significant challenges, with researchers continuously striving to uncover effective treatments.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "development",
+        "explanation": "The passage mentions 'human development' as a sub-field of psychology.",
+        "keySentence": "Psychology is a multifaceted discipline that includes a wide range of sub-fields such as human development.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "understand",
+        "explanation": "The passage states that psychology aims to 'understand and explain thoughts, emotions, and behaviors'.",
+        "keySentence": "The study of psychology aims to understand and explain thoughts, emotions, and behaviors.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "store",
+        "explanation": "The passage refers to how information is 'acquired, processed, and stored'.",
+        "keySentence": "Cognitive psychology, for instance, is concerned with how people acquire, process, and store information.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "mental illness",
+        "explanation": "The passage highlights that mental illness still poses significant challenges.",
+        "keySentence": "Despite the advances in the field, certain areas like mental illness still pose significant challenges.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "treatments",
+        "explanation": "Effective treatments are mentioned as a focus for ongoing research efforts.",
+        "keySentence": "Researchers continuously striving to uncover effective treatments.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology encompasses various areas such as [1], social behavior, and cognitive processes. It seeks to [2] and explain human thoughts, emotions, and behaviors. In cognitive psychology, the focus is on how information is acquired and [3]. Researchers use different methods, including qualitative and quantitative approaches, to understand the human mind. However, challenges remain, particularly in treating [4], and efforts are ongoing to discover effective [5].",
+      "wordBank": [
+        "development",
+        "understand",
+        "store",
+        "mental illness",
+        "treatments",
+        "growth",
+        "comprehend",
+        "process"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:38.410Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "02e2929d-241b-4007-a5b9-15ac9e420a8f",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Space Exploration",
+    "passage": "The exploration of space has been a significant endeavor for many countries since the mid-20th century. Initially led by the United States and the Soviet Union, the space race was primarily driven by political and technological competition. Over the years, scientific curiosity has become a major factor in space exploration, leading to numerous missions aimed at understanding our solar system. Recently, private companies have entered the field, promising to lower costs and increase access to space. These developments have sparked debates about the future of international cooperation and the ethical considerations of space exploitation.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "competition",
+        "explanation": "The passage discusses the space race as being primarily driven by political and technological competition.",
+        "keySentence": "Initially led by the United States and the Soviet Union, the space race was primarily driven by political and technological competition.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "curiosity",
+        "explanation": "The passage states that scientific curiosity has become a major factor in space exploration.",
+        "keySentence": "Over the years, scientific curiosity has become a major factor in space exploration.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "costs",
+        "explanation": "The passage highlights the promise of private companies to lower costs in space exploration.",
+        "keySentence": "Recently, private companies have entered the field, promising to lower costs and increase access to space.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "cooperation",
+        "explanation": "The passage mentions debates about the future of international cooperation in space exploration.",
+        "keySentence": "These developments have sparked debates about the future of international cooperation and the ethical considerations of space exploitation.",
+        "mutationType": "requires careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "exploration",
+        "explanation": "The passage discusses the ethical considerations of space exploitation, but the correct term is exploration.",
+        "keySentence": "These developments have sparked debates about the future of international cooperation and the ethical considerations of space exploitation.",
+        "mutationType": "requires careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Space exploration began as a [1] competition between superpowers but has evolved to include significant [2] curiosity about our solar system. The entry of private firms promises reduced [3] expenses and broader access to space. However, this progress raises questions about [4] partnerships and the moral aspects of space [5].",
+      "wordBank": [
+        "rivalry",
+        "costs",
+        "cooperation",
+        "ethical",
+        "exploration",
+        "experiment",
+        "funding",
+        "collusion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:49.061Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "44d01631-c132-44e6-a6ed-03a7cdb04c39",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources, such as solar and wind, are gaining popularity due to their environmental benefits. Solar energy harnesses the power of the sun and converts it into electricity through photovoltaic cells. These cells are becoming more efficient and cost-effective, making solar a competitive option. Wind energy, on the other hand, uses turbines to capture the kinetic energy of the wind. Although installation costs can be high, technological advancements are reducing these expenses. Furthermore, government incentives and policies are encouraging the adoption of renewable energy. Despite their potential, these energy sources face challenges, including dependency on weather conditions and the need for energy storage solutions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "environmental",
+        "explanation": "The passage mentions 'environmental benefits' as a reason for renewable energy's popularity.",
+        "keySentence": "Renewable energy sources, such as solar and wind, are gaining popularity due to their environmental benefits.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "electricity",
+        "explanation": "Solar energy converts sunlight into electricity through photovoltaic cells.",
+        "keySentence": "Solar energy harnesses the power of the sun and converts it into electricity through photovoltaic cells.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "turbines",
+        "explanation": "Wind energy uses turbines to capture kinetic energy.",
+        "keySentence": "Wind energy, on the other hand, uses turbines to capture the kinetic energy of the wind.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "expenses",
+        "explanation": "Technological advancements are reducing installation expenses.",
+        "keySentence": "Although installation costs can be high, technological advancements are reducing these expenses.",
+        "mutationType": "REQUIRES_CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "adoption",
+        "explanation": "Government policies encourage the adoption of renewable energy.",
+        "keySentence": "Furthermore, government incentives and policies are encouraging the adoption of renewable energy.",
+        "mutationType": "REQUIRES_CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy, like solar and wind, is popular for its [1] advantages. Solar power uses photovoltaic cells to convert sunlight into [2]. Wind energy captures wind's kinetic power through [3]. While installation can be costly, advances are decreasing [4]. Government policies further support renewable [5].",
+      "wordBank": [
+        "environmental",
+        "electricity",
+        "turbines",
+        "expenses",
+        "adoption",
+        "limitations",
+        "fossil",
+        "nuclear"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:59.001Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e3771f94-a8dc-4c0a-ae1a-1cc3793146f7",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has been a frontier of human innovation, pushing the boundaries of what is possible. The early missions to the Moon demonstrated not only technical prowess but also fostered international collaboration. These missions laid the groundwork for future endeavors, enabling the development of technologies that are now integral to daily life. As humanity sets its sights on Mars, challenges such as radiation and long-duration space travel have become focal points. Addressing these issues requires advancements in science and engineering, highlighting the importance of continued investment in space exploration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "innovation",
+        "explanation": "The summary uses 'pushed human' as a synonym for 'innovation' mentioned in the passage.",
+        "keySentence": "Space exploration has been a frontier of human innovation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "collaboration",
+        "explanation": "The summary uses 'promoted international' as a synonym for 'collaboration' mentioned in the passage.",
+        "keySentence": "The early missions to the Moon demonstrated not only technical prowess but also fostered international collaboration.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "future",
+        "explanation": "The summary uses 'paving the way for' as a synonym for 'future endeavors' mentioned in the passage.",
+        "keySentence": "These missions laid the groundwork for future endeavors, enabling the development of technologies.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "radiation",
+        "explanation": "The summary mentions 'challenges like' referring to specific issues detailed in the passage.",
+        "keySentence": "As humanity sets its sights on Mars, challenges such as radiation and long-duration space travel have become focal points.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "investment",
+        "explanation": "The summary refers to the 'need for ongoing' using the passage's emphasis on 'importance of continued investment'.",
+        "keySentence": "Addressing these issues requires advancements in science and engineering, highlighting the importance of continued investment in space exploration.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Space exploration has pushed human [1] and promoted international [2]. Early missions to the Moon were crucial, paving the way for [3] technologies. As attention turns to Mars, challenges like [4] and extended missions need solutions. This underscores the need for ongoing [5] in the field.",
+      "wordBank": [
+        "innovation",
+        "collaboration",
+        "future",
+        "radiation",
+        "investment",
+        "discovery",
+        "competition",
+        "gravity"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:38:43.969Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "90f02d53-425b-4f90-a33b-e26deab6c225",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience has evolved significantly over the past few decades, providing insights into the intricate workings of the human brain. One major area of study is neuroplasticity, which refers to the brain's ability to reorganize itself by forming new neural connections. This plasticity is crucial for learning and memory, allowing individuals to adapt to new experiences and recover from brain injuries. Another important focus is on neurotransmitters, the chemical messengers that transmit signals between neurons. Understanding the role of neurotransmitters has led to breakthroughs in treating mental health disorders. Moreover, advancements in brain imaging technologies have enabled researchers to observe brain activity in real-time, offering a deeper understanding of cognitive functions and disorders.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "neuroscience",
+        "explanation": "The passage discusses the evolution of neuroscience and its role in understanding the brain.",
+        "keySentence": "Neuroscience has evolved significantly over the past few decades, providing insights into the intricate workings of the human brain.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "learning",
+        "explanation": "Neuroplasticity is linked with learning and memory, allowing adaptation to new experiences.",
+        "keySentence": "This plasticity is crucial for learning and memory, allowing individuals to adapt to new experiences and recover from brain injuries.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "signals",
+        "explanation": "Neurotransmitters are responsible for transmitting signals between neurons.",
+        "keySentence": "Another important focus is on neurotransmitters, the chemical messengers that transmit signals between neurons.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "brain",
+        "explanation": "The passage emphasizes advancements in brain imaging technologies.",
+        "keySentence": "Moreover, advancements in brain imaging technologies have enabled researchers to observe brain activity in real-time.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "cognitive",
+        "explanation": "The passage concludes with enhanced understanding of cognitive functions and disorders.",
+        "keySentence": "Offering a deeper understanding of cognitive functions and disorders.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Recent advancements in [1] have shed light on the brain's capacity for neuroplasticity, which is essential for [2] and memory. Neurotransmitters play a crucial role in transmitting [3] between neurons, aiding the development of treatments for mental health disorders. Additionally, innovations in [4] imaging have allowed scientists to monitor brain activity, enhancing our comprehension of [5] functions.",
+      "wordBank": [
+        "neuroscience",
+        "learning",
+        "signals",
+        "brain",
+        "cognitive",
+        "genetics",
+        "biochemistry",
+        "illusion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:04.102Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "1107ca31-ed83-4bca-8549-ae9e9c0436a7",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "The study of psychology involves understanding the human mind and behavior. Cognitive psychology focuses on internal processes such as perception, memory, and problem-solving. These cognitive functions are essential for interpreting the world around us. Another branch, developmental psychology, examines how people change over their lifespan, including emotional, social, and cognitive growth. This field provides insights into how early experiences shape later behaviors. Social psychology, on the other hand, explores how individuals' thoughts and behaviors are influenced by social interactions and societal norms. It emphasizes the role of group dynamics and cultural influences in shaping behavior.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "mind",
+        "explanation": "The study of psychology involves understanding the human mind, which is a key aspect of psychological study.",
+        "keySentence": "The study of psychology involves understanding the human mind and behavior.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "memory",
+        "explanation": "Memory is one of the internal processes examined in cognitive psychology.",
+        "keySentence": "Cognitive psychology focuses on internal processes such as perception, memory, and problem-solving.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "growth",
+        "explanation": "Developmental psychology examines changes, including emotional, social, and cognitive growth.",
+        "keySentence": "Developmental psychology examines how people change over their lifespan, including emotional, social, and cognitive growth.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "social",
+        "explanation": "Social psychology focuses on social interactions and their impact on individual behavior.",
+        "keySentence": "Social psychology, on the other hand, explores how individuals' thoughts and behaviors are influenced by social interactions and societal norms.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "behaviors",
+        "explanation": "Social psychology examines how interactions influence individual behaviors, not just thoughts.",
+        "keySentence": "It emphasizes the role of group dynamics and cultural influences in shaping behavior.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology is the study of the human [1] and behavior. Cognitive psychology examines internal processes like perception and [2]. Developmental psychology investigates changes across the lifespan, focusing on emotional and social [3]. Social psychology looks at how [4] interactions and cultural norms affect individual [5].",
+      "wordBank": [
+        "mind",
+        "memory",
+        "growth",
+        "social",
+        "behaviors",
+        "emotional",
+        "mood",
+        "thoughts"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:11.797Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "4e37622b-38e2-4787-85f7-68d5c6268bbc",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "Recent archaeological excavations in the remote region of Mesopotamia have unveiled a complex network of ancient canals. These canals, believed to date back to the early Bronze Age, suggest an advanced understanding of irrigation techniques by the civilization that inhabited the area. The discovery was made possible due to satellite imagery, which revealed the faint outlines of these structures that were otherwise invisible to the naked eye. In addition to the canals, researchers found remnants of pottery, which have provided insights into the daily life and trade practices of the society. The pottery's intricate designs indicate a high level of craftsmanship, while the materials used reflect extensive trade networks that extended far beyond the immediate region.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "canals",
+        "explanation": "The passage mentions the 'complex network of ancient canals' discovered in Mesopotamia.",
+        "keySentence": "Recent archaeological excavations in the remote region of Mesopotamia have unveiled a complex network of ancient canals.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "irrigation",
+        "explanation": "The passage refers to 'an advanced understanding of irrigation techniques'.",
+        "keySentence": "These canals, believed to date back to the early Bronze Age, suggest an advanced understanding of irrigation techniques by the civilization that inhabited the area.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "satellite",
+        "explanation": "Satellite imagery was used to reveal the structures, as mentioned in the passage.",
+        "keySentence": "The discovery was made possible due to satellite imagery, which revealed the faint outlines of these structures that were otherwise invisible to the naked eye.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "designs",
+        "explanation": "The passage highlights the 'intricate designs' of the pottery.",
+        "keySentence": "The pottery's intricate designs indicate a high level of craftsmanship.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "trade",
+        "explanation": "The passage mentions 'extensive trade networks' connected to the materials used in pottery.",
+        "keySentence": "The materials used reflect extensive trade networks that extended far beyond the immediate region.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "In Mesopotamia, archaeologists discovered an ancient [1] system that demonstrates advanced [2] techniques. The use of [3] imagery was crucial in identifying these structures. Pottery remains, with detailed [4], offer insights into the society's [5] networks.",
+      "wordBank": [
+        "canals",
+        "irrigation",
+        "satellite",
+        "designs",
+        "trade",
+        "buildings",
+        "navigation",
+        "fabrics"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:21.605Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "b6af9f9d-b130-4873-bbb5-67866555c373",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has undergone significant changes in recent decades, driven by the need for sustainable and efficient city planning. Cities are increasingly focusing on green spaces, which help improve air quality and provide recreational areas for residents. Additionally, urban planners are prioritizing public transportation systems to reduce traffic congestion and minimize pollution. Innovative architectural designs are also playing a crucial role in creating energy-efficient buildings that reduce the carbon footprint of urban areas. The concept of smart cities is gaining traction, with technology being integrated into infrastructure to enhance the quality of life for city dwellers.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "green",
+        "explanation": "The passage emphasizes green spaces as vital for improving air quality and recreation.",
+        "keySentence": "Cities are increasingly focusing on green spaces, which help improve air quality and provide recreational areas for residents.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "transportation",
+        "explanation": "Efficient public transportation systems are highlighted as a priority to reduce congestion and pollution.",
+        "keySentence": "Additionally, urban planners are prioritizing public transportation systems to reduce traffic congestion and minimize pollution.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "architectural",
+        "explanation": "Innovative architectural designs are key for creating energy-efficient buildings.",
+        "keySentence": "Innovative architectural designs are also playing a crucial role in creating energy-efficient buildings that reduce the carbon footprint of urban areas.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "smart",
+        "explanation": "The passage discusses the emergence of smart cities integrating technology.",
+        "keySentence": "The concept of smart cities is gaining traction, with technology being integrated into infrastructure to enhance the quality of life for city dwellers.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "life",
+        "explanation": "Technology integration aims to enhance the quality of life in urban areas.",
+        "keySentence": "The concept of smart cities is gaining traction, with technology being integrated into infrastructure to enhance the quality of life for city dwellers.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Recent shifts in urban development emphasize the importance of [1] spaces and efficient [2] systems to enhance city living. Cities are adopting innovative [3] designs to promote energy efficiency. The integration of technology is pivotal in the emergence of [4] cities, aiming to improve residents' [5].",
+      "wordBank": [
+        "green",
+        "transportation",
+        "architectural",
+        "smart",
+        "life",
+        "natural",
+        "traffic",
+        "building"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:30.282Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "11b124ef-f979-40cf-9b04-cfca87642457",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the oceans, marine biology covers a wide range of topics and organisms, from the smallest plankton to the largest whales. The study often involves understanding the complex interactions within marine ecosystems, including the food web and predator-prey relationships. Recent advancements in technology have allowed scientists to explore the depths of the oceans more thoroughly, revealing new species and complex ecosystems. One of the fascinating areas of study is the adaptation of marine organisms to extreme environments, such as hydrothermal vents, where life thrives in conditions of high pressure and temperature. These adaptations often involve unique physiological changes that allow organisms to survive and flourish in such harsh settings.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "interactions",
+        "explanation": "The passage discusses 'complex interactions within marine ecosystems'.",
+        "keySentence": "The study often involves understanding the complex interactions within marine ecosystems, including the food web and predator-prey relationships.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "whales",
+        "explanation": "The passage mentions 'from the smallest plankton to the largest whales'.",
+        "keySentence": "Given the vastness of the oceans, marine biology covers a wide range of topics and organisms, from the smallest plankton to the largest whales.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "adaptation",
+        "explanation": "The passage refers to the 'adaptation of marine organisms to extreme environments'.",
+        "keySentence": "One of the fascinating areas of study is the adaptation of marine organisms to extreme environments, such as hydrothermal vents.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "physiological",
+        "explanation": "The passage describes 'unique physiological changes'.",
+        "keySentence": "These adaptations often involve unique physiological changes that allow organisms to survive and flourish in such harsh settings.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "biology",
+        "explanation": "The passage focuses on marine biology as a field of study.",
+        "keySentence": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology involves the study of oceanic organisms and their complex [1]. The field covers a range of topics, from plankton to [2]. Technological advancements have enabled deeper exploration, leading to the discovery of new species and ecosystems. A key area of interest is the [3] of marine life to extreme environments like hydrothermal vents. The unique [4] of these organisms allow them to thrive under high pressure and temperature. Understanding these processes enriches our knowledge of marine [5].",
+      "wordBank": [
+        "ecosystems",
+        "whales",
+        "adaptation",
+        "physiological",
+        "biology",
+        "forests",
+        "mammals",
+        "migration"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:41.041Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "8ab74d7b-eb54-4b5e-a550-6715334be461",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has evolved significantly over the years. One major area of focus has been phonetics, which examines the sounds of human speech. Researchers have developed innovative methods to analyze acoustic properties, leading to a deeper understanding of language patterns. Another area of study is syntax, the set of rules governing sentence structure. By exploring syntax, linguists can better comprehend how different languages convey meaning. Furthermore, sociolinguistics investigates how language varies across different social groups and contexts. This branch of linguistics helps in understanding the cultural influences on language use. Finally, computational linguistics applies computer science techniques to process and analyze language data, revolutionizing the study of linguistics by enabling large-scale text analysis.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "sounds",
+        "explanation": "Phonetics examines the sounds of human speech, and the summary uses 'studies' as a synonym for 'examines'.",
+        "keySentence": "One major area of focus has been phonetics, which examines the sounds of human speech.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "structure",
+        "explanation": "Syntax is about the rules governing sentence structure, and the summary uses 'focuses on' to bridge with 'governing'.",
+        "keySentence": "Another area of study is syntax, the set of rules governing sentence structure.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "social",
+        "explanation": "Sociolinguistics investigates how language varies across social groups and contexts, and the summary uses 'factors' to bridge with 'groups'.",
+        "keySentence": "Sociolinguistics investigates how language varies across different social groups and contexts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "analysis",
+        "explanation": "Computational linguistics applies computer science techniques to process and analyze language data, implying analysis.",
+        "keySentence": "Finally, computational linguistics applies computer science techniques to process and analyze language data.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "understanding",
+        "explanation": "The advancements have enhanced our understanding of linguistic patterns, referring to the deeper comprehension mentioned.",
+        "keySentence": "Researchers have developed innovative methods to analyze acoustic properties, leading to a deeper understanding of language patterns.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Linguistic research encompasses various fields. Phonetics, which studies the [1] of speech, has progressed with new methods to examine sounds. Syntax focuses on the [2] of sentences, providing insights into meaning across languages. Sociolinguistics explores how language is influenced by [3] factors. Computational linguistics uses technology to analyze language, allowing for large-scale [4]. These advancements have significantly enhanced our [5] of linguistic patterns.",
+      "wordBank": [
+        "structure",
+        "understanding",
+        "acoustic",
+        "social",
+        "analysis",
+        "sounds",
+        "patterns",
+        "groups"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:40:03.051Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "30e012ee-5343-4f89-a4d1-884aadd49975",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policies are critical in shaping the economic landscape of a nation. Governments often implement fiscal measures, such as taxation and government spending, to influence economic growth. Monetary policy, managed by a country's central bank, involves adjusting interest rates to control inflation and stabilize the currency. Structural policies focus on long-term improvements, such as enhancing productivity and competitiveness. These policies are designed to encourage sustainable development and ensure economic resilience. Policymakers must carefully balance these strategies to address both immediate economic challenges and future growth prospects.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "fiscal",
+        "explanation": "Fiscal measures refer to government actions like taxation to influence the economy.",
+        "keySentence": "Governments often implement fiscal measures, such as taxation and government spending, to influence economic growth.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "monetary",
+        "explanation": "Monetary policy involves adjusting interest rates to control inflation.",
+        "keySentence": "Monetary policy, managed by a country's central bank, involves adjusting interest rates to control inflation and stabilize the currency.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "long-term",
+        "explanation": "Structural policies focus on improvements that are sustained over a long period.",
+        "keySentence": "Structural policies focus on long-term improvements, such as enhancing productivity and competitiveness.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "sustainable",
+        "explanation": "Sustainable development refers to growth that can be maintained over time without depleting resources.",
+        "keySentence": "These policies are designed to encourage sustainable development and ensure economic resilience.",
+        "mutationType": "requires careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "resilience",
+        "explanation": "Economic resilience refers to the ability of an economy to recover from shocks.",
+        "keySentence": "These policies are designed to encourage sustainable development and ensure economic resilience.",
+        "mutationType": "requires careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Governments use [1], such as taxes, to affect economic growth. Central banks manage [2] to control inflation. Structural policies aim for [3] improvements. Balancing these strategies can help achieve [4] development and economic [5].",
+      "wordBank": [
+        "fiscal",
+        "monetary",
+        "long-term",
+        "sustainable",
+        "resilience",
+        "temporary",
+        "instability",
+        "short-term"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:40:11.638Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "ffe66127-f691-4ddb-a624-de2422837928",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "The study of climate science primarily focuses on understanding the Earth's atmosphere and the complex interactions that govern weather patterns. Researchers in this field analyze data from various sources, including satellite images and historical climate records, to predict future climatic conditions. One significant aspect of climate science is investigating the impact of greenhouse gases, which trap heat in the atmosphere, leading to global warming. Another important area of research is the examination of ocean currents, as they play a crucial role in regulating the Earth's climate. By comprehending these elements, scientists aim to develop more accurate climate models and propose solutions to mitigate adverse environmental effects.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "atmosphere",
+        "explanation": "The passage refers to the Earth's atmosphere as a primary focus of climate science.",
+        "keySentence": "The study of climate science primarily focuses on understanding the Earth's atmosphere and the complex interactions that govern weather patterns.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "satellite",
+        "explanation": "Satellite images are mentioned as a source of data used by researchers to predict climatic conditions.",
+        "keySentence": "Researchers in this field analyze data from various sources, including satellite images and historical climate records, to predict future climatic conditions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "greenhouse",
+        "explanation": "Greenhouse gases are highlighted as significant contributors to global warming.",
+        "keySentence": "One significant aspect of climate science is investigating the impact of greenhouse gases, which trap heat in the atmosphere, leading to global warming.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "proposing",
+        "explanation": "The passage indicates that understanding climate elements helps in proposing solutions, not just understanding them.",
+        "keySentence": "By comprehending these elements, scientists aim to develop more accurate climate models and propose solutions to mitigate adverse environmental effects.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "impacts",
+        "explanation": "The passage discusses mitigating adverse environmental impacts.",
+        "keySentence": "By comprehending these elements, scientists aim to develop more accurate climate models and propose solutions to mitigate adverse environmental effects.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science involves the study of the Earth's [1] and the interactions affecting weather. Researchers use data like [2] images to forecast climate changes. A key focus is on [3] gases, which contribute to global warming. Ocean currents are also crucial for climate regulation. Understanding these helps in creating accurate models and [4] solutions to reduce [5].",
+      "wordBank": [
+        "atmosphere",
+        "satellite",
+        "greenhouse",
+        "proposing",
+        "impacts",
+        "ecosystem",
+        "weather",
+        "alleviating"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:40:30.087Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e5a31fe7-bde4-4bd4-86f5-3735dab93f1c",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Cognitive Behavioral Therapy in Psychology",
+    "passage": "Cognitive Behavioral Therapy (CBT) is a widely recognized method within psychology for treating a range of mental health disorders. The therapy focuses on the relationship between thoughts, feelings, and behaviors, aiming to alter negative patterns. CBT is grounded in the theory that our cognitions can influence our emotions and behaviors. By identifying and challenging distorted cognitions, individuals can learn to manage their emotional responses more effectively. The structured nature of CBT involves setting specific goals and employing various techniques, such as cognitive restructuring and behavioral experiments, to achieve desired outcomes. Research has shown that CBT can be particularly effective for treating anxiety and depression, with numerous studies supporting its efficacy in improving overall mental health.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "patterns",
+        "explanation": "The passage mentions altering negative patterns, which is paraphrased in the summary.",
+        "keySentence": "The therapy focuses on the relationship between thoughts, feelings, and behaviors, aiming to alter negative patterns.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "emotions",
+        "explanation": "The passage states that cognitions influence emotions, which is paraphrased in the summary.",
+        "keySentence": "CBT is grounded in the theory that our cognitions can influence our emotions and behaviors.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "cognitions",
+        "explanation": "The passage discusses challenging distorted cognitions, which is paraphrased in the summary.",
+        "keySentence": "By identifying and challenging distorted cognitions, individuals can learn to manage their emotional responses more effectively.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "treating",
+        "explanation": "The passage mentions CBT's effectiveness in treating mental health issues, a detail requiring careful reading.",
+        "keySentence": "Research has shown that CBT can be particularly effective for treating anxiety and depression.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "anxiety",
+        "explanation": "The passage highlights anxiety as a specific disorder CBT effectively treats, requiring careful reading.",
+        "keySentence": "Research has shown that CBT can be particularly effective for treating anxiety and depression.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Cognitive Behavioral Therapy (CBT) is a popular treatment in psychology, aiming to change negative [1]. It is based on the belief that thoughts impact [2] and behaviors. By challenging distorted [3], patients can better manage emotions. The structured approach of CBT, including specific goals and techniques, has proven effective for [4] mental health issues like [5].",
+      "wordBank": [
+        "patterns",
+        "emotions",
+        "cognitions",
+        "treating",
+        "anxiety",
+        "feelings",
+        "affecting",
+        "stress"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:40:40.222Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "f928164f-1004-486c-b152-c7a3e9344d54",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "In recent years, a groundbreaking archaeological find was made in the remote deserts of Peru. A team of international archaeologists uncovered a vast array of artifacts dating back several centuries. The most remarkable discovery was a series of ancient pottery that exhibited exquisite craftsmanship, providing insight into the sophisticated culture that once thrived in the region. These artifacts were unearthed from what is believed to be a ceremonial site. The intricate designs on the pottery suggest a highly developed artistic tradition, indicating that this civilization had advanced knowledge and skills. Furthermore, the site also contained a number of human remains, which are currently being studied to understand the health and lifestyle of this ancient population.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "discovery",
+        "explanation": "The passage describes a significant archaeological find, synonymous with 'discovery'.",
+        "keySentence": "In recent years, a groundbreaking archaeological find was made in the remote deserts of Peru.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "array",
+        "explanation": "The passage mentions a 'vast array of artifacts', matching the synonym 'collection'.",
+        "keySentence": "A team of international archaeologists uncovered a vast array of artifacts dating back several centuries.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "pottery",
+        "explanation": "Described in the passage as 'ancient pottery', the term directly fits the context.",
+        "keySentence": "The most remarkable discovery was a series of ancient pottery that exhibited exquisite craftsmanship.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "sophisticated",
+        "explanation": "The passage describes the culture as sophisticated, which requires distinguishing from similar terms.",
+        "keySentence": "The intricate designs on the pottery suggest a highly developed artistic tradition.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "remains",
+        "explanation": "Human remains are mentioned in the passage, requiring attention to specific wording.",
+        "keySentence": "Furthermore, the site also contained a number of human remains.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "An important archaeological [1] was made in Peru, where a [2] of artifacts was found at a likely ceremonial site. The discovery included ancient [3] known for their fine craftsmanship, highlighting the [4] culture of the civilization. Human [5] were also found, offering clues about the people's lifestyle.",
+      "wordBank": [
+        "discovery",
+        "array",
+        "pottery",
+        "sophisticated",
+        "remains",
+        "find",
+        "collection",
+        "sculptures"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:40:51.472Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "1bf2bac6-c75a-4f6b-badb-58108e8ac75a",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has advanced significantly over the past few decades. The development of new technologies has enabled astronauts to travel farther into space than ever before. Recent missions have focused on studying the potential for life on other planets, particularly Mars. Scientists believe that understanding the Martian environment could provide insights into the origins of life on Earth. Additionally, the prospect of mining asteroids for valuable resources is being explored, as these celestial bodies contain materials that could be used in various industries on Earth. However, the high costs associated with space missions pose a significant challenge, requiring international collaboration to share the financial burden.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "technology",
+        "explanation": "The passage discusses the role of technology in enabling further space travel.",
+        "keySentence": "The development of new technologies has enabled astronauts to travel farther into space than ever before.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "Mars",
+        "explanation": "The passage specifically mentions Mars as a focus for studying potential life.",
+        "keySentence": "Recent missions have focused on studying the potential for life on other planets, particularly Mars.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "origins",
+        "explanation": "The passage ties the understanding of other planets to the origins of life on Earth.",
+        "keySentence": "Scientists believe that understanding the Martian environment could provide insights into the origins of life on Earth.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "mining",
+        "explanation": "The passage discusses mining asteroids for valuable resources.",
+        "keySentence": "Additionally, the prospect of mining asteroids for valuable resources is being explored.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "international",
+        "explanation": "The passage emphasizes the need for international collaboration due to high costs.",
+        "keySentence": "However, the high costs associated with space missions pose a significant challenge, requiring international collaboration to share the financial burden.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "In recent years, advancements in [1] have allowed space missions to reach new distances. Current explorations aim to discover the possibility of life on planets like [2]. Understanding these planets may help in uncovering Earth's [3]. Another area of interest is asteroid [4] for resources, although financial constraints necessitate [5] cooperation.",
+      "wordBank": [
+        "technology",
+        "Mars",
+        "origins",
+        "mining",
+        "international",
+        "technology",
+        "Jupiter",
+        "domestic"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:41:23.436Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "f020c157-7884-4c8a-9c68-89f1f713b849",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine Biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the oceans, marine biology covers a wide array of topics, from the behavior and physiology of marine organisms to the complex ecosystems in which they live. One area of focus is the study of coral reefs, which are home to a diverse range of species. Coral reefs are particularly important because they are highly sensitive to environmental changes, acting as indicators of ocean health. Another important aspect of marine biology is the study of marine conservation. As human activity continues to impact the oceans, understanding and protecting marine ecosystems becomes increasingly crucial. Overfishing, pollution, and climate change pose significant threats to marine life, necessitating informed conservation efforts. By researching these areas, marine biologists aim to preserve the biodiversity of marine environments and ensure sustainable practices for future generations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "ecosystems",
+        "explanation": "The passage discusses the study of marine organisms and their ecosystems, hence the correct word is 'ecosystems'.",
+        "keySentence": "Marine biology covers a wide array of topics, from the behavior and physiology of marine organisms to the complex ecosystems in which they live.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "indicators",
+        "explanation": "'Indicators' is used in the passage to describe coral reefs' role in showing the health of the ocean due to their sensitivity.",
+        "keySentence": "Coral reefs are particularly important because they are highly sensitive to environmental changes, acting as indicators of ocean health.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "overfishing",
+        "explanation": "Overfishing is explicitly mentioned as a threat to marine ecosystems, making it the correct choice.",
+        "keySentence": "Overfishing, pollution, and climate change pose significant threats to marine life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "biodiversity",
+        "explanation": "The goal of marine biologists includes preserving the biodiversity of marine environments.",
+        "keySentence": "By researching these areas, marine biologists aim to preserve the biodiversity of marine environments.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sustainable",
+        "explanation": "The passage emphasizes the importance of sustainable practices for future generations.",
+        "keySentence": "By researching these areas, marine biologists aim to preserve the biodiversity of marine environments and ensure sustainable practices for future generations.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine Biology involves the study of ocean organisms and their [1]. A key focus is on coral reefs, which serve as [2] of ocean health due to their sensitivity to environmental shifts. Marine conservation is vital as activities like [3] threaten marine ecosystems. Research aims to maintain marine [4] and promote [5] practices.",
+      "wordBank": [
+        "ecosystems",
+        "indicators",
+        "overfishing",
+        "biodiversity",
+        "sustainable",
+        "landforms",
+        "predators",
+        "depletion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:41:55.176Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "3207cadb-da9e-4468-a480-fcc6e3dd90cc",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has significantly advanced our understanding of the universe. One of the primary objectives of these missions is to discover the potential for life beyond Earth. Scientists focus on analyzing celestial bodies like Mars and Europa, a moon of Jupiter, which may harbor conditions suitable for life. Moreover, space technology has led to numerous innovations that benefit everyday life on Earth, such as satellite communications and advanced materials. Despite the high costs and risks involved, the pursuit of knowledge and the potential economic benefits continue to drive investment in space exploration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "Europa",
+        "explanation": "Europa is highlighted as a location with conditions that might support life.",
+        "keySentence": "Scientists focus on analyzing celestial bodies like Mars and Europa, a moon of Jupiter, which may harbor conditions suitable for life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "innovations",
+        "explanation": "Space technology has led to innovations benefiting daily life.",
+        "keySentence": "Moreover, space technology has led to numerous innovations that benefit everyday life on Earth.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "satellite",
+        "explanation": "Satellite communications are a direct result of space technology.",
+        "keySentence": "such as satellite communications and advanced materials.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "knowledge",
+        "explanation": "The pursuit of knowledge is a key reason for continued exploration.",
+        "keySentence": "Despite the high costs and risks involved, the pursuit of knowledge and the potential economic benefits continue to drive investment in space exploration.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "economic",
+        "explanation": "Economic benefits are mentioned as a reason for investment in space exploration.",
+        "keySentence": "the pursuit of knowledge and the potential economic benefits continue to drive investment in space exploration.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "The aim of space missions is to explore the possibility of life outside Earth. Researchers concentrate on bodies like Mars and [1] because they might support life. Space technology also results in [2] that help daily life, including [3] communications. Although expensive and risky, exploration continues due to the pursuit of [4] and potential [5] advantages.",
+      "wordBank": [
+        "Europa",
+        "innovations",
+        "satellite",
+        "knowledge",
+        "economic",
+        "Io",
+        "pollution",
+        "political"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:16.784Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "c0c4af52-09be-48fd-98e7-0e5720892e2b",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience explores the complex workings of the brain and nervous system. It examines how neurons communicate through electrical impulses and chemical signals to process and transmit information. Recent advancements in neuroimaging have provided greater insight into brain activity, aiding in the understanding of various neurological disorders. Furthermore, the study of synaptic plasticity sheds light on how experiences can alter neural connections, contributing to learning and memory formation. As a multidisciplinary field, neuroscience integrates biology, psychology, and computer science to unravel the intricacies of human cognition and behavior.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "nervous",
+        "explanation": "The passage refers to the 'brain and nervous system,' which is paraphrased in the summary.",
+        "keySentence": "Neuroscience explores the complex workings of the brain and nervous system.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "understanding",
+        "explanation": "The passage mentions 'aiding in the understanding of various neurological disorders,' which corresponds to 'enhanced understanding' in the summary.",
+        "keySentence": "Recent advancements in neuroimaging have provided greater insight into brain activity, aiding in the understanding of various neurological disorders.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "connections",
+        "explanation": "The passage discusses 'alter neural connections,' which relates to neural connections in the summary.",
+        "keySentence": "Furthermore, the study of synaptic plasticity sheds light on how experiences can alter neural connections, contributing to learning and memory formation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "cognition",
+        "explanation": "The passage uses 'human cognition and behavior,' and the summary is asking about the understanding of human cognition.",
+        "keySentence": "As a multidisciplinary field, neuroscience integrates biology, psychology, and computer science to unravel the intricacies of human cognition and behavior.",
+        "mutationType": "READING_CAREFULNESS",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "behavior",
+        "explanation": "The passage elaborates on 'human cognition and behavior,' which corresponds to behavior in the summary.",
+        "keySentence": "As a multidisciplinary field, neuroscience integrates biology, psychology, and computer science to unravel the intricacies of human cognition and behavior.",
+        "mutationType": "READING_CAREFULNESS",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Neuroscience investigates the brain and [1] system, focusing on neuron communication. Recent neuroimaging advancements have enhanced our [2] of brain functions and disorders. Synaptic plasticity research shows how experiences affect neural [3], impacting learning. This field combines multiple disciplines to understand human [4] and [5].",
+      "wordBank": [
+        "nervous",
+        "understanding",
+        "connections",
+        "behavior",
+        "cognition",
+        "intelligence",
+        "emotions",
+        "activities"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:24.966Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "bd3eb969-bc29-4031-9190-6c25ace65110",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses a wide range of phenomena, including perception, cognition, emotion, and motivation. Researchers in this field aim to understand how the mind operates and how it affects behavior. One of the central aspects of psychology is its application in solving real-world problems. For instance, psychological principles can be applied to improve educational outcomes, enhance workplace productivity, and promote mental health. Cognitive psychology focuses on understanding internal processes such as thinking, memory, and problem-solving. This branch of psychology is crucial in bridging the gap between scientific theory and practical application. By studying how people process information, cognitive psychologists develop strategies to address various challenges. Other branches like developmental and social psychology further explore the impact of psychological processes across different stages of life and within social contexts.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "behavior",
+        "explanation": "The passage states that psychology studies the mind and behavior.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "productivity",
+        "explanation": "The passage mentions that psychology can enhance workplace productivity.",
+        "keySentence": "For instance, psychological principles can be applied to improve educational outcomes, enhance workplace productivity, and promote mental health.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "practical",
+        "explanation": "The passage discusses bridging theory with practical applications in cognitive psychology.",
+        "keySentence": "This branch of psychology is crucial in bridging the gap between scientific theory and practical application.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "thinking",
+        "explanation": "Cognitive psychology focuses on internal processes such as thinking.",
+        "keySentence": "Cognitive psychology focuses on understanding internal processes such as thinking, memory, and problem-solving.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "stages",
+        "explanation": "Developmental psychology studies psychological effects across different stages of life.",
+        "keySentence": "Other branches like developmental and social psychology further explore the impact of psychological processes across different stages of life and within social contexts.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology investigates the mind and [1] and seeks to address practical issues. It can enhance [2] in schools and workplaces. Cognitive psychology is vital for linking theory to [3] solutions. It examines internal processes like [4] to create problem-solving strategies. Additionally, developmental and social psychology study psychological effects across life [5].",
+      "wordBank": [
+        "behavior",
+        "productivity",
+        "practical",
+        "thinking",
+        "stages",
+        "emotions",
+        "motivation",
+        "sensation"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:58.972Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "613d32a2-4018-4f48-bd13-9b138a4b6eaa",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the study of organisms in the ocean, examining their behaviors and interactions with the ecosystem. Marine biologists work to understand the complex web of life in oceanic environments, focusing on both large and small species. A critical area of research is the impact of climate change on marine life, including rising sea temperatures and ocean acidification. These changes are altering habitats, leading to shifts in species distribution and potential extinction. Furthermore, marine biology explores genetic adaptation, where species develop traits to survive in changing conditions. This field requires interdisciplinary collaboration, drawing from oceanography, chemistry, and environmental science to address these challenges.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "interactions",
+        "explanation": "The study focuses on how organisms interact with the ecosystem.",
+        "keySentence": "Marine biology is the study of organisms in the ocean, examining their behaviors and interactions with the ecosystem.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "rising",
+        "explanation": "Climate change effects include increased sea temperatures.",
+        "keySentence": "A critical area of research is the impact of climate change on marine life, including rising sea temperatures and ocean acidification.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "species",
+        "explanation": "The passage discusses shifts in species distribution.",
+        "keySentence": "These changes are altering habitats, leading to shifts in species distribution and potential extinction.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "adaptation",
+        "explanation": "Adaptation refers to the genetic changes that help species survive.",
+        "keySentence": "Furthermore, marine biology explores genetic adaptation, where species develop traits to survive in changing conditions.",
+        "mutationType": "CARE_FUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "oceanography",
+        "explanation": "Oceanography is one of the scientific fields that collaborate with marine biology.",
+        "keySentence": "This field requires interdisciplinary collaboration, drawing from oceanography, chemistry, and environmental science to address these challenges.",
+        "mutationType": "CARE_FUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology investigates ocean organisms and their [1] with the ecosystem. Researchers focus on how climate change impacts marine life, such as [2] sea temperatures and ocean acidification. These factors are causing habitat changes and affecting [3] distribution. Additionally, genetic [4] allows species to adapt to new environmental conditions. This discipline involves collaboration across various scientific fields like [5].",
+      "wordBank": [
+        "interactions",
+        "rising",
+        "species",
+        "adaptation",
+        "oceanography",
+        "mutations",
+        "lowering",
+        "individual"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:43:21.666Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "2edd725f-5067-4a9b-b286-867aa8519281",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "In a groundbreaking archaeological discovery, a team of researchers uncovered an ancient city believed to have been buried for centuries. The site, located in a remote part of the Middle East, is thought to have been a vibrant hub of trade and culture during its peak. The archaeologists unearthed various artifacts, including pottery, tools, and remnants of structures, which provide insight into the daily lives and customs of its inhabitants. The discovery of a sophisticated irrigation system suggests that the city was advanced in its agricultural practices, supporting a large population. However, evidence of a sudden abandonment hints at possible environmental or human-induced factors leading to its decline.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "discovery",
+        "explanation": "The word 'discovery' is a direct synonym for 'groundbreaking archaeological discovery' mentioned in the passage.",
+        "keySentence": "In a groundbreaking archaeological discovery, a team of researchers uncovered an ancient city.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "hub",
+        "explanation": "The word 'hub' is paraphrased from 'vibrant hub of trade and culture' in the passage.",
+        "keySentence": "The site, located in a remote part of the Middle East, is thought to have been a vibrant hub of trade and culture during its peak.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "sophisticated",
+        "explanation": "'Sophisticated' is used to describe the irrigation system, derived from 'sophisticated irrigation system' in the passage.",
+        "keySentence": "The discovery of a sophisticated irrigation system suggests that the city was advanced in its agricultural practices.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "abandoned",
+        "explanation": "The word 'abandoned' refers to the sudden leaving of the city, making it a key detail about its decline.",
+        "keySentence": "However, evidence of a sudden abandonment hints at possible environmental or human-induced factors leading to its decline.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "find",
+        "explanation": "'Find' relates to the significant uncovering of the ancient city, distinguishing it as a major archaeological event.",
+        "keySentence": "The discovery of a sophisticated irrigation system suggests that the city was advanced in its agricultural practices, supporting a large population.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "A recent [1] in the Middle East uncovered an ancient city, once a [2] of trade. Archaeologists found artifacts that reveal aspects of daily life. Notably, a [3] irrigation system was discovered, indicating advanced agriculture. The city was [4] suddenly, possibly due to environmental factors. This [5] offers new insights into ancient civilizations.",
+      "wordBank": [
+        "discovery",
+        "hub",
+        "sophisticated",
+        "abandoned",
+        "find",
+        "center",
+        "simple",
+        "preserved"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:43:32.865Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "79ceec9a-534b-47ca-ad80-d7d0424a8e96",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy refers to the actions that governments take in the economic field. It covers systems for setting interest rates, government budgets, labor markets, national ownership, and many other areas of government interventions into the economy. The goal of economic policy is to ensure stability and growth in the economy. To achieve this, policymakers often balance between expansionary measures that stimulate growth and contractionary actions to control inflation. Moreover, fiscal policy is a critical component, involving adjustments to government spending and tax policies to influence the economy. A key challenge faced by policymakers is the dynamic nature of global markets, which requires constant adaptation and strategic planning.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "interest",
+        "explanation": "The passage describes setting 'interest rates' as part of economic policy.",
+        "keySentence": "It covers systems for setting interest rates...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "government",
+        "explanation": "The passage mentions 'government budgets' as a part of economic policy.",
+        "keySentence": "It covers systems for setting interest rates, government budgets...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "stability",
+        "explanation": "The passage states the goal of economic policy is to ensure 'stability' and growth.",
+        "keySentence": "The goal of economic policy is to ensure stability and growth...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "global",
+        "explanation": "The passage discusses the dynamic nature of 'global markets' creating challenges.",
+        "keySentence": "A key challenge faced by policymakers is the dynamic nature of global markets...",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "fiscal",
+        "explanation": "The passage identifies 'fiscal policy' as a critical component of economic policy.",
+        "keySentence": "Moreover, fiscal policy is a critical component...",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Economic policy encompasses various government actions, such as setting [1] rates and managing [2] budgets. Policymakers aim for economic [3] through balancing different measures. They face challenges like adapting to [4] markets and adjusting [5] policy.",
+      "wordBank": [
+        "interest",
+        "government",
+        "stability",
+        "global",
+        "fiscal",
+        "credit",
+        "local",
+        "monetary"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:43:41.775Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "42f2111f-6ab3-49fc-bc89-f4477a226645",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has been a critical focus for many governments worldwide. The process involves transforming rural areas into urban centers, which significantly boosts economic activities. However, this transformation is not without challenges. Environmental impacts, such as increased pollution and loss of green spaces, are major concerns. Additionally, the social fabric of these areas often changes, leading to issues like overpopulation and inadequate infrastructure. To address these challenges, sustainable development practices are essential. These practices aim to balance economic growth with environmental preservation and social well-being.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "growth",
+        "explanation": "The passage mentions economic activities being boosted, which is synonymous with growth.",
+        "keySentence": "Urban development has been a critical focus for many governments worldwide.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "growth",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "pollution",
+        "explanation": "The passage discusses environmental impacts including increased pollution.",
+        "keySentence": "Environmental impacts, such as increased pollution and loss of green spaces, are major concerns.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "pollution",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "transformation",
+        "explanation": "The process described involves transforming rural areas, which is synonymous with transformation.",
+        "keySentence": "The process involves transforming rural areas into urban centers.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "development",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "harmony",
+        "explanation": "The passage talks about balancing economic growth with environmental preservation, implying harmony.",
+        "keySentence": "These practices aim to balance economic growth with environmental preservation and social well-being.",
+        "mutationType": "Careful Reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "harmony",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "development",
+        "explanation": "The passage refers to successful urban development as the goal.",
+        "keySentence": "Balancing these aspects is key to successful urban development.",
+        "mutationType": "Careful Reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "transformation",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban development is crucial for economic [1]. It involves converting rural areas into urban centers, but this can lead to increased [2] and social changes. Environmental impacts, such as loss of green spaces, are significant challenges. Sustainable practices are necessary to ensure that economic [3] does not compromise environmental and social [4]. Balancing these aspects is key to successful urban [5].",
+      "wordBank": [
+        "growth",
+        "pollution",
+        "transformation",
+        "harmony",
+        "development",
+        "regression",
+        "disruption",
+        "depletion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:43:51.237Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "39f59821-e85d-4d8d-80df-c9fcc6659e15",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources, such as solar and wind power, have gained significant traction in recent years. The increasing demand for sustainable solutions has driven innovations in technology, making these energy forms more efficient and cost-effective. Governments worldwide are encouraging the adoption of renewable energy through subsidies and policy changes. Despite the progress, challenges such as energy storage and initial investment costs remain. However, ongoing research and development are poised to address these hurdles, further advancing the global shift towards greener energy solutions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "innovations",
+        "explanation": "The passage mentions that innovations in technology have made energy forms more efficient.",
+        "keySentence": "The increasing demand for sustainable solutions has driven innovations in technology.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "innovations",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "subsidies",
+        "explanation": "Subsidies are mentioned as a method governments use to encourage renewable energy adoption.",
+        "keySentence": "Governments worldwide are encouraging the adoption of renewable energy through subsidies and policy changes.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "subsidies",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "costs",
+        "explanation": "The passage refers to initial investment costs as a challenge.",
+        "keySentence": "Despite the progress, challenges such as energy storage and initial investment costs remain.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "costs",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "initiatives",
+        "explanation": "The summary refers to continuous efforts, which in this context aligns with 'initiatives'.",
+        "keySentence": "ongoing research and development are poised to address these hurdles",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "solutions",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "obstacles",
+        "explanation": "Obstacles are synonymous with challenges that are mentioned in the passage.",
+        "keySentence": "further advancing the global shift towards greener energy solutions.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "barriers",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "The growing need for sustainable solutions has propelled [1] advancements in renewable energy technologies. Governments are promoting these sources through [2] incentives and policy reforms. Although progress is evident, issues like energy storage and upfront [3] expenses continue to pose challenges. Nevertheless, continuous [4] efforts in research and development are expected to overcome these [5].",
+      "wordBank": [
+        "innovations",
+        "subsidies",
+        "costs",
+        "initiatives",
+        "obstacles",
+        "expenses",
+        "barriers",
+        "solutions"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:44:07.755Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "3062460f-e547-4aaa-95d5-b3cb5522ff23",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Economic Policy",
+    "passage": "Economic policy is a critical tool for shaping national prosperity. Governments often employ monetary strategies to regulate inflation and control interest rates. Fiscal policy also plays a vital role, as it involves government spending and tax adjustments to stimulate economic growth. Policymakers must balance these elements carefully to avoid adverse effects such as recession or excessive debt. Effective economic policies require thorough analysis and precise implementation to ensure long-term stability and growth.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "prosperity",
+        "explanation": "The passage states that economic policy is critical for shaping national prosperity.",
+        "keySentence": "Economic policy is a critical tool for shaping national prosperity.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "inflation",
+        "explanation": "Monetary strategies are employed to regulate inflation.",
+        "keySentence": "Governments often employ monetary strategies to regulate inflation and control interest rates.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "growth",
+        "explanation": "Fiscal policy involves government spending and tax adjustments to stimulate economic growth.",
+        "keySentence": "Fiscal policy also plays a vital role, as it involves government spending and tax adjustments to stimulate economic growth.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "recession",
+        "explanation": "Policymakers must balance elements to avoid adverse effects such as recession.",
+        "keySentence": "Policymakers must balance these elements carefully to avoid adverse effects such as recession or excessive debt.",
+        "mutationType": "careful reading needed",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "debt",
+        "explanation": "Excessive debt is mentioned as an adverse effect to avoid.",
+        "keySentence": "Policymakers must balance these elements carefully to avoid adverse effects such as recession or excessive debt.",
+        "mutationType": "careful reading needed",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Economic policies are essential for ensuring a nation's [1]. Monetary strategies help manage [2] and interest rates, while fiscal policy involves government spending and taxes to boost [3]. Policymakers need to balance these elements to prevent negative outcomes like [4] or increased [5].",
+      "wordBank": [
+        "prosperity",
+        "inflation",
+        "growth",
+        "recession",
+        "debt",
+        "wealth",
+        "deflation",
+        "expansion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:44:29.083Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "2c0a332a-dd2c-4f5d-a284-81d61502d89a",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Climate Science",
+    "passage": "Climate science is a complex field that examines the interactions among various components of the Earth's system. It analyzes data from past and present climates to predict future changes. Researchers study patterns like ocean currents and atmospheric composition to understand their impact on global temperatures. One significant focus is the role of carbon dioxide, a greenhouse gas, in accelerating climate change. Recent studies highlight the importance of renewable energy sources as a means to mitigate these effects. Scientists emphasize that immediate action is required to counter the adverse impacts of climate change, including rising sea levels and increased weather extremities.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "past",
+        "explanation": "The passage refers to analyzing data from past climates to predict future changes, which is synonymous with 'historical' in the summary.",
+        "keySentence": "It analyzes data from past and present climates to predict future changes.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "ocean",
+        "explanation": "The passage discusses studying ocean currents, which is paraphrased as 'currents' in the summary.",
+        "keySentence": "Researchers study patterns like ocean currents and atmospheric composition to understand their impact on global temperatures.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "carbon dioxide",
+        "explanation": "The passage mentions the role of carbon dioxide, a greenhouse gas, which corresponds to 'greenhouse' gases in the summary.",
+        "keySentence": "One significant focus is the role of carbon dioxide, a greenhouse gas, in accelerating climate change.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "renewable",
+        "explanation": "The passage highlights renewable energy as a means to mitigate climate change effects, which matches 'renewable' in the summary.",
+        "keySentence": "Recent studies highlight the importance of renewable energy sources as a means to mitigate these effects.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "weather",
+        "explanation": "The passage refers to increased weather extremities, which is synonymous with 'severe weather' in the summary.",
+        "keySentence": "Scientists emphasize that immediate action is required to counter the adverse impacts of climate change, including rising sea levels and increased weather extremities.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science investigates the interactions within the Earth's system, utilizing [1] data to forecast environmental shifts. It examines factors such as [2] currents and atmospheric components and highlights the influence of [3] gases. Current research stresses the urgency of transitioning to [4] energy to reduce climate change impacts. Immediate measures are necessary to combat the negative consequences, such as escalating sea levels and severe [5].",
+      "wordBank": [
+        "historical",
+        "ocean",
+        "greenhouse",
+        "renewable",
+        "extremities",
+        "fossil",
+        "ozone",
+        "pollution"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:44:41.723Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "fbdabbac-624f-4212-938d-f79359f3c816",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vast and varied nature of the oceans, marine biologists often specialize in particular areas. Some focus on marine ecosystems, examining how different organisms interact with their environment. Others might study specific species, such as marine mammals or fish. A critical aspect of marine biology is understanding the impact of human activities, such as pollution and overfishing, on marine life. Researchers are increasingly concerned about coral reefs, which are vital ecosystems that support a diverse range of species. These reefs are under threat from climate change, leading to phenomena like coral bleaching. Efforts to protect marine biodiversity include establishing marine protected areas and promoting sustainable fishing practices.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "ecosystems",
+        "explanation": "The summary paraphrases the passage where it mentions 'marine ecosystems' as areas of specialization for marine biologists.",
+        "keySentence": "Some focus on marine ecosystems, examining how different organisms interact with their environment.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "pollution",
+        "explanation": "The summary paraphrases the passage's mention of 'the impact of human activities, such as pollution'.",
+        "keySentence": "A critical aspect of marine biology is understanding the impact of human activities, such as pollution and overfishing, on marine life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "coral",
+        "explanation": "The summary refers to 'coral reefs', which the passage identifies as vital ecosystems under threat.",
+        "keySentence": "Researchers are increasingly concerned about coral reefs, which are vital ecosystems that support a diverse range of species.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "bleaching",
+        "explanation": "The passage describes 'coral bleaching' as a result of climate change, impacting coral reefs.",
+        "keySentence": "These reefs are under threat from climate change, leading to phenomena like coral bleaching.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sustainable",
+        "explanation": "The passage speaks about 'promoting sustainable fishing practices' as part of conservation efforts.",
+        "keySentence": "Efforts to protect marine biodiversity include establishing marine protected areas and promoting sustainable fishing practices.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology involves the study of ocean organisms. Specialists may examine species interactions within [1] or focus on individual species. Human activities like [2] negatively affect marine life, particularly [3] reefs. Climate change causes [4], harming these vital ecosystems. Conservation efforts, such as creating protected areas and advocating for [5] fishing, aim to preserve marine biodiversity.",
+      "wordBank": [
+        "ecosystems",
+        "pollution",
+        "coral",
+        "bleaching",
+        "sustainable",
+        "deforestation",
+        "biodiversity",
+        "erosion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:15.272Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "3678226d-b3c3-4b3d-9c1a-f8a27014f6ab",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Archaeological Discovery",
+    "passage": "Recent archaeological discoveries in the ancient city of Luxor have unveiled significant insights into the daily life of its inhabitants. The findings include well-preserved artifacts such as pottery, tools, and clothing, which provide a glimpse into the socio-economic conditions of the time. Excavations revealed an intricate network of streets and residential buildings, suggesting a complex urban planning system. Furthermore, the discovery of ancient scripts has allowed researchers to understand the cultural and religious practices of this ancient civilization. These discoveries are pivotal in reshaping the historical narrative of Luxor and contribute to a deeper understanding of early urban societies.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "artifacts",
+        "explanation": "The passage mentions 'well-preserved artifacts' as a key part of the findings.",
+        "keySentence": "The findings include well-preserved artifacts such as pottery, tools, and clothing.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "daily",
+        "explanation": "The passage describes insights into the 'daily life' of Luxor's inhabitants.",
+        "keySentence": "Recent archaeological discoveries in the ancient city of Luxor have unveiled significant insights into the daily life of its inhabitants.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "networks",
+        "explanation": "The passage refers to an 'intricate network of streets and residential buildings'.",
+        "keySentence": "Excavations revealed an intricate network of streets and residential buildings, suggesting a complex urban planning system.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "scripts",
+        "explanation": "The passage mentions 'ancient scripts' that help understand cultural practices.",
+        "keySentence": "Furthermore, the discovery of ancient scripts has allowed researchers to understand the cultural and religious practices of this ancient civilization.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "reshape",
+        "explanation": "The findings are described as 'pivotal in reshaping the historical narrative'.",
+        "keySentence": "These discoveries are pivotal in reshaping the historical narrative of Luxor and contribute to a deeper understanding of early urban societies.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Archaeological excavations in Luxor have revealed [1] artifacts that offer insight into the [2] life of its ancient residents. The discovery of [3] networks and buildings points to advanced urban planning. Moreover, ancient [4] scripts have been found, shedding light on cultural practices. These findings significantly [5] our understanding of Luxor's history.",
+      "wordBank": [
+        "artifacts",
+        "daily",
+        "networks",
+        "scripts",
+        "reshape",
+        "tools",
+        "economy",
+        "architecture"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:27.358Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "f7e0ec22-73eb-415c-b2a3-2ed9584417ea",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience has made significant strides in understanding the human brain's complexities. One area of focus is neural plasticity, which refers to the brain's ability to adapt and reorganize itself by forming new neural connections. This adaptability is crucial for learning and memory. Another key development is the exploration of neurotransmitters, the chemical messengers that transmit signals across synapses. These neurotransmitters play a fundamental role in regulating mood and cognitive functions. Lastly, advances in neuroimaging techniques have allowed researchers to observe real-time brain activity, providing insights into its functioning. These techniques have revolutionized our understanding of both normal and pathological brain states.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "complexities",
+        "explanation": "The word 'complexities' in the passage is paraphrased as the brain's 'understanding' in the summary.",
+        "keySentence": "Neuroscience has made significant strides in understanding the human brain's complexities.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "learning",
+        "explanation": "The passage mentions 'learning' as a crucial function of neural plasticity, which is directly mentioned in the summary.",
+        "keySentence": "This adaptability is crucial for learning and memory.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "mood",
+        "explanation": "Neurotransmitters are described as playing a role in 'mood regulation' in both the passage and the summary.",
+        "keySentence": "These neurotransmitters play a fundamental role in regulating mood and cognitive functions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "activity",
+        "explanation": "The passage refers to 'real-time brain activity' which is directly used in the summary.",
+        "keySentence": "Neuroimaging techniques have allowed researchers to observe real-time brain activity.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "pathological",
+        "explanation": "The summary discusses both 'normal and pathological brain states', which matches the passage.",
+        "keySentence": "These techniques have revolutionized our understanding of both normal and pathological brain states.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "The field of neuroscience has advanced in understanding the brain's [1] by examining neural plasticity. This process, essential for [2] and memory, allows the brain to form new connections. Additionally, the study of neurotransmitters, which are crucial for [3] regulation and cognitive functions, has expanded. Neuroimaging techniques have also progressed, enabling researchers to observe real-time brain [4], thus enhancing our understanding of both normal and [5] brain states.",
+      "wordBank": [
+        "neuroplasticity",
+        "learning",
+        "mood",
+        "activity",
+        "pathological",
+        "sensation",
+        "perception",
+        "emotion"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:37.222Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "b31475ef-bf56-4e17-8685-e488a7e1f12a",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has significantly advanced over the past few decades, driven by technological innovations and international collaboration. Initially, the primary objective was to understand our solar system, leading to remarkable achievements such as landing on the moon. Today, the focus has broadened to include searching for extraterrestrial life and understanding cosmic phenomena. One key development is the use of robotic spacecraft, which have become essential tools in gathering data from distant planets. Despite the high costs and risks involved, space exploration continues to inspire scientific breakthroughs and foster a sense of global unity.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "technological",
+        "explanation": "The passage mentions 'technological innovations' as a key driver of advancement.",
+        "keySentence": "Space exploration has significantly advanced over the past few decades, driven by technological innovations.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "collaboration",
+        "explanation": "The passage highlights 'international collaboration' as a contributor to progress.",
+        "keySentence": "Space exploration has significantly advanced over the past few decades, driven by technological innovations and international collaboration.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "extraterrestrial",
+        "explanation": "The summary refers to the search for life beyond Earth, which is described as 'extraterrestrial life' in the passage.",
+        "keySentence": "Today, the focus has broadened to include searching for extraterrestrial life and understanding cosmic phenomena.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "costs",
+        "explanation": "The passage discusses 'high costs' as a challenge in space exploration.",
+        "keySentence": "Despite the high costs and risks involved, space exploration continues to inspire scientific breakthroughs.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "scientific",
+        "explanation": "The passage states that exploration inspires 'scientific breakthroughs'.",
+        "keySentence": "Despite the high costs and risks involved, space exploration continues to inspire scientific breakthroughs and foster a sense of global unity.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "In recent years, [1] advancements and global [2] have propelled space exploration forward. Initially centered around our solar system, efforts have now expanded to include the search for [3] life. Robotic spacecraft are pivotal in collecting information. Although [4] and risks are significant, exploration drives [5] discovery and unites the world.",
+      "wordBank": [
+        "technological",
+        "collaboration",
+        "extraterrestrial",
+        "costs",
+        "scientific",
+        "financial",
+        "astronomical",
+        "planetary"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:48.039Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "6d71881a-34f6-4730-8b38-69454c316759",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy has become a critical component in the global effort to reduce carbon emissions. Solar power, harnessed from the sun's rays, is one of the most popular forms of renewable energy. It involves converting sunlight into electricity using photovoltaic cells. Wind energy, another significant source, utilizes turbines to capture the kinetic energy of wind, transforming it into electrical power. While renewable energy sources are clean and sustainable, they require significant initial investments. However, these investments can lead to long-term savings and environmental benefits. Despite the challenges, the transition to renewable energy is essential for a sustainable future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "photovoltaic",
+        "explanation": "The passage explains that solar power involves converting sunlight into electricity using photovoltaic cells.",
+        "keySentence": "It involves converting sunlight into electricity using photovoltaic cells.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "kinetic",
+        "explanation": "Wind energy captures the kinetic energy of wind, transforming it into electrical power.",
+        "keySentence": "Wind energy, another significant source, utilizes turbines to capture the kinetic energy of wind.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "expensive",
+        "explanation": "The passage mentions that renewable energy sources require significant initial investments, indicating they are expensive.",
+        "keySentence": "While renewable energy sources are clean and sustainable, they require significant initial investments.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "obstacles",
+        "explanation": "The passage notes challenges in transitioning to renewable energy, which can be considered obstacles.",
+        "keySentence": "Despite the challenges, the transition to renewable energy is essential for a sustainable future.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sustainable",
+        "explanation": "The passage emphasizes the importance of renewable energy for a sustainable future.",
+        "keySentence": "Despite the challenges, the transition to renewable energy is essential for a sustainable future.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy is vital in the fight against carbon emissions. A popular form is solar power, which uses [1] cells to convert sunlight. Wind energy captures [2] energy for electricity. While initially [3], renewable sources can save money and help the environment. The shift to renewables is crucial despite the [4] involved. Ensuring a [5] future depends on this transition.",
+      "wordBank": [
+        "photovoltaic",
+        "kinetic",
+        "expensive",
+        "obstacles",
+        "sustainable",
+        "solar",
+        "chemical",
+        "inefficient"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:58.376Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "2978fc3c-0038-4a60-8057-6a4fdf4c32f1",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given that in biology, many phyla, families, and genera have some species that live in the sea and others that live on land, marine biology classifies species based on the environment rather than on taxonomy. Marine biologists study the behavior, physiology, and interactions of marine organisms with their environment. They examine how these organisms adapt to various oceanic conditions, such as temperature and salinity. The health of marine life is crucial as it affects the global ecosystem. Marine ecosystems provide vital resources, including oxygen and food, and play a significant role in regulating the Earth's climate. Human activities, such as pollution and overfishing, are causing detrimental effects on these ecosystems, leading to a loss of biodiversity and the degradation of habitat.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "behavior",
+        "explanation": "The study of marine biology includes observing how marine organisms behave.",
+        "keySentence": "Marine biologists study the behavior, physiology, and interactions of marine organisms with their environment.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "adaptation",
+        "explanation": "Marine organisms adapt to various environmental conditions.",
+        "keySentence": "They examine how these organisms adapt to various oceanic conditions, such as temperature and salinity.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "regulating",
+        "explanation": "Marine ecosystems play a crucial role in regulating the Earth's climate.",
+        "keySentence": "Marine ecosystems provide vital resources, including oxygen and food, and play a significant role in regulating the Earth's climate.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "pollution",
+        "explanation": "Pollution is one of the human activities causing harm to marine environments.",
+        "keySentence": "Human activities, such as pollution and overfishing, are causing detrimental effects on these ecosystems.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "decrease",
+        "explanation": "The harmful activities lead to a decrease in biodiversity.",
+        "keySentence": "Human activities, such as pollution and overfishing, are causing detrimental effects on these ecosystems, leading to a loss of biodiversity.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Marine biology involves the study of ocean-based species, focusing on their [1], physiology, and environmental interactions. Marine organisms adapt to [2] conditions like temperature and salinity. The health of these ecosystems is vital, providing resources and [3] the Earth's climate. However, human activities such as [4] and overfishing are harming these environments, causing a [5] in biodiversity.",
+      "wordBank": [
+        "behavior",
+        "adaptation",
+        "regulating",
+        "pollution",
+        "decrease",
+        "increase",
+        "transformation",
+        "conservation"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:46:08.204Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "0d4c77f1-3759-4192-aa4d-583d9203d29f",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Psychology",
+    "passage": "Psychology is the scientific study of the mind and behavior. It encompasses a wide range of topics including cognition, emotion, perception, and personality. Researchers in this field aim to understand how humans think, feel, and act both individually and in social contexts. By exploring various psychological processes, such as learning and memory, psychologists seek to uncover the underlying mechanisms that drive behavior. In recent years, there has been a growing interest in the biological basis of behavior, leading to advancements in neuropsychology. This subfield examines how brain structures and functions influence mental processes, offering insights into how neurological disorders impact cognition and behavior.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "mind",
+        "explanation": "The passage begins by stating that psychology is the study of 'the mind and behavior'.",
+        "keySentence": "Psychology is the scientific study of the mind and behavior.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "cognition",
+        "explanation": "The passage lists 'cognition' as one of the topics covered in psychology.",
+        "keySentence": "It encompasses a wide range of topics including cognition, emotion, perception, and personality.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "neuropsychology",
+        "explanation": "The passage notes a growing interest in the biological basis of behavior, leading to advancements in 'neuropsychology'.",
+        "keySentence": "In recent years, there has been a growing interest in the biological basis of behavior, leading to advancements in neuropsychology.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "cognition",
+        "explanation": "Neuropsychology studies how brain functions influence 'cognition' and behavior.",
+        "keySentence": "This subfield examines how brain structures and functions influence mental processes, offering insights into how neurological disorders impact cognition and behavior.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "advancements",
+        "explanation": "The passage mentions that there have been advancements in neuropsychology.",
+        "keySentence": "In recent years, there has been a growing interest in the biological basis of behavior, leading to advancements in neuropsychology.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology is a scientific discipline focused on studying the [1] and behavior of individuals. It covers topics such as [2], emotion, and perception. Psychologists aim to understand human actions both individually and socially. Recent trends highlight the biological aspects of behavior, particularly in [3]. Neuropsychology investigates the brain's role, providing understanding of how disorders affect [4] and behavior. This has led to [5] in the field.",
+      "wordBank": [
+        "mind",
+        "cognition",
+        "neuropsychology",
+        "memory",
+        "advancements",
+        "development",
+        "emotions",
+        "biopsychology"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:46:17.310Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
   }
 ]

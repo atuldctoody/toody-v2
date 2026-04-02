@@ -1,0 +1,91 @@
+[
+  {
+    "id": "24eeb73c-4693-4472-8b98-f617fffe845c",
+    "type": "matching-features",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "In the realm of linguistic research, Dr Smith has been at the forefront of studying language acquisition in children. His work emphasizes the role of social interaction in learning new languages, suggesting that children learn best in immersive environments. Meanwhile, Professor Jones has focused her research on the evolution of language over centuries, particularly how external factors like trade and migration influence linguistic changes. Her studies reveal that languages borrow extensively from one another, leading to the development of pidgins and creoles. Dr Patel, on the other hand, has concentrated on the cognitive aspects of bilingualism. His findings show that bilingual individuals often have superior problem-solving skills and multitasking abilities due to their enhanced executive functions. Interestingly, while Dr Smith and Professor Jones discuss language change and acquisition, Dr Patel highlights the personal cognitive benefits that arise from speaking multiple languages.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Emphasizes the importance of social interaction in language learning.",
+        "answer": "Dr Smith",
+        "explanation": "Dr Smith focuses on language acquisition and the role of social interaction.",
+        "mutationType": "CORRECT_ATTRIBUTION",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Studies how languages evolve due to external factors like trade and migration.",
+        "answer": "Professor Jones",
+        "explanation": "Professor Jones researches the evolution of language influenced by external factors.",
+        "mutationType": "CORRECT_ATTRIBUTION",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Finds that bilingualism enhances cognitive abilities such as multitasking.",
+        "answer": "Dr Patel",
+        "explanation": "Dr Patel's research on cognitive aspects of bilingualism shows enhanced abilities, despite Dr Smith's nearby mention.",
+        "mutationType": "PROXIMITY_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Focuses on language acquisition in children.",
+        "answer": "Dr Smith",
+        "explanation": "Dr Smith is known for his work on how children acquire language.",
+        "mutationType": "CORRECT_ATTRIBUTION",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Reveals that languages often borrow from one another.",
+        "answer": "Professor Jones",
+        "explanation": "Professor Jones' studies show extensive borrowing between languages.",
+        "mutationType": "CORRECT_ATTRIBUTION",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "features": [
+        "Dr Smith",
+        "Professor Jones",
+        "Dr Patel"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:45:39.668Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_ATTRIBUTION": 4,
+        "PROXIMITY_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  }
+]

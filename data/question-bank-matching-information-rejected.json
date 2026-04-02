@@ -1,0 +1,1486 @@
+[
+  {
+    "id": "b0b9fd4e-afc5-4424-9d91-2ccc67799eff",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Marine Biology",
+    "passage": "A. Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the marine environment, marine biology is a vast field that encompasses a wide variety of topics, including the behavior and interactions of marine life forms with their environment.\n\nB. Coral reefs are among the most diverse ecosystems on the planet. They provide a habitat for a multitude of marine organisms. Coral reefs also play a crucial role in protecting coastal areas from erosion and are vital for the local economies through tourism and fishing.\n\nC. Marine biologists often study the impact of human activities on marine life. Pollution, overfishing, and climate change are pressing issues that threaten marine ecosystems. Conservation efforts are increasingly important to maintain biodiversity and support sustainable use of marine resources.\n\nD. The study of marine microorganisms is crucial as they form the base of the food web. These microorganisms contribute significantly to the planet's oxygen supply and carbon cycle. Understanding their role helps in assessing the overall health of marine ecosystems.\n\nE. Technological advancements have significantly enhanced the study of marine biology. Tools such as satellite imagery and underwater drones allow scientists to explore previously inaccessible areas and gather data more efficiently, leading to new discoveries about deep-sea ecosystems.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs help in protecting coastal areas from erosion.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses the role of coral reefs in protecting coastal areas.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Marine biologists are concerned with the effects of pollution on marine life.",
+        "answer": "C",
+        "explanation": "Paragraph C covers the impact of human activities, including pollution, on marine life.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Marine microorganisms are crucial for the oxygen supply on Earth.",
+        "answer": "D",
+        "explanation": "Paragraph D specifically mentions the role of marine microorganisms in the oxygen supply, not coral reefs in B.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Advanced technology has enabled new discoveries in deep-sea research.",
+        "answer": "E",
+        "explanation": "Paragraph E describes the impact of technological advancements on marine biology research.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The study of marine life includes understanding their interactions with the environment.",
+        "answer": "A",
+        "explanation": "Paragraph A introduces the scope of marine biology, including interactions with the environment.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the marine environment, marine biology is a vast field that encompasses a wide variety of topics, including the behavior and interactions of marine life forms with their environment."
+        },
+        {
+          "label": "B",
+          "text": "Coral reefs are among the most diverse ecosystems on the planet. They provide a habitat for a multitude of marine organisms. Coral reefs also play a crucial role in protecting coastal areas from erosion and are vital for the local economies through tourism and fishing."
+        },
+        {
+          "label": "C",
+          "text": "Marine biologists often study the impact of human activities on marine life. Pollution, overfishing, and climate change are pressing issues that threaten marine ecosystems. Conservation efforts are increasingly important to maintain biodiversity and support sustainable use of marine resources."
+        },
+        {
+          "label": "D",
+          "text": "The study of marine microorganisms is crucial as they form the base of the food web. These microorganisms contribute significantly to the planet's oxygen supply and carbon cycle. Understanding their role helps in assessing the overall health of marine ecosystems."
+        },
+        {
+          "label": "E",
+          "text": "Technological advancements have significantly enhanced the study of marine biology. Tools such as satellite imagery and underwater drones allow scientists to explore previously inaccessible areas and gather data more efficiently, leading to new discoveries about deep-sea ecosystems."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T10:34:07.592Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "542f4abd-d14a-486b-a031-267375d81578",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "A. Psychology as a discipline has evolved over the years, with various branches like cognitive and behavioral psychology gaining prominence. Early theories emphasized observation and experimentation, laying the groundwork for contemporary practices. Today, psychologists employ a diverse range of methodologies to study the human mind and behavior, reflecting the field's dynamic nature.\n\nB. Cognitive psychology focuses on understanding mental processes such as perception, memory, and problem-solving. Researchers in this area often conduct experiments to explore how individuals process information and how these processes affect behavior. This branch has significantly contributed to fields like artificial intelligence and education.\n\nC. Behavioral psychology is centered on the idea that behaviors are acquired through conditioning. This approach was pioneered by researchers like Pavlov and Skinner, who demonstrated how environmental stimuli could influence behavior. Today, behavioral techniques are used in various therapeutic settings to help modify undesired behaviors.\n\nD. The application of psychological principles extends to numerous real-world settings, including workplaces, schools, and clinics. Organizational psychology, for instance, seeks to enhance employee performance and satisfaction through scientifically backed strategies. Similarly, educational psychologists work to improve learning outcomes by applying research-based methods.\n\nE. In recent years, the integration of technology in psychological research has opened new avenues for exploration. Tools like neuroimaging and virtual reality are being used to gain deeper insights into the brain's functioning. This technological advancement allows psychologists to uncover the complexities of mental health disorders more effectively.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The evolution of psychology and its various branches over time.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses the historical development and diversification of psychology.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "The use of experiments to understand mental processes.",
+        "answer": "B",
+        "explanation": "Paragraph B focuses on cognitive psychology and mentions experiments to study mental processes.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "The influence of environmental stimuli on behavior.",
+        "answer": "C",
+        "explanation": "Paragraph C specifically addresses how conditioning and environmental stimuli affect behavior, unlike D, which is more about the application of psychology.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "The role of psychology in improving workplace performance.",
+        "answer": "D",
+        "explanation": "Paragraph D highlights the application of psychology in organizational settings to enhance performance.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The impact of technology on modern psychological research.",
+        "answer": "E",
+        "explanation": "Paragraph E discusses how technology like neuroimaging is advancing psychological research.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Psychology as a discipline has evolved over the years, with various branches like cognitive and behavioral psychology gaining prominence. Early theories emphasized observation and experimentation, laying the groundwork for contemporary practices. Today, psychologists employ a diverse range of methodologies to study the human mind and behavior, reflecting the field's dynamic nature."
+        },
+        {
+          "label": "B",
+          "text": "Cognitive psychology focuses on understanding mental processes such as perception, memory, and problem-solving. Researchers in this area often conduct experiments to explore how individuals process information and how these processes affect behavior. This branch has significantly contributed to fields like artificial intelligence and education."
+        },
+        {
+          "label": "C",
+          "text": "Behavioral psychology is centered on the idea that behaviors are acquired through conditioning. This approach was pioneered by researchers like Pavlov and Skinner, who demonstrated how environmental stimuli could influence behavior. Today, behavioral techniques are used in various therapeutic settings to help modify undesired behaviors."
+        },
+        {
+          "label": "D",
+          "text": "The application of psychological principles extends to numerous real-world settings, including workplaces, schools, and clinics. Organizational psychology, for instance, seeks to enhance employee performance and satisfaction through scientifically backed strategies. Similarly, educational psychologists work to improve learning outcomes by applying research-based methods."
+        },
+        {
+          "label": "E",
+          "text": "In recent years, the integration of technology in psychological research has opened new avenues for exploration. Tools like neuroimaging and virtual reality are being used to gain deeper insights into the brain's functioning. This technological advancement allows psychologists to uncover the complexities of mental health disorders more effectively."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T10:35:27.465Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e1197141-d6c0-4567-a35d-95af9e1889c2",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Renewable Energy",
+    "passage": "A. Renewable energy is derived from natural processes that are replenished constantly. This includes sunlight, wind, rain, tides, and geothermal heat. Many countries are investing heavily in renewable sources to reduce carbon emissions and combat climate change. While the initial cost can be high, the long-term benefits are substantial.\n\nB. Solar power has become increasingly popular due to technological advancements that have made solar panels more efficient and affordable. Photovoltaic cells convert sunlight directly into electricity, providing a clean and sustainable energy source. Many residential and commercial buildings now have solar panels installed on their roofs.\n\nC. Wind energy is harnessed through wind turbines, which are often grouped together in wind farms. These turbines convert the kinetic energy of the wind into mechanical power, which can then be converted into electricity. Wind energy is seen as a key component in the shift towards sustainable energy solutions.\n\nD. Hydroelectric power is generated by the flow of water, usually from reservoirs or dams. This method of generating energy is highly efficient and can provide a stable energy supply. However, it can have significant ecological impacts, affecting local wildlife and habitats.\n\nE. Geothermal energy utilizes the heat from beneath the Earth's surface. This renewable resource can be tapped into for direct heating or to generate electricity. Geothermal plants are typically located in regions with high geothermal activity, such as Iceland and parts of the United States.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Many countries are investing in renewable sources to combat climate change.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses the investment in renewable energy to reduce carbon emissions and combat climate change.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Wind turbines are often grouped together in wind farms.",
+        "answer": "C",
+        "explanation": "Paragraph C describes how wind turbines are organized in wind farms to harness wind energy.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Solar panels are becoming more efficient and affordable.",
+        "answer": "B",
+        "explanation": "Paragraph B specifically mentions technological advancements in solar panels, while paragraph D talks about hydroelectric power, which could be a distraction.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Hydroelectric power can have significant ecological impacts.",
+        "answer": "D",
+        "explanation": "Paragraph D highlights the ecological impacts of hydroelectric power, affecting local wildlife and habitats.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Geothermal plants are typically located in regions with high geothermal activity.",
+        "answer": "E",
+        "explanation": "Paragraph E explains the location of geothermal plants in areas with significant geothermal activity.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Renewable energy is derived from natural processes that are replenished constantly. This includes sunlight, wind, rain, tides, and geothermal heat. Many countries are investing heavily in renewable sources to reduce carbon emissions and combat climate change. While the initial cost can be high, the long-term benefits are substantial."
+        },
+        {
+          "label": "B",
+          "text": "Solar power has become increasingly popular due to technological advancements that have made solar panels more efficient and affordable. Photovoltaic cells convert sunlight directly into electricity, providing a clean and sustainable energy source. Many residential and commercial buildings now have solar panels installed on their roofs."
+        },
+        {
+          "label": "C",
+          "text": "Wind energy is harnessed through wind turbines, which are often grouped together in wind farms. These turbines convert the kinetic energy of the wind into mechanical power, which can then be converted into electricity. Wind energy is seen as a key component in the shift towards sustainable energy solutions."
+        },
+        {
+          "label": "D",
+          "text": "Hydroelectric power is generated by the flow of water, usually from reservoirs or dams. This method of generating energy is highly efficient and can provide a stable energy supply. However, it can have significant ecological impacts, affecting local wildlife and habitats."
+        },
+        {
+          "label": "E",
+          "text": "Geothermal energy utilizes the heat from beneath the Earth's surface. This renewable resource can be tapped into for direct heating or to generate electricity. Geothermal plants are typically located in regions with high geothermal activity, such as Iceland and parts of the United States."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T10:35:37.589Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "40947fbf-2e09-427a-85e3-70e16def6990",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Marine Biology",
+    "passage": "A. Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the oceans, marine biologists focus on specific areas, such as coral reefs or deep-sea ecosystems, to better understand the life forms that dwell there.\n\nB. Coral reefs are known for their biodiversity, housing thousands of marine species. These vibrant ecosystems are crucial for the health of the ocean, serving as both protective barriers and rich feeding grounds. Conservation efforts are crucial to maintain their ecological balance.\n\nC. Deep-sea ecosystems are among the least explored on Earth. These regions are characterized by extreme conditions, such as high pressure and low temperatures, and are home to unique organisms that have adapted to such harsh environments.\n\nD. Marine pollution poses a significant threat to oceanic life. Plastic waste, oil spills, and chemical runoff are just a few of the pollutants that degrade marine habitats. Efforts to reduce pollution are essential for preserving marine biodiversity.\n\nE. The study of marine mammals, such as dolphins and whales, offers insights into the complex social structures and communication systems of these intelligent creatures. Marine biologists use various technologies to track and study their behavior in the wild.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs provide crucial ecological functions as protective barriers.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses the ecological importance of coral reefs, including their role as protective barriers.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Unique organisms have adapted to the harsh conditions of deep-sea environments.",
+        "answer": "C",
+        "explanation": "Paragraph C focuses on the unique adaptations of organisms in deep-sea ecosystems.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Conservation efforts are crucial for maintaining marine biodiversity.",
+        "answer": "B",
+        "explanation": "Paragraph B mentions conservation efforts specifically in the context of coral reefs, while paragraph D discusses pollution, which could mislead.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Plastic waste is a major pollutant affecting oceanic life.",
+        "answer": "D",
+        "explanation": "Paragraph D highlights the issue of marine pollution, including plastic waste.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Marine biologists use technology to study the behavior of marine mammals.",
+        "answer": "E",
+        "explanation": "Paragraph E discusses the use of technology in studying marine mammals like dolphins and whales.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the oceans, marine biologists focus on specific areas, such as coral reefs or deep-sea ecosystems, to better understand the life forms that dwell there."
+        },
+        {
+          "label": "B",
+          "text": "Coral reefs are known for their biodiversity, housing thousands of marine species. These vibrant ecosystems are crucial for the health of the ocean, serving as both protective barriers and rich feeding grounds. Conservation efforts are crucial to maintain their ecological balance."
+        },
+        {
+          "label": "C",
+          "text": "Deep-sea ecosystems are among the least explored on Earth. These regions are characterized by extreme conditions, such as high pressure and low temperatures, and are home to unique organisms that have adapted to such harsh environments."
+        },
+        {
+          "label": "D",
+          "text": "Marine pollution poses a significant threat to oceanic life. Plastic waste, oil spills, and chemical runoff are just a few of the pollutants that degrade marine habitats. Efforts to reduce pollution are essential for preserving marine biodiversity."
+        },
+        {
+          "label": "E",
+          "text": "The study of marine mammals, such as dolphins and whales, offers insights into the complex social structures and communication systems of these intelligent creatures. Marine biologists use various technologies to track and study their behavior in the wild."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:02:11.139Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 2.7,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "0dc18568-c70e-4af6-b3d5-658caaf56062",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Linguistic Research",
+    "passage": "A. Linguistic research often focuses on the evolution of languages over time. Researchers examine historical texts to trace changes and influences in vocabulary and grammar. This historical approach helps in understanding the dynamic nature of language development and the factors contributing to linguistic shifts.\n\nB. Sociolinguistics studies the relationship between language and society. It explores how social factors such as class, gender, and ethnicity influence language use, variation, and change. This field provides insights into language as a social phenomenon, reflecting societal norms and values.\n\nC. Psycholinguistics investigates the cognitive processes underlying language acquisition and use. It examines how individuals comprehend, produce, and store language. This branch of linguistics is closely related to psychology, focusing on mental mechanisms involved in linguistic capabilities.\n\nD. Language preservation is crucial in maintaining cultural heritage. Linguists work to document endangered languages to ensure their survival for future generations. This involves recording native speakers and creating written records to support revitalization efforts and linguistic diversity.\n\nE. Computational linguistics applies computer technology to the processing of natural language. It includes developing algorithms for machine translation, speech recognition, and natural language processing tasks. This field bridges computer science and linguistics, enhancing communication technologies.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Linguistic research often focuses on historical text analysis.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses the historical approach in linguistic research, specifically examining historical texts.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "The relationship between language and social factors is a key focus.",
+        "answer": "B",
+        "explanation": "Paragraph B explains how sociolinguistics studies the influence of social factors like class and gender on language.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Understanding language acquisition involves cognitive processes.",
+        "answer": "C",
+        "explanation": "Paragraph C focuses on the cognitive processes in psycholinguistics, whereas Paragraph B might seem related but focuses on social factors.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Efforts to document endangered languages are vital for cultural heritage.",
+        "answer": "D",
+        "explanation": "Paragraph D addresses the importance of language documentation and preservation for cultural heritage.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The development of machine translation systems is a part of this field.",
+        "answer": "E",
+        "explanation": "Paragraph E describes how computational linguistics involves creating algorithms for machine translation.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Linguistic research often focuses on the evolution of languages over time. Researchers examine historical texts to trace changes and influences in vocabulary and grammar. This historical approach helps in understanding the dynamic nature of language development and the factors contributing to linguistic shifts."
+        },
+        {
+          "label": "B",
+          "text": "Sociolinguistics studies the relationship between language and society. It explores how social factors such as class, gender, and ethnicity influence language use, variation, and change. This field provides insights into language as a social phenomenon, reflecting societal norms and values."
+        },
+        {
+          "label": "C",
+          "text": "Psycholinguistics investigates the cognitive processes underlying language acquisition and use. It examines how individuals comprehend, produce, and store language. This branch of linguistics is closely related to psychology, focusing on mental mechanisms involved in linguistic capabilities."
+        },
+        {
+          "label": "D",
+          "text": "Language preservation is crucial in maintaining cultural heritage. Linguists work to document endangered languages to ensure their survival for future generations. This involves recording native speakers and creating written records to support revitalization efforts and linguistic diversity."
+        },
+        {
+          "label": "E",
+          "text": "Computational linguistics applies computer technology to the processing of natural language. It includes developing algorithms for machine translation, speech recognition, and natural language processing tasks. This field bridges computer science and linguistics, enhancing communication technologies."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:02:23.938Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "0208a5fc-dc42-48be-b688-34c7feca480f",
+    "type": "matching-information",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "A. The study of psychology has evolved significantly over the years, beginning with the ancient Greeks who sought to understand the human mind. Today, psychology encompasses a wide range of topics, from cognitive processes to emotional responses. Researchers aim to uncover the mysteries of mental health and well-being by using scientific methods to provide evidence-based insights.\n\nB. Cognitive psychology focuses on understanding mental processes such as memory, perception, and problem-solving. This branch of psychology uses experimental methods to investigate how people perceive and interact with the world around them. By studying cognitive processes, psychologists can better understand how individuals learn and develop over time.\n\nC. Emotional regulation is a key area of interest in psychology, addressing how individuals manage and respond to their emotions. Techniques such as mindfulness and cognitive-behavioral therapy are employed to help individuals improve their emotional intelligence and resilience. Understanding emotional regulation can lead to better mental health outcomes.\n\nD. Social psychology examines how people's thoughts, feelings, and behaviors are influenced by the presence of others. It explores phenomena such as conformity, group dynamics, and social influence. By understanding social interactions, psychologists aim to explain how societal norms and relationships shape individual behavior.\n\nE. Developmental psychology studies the psychological growth of individuals across their lifespan. This field looks at how people change and grow from infancy through old age, considering the impact of genetics, environment, and social factors. Developmental psychologists work to identify stages of development and the challenges that may arise at each stage.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "This paragraph discusses the historical evolution and broad scope of psychology.",
+        "answer": "A",
+        "explanation": "Paragraph A describes the historical evolution of psychology starting from the ancient Greeks and its broad scope covering various topics.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "This paragraph talks about techniques used to manage emotions.",
+        "answer": "C",
+        "explanation": "Paragraph C specifically mentions techniques like mindfulness and cognitive-behavioral therapy for emotional regulation.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "This paragraph explores cognitive processes and how they help in understanding learning and development.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses cognitive processes in detail, including how they aid in understanding learning and development, which might be confused with developmental psychology in Paragraph E.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "This paragraph examines the influence of society on individual behavior.",
+        "answer": "D",
+        "explanation": "Paragraph D is focused on social psychology and how societal norms and interactions influence individual behavior.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "This paragraph addresses the study of psychological growth across different life stages.",
+        "answer": "E",
+        "explanation": "Paragraph E specifically addresses developmental psychology, which studies psychological growth throughout the lifespan.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "The study of psychology has evolved significantly over the years, beginning with the ancient Greeks who sought to understand the human mind. Today, psychology encompasses a wide range of topics, from cognitive processes to emotional responses. Researchers aim to uncover the mysteries of mental health and well-being by using scientific methods to provide evidence-based insights."
+        },
+        {
+          "label": "B",
+          "text": "Cognitive psychology focuses on understanding mental processes such as memory, perception, and problem-solving. This branch of psychology uses experimental methods to investigate how people perceive and interact with the world around them. By studying cognitive processes, psychologists can better understand how individuals learn and develop over time."
+        },
+        {
+          "label": "C",
+          "text": "Emotional regulation is a key area of interest in psychology, addressing how individuals manage and respond to their emotions. Techniques such as mindfulness and cognitive-behavioral therapy are employed to help individuals improve their emotional intelligence and resilience. Understanding emotional regulation can lead to better mental health outcomes."
+        },
+        {
+          "label": "D",
+          "text": "Social psychology examines how people's thoughts, feelings, and behaviors are influenced by the presence of others. It explores phenomena such as conformity, group dynamics, and social influence. By understanding social interactions, psychologists aim to explain how societal norms and relationships shape individual behavior."
+        },
+        {
+          "label": "E",
+          "text": "Developmental psychology studies the psychological growth of individuals across their lifespan. This field looks at how people change and grow from infancy through old age, considering the impact of genetics, environment, and social factors. Developmental psychologists work to identify stages of development and the challenges that may arise at each stage."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:02:38.173Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e4410b1c-ce21-422a-b5e4-328e1708a105",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "A. Linguistic research often explores the cognitive processes involved in language acquisition. Studies in this area seek to understand how individuals, particularly children, learn to speak and comprehend language. Theories such as the critical period hypothesis suggest that there is an optimal window for language learning, which has profound implications for educational practices.\n\nB. Historical linguistics examines how languages evolve over time. By analyzing language change, researchers can trace the development of languages and their relationships. This branch of linguistics can reveal much about the migration and interaction of human populations through history.\n\nC. Sociolinguistics investigates the relationship between language and society. This includes understanding how language varies according to factors like region, class, and gender. Sociolinguistic research often highlights the role of language in social identity and group membership.\n\nD. Phonetics is the study of the physical sounds of human speech. Researchers in this field analyze sound waves to understand how different sounds are produced and perceived. Phonetic research is crucial for developing technologies like speech recognition systems and improving communication aids.\n\nE. Pragmatics focuses on how context influences the interpretation of language. This area of study examines how speakers use language in practical ways to achieve communication goals. Pragmatic analysis can reveal the subtle meanings and intentions behind everyday communication.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Studies how language varies according to social factors.",
+        "answer": "C",
+        "explanation": "Paragraph C discusses sociolinguistics and its focus on language variation by region, class, and gender.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Analyzes sound waves to understand speech production.",
+        "answer": "D",
+        "explanation": "Paragraph D covers phonetics, which involves analyzing sound waves to study speech sounds.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Investigates how language changes over time and its implications for human migration.",
+        "answer": "B",
+        "explanation": "Paragraph B is about historical linguistics and language evolution, which can indicate human migration and interaction. Despite overlapping with the topic of language evolution in paragraph A, it specifically focuses on historical linguistics.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Examines the optimal window for language learning in children.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses cognitive processes in language acquisition, including the critical period hypothesis related to optimal learning times.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Studies how context affects the interpretation of language.",
+        "answer": "E",
+        "explanation": "Paragraph E focuses on pragmatics, which looks at how context influences language interpretation.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Linguistic research often explores the cognitive processes involved in language acquisition. Studies in this area seek to understand how individuals, particularly children, learn to speak and comprehend language. Theories such as the critical period hypothesis suggest that there is an optimal window for language learning, which has profound implications for educational practices."
+        },
+        {
+          "label": "B",
+          "text": "Historical linguistics examines how languages evolve over time. By analyzing language change, researchers can trace the development of languages and their relationships. This branch of linguistics can reveal much about the migration and interaction of human populations through history."
+        },
+        {
+          "label": "C",
+          "text": "Sociolinguistics investigates the relationship between language and society. This includes understanding how language varies according to factors like region, class, and gender. Sociolinguistic research often highlights the role of language in social identity and group membership."
+        },
+        {
+          "label": "D",
+          "text": "Phonetics is the study of the physical sounds of human speech. Researchers in this field analyze sound waves to understand how different sounds are produced and perceived. Phonetic research is crucial for developing technologies like speech recognition systems and improving communication aids."
+        },
+        {
+          "label": "E",
+          "text": "Pragmatics focuses on how context influences the interpretation of language. This area of study examines how speakers use language in practical ways to achieve communication goals. Pragmatic analysis can reveal the subtle meanings and intentions behind everyday communication."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:03:31.262Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "0be6c2be-d72d-45f7-8c62-8bfe37c8afd5",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "A. Psychology is the scientific study of behavior and mental processes. It encompasses various subfields such as cognitive psychology, developmental psychology, and social psychology. Researchers aim to understand how humans perceive, think, and interact with the world. The study of psychology often involves rigorous methodologies and empirical evidence to support findings.\n\nB. Cognitive psychology focuses on internal processes such as memory, perception, and problem-solving. It investigates how individuals acquire, process, and store information. This branch of psychology uses experimental methods to explore the complexities of the human mind, contributing significantly to artificial intelligence development.\n\nC. Developmental psychology examines the psychological growth of individuals throughout their lifespan. This field studies how people change from infancy to old age, including their cognitive, emotional, and social development. It provides insights into how early experiences can shape later behavior and personality.\n\nD. Social psychology explores how individuals' thoughts, feelings, and behaviors are influenced by the presence of others. It looks at topics such as group dynamics, persuasion, and interpersonal relationships. Social psychologists often conduct experiments to understand how social contexts affect individual behavior.\n\nE. The field of psychology has practical applications in various domains, including clinical settings, education, and workplaces. Psychologists apply their knowledge to help individuals manage mental health issues, improve learning outcomes, and enhance employee productivity. These applications exemplify the versatility and impact of psychological science in everyday life.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The study of human behavior and mental processes using empirical methods.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses the scientific study of behavior and mental processes and mentions the use of empirical evidence and rigorous methodologies.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "The examination of psychological growth from infancy to old age.",
+        "answer": "C",
+        "explanation": "Paragraph C focuses on developmental psychology, which studies psychological growth throughout the lifespan.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "The study of internal processes like memory and perception.",
+        "answer": "B",
+        "explanation": "Paragraph B specifically addresses cognitive psychology, which deals with internal processes. Although social contexts are mentioned in D, B is more appropriate because it focuses on cognitive processes.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "The investigation of how social contexts influence individual behavior.",
+        "answer": "D",
+        "explanation": "Paragraph D is about social psychology, which examines how individuals are influenced by social contexts.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Practical applications of psychology in clinical and educational settings.",
+        "answer": "E",
+        "explanation": "Paragraph E discusses the practical applications of psychology in various fields, including clinical and educational settings.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Psychology is the scientific study of behavior and mental processes. It encompasses various subfields such as cognitive psychology, developmental psychology, and social psychology. Researchers aim to understand how humans perceive, think, and interact with the world. The study of psychology often involves rigorous methodologies and empirical evidence to support findings."
+        },
+        {
+          "label": "B",
+          "text": "Cognitive psychology focuses on internal processes such as memory, perception, and problem-solving. It investigates how individuals acquire, process, and store information. This branch of psychology uses experimental methods to explore the complexities of the human mind, contributing significantly to artificial intelligence development."
+        },
+        {
+          "label": "C",
+          "text": "Developmental psychology examines the psychological growth of individuals throughout their lifespan. This field studies how people change from infancy to old age, including their cognitive, emotional, and social development. It provides insights into how early experiences can shape later behavior and personality."
+        },
+        {
+          "label": "D",
+          "text": "Social psychology explores how individuals' thoughts, feelings, and behaviors are influenced by the presence of others. It looks at topics such as group dynamics, persuasion, and interpersonal relationships. Social psychologists often conduct experiments to understand how social contexts affect individual behavior."
+        },
+        {
+          "label": "E",
+          "text": "The field of psychology has practical applications in various domains, including clinical settings, education, and workplaces. Psychologists apply their knowledge to help individuals manage mental health issues, improve learning outcomes, and enhance employee productivity. These applications exemplify the versatility and impact of psychological science in everyday life."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:04:22.211Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.2,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "9afdad1d-33b3-4047-903e-5edc289d679e",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "A. Economic policy often aims to balance growth with sustainability. In recent years, many governments have adopted measures to promote green energy and reduce carbon emissions. These initiatives are part of a broader strategy to combat climate change while ensuring economic stability.\n\nB. Monetary policy, a key aspect of economic policy, involves managing the money supply and interest rates. Central banks use these tools to influence inflation and stabilize the currency, ensuring a healthy economic environment that fosters growth and employment.\n\nC. Fiscal policy encompasses government spending and tax policies aimed at influencing economic conditions. By adjusting taxes and public spending, governments strive to boost economic activity during downturns and cool down economies that are overheating.\n\nD. Trade policy, another dimension of economic policy, involves regulations that govern international trade. These policies aim to protect domestic industries while promoting exports, seeking to establish a favorable balance of trade to enhance national economic growth.\n\nE. Structural reforms are essential for long-term economic development. These reforms might include improving infrastructure, enhancing education systems, and fostering innovation. Such measures help create a robust economic framework that supports sustainable growth.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Information about the role of central banks in managing inflation.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses monetary policy, including how central banks use tools like interest rates to influence inflation.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Details on how government spending can stimulate economic activity.",
+        "answer": "C",
+        "explanation": "Paragraph C explains fiscal policy and how government spending can boost economic activity during downturns.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Discussion on policies aimed at reducing carbon emissions.",
+        "answer": "A",
+        "explanation": "Paragraph A focuses on economic policies for sustainability, specifically initiatives to reduce carbon emissions, whereas Paragraph D might seem related due to environmental aspects of trade policies.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Explanation of trade policies designed to protect domestic industries.",
+        "answer": "D",
+        "explanation": "Paragraph D covers trade policy, which includes regulations to protect domestic industries and promote exports.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The importance of structural reforms for sustainable growth.",
+        "answer": "E",
+        "explanation": "Paragraph E addresses structural reforms and their role in creating a framework for sustainable economic growth.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Economic policy often aims to balance growth with sustainability. In recent years, many governments have adopted measures to promote green energy and reduce carbon emissions. These initiatives are part of a broader strategy to combat climate change while ensuring economic stability."
+        },
+        {
+          "label": "B",
+          "text": "Monetary policy, a key aspect of economic policy, involves managing the money supply and interest rates. Central banks use these tools to influence inflation and stabilize the currency, ensuring a healthy economic environment that fosters growth and employment."
+        },
+        {
+          "label": "C",
+          "text": "Fiscal policy encompasses government spending and tax policies aimed at influencing economic conditions. By adjusting taxes and public spending, governments strive to boost economic activity during downturns and cool down economies that are overheating."
+        },
+        {
+          "label": "D",
+          "text": "Trade policy, another dimension of economic policy, involves regulations that govern international trade. These policies aim to protect domestic industries while promoting exports, seeking to establish a favorable balance of trade to enhance national economic growth."
+        },
+        {
+          "label": "E",
+          "text": "Structural reforms are essential for long-term economic development. These reforms might include improving infrastructure, enhancing education systems, and fostering innovation. Such measures help create a robust economic framework that supports sustainable growth."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:04:33.986Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "63cc8b34-2c89-4da3-a872-573431e969d2",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "A. Economic policy refers to the actions that governments take in the economic field. These policies cover a variety of areas including taxation, government budgets, the money supply, interest rates, and labor markets. The primary goal is often to achieve economic stability and growth.\n\nB. Fiscal policy involves government spending and taxation decisions. By adjusting its levels of spending and tax rates, the government can influence overall economic activity, aiming to achieve full employment, control inflation, and encourage economic growth.\n\nC. Monetary policy is primarily concerned with the management of interest rates and the total supply of money in circulation, generally carried out by central banks. Its main objectives are to control inflation, stabilize the currency, and achieve low unemployment.\n\nD. Supply-side policies aim to increase the productive capacity of the economy by improving the efficiency of the labor market, enhancing the incentives for investment, and fostering innovation. These policies often include tax cuts, deregulation, and investment in education.\n\nE. Trade policy influences the international economic relationships of a country. It encompasses tariffs, trade agreements, and import quotas. The goal is to enhance trade by reducing barriers, promoting exports, and protecting domestic industries.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Information about government actions in economic fields.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses various aspects of economic policy, including government actions in the economic field.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Details about managing interest rates and money supply.",
+        "answer": "C",
+        "explanation": "Paragraph C specifically addresses monetary policy, which involves managing interest rates and the money supply.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Measures intended to foster economic growth through taxation changes.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses fiscal policy, which includes taxation changes aimed at fostering economic growth, not D which focuses on supply-side measures.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Policies focused on enhancing productive capacity through labor market efficiency.",
+        "answer": "D",
+        "explanation": "Paragraph D covers supply-side policies aimed at increasing productive capacity by improving labor market efficiency.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Influence of tariffs and trade agreements on international relationships.",
+        "answer": "E",
+        "explanation": "Paragraph E talks about trade policy, which includes the influence of tariffs and trade agreements on international economic relationships.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Economic policy refers to the actions that governments take in the economic field. These policies cover a variety of areas including taxation, government budgets, the money supply, interest rates, and labor markets. The primary goal is often to achieve economic stability and growth."
+        },
+        {
+          "label": "B",
+          "text": "Fiscal policy involves government spending and taxation decisions. By adjusting its levels of spending and tax rates, the government can influence overall economic activity, aiming to achieve full employment, control inflation, and encourage economic growth."
+        },
+        {
+          "label": "C",
+          "text": "Monetary policy is primarily concerned with the management of interest rates and the total supply of money in circulation, generally carried out by central banks. Its main objectives are to control inflation, stabilize the currency, and achieve low unemployment."
+        },
+        {
+          "label": "D",
+          "text": "Supply-side policies aim to increase the productive capacity of the economy by improving the efficiency of the labor market, enhancing the incentives for investment, and fostering innovation. These policies often include tax cuts, deregulation, and investment in education."
+        },
+        {
+          "label": "E",
+          "text": "Trade policy influences the international economic relationships of a country. It encompasses tariffs, trade agreements, and import quotas. The goal is to enhance trade by reducing barriers, promoting exports, and protecting domestic industries."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:05:19.036Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.8,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "1e579f87-5dfd-45c7-9da3-7d111d3ca5c6",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Psychology",
+    "passage": "A. The study of cognitive psychology focuses on understanding how people think, learn, and remember. Cognitive psychologists investigate internal mental processes such as perception, memory, and problem-solving. This field has greatly influenced educational practices by providing insights into how children learn best in various educational settings.\n\nB. Behavioral psychology examines the connection between our minds and behaviors. Often referred to as behaviorism, this approach focuses on observable behaviors and the ways they can be learned or unlearned through conditioning. Pioneers like B.F. Skinner and John Watson have significantly contributed to this field.\n\nC. Developmental psychology is the scientific study of how and why human beings change over the course of their life. Originally concerned with infants and children, this field has expanded to include adolescence, adult development, aging, and the whole lifespan. Researchers often explore how various factors influence growth.\n\nD. Social psychology explores how people's thoughts, behaviors, and feelings are influenced by the actual, imagined, or implied presence of others. It seeks to understand how and why people behave in social contexts and examines concepts like group dynamics, leadership, and social influence.\n\nE. Clinical psychology integrates science, theory, and clinical knowledge to understand, prevent, and relieve psychologically-based distress or dysfunction. Clinical psychologists often work in hospitals, clinics, or private practices, using therapy and assessment to help individuals manage their mental health.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Which paragraph discusses the influence of psychologists like B.F. Skinner?",
+        "answer": "B",
+        "explanation": "Paragraph B mentions B.F. Skinner's contribution to the field of behavioral psychology.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Which paragraph focuses on the entire human lifespan?",
+        "answer": "C",
+        "explanation": "Paragraph C discusses developmental psychology, which covers the entire lifespan from infancy to old age.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Which paragraph is about the study of how people think and solve problems?",
+        "answer": "A",
+        "explanation": "Although both paragraphs A and C discuss aspects of human thought, paragraph A specifically focuses on cognitive psychology, which studies thinking and problem-solving.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Which paragraph discusses the role of social contexts in influencing behavior?",
+        "answer": "D",
+        "explanation": "Paragraph D delves into social psychology, which examines how social contexts affect individual behavior.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Which paragraph describes the field that deals with mental health treatment?",
+        "answer": "E",
+        "explanation": "Paragraph E describes clinical psychology, which involves treating and understanding psychological distress.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "The study of cognitive psychology focuses on understanding how people think, learn, and remember. Cognitive psychologists investigate internal mental processes such as perception, memory, and problem-solving. This field has greatly influenced educational practices by providing insights into how children learn best in various educational settings."
+        },
+        {
+          "label": "B",
+          "text": "Behavioral psychology examines the connection between our minds and behaviors. Often referred to as behaviorism, this approach focuses on observable behaviors and the ways they can be learned or unlearned through conditioning. Pioneers like B.F. Skinner and John Watson have significantly contributed to this field."
+        },
+        {
+          "label": "C",
+          "text": "Developmental psychology is the scientific study of how and why human beings change over the course of their life. Originally concerned with infants and children, this field has expanded to include adolescence, adult development, aging, and the whole lifespan. Researchers often explore how various factors influence growth."
+        },
+        {
+          "label": "D",
+          "text": "Social psychology explores how people's thoughts, behaviors, and feelings are influenced by the actual, imagined, or implied presence of others. It seeks to understand how and why people behave in social contexts and examines concepts like group dynamics, leadership, and social influence."
+        },
+        {
+          "label": "E",
+          "text": "Clinical psychology integrates science, theory, and clinical knowledge to understand, prevent, and relieve psychologically-based distress or dysfunction. Clinical psychologists often work in hospitals, clinics, or private practices, using therapy and assessment to help individuals manage their mental health."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:42:57.254Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 2.7,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "57aabc3b-8b3b-4088-bddd-db61df0256cf",
+    "type": "matching-information",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "A. Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the ocean, marine biology covers a wide range of topics, from the study of microscopic plankton to massive whales. The diversity of life forms makes the ocean a rich field for scientific exploration and research.\n\nB. One of the key focuses of marine biology is understanding the complex ecosystems that exist underwater. Coral reefs, for instance, are among the most biologically diverse ecosystems on Earth. These ecosystems provide vital habitats for numerous marine species and are crucial for maintaining ocean health.\n\nC. Marine biologists often study the impact of human activities on marine environments. Pollution, overfishing, and climate change have significantly affected marine life. Efforts are being made globally to mitigate these impacts through conservation initiatives and sustainable practices.\n\nD. Technological advancements have greatly enhanced marine biological research. The use of remotely operated vehicles (ROVs), satellite imagery, and underwater drones allows scientists to explore previously inaccessible areas of the ocean, leading to new discoveries and insights into marine life.\n\nE. Education and public awareness play a crucial role in marine conservation. Many organizations are dedicated to educating the public about the importance of preserving marine biodiversity. These efforts include educational programs, documentaries, and interactive exhibits at aquariums.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Marine biology encompasses the study of both small and large marine organisms.",
+        "answer": "A",
+        "explanation": "Paragraph A discusses the range of topics in marine biology, from microscopic plankton to massive whales.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Human activities have a profound impact on marine environments.",
+        "answer": "C",
+        "explanation": "Paragraph C explains how pollution, overfishing, and climate change affect marine life.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Coral reefs are vital for maintaining ocean health.",
+        "answer": "B",
+        "explanation": "Paragraph B specifically states the importance of coral reefs, not D, which deals with technological advancements.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Technological tools have opened new avenues for ocean exploration.",
+        "answer": "D",
+        "explanation": "Paragraph D highlights the role of technology in enhancing marine research.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Public education is key to marine conservation efforts.",
+        "answer": "E",
+        "explanation": "Paragraph E focuses on the role of education and public awareness in marine conservation.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given the vastness of the ocean, marine biology covers a wide range of topics, from the study of microscopic plankton to massive whales. The diversity of life forms makes the ocean a rich field for scientific exploration and research."
+        },
+        {
+          "label": "B",
+          "text": "One of the key focuses of marine biology is understanding the complex ecosystems that exist underwater. Coral reefs, for instance, are among the most biologically diverse ecosystems on Earth. These ecosystems provide vital habitats for numerous marine species and are crucial for maintaining ocean health."
+        },
+        {
+          "label": "C",
+          "text": "Marine biologists often study the impact of human activities on marine environments. Pollution, overfishing, and climate change have significantly affected marine life. Efforts are being made globally to mitigate these impacts through conservation initiatives and sustainable practices."
+        },
+        {
+          "label": "D",
+          "text": "Technological advancements have greatly enhanced marine biological research. The use of remotely operated vehicles (ROVs), satellite imagery, and underwater drones allows scientists to explore previously inaccessible areas of the ocean, leading to new discoveries and insights into marine life."
+        },
+        {
+          "label": "E",
+          "text": "Education and public awareness play a crucial role in marine conservation. Many organizations are dedicated to educating the public about the importance of preserving marine biodiversity. These efforts include educational programs, documentaries, and interactive exhibits at aquariums."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:43:09.032Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "802e652d-9d62-42ca-acb3-dcdea1140d89",
+    "type": "matching-information",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "A. Marine biology is the study of marine organisms, their behaviors, and interactions with the environment. It encompasses a wide range of topics including the study of ecosystems, population dynamics, and the impact of human activities on marine life. Researchers in this field often collaborate with oceanographers to understand the physical and chemical characteristics of the ocean.\n\nB. Coral reefs are often referred to as the 'rainforests of the sea' due to their rich biodiversity. These ecosystems provide habitat and food for numerous marine species. However, they are threatened by climate change, which causes coral bleaching, and by destructive fishing practices that damage their delicate structures.\n\nC. The study of marine mammals, such as whales and dolphins, is a crucial aspect of marine biology. These animals play a significant role in marine ecosystems and are key indicators of ocean health. Conservation efforts focus on protecting these species from threats like pollution and entanglement in fishing gear.\n\nD. Ocean acidification is a pressing issue resulting from increased carbon dioxide absorption by the ocean. This phenomenon affects calcifying organisms like shellfish and corals, disrupting marine food chains. While similar in impact to climate change, acidification specifically alters the chemical balance of seawater.\n\nE. Marine biologists employ various research methods, including field studies, laboratory experiments, and computer modeling, to gather and analyze data. Advanced technologies, such as remote sensing and genetic analysis, have revolutionized the field, allowing for more detailed and comprehensive studies of marine life.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The impact of climate change on coral reefs.",
+        "answer": "B",
+        "explanation": "Paragraph B discusses the impact of climate change on coral reefs, specifically mentioning coral bleaching.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "The role of marine mammals in ecosystems.",
+        "answer": "C",
+        "explanation": "Paragraph C explains the significance of marine mammals in ecosystems and their role as indicators of ocean health.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "The effects of increased carbon dioxide on marine life.",
+        "answer": "D",
+        "explanation": "While both B and D discuss impacts on marine life, only D specifically addresses ocean acidification due to carbon dioxide absorption.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Collaboration between marine biologists and oceanographers.",
+        "answer": "A",
+        "explanation": "Paragraph A mentions the collaboration between marine biologists and oceanographers to understand ocean characteristics.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The use of advanced technologies in marine research.",
+        "answer": "E",
+        "explanation": "Paragraph E details the advanced technologies used in marine research, such as remote sensing and genetic analysis.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Marine biology is the study of marine organisms, their behaviors, and interactions with the environment. It encompasses a wide range of topics including the study of ecosystems, population dynamics, and the impact of human activities on marine life. Researchers in this field often collaborate with oceanographers to understand the physical and chemical characteristics of the ocean."
+        },
+        {
+          "label": "B",
+          "text": "Coral reefs are often referred to as the 'rainforests of the sea' due to their rich biodiversity. These ecosystems provide habitat and food for numerous marine species. However, they are threatened by climate change, which causes coral bleaching, and by destructive fishing practices that damage their delicate structures."
+        },
+        {
+          "label": "C",
+          "text": "The study of marine mammals, such as whales and dolphins, is a crucial aspect of marine biology. These animals play a significant role in marine ecosystems and are key indicators of ocean health. Conservation efforts focus on protecting these species from threats like pollution and entanglement in fishing gear."
+        },
+        {
+          "label": "D",
+          "text": "Ocean acidification is a pressing issue resulting from increased carbon dioxide absorption by the ocean. This phenomenon affects calcifying organisms like shellfish and corals, disrupting marine food chains. While similar in impact to climate change, acidification specifically alters the chemical balance of seawater."
+        },
+        {
+          "label": "E",
+          "text": "Marine biologists employ various research methods, including field studies, laboratory experiments, and computer modeling, to gather and analyze data. Advanced technologies, such as remote sensing and genetic analysis, have revolutionized the field, allowing for more detailed and comprehensive studies of marine life."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:45:24.405Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "e1cb7d52-fa44-4712-affb-102db5c3e3fb",
+    "type": "matching-information",
+    "band": 7,
+    "topic": "Psychology",
+    "passage": "A. Cognitive psychology focuses on the internal processes involved in making sense of the world. It examines how people perceive, remember, think, speak, and solve problems. Researchers in this field utilize experimental methods to study the mental processes that underpin human behavior.\n\nB. Developmental psychology explores the psychological growth of individuals throughout their lifespan. It considers how thinking, feeling, and behavior change and develop from infancy through old age. This branch of psychology often examines how different stages of life can influence cognitive and emotional development.\n\nC. Social psychology studies how individuals' thoughts, feelings, and behaviors are influenced by the presence of others. This field investigates topics such as group dynamics, social perception, leadership, and aggression, aiming to understand how social interactions shape human behavior.\n\nD. Behavioral psychology, also known as behaviorism, is concerned with observable behaviors. It emphasizes the role of environmental factors in shaping behavior, often discounting the importance of internal states. Classical and operant conditioning are key concepts within this domain.\n\nE. Clinical psychology integrates science, theory, and practice to understand, predict, and treat maladjustment and disability. Practitioners often work with individuals to alleviate psychological distress and promote mental well-being, using a variety of therapeutic methods.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The study of how individuals' feelings are influenced by their social environment.",
+        "answer": "C",
+        "explanation": "Paragraph C discusses social psychology, which involves studying how individual feelings and behaviors are influenced by others.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "An area of psychology focusing on changes from infancy to old age.",
+        "answer": "B",
+        "explanation": "Paragraph B covers developmental psychology, which examines psychological growth throughout the lifespan.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "The application of experimental methods to understand internal mental processes.",
+        "answer": "A",
+        "explanation": "Paragraph A describes cognitive psychology, which uses experimental methods to study mental processes, despite the topic overlap with behaviorism in D.",
+        "mutationType": "TOPIC_OVERLAP_TRAP",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "A focus on observable behaviors and the impact of the environment on these behaviors.",
+        "answer": "D",
+        "explanation": "Paragraph D is about behavioral psychology, emphasizing observable behaviors and environmental influences.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "The integration of science and practice to treat psychological distress.",
+        "answer": "E",
+        "explanation": "Paragraph E talks about clinical psychology, which combines science and practice to address psychological issues.",
+        "mutationType": "CORRECT_PARAGRAPH",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Cognitive psychology focuses on the internal processes involved in making sense of the world. It examines how people perceive, remember, think, speak, and solve problems. Researchers in this field utilize experimental methods to study the mental processes that underpin human behavior."
+        },
+        {
+          "label": "B",
+          "text": "Developmental psychology explores the psychological growth of individuals throughout their lifespan. It considers how thinking, feeling, and behavior change and develop from infancy through old age. This branch of psychology often examines how different stages of life can influence cognitive and emotional development."
+        },
+        {
+          "label": "C",
+          "text": "Social psychology studies how individuals' thoughts, feelings, and behaviors are influenced by the presence of others. This field investigates topics such as group dynamics, social perception, leadership, and aggression, aiming to understand how social interactions shape human behavior."
+        },
+        {
+          "label": "D",
+          "text": "Behavioral psychology, also known as behaviorism, is concerned with observable behaviors. It emphasizes the role of environmental factors in shaping behavior, often discounting the importance of internal states. Classical and operant conditioning are key concepts within this domain."
+        },
+        {
+          "label": "E",
+          "text": "Clinical psychology integrates science, theory, and practice to understand, predict, and treat maladjustment and disability. Practitioners often work with individuals to alleviate psychological distress and promote mental well-being, using a variety of therapeutic methods."
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T11:45:34.542Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 2.7,
+        "scores": {
+          "argumentStructure": 2,
+          "academicVocabulary": 3,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 3,
+          "bandAppropriateness": 3
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "CORRECT_PARAGRAPH": 4,
+        "TOPIC_OVERLAP_TRAP": 1
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  }
+]

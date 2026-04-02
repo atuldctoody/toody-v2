@@ -1,0 +1,329 @@
+[
+  {
+    "id": "2a1a53a9-dde6-4a8e-9d44-4e6b0a007fb4",
+    "type": "matching-headings",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "A. Urban development has undergone significant transformation in the last decade, primarily driven by technological advancements. Smart cities are now incorporating digital infrastructure to enhance connectivity and efficiency. These technological integrations aim to improve urban living standards and address challenges such as traffic congestion and pollution.\n\nB. The rise of sustainable architecture is a critical aspect of modern urban development. Green buildings are designed to minimize environmental impact through energy-efficient systems and eco-friendly materials. This movement towards sustainability reflects a broader commitment to reducing urban carbon footprints.\n\nC. Public transportation systems are evolving to meet the demands of growing urban populations. Investments in rapid transit networks and innovative mobility solutions, like electric buses and bike-sharing schemes, are helping cities reduce traffic congestion and promote cleaner urban environments.\n\nD. Urban sprawl poses significant challenges for city planners. As cities expand, they face issues related to land use, infrastructure strain, and service delivery. Effective urban planning is essential to manage growth and ensure that developments meet the needs of all residents.\n\nE. Community engagement is becoming an integral part of urban planning processes. By involving residents in decision-making, cities aim to create more inclusive and responsive urban environments. This participatory approach helps align development projects with the needs and aspirations of the community.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Paragraph A",
+        "answer": "1",
+        "explanation": "Heading 1 matches paragraph A as it discusses the role of technology in enhancing urban living standards through digital infrastructure in smart cities.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Paragraph B",
+        "answer": "2",
+        "explanation": "Heading 2 is appropriate for paragraph B, which focuses on sustainable architecture and its role in modern urban development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "2",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Paragraph C",
+        "answer": "3",
+        "explanation": "Heading 3 fits paragraph C, which describes the evolution of public transportation systems and their impact on urban environments.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "3",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Paragraph D",
+        "answer": "4",
+        "explanation": "Heading 4 is suitable for paragraph D, as it covers the challenges associated with urban sprawl and the importance of effective planning.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "4",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Paragraph E",
+        "answer": "5",
+        "explanation": "Heading 5 corresponds to paragraph E, which highlights the significance of community engagement in urban planning.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "5",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Urban development has undergone significant transformation in the last decade, primarily driven by technological advancements. Smart cities are now incorporating digital infrastructure to enhance connectivity and efficiency. These technological integrations aim to improve urban living standards and address challenges such as traffic congestion and pollution."
+        },
+        {
+          "label": "B",
+          "text": "The rise of sustainable architecture is a critical aspect of modern urban development. Green buildings are designed to minimize environmental impact through energy-efficient systems and eco-friendly materials. This movement towards sustainability reflects a broader commitment to reducing urban carbon footprints."
+        },
+        {
+          "label": "C",
+          "text": "Public transportation systems are evolving to meet the demands of growing urban populations. Investments in rapid transit networks and innovative mobility solutions, like electric buses and bike-sharing schemes, are helping cities reduce traffic congestion and promote cleaner urban environments."
+        },
+        {
+          "label": "D",
+          "text": "Urban sprawl poses significant challenges for city planners. As cities expand, they face issues related to land use, infrastructure strain, and service delivery. Effective urban planning is essential to manage growth and ensure that developments meet the needs of all residents."
+        },
+        {
+          "label": "E",
+          "text": "Community engagement is becoming an integral part of urban planning processes. By involving residents in decision-making, cities aim to create more inclusive and responsive urban environments. This participatory approach helps align development projects with the needs and aspirations of the community."
+        }
+      ],
+      "headings": [
+        {
+          "id": 1,
+          "text": "The Role of Technology in Modern Cities",
+          "correctParagraph": "A",
+          "isDistractor": false
+        },
+        {
+          "id": 2,
+          "text": "Sustainable Building Practices",
+          "correctParagraph": "B",
+          "isDistractor": false
+        },
+        {
+          "id": 3,
+          "text": "Innovations in Public Transport",
+          "correctParagraph": "C",
+          "isDistractor": false
+        },
+        {
+          "id": 4,
+          "text": "Challenges of Urban Expansion",
+          "correctParagraph": "D",
+          "isDistractor": false
+        },
+        {
+          "id": 5,
+          "text": "Involving Citizens in Urban Planning",
+          "correctParagraph": "E",
+          "isDistractor": false
+        },
+        {
+          "id": 6,
+          "text": "The Impact of Traffic Congestion",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "SPECIFIC_DETAIL_TRAP"
+        },
+        {
+          "id": 7,
+          "text": "Rural Development Strategies",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "TOPIC_ADJACENT"
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T09:48:54.887Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": null,
+        "scores": null
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_HEADING": 0,
+        "SPECIFIC_DETAIL_TRAP": 0,
+        "TOPIC_ADJACENT": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "1d49ffdf-1d82-49c1-883a-e45aae7e9a87",
+    "type": "matching-headings",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "A. Marine ecosystems are vital to the health of the planet. They provide essential services such as oxygen production, climate regulation, and resources for human consumption. Despite their importance, these ecosystems face numerous threats from human activity, including pollution and overfishing, which disrupt the delicate balance of marine life.\n\nB. Coral reefs are often referred to as the rainforests of the sea due to their rich biodiversity. They support a wide array of marine organisms and are crucial for the livelihoods of millions of people. However, climate change and ocean acidification pose significant risks to these vibrant ecosystems.\n\nC. The study of marine mammals, such as whales and dolphins, has provided valuable insights into complex social structures and communication methods. These animals demonstrate remarkable intelligence and adaptability, allowing them to thrive in diverse marine environments.\n\nD. Recent advancements in technology have revolutionized the field of marine biology. Tools like remote sensing and underwater drones enable scientists to explore previously inaccessible areas of the ocean, leading to new discoveries and a deeper understanding of marine life.\n\nE. Marine conservation efforts are increasingly focusing on creating marine protected areas to safeguard biodiversity. These designated zones help to preserve critical habitats and provide refuges for endangered species, promoting the recovery of marine ecosystems.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Paragraph A",
+        "answer": "1",
+        "explanation": "Paragraph A discusses the threats to marine ecosystems, matching the heading 'Threats to Marine Ecosystems'.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Paragraph B",
+        "answer": "2",
+        "explanation": "Paragraph B highlights the importance of coral reefs, which aligns with the heading 'The Importance of Coral Reefs'.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "2",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Paragraph C",
+        "answer": "3",
+        "explanation": "Paragraph C focuses on marine mammals, fitting the heading 'Understanding Marine Mammals'.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "3",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Paragraph D",
+        "answer": "4",
+        "explanation": "Paragraph D covers technological advancements in marine research, corresponding to 'Technological Advances in Marine Research'.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "4",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Paragraph E",
+        "answer": "5",
+        "explanation": "Paragraph E discusses marine protected areas, making 'The Role of Marine Protected Areas' the correct heading.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "5",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Marine ecosystems are vital to the health of the planet. They provide essential services such as oxygen production, climate regulation, and resources for human consumption. Despite their importance, these ecosystems face numerous threats from human activity, including pollution and overfishing, which disrupt the delicate balance of marine life."
+        },
+        {
+          "label": "B",
+          "text": "Coral reefs are often referred to as the rainforests of the sea due to their rich biodiversity. They support a wide array of marine organisms and are crucial for the livelihoods of millions of people. However, climate change and ocean acidification pose significant risks to these vibrant ecosystems."
+        },
+        {
+          "label": "C",
+          "text": "The study of marine mammals, such as whales and dolphins, has provided valuable insights into complex social structures and communication methods. These animals demonstrate remarkable intelligence and adaptability, allowing them to thrive in diverse marine environments."
+        },
+        {
+          "label": "D",
+          "text": "Recent advancements in technology have revolutionized the field of marine biology. Tools like remote sensing and underwater drones enable scientists to explore previously inaccessible areas of the ocean, leading to new discoveries and a deeper understanding of marine life."
+        },
+        {
+          "label": "E",
+          "text": "Marine conservation efforts are increasingly focusing on creating marine protected areas to safeguard biodiversity. These designated zones help to preserve critical habitats and provide refuges for endangered species, promoting the recovery of marine ecosystems."
+        }
+      ],
+      "headings": [
+        {
+          "id": 1,
+          "text": "Threats to Marine Ecosystems",
+          "correctParagraph": "A",
+          "isDistractor": false
+        },
+        {
+          "id": 2,
+          "text": "The Importance of Coral Reefs",
+          "correctParagraph": "B",
+          "isDistractor": false
+        },
+        {
+          "id": 3,
+          "text": "Understanding Marine Mammals",
+          "correctParagraph": "C",
+          "isDistractor": false
+        },
+        {
+          "id": 4,
+          "text": "Technological Advances in Marine Research",
+          "correctParagraph": "D",
+          "isDistractor": false
+        },
+        {
+          "id": 5,
+          "text": "The Role of Marine Protected Areas",
+          "correctParagraph": "E",
+          "isDistractor": false
+        },
+        {
+          "id": 6,
+          "text": "The Impact of Ocean Acidification on Coral Reefs",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "SPECIFIC_DETAIL_TRAP"
+        },
+        {
+          "id": 7,
+          "text": "The Study of Marine Microorganisms",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "TOPIC_ADJACENT"
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T09:49:50.946Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_HEADING": 0,
+        "SPECIFIC_DETAIL_TRAP": 0,
+        "TOPIC_ADJACENT": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  }
+]
