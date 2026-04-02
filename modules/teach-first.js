@@ -115,6 +115,21 @@ export async function loadTeachFirst(skillKey) {
     ? 'CRITICAL: Every "answer" field must be exactly ONE letter (A, B, C, or D) matching the correct option.'
     : 'CRITICAL: Every "answer" field must be exactly one of: True or False — never pipe-separated or NG.';
 
+  // Adaptive instruction — target the student's weakest logic types
+  const brainSkillData = studentData?.brain?.subjects?.['ielts-academic']?.skills?.[skillId] || {};
+  const eblt = brainSkillData.errorsByLogicType  || {};
+  const ablt = brainSkillData.attemptsByLogicType || {};
+  const weakTypes = Object.keys(ablt)
+    .filter(lt => (ablt[lt] || 0) >= 2)
+    .map(lt => ({ lt, rate: (eblt[lt] || 0) / ablt[lt] }))
+    .filter(x => x.rate >= 0.4)
+    .sort((a, b) => b.rate - a.rate)
+    .slice(0, 2)
+    .map(x => x.lt);
+  const adaptiveInstruction = weakTypes.length > 0
+    ? `\n\nADAPTIVE FOCUS: This student struggles most with: ${weakTypes.join(', ')}. Make the Hard worked example and at least one drill question specifically test these logic types.`
+    : '';
+
   const mcOptSchema = '"options":[{"label":"A","text":"option A text"},{"label":"B","text":"option B text"},{"label":"C","text":"option C text"},{"label":"D","text":"option D text"}],';
   const exSchema = (label, ansIdx) => isMC
     ? `{"label":"${label}","passage":"3-4 sentences — enough detail to answer a multiple choice question","statement":"${exStatementHint}",${mcOptSchema}"answer":"${ansVals[ansIdx]}","steps":["Read the question: what are you looking for in the passage?","Scan the passage: which sentence directly answers the question?","Eliminate: why are the distractors wrong?"],"insight":"One sentence: the key reasoning move that separates the correct answer from the distractors."}`
@@ -153,7 +168,7 @@ Return ONLY this JSON:
     {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'}", "statement": "a testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[2]}", "explanation": "one sentence"},
     {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic", "statement": "another testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"}
   ]
-}`,
+}${adaptiveInstruction}`,
     maxTokens: 3500
   };
 

@@ -426,9 +426,4 @@ async function checkWeek1Completion() {
   goTo('s-week1-complete');
 }
 
-window.week1KeepGoing = function () {
-  const { renderHome } = await import('./home.js').catch(() => ({ renderHome: () => {} }));
-  renderHome();
-  goTo('s-home');
-};
 window.week1KeepGoing = function () { goTo('s-home'); };

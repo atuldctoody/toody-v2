@@ -282,6 +282,16 @@ async function getFromBankCollection(collectionName, targetBand, excludeIds = []
   const band       = Math.round(targetBand * 2) / 2;
   const bandsToTry = [band, band - 0.5, band + 0.5].filter(b => b >= 5.0 && b <= 7.0);
 
+  // Pre-compute weak logic type error rates from all IELTS skills
+  const brainSkills = studentData?.brain?.subjects?.['ielts-academic']?.skills || {};
+  const errorTotals   = {};
+  const attemptTotals = {};
+  Object.values(brainSkills).forEach(sk => {
+    Object.entries(sk.errorsByLogicType   || {}).forEach(([lt, n]) => { errorTotals[lt]   = (errorTotals[lt]   || 0) + n; });
+    Object.entries(sk.attemptsByLogicType || {}).forEach(([lt, n]) => { attemptTotals[lt] = (attemptTotals[lt] || 0) + n; });
+  });
+  const errRate = (lt) => (attemptTotals[lt] || 0) > 0 ? (errorTotals[lt] || 0) / attemptTotals[lt] : 0;
+
   for (const b of bandsToTry) {
     const snapshot = await getDocs(
       query(
@@ -298,7 +308,16 @@ async function getFromBankCollection(collectionName, targetBand, excludeIds = []
     const candidates = snapshot.docs.filter(d => !excludeIds.includes(d.id));
     if (candidates.length === 0) continue;
 
-    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+    // Score each candidate by weak logic type coverage, then pick from top 3
+    const scored = candidates
+      .map(doc => ({
+        doc,
+        score: (doc.data().questions || []).reduce((s, q) => s + (q.logicType ? errRate(q.logicType) : 0), 0),
+      }))
+      .sort((a, b) => b.score - a.score);
+    const top3   = scored.slice(0, Math.min(3, scored.length));
+    const picked = top3[Math.floor(Math.random() * top3.length)].doc;
+
     updateDoc(picked.ref, {
       servedCount:  increment(1),
       lastServedAt: serverTimestamp(),

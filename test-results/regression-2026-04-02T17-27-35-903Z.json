@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-02T17:12:33.032Z",
+  "timestamp": "2026-04-02T17:27:35.903Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 32916,
+  "durationMs": 30580,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 27572,
+      "durationMs": 21770,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Marine Biodiversity",
+          "topic": "Climate Change Effects",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.7,
           "error": null
         },
         "audio": {
@@ -34,7 +34,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 5.5,
+          "overallBand": 6,
           "error": null
         }
       }
@@ -42,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 32888,
+      "durationMs": 30547,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Environmental Impact",
+          "topic": "Climate Change and Marine Life",
           "error": null
         },
         "verification": {
@@ -56,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.8,
+          "avgScore": 3.4,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 28552,
+      "durationMs": 29208,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "Renewable Energy Technologies",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
           "error": null
         }
       }

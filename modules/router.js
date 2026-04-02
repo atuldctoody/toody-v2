@@ -210,7 +210,7 @@ window.pickSkill = pickSkill;
 export function goToSession(forceSkillKey) {
   const plan = currentPlan || pickNextSkill(forceSkillKey);
   currentPlan = plan;
-  const sessionCount = (studentData?.dayNumber || 1) - 1;
+  const sessionCount = studentData?.sessions?.length || 0;
 
   // Update all screen session badges to show session count
   const badge = `Session ${sessionCount + 1}`;

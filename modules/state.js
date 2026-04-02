@@ -120,16 +120,21 @@ export async function updateStudentBrain(behaviour, accuracy, skillKey, question
     const isStrong   = newConsec >= 3;
 
     // Per-logicType error accumulation — tracks which mutation types a student misses most
-    let errorsByLogicType = null;
+    let errorsByLogicType  = null;
+    let attemptsByLogicType = null;
     if (skillId && questionResults && questionResults.length > 0) {
-      const prevEBLT = prevSkillBrain.errorsByLogicType || {};
-      const merged   = { ...prevEBLT };
+      const prevEBLT = prevSkillBrain.errorsByLogicType  || {};
+      const prevABLT = prevSkillBrain.attemptsByLogicType || {};
+      const mergedErrors   = { ...prevEBLT };
+      const mergedAttempts = { ...prevABLT };
       questionResults.forEach(({ logicType, isRight }) => {
-        if (!isRight && logicType) {
-          merged[logicType] = (merged[logicType] || 0) + 1;
+        if (logicType) {
+          mergedAttempts[logicType] = (mergedAttempts[logicType] || 0) + 1;
+          if (!isRight) mergedErrors[logicType] = (mergedErrors[logicType] || 0) + 1;
         }
       });
-      errorsByLogicType = merged;
+      errorsByLogicType   = mergedErrors;
+      attemptsByLogicType = mergedAttempts;
     }
 
     const skillBrainUpdate = skillId ? {
@@ -142,7 +147,8 @@ export async function updateStudentBrain(behaviour, accuracy, skillKey, question
       isStrong,
       aiResolved,
       needsHuman,
-      ...(errorsByLogicType ? { errorsByLogicType } : {}),
+      ...(errorsByLogicType   ? { errorsByLogicType   } : {}),
+      ...(attemptsByLogicType ? { attemptsByLogicType } : {}),
     } : null;
 
     const updatedSubjSkills = {
