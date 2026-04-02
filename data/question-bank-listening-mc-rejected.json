@@ -3516,5 +3516,463 @@
     "meta": {
       "generatedAt": "2026-04-02T14:43:03.707Z"
     }
+  },
+  {
+    "id": "72ac0375-a145-4135-9e65-62a5fdf09fbd",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Neuroscience",
+    "passage": "A: Hi Emily, have you been keeping up with the latest findings in neuroscience?\nB: Oh, absolutely, Alex. I recently read about a study that examined how sleep affects memory consolidation.\nA: Yes, I came across that too. They found that sleep plays a crucial role in strengthening our memories.\nB: Exactly! The researchers used various techniques to monitor brain activity. They specifically highlighted the importance of REM sleep.\nA: Did you notice that the study mentioned REM sleep as the phase where most memory processing occurs?\nB: Yes, but they also pointed out the role of non-REM sleep in the early stages of memory formation.\nA: True, but it's fascinating how they emphasized REM sleep for deep processing.\nB: There's another aspect I found intriguing. The use of brain imaging to visualize active areas during sleep.\nA: It's quite advanced, isn't it? Brain imaging is indeed revolutionizing our understanding of these processes.\nB: Oh, and did you hear about the study on neuroplasticity?\nA: You mean the one that discusses how the brain adapts to new information?\nB: Precisely. They concluded that neuroplasticity is most pronounced during childhood.\nA: However, it's still present in adults, which is encouraging for lifelong learning.\nB: Indeed, the adult brain's capability to adapt is often underestimated.\nA: And the role of neurotransmitters, like dopamine, in learning and motivation was detailed in another paper I read.\nB: Yes, they indicated that dopamine levels can significantly influence our capacity to learn.\nA: It’s surprising how neurotransmitters can change the way we process information.\nB: Neuroscience is indeed a field full of surprises and constant discoveries.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the main conclusion about sleep in memory consolidation discussed in the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Sleep is essential for reinforcing memories.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Sleep strengthens memories.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "They used brain imaging during sleep.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Non-REM sleep is more important than REM sleep.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it captures the paraphrased essence of the dialogue. B uses exact words but doesn’t fully encapsulate the idea. C is mentioned but not the main conclusion. D reverses the meaning by misplacing emphasis.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "What technique did researchers use to study brain activity during sleep?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They used advanced brain imaging methods.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They used brain imaging to visualize active areas.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "They discussed the phases of sleep.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "They relied solely on REM sleep studies.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A summarizes the method comprehensively. B echoes exact words without full context. C is mentioned but not the focus here. D incorrectly narrows the study method to REM sleep only.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "What does the dialogue suggest about neuroplasticity?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Neuroplasticity is highly evident in children but also present in adults.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Neuroplasticity is most pronounced during childhood.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The study on neuroplasticity was intriguing.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Neuroplasticity only occurs in childhood.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A captures both the childhood and adult aspects. B repeats part of the dialogue but misses the adult aspect. C is a vague mention. D reverses the full implication by excluding adults.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "According to the dialogue, what is the role of dopamine in learning?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Dopamine levels can greatly affect learning ability.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Dopamine influences our capacity to learn.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Neurotransmitters were mentioned in the study.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Dopamine decreases learning motivation.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A accurately paraphrases the role discussed. B repeats text but lacks depth. C is mentioned but not relevant here. D incorrectly suggests a negative effect of dopamine.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What surprising aspect of neuroscience is highlighted in the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Neuroscience is full of unexpected findings.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Neuroscience is a field full of surprises.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The field is constantly making discoveries.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Neuroscience mainly focuses on established facts.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A accurately sums up the dialogue's perspective. B echoes text without deeper context. C, while true, doesn’t capture the surprise element. D contradicts the nature of the field discussed.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:49:31.599Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "5947141c-c6c8-4b83-bc1c-97b2254bf0c0",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Economic Policy",
+    "passage": "A: So, have you been keeping up with the recent changes in our country's economic policy?\nB: Yes, I have. It's quite interesting how they're planning to handle inflation by adjusting interest rates.\nA: Absolutely. They aim to control inflation by raising the interest rates, which should, in theory, reduce spending and slow down the economy.\nB: Right, although some analysts argue that this approach might not be effective in the long term. They believe it could lead to a recession.\nA: Exactly, and there's also the matter of fiscal policy adjustments. The government plans to cut down on public spending, which has its own set of challenges.\nB: They mentioned reducing expenditure on infrastructure projects, didn't they?\nA: Yes, but contrary to what many people think, they're not cutting healthcare spending. In fact, they plan to increase it slightly.\nB: That's a relief. I was concerned they'd touch healthcare. It's crucial, especially post-pandemic.\nA: Indeed. Another point of debate is the tax reforms. They're introducing higher taxes for the wealthy.\nB: Some argue that it might discourage investments, although the intent is to create more equitable wealth distribution.\nA: That's true. But, if handled poorly, it could backfire.\nB: Very true. And let's not forget about the new trade policies being discussed. They're aiming to reduce import tariffs.\nA: Yes, although some are worried about its impact on local industries. They might struggle to compete with cheaper imports.\nB: That's a valid concern. It seems like a delicate balancing act, doesn't it?\nA: It certainly is. The government has a tough job ensuring these policies don't have unintended negative consequences.\nB: Well, let's hope they manage to find the right balance.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the government's strategy for controlling inflation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Adjusting interest rates to limit spending",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Raising interest rates, which should reduce spending and slow down the economy",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Introducing new trade policies",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Reducing interest rates to boost the economy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because it paraphrases the strategy of adjusting interest rates to control inflation. B uses exact words but doesn't capture the overall strategy. C is mentioned but unrelated to the question. D reverses the policy's intent.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "What is one concern regarding the government's fiscal policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Challenges from reducing public spending",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Cutting down on public spending",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Increased healthcare spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Boosting infrastructure expenditure",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it accurately captures the concern related to reducing public spending. B echoes words from the dialogue but lacks context. C is about healthcare, not fiscal policy concerns. D is the opposite of what's happening.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "How does the government plan to address wealth distribution?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By implementing higher taxes for the wealthy",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Introducing higher taxes for the wealthy",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Reducing import tariffs",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Lowering taxes for investors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is the correct answer as it paraphrases the government's plan. B repeats the dialogue but is not an explanation. C is unrelated to wealth distribution. D reverses the tax policy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "What is a potential downside of the new trade policies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Local industries might face challenges competing with cheaper imports",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Reducing import tariffs",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Higher taxes for the wealthy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Boosting local industry competitiveness",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A correctly identifies the potential downside. B is an echo of the policy but not the downside. C is unrelated. D reverses the negative impact.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is not a target for government spending cuts?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Healthcare spending will not be reduced",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Reducing expenditure on infrastructure projects",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Interest rate increases",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Cutting healthcare spending",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it states healthcare spending is not targeted. B echoes other spending cuts. C is unrelated to spending. D reverses the actual policy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T15:01:29.922Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
   }
 ]

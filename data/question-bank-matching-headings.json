@@ -11120,5 +11120,503 @@
       },
       "flaggedForReview": []
     }
+  },
+  {
+    "id": "1fccae31-94b7-4d7e-b8da-9756e3b5efcd",
+    "type": "matching-headings",
+    "band": 7,
+    "topic": "Space Exploration",
+    "passage": "A. The development of reusable rocket technology has revolutionized space exploration by significantly reducing the cost of launching payloads into orbit. Companies like SpaceX have pioneered this technology, allowing for more frequent and affordable missions that were once prohibitively expensive for many nations.\n\nB. International cooperation has become a cornerstone of modern space exploration. Joint missions, such as those between NASA and ESA, have facilitated the sharing of resources, expertise, and financial burdens, leading to more ambitious projects than any single country could undertake alone.\n\nC. Robotic missions have played a crucial role in exploring distant planets and moons, providing invaluable data that would be difficult to obtain with human astronauts. These missions are often the precursor to manned missions, gathering information about conditions on the surface and potential hazards.\n\nD. Space tourism is emerging as a new industry, with several companies planning to offer commercial trips to space. This development is not only opening up space travel to non-professionals but also raising important questions about regulation, safety, and environmental impact.\n\nE. The search for extraterrestrial life remains one of the most intriguing aspects of space exploration. Scientists are developing more sophisticated tools to detect signs of life, focusing on planets and moons with conditions similar to Earth, such as liquid water and a suitable atmosphere.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Paragraph A",
+        "answer": "3",
+        "explanation": "Heading 3 matches paragraph A because it discusses the impact of advancements in rocket technology, specifically reusable rockets, on space exploration.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "3",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Paragraph B",
+        "answer": "1",
+        "explanation": "Heading 1 matches paragraph B as it focuses on international cooperation in space exploration, highlighting joint missions and shared resources.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Paragraph C",
+        "answer": "4",
+        "explanation": "Heading 4 is appropriate for paragraph C, which explains how robotic missions gather data and pave the way for future manned missions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "4",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Paragraph D",
+        "answer": "2",
+        "explanation": "Heading 2 is suitable for paragraph D as it describes the emerging space tourism industry and its implications.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "2",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Paragraph E",
+        "answer": "5",
+        "explanation": "Heading 5 matches paragraph E, which delves into the search for extraterrestrial life and the scientific efforts to find it.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "5",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "The development of reusable rocket technology has revolutionized space exploration by significantly reducing the cost of launching payloads into orbit. Companies like SpaceX have pioneered this technology, allowing for more frequent and affordable missions that were once prohibitively expensive for many nations."
+        },
+        {
+          "label": "B",
+          "text": "International cooperation has become a cornerstone of modern space exploration. Joint missions, such as those between NASA and ESA, have facilitated the sharing of resources, expertise, and financial burdens, leading to more ambitious projects than any single country could undertake alone."
+        },
+        {
+          "label": "C",
+          "text": "Robotic missions have played a crucial role in exploring distant planets and moons, providing invaluable data that would be difficult to obtain with human astronauts. These missions are often the precursor to manned missions, gathering information about conditions on the surface and potential hazards."
+        },
+        {
+          "label": "D",
+          "text": "Space tourism is emerging as a new industry, with several companies planning to offer commercial trips to space. This development is not only opening up space travel to non-professionals but also raising important questions about regulation, safety, and environmental impact."
+        },
+        {
+          "label": "E",
+          "text": "The search for extraterrestrial life remains one of the most intriguing aspects of space exploration. Scientists are developing more sophisticated tools to detect signs of life, focusing on planets and moons with conditions similar to Earth, such as liquid water and a suitable atmosphere."
+        }
+      ],
+      "headings": [
+        {
+          "id": 1,
+          "text": "Collaboration in Space Exploration",
+          "correctParagraph": "B",
+          "isDistractor": false
+        },
+        {
+          "id": 2,
+          "text": "The Rise of Space Tourism",
+          "correctParagraph": "D",
+          "isDistractor": false
+        },
+        {
+          "id": 3,
+          "text": "Advancements in Rocket Technology",
+          "correctParagraph": "A",
+          "isDistractor": false
+        },
+        {
+          "id": 4,
+          "text": "Robotic Precursors to Manned Missions",
+          "correctParagraph": "C",
+          "isDistractor": false
+        },
+        {
+          "id": 5,
+          "text": "The Quest for Extraterrestrial Life",
+          "correctParagraph": "E",
+          "isDistractor": false
+        },
+        {
+          "id": 6,
+          "text": "SpaceX's Reusable Rockets",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "SPECIFIC_DETAIL_TRAP"
+        },
+        {
+          "id": 7,
+          "text": "The Challenges of Deep Space Travel",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "TOPIC_ADJACENT"
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T14:47:51.661Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "distinctSections": 1,
+          "mainIdeaClarity": 1,
+          "bandAppropriate": 1,
+          "tractability": 1,
+          "distractorQuality": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_HEADING": 0,
+        "SPECIFIC_DETAIL_TRAP": 0,
+        "TOPIC_ADJACENT": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "58fbbcf7-30f7-436f-a907-bac89d8f9056",
+    "type": "matching-headings",
+    "band": 7,
+    "topic": "Economic Policy",
+    "passage": "A. Fiscal policies are essential tools used by governments to influence economic conditions. By adjusting tax rates and modifying public spending, governments can either stimulate or cool down the economy. During periods of recession, increased spending and tax cuts are typical measures to boost demand and job creation.\n\nB. Monetary policy involves the management of interest rates and the total supply of money in circulation and is generally carried out by central banks. By lowering interest rates, borrowing becomes more attractive, which can spur investment and consumption, leading to economic growth.\n\nC. Trade policies are crucial for shaping a country's economic interactions with other nations. Through tariffs, trade agreements, and quotas, governments can protect domestic industries and promote exports, thereby influencing the balance of trade and employment levels.\n\nD. Supply-side economics focuses on boosting economic output by enhancing the efficiency and productivity of an economy. This approach often involves reducing regulation and taxes on businesses to encourage investment and innovation, ultimately leading to job creation and economic growth.\n\nE. The role of government in economic development extends to infrastructure investment. By funding projects like transportation and communication networks, governments can facilitate business operations and enhance productivity, which are vital for long-term economic advancement.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Paragraph A",
+        "answer": "3",
+        "explanation": "Paragraph A discusses fiscal policies, including government spending and taxation strategies, which matches heading 3.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "3",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Paragraph B",
+        "answer": "1",
+        "explanation": "Paragraph B explains monetary policy and the role of central banks, fitting heading 1.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Paragraph C",
+        "answer": "2",
+        "explanation": "Paragraph C is about trade policies affecting economic interactions, aligning with heading 2.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "2",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Paragraph D",
+        "answer": "4",
+        "explanation": "Paragraph D covers supply-side economics and private sector investment, which corresponds to heading 4.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "4",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Paragraph E",
+        "answer": "5",
+        "explanation": "Paragraph E discusses infrastructure investment as a growth catalyst, matching heading 5.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "5",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "Fiscal policies are essential tools used by governments to influence economic conditions. By adjusting tax rates and modifying public spending, governments can either stimulate or cool down the economy. During periods of recession, increased spending and tax cuts are typical measures to boost demand and job creation."
+        },
+        {
+          "label": "B",
+          "text": "Monetary policy involves the management of interest rates and the total supply of money in circulation and is generally carried out by central banks. By lowering interest rates, borrowing becomes more attractive, which can spur investment and consumption, leading to economic growth."
+        },
+        {
+          "label": "C",
+          "text": "Trade policies are crucial for shaping a country's economic interactions with other nations. Through tariffs, trade agreements, and quotas, governments can protect domestic industries and promote exports, thereby influencing the balance of trade and employment levels."
+        },
+        {
+          "label": "D",
+          "text": "Supply-side economics focuses on boosting economic output by enhancing the efficiency and productivity of an economy. This approach often involves reducing regulation and taxes on businesses to encourage investment and innovation, ultimately leading to job creation and economic growth."
+        },
+        {
+          "label": "E",
+          "text": "The role of government in economic development extends to infrastructure investment. By funding projects like transportation and communication networks, governments can facilitate business operations and enhance productivity, which are vital for long-term economic advancement."
+        }
+      ],
+      "headings": [
+        {
+          "id": 1,
+          "text": "The Role of Central Banks in Economic Growth",
+          "correctParagraph": "B",
+          "isDistractor": false
+        },
+        {
+          "id": 2,
+          "text": "International Trade and Economic Policy",
+          "correctParagraph": "C",
+          "isDistractor": false
+        },
+        {
+          "id": 3,
+          "text": "Government Spending and Taxation Strategies",
+          "correctParagraph": "A",
+          "isDistractor": false
+        },
+        {
+          "id": 4,
+          "text": "Encouraging Private Sector Investment",
+          "correctParagraph": "D",
+          "isDistractor": false
+        },
+        {
+          "id": 5,
+          "text": "Infrastructure as a Catalyst for Growth",
+          "correctParagraph": "E",
+          "isDistractor": false
+        },
+        {
+          "id": 6,
+          "text": "The Impact of Tax Cuts on Consumer Spending",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "SPECIFIC_DETAIL_TRAP"
+        },
+        {
+          "id": 7,
+          "text": "The Effects of Inflation on the Economy",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "TOPIC_ADJACENT"
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T14:48:16.031Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "distinctSections": 1,
+          "mainIdeaClarity": 1,
+          "bandAppropriate": 1,
+          "tractability": 1,
+          "distractorQuality": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_HEADING": 0,
+        "SPECIFIC_DETAIL_TRAP": 0,
+        "TOPIC_ADJACENT": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "df639cc1-b5e7-4fa3-9a12-117004c4cc6b",
+    "type": "matching-headings",
+    "band": 7,
+    "topic": "Archaeological Discovery",
+    "passage": "A. The recent excavation in the ancient city of Pompeii has revealed a series of frescoes that provide insight into Roman lifestyle. These vibrant paintings depict scenes of daily life, showcasing the clothing, food, and social interactions of the time. Such discoveries not only add to our understanding of Roman culture but also highlight the artistic skills of the period.\n\nB. Archaeologists have made significant strides in understanding the burial rituals of ancient Egypt. Recent finds include a tomb believed to belong to a high-ranking official, complete with intricate carvings and artifacts. These discoveries help illuminate the complex religious beliefs and practices surrounding death and the afterlife in ancient Egyptian society.\n\nC. A groundbreaking discovery in the field of underwater archaeology was made off the coast of Turkey, where a team uncovered a shipwreck dating back to the Byzantine era. The ship's cargo, including amphorae filled with olive oil and wine, offers valuable information about trade routes and economic exchanges in the Mediterranean region.\n\nD. An unexpected find in the dense jungles of Central America has uncovered a lost Mayan city. Using advanced LIDAR technology, researchers mapped the area and identified structures hidden beneath the foliage. This discovery sheds light on the extent of Mayan civilization and its sophisticated urban planning.\n\nE. In a remote part of Siberia, archaeologists have unearthed remnants of what is believed to be the earliest known human settlement in the region. This site, dating back over 30,000 years, contains tools and animal bones that suggest a highly adaptive lifestyle in a harsh environment, offering clues about human migration patterns.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Paragraph A",
+        "answer": "1",
+        "explanation": "The paragraph focuses on frescoes that depict Roman daily life, matching the heading about insights into Roman daily life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "1",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Paragraph B",
+        "answer": "2",
+        "explanation": "The paragraph discusses burial rituals and artifacts, which is directly related to unveiling ancient Egyptian burial practices.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "2",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Paragraph C",
+        "answer": "3",
+        "explanation": "The primary focus is on the discovery of a Byzantine shipwreck, which aligns with the heading.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "3",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Paragraph D",
+        "answer": "4",
+        "explanation": "The main idea is the discovery of a lost Mayan city, perfectly matching the heading.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "4",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Paragraph E",
+        "answer": "5",
+        "explanation": "The paragraph details the discovery of an ancient human settlement in Siberia, which aligns with the heading.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "5",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "paragraphs": [
+        {
+          "label": "A",
+          "text": "The recent excavation in the ancient city of Pompeii has revealed a series of frescoes that provide insight into Roman lifestyle. These vibrant paintings depict scenes of daily life, showcasing the clothing, food, and social interactions of the time. Such discoveries not only add to our understanding of Roman culture but also highlight the artistic skills of the period."
+        },
+        {
+          "label": "B",
+          "text": "Archaeologists have made significant strides in understanding the burial rituals of ancient Egypt. Recent finds include a tomb believed to belong to a high-ranking official, complete with intricate carvings and artifacts. These discoveries help illuminate the complex religious beliefs and practices surrounding death and the afterlife in ancient Egyptian society."
+        },
+        {
+          "label": "C",
+          "text": "A groundbreaking discovery in the field of underwater archaeology was made off the coast of Turkey, where a team uncovered a shipwreck dating back to the Byzantine era. The ship's cargo, including amphorae filled with olive oil and wine, offers valuable information about trade routes and economic exchanges in the Mediterranean region."
+        },
+        {
+          "label": "D",
+          "text": "An unexpected find in the dense jungles of Central America has uncovered a lost Mayan city. Using advanced LIDAR technology, researchers mapped the area and identified structures hidden beneath the foliage. This discovery sheds light on the extent of Mayan civilization and its sophisticated urban planning."
+        },
+        {
+          "label": "E",
+          "text": "In a remote part of Siberia, archaeologists have unearthed remnants of what is believed to be the earliest known human settlement in the region. This site, dating back over 30,000 years, contains tools and animal bones that suggest a highly adaptive lifestyle in a harsh environment, offering clues about human migration patterns."
+        }
+      ],
+      "headings": [
+        {
+          "id": 1,
+          "text": "Insights into Roman Daily Life",
+          "correctParagraph": "A",
+          "isDistractor": false
+        },
+        {
+          "id": 2,
+          "text": "Unveiling Ancient Egyptian Burial Practices",
+          "correctParagraph": "B",
+          "isDistractor": false
+        },
+        {
+          "id": 3,
+          "text": "Byzantine Shipwreck Discovery",
+          "correctParagraph": "C",
+          "isDistractor": false
+        },
+        {
+          "id": 4,
+          "text": "Uncovering a Lost Mayan City",
+          "correctParagraph": "D",
+          "isDistractor": false
+        },
+        {
+          "id": 5,
+          "text": "Early Human Settlement in Siberia",
+          "correctParagraph": "E",
+          "isDistractor": false
+        },
+        {
+          "id": 6,
+          "text": "The Use of LIDAR in Modern Archaeology",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "SPECIFIC_DETAIL_TRAP"
+        },
+        {
+          "id": 7,
+          "text": "The Evolution of Ancient Trade Routes",
+          "correctParagraph": null,
+          "isDistractor": true,
+          "trapType": "TOPIC_ADJACENT"
+        }
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T14:48:35.793Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "distinctSections": 1,
+          "mainIdeaClarity": 1,
+          "bandAppropriate": 1,
+          "tractability": 1,
+          "distractorQuality": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_HEADING": 0,
+        "SPECIFIC_DETAIL_TRAP": 0,
+        "TOPIC_ADJACENT": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
   }
 ]

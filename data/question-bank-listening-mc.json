@@ -8092,5 +8092,3045 @@
       },
       "flaggedForReview": []
     }
+  },
+  {
+    "id": "dc3b6a35-e8a3-4a62-ad9a-0aee5ec9ca0b",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Space Exploration",
+    "passage": "A: Hi, did you watch the documentary about space exploration last night? It was fascinating!\nB: Oh, I missed it. What was it about?\nA: It covered a lot, from the early days of the space race to the latest missions to Mars. One thing that stood out was the emphasis on international cooperation in recent years.\nB: International cooperation? I thought most of the major missions were dominated by a single country.\nA: Well, that's true for some historical missions, but now, agencies like NASA and ESA often work together. The International Space Station is a prime example of this cooperation.\nB: Right, I remember hearing something about that. What about the costs? Space exploration must be incredibly expensive.\nA: Definitely. However, the documentary highlighted that many countries share the costs, making it more feasible. They also mentioned that private companies are now playing a significant role.\nB: Private companies? Aren't they just in it for the profit?\nA: Not necessarily. While they are businesses, they contribute significantly to technological advancements, which benefits everyone.\nB: I see. Did they talk about environmental concerns?\nA: Yes, they did. Interestingly, while launching rockets does have an environmental impact, the technology developed can help monitor and address climate change on Earth.\nB: That's ironic. I guess it's a double-edged sword.\nA: Exactly. The documentary concluded by stressing the importance of continued exploration, not just for scientific discovery but for inspiring new generations.\nB: Inspiring how?\nA: By showing what humans can achieve when we push boundaries and work together.\nB: That sounds inspiring indeed. I'll have to catch the replay.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What was a key theme of the documentary mentioned?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The collaboration between nations in recent space missions",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Most major missions were dominated by a single country",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The costs involved in space exploration",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Space exploration is a solo endeavor",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because it encapsulates the documentary's emphasis on international cooperation. B is incorrect as it reflects a past perspective. C is mentioned but is not the main theme. D reverses the cooperative theme.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What role do private companies play in space exploration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They drive innovation that benefits all of humanity",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They are solely profit-driven",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "They collaborate with national space agencies",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "They hinder technological advancements",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because it captures the positive role of private companies as described. B is incorrect as it simplifies their role. C is true but not the complete answer. D is the opposite of their described role.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What did the documentary say about the environmental impact of space exploration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Space technology can help monitor environmental issues on Earth",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Rocket launches have no environmental impact",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "The environmental cost of space exploration is high",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "Environmental concerns were not addressed",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it accurately paraphrases the documentary's point. B reverses the impact. C is only part of the discussion. D is false as concerns were addressed.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What was the documentary's conclusion about space exploration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is vital for scientific progress and inspiring future generations",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The risks outweigh the benefits",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Only scientific discovery is important",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "It is a waste of resources",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it summarizes the documentary's positive outlook. B reverses the conclusion. C is incomplete. D is not aligned with the documentary's message.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "How does the documentary view the International Space Station?",
+        "options": [
+          {
+            "label": "A",
+            "text": "As a successful example of international collaboration",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "As a project dominated by one nation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "As a costly endeavor",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "As a failure in cooperation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it reflects the documentary's view of the ISS. B reverses the collaborative nature. C is true but not the main point. D is incorrect as it contradicts the documentary.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:49:07.229Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "cf74ff53-61d0-4b92-a174-35674920f79c",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Renewable Energy",
+    "passage": "A: Hi, Sarah. Have you read the latest report on renewable energy? It's quite fascinating how it's evolving.\nB: Yes, I did. The growth in solar energy, in particular, is truly impressive. It's actually doubling in capacity every few years.\nA: I know! But what really caught my attention was wind energy. Did you know it's now one of the cheapest sources of electricity?\nB: That's interesting. I thought solar was the cheapest. I guess I misunderstood.\nA: It's a common mistake. Solar is indeed affordable, but wind energy has recently taken the lead in terms of cost-effectiveness.\nB: What about hydroelectric power? It’s often mentioned in discussions, but I’m not sure about its current status.\nA: Hydroelectric power is still significant, contributing heavily to global energy supply. However, its growth is slower compared to other renewables.\nB: I see. And what about the environmental impact? I heard that wind farms might harm bird populations.\nA: That’s a valid concern, although recent designs have greatly mitigated those risks. In fact, wind energy has one of the lowest environmental impacts overall.\nB: That's reassuring. I also read something about geothermal energy. Is it being used more these days?\nA: Yes, geothermal energy is being explored more, especially in regions with volcanic activity, but it's not as widely adopted globally as solar or wind.\nB: Well, it's good to know there are multiple options being developed. It seems like a diverse approach is key to a sustainable future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is currently the cheapest source of electricity according to the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Wind energy is now the most cost-effective.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Solar energy is the cheapest source of electricity.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Hydroelectric power is significant in global supply.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Solar energy has recently taken the lead over wind.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because wind energy is described as the cheapest. B uses exact words but is incorrect. C is true but irrelevant. D reverses the information.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What is said about the growth of solar energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Solar energy is increasing its capacity significantly.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Solar energy is doubling in capacity every few years.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Hydroelectric power is growing slower than solar.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Solar energy's growth is slowing down.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A correctly paraphrases the information about solar growth. B repeats exact words but is not the answer. C is mentioned but irrelevant. D is the opposite of the truth.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is said about the environmental impact of wind energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Wind energy has minimal environmental impact with new designs.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Wind farms might harm bird populations.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Wind and solar are both environmentally friendly.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Wind energy has a higher environmental impact than other renewables.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A paraphrases the dialogue correctly. B echoes a concern but misses the resolution. C is true but not the focus. D contradicts the dialogue.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What is the status of hydroelectric power in the current energy landscape?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Hydroelectric power remains an important energy source.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Hydroelectric power is growing rapidly.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Hydroelectric power is the most widely used renewable.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Hydroelectric power is no longer significant.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A reflects the dialogue accurately. B echoes the opposite of the truth. C is mentioned but incorrect. D reverses the dialogue's point.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is the current trend regarding geothermal energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Geothermal energy is gaining attention in volcanic areas.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Geothermal energy is being used more globally than solar or wind.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Geothermal energy is part of the diverse approach to sustainability.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Geothermal energy is declining in volcanic regions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A correctly paraphrases geothermal's trend. B echoes but reverses the truth. C is mentioned broadly. D contradicts the dialogue.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:49:53.556Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "8894d4ee-9613-4bf3-9a45-8d0db0d1876d",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Economic Policy",
+    "passage": "A: Hi, Sarah. I've been reading up on the current economic policies, and it's quite fascinating how they influence the economy. What do you think is the most crucial aspect of economic policy right now?\nB: Well, John, I believe the focus should be on sustainable growth. It's not just about boosting GDP numbers but ensuring that growth is environmentally sustainable and socially inclusive.\nA: That's interesting. But don't you think that controlling inflation should be the priority?\nB: Controlling inflation is important, but if we only focus on that, we might miss out on other critical aspects like employment and income distribution. A balanced approach is crucial.\nA: True, but I read that the government is more focused on reducing unemployment rates lately. They are implementing policies to create more jobs.\nB: That's correct. However, job creation alone won't suffice if the jobs aren't well-paying or secure. Policies should aim at improving job quality as well.\nA: That makes sense. But I've also heard people arguing for tax cuts to stimulate economic growth. What's your take on that?\nB: Tax cuts can provide a short-term boost, but they might not lead to sustainable growth. It depends on how the additional disposable income is spent and whether it leads to increased productivity.\nA: I see. So you're saying that there should be a more comprehensive strategy that includes tax policies, job creation, and sustainability?\nB: Exactly. A holistic economic policy should intertwine these elements to ensure stable and inclusive growth.\nA: It's certainly a complex issue. Balancing all these factors must be quite challenging for policymakers.\nB: Indeed, but with careful planning and execution, it can lead to a more resilient economy.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What does Sarah believe should be the priority in economic policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Promoting sustainable and inclusive growth",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Controlling inflation",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Reducing unemployment",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Focusing solely on GDP growth",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah emphasizes a need for sustainable and inclusive growth, which is a paraphrase of the correct answer. While she acknowledges the importance of controlling inflation and reducing unemployment, she stresses a comprehensive approach.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "According to John, what is the current focus of government policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Creating more jobs",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Ensuring job quality",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Increasing GDP numbers",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Reducing income inequality",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "John mentions that the government is focusing on creating jobs, making it the correct answer. Although job quality and GDP are discussed, they are not the current focus according to John.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "How does Sarah view tax cuts in relation to economic growth?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They can boost growth temporarily but not sustainably",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They are essential for immediate economic revival",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "They lead to increased productivity",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "They have no impact on disposable income",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah suggests that tax cuts provide a temporary boost but questions their long-term sustainability, making A the correct choice. Options B and C misrepresent her opinion, while D is incorrect.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What challenge does John highlight for policymakers?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Balancing various aspects of economic policy",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Ensuring short-term economic boosts",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Reducing job insecurity",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Increasing focus on GDP figures",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "John mentions the challenge of balancing different economic factors, correctly captured in option A. Other options either reverse or misinterpret the dialogue.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What does Sarah imply about the relationship between job creation and quality?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Job creation must also focus on quality",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Job creation is sufficient on its own",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "The government ignores job quality",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "Job quality improvement is unnecessary",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah emphasizes the importance of job quality alongside creation, making A correct. B and D misrepresent her views, while C echoes her words inaccurately.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 6,
+        "text": "What does John suggest about a holistic economic policy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It should integrate various economic elements",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It focuses only on tax policies",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "It neglects employment concerns",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "It primarily aims for immediate growth",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "John talks about integrating different elements for a holistic policy, which makes A correct. Options B, C, and D misinterpret his explanation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:51:06.152Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "c2ff043f-e2b4-4739-b04c-0f2cd152d649",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Archaeological Discovery",
+    "passage": "A: Hi Sarah, did you hear about the recent archaeological discovery in our town? B: Oh yes, I read something about it. They found some ancient artifacts, right? A: Exactly! The excavation team discovered a variety of tools and pottery items. But what's really fascinating is the unexpected burial site they found nearby. B: A burial site? I hadn't heard about that part. What makes it so significant? A: Well, the burial site contained remains believed to date back over 2,000 years. The intriguing part is how well-preserved everything was. B: That sounds incredible. Did they find anything else unusual? A: Yes, they unearthed a type of ceremonial necklace that suggests the site might have been used for ritual purposes. B: Interesting. I remember reading that the pots were painted with bright colors. A: No, actually the pots were mostly plain with simple designs. The colors must have been mentioned in a different context. B: Ah, I see. Did they figure out who the people were? A: Not yet. The archaeologists are still analyzing the site, but they suspect it was a settlement of a lesser-known tribe. B: I wonder how they determined the age of the artifacts. A: They used carbon dating techniques, which are quite reliable for estimating the age of organic materials. B: That makes sense. It's amazing how these discoveries can give us a glimpse into the past. A: Absolutely, and it helps us understand the cultural and historical context of the era.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What was the unexpected finding at the archaeological site?",
+        "options": [
+          {
+            "label": "A",
+            "text": "An unexpectedly preserved burial site was found.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They found some ancient artifacts.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The site contained painted pots.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The burial site was poorly preserved.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because the speakers discuss the well-preserved burial site as an unexpected discovery. B is an echo of the general finding but not the unexpected part. C mentions pots, which were discussed but not as the unexpected finding. D reverses the meaning regarding preservation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What suggests the site might have been used for ritual purposes?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A ceremonial necklace was found at the site.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The site contained remains over 2,000 years old.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "They used carbon dating techniques.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The pots had bright colors.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it paraphrases the discussion about the ceremonial necklace indicating ritual use. B is an echo of the age but not related to rituals. C mentions a technique but not related to the site's purpose. D reverses the actual description of the pots.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "How did the team estimate the age of the artifacts?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They used carbon dating to determine the age.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The artifacts were believed to date back over 2,000 years.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The site was used for rituals by a lesser-known tribe.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The pots had intricate designs that revealed their age.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it accurately paraphrases the method used to date the artifacts. B is an echo of the age but not the method. C is mentioned but irrelevant to dating. D reverses the actual description of the pots.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What is the current understanding about the people who lived there?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They are believed to be from a lesser-known tribe.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The people were definitely from a well-known tribe.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Archaeologists have confirmed the tribe's identity.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "The tribe was known for pottery with bright colors.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it reflects the current hypothesis about the tribe. B reverses the meaning as they are not from a well-known tribe. C is a false echo as their identity is not confirmed. D distracts with unrelated pottery details.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What misconception about the pots was clarified?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The pots were plain with simple designs, not colorful.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The pots were painted with bright colors.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The pots were used in rituals.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The pots were intricately designed.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it clarifies the actual description of the pots. B is an echo of the misconception. C is a distraction with irrelevant usage. D reverses the description.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:51:33.926Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "56ee6078-a39b-4548-bd92-ac02328622b1",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Psychology: Memory and Learning",
+    "passage": "A: Hi, Sarah. I was reading about how memory works in psychology and found some interesting points. B: Oh really? What did you discover? A: Well, one thing is that our short-term memory can only hold about seven items at a time. B: That's fascinating. So, is that why phone numbers are usually seven digits? A: Exactly, but what's more interesting is that recent studies suggest short-term memory capacity can be even less, possibly four items. B: That's a surprising change. I always thought our brains were pretty efficient in that area. A: Yes, but our brain compensates by chunking information. For example, we can remember a sequence of words better if we group them into a meaningful sentence. B: That makes sense. So, what about long-term memory? A: Long-term memory is quite different; it seems to have an unlimited capacity. However, retrieving those memories can be tricky. B: I see. Does that mean we never really forget anything? A: Not exactly. We might not be able to access the memory, but it's there somewhere. B: Interesting. I also heard that emotional experiences are remembered better. Is that true? A: Yes, emotions can enhance memory retention, but sometimes they can distort it as well. B: So, emotions are a double-edged sword when it comes to memory? A: Precisely. They can make memories vivid but also less accurate. B: This is all so intriguing. I guess there's still so much to learn about how our brains work. A: Absolutely, and researchers are constantly discovering new aspects about memory and learning.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is mentioned about short-term memory capacity?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Recent studies suggest it might be less than previously thought.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It can hold about seven items at a time.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Short-term memory is efficient.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It has an unlimited capacity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because the script mentions newer studies suggest a lower capacity. B uses the exact phrase but misses the updated information. C is mentioned but not related to capacity. D reverses the context.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "How does the brain handle more information than short-term memory can hold?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By grouping information into larger units.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It can hold about seven items at a time.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Long-term memory has unlimited capacity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "By focusing on fewer items.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it reflects the concept of chunking mentioned in the dialogue. B is an echo of short-term memory capacity, not handling information. C is about long-term memory, not handling. D reverses the concept.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is said about long-term memory capacity?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It seems to have no limits in how much it can store.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Retrieving memories can be tricky.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "It is more efficient than short-term memory.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It can only store a limited number of experiences.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it paraphrases the notion of unlimited capacity. B is mentioned about difficulty in retrieval, not capacity. C is a general statement not related to capacity. D reverses the capacity statement.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What is the effect of emotions on memory?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They make memories more vivid but can distort them.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Emotions enhance memory retention.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Emotions do not affect memory.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "They are a double-edged sword.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A accurately captures the dual effect of emotions. B is only partially correct as it misses the distortion aspect. C is incorrect and reverses the effect. D is a metaphor used but doesn't fully explain.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What misconception about memory is corrected in the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Short-term memory may hold less than seven items.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The brain is very efficient in memory.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "All memories are easily accessible.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Emotional experiences are remembered better.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it revises the typical notion of short-term capacity. B is a general efficiency claim, not mentioned as a misconception. C reverses the idea that access is sometimes difficult. D is true but not corrected.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:52:05.161Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "495e154c-d206-4d00-88bb-ec2d2836b93c",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Marine Biology",
+    "passage": "A: Hi Sarah, I heard you’re taking a course in marine biology. How’s that going?\nB: Hi Tom! Yes, it’s fascinating. We’re currently studying the different ecosystems under the sea and how they interact with each other.\nA: That sounds interesting. Do you focus more on the organisms or their environments?\nB: Well, it’s a mix of both, but there’s a stronger emphasis on the organisms themselves. We study their roles within the ecosystem and how they adapt to various conditions.\nA: I see. I’ve always wondered how marine life is affected by climate change. Do you explore that topic?\nB: Absolutely, it’s a significant part of our studies. We look at how rising sea temperatures and acidification impact marine species. However, it’s not just about the negative effects. We also examine how some species adapt and survive, which is quite remarkable.\nA: That’s a relief to hear. I suppose pollution is another big topic?\nB: Yes, we cover pollution extensively. It’s alarming how much plastic and waste end up in the oceans. Interestingly, we also look at innovative solutions, like biodegradable materials and clean-up projects.\nA: I read somewhere that coral reefs are particularly vulnerable. Do you study them as well?\nB: Definitely. Coral reefs are crucial marine habitats, and their decline is worrying. But we’re also learning about restoration efforts and how certain resilient types of coral might help.\nA: That’s hopeful. Are there any particular projects or assignments you’re working on?\nB: Right now, I’m involved in a project on the migratory patterns of whales. It’s intriguing to see how these creatures navigate and how their routes are changing.\nA: Sounds like a lot of work, but also very rewarding.\nB: It is! Understanding these patterns can help in their conservation. So, it’s worth every effort.\nA: Thanks for sharing, Sarah. I’ve learned a lot just from this chat.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the main focus of Sarah's marine biology course?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The roles and adaptations of marine organisms",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The interactions between different ecosystems",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The negative effects of climate change on the sea",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The environments in which marine organisms live",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "The correct answer focuses on organisms and their adaptations, as paraphrased from the dialogue. Options B, C, and D are either mentioned but not the main focus or reverse the meaning.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "How does Sarah describe the impact of climate change on marine life?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Both negative effects and adaptation strategies are studied",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Only the negative effects of rising sea temperatures",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The acidification of oceans is a major focus",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Marine species are not significantly affected",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah mentions both negative impacts and adaptations. Option B only echoes part of this. C is mentioned but not the focus, and D reverses the statement.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What solutions to ocean pollution does Sarah mention?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Innovative methods like biodegradable materials",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The alarming amount of plastic in the oceans",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The impact of waste on marine ecosystems",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "No effective solutions are studied",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah talks about innovative solutions like biodegradable materials, paraphrased in A. B and C mention problems, not solutions, and D contradicts the dialogue.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does Sarah describe the situation with coral reefs?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Their decline is concerning, but restoration efforts are hopeful",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Coral reefs are crucial marine habitats",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Their vulnerability to pollution is studied",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Coral reefs are thriving due to restoration",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah mentions concerns about decline but also highlights restoration efforts, paraphrased in A. B is partial information, C is mentioned but not the focus, and D reverses the situation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What project is Sarah currently working on?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Investigating whale migration patterns",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The changing routes of marine creatures",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The impact of climate change on whales",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Studying how whales are unaffected by changes",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah is working on whale migration patterns, paraphrased in A. B echoes a related idea, C is an incorrect focus, and D contradicts the dialogue.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 6,
+        "text": "What does Sarah find rewarding about her studies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Contributing to conservation efforts",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The significant amount of work involved",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The complexity of marine ecosystems",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The ease of studying marine biology",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Sarah finds conservation efforts rewarding, paraphrased in A. B mentions workload but isn't about reward, C is unrelated, and D reverses the idea.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:52:36.875Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "482fa66e-0235-4333-8cf5-ce22eb469dc7",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Linguistic Research",
+    "passage": "A: Hi Sarah, I heard you're working on some interesting linguistic research. Can you tell me about it? B: Sure, Tom. I'm currently examining how languages evolve over time, specifically focusing on phonetic changes. A: That sounds fascinating. Are you looking at any particular languages? B: Yes, I'm concentrating on English and Spanish. They offer a rich history of phonetic evolution due to their widespread use and diverse influences. A: I see. And what's the main focus of your research? B: My primary aim is to understand the factors influencing phonetic changes, like socio-economic shifts and technology. A: Interesting. Do you think technology plays a significant role then? B: Absolutely. With the rise of digital communication, we're seeing more rapid changes in language use. A: So, are you looking at any specific technological influences? B: Yes, social media is a big one. Its informal nature encourages phonetic innovation. A: What about socio-economic factors? B: Well, those are a bit trickier to pin down, but they definitely affect language evolution through migration and cultural exchange. A: How are you collecting your data? B: I'm using a combination of historical texts and modern recordings to track changes over time. A: That sounds comprehensive. Are you facing any challenges? B: One major challenge is ensuring the authenticity of historical data. Sometimes, it's difficult to verify the original pronunciation. A: I can imagine. And what do you hope to achieve with your research? B: Ultimately, I aim to contribute to a better understanding of how and why languages change, which can aid in language preservation efforts.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is Sarah's main focus in her research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Investigating the reasons behind phonetic changes",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Examining how languages evolve over time",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Studying English and Spanish languages",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Looking at how languages remain unchanged",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "The correct answer is A as Sarah specifically mentions examining the factors behind phonetic changes. Option B repeats the broader topic but not her main focus. C is mentioned but doesn't represent the focus. D reverses the concept as she is studying changes, not stasis.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What role does technology play in Sarah's research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Accelerating language changes through digital communication",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Technology plays a significant role",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Studying the influence of migration and cultural exchange",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Slowing down language evolution",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because Sarah specifically links digital communication with rapid language changes. B repeats that technology is significant but doesn't specify how. C refers to socio-economic factors, not technology. D is incorrect as she states the opposite.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Which technological influence is Sarah particularly studying?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The informal nature of social media",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Technology is a big one",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The influence of historical texts",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The formal nature of communication",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as Sarah mentions social media's informal nature as a specific influence. B repeats a general statement about technology. C involves historical texts but not technology. D is incorrect as it contradicts her statement.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What challenge does Sarah face in her research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Authenticating the pronunciation in historical data",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It's difficult to verify the original pronunciation",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Collecting data from historical texts",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Ensuring the accuracy of modern recordings",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because Sarah explicitly mentions the issue with historical pronunciation. B is an exact repetition of a challenge. C is related but not the specific challenge mentioned. D reverses the issue as she refers to historical, not modern data.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is Sarah's ultimate goal with her research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Contributing to language preservation efforts",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Aiming to contribute to a better understanding of languages",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Recording linguistic changes over time",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Preventing language changes",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as Sarah hopes her research aids in language preservation. B echoes her goal but lacks the preservation aspect. C is part of her process, not her ultimate aim. D incorrectly suggests she wants to stop changes, not preserve languages.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:53:16.363Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "0b0d63c7-1dfb-4c93-aa3a-7ee4639e1f12",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Climate Science",
+    "passage": "A: Hi Sarah, have you been following the latest research in climate science? It's fascinating how the field is evolving.\nB: Definitely, John. I find it particularly interesting how scientists are now focusing on the role of ocean currents in climate change.\nA: Yes, the ocean currents are crucial. They distribute heat around the planet, which directly impacts weather patterns.\nB: Absolutely. And did you hear about the recent study on the Atlantic Meridional Overturning Circulation?\nA: I did. It's alarming to think that it might be slowing down due to global warming.\nB: Yes, but the study also mentioned a possible recovery phase, which wasn't highlighted much in the media.\nA: True, but even if recovery happens, the short-term effects could still be severe with more extreme weather events.\nB: That's a valid point. Another aspect is how the melting ice caps are contributing to rising sea levels.\nA: Of course, and it's not just the ice caps. The glaciers are melting too, which adds to the issue.\nB: Right, and this melting is often linked to increased atmospheric temperatures. It's a cycle that's hard to break.\nA: Indeed, and while we understand more about these processes now, predicting future changes remains a challenge.\nB: That's because the climate system is incredibly complex. Small changes can lead to significant impacts.\nA: Exactly, and that's why it's essential for climate models to incorporate a wide variety of factors.\nB: And speaking of models, the newer ones are better at simulating regional climate impacts, aren't they?\nA: Yes, but some regions are still difficult to model accurately due to limited data.\nB: Hopefully, with more advanced technology and data collection, we can overcome these obstacles.\nA: Let's hope so. The more precise our understanding, the better we can respond to climate challenges.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the main focus of recent climate science research mentioned?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The impact of ocean currents on global climate",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The role of ocean currents in climate change",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The melting ice caps",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The recovery phase of ocean currents",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A paraphrases the dialogue content about ocean currents affecting global climate. B uses exact words but is incomplete. C and D are mentioned but do not answer the question.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "What concern is raised about the Atlantic Meridional Overturning Circulation?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It might be slowing due to global warming",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It is undergoing a recovery phase",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "It affects weather patterns",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It is speeding up due to climate change",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the concern about slowing circulation due to warming. B mentions recovery but reverses the concern. C is mentioned but isn't the focus. D incorrectly reverses the statement.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is noted about the media's coverage of climate studies?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Media often overlooks possible recovery phases",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Media focuses on recovery phases",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Media highlights melting glaciers",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Media provides comprehensive coverage",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A captures the idea that media doesn't highlight recovery phases. B is incorrect as it reverses the statement. C is mentioned but unrelated to media coverage. D inaccurately reverses the critique.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What challenge is noted about climate models?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They struggle with regional accuracy",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They are excellent at simulating regional impacts",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "They incorporate a variety of factors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "They predict future changes easily",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly reflects the issue of regional accuracy. B echoes the dialogue but wrongly asserts excellence. C is mentioned but doesn't address the challenge. D reverses the difficulty in prediction.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is Sarah's view on the complexity of the climate system?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is complex and small changes have big impacts",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It is straightforward and predictable",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "It only affects large-scale phenomena",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is well understood by scientists",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A accurately paraphrases Sarah's view on complexity. B reverses her statement. C incorrectly narrows the impact. D is mentioned but doesn't reflect her view on complexity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:53:46.876Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "1703b6c9-00b5-47e6-ab31-bdac0a903917",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "A: Hi Jane, have you heard about the new urban development project that's been proposed for the city center? B: Yes, I have. It's supposed to focus on improving public transportation and increasing green spaces. A: Exactly, and they're also planning to upgrade the infrastructure to support more residential areas. B: That sounds promising. However, I've heard some concerns about the project possibly increasing traffic congestion. A: I understand that concern, but the project aims to reduce reliance on cars by enhancing bus and train services. B: That's a good point. But what about the cost? Is it going to affect the local economy negatively? A: On the contrary, the plan is designed to boost local businesses by attracting more visitors and residents. B: I see. But some people are worried about the potential environmental impact. A: Actually, the project includes several sustainability initiatives, like solar panels and rainwater harvesting systems. B: Well, that sounds reassuring. But what if it doesn't attract the expected number of people to the new residential areas? A: The developers have conducted extensive market research to ensure demand, and there's a growing trend of people moving back to city centers. B: That's interesting. I suppose time will tell whether this development will be a success. A: Indeed. It's a significant undertaking, and it requires careful planning and execution.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is one of the main goals of the new urban development project?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To enhance public transport and reduce car dependency",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "To upgrade the infrastructure to support more residential areas",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "To increase traffic congestion",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "To impact the local economy negatively",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it paraphrases the project's aim to enhance public transport and reduce car dependency. Option B uses exact words but doesn't capture the main goal. Option C reverses the project's goal, and Option D suggests a negative impact not mentioned in the plan.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What concern does Jane mention about the project?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It might increase traffic congestion",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It aims to reduce reliance on cars",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "It will definitely attract more visitors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It focuses on supporting local businesses",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases Jane's concern about potential traffic congestion. Option B echoes a project goal but isn't a concern. Option C incorrectly reverses the concern, and Option D is a mentioned benefit but not a concern.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is the expected effect of the project on local businesses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It is expected to boost local businesses",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It will increase green spaces",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It might lead to economic decline",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It plans to upgrade infrastructure",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it captures the expected positive impact on local businesses. Option B is a project aspect but not related to businesses. Option C reverses the expected outcome, and Option D echoes project details but doesn't answer the question.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does the project plan to address environmental concerns?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By incorporating sustainability initiatives like solar panels",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "By conducting market research",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "By increasing traffic congestion",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "By improving public transportation",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it accurately paraphrases the environmental initiatives mentioned. Option B is unrelated to the environment, Option C reverses the project's goals, and Option D echoes a project goal but not related to environmental concerns.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What market trend does the project consider to ensure demand?",
+        "options": [
+          {
+            "label": "A",
+            "text": "People moving back to city centers",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Enhancing bus and train services",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Decreasing green spaces",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Attracting more visitors",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly identifies the trend of people moving back to city centers. Option B is a project goal but not a market trend. Option C reverses the trend, and Option D, while mentioned, does not specifically refer to the market trend.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:54:12.580Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "7dd844c7-c174-42a1-8fcc-2398256d6e08",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Neuroscience",
+    "passage": "A: Hi Sarah, have you heard about the latest developments in neuroscience? It's fascinating how our understanding of the brain is evolving.\nB: Absolutely, Mike. I recently read about some experiments showing how neural pathways can be strengthened through repeated activity.\nA: Yes, exactly. The idea is that the more we practice a skill, the more robust those pathways become, right?\nB: That's correct. But interestingly, there was a study that showed the opposite effect. They found that if you stop using those skills, the pathways can weaken over time.\nA: I see. So, it's a bit like a muscle; use it or lose it. Speaking of learning, isn't there a part of the brain that's particularly involved in memory retention?\nB: You're probably thinking about the hippocampus. It's crucial for forming new memories and connecting them to emotions.\nA: Right, and I believe the prefrontal cortex also plays a role in processing and retrieving those memories.\nB: Exactly. However, I read that while the prefrontal cortex is involved in memory retrieval, it's also responsible for decision-making and problem-solving.\nA: That's fascinating. I also came across something about neuroplasticity. It seems the brain is much more adaptable than we previously thought.\nB: Yes, neuroplasticity refers to the brain's ability to reorganize itself by forming new neural connections throughout life.\nA: It sounds promising for rehabilitation therapies after brain injuries.\nB: Indeed. But it's important to note that while neuroplasticity offers potential, it doesn't occur overnight. It requires sustained effort and practice.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the relationship between skill practice and neural pathways?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Practicing a skill reinforces neural connections.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Neural pathways can weaken if skills are not used.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Neural pathways are like muscles.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Skills weaken neural pathways when practiced.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A paraphrases the idea that practice strengthens pathways. Option B echoes the weakening aspect without focusing on reinforcement. C is an analogy, not the answer. D reverses the concept.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Which part of the brain is crucial for forming new memories?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The hippocampus is key to creating new memories.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The prefrontal cortex is responsible for memory creation.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Emotions are tied to memory formation.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The prefrontal cortex is unrelated to memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A correctly identifies the hippocampus's role in memory. B echoes the prefrontal cortex's role but incorrectly applies it to creation. C is mentioned but not directly relevant. D incorrectly negates the prefrontal cortex's involvement.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What role does the prefrontal cortex play in brain function?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It aids in decision-making and problem-solving.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It is crucial for forming new memories.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "It connects emotions to memories.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It prevents memory retrieval.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A accurately describes the prefrontal cortex's functions. B mistakenly attributes memory formation to it. C is relevant to a different brain part. D reverses the retrieval function.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What does neuroplasticity refer to?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The brain's ability to form new connections.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The brain reorganizes itself overnight.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Neuroplasticity is promising for rehabilitation.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Neuroplasticity makes the brain rigid.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A captures the essence of neuroplasticity. B incorrectly suggests speed. C, while true, is not the definition. D reverses the adaptability concept.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is required for neuroplasticity to occur?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Consistent effort and practice are needed.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Neuroplasticity occurs overnight.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Brain injuries can lead to neuroplasticity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It happens without any effort.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is accurate about the requirement. B echoes an incorrect fast occurrence. C mentions a related application, not the requirement. D wrongly suggests it happens effortlessly.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:54:33.981Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 0,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "67fa87bc-a7de-4c3c-80f3-d6a27a3704ac",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "A: Hi Sarah, have you heard about the new urban development plan for the city? B: Oh yes, I read about it yesterday. They are focusing on creating more green spaces. A: Exactly, although the report mentions that the main priority is actually improving public transportation. B: Right, the plan also suggests reducing traffic congestion by expanding the subway network. A: Yes, and I think they aim to make public transport more accessible to the suburbs. B: They did talk about that, but some people are concerned about the cost. A: True, but the city believes that long-term benefits will outweigh the initial expenditure. B: The report also highlights the need for more affordable housing in urban areas. A: I noticed that, but the emphasis seems to be more on sustainability. B: Sustainability is crucial, but they can't ignore the housing shortage. A: Of course, but they are also considering innovative solutions like vertical gardens and smart buildings. B: That sounds futuristic, but I wonder how practical it is. A: Well, they claim these innovations will reduce energy consumption significantly. B: Let's hope it works out. Do you think the community is ready for these changes? A: It might take time, but with proper awareness campaigns, people might adapt well. B: I suppose a gradual transition will make it easier for everyone to adjust.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the main priority of the new urban development plan?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Enhancing the public transport system",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Creating more green spaces",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Reducing the cost of living",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Decreasing the number of public transport options",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it paraphrases the dialogue where public transportation improvement is stated as the main priority. Option B is a trap as green spaces are mentioned but not as the main priority. Option C is mentioned but not related to the main priority. Option D reverses the meaning.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What concern do people have about the plan?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The cost of the project",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The lack of green spaces",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "The increased use of energy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "The emphasis on affordable housing",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it refers to the concern about the project's cost. Option B traps the listener by echoing the dialogue but is incorrect. Option C reverses the meaning of energy consumption reduction. Option D mentions affordable housing but doesn't relate to the specific concern.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What does the city believe about the project's cost?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Long-term benefits will justify the expenses",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It will be too expensive to implement",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "The initial expenditure outweighs benefits",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "The cost is not a significant issue",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A paraphrases the belief that long-term benefits outweigh costs. Option B reverses the intended meaning. Option C echoes the dialogue in a misleading way. Option D is mentioned but not as the city's belief.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "What innovative solutions are being considered?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Implementing vertical gardens and smart buildings",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Expanding the subway network",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Reducing energy consumption by traditional means",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Increasing the number of green spaces",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the innovative solutions. Option B is mentioned but not an innovative solution. Option C reverses the intended approach. Option D echoes the dialogue but is incorrect.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "How does the dialogue suggest the community might react to the changes?",
+        "options": [
+          {
+            "label": "A",
+            "text": "With adequate information, they may adapt well",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They will oppose it due to high costs",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "They are ready and eager for the changes",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "D",
+            "text": "They will ignore the changes altogether",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A paraphrases the idea that proper awareness will aid adaptation. Option B reverses the sentiment. Option C echoes the dialogue but is incorrect. Option D mentions a reaction but not the intended one.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:54:59.826Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "89a5a602-4edb-4af3-9e23-6d1a2f98fdab",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Climate Science",
+    "passage": "A: Hi Sarah, I was reading about climate change and its impact on sea levels. It said that sea levels are rising faster than expected.\nB: Yes, that's right. Many recent studies confirm that sea levels have been rising due to thermal expansion and melting ice sheets.\nA: I think the article mentioned that the primary cause is the melting ice sheets, particularly in Greenland and Antarctica.\nB: Actually, while melting ice contributes significantly, thermal expansion — where water expands as it warms — is also a major factor.\nA: Oh, I see. I also read that if the current trends continue, coastal cities might face severe flooding.\nB: True, but some cities are already taking steps to mitigate the impacts. For example, they are building sea walls and improving drainage systems.\nA: That sounds proactive. Another point was about carbon emissions being the main driver of climate change. Is that accurate?\nB: Absolutely. The burning of fossil fuels releases carbon dioxide, which is a key greenhouse gas contributing to global warming.\nA: The article suggested that renewable energy sources could help reduce carbon emissions. Are countries adopting these solutions?\nB: Yes, many countries are increasing their investment in solar, wind, and other renewable energy sources to lower their carbon footprint.\nA: I also heard that deforestation is linked to climate change. How does that work?\nB: Deforestation reduces the number of trees that can absorb carbon dioxide, exacerbating the greenhouse effect.\nA: That makes sense. So, it seems like tackling climate change requires a multi-faceted approach.\nB: Indeed, it involves reducing emissions, protecting natural carbon sinks, and adapting to changes that are already underway.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What are the two main factors contributing to rising sea levels mentioned in the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Thermal expansion and ice melting",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Melting ice sheets",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Coastal flooding risks",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Ice melting and sea contraction",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because thermal expansion and ice melting are both mentioned as main factors. B only mentions ice melting, C is about impacts, not causes, and D incorrectly mentions 'sea contraction'.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What measures are some coastal cities taking to address rising sea levels?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Constructing sea defenses and improving water management",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Experiencing severe flooding",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Investing in renewable energy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Neglecting to take action",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it summarizes the proactive measures. B is incorrect as it describes potential impacts, C is related but not specific to sea levels, and D is the opposite of what cities are doing.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is said to be the main driver of climate change?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Emissions from burning fossil fuels",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Carbon emissions",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Deforestation",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Renewable energy sources",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it specifies emissions from fossil fuels. B is too broad, C is a contributing factor but not the main driver, and D is incorrect as it refers to a solution.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does deforestation contribute to climate change?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Reduces natural carbon absorption",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Increases carbon dioxide",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Linked to sea level rise",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Promotes carbon storage",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it explains the role of trees. B is too generic, C is related to climate but not specifically to deforestation, and D reverses the impact.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What approach is necessary to tackle climate change according to the dialogue?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A comprehensive strategy combining various methods",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Reducing emissions only",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Focusing on renewable energy",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Ignoring adaptation and focusing solely on prevention",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because the dialogue suggests multiple actions are needed. B and C mention parts of the solution, and D suggests an incorrect approach.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:55:26.203Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "f81dd634-3fb8-4f1e-bd92-5f31dfaf3c9a",
+    "type": "listening-mc",
+    "band": 7,
+    "topic": "Renewable Energy",
+    "passage": "A: Hi Sarah, have you been following the latest developments in renewable energy? It's really fascinating how it's transforming our energy landscape.\nB: Absolutely, John. I read that solar power is becoming more efficient and affordable than ever before. But isn't it still quite expensive compared to conventional sources?\nA: That's a common belief, but actually, the cost of solar panels has dropped significantly over the past decade. They're now much more cost-effective, especially with government incentives.\nB: I see. What about wind energy? I heard it's not reliable because it depends on weather conditions.\nA: Well, it's true that wind energy can be intermittent, but advances in battery storage are helping to mitigate that issue. Plus, it has a very low environmental impact compared to fossil fuels.\nB: I read something about hydropower too. It's sustainable, but doesn't it affect aquatic ecosystems?\nA: Yes, there are environmental concerns, particularly with large dams. However, newer technologies like small-scale hydro are minimizing these impacts.\nB: What about biomass? Some say it's renewable, but isn't burning biomass similar to burning fossil fuels?\nA: Biomass is indeed renewable, but the key difference is that it uses organic materials that can be replenished. It also has a smaller carbon footprint when managed sustainably.\nB: Thanks for clarifying. It seems like each source has its pros and cons. It’s a matter of balancing them, right?\nA: Exactly. It's about integrating different types of renewable energy to create a more sustainable and resilient energy system.\nB: That makes sense. I guess the future of energy is more diverse than I thought.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What does John say about the cost of solar power?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It has become more affordable over time.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It's still quite expensive compared to conventional sources.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Government incentives are not enough to reduce costs.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "The cost of solar panels is increasing.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because John explains that the cost has dropped significantly. B is an echo trap as it repeats Sarah's initial misconception. C and D are incorrect because they either misinterpret or reverse the discussed points.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "What advancement has helped address the intermittency of wind energy?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Improvements in battery storage technology.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Wind energy is not reliable.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Wind energy requires perfect weather conditions.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Wind energy now operates independently of weather.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as John mentions advancements in battery storage. B is an echo trap since it doesn't address the solution provided. C is mentioned but doesn't answer the question, and D reverses the truth of wind energy's dependency on weather.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "What does Sarah say about the environmental impact of hydropower?",
+        "options": [
+          {
+            "label": "A",
+            "text": "New technologies are reducing its environmental impact.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It affects aquatic ecosystems.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Large dams are beneficial for the environment.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Hydropower does not use any water resources.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct according to Sarah's explanation on small-scale hydro technologies. B is an echo trap as it’s the initial concern mentioned. C is a distractor since it’s not discussed, and D reverses the environmental discussion.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does John differentiate biomass from fossil fuels?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Biomass uses replenishable organic materials.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Burning biomass is similar to burning fossil fuels.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Biomass has no carbon footprint.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Biomass cannot be replenished.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as John explains biomass uses renewable materials. B is an echo trap repeating Sarah's misconception. C is incorrect as it's not mentioned, and D is a reversal of the renewable nature of biomass.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is the overall message about renewable energy systems?",
+        "options": [
+          {
+            "label": "A",
+            "text": "A diverse mix is needed for sustainability.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Each source has only pros.",
+            "isCorrect": false,
+            "trapType": "ECHO_TRAP"
+          },
+          {
+            "label": "C",
+            "text": "Renewable systems are flawless.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "Using only one type is the best approach.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct, summarizing the dialogue's conclusion about integrating energy sources. B is an echo trap as it misrepresents the balanced view. C is not discussed, and D reverses the idea of energy diversity.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {},
+    "meta": {
+      "generatedAt": "2026-04-02T14:55:51.384Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "naturalDialogue": 1,
+          "clearAudioCues": 1,
+          "appropriateTraps": 1,
+          "bandVocabulary": 1,
+          "gapAnswerability": 1
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "ECHO_TRAP": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    }
   }
 ]
