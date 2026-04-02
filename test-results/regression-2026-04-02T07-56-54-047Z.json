@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-02T06:35:08.812Z",
+  "timestamp": "2026-04-02T07:56:54.047Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 28759,
+  "durationMs": 24537,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24368,
+      "durationMs": 22996,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Impact of Technology on Communication",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4,
+          "avgScore": 4.6,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 25858,
+      "durationMs": 24035,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Cognitive Psychology and Memory",
+          "topic": "Urban Carbon Emissions",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 2,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.8,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 28726,
+      "durationMs": 24503,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Environmental Sustainability",
+          "topic": "Climate Change Effects",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.4,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {

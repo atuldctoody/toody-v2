@@ -1,0 +1,1315 @@
+[
+  {
+    "id": "4e4eba23-77a7-4f7a-a1c2-8010594a0de6",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected token 'I', \"I'll analy\"... is not valid JSON",
+    "meta": {
+      "generatedAt": "2026-04-02T07:13:52.152Z"
+    }
+  },
+  {
+    "id": "57fdcbdd-3365-442d-9d4d-da5390040ec0",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected token 'I', \"I'll analy\"... is not valid JSON",
+    "meta": {
+      "generatedAt": "2026-04-02T07:13:52.128Z"
+    }
+  },
+  {
+    "id": "d0d40c19-d83b-4fca-afbb-bf664212c418",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:13:41.078Z"
+    }
+  },
+  {
+    "id": "36bbc331-730e-49ce-8a53-f93673d28e41",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:31.460Z"
+    }
+  },
+  {
+    "id": "1a694637-8a2b-499a-8d84-0d28e212f643",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 859 (line 1 column 860)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:45.068Z"
+    }
+  },
+  {
+    "id": "97558b72-77fe-4b61-a14e-76f8ed77f853",
+    "type": "ynng",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:44.193Z"
+    }
+  },
+  {
+    "id": "ed088f9a-b13a-4270-987e-69b3cb425804",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZq2z4qEkFKv84YcMrS\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:08.255Z"
+    }
+  },
+  {
+    "id": "72396406-a686-48fa-9f73-2152ac6080ac",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZqLAfyGkjrDoPe8MYv\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:12.682Z"
+    }
+  },
+  {
+    "id": "01c405f8-9003-4db5-a3c7-84cf7bce0662",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpCn9i5w4rSRntqx78\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:57.093Z"
+    }
+  },
+  {
+    "id": "94086480-133a-496f-8cb8-b57f3effa5d5",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpEgzht2NZfeH2D6P8\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:57.503Z"
+    }
+  },
+  {
+    "id": "d2bf8d97-1de8-4e37-a9e9-8c36fd732e88",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpGNSqzBPNKScPYqnT\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:57.830Z"
+    }
+  },
+  {
+    "id": "7bba3b15-c559-45f4-b425-3698b40f6d35",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpHhpArEdnMFBF6Cit\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:58.109Z"
+    }
+  },
+  {
+    "id": "ec3d88d1-e941-4f7f-8d32-60f2b54dec98",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpJwyXCVAWRc9A3vSu\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:58.429Z"
+    }
+  },
+  {
+    "id": "75cd8bbc-be3e-4993-9d14-15ff31eeb285",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpLJLMVLtHqoCjsWBY\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:58.780Z"
+    }
+  },
+  {
+    "id": "b76216ba-1861-4eda-9f7f-4a5c5617e689",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpMm9L5CbxhcjF9vyv\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:59.143Z"
+    }
+  },
+  {
+    "id": "12246660-0e6b-4ec6-9430-b13bb301f51e",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpPKu5D2XAHqRxvo1c\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:59.450Z"
+    }
+  },
+  {
+    "id": "d0047238-67ae-434d-ae02-9d7b9fd03df7",
+    "type": "ynng",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpQdHjrGuLxt4epxu9\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:59.757Z"
+    }
+  },
+  {
+    "id": "9104f5dd-1573-4d56-a319-942240ace72b",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpRvfhjnQGhM7NRhpK\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:00.026Z"
+    }
+  },
+  {
+    "id": "c728abc9-06ac-470c-9184-a9fd8fa18984",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpT8rJsoqpS69r4wAP\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:00.370Z"
+    }
+  },
+  {
+    "id": "dc470e90-93a8-4bde-9917-80852a59654e",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpUbesGLXWTexxyiBJ\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:00.678Z"
+    }
+  },
+  {
+    "id": "cfbe7296-a2ff-4289-9b12-7adb9f5895d8",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpVw29m4xVmRLupbao\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:01.086Z"
+    }
+  },
+  {
+    "id": "8b6d5235-0525-4b12-993d-8ed0777f55b2",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpXfTN7FABGosUBE9v\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:01.497Z"
+    }
+  },
+  {
+    "id": "191e0db5-2adc-4afd-9096-88ca2c475204",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpaGE1fummnn3XEYPV\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:01.996Z"
+    }
+  },
+  {
+    "id": "3ffce0e6-36ca-419e-8cf9-d63ceda283de",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpbVtMsbKf2HBbRMPc\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:02.316Z"
+    }
+  },
+  {
+    "id": "60821ce9-8ec2-4a52-9eed-4d1b11048383",
+    "type": "ynng",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpcuiqG3dsY9dZVpva\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:02.624Z"
+    }
+  },
+  {
+    "id": "be8861de-aa45-488b-93b0-fe2ccb4527e0",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpeEb1CBRvoYYas8VJ\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:02.969Z"
+    }
+  },
+  {
+    "id": "fd32b296-0a94-4d7a-86a4-bc71f57b2eab",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpfhQ6vQAV3ghKkWoX\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:03.330Z"
+    }
+  },
+  {
+    "id": "d6068f28-e46e-4e4a-aaae-73d9354cfb8c",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZphEfn4Ze3vD1CwKWg\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:03.632Z"
+    }
+  },
+  {
+    "id": "a8b55ec7-6eec-47a4-9757-d465ad45cc13",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpiX4anjPNDBG9rgY8\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:03.934Z"
+    }
+  },
+  {
+    "id": "173d61aa-936d-45e5-8454-c643c1f7dede",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpjoTSrsKH6MsdYQxb\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:04.261Z"
+    }
+  },
+  {
+    "id": "2739440f-47b5-4d63-b75d-e5dc9348499b",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpmJzNHYvhoeye5u2j\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:04.692Z"
+    }
+  },
+  {
+    "id": "3d0df065-d119-4257-989c-c1467b01b9b2",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpo8P7zkcvQtRy8S5j\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:05.038Z"
+    }
+  },
+  {
+    "id": "a0608bad-1bd6-4085-aed1-bded23400230",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZppYDEC41Qks8ZEHMa\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:05.349Z"
+    }
+  },
+  {
+    "id": "a65caca1-5296-48bd-89d1-97551a5a8126",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpr4VVRyNrNVZ5pGq5\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:06.001Z"
+    }
+  },
+  {
+    "id": "0297967f-b913-4818-b2e6-fbe31d040e71",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZptgkP2WDkX4rtZCyo\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:06.362Z"
+    }
+  },
+  {
+    "id": "fa8f5f3a-d235-4c09-ab5c-14d1d1f8533b",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpvAJJMrXTVMHbT6zn\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:06.634Z"
+    }
+  },
+  {
+    "id": "db27ee19-375b-466e-bcb5-f929a14725de",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpwMEizk1jpMtxa2dX\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:07.025Z"
+    }
+  },
+  {
+    "id": "863a13cd-4ff1-466f-b52b-3c2885a87ca8",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpy5RDMJKpRwvvQhKv\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:07.366Z"
+    }
+  },
+  {
+    "id": "e73247c7-5519-4d64-91f5-366ffeea3cfb",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZpzVVshYKgugnek85c\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:07.691Z"
+    }
+  },
+  {
+    "id": "b89f2179-cbb2-4cf8-97ca-73e98959f9dd",
+    "type": "ynng",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZq1r735rSJGZRAS26X\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:08.050Z"
+    }
+  },
+  {
+    "id": "79d5876d-7701-43b1-bb46-0527cb81f279",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZq3QNNejBJHMvwq6YN\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:08.469Z"
+    }
+  },
+  {
+    "id": "d0da1684-8490-4987-84f0-d4085c404439",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZq4HSxiCX9tFRCBwrA\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:08.563Z"
+    }
+  },
+  {
+    "id": "1d0a5495-4605-41a7-9fb9-c4cc6d403111",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeZq5BGsuZKAJfBaBd2B\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:41:08.766Z"
+    }
+  },
+  {
+    "id": "9c96fcc5-d19a-4c0c-95b1-569e02850dc7",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "The field of psychology offers rich insights into human behavior and mental processes, yet it is constantly evolving as new research emerges. It is clear that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents. This form of therapy focuses on identifying and altering negative thought patterns, leading to improved mental health outcomes. However, I firmly reject the notion that childhood memories before age three are entirely fabricated, as recent neurological evidence demonstrates genuine early memory formation. Such findings challenge the long-held belief that memories from this early period are unreliable, suggesting instead that the brain possesses the capacity for memory storage much earlier than previously thought.\n\nAnother area of significant debate is the impact of social media on mental health. Several psychologists have argued that social media usage directly causes depression in young adults, though others contend the relationship is merely correlational. In my view, while social media can contribute to feelings of inadequacy and isolation, it is vital to consider individual differences and external factors that may exacerbate these effects.\n\nMoreover, the decline in attention spans among digital natives could arguably be linked to constant smartphone notifications, though definitive causal evidence remains elusive. The incessant barrage of alerts and messages may disrupt focus and attention, yet more rigorous research is needed to confirm this hypothesis definitively.\n\nIn the realm of stress management, proponents of mindfulness meditation emphasize its stress-reduction benefits, while critics point to the lack of long-term empirical studies and potential placebo effects. I believe that while mindfulness practices offer immediate relief for many, it is crucial for researchers to conduct long-term studies to understand its efficacy fully. Overall, psychology continues to uncover the complexities of the human mind, and staying informed about new findings allows for a more nuanced understanding of mental health.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes cognitive behavioral therapy is the best way to treat anxiety in teenagers.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is clear that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+        "anchorText": "It is clear that",
+        "complexityLevel": 2,
+        "explanation": "PARAPHRASE_MATCH — 'most effective treatment' matches 'best way to treat' and 'adolescents' matches 'teenagers'.",
+        "reasoning": {
+          "step_1_locate": "It is clear that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+          "step_2_compare": "Author says: 'It is clear that cognitive behavioral therapy represents the most effective treatment'. Statement claims: writer believes CBT is the best way to treat anxiety in teenagers.",
+          "step_3_logic": "PARAPHRASE_MATCH — 'most effective treatment' matches 'best way to treat' and 'adolescents' matches 'teenagers'.",
+          "step_4_eliminate": "Not No because the author explicitly supports this view. Not Not Given because 'it is clear that' shows definite authorial stance, not neutral reporting."
+        },
+        "keySentence": "It is clear that cognitive behavioral therapy represents the most effective treatment approach for managing anxiety disorders in adolescents.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer agrees that all memories from before the age of three are false.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, I firmly reject the notion that childhood memories before age three are entirely fabricated, as recent neurological evidence demonstrates genuine early memory formation.",
+        "anchorText": "I firmly reject the notion that",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — author explicitly rejects what the statement claims they agree with.",
+        "reasoning": {
+          "step_1_locate": "However, I firmly reject the notion that childhood memories before age three are entirely fabricated, as recent neurological evidence demonstrates genuine early memory formation.",
+          "step_2_compare": "Author says: 'I firmly reject the notion that childhood memories before age three are entirely fabricated'. Statement claims: writer agrees all memories from before age three are false.",
+          "step_3_logic": "DIRECT_CONTRADICTION — author explicitly rejects what the statement claims they agree with.",
+          "step_4_eliminate": "Not Yes because the author rejects this view. Not Not Given because 'I firmly reject' is an explicit personal stance, not neutral reporting."
+        },
+        "keySentence": "However, I firmly reject the notion that childhood memories before age three are entirely fabricated, as recent neurological evidence demonstrates genuine early memory formation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that using social media causes depression in young people.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Several psychologists have argued that social media usage directly causes depression in young adults, though others contend the relationship is merely correlational.",
+        "anchorText": "Several psychologists have argued",
+        "complexityLevel": 3,
+        "explanation": "ATTRIBUTION_WITHOUT_ENDORSEMENT — author reports others' views using 'have argued' and 'contend' without adding personal opinion markers.",
+        "reasoning": {
+          "step_1_locate": "Several psychologists have argued that social media usage directly causes depression in young adults, though others contend the relationship is merely correlational.",
+          "step_2_compare": "Author says: 'Several psychologists have argued' and 'others contend'. Statement claims: the writer believes social media causes depression.",
+          "step_3_logic": "ATTRIBUTION_WITHOUT_ENDORSEMENT — author reports others' views using 'have argued' and 'contend' without adding personal opinion markers.",
+          "step_4_eliminate": "Not Yes because no marker shows author agreement (no 'I believe', 'clearly', etc.). Not No because author doesn't reject the claim, just reports it neutrally."
+        },
+        "keySentence": "Several psychologists have argued that social media usage directly causes depression in young adults, though others contend the relationship is merely correlational.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that smartphone notifications reduce people's ability to concentrate.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in attention spans among digital natives could arguably be linked to constant smartphone notifications, though definitive causal evidence remains elusive.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "CERTAINTY_MISMATCH — 'could arguably' and 'remains elusive' indicate uncertainty, contradicting the statement's claim of certainty.",
+        "reasoning": {
+          "step_1_locate": "The decline in attention spans among digital natives could arguably be linked to constant smartphone notifications, though definitive causal evidence remains elusive.",
+          "step_2_compare": "Author says: 'could arguably be linked' and 'definitive evidence remains elusive'. Statement claims: writer is certain about this connection.",
+          "step_3_logic": "CERTAINTY_MISMATCH — 'could arguably' and 'remains elusive' indicate uncertainty, contradicting the statement's claim of certainty.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows tentative suggestion, not certainty. Not No because author doesn't reject the link, just presents it uncertainly."
+        },
+        "keySentence": "The decline in attention spans among digital natives could arguably be linked to constant smartphone notifications, though definitive causal evidence remains elusive.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer thinks mindfulness meditation is beneficial for reducing stress.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of mindfulness meditation emphasize its stress-reduction benefits, while critics point to the lack of long-term empirical studies and potential placebo effects.",
+        "anchorText": "Proponents...while critics",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — author gives equal weight to both sides using 'proponents...while critics' without endorsing either view.",
+        "reasoning": {
+          "step_1_locate": "Proponents of mindfulness meditation emphasize its stress-reduction benefits, while critics point to the lack of long-term empirical studies and potential placebo effects.",
+          "step_2_compare": "Author says: 'Proponents emphasize' and 'critics point to'. Statement claims: the writer thinks mindfulness is beneficial.",
+          "step_3_logic": "BALANCED_PRESENTATION — author gives equal weight to both sides using 'proponents...while critics' without endorsing either view.",
+          "step_4_eliminate": "Not Yes because author reports proponents' views without endorsing them. Not No because author doesn't reject the benefits, just presents criticism alongside them."
+        },
+        "keySentence": "Proponents of mindfulness meditation emphasize its stress-reduction benefits, while critics point to the lack of long-term empirical studies and potential placebo effects.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:43:51.180Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "1cc07cba-2c55-4359-8654-906b0df9299e",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:44:20.187Z"
+    }
+  },
+  {
+    "id": "27df0148-d30c-461f-9ea0-2df30923d584",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has fascinated humanity for decades, offering the promise of discovery and the potential for new beginnings. It is clear that international cooperation in space exploration has become essential for achieving ambitious missions beyond Earth's orbit. With countries like the United States, Russia, China, and members of the European Space Agency pooling resources and expertise, collaborative efforts are driving the most significant advancements. In my view, this cooperation is vital to overcoming the immense challenges posed by space travel. \n\nI firmly believe that claims about colonizing Mars within the next decade are unrealistic and ignore the significant technological barriers we still face. Despite Elon Musk's ambitious timelines, the reality is that the challenges of radiation protection, life support systems, and sustainable habitats are far from being resolved. Scientists at NASA argue that reusable rocket technology will reduce the cost of space travel by up to 90 percent in the coming years, which is a promising development. Yet, cost reduction alone does not solve the myriad of technical issues that remain. \n\nThe Moon, our closest celestial neighbor, has been a focal point of renewed interest. The discovery of water ice on the Moon could arguably make it a viable staging post for deeper space missions, though this remains to be proven. Water is a critical resource, not only for sustaining life but also for producing rocket fuel. Establishing a lunar base could facilitate missions to Mars and beyond, but the logistical and financial hurdles are considerable. \n\nWhile some experts contend that private companies will dominate space exploration, others maintain that government agencies will continue to lead major scientific missions. I believe that a balanced partnership between public and private sectors will be the most effective approach. Government agencies bring decades of experience and a focus on scientific discovery, while private companies drive innovation and efficiency. Together, they can push the boundaries of what is possible in space exploration. \n\nIn conclusion, while the dream of space exploration is alive and well, it requires a pragmatic approach grounded in current capabilities and collaborative efforts. Only through sustained international and public-private partnerships can we hope to make significant strides in exploring the final frontier.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes international cooperation is necessary for major space missions.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is clear that international cooperation in space exploration has become essential for achieving ambitious missions beyond Earth's orbit.",
+        "anchorText": "It is clear that",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_MATCH — 'essential' and 'necessary' are synonyms; 'it is clear that' signals the author's definite view.",
+        "reasoning": {
+          "step_1_locate": "It is clear that international cooperation in space exploration has become essential for achieving ambitious missions beyond Earth's orbit.",
+          "step_2_compare": "Author says: international cooperation has become essential. Statement claims: writer believes international cooperation is necessary.",
+          "step_3_logic": "SYNONYM_MATCH — 'essential' and 'necessary' are synonyms; 'it is clear that' signals the author's definite view.",
+          "step_4_eliminate": "Not No because the author explicitly supports this view. Not Not Given because 'it is clear that' is a direct opinion marker showing the author's stance."
+        },
+        "keySentence": "It is clear that international cooperation in space exploration has become essential for achieving ambitious missions beyond Earth's orbit.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks Mars colonization is achievable within ten years.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "I firmly believe that claims about colonizing Mars within the next decade are unrealistic and ignore the significant technological barriers we still face.",
+        "anchorText": "I firmly believe that",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — 'unrealistic' directly opposes 'achievable'; the author's personal belief marker makes this a clear No.",
+        "reasoning": {
+          "step_1_locate": "I firmly believe that claims about colonizing Mars within the next decade are unrealistic and ignore the significant technological barriers we still face.",
+          "step_2_compare": "Author says: claims about colonizing Mars within the next decade are unrealistic. Statement claims: writer thinks Mars colonization is achievable within ten years.",
+          "step_3_logic": "DIRECT_CONTRADICTION — 'unrealistic' directly opposes 'achievable'; the author's personal belief marker makes this a clear No.",
+          "step_4_eliminate": "Not Yes because the author explicitly calls it unrealistic. Not Not Given because 'I firmly believe' is the author's direct personal opinion, not reporting others' views."
+        },
+        "keySentence": "I firmly believe that claims about colonizing Mars within the next decade are unrealistic and ignore the significant technological barriers we still face.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes reusable rockets will make space travel significantly cheaper.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Scientists at NASA argue that reusable rocket technology will reduce the cost of space travel by up to 90 percent in the coming years.",
+        "anchorText": "Scientists at NASA argue that",
+        "complexityLevel": 3,
+        "explanation": "ATTRIBUTION_TO_OTHERS — the author reports others' views using 'scientists argue' but never endorses or rejects this position personally.",
+        "reasoning": {
+          "step_1_locate": "Scientists at NASA argue that reusable rocket technology will reduce the cost of space travel by up to 90 percent in the coming years.",
+          "step_2_compare": "Author says: Scientists at NASA argue [this claim]. Statement claims: the writer believes this.",
+          "step_3_logic": "ATTRIBUTION_TO_OTHERS — the author reports others' views using 'scientists argue' but never endorses or rejects this position personally.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows the author agrees. Not No because the author doesn't contradict it; they simply report what scientists say without taking a stance."
+        },
+        "keySentence": "Scientists at NASA argue that reusable rocket technology will reduce the cost of space travel by up to 90 percent in the coming years.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that the Moon will serve as a base for future space exploration.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The discovery of water ice on the Moon could arguably make it a viable staging post for deeper space missions, though this remains to be proven.",
+        "anchorText": "could arguably",
+        "complexityLevel": 4,
+        "explanation": "CERTAINTY_MISMATCH — 'could arguably' and 'remains to be proven' show the author is not certain; the statement claims certainty.",
+        "reasoning": {
+          "step_1_locate": "The discovery of water ice on the Moon could arguably make it a viable staging post for deeper space missions, though this remains to be proven.",
+          "step_2_compare": "Author says: could arguably make it viable (uncertain). Statement claims: writer is certain the Moon will serve as a base.",
+          "step_3_logic": "CERTAINTY_MISMATCH — 'could arguably' and 'remains to be proven' show the author is not certain; the statement claims certainty.",
+          "step_4_eliminate": "Not Yes because 'could arguably' is tentative, not certain. Not No because the author doesn't reject the idea; they simply don't commit to a definite position."
+        },
+        "keySentence": "The discovery of water ice on the Moon could arguably make it a viable staging post for deeper space missions, though this remains to be proven.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes private companies will be more important than government agencies in space exploration.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some experts contend that private companies will dominate space exploration, others maintain that government agencies will continue to lead major scientific missions.",
+        "anchorText": "While some experts contend... others maintain",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — the author presents two opposing views without endorsing either side or using personal opinion markers.",
+        "reasoning": {
+          "step_1_locate": "While some experts contend that private companies will dominate space exploration, others maintain that government agencies will continue to lead major scientific missions.",
+          "step_2_compare": "Author says: some say X, others say Y (balanced reporting). Statement claims: writer believes private companies will be more important.",
+          "step_3_logic": "BALANCED_PRESENTATION — the author presents two opposing views without endorsing either side or using personal opinion markers.",
+          "step_4_eliminate": "Not Yes because the author never states support for the private company view. Not No because the author doesn't reject it either; they simply present both sides neutrally."
+        },
+        "keySentence": "While some experts contend that private companies will dominate space exploration, others maintain that government agencies will continue to lead major scientific missions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:44:30.082Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "b81293f0-cdae-4002-9d23-5d67102b79f7",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:44:36.123Z"
+    }
+  },
+  {
+    "id": "9a778be1-e02e-4972-99e1-2d514d3d4eaa",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:44:48.721Z"
+    }
+  },
+  {
+    "id": "586bfd11-e873-4d43-90f1-e0e3c87d263c",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:45:00.344Z"
+    }
+  },
+  {
+    "id": "ca2227dd-b74f-4786-be15-f7ea23efdf38",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "Economic policy is a multifaceted discipline that requires careful consideration and strategic planning. The notion that tax cuts automatically stimulate economic growth is, in my view, fundamentally flawed and ignores the complexities of modern fiscal policy. Tax cuts can lead to short-term boosts in spending, but they often result in reduced government revenue, which can limit public investment in essential services like education and infrastructure. These are critical components for sustainable long-term growth. Furthermore, it is vital that governments maintain strict control over inflation rates, as unchecked price increases inevitably erode purchasing power and destabilize entire economies. Inflation control ensures that the value of currency remains stable, thereby fostering an environment of economic confidence and predictability. \n\nRecent studies by the International Monetary Fund suggest that austerity measures during recessions may deepen economic downturns, though some economists argue the opposite. I believe that austerity can lead to a vicious cycle of reduced consumer spending and increased unemployment, prolonging economic recovery. However, proponents cite that reducing national debt is crucial for long-term economic health. \n\nAdditionally, as technology continues to evolve, universal basic income could arguably provide a solution to technological unemployment, though the long-term fiscal implications remain uncertain. While it may offer immediate relief to those displaced by automation, the challenge lies in funding such a program without placing undue strain on the economy. \n\nMinimum wage policies also spark considerable debate. Proponents of minimum wage increases contend that higher wages boost consumer spending, while critics maintain that such policies lead to job losses in small businesses. It is clear that finding a balance is essential; minimum wage increases should be implemented carefully to ensure they do not negatively impact employment levels while still providing workers with a livable income. \n\nIn conclusion, effective economic policy must be multifaceted, taking into account both short-term needs and long-term goals. Policymakers must weigh the pros and cons of each policy decision, considering not just the immediate economic environment but also the broader, long-term implications.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that reducing taxes will always lead to economic growth.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that tax cuts automatically stimulate economic growth is, in my view, fundamentally flawed and ignores the complexities of modern fiscal policy.",
+        "anchorText": "in my view, fundamentally flawed",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — the author's personal view directly opposes the statement's claim",
+        "reasoning": {
+          "step_1_locate": "The notion that tax cuts automatically stimulate economic growth is, in my view, fundamentally flawed and ignores the complexities of modern fiscal policy.",
+          "step_2_compare": "Author says: tax cuts automatically stimulating growth is fundamentally flawed. Statement claims: writer believes reducing taxes will always lead to growth.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author's personal view directly opposes the statement's claim",
+          "step_4_eliminate": "Not Yes because the author calls this notion 'fundamentally flawed'. Not Not Given because 'in my view' is an explicit personal opinion marker."
+        },
+        "keySentence": "The notion that tax cuts automatically stimulate economic growth is, in my view, fundamentally flawed and ignores the complexities of modern fiscal policy.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks that controlling inflation should be a priority for governments.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments maintain strict control over inflation rates, as unchecked price increases inevitably erode purchasing power and destabilize entire economies.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_AGREEMENT — 'vital' indicates the author's clear position that this is a priority",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments maintain strict control over inflation rates, as unchecked price increases inevitably erode purchasing power and destabilize entire economies.",
+          "step_2_compare": "Author says: it is vital that governments control inflation. Statement claims: writer thinks controlling inflation should be a priority.",
+          "step_3_logic": "DIRECT_AGREEMENT — 'vital' indicates the author's clear position that this is a priority",
+          "step_4_eliminate": "Not No because the author endorses this view with 'vital'. Not Not Given because 'it is vital that' is an explicit opinion marker showing the author's stance."
+        },
+        "keySentence": "It is vital that governments maintain strict control over inflation rates, as unchecked price increases inevitably erode purchasing power and destabilize entire economies.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that austerity measures worsen recessions.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Monetary Fund suggest that austerity measures during recessions may deepen economic downturns, though some economists argue the opposite.",
+        "anchorText": "studies suggest / some economists argue",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — the author reports others' views without stating their own position",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Monetary Fund suggest that austerity measures during recessions may deepen economic downturns, though some economists argue the opposite.",
+          "step_2_compare": "Author says: studies suggest X, economists argue Y. Statement claims: writer believes austerity worsens recessions.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author reports others' views without stating their own position",
+          "step_4_eliminate": "Not Yes because there's no marker of the author's personal belief. Not No because the author doesn't contradict this view, just reports it neutrally."
+        },
+        "keySentence": "Recent studies by the International Monetary Fund suggest that austerity measures during recessions may deepen economic downturns, though some economists argue the opposite.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is convinced that universal basic income will solve unemployment caused by technology.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "Universal basic income could arguably provide a solution to technological unemployment, though the long-term fiscal implications remain uncertain.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_SPECULATION — 'could arguably' and 'remain uncertain' show the author is not committing to a definite view",
+        "reasoning": {
+          "step_1_locate": "Universal basic income could arguably provide a solution to technological unemployment, though the long-term fiscal implications remain uncertain.",
+          "step_2_compare": "Author says: could arguably provide a solution. Statement claims: writer is convinced it will solve unemployment.",
+          "step_3_logic": "HEDGED_SPECULATION — 'could arguably' and 'remain uncertain' show the author is not committing to a definite view",
+          "step_4_eliminate": "Not Yes because 'could arguably' indicates possibility, not conviction. Not No because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "Universal basic income could arguably provide a solution to technological unemployment, though the long-term fiscal implications remain uncertain.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports raising the minimum wage to increase consumer spending.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of minimum wage increases contend that higher wages boost consumer spending, while critics maintain that such policies lead to job losses in small businesses.",
+        "anchorText": "Proponents contend / critics maintain",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — the author reports both perspectives without endorsing either one",
+        "reasoning": {
+          "step_1_locate": "Proponents of minimum wage increases contend that higher wages boost consumer spending, while critics maintain that such policies lead to job losses in small businesses.",
+          "step_2_compare": "Author says: proponents contend X, critics maintain Y. Statement claims: writer supports raising minimum wage.",
+          "step_3_logic": "BALANCED_PRESENTATION — the author reports both perspectives without endorsing either one",
+          "step_4_eliminate": "Not Yes because the author attributes this view to 'proponents', not themselves. Not No because the author doesn't reject this view, just reports it alongside the opposing view."
+        },
+        "keySentence": "Proponents of minimum wage increases contend that higher wages boost consumer spending, while critics maintain that such policies lead to job losses in small businesses.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:45:26.197Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "950d3b3d-9c5c-42c2-b8a0-5f0c437d9d5f",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Climate Science",
+    "passage": "Climate science has been the focus of intense research and debate in recent years, as the impacts of climate change become increasingly evident. Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050. This alarming trend underscores the urgent need for action. I believe it is clear that the current trajectory of climate change is unsustainable and demands immediate intervention. It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve. Furthermore, the notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed, as systemic industrial emissions account for the vast majority of global carbon output. While personal responsibility is important, it is the large-scale industrial activities that require stringent regulation and reform. \n\nThe recent decline in coal consumption in developed nations could arguably indicate a genuine shift toward renewable energy, though economic factors may also play a significant role. In my view, this decline is a positive sign, but it must be accompanied by robust policies that support sustainable energy development and ensure a just transition for workers in fossil fuel industries. Proponents of geoengineering argue that technological interventions are essential to combat rapid warming, while critics contend that such approaches are risky and distract from emission reduction efforts. I am inclined to agree with the critics, as reliance on unproven technologies could lead to unforeseen consequences and divert attention from the more pressing need to reduce emissions. \n\nIn conclusion, the challenges posed by climate change require comprehensive solutions that involve both immediate policy action and long-term strategic planning. It is essential that governments, industries, and individuals work together to create a sustainable future, focusing on reducing emissions, transitioning to renewable energy, and exploring safe and effective technological innovations.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that Arctic summers will be ice-free by 2050.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+        "anchorText": "studies have found",
+        "complexityLevel": 2,
+        "explanation": "NEUTRAL_AUTHOR — The author is reporting the findings and predictions of others without expressing personal agreement or disagreement.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+          "step_2_compare": "Author says: 'studies have found' and 'scientists predicting'. Statement claims: 'The writer believes'.",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author is reporting the findings and predictions of others without expressing personal agreement or disagreement.",
+          "step_4_eliminate": "Not Yes because there is no opinion marker showing the author's personal belief. Not No because the author doesn't contradict the prediction, they simply report it neutrally."
+        },
+        "keySentence": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks immediate government action on carbon reduction is necessary.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_AGREES — The author uses the strong opinion marker 'It is vital that' to express their direct support for the claim.",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+          "step_2_compare": "Author says: 'It is vital that governments implement carbon reduction policies immediately'. Statement claims: 'immediate government action on carbon reduction is necessary'.",
+          "step_3_logic": "AUTHOR_AGREES — The author uses the strong opinion marker 'It is vital that' to express their direct support for the claim.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts the need for immediate action. Not Not Given because 'It is vital that' is a clear opinion marker showing the author's definite view."
+        },
+        "keySentence": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that individual lifestyle changes can solve the climate crisis on their own.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed, as systemic industrial emissions account for the vast majority of global carbon output.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_DISAGREES — The author explicitly calls this notion 'fundamentally flawed', which is a direct contradiction of the statement's claim.",
+        "reasoning": {
+          "step_1_locate": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed, as systemic industrial emissions account for the vast majority of global carbon output.",
+          "step_2_compare": "Author says: 'The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed'. Statement claims: 'individual lifestyle changes can solve the climate crisis on their own'.",
+          "step_3_logic": "AUTHOR_DISAGREES — The author explicitly calls this notion 'fundamentally flawed', which is a direct contradiction of the statement's claim.",
+          "step_4_eliminate": "Not Yes because the author explicitly rejects rather than supports this view. Not Not Given because 'is fundamentally flawed' is a clear opinion marker showing definite disagreement."
+        },
+        "keySentence": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed, as systemic industrial emissions account for the vast majority of global carbon output.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that reduced coal use in developed countries shows a real move to renewable energy.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The recent decline in coal consumption in developed nations could arguably indicate a genuine shift toward renewable energy, though economic factors may also play a significant role.",
+        "anchorText": "could arguably indicate",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_OPINION — The author uses tentative language that suggests possibility without expressing certainty or a definite position.",
+        "reasoning": {
+          "step_1_locate": "The recent decline in coal consumption in developed nations could arguably indicate a genuine shift toward renewable energy, though economic factors may also play a significant role.",
+          "step_2_compare": "Author says: 'could arguably indicate' and 'may also play a significant role'. Statement claims: 'The writer is certain'.",
+          "step_3_logic": "HEDGED_OPINION — The author uses tentative language that suggests possibility without expressing certainty or a definite position.",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject the interpretation, they simply present it as one possible explanation without committing."
+        },
+        "keySentence": "The recent decline in coal consumption in developed nations could arguably indicate a genuine shift toward renewable energy, though economic factors may also play a significant role.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the use of geoengineering to address climate change.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of geoengineering argue that technological interventions are essential to combat rapid warming, while critics contend that such approaches are risky and distract from emission reduction efforts.",
+        "anchorText": "argue / contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_REPORTING — The author presents opposing viewpoints equally without revealing their own position on geoengineering.",
+        "reasoning": {
+          "step_1_locate": "Proponents of geoengineering argue that technological interventions are essential to combat rapid warming, while critics contend that such approaches are risky and distract from emission reduction efforts.",
+          "step_2_compare": "Author says: 'Proponents argue' and 'critics contend'. Statement claims: 'The writer supports'.",
+          "step_3_logic": "BALANCED_REPORTING — The author presents opposing viewpoints equally without revealing their own position on geoengineering.",
+          "step_4_eliminate": "Not Yes because the author never expresses personal support for geoengineering. Not No because the author doesn't express opposition either, they simply report both perspectives neutrally."
+        },
+        "keySentence": "Proponents of geoengineering argue that technological interventions are essential to combat rapid warming, while critics contend that such approaches are risky and distract from emission reduction efforts.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:45:53.263Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "cb3bff11-ca4a-40de-a860-6716291704d4",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:46:00.142Z"
+    }
+  },
+  {
+    "id": "cfde1f73-99a4-4d84-83b3-6194ef35978d",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:46:06.532Z"
+    }
+  },
+  {
+    "id": "02157957-97da-4422-b95c-6684dd6f2cc6",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:46:43.117Z"
+    }
+  },
+  {
+    "id": "2cecd61b-dc2a-491e-9b47-29d709f32caa",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:01.727Z"
+    }
+  },
+  {
+    "id": "d66ddc4b-5572-4e04-a298-1ee0cfe522c0",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 792 (line 1 column 793)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:06.953Z"
+    }
+  },
+  {
+    "id": "26477f35-f142-42e0-af9c-75af4b11b30a",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHZrfhBgc3iNrBJ7wp\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:08.184Z"
+    }
+  },
+  {
+    "id": "1fd2b28d-39e4-4ec0-b747-199d3dcd7db3",
+    "type": "ynng",
+    "topic": "Economic Policy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaH7brWqCo7YFtEnEp4\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:02.054Z"
+    }
+  },
+  {
+    "id": "9241159b-ca0c-43ae-b8cc-350ae1ddf777",
+    "type": "ynng",
+    "topic": "Linguistic Research",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaH9BrRKncZTXU1tkaW\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:02.454Z"
+    }
+  },
+  {
+    "id": "f9372b49-32e7-4a16-b123-f871a1bb67ba",
+    "type": "ynng",
+    "topic": "Psychology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHAkcPN7efJFP3AzeL\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:02.856Z"
+    }
+  },
+  {
+    "id": "246757a7-317b-4f3f-8a2b-0d3881743d54",
+    "type": "ynng",
+    "topic": "Space Exploration",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Unexpected non-whitespace character after JSON at position 308 (line 1 column 309)",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:32.964Z"
+    }
+  },
+  {
+    "id": "da79040e-e18d-4ddb-9a09-b1a4bafa3202",
+    "type": "ynng",
+    "topic": "Climate Science",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHW2V61zMN1fEPPjcQ\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:07.370Z"
+    }
+  },
+  {
+    "id": "8af8384b-1d63-43b7-b5dc-b5ed76468a45",
+    "type": "ynng",
+    "topic": "Renewable Energy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHXghMh25mbdqvePJA\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:07.672Z"
+    }
+  },
+  {
+    "id": "2bf59d99-f0b9-4be6-ac1e-ddcd7a6656fd",
+    "type": "ynng",
+    "topic": "Urban Development",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHYzL9i34UxPJqWsJS\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:07.983Z"
+    }
+  },
+  {
+    "id": "b71e1e04-89e6-4a8e-9b43-b266e0c636fb",
+    "type": "ynng",
+    "topic": "Archaeological Discovery",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHaJhgjdpahXsrVdbw\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:08.262Z"
+    }
+  },
+  {
+    "id": "f9a5b408-11c7-4450-8d92-26f85feb9895",
+    "type": "ynng",
+    "topic": "Marine Biology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHbCnGbRwwuxs5G2Ay\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:08.591Z"
+    }
+  },
+  {
+    "id": "4061a19d-679d-40ea-abda-bcc115e4d084",
+    "type": "ynng",
+    "topic": "Neuroscience",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "API error: 429 {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"This request would exceed your organization's rate limit of 8,000 output tokens per minute (org: d0c02952-49ae-4392-8f26-8c35397e73bf, model: claude-sonnet-4-5-20250929). For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://claude.com/contact-sales to discuss your options for a rate limit increase.\"},\"request_id\":\"req_011CZeaHbZcAArv5nftCkeY6\"}",
+    "meta": {
+      "generatedAt": "2026-04-02T07:47:08.593Z"
+    }
+  }
+]

@@ -57,9 +57,14 @@ let warmupQ             = null;
 export let warmupCorrect = false;
 
 // Summary Completion session
-let isSCSession    = false;
-let sessionSummary = '';   // SC summary text
-let sessionWordBank = [];  // SC word bank
+let isSCSession          = false;
+let sessionSummary       = '';   // SC summary text
+let sessionWordBank      = [];   // SC word bank
+
+// Additional session type flags
+let isYNNGSession         = false;  // Yes / No / Not Given
+let isMCSession           = false;  // Reading Multiple Choice
+let isSentenceCompSession = false;  // Sentence Completion
 
 // ── BEHAVIOUR TRACKING STATE ──────────────────────────────────────
 let bhvSessionStart   = 0;
@@ -264,6 +269,39 @@ async function getQuestionFromBank(targetBand, excludeIds = []) {
   return null;
 }
 
+// Generic bank loader — same query pattern as getQuestionFromBank but for any collection.
+async function getFromBankCollection(collectionName, targetBand, excludeIds = []) {
+  const band       = Math.round(targetBand * 2) / 2;
+  const bandsToTry = [band, band - 0.5, band + 0.5].filter(b => b >= 5.0 && b <= 7.0);
+
+  for (const b of bandsToTry) {
+    const snapshot = await getDocs(
+      query(
+        collection(db, collectionName),
+        where('band', '==', b),
+        where('status', '==', 'active'),
+        orderBy('servedCount', 'asc'),
+        limit(10)
+      )
+    );
+
+    if (snapshot.empty) continue;
+
+    const candidates = snapshot.docs.filter(d => !excludeIds.includes(d.id));
+    if (candidates.length === 0) continue;
+
+    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+    updateDoc(picked.ref, {
+      servedCount:  increment(1),
+      lastServedAt: serverTimestamp(),
+    }).catch(() => {});
+
+    return { id: picked.id, ...picked.data() };
+  }
+
+  return null;
+}
+
 // ── READING SESSION ───────────────────────────────────────────────
 export async function loadReadingSession() {
   sessionQuestions = [];
@@ -274,6 +312,9 @@ export async function loadReadingSession() {
   sessionSummary   = '';
   sessionWordBank  = [];
   isSCSession                  = false;
+  isYNNGSession                = false;
+  isMCSession                  = false;
+  isSentenceCompSession        = false;
   sessionLogicValidationPassed = false;
   sessionIsVerified            = false;
   sessionFromBank              = false;
@@ -289,8 +330,11 @@ export async function loadReadingSession() {
   submitBtn.textContent = 'Submit answers →';
   submitBtn.onclick = () => window.submitReading();
 
-  const skillKey = currentPlan?.skill || 'reading.tfng';
-  isSCSession    = (skillKey === 'reading.summaryCompletion');
+  const skillKey        = currentPlan?.skill || 'reading.tfng';
+  isSCSession           = (skillKey === 'reading.summaryCompletion');
+  isYNNGSession         = (skillKey === 'reading.yesNoNotGiven');
+  isMCSession           = (skillKey === 'reading.multipleChoice');
+  isSentenceCompSession = (skillKey === 'reading.sentenceCompletion');
 
   const _scDay = (studentData?.dayNumber || 1) - 1;
   document.getElementById('reading-p1-dot').className = _scDay > 0 ? 'phase-dot done' : 'phase-dot';
@@ -343,10 +387,231 @@ export async function loadReadingSession() {
       console.warn('Question bank lookup failed — falling back to AI generation:', err.message);
     }
   }
+
+  // ── Bank fast-path: Y/N/NG ────────────────────────────────────────────────
+  if (isYNNGSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-ynng',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+
+        sessionPassage   = bankSet.passage;
+        sessionTopic     = bankSet.topic;
+        sessionFromBank  = true;
+        sessionBankSetId = bankSet.id;
+        sessionQuestions = bankSet.questions.map(q => ({
+          id:          q.id,
+          text:        q.text,
+          answer:      q.answer,
+          explanation: q.explanation,
+          keySentence: q.passageAnchor || q.keySentence,
+          errorReason: q.errorReason || null,
+          logicType:   q.logicType   || null,
+          verified:    true,
+          fromBank:    true,
+        }));
+
+        buildToughLove(sessionQuestions, sessionPassage);
+        renderYNNGSession({ passage: sessionPassage, questions: sessionQuestions });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking();
+        setupScrollTracking();
+        trackQStart(1);
+        return;
+      }
+    } catch (err) {
+      console.warn('YNNG bank lookup failed — falling back to AI:', err.message);
+    }
+  }
+
+  // ── Bank fast-path: Reading Multiple Choice ───────────────────────────────
+  if (isMCSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-multiple-choice',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+
+        sessionPassage   = bankSet.passage;
+        sessionTopic     = bankSet.topic;
+        sessionFromBank  = true;
+        sessionBankSetId = bankSet.id;
+        sessionQuestions = bankSet.questions.map(q => ({
+          id:          q.id,
+          text:        q.text,
+          options:     q.options || [],
+          answer:      q.answer,
+          explanation: q.explanation,
+          keySentence: q.keySentence || null,
+          verified:    true,
+          fromBank:    true,
+        }));
+
+        renderMCSession({ passage: sessionPassage, questions: sessionQuestions });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking();
+        setupScrollTracking();
+        trackQStart(1);
+        return;
+      }
+    } catch (err) {
+      console.warn('MC bank lookup failed — falling back to AI:', err.message);
+    }
+  }
+
+  // ── Bank fast-path: Summary Completion ────────────────────────────────────
+  if (isSCSession) {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getFromBankCollection(
+        'questionBank-summary-completion',
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+
+        sessionPassage   = bankSet.passage;
+        sessionTopic     = bankSet.topic;
+        sessionFromBank  = true;
+        sessionBankSetId = bankSet.id;
+        sessionSummary   = bankSet.extraData?.summaryText || '';
+        sessionWordBank  = bankSet.extraData?.wordBank    || [];
+        sessionQuestions = bankSet.questions.map(q => ({
+          id:          q.id,
+          text:        q.text,
+          answer:      q.answer,
+          explanation: q.explanation,
+          keySentence: q.keySentence || null,
+          verified:    true,
+          fromBank:    true,
+        }));
+
+        renderSCSession({
+          passage:     sessionPassage,
+          summaryText: sessionSummary,
+          wordBank:    sessionWordBank,
+          questions:   sessionQuestions,
+        });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking();
+        setupScrollTracking();
+        trackQStart(1);
+        return;
+      }
+    } catch (err) {
+      console.warn('SC bank lookup failed — falling back to AI:', err.message);
+    }
+  }
   // ─────────────────────────────────────────────────────────────────────────
 
   let prompt;
-  if (isSCSession) {
+  if (isYNNGSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Yes/No/Not Given IELTS Academic reading exercise for a Band ${band} student.
+
+The passage must be written in the FIRST PERSON or clearly express the AUTHOR'S OWN OPINION. Use "I believe", "In my view", "It is clear that", "Proponents of X overlook" — the passage must be an academic argument, not neutral reporting.
+
+ANSWER FORMAT RULES (mandatory):
+- The "answer" field must contain exactly one of: Yes, No, or Not Given.
+- Yes = the statement matches the writer's view as expressed in the passage.
+- No = the statement contradicts the writer's view.
+- Not Given = the writer does not address this specific claim.
+- NEVER use True/False/NG — this is Yes/No/Not Given.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of opinionated academic prose where the author clearly expresses views (170-220 words total)",
+  "topic": "2-4 word topic label",
+  "questions": [
+    {"id": 1, "text": "statement about the writer's view", "answer": "Yes",       "explanation": "which phrase shows the writer agrees", "keySentence": "exact sentence from passage"},
+    {"id": 2, "text": "statement about the writer's view", "answer": "No",        "explanation": "which phrase shows the writer disagrees", "keySentence": "exact sentence from passage"},
+    {"id": 3, "text": "statement about the writer's view", "answer": "Not Given", "explanation": "why this topic is not addressed by the writer", "keySentence": "closest sentence in passage"},
+    {"id": 4, "text": "statement about the writer's view", "answer": "Yes",       "explanation": "which phrase shows the writer agrees", "keySentence": "exact sentence from passage"},
+    {"id": 5, "text": "statement about the writer's view", "answer": "No",        "explanation": "which phrase shows the writer disagrees", "keySentence": "exact sentence from passage"}
+  ]
+}`,
+    };
+  } else if (isMCSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Multiple Choice IELTS Academic reading exercise for a Band ${band} student.
+
+DISTRACTOR RULES (mandatory):
+- Each question must have exactly 4 options labelled A, B, C, D.
+- The correct option must be supported by the passage. The other three are distractors — mentioned in the passage but wrong, or based on common assumptions.
+- Never make the correct answer obvious from wording alone; require reading the passage carefully.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
+  "topic": "2-4 word topic label",
+  "questions": [
+    {
+      "id": 1,
+      "text": "question stem",
+      "options": [
+        {"label": "A", "text": "option text", "isCorrect": false},
+        {"label": "B", "text": "option text", "isCorrect": false},
+        {"label": "C", "text": "option text", "isCorrect": false},
+        {"label": "D", "text": "option text", "isCorrect": true}
+      ],
+      "answer": "D",
+      "explanation": "why D is correct and why the distractors are wrong"
+    },
+    {"id": 2, "text": "...", "options": [...], "answer": "A", "explanation": "..."},
+    {"id": 3, "text": "...", "options": [...], "answer": "B", "explanation": "..."},
+    {"id": 4, "text": "...", "options": [...], "answer": "C", "explanation": "..."},
+    {"id": 5, "text": "...", "options": [...], "answer": "D", "explanation": "..."}
+  ]
+}`,
+    };
+  } else if (isSentenceCompSession) {
+    prompt = {
+      model: 'gpt-4o',
+      system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
+      user: `Create a Sentence Completion IELTS Academic reading exercise for a Band ${band} student.
+
+RULES:
+- Each question is an incomplete sentence. The gap must be filled with NO MORE THAN THREE WORDS taken directly from the passage.
+- The answer must be the exact words from the passage — no paraphrasing.
+- The sentence stem should paraphrase the passage so the student must scan for the answer.
+
+Return ONLY this JSON:
+{
+  "passage": "3 paragraphs of academic prose on any interesting topic (170-220 words total)",
+  "topic": "2-4 word topic label",
+  "questions": [
+    {"id": 1, "text": "Incomplete sentence with _____ gap.", "answer": "exact words from passage", "explanation": "which passage sentence contains the answer", "keySentence": "exact sentence from passage"},
+    {"id": 2, "text": "...", "answer": "...", "explanation": "...", "keySentence": "..."},
+    {"id": 3, "text": "...", "answer": "...", "explanation": "...", "keySentence": "..."},
+    {"id": 4, "text": "...", "answer": "...", "explanation": "...", "keySentence": "..."},
+    {"id": 5, "text": "...", "answer": "...", "explanation": "...", "keySentence": "..."}
+  ]
+}`,
+    };
+  } else if (isSCSession) {
     prompt = {
       model: 'gpt-4o',
       system: 'You are an IELTS Academic examiner. Generate reading exercises at the exact band level specified. Return valid JSON only, no markdown, no preamble.',
@@ -457,10 +722,10 @@ Return ONLY this JSON:
     // ──────────────────────────────────────────────────────────────────────────
 
     // ── Logic Tag Validation ───────────────────────────────────────────────────
-    // For TFNG sessions: verify every question has a valid logicType and a
-    // passageAnchor that is a verbatim substring of the passage.
+    // For TFNG sessions only: verify every question has a valid logicType and
+    // a passageAnchor that is a verbatim substring of the passage.
     // On failure, regenerate once with an explicit correction instruction.
-    if (!isSCSession) {
+    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession) {
       try {
         const tagsOk = validateLogicTags(parsed.passage, parsed.questions);
         if (!tagsOk) {
@@ -491,6 +756,23 @@ Return ONLY this JSON:
       sessionSummary   = parsed.summaryText || '';
       sessionWordBank  = parsed.wordBank    || [];
       renderSCSession(parsed);
+    } else if (isYNNGSession) {
+      // Verify answers before display (non-fatal)
+      let verified = { questions: parsed.questions, corrections: [] };
+      try {
+        verified = await verifyAnswers(parsed.passage, parsed.questions, API_URL);
+        sessionIsVerified = true;
+      } catch { /* non-fatal */ }
+      sessionQuestions   = verified.questions;
+      sessionCorrections = verified.corrections;
+      buildToughLove(verified.questions, parsed.passage);
+      renderYNNGSession({ ...parsed, questions: verified.questions });
+    } else if (isMCSession) {
+      sessionQuestions = parsed.questions;
+      renderMCSession(parsed);
+    } else if (isSentenceCompSession) {
+      sessionQuestions = parsed.questions;
+      renderSentenceCompletionSession(parsed);
     } else {
       // Run the Answer Verification Agent before showing anything to the student.
       let verified = { questions: parsed.questions, corrections: [] };
@@ -664,8 +946,188 @@ window.answerTFNG = function (qnum, val) {
   }
 };
 
+// ── Y/N/NG RENDERER ───────────────────────────────────────────────
+export function renderYNNGSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    "Read the passage carefully. The author expresses opinions — decide if each statement matches the writer's view.";
+  document.getElementById('reading-q-label').textContent = 'Yes / No / Not Given';
+  document.getElementById('reading-q-instructions').innerHTML =
+    '<strong>Yes</strong> = writer agrees · <strong>No</strong> = writer disagrees · <strong>Not Given</strong> = writer doesn\'t address this';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => `
+    <div class="q-block" id="qb${q.id}">
+      <div class="q-num">${q.id}</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-sub">Does this match the writer's view?</div>
+      <div class="tfng" id="tfng${q.id}">
+        <button class="tfng-btn" onclick="answerYNNG(${q.id},'Yes')"       data-v="Yes">✓ Yes</button>
+        <button class="tfng-btn" onclick="answerYNNG(${q.id},'No')"        data-v="No">✗ No</button>
+        <button class="tfng-btn" onclick="answerYNNG(${q.id},'Not Given')" data-v="Not Given">? Not Given</button>
+      </div>
+      <div class="result-flash" id="rf${q.id}"></div>
+    </div>
+  `).join('');
+}
+
+window.answerYNNG = function (qnum, val) {
+  if (sessionAnswers[qnum]) return;
+  const q = sessionQuestions.find(x => x.id === qnum);
+  if (!q) return;
+
+  trackQAnswer(qnum);
+  trackQStart(qnum + 1);
+
+  const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
+  sessionAnswers[qnum] = { val, isRight };
+  if (isRight) sessionCorrect++;
+
+  document.querySelectorAll(`#tfng${qnum} .tfng-btn`).forEach(b => {
+    b.disabled = true;
+    if      (normaliseAnswer(b.dataset.v) === normaliseAnswer(q.answer)) b.classList.add('correct');
+    else if (normaliseAnswer(b.dataset.v) === normaliseAnswer(val) && !isRight) b.classList.add('wrong');
+  });
+
+  const rf = document.getElementById(`rf${qnum}`);
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight
+    ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+
+  if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
+    document.getElementById('btn-reading-submit').disabled = false;
+  }
+};
+
+// ── READING MULTIPLE CHOICE RENDERER ─────────────────────────────
+export function renderMCSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully, then choose the best answer for each question.';
+  document.getElementById('reading-q-label').textContent = 'Multiple Choice';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Choose the <strong>best answer</strong> — only one option is correct.';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => {
+    const optionsHtml = (q.options || []).map(opt =>
+      `<button class="mc-option" data-v="${opt.label}" onclick="answerMC(${q.id},'${opt.label}')">
+        <span class="mc-label">${opt.label}</span>
+        <span>${opt.text}</span>
+      </button>`
+    ).join('');
+    return `
+      <div class="q-block" id="qb${q.id}">
+        <div class="q-num">${q.id}</div>
+        <div class="q-text">${q.text}</div>
+        <div id="mc${q.id}" style="margin-top:10px">${optionsHtml}</div>
+        <div class="result-flash" id="rf${q.id}"></div>
+      </div>`;
+  }).join('');
+}
+
+window.answerMC = function (qnum, val) {
+  if (sessionAnswers[qnum]) return;
+  const q = sessionQuestions.find(x => x.id === qnum);
+  if (!q) return;
+
+  trackQAnswer(qnum);
+  trackQStart(qnum + 1);
+
+  const isRight = normaliseAnswer(val) === normaliseAnswer(q.answer);
+  sessionAnswers[qnum] = { val, isRight };
+  if (isRight) sessionCorrect++;
+
+  document.querySelectorAll(`#mc${qnum} .mc-option`).forEach(b => {
+    b.disabled = true;
+    if      (normaliseAnswer(b.dataset.v) === normaliseAnswer(q.answer)) b.classList.add('correct');
+    else if (normaliseAnswer(b.dataset.v) === normaliseAnswer(val) && !isRight) b.classList.add('wrong');
+  });
+
+  const rf = document.getElementById(`rf${qnum}`);
+  rf.classList.add('show', isRight ? 'good' : 'bad');
+  rf.innerHTML = isRight
+    ? `✅ Correct.`
+    : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+
+  if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
+    document.getElementById('btn-reading-submit').disabled = false;
+  }
+};
+
+// ── SENTENCE COMPLETION RENDERER ──────────────────────────────────
+export function renderSentenceCompletionSession(parsed) {
+  document.getElementById('reading-intro-msg').textContent =
+    'Read the passage carefully, then complete each sentence using words directly from the passage.';
+  document.getElementById('reading-q-label').textContent = 'Sentence Completion';
+  document.getElementById('reading-q-instructions').innerHTML =
+    'Use words <strong>directly from the passage</strong>. No more than <strong>THREE WORDS</strong> per gap.';
+
+  document.getElementById('reading-passage').innerHTML = (parsed.passage || '')
+    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
+
+  document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => `
+    <div class="q-block" id="qb${q.id}">
+      <div class="q-num">${q.id}</div>
+      <div class="q-text">${q.text.replace('_____', '<span style="background:#E8E5FF;padding:2px 8px;border-radius:4px;font-style:italic;color:var(--accent)">_____</span>')}</div>
+      <div style="margin-top:10px">
+        <input type="text" id="sentcomp-input-${q.id}" placeholder="Type your answer…"
+          style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:14px;color:var(--text);background:#fff;box-sizing:border-box;font-family:inherit"
+          oninput="onSentenceCompInput()" />
+      </div>
+      <div class="result-flash" id="rf${q.id}"></div>
+    </div>
+  `).join('');
+}
+
+window.onSentenceCompInput = function () {
+  const allFilled = sessionQuestions.every(q => {
+    const el = document.getElementById(`sentcomp-input-${q.id}`);
+    return el && el.value.trim() !== '';
+  });
+  document.getElementById('btn-reading-submit').disabled = !allFilled;
+};
+
+function submitSentenceComp() {
+  sessionCorrect = 0;
+  sessionQuestions.forEach(q => {
+    const el      = document.getElementById(`sentcomp-input-${q.id}`);
+    const val     = el ? el.value.trim() : '';
+    const correct = q.answer || '';
+    const isRight = normaliseAnswer(val) === normaliseAnswer(correct);
+    if (isRight) sessionCorrect++;
+    sessionAnswers[q.id] = { val, isRight };
+    if (el) {
+      el.disabled = true;
+      el.style.borderColor = isRight ? 'var(--success)' : 'var(--danger)';
+    }
+    const rf = document.getElementById(`rf${q.id}`);
+    if (rf) {
+      rf.classList.add('show', isRight ? 'good' : 'bad');
+      rf.innerHTML = isRight
+        ? `✅ Correct.`
+        : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+    }
+  });
+
+  const btn = document.getElementById('btn-reading-submit');
+  btn.textContent = 'Continue to notebook →';
+  btn.disabled = false;
+  btn.onclick = () => finishReadingSession();
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
 window.submitReading = function () {
-  if (isSCSession) { submitSCSession(); return; }
+  if (isSCSession || isSentenceCompSession) {
+    if (isSentenceCompSession) { submitSentenceComp(); return; }
+    submitSCSession();
+    return;
+  }
 
   const tlAnswer   = tlQ ? sessionAnswers[tlQ.id] : null;
   const tlEligible = tlQ !== null && tlAnswer?.isRight === true;
@@ -772,12 +1234,15 @@ export async function finishReadingSession() {
       bankSetId:          sessionBankSetId,
       ...(sessionCorrections.length    ? { answerCorrections: sessionCorrections }   : {}),
       ...(sessionPassageQuality        ? { passageQuality: sessionPassageQuality }   : {}),
-      ...(!isSCSession && sessionQuestions.length ? {
+      // Only log logic-type metadata for T/F/NG sessions (where it is generated)
+      ...(!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession && sessionQuestions.length ? {
         logicTypes:           sessionQuestions.map(q => ({ id: q.id, logicType: q.logicType || null })),
         passageAnchors:       sessionQuestions.map(q => ({ id: q.id, passageAnchor: q.passageAnchor || null })),
         logicValidationPassed: sessionLogicValidationPassed,
         isVerified:            sessionIsVerified,
       } : {}),
+      // For YNNG/MC/SC log isVerified without logic types
+      ...(isYNNGSession ? { isVerified: sessionIsVerified } : {}),
     });
 
     const prevCorrect  = Math.round(((prevSkill.accuracy || 0) / 100) * (prevSkill.attempted || 0));
@@ -787,9 +1252,9 @@ export async function finishReadingSession() {
     const newStreak = (studentData.streak || 0) + 1;
     const subjPath  = `brain.subjects.ielts-academic.skills.${skillId}`;
 
-    // Error reason tagging — TFNG only (SC has a different error model)
+    // Error reason tagging — TFNG only (all other session types have different error models)
     let errorReasonsUpdate = null;
-    if (!isSCSession) {
+    if (!isSCSession && !isYNNGSession && !isMCSession && !isSentenceCompSession) {
       const prevER = prevSkill.errorReasons || {};
       const mergedER = {
         synonymTrap: 0, cautiousLanguageMissed: 0, negationOverlooked: 0,
@@ -840,7 +1305,7 @@ export async function finishReadingSession() {
 
     const snap = await getStudentDoc(currentUser.uid);
     setStudentData(snap.data());
-    const questionResults = !isSCSession
+    const questionResults = (!isSCSession && !isMCSession && !isSentenceCompSession)
       ? sessionQuestions.map(q => ({ logicType: q.logicType || null, isRight: sessionAnswers[q.id]?.isRight || false }))
       : null;
     await updateStudentBrain(behaviour, accuracy, skillKey, questionResults);

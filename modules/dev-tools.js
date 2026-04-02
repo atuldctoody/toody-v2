@@ -69,6 +69,22 @@ export function devJumpTo(target) {
       setCurrentPlan({ ...SKILL_MAP['reading.tfng'], reason: 'Dev jump' });
       loadReadingSession();
       break;
+    case 'reading-ynng':
+      setCurrentPlan({ ...SKILL_MAP['reading.yesNoNotGiven'], skill: 'reading.yesNoNotGiven', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-mc':
+      setCurrentPlan({ ...SKILL_MAP['reading.multipleChoice'], skill: 'reading.multipleChoice', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-sc':
+      setCurrentPlan({ ...SKILL_MAP['reading.summaryCompletion'], reason: 'Dev jump' });
+      loadReadingSession();
+      break;
+    case 'reading-sentcomp':
+      setCurrentPlan({ ...SKILL_MAP['reading.sentenceCompletion'], skill: 'reading.sentenceCompletion', screen: 's-reading', reason: 'Dev jump' });
+      loadReadingSession();
+      break;
     case 'listening':
       setCurrentPlan({ ...SKILL_MAP['listening.multipleChoice'], reason: 'Dev jump' });
       loadListeningSession();

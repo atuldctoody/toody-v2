@@ -1,0 +1,803 @@
+[
+  {
+    "id": "8a14037d-cbd8-4ebd-80ec-4a116612d68c",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is the scientific study of organisms in the ocean or other marine bodies of water. Given that the oceans cover over 70% of the Earth's surface, the variety of life forms is immense. Marine biologists study everything from the smallest plankton to the largest whale. The field is broad, and specialists might focus on a particular organism, a specific behavior, or an ecological process. Recent advancements have allowed researchers to explore even the most remote parts of the ocean, revealing species previously unknown to science.\n\nOne of the significant challenges in marine biology is understanding how organisms adapt to the extreme conditions of the deep sea. The pressure, darkness, and cold present unique challenges for life. Many species have adapted through bioluminescence, allowing them to produce light in the dark ocean depths. This adaptation serves various functions, such as attracting prey or deterring predators. Understanding these adaptations can provide insights into evolutionary processes and the limits of life on Earth.\n\nHuman activities pose increasing threats to marine ecosystems. Pollution, overfishing, and climate change are altering the delicate balance of marine environments. Marine biologists are at the forefront of research into these impacts, aiming to develop strategies to mitigate damage and preserve biodiversity. They work in collaboration with policymakers to create effective conservation measures, striving to ensure the health and sustainability of oceanic life for the future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is the primary focus of marine biology?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The study of life forms in marine environments.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "The exploration of the ocean's chemical properties.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "The study of terrestrial organisms near the ocean.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "The analysis of oceanic weather patterns.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it paraphrases the passage's definition of marine biology as the study of organisms in marine environments. B is mentioned in terms of marine research but is not the focus of marine biology. C reverses the focus from marine organisms to terrestrial ones. D overstates by adding weather patterns, which extends beyond marine biology.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "Why is bioluminescence important for marine organisms?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It helps them survive in dark ocean depths.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It increases their ability to photosynthesize.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It makes them invisible to predators.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It allows them to dominate other species.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it captures the role of bioluminescence in adaptation to dark environments. B is incorrect as photosynthesis is not related to bioluminescence. C reverses the concept, as bioluminescence makes them visible, not invisible. D overstates the influence of bioluminescence on species dominance.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "How do marine biologists contribute to conservation efforts?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By researching impacts of human activities on marine life.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "By enforcing international fishing laws.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "By increasing marine pollution awareness.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "By ensuring the complete halt of ocean pollution.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it describes marine biologists' role in researching human impacts. B is a distractor since biologists don't enforce laws. C reverses the focus from research to awareness alone. D overstates by implying that biologists can entirely stop pollution.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "What recent advancements have aided marine biology research?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Technologies that allow exploration of remote ocean areas.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Increased funding for marine biology projects.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "The discovery of terrestrial organisms.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Complete mapping of the ocean floor.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it paraphrases advancements in exploration technology. B is mentioned but not highlighted as an advancement. C reverses the context to terrestrial discoveries. D overstates by suggesting the entire ocean floor has been mapped.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "What challenges do marine organisms face in the deep sea?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Extreme pressure, darkness, and cold temperatures.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Lack of oxygen and abundant sunlight.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Overabundance of nutrients.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "High levels of pollution throughout.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it accurately lists the challenges faced. B includes sunlight, incorrectly implying it's abundant. C reverses the situation by suggesting nutrient abundance. D overstates pollution's reach without specification.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 6,
+        "text": "What role do marine biologists play in policy making?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Collaborating with policymakers to create conservation measures.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Drafting international conservation laws.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "Enforcing marine environmental laws.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Ensuring the oceans are free from any human impact.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it describes the collaborative role in policy making. B, while related, gives a specific role not mentioned. C is reversed, as enforcement isn't typically done by biologists. D overstates by implying complete human impact removal.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:16:27.672Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.7,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "61f7451a-5af6-4c73-82c0-7eb6a7c2b6fa",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Psychology: The Impact of Color on Mood",
+    "passage": "The study of color psychology examines how different hues influence human behavior and emotions. Researchers have found that colors can significantly affect mood and perceptions. For instance, warm colors like red and orange are often associated with energy and excitement, whereas cooler colors such as blue and green are linked to calmness and relaxation. Although the effects of color are subjective and can vary between individuals, certain trends have been consistently observed across cultures. \n\nOne key area of study is how color impacts workplace efficiency and productivity. Studies suggest that blue environments might enhance focus and performance on cognitive tasks, making it a popular choice for office spaces. Conversely, while red might increase heart rate and evoke a sense of urgency, it can also be distracting in complex cognitive tasks, potentially hindering performance. \n\nMoreover, color psychology is not only applicable in professional settings but also in therapeutic practices. Colors are used in art therapy to help patients express emotions and in environmental design to create soothing spaces in healthcare facilities. However, the interpretation of color can be influenced by personal experiences and cultural backgrounds, indicating that while general patterns exist, individual responses to color may vary.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What is a general observation about the effect of warm colors?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They are often linked to increased energy and excitement.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "They are associated with calm and relaxation.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "They reduce heart rate and prevent distraction.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "They universally evoke the same emotions in all individuals.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct because it paraphrases the passage's claim that warm colors like red and orange are associated with energy and excitement. Option B is incorrect as it describes cool colors. Option C incorrectly reverses the effect of warm colors. Option D overstates the claim by suggesting universality.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "How does color influence productivity in the workplace according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Blue environments may enhance focus and cognitive task performance.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Red environments universally increase productivity.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "Cool colors are distracting in a work environment.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Color has no effect on workplace efficiency.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage's statement about blue enhancing focus. Option B overstates the passage by suggesting red universally boosts productivity. Option C reverses the effect of cool colors. Option D contradicts the passage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "What role does color play in therapeutic practices?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It helps patients express emotions through art therapy.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It ensures all patients feel the same level of calm.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It is irrelevant to environmental design in healthcare.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "It is used to increase anxiety levels.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it accurately reflects the passage's information about art therapy. Option B overstates the role of color by suggesting uniformity in its effects. Option C contradicts the passage's mention of environmental design. Option D reverses the calming effect mentioned in the passage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "Why might individual responses to color vary?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Personal experiences and cultural backgrounds influence interpretation.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Color effects are scientifically proven to be the same for everyone.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "All cultures interpret colors in the same way.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Individual responses are not mentioned in the passage.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage's statement about the influence of personal experiences and cultural backgrounds. Option B overstates the passage's claims. Option C reverses the idea of cultural variation. Option D is incorrect as the passage does mention individual variation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "What is a key finding about red in work environments?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It might increase heart rate and evoke urgency.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It is always beneficial for cognitive task performance.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It decreases the sense of urgency.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is not mentioned in relation to work environments.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A is correct as it paraphrases the passage's information about red. Option B overstates the benefits of red. Option C reverses the effect of red. Option D is incorrect as the passage mentions red in work environments.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 6,
+        "text": "What does the passage suggest about the general trends in color perception?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Certain trends have been observed across cultures.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Trends in color perception are identical in all cultures.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "C",
+            "text": "Color perception trends are not discussed.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "D",
+            "text": "All individuals perceive colors in the same way.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "Option A correctly paraphrases the passage's statement about cultural trends. Option B reverses the idea of cultural variation. Option C is incorrect as the passage does discuss trends. Option D overstates the passage's claims.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:16:27.893Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.3,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "c41d6eeb-1d35-416c-aca3-5057fcfa4fa8",
+    "type": "multiple-choice",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "The pursuit of knowledge about our universe has always been a driving force for human innovation. In the mid-20th century, the space race catalyzed rapid advancements in technology, leading to significant achievements such as the first moon landing in 1969. These milestones have not only expanded our understanding of the cosmos but also resulted in practical benefits on Earth, from satellite communications to improved materials science. Despite the progress, space exploration remains a topic of debate. Critics argue that the financial resources allocated could be better spent addressing urgent terrestrial issues. However, proponents contend that the long-term gains, such as potential solutions to overpopulation and resource depletion, justify the investment. Additionally, the collaborative efforts seen in projects like the International Space Station highlight the potential for space exploration to foster global cooperation.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "What was a significant outcome of the space race?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It led to groundbreaking technological progress.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It diverted funds from other important areas.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          },
+          {
+            "label": "C",
+            "text": "It reduced interest in space exploration.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It solved all issues related to resource depletion.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct because the passage highlights technological progress as a result of the space race. B mentions a criticism but doesn't answer the specific question. C reverses the passage's meaning by suggesting reduced interest, while D exaggerates the impact of the space race.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Why do some people support continued investment in space exploration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It could help address future global challenges.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It guarantees immediate solutions to world problems.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It has already solved overpopulation issues.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It allows for the construction of new space stations.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as proponents believe in long-term benefits, as stated in the passage. B overstates by suggesting immediate solutions, C incorrectly suggests current solutions, and D mentions space stations but doesn't address the specific question of support.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "What is one of the criticisms of space exploration mentioned?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It might divert necessary funds from pressing Earth issues.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It has completely stopped terrestrial scientific research.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It ensures the immediate solution to overpopulation.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is entirely funded by private enterprises.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as it reflects the criticism noted in the passage. B overstates by suggesting a complete halt to Earth research, C reverses the meaning, and D inaccurately describes funding, which is not the focus of the criticism.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "C",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "How does the passage describe the role of international cooperation in space exploration?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It helps build global partnerships.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "It eliminates all international conflicts.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "It leads to competition rather than collaboration.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "It is a minor aspect of space exploration.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as the passage highlights international cooperation as a positive aspect. B overstates by claiming it eliminates conflicts, C reverses the stated collaboration, and D minimizes the importance of cooperation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "D",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "What practical benefits have resulted from space exploration, according to the passage?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Advancements in communication technologies.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Immediate resolution of global warming.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "An end to global financial crises.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Complete independence from Earth resources.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as the passage mentions advancements in communications. B and D overstate by suggesting immediate or complete solutions, while C reverses the focus to financial crises, which is not mentioned.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "A",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 6,
+        "text": "What long-term benefits do proponents of space exploration foresee?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Potential solutions to overpopulation and resource scarcity.",
+            "isCorrect": true,
+            "trapType": "CORRECT_PARAPHRASE"
+          },
+          {
+            "label": "B",
+            "text": "Immediate economic profits for all countries.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_OVERSTATED"
+          },
+          {
+            "label": "C",
+            "text": "Total eradication of poverty.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_REVERSED"
+          },
+          {
+            "label": "D",
+            "text": "Expansion of Earth's natural resources.",
+            "isCorrect": false,
+            "trapType": "DISTRACTOR_MENTIONED"
+          }
+        ],
+        "answer": "A",
+        "explanation": "A is correct as the passage notes potential long-term solutions. B overstates by suggesting immediate profits, C reverses by claiming poverty eradication, and D inaccurately suggests resource expansion, which is not mentioned as a benefit.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "B",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:16:27.332Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "mutationDistribution": {
+        "CORRECT_PARAPHRASE": 0,
+        "DISTRACTOR_MENTIONED": 0,
+        "DISTRACTOR_REVERSED": 0,
+        "DISTRACTOR_OVERSTATED": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  }
+]

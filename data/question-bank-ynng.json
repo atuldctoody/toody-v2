@@ -306,5 +306,1083 @@
       },
       "flaggedForReview": []
     }
+  },
+  {
+    "id": "f67b066b-95c9-4f83-97f4-c2ffd2ced83c",
+    "type": "ynng",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience has made remarkable strides in recent decades, fundamentally altering how we perceive the brain's capabilities and limitations. It is evident that neuroplasticity represents one of the most significant discoveries in modern neuroscience, fundamentally changing our understanding of brain development. This concept underscores the brain's ability to reorganize itself by forming new neural connections, allowing individuals to adapt to new experiences and recover from injuries. In my view, this discovery offers immense potential for therapeutic applications, particularly in rehabilitation and learning.\n\nMoreover, it is clear that the notion that we use only 10% of our brain capacity is clearly a myth that has been thoroughly debunked by contemporary neuroscience research. This outdated perspective undermines the complexity and efficiency of the human brain, which constantly engages different regions to perform even the simplest tasks. I believe that dispelling such myths is crucial for fostering a more accurate public understanding of neuroscience.\n\nIn addition to these groundbreaking insights, recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though the long-term implications remain under investigation. While these findings are promising, it is vital to approach them with a degree of caution, as more research is necessary to fully comprehend the extent and significance of these changes.\n\nAnother area of interest in neuroscience is the impact of sleep on cognitive functions. The relationship between sleep deprivation and cognitive decline could arguably be more complex than current models suggest, given the variability in individual responses. I believe that this complexity indicates a need for personalized approaches in addressing sleep-related issues, which could lead to more effective interventions.\n\nFinally, the intersection of neuroscience and artificial intelligence raises intriguing questions about the future of human cognition. While some neuroscientists argue that artificial intelligence will never replicate human consciousness, others contend that technological advances may eventually bridge this gap. In my view, this debate highlights the need for continued exploration of the ethical and philosophical dimensions of AI, as we stand on the brink of unprecedented technological evolution.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that neuroplasticity is a major breakthrough in neuroscience.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that neuroplasticity represents one of the most significant discoveries in modern neuroscience, fundamentally changing our understanding of brain development.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — The author's explicit opinion marker 'It is evident that' shows direct agreement with the significance of neuroplasticity as a major discovery.",
+        "reasoning": {
+          "step_1_locate": "It is evident that neuroplasticity represents one of the most significant discoveries in modern neuroscience, fundamentally changing our understanding of brain development.",
+          "step_2_compare": "Author says: 'It is evident that neuroplasticity represents one of the most significant discoveries'. Statement claims: writer believes neuroplasticity is a major breakthrough.",
+          "step_3_logic": "DIRECT_MATCH — The author's explicit opinion marker 'It is evident that' shows direct agreement with the significance of neuroplasticity as a major discovery.",
+          "step_4_eliminate": "Not 'No' because the author clearly supports this view rather than contradicting it. Not 'Not Given' because 'It is evident that' is a definite opinion marker showing the author's personal stance."
+        },
+        "keySentence": "It is evident that neuroplasticity represents one of the most significant discoveries in modern neuroscience, fundamentally changing our understanding of brain development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer accepts that humans utilize only a small fraction of their brain's potential.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that we use only 10% of our brain capacity is clearly a myth that has been thoroughly debunked by contemporary neuroscience research.",
+        "anchorText": "clearly a myth",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — The author explicitly rejects the idea by calling it 'clearly a myth', which directly opposes the statement's claim.",
+        "reasoning": {
+          "step_1_locate": "The notion that we use only 10% of our brain capacity is clearly a myth that has been thoroughly debunked by contemporary neuroscience research.",
+          "step_2_compare": "Author says: 'clearly a myth' about the 10% brain usage claim. Statement claims: writer accepts humans use only a small fraction of brain potential.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author explicitly rejects the idea by calling it 'clearly a myth', which directly opposes the statement's claim.",
+          "step_4_eliminate": "Not 'Yes' because the author explicitly rejects rather than accepts this view. Not 'Not Given' because 'clearly a myth' is a definite opinion marker showing the author's disagreement."
+        },
+        "keySentence": "The notion that we use only 10% of our brain capacity is clearly a myth that has been thoroughly debunked by contemporary neuroscience research.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that meditation definitively changes the brain's physical structure.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though the long-term implications remain under investigation.",
+        "anchorText": "studies by neuroscientists suggest",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — The author only reports what researchers found using 'studies suggest' without adding personal opinion markers about their own belief.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though the long-term implications remain under investigation.",
+          "step_2_compare": "Author says: 'studies suggest' (reporting others' views). Statement claims: writer believes meditation definitively changes brain structure.",
+          "step_3_logic": "NEUTRAL_REPORTING — The author only reports what researchers found using 'studies suggest' without adding personal opinion markers about their own belief.",
+          "step_4_eliminate": "Not 'Yes' because there is no opinion marker showing the author's personal agreement. Not 'No' because the author doesn't contradict the claim, just reports it neutrally."
+        },
+        "keySentence": "Recent studies by neuroscientists at Stanford University suggest that meditation can alter brain structure, though the long-term implications remain under investigation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that the connection between lack of sleep and mental deterioration is more complicated than existing theories propose.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The relationship between sleep deprivation and cognitive decline could arguably be more complex than current models suggest, given the variability in individual responses.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_UNCERTAINTY — The double hedge 'could arguably' shows the author is not committing to a definite view, contradicting the statement's claim of certainty.",
+        "reasoning": {
+          "step_1_locate": "The relationship between sleep deprivation and cognitive decline could arguably be more complex than current models suggest, given the variability in individual responses.",
+          "step_2_compare": "Author says: 'could arguably be more complex' (hedged, uncertain). Statement claims: writer is certain about this complexity.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — The double hedge 'could arguably' shows the author is not committing to a definite view, contradicting the statement's claim of certainty.",
+          "step_4_eliminate": "Not 'Yes' because 'could arguably' indicates uncertainty, not the certainty claimed in the statement. Not 'No' because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "The relationship between sleep deprivation and cognitive decline could arguably be more complex than current models suggest, given the variability in individual responses.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the view that AI cannot achieve human-like consciousness.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some neuroscientists argue that artificial intelligence will never replicate human consciousness, others contend that technological advances may eventually bridge this gap.",
+        "anchorText": "some argue... others contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NEUTRALITY — The author presents both sides equally without opinion markers indicating personal support for either position.",
+        "reasoning": {
+          "step_1_locate": "While some neuroscientists argue that artificial intelligence will never replicate human consciousness, others contend that technological advances may eventually bridge this gap.",
+          "step_2_compare": "Author says: 'some argue X, others contend Y' (balanced reporting). Statement claims: writer supports the view that AI cannot achieve consciousness.",
+          "step_3_logic": "BALANCED_NEUTRALITY — The author presents both sides equally without opinion markers indicating personal support for either position.",
+          "step_4_eliminate": "Not 'Yes' because there is no opinion marker showing the author personally supports this view. Not 'No' because the author doesn't reject it, just reports it alongside the opposing view."
+        },
+        "keySentence": "While some neuroscientists argue that artificial intelligence will never replicate human consciousness, others contend that technological advances may eventually bridge this gap.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:40:56.671Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "e35dbb55-278f-4fff-8bdc-fd842c3ead0b",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has undergone significant changes over the past decades, illuminating the complexities of language acquisition and use. Recent studies by linguists at Cambridge University have found that bilingual children develop stronger cognitive flexibility than their monolingual peers. This finding underscores the importance of promoting bilingual education, which I believe can provide cognitive advantages that extend beyond language skills. Bilingualism, in my view, not only enhances cognitive abilities but also fosters cultural understanding and empathy. \n\nIt is evident that corpus linguistics has revolutionized our understanding of language patterns in natural discourse. The use of large corpora has allowed linguists to analyze real-life language use systematically, providing insights into how language evolves and functions in varied contexts. This methodological advancement, I argue, is crucial for developing more accurate linguistic theories and applications, such as natural language processing technologies.\n\nHowever, the notion that universal grammar exists as an innate biological mechanism is fundamentally flawed, as it fails to account for the vast diversity of linguistic structures across cultures. In my opinion, this perspective overlooks the adaptability and creativity inherent in human language. The diversity of languages suggests that environmental and social factors play a significant role in shaping linguistic development, challenging the idea of a universal set of grammatical rules.\n\nFurthermore, the decline in minority languages could arguably be attributed to globalization pressures, though other socioeconomic factors may also play a role. It is vital to recognize that language loss entails not just the disappearance of words and grammar but also the erosion of cultural identity and heritage. Efforts to preserve linguistic diversity should be prioritized to maintain the rich tapestry of human expression.\n\nIn the realm of cognitive linguistics, some researchers contend that language shapes thought processes, while others maintain that thought exists independently of linguistic structures. This debate highlights the intricate relationship between language and cognition. While I acknowledge the influence of language on thought, it is clear that cognitive processes can transcend linguistic boundaries, enabling individuals to think creatively and abstractly.\n\nOverall, linguistic research continues to offer profound insights into the nature of language and thought, making it an indispensable field of study in our increasingly interconnected world.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that bilingual children have better cognitive flexibility than monolingual children.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by linguists at Cambridge University have found that bilingual children develop stronger cognitive flexibility than their monolingual peers.",
+        "anchorText": "studies by linguists at Cambridge University have found",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — the author is merely reporting research findings without endorsing or rejecting them",
+        "reasoning": {
+          "step_1_locate": "Recent studies by linguists at Cambridge University have found that bilingual children develop stronger cognitive flexibility than their monolingual peers.",
+          "step_2_compare": "Author says: studies have found [claim]. Statement claims: the writer believes [same claim].",
+          "step_3_logic": "NEUTRAL_REPORTING — the author is merely reporting research findings without endorsing or rejecting them",
+          "step_4_eliminate": "Not Yes because the author never uses opinion markers showing personal agreement. Not No because the author doesn't contradict the research findings."
+        },
+        "keySentence": "Recent studies by linguists at Cambridge University have found that bilingual children develop stronger cognitive flexibility than their monolingual peers.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks corpus linguistics has transformed how we understand language patterns.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that corpus linguistics has revolutionized our understanding of language patterns in natural discourse.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_MATCH — revolutionized and transformed are synonyms; the author clearly endorses this view",
+        "reasoning": {
+          "step_1_locate": "It is evident that corpus linguistics has revolutionized our understanding of language patterns in natural discourse.",
+          "step_2_compare": "Author says: It is evident that corpus linguistics has revolutionized understanding. Statement claims: writer thinks corpus linguistics has transformed understanding.",
+          "step_3_logic": "SYNONYM_MATCH — revolutionized and transformed are synonyms; the author clearly endorses this view",
+          "step_4_eliminate": "Not No because the author explicitly agrees rather than disagrees. Not Not Given because 'it is evident that' is a clear opinion marker showing the author's position."
+        },
+        "keySentence": "It is evident that corpus linguistics has revolutionized our understanding of language patterns in natural discourse.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer supports the theory of universal grammar as an innate biological mechanism.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, the notion that universal grammar exists as an innate biological mechanism is fundamentally flawed, as it fails to account for the vast diversity of linguistic structures across cultures.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — calling something fundamentally flawed means the author rejects it, opposite of supporting it",
+        "reasoning": {
+          "step_1_locate": "However, the notion that universal grammar exists as an innate biological mechanism is fundamentally flawed, as it fails to account for the vast diversity of linguistic structures across cultures.",
+          "step_2_compare": "Author says: universal grammar is fundamentally flawed. Statement claims: writer supports universal grammar.",
+          "step_3_logic": "DIRECT_CONTRADICTION — calling something fundamentally flawed means the author rejects it, opposite of supporting it",
+          "step_4_eliminate": "Not Yes because the author explicitly rejects rather than supports the theory. Not Not Given because 'is fundamentally flawed' is a clear negative opinion marker."
+        },
+        "keySentence": "However, the notion that universal grammar exists as an innate biological mechanism is fundamentally flawed, as it fails to account for the vast diversity of linguistic structures across cultures.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes globalization is the main cause of minority language decline.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The decline in minority languages could arguably be attributed to globalization pressures, though other socioeconomic factors may also play a role.",
+        "anchorText": "could arguably be attributed",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_UNCERTAINTY — 'could arguably' and 'may also' show the author is presenting possibilities without committing to a definite view",
+        "reasoning": {
+          "step_1_locate": "The decline in minority languages could arguably be attributed to globalization pressures, though other socioeconomic factors may also play a role.",
+          "step_2_compare": "Author says: could arguably be attributed to globalization. Statement claims: writer believes globalization is the main cause.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — 'could arguably' and 'may also' show the author is presenting possibilities without committing to a definite view",
+          "step_4_eliminate": "Not Yes because the author doesn't definitively state globalization is the main cause. Not No because the author doesn't reject globalization as a factor, just presents it tentatively."
+        },
+        "keySentence": "The decline in minority languages could arguably be attributed to globalization pressures, though other socioeconomic factors may also play a role.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer agrees that language shapes thought processes.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Some researchers contend that language shapes thought processes, while others maintain that thought exists independently of linguistic structures.",
+        "anchorText": "Some researchers contend / while others maintain",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NEUTRALITY — the author reports both opposing views without endorsing either position",
+        "reasoning": {
+          "step_1_locate": "Some researchers contend that language shapes thought processes, while others maintain that thought exists independently of linguistic structures.",
+          "step_2_compare": "Author says: some contend X while others maintain Y. Statement claims: writer agrees with X.",
+          "step_3_logic": "BALANCED_NEUTRALITY — the author reports both opposing views without endorsing either position",
+          "step_4_eliminate": "Not Yes because the author never indicates personal agreement with either view. Not No because the author doesn't reject the language-shapes-thought view, just reports it alongside the opposing view."
+        },
+        "keySentence": "Some researchers contend that language shapes thought processes, while others maintain that thought exists independently of linguistic structures.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:43:51.766Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "e2b88719-2630-4251-be21-2400d7606217",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Renewable Energy",
+    "passage": "The transition from fossil fuels to renewable energy sources is not just a trend but a necessity for sustainable development. In my view, renewable energy offers a viable solution to the pressing issue of climate change. It is clear that harnessing the power of the sun, wind, and water can significantly reduce our carbon footprint. However, I firmly believe that the claim that solar panels are too expensive for developing nations is outdated and fails to consider recent technological advances. Over the past few years, the cost of solar panel production has decreased substantially, making them more accessible and affordable worldwide. \n\nFurthermore, it is vital that governments prioritize investment in wind energy infrastructure over fossil fuel subsidies to meet climate targets. Wind energy not only provides a clean source of power but also generates employment in manufacturing, installation, and maintenance sectors. By shifting financial support from coal and oil to wind farms, countries can stimulate economic growth while reducing greenhouse gas emissions.\n\nRecent studies by the International Energy Agency suggest that hydroelectric power could supply 25% of global energy needs by 2040, though some environmental groups have raised concerns about ecosystem disruption. While hydroelectric dams provide a reliable source of energy, their impact on local habitats and water quality cannot be overlooked. Balancing energy production with environmental conservation is crucial to ensuring sustainable development.\n\nThe rapid decline in battery storage costs could arguably make renewable energy more reliable than traditional power sources within the next decade. Enhanced storage solutions enable the efficient use of solar and wind power even when the sun isn't shining or the wind isn't blowing. This advancement addresses one of the main criticisms of renewable energy — its intermittency.\n\nThe passage presents both advantages and disadvantages of nuclear energy without the author expressing personal support or opposition. Nuclear power generates a significant amount of electricity with minimal greenhouse gas emissions. However, concerns about radioactive waste and the potential for catastrophic failures continue to provoke debate.\n\nIn conclusion, I believe that embracing renewable energy is not just an option but a requirement for a sustainable future. By investing in solar, wind, and hydroelectric power, and exploring battery storage innovations, we can create a resilient and clean energy system that meets global demands.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer agrees that solar panels remain too costly for developing countries.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, I firmly believe that the claim that solar panels are too expensive for developing nations is outdated and fails to consider recent technological advances.",
+        "anchorText": "I firmly believe",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — the author explicitly rejects the view that the statement attributes to them.",
+        "reasoning": {
+          "step_1_locate": "However, I firmly believe that the claim that solar panels are too expensive for developing nations is outdated and fails to consider recent technological advances.",
+          "step_2_compare": "Author says: the claim is outdated. Statement claims: writer agrees panels are too costly.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author explicitly rejects the view that the statement attributes to them.",
+          "step_4_eliminate": "Not Yes because the author calls the claim 'outdated'. Not Not Given because 'I firmly believe' is a clear personal opinion marker."
+        },
+        "keySentence": "However, I firmly believe that the claim that solar panels are too expensive for developing nations is outdated and fails to consider recent technological advances.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer believes governments should invest more in wind energy than in fossil fuel subsidies.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments prioritize investment in wind energy infrastructure over fossil fuel subsidies to meet climate targets.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — the statement accurately reflects the author's explicitly stated view.",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments prioritize investment in wind energy infrastructure over fossil fuel subsidies to meet climate targets.",
+          "step_2_compare": "Author says: it is vital to prioritize wind energy over fossil fuel subsidies. Statement claims: writer believes governments should invest more in wind energy.",
+          "step_3_logic": "DIRECT_MATCH — the statement accurately reflects the author's explicitly stated view.",
+          "step_4_eliminate": "Not No because the author's view matches the statement. Not Not Given because 'it is vital that' clearly expresses the author's personal position."
+        },
+        "keySentence": "It is vital that governments prioritize investment in wind energy infrastructure over fossil fuel subsidies to meet climate targets.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer thinks hydroelectric power is the best solution for future energy needs.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Energy Agency suggest that hydroelectric power could supply 25% of global energy needs by 2040, though some environmental groups have raised concerns about ecosystem disruption.",
+        "anchorText": "studies suggest / groups have raised",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — the author presents information from external sources without adding personal judgment.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Energy Agency suggest that hydroelectric power could supply 25% of global energy needs by 2040, though some environmental groups have raised concerns about ecosystem disruption.",
+          "step_2_compare": "Author says: [reports others' views only]. Statement claims: writer thinks hydroelectric is best.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author presents information from external sources without adding personal judgment.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows author agreement. Not No because the author doesn't contradict it either—they simply report what others say."
+        },
+        "keySentence": "Recent studies by the International Energy Agency suggest that hydroelectric power could supply 25% of global energy needs by 2040, though some environmental groups have raised concerns about ecosystem disruption.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that renewable energy will become more reliable than traditional power sources.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The rapid decline in battery storage costs could arguably make renewable energy more reliable than traditional power sources within the next decade.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_UNCERTAINTY — the author uses tentative language that avoids definite commitment.",
+        "reasoning": {
+          "step_1_locate": "The rapid decline in battery storage costs could arguably make renewable energy more reliable than traditional power sources within the next decade.",
+          "step_2_compare": "Author says: could arguably make renewable energy more reliable. Statement claims: writer is certain it will become more reliable.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — the author uses tentative language that avoids definite commitment.",
+          "step_4_eliminate": "Not Yes because 'could arguably' is not certainty. Not No because the author doesn't reject the idea—they just don't commit to it."
+        },
+        "keySentence": "The rapid decline in battery storage costs could arguably make renewable energy more reliable than traditional power sources within the next decade.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the use of nuclear energy as a low-carbon alternative.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "The passage presents both advantages and disadvantages of nuclear energy without the author expressing personal support or opposition",
+        "anchorText": "Nuclear energy produces minimal carbon emissions during operation, making it attractive to countries seeking to reduce their carbon footprint. However, concerns about radioactive waste disposal and the high costs of building nuclear power plants remain significant challenges. Some experts view nuclear power as an important part of the energy transition, while others argue that investment should focus entirely on truly renewable sources like wind and solar.",
+        "complexityLevel": "Band 5.5",
+        "explanation": "The author presents facts and reports expert opinions but never states their own position using phrases like 'I believe,' 'it is clear that,' or 'nuclear energy should be supported'",
+        "reasoning": {
+          "step_1_locate": "Find the section discussing nuclear energy and identify what the author says versus what others say",
+          "step_2_compare": "The passage mentions nuclear energy's low carbon emissions (factual statement) and notes that 'some experts view' it positively while 'others argue' against it (reporting different views)",
+          "step_3_logic": "The author presents facts and reports expert opinions but never states their own position using phrases like 'I believe,' 'it is clear that,' or 'nuclear energy should be supported'",
+          "step_4_eliminate": "Cannot answer YES (no authorial support stated) or NO (no authorial opposition stated); the author maintains neutrality by presenting balanced reporting"
+        },
+        "keySentence": "The passage presents both advantages and disadvantages of nuclear energy without the author expressing personal support or opposition",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:44:03.769Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 2.5,
+        "min": 2,
+        "max": 3
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "a82393f3-65ec-43ba-af53-d546c977087a",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Climate Science",
+    "passage": "Climate science is a field that has garnered significant attention in recent years, primarily due to the alarming pace of environmental changes. Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050. This data, I believe, underscores the urgent need for comprehensive action. It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve. In my view, waiting any longer will exacerbate the already dire predictions and make mitigation efforts significantly more challenging.\n\nMoreover, the notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed and diverts attention from the systemic changes required. While personal responsibility is important, it is clear that large-scale industrial and governmental shifts are crucial to making a substantial impact. It is not enough to focus solely on personal carbon footprints when the broader system needs restructuring.\n\nInterestingly, the recent temperature anomalies could arguably be attributed to natural climate variability rather than human activity, though more research is needed. This perspective, however, should not detract from the overwhelming evidence supporting human-induced climate change. It is critical that scientific inquiry continues to explore these facets, but we must not use them as an excuse for inaction.\n\nGeoengineering has emerged as a controversial topic in the discourse on climate solutions. Proponents of geoengineering argue it offers a rapid solution to global warming, while critics contend that it poses unacceptable environmental risks and ethical concerns. In my view, the potential unintended consequences of such interventions necessitate a cautious approach. We cannot afford to gamble with the planet's future on unproven technologies without thoroughly understanding their long-term impacts.\n\nIn conclusion, it is clear that bold, systemic actions are needed to address the climate crisis. While individual efforts are commendable, they are insufficient in the face of such a global challenge. Governments must lead the charge in implementing effective policies and fostering international cooperation to secure a sustainable future.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that Arctic summers will be ice-free by 2050.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+        "anchorText": "studies have found",
+        "complexityLevel": 2,
+        "explanation": "NEUTRAL_AUTHOR — The author is reporting the findings and predictions of others without expressing personal agreement or disagreement.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+          "step_2_compare": "Author says: 'studies have found' and 'scientists predicting'. Statement claims: 'The writer believes'.",
+          "step_3_logic": "NEUTRAL_AUTHOR — The author is reporting the findings and predictions of others without expressing personal agreement or disagreement.",
+          "step_4_eliminate": "Not Yes because the author never uses opinion markers like 'I believe' or 'clearly'. Not No because the author doesn't contradict the prediction, just reports it neutrally."
+        },
+        "keySentence": "Recent studies by the International Climate Research Institute have found that Arctic ice is melting at unprecedented rates, with some scientists predicting ice-free summers by 2050.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks immediate government action on carbon reduction is necessary.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_AGREES — The phrase 'It is vital that' is a clear opinion marker showing the author's strong agreement with the necessity of immediate action.",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+          "step_2_compare": "Author says: 'It is vital that governments implement carbon reduction policies immediately'. Statement claims: 'The writer thinks immediate government action on carbon reduction is necessary'.",
+          "step_3_logic": "AUTHOR_AGREES — The phrase 'It is vital that' is a clear opinion marker showing the author's strong agreement with the necessity of immediate action.",
+          "step_4_eliminate": "Not No because the author supports rather than contradicts the need for action. Not Not Given because 'It is vital that' is an explicit opinion marker, not neutral reporting."
+        },
+        "keySentence": "It is vital that governments implement carbon reduction policies immediately, as delays will make climate targets impossible to achieve.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that individual lifestyle changes can solve the climate crisis.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed and diverts attention from the systemic changes required.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "AUTHOR_DISAGREES — The opinion marker 'is fundamentally flawed' shows the author explicitly rejects this notion.",
+        "reasoning": {
+          "step_1_locate": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed and diverts attention from the systemic changes required.",
+          "step_2_compare": "Author says: 'The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed'. Statement claims: 'The writer agrees that individual lifestyle changes can solve the climate crisis'.",
+          "step_3_logic": "AUTHOR_DISAGREES — The opinion marker 'is fundamentally flawed' shows the author explicitly rejects this notion.",
+          "step_4_eliminate": "Not Yes because the author calls the idea 'fundamentally flawed', not valid. Not Not Given because the author takes a clear position against this view rather than remaining neutral."
+        },
+        "keySentence": "The notion that individual lifestyle changes alone can solve the climate crisis is fundamentally flawed and diverts attention from the systemic changes required.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes temperature anomalies are caused by natural climate variability.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The recent temperature anomalies could arguably be attributed to natural climate variability rather than human activity, though more research is needed.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_OPINION — The phrases 'could arguably' and 'though more research is needed' show the author is presenting a possibility without committing to belief.",
+        "reasoning": {
+          "step_1_locate": "The recent temperature anomalies could arguably be attributed to natural climate variability rather than human activity, though more research is needed.",
+          "step_2_compare": "Author says: 'could arguably be attributed'. Statement claims: 'The writer believes'.",
+          "step_3_logic": "HEDGED_OPINION — The phrases 'could arguably' and 'though more research is needed' show the author is presenting a possibility without committing to belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' indicates uncertainty, not belief. Not No because the author doesn't reject this possibility, just presents it tentatively."
+        },
+        "keySentence": "The recent temperature anomalies could arguably be attributed to natural climate variability rather than human activity, though more research is needed.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer supports the use of geoengineering as a solution to global warming.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Proponents of geoengineering argue it offers a rapid solution to global warming, while critics contend that it poses unacceptable environmental risks and ethical concerns.",
+        "anchorText": "argue / contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_REPORTING — The author presents opposing views equally without taking a personal stance on which side is correct.",
+        "reasoning": {
+          "step_1_locate": "Proponents of geoengineering argue it offers a rapid solution to global warming, while critics contend that it poses unacceptable environmental risks and ethical concerns.",
+          "step_2_compare": "Author says: 'Proponents argue' and 'critics contend'. Statement claims: 'The writer supports'.",
+          "step_3_logic": "BALANCED_REPORTING — The author presents opposing views equally without taking a personal stance on which side is correct.",
+          "step_4_eliminate": "Not Yes because the author never expresses personal support, only reports what proponents say. Not No because the author doesn't reject geoengineering, just presents both perspectives neutrally."
+        },
+        "keySentence": "Proponents of geoengineering argue it offers a rapid solution to global warming, while critics contend that it poses unacceptable environmental risks and ethical concerns.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:45:13.751Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "d4f67cd6-ce60-4757-a683-bb5b1c91cb19",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has long been a subject of human fascination and scientific inquiry. However, I firmly believe that the enormous costs associated with manned missions to Mars cannot be justified when millions of people on Earth lack access to clean water and basic healthcare. While the allure of discovering new worlds is undeniable, it is clear that our priorities should focus on ensuring the well-being of our planet's inhabitants first. Nonetheless, space exploration has yielded significant benefits, particularly through advancements in satellite technology. It is vital that governments continue to invest in satellite technology, as these systems have proven essential for weather forecasting, disaster management, and global communications. The advancements in these areas have had a profound impact on our daily lives and have contributed to saving countless lives. \n\nRecent studies conducted by NASA researchers found that prolonged exposure to cosmic radiation during deep space travel significantly increases the risk of cancer and neurological damage. This highlights the formidable challenges and risks associated with manned deep space missions. The health and safety of astronauts must be a top priority, and current technology may not yet be sufficient to mitigate these severe risks. \n\nThe discovery of water ice on the Moon could arguably make lunar colonization more feasible, though significant technological challenges remain. Establishing a human presence on the Moon would require monumental efforts in terms of technology and resources. While the potential for lunar bases exists, they must be approached with caution and thorough planning. \n\nIn my view, the role of private companies in space exploration is a double-edged sword. While some scientists argue that private companies like SpaceX are revolutionizing space access through cost reduction, critics contend that commercial space ventures prioritize profit over scientific advancement and safety standards. The involvement of the private sector can drive innovation and reduce costs, but it is crucial to ensure that these ventures adhere to rigorous safety and scientific protocols. Ultimately, a balanced approach that combines governmental oversight with private sector innovation may provide the most sustainable path forward for space exploration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer thinks that spending on Mars missions is justifiable despite Earth's problems.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "However, I firmly believe that the enormous costs associated with manned missions to Mars cannot be justified when millions of people on Earth lack access to clean water and basic healthcare.",
+        "anchorText": "I firmly believe",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — the author's explicit belief directly opposes the statement's claim",
+        "reasoning": {
+          "step_1_locate": "However, I firmly believe that the enormous costs associated with manned missions to Mars cannot be justified when millions of people on Earth lack access to clean water and basic healthcare.",
+          "step_2_compare": "Author says: costs cannot be justified. Statement claims: spending is justifiable.",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author's explicit belief directly opposes the statement's claim",
+          "step_4_eliminate": "Not Yes because the author says costs 'cannot be justified', which is the opposite. Not Not Given because 'I firmly believe' is a clear personal opinion marker."
+        },
+        "keySentence": "However, I firmly believe that the enormous costs associated with manned missions to Mars cannot be justified when millions of people on Earth lack access to clean water and basic healthcare.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer believes continued government investment in satellite technology is necessary.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments continue to invest in satellite technology, as these systems have proven essential for weather forecasting, disaster management, and global communications.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_AGREEMENT — 'vital' and 'necessary' express the same positive stance on continued investment",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments continue to invest in satellite technology, as these systems have proven essential for weather forecasting, disaster management, and global communications.",
+          "step_2_compare": "Author says: it is vital that governments continue to invest. Statement claims: investment is necessary.",
+          "step_3_logic": "DIRECT_AGREEMENT — 'vital' and 'necessary' express the same positive stance on continued investment",
+          "step_4_eliminate": "Not No because the author supports investment with 'vital'. Not Not Given because 'It is vital that' is an explicit opinion marker showing the author's view."
+        },
+        "keySentence": "It is vital that governments continue to invest in satellite technology, as these systems have proven essential for weather forecasting, disaster management, and global communications.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes that cosmic radiation poses serious health risks to astronauts.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies conducted by NASA researchers found that prolonged exposure to cosmic radiation during deep space travel significantly increases the risk of cancer and neurological damage.",
+        "anchorText": "researchers found",
+        "complexityLevel": 3,
+        "explanation": "NEUTRAL_REPORTING — the author reports research findings without adding personal agreement or disagreement",
+        "reasoning": {
+          "step_1_locate": "Recent studies conducted by NASA researchers found that prolonged exposure to cosmic radiation during deep space travel significantly increases the risk of cancer and neurological damage.",
+          "step_2_compare": "Author says: researchers found health risks. Statement claims: the writer believes there are health risks.",
+          "step_3_logic": "NEUTRAL_REPORTING — the author reports research findings without adding personal agreement or disagreement",
+          "step_4_eliminate": "Not Yes because there's no opinion marker showing the author's belief. Not No because the author doesn't contradict the finding, just reports it neutrally."
+        },
+        "keySentence": "Recent studies conducted by NASA researchers found that prolonged exposure to cosmic radiation during deep space travel significantly increases the risk of cancer and neurological damage.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer is certain that water ice on the Moon will make colonization feasible.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The discovery of water ice on the Moon could arguably make lunar colonization more feasible, though significant technological challenges remain.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_UNCERTAINTY — 'could arguably' expresses possibility without commitment, not certainty",
+        "reasoning": {
+          "step_1_locate": "The discovery of water ice on the Moon could arguably make lunar colonization more feasible, though significant technological challenges remain.",
+          "step_2_compare": "Author says: could arguably make colonization more feasible. Statement claims: writer is certain it will make colonization feasible.",
+          "step_3_logic": "HEDGED_UNCERTAINTY — 'could arguably' expresses possibility without commitment, not certainty",
+          "step_4_eliminate": "Not Yes because 'could arguably' shows uncertainty, not certainty. Not No because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "The discovery of water ice on the Moon could arguably make lunar colonization more feasible, though significant technological challenges remain.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer thinks private space companies are beneficial for space exploration.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some scientists argue that private companies like SpaceX are revolutionizing space access through cost reduction, critics contend that commercial space ventures prioritize profit over scientific advancement and safety standards.",
+        "anchorText": "some scientists argue / critics contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NEUTRALITY — author presents both positive and negative views equally without taking a personal stance",
+        "reasoning": {
+          "step_1_locate": "While some scientists argue that private companies like SpaceX are revolutionizing space access through cost reduction, critics contend that commercial space ventures prioritize profit over scientific advancement and safety standards.",
+          "step_2_compare": "Author says: some argue benefits, critics argue problems. Statement claims: the writer thinks they are beneficial.",
+          "step_3_logic": "BALANCED_NEUTRALITY — author presents both positive and negative views equally without taking a personal stance",
+          "step_4_eliminate": "Not Yes because the author doesn't endorse the positive view. Not No because the author doesn't endorse the negative view either; they remain neutral."
+        },
+        "keySentence": "While some scientists argue that private companies like SpaceX are revolutionizing space access through cost reduction, critics contend that commercial space ventures prioritize profit over scientific advancement and safety standards.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:45:37.552Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "2db87013-5944-4921-b534-5a43affcd441",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Economic Policy",
+    "passage": "In my view, the formulation of economic policy is a critical aspect that directly influences a nation's financial health and social welfare. Various theories and approaches exist, each with its proponents and detractors. Progressive taxation systems could arguably reduce income inequality more effectively than flat-rate alternatives, though the evidence remains inconclusive. This suggests a need for a balanced approach that considers the unique economic landscape of each country. Furthermore, it is vital that governments implement strict regulatory frameworks to prevent future financial crises of the magnitude witnessed in 2008. Such measures can mitigate risks and safeguard economies from the reckless financial practices that have previously led to widespread economic downturns.\n\nAdditionally, the notion that austerity measures stimulate economic growth is clearly contradicted by empirical data from European economies during the 2010s. These data illustrate that severe budget cuts and spending reductions often exacerbate economic stagnation rather than fostering growth. Instead, policies encouraging investment and consumer confidence may yield more sustainable economic improvements.\n\nMoreover, recent studies by the International Monetary Fund suggest that universal basic income programmes may reduce poverty levels, though critics contend they create welfare dependency. I believe that while these programs offer a safety net, careful implementation and complementary policies promoting employment and skill development are essential to avoid long-term dependency.\n\nThe debate over minimum wage increases also highlights the complexity of economic policy. While some economists argue that minimum wage increases boost consumer spending, others maintain they lead to unemployment among low-skilled workers. It is clear that the impact of such policies can vary significantly based on the broader economic context and the specific characteristics of the labor market.\n\nIn conclusion, economic policy requires a nuanced and multifaceted approach. Policymakers must consider various perspectives and empirical evidence to craft strategies that not only address immediate concerns but also promote long-term economic stability and social equity.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes progressive taxation is more effective at reducing income inequality than flat-rate taxation.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "Progressive taxation systems could arguably reduce income inequality more effectively than flat-rate alternatives, though the evidence remains inconclusive.",
+        "anchorText": "could arguably",
+        "complexityLevel": 3,
+        "explanation": "HEDGED_OPINION — The author presents a possibility using tentative language rather than stating a firm belief.",
+        "reasoning": {
+          "step_1_locate": "Progressive taxation systems could arguably reduce income inequality more effectively than flat-rate alternatives, though the evidence remains inconclusive.",
+          "step_2_compare": "Author says: 'could arguably reduce income inequality more effectively'. Statement claims: 'writer believes progressive taxation is more effective'.",
+          "step_3_logic": "HEDGED_OPINION — The author presents a possibility using tentative language rather than stating a firm belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' indicates uncertainty, not belief. Not No because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "Progressive taxation systems could arguably reduce income inequality more effectively than flat-rate alternatives, though the evidence remains inconclusive.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks government regulation is essential to avoid major financial crises.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is vital that governments implement strict regulatory frameworks to prevent future financial crises of the magnitude witnessed in 2008.",
+        "anchorText": "It is vital that",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_MATCH — 'Vital' and 'essential' are synonymous, and both refer to government regulation preventing crises.",
+        "reasoning": {
+          "step_1_locate": "It is vital that governments implement strict regulatory frameworks to prevent future financial crises of the magnitude witnessed in 2008.",
+          "step_2_compare": "Author says: 'It is vital that governments implement strict regulatory frameworks'. Statement claims: 'writer thinks government regulation is essential'.",
+          "step_3_logic": "DIRECT_MATCH — 'Vital' and 'essential' are synonymous, and both refer to government regulation preventing crises.",
+          "step_4_eliminate": "Not No because the author clearly supports regulation. Not Not Given because 'it is vital' is an explicit opinion marker showing the author's view."
+        },
+        "keySentence": "It is vital that governments implement strict regulatory frameworks to prevent future financial crises of the magnitude witnessed in 2008.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer believes austerity measures can promote economic growth.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that austerity measures stimulate economic growth is clearly contradicted by empirical data from European economies during the 2010s.",
+        "anchorText": "clearly contradicted",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — The author explicitly states the idea is contradicted, which is the opposite of believing it works.",
+        "reasoning": {
+          "step_1_locate": "The notion that austerity measures stimulate economic growth is clearly contradicted by empirical data from European economies during the 2010s.",
+          "step_2_compare": "Author says: 'The notion that austerity measures stimulate economic growth is clearly contradicted'. Statement claims: 'writer believes austerity measures can promote economic growth'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The author explicitly states the idea is contradicted, which is the opposite of believing it works.",
+          "step_4_eliminate": "Not Yes because the author rejects this notion. Not Not Given because 'clearly contradicted' is an explicit opinion marker showing disagreement."
+        },
+        "keySentence": "The notion that austerity measures stimulate economic growth is clearly contradicted by empirical data from European economies during the 2010s.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer supports the implementation of universal basic income programmes.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by the International Monetary Fund suggest that universal basic income programmes may reduce poverty levels, though critics contend they create welfare dependency.",
+        "anchorText": "studies suggest / critics contend",
+        "complexityLevel": 4,
+        "explanation": "NEUTRAL_REPORTING — The author presents others' views without adding personal opinion markers about their own stance.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by the International Monetary Fund suggest that universal basic income programmes may reduce poverty levels, though critics contend they create welfare dependency.",
+          "step_2_compare": "Author says: 'studies suggest' and 'critics contend'. Statement claims: 'writer supports universal basic income'.",
+          "step_3_logic": "NEUTRAL_REPORTING — The author presents others' views without adding personal opinion markers about their own stance.",
+          "step_4_eliminate": "Not Yes because no opinion marker shows the author's support. Not No because the author doesn't express opposition, only reports different viewpoints."
+        },
+        "keySentence": "Recent studies by the International Monetary Fund suggest that universal basic income programmes may reduce poverty levels, though critics contend they create welfare dependency.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes minimum wage increases are beneficial for the economy.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "While some economists argue that minimum wage increases boost consumer spending, others maintain they lead to unemployment among low-skilled workers.",
+        "anchorText": "some argue / others maintain",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_PRESENTATION — The author presents opposing views equally without taking a side or using opinion markers to show personal agreement.",
+        "reasoning": {
+          "step_1_locate": "While some economists argue that minimum wage increases boost consumer spending, others maintain they lead to unemployment among low-skilled workers.",
+          "step_2_compare": "Author says: 'some economists argue' one thing while 'others maintain' another. Statement claims: 'writer believes minimum wage increases are beneficial'.",
+          "step_3_logic": "BALANCED_PRESENTATION — The author presents opposing views equally without taking a side or using opinion markers to show personal agreement.",
+          "step_4_eliminate": "Not Yes because the author doesn't express personal belief in the benefits. Not No because the author doesn't reject the idea, just presents both perspectives neutrally."
+        },
+        "keySentence": "While some economists argue that minimum wage increases boost consumer spending, others maintain they lead to unemployment among low-skilled workers.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:46:30.288Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
+  },
+  {
+    "id": "b1ed244a-42ee-4053-9756-1e45960a3dfe",
+    "type": "ynng",
+    "band": 5.5,
+    "topic": "Psychology",
+    "passage": "Psychology, as a field, continues to unravel the complexities of the human mind and behavior. I believe that understanding these intricacies is vital for fostering mental well-being and personal development. Recent studies by cognitive psychologists have found that multitasking significantly reduces productivity and increases error rates in complex tasks. This highlights the importance of focusing on single tasks to enhance efficiency and accuracy. It is evident that early childhood experiences play a crucial role in shaping adult personality traits and behavioral patterns. This underscores the necessity for nurturing environments during formative years to promote healthy psychological development. The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as environmental influences demonstrably contribute to cognitive development. In my view, this interaction between nature and nurture is crucial in shaping an individual's intellectual capabilities. The relationship between social media usage and depression in adolescents could arguably be bidirectional, though more longitudinal research is needed to establish causality. It is clear that excessive use of these platforms can lead to negative mental health outcomes, yet social media can also provide support networks that combat loneliness. Some psychologists argue that positive reinforcement is more effective than punishment in behavior modification, while others contend that both techniques have their place depending on the context and individual circumstances. In my opinion, a balanced approach that considers the unique needs of each individual is essential for successful behavioral interventions. In conclusion, psychology offers profound insights into human behavior and mental processes, and continued research is pivotal for advancing our understanding in these areas.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The writer believes that multitasking reduces productivity.",
+        "answer": "Not Given",
+        "logicType": "NEUTRAL_AUTHOR",
+        "passageAnchor": "Recent studies by cognitive psychologists have found that multitasking significantly reduces productivity and increases error rates in complex tasks.",
+        "anchorText": "studies by cognitive psychologists have found",
+        "complexityLevel": 2,
+        "explanation": "NEUTRAL_REPORTING — the author is merely reporting what researchers discovered without endorsing or rejecting the claim.",
+        "reasoning": {
+          "step_1_locate": "Recent studies by cognitive psychologists have found that multitasking significantly reduces productivity and increases error rates in complex tasks.",
+          "step_2_compare": "Author says: 'studies have found' (reporting others' research). Statement claims: 'the writer believes' (author's personal view).",
+          "step_3_logic": "NEUTRAL_REPORTING — the author is merely reporting what researchers discovered without endorsing or rejecting the claim.",
+          "step_4_eliminate": "Not Yes because the author never expresses personal agreement. Not No because the author doesn't contradict the research findings."
+        },
+        "keySentence": "Recent studies by cognitive psychologists have found that multitasking significantly reduces productivity and increases error rates in complex tasks.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The writer thinks early childhood experiences are important for adult personality development.",
+        "answer": "Yes",
+        "logicType": "AUTHOR_AGREES",
+        "passageAnchor": "It is evident that early childhood experiences play a crucial role in shaping adult personality traits and behavioral patterns.",
+        "anchorText": "It is evident that",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_AGREEMENT — the author explicitly endorses the importance of early childhood experiences using the strong opinion marker 'it is evident'.",
+        "reasoning": {
+          "step_1_locate": "It is evident that early childhood experiences play a crucial role in shaping adult personality traits and behavioral patterns.",
+          "step_2_compare": "Author says: 'It is evident that early childhood experiences play a crucial role' (definite opinion). Statement claims: 'writer thinks early childhood experiences are important' (same view).",
+          "step_3_logic": "DIRECT_AGREEMENT — the author explicitly endorses the importance of early childhood experiences using the strong opinion marker 'it is evident'.",
+          "step_4_eliminate": "Not No because the author agrees rather than disagrees. Not Not Given because 'it is evident' is a clear opinion marker showing the author's stance."
+        },
+        "keySentence": "It is evident that early childhood experiences play a crucial role in shaping adult personality traits and behavioral patterns.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Yes",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "The writer agrees that genetics alone determine intelligence.",
+        "answer": "No",
+        "logicType": "AUTHOR_DISAGREES",
+        "passageAnchor": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as environmental influences demonstrably contribute to cognitive development.",
+        "anchorText": "is fundamentally flawed",
+        "complexityLevel": 3,
+        "explanation": "DIRECT_CONTRADICTION — the author explicitly rejects the genetics-only position using the strong negative opinion marker 'fundamentally flawed'.",
+        "reasoning": {
+          "step_1_locate": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as environmental influences demonstrably contribute to cognitive development.",
+          "step_2_compare": "Author says: 'notion that intelligence is entirely determined by genetic factors is fundamentally flawed' (rejects genetics-only view). Statement claims: 'writer agrees that genetics alone determine intelligence' (opposite view).",
+          "step_3_logic": "DIRECT_CONTRADICTION — the author explicitly rejects the genetics-only position using the strong negative opinion marker 'fundamentally flawed'.",
+          "step_4_eliminate": "Not Yes because the author rejects rather than agrees with the claim. Not Not Given because 'fundamentally flawed' clearly shows the author's disagreement."
+        },
+        "keySentence": "The notion that intelligence is entirely determined by genetic factors is fundamentally flawed, as environmental influences demonstrably contribute to cognitive development.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "No",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "The writer believes social media usage and adolescent depression have a bidirectional relationship.",
+        "answer": "Not Given",
+        "logicType": "HEDGED_OPINION",
+        "passageAnchor": "The relationship between social media usage and depression in adolescents could arguably be bidirectional, though more longitudinal research is needed to establish causality.",
+        "anchorText": "could arguably be",
+        "complexityLevel": 4,
+        "explanation": "HEDGED_SPECULATION — the author uses 'could arguably' to present a possibility without endorsing it as their firm belief.",
+        "reasoning": {
+          "step_1_locate": "The relationship between social media usage and depression in adolescents could arguably be bidirectional, though more longitudinal research is needed to establish causality.",
+          "step_2_compare": "Author says: 'could arguably be bidirectional' (tentative suggestion). Statement claims: 'writer believes' (definite position).",
+          "step_3_logic": "HEDGED_SPECULATION — the author uses 'could arguably' to present a possibility without endorsing it as their firm belief.",
+          "step_4_eliminate": "Not Yes because 'could arguably' indicates uncertainty rather than belief. Not No because the author doesn't reject the idea, just presents it tentatively."
+        },
+        "keySentence": "The relationship between social media usage and depression in adolescents could arguably be bidirectional, though more longitudinal research is needed to establish causality.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The writer believes positive reinforcement is more effective than punishment.",
+        "answer": "Not Given",
+        "logicType": "BALANCED_REPORTING",
+        "passageAnchor": "Some psychologists argue that positive reinforcement is more effective than punishment in behavior modification, while others contend that both techniques have their place depending on the context and individual circumstances.",
+        "anchorText": "Some psychologists argue... while others contend",
+        "complexityLevel": 4,
+        "explanation": "BALANCED_NEUTRALITY — the author presents two opposing views without endorsing either position.",
+        "reasoning": {
+          "step_1_locate": "Some psychologists argue that positive reinforcement is more effective than punishment in behavior modification, while others contend that both techniques have their place depending on the context and individual circumstances.",
+          "step_2_compare": "Author says: 'Some argue X, while others contend Y' (balanced presentation). Statement claims: 'writer believes' positive reinforcement is more effective (taking one side).",
+          "step_3_logic": "BALANCED_NEUTRALITY — the author presents two opposing views without endorsing either position.",
+          "step_4_eliminate": "Not Yes because the author never endorses the positive reinforcement view. Not No because the author doesn't reject it either, just reports both perspectives equally."
+        },
+        "keySentence": "Some psychologists argue that positive reinforcement is more effective than punishment in behavior modification, while others contend that both techniques have their place depending on the context and individual circumstances.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T07:46:36.023Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "AUTHOR_AGREES": 1,
+        "AUTHOR_DISAGREES": 1,
+        "NEUTRAL_AUTHOR": 1,
+        "HEDGED_OPINION": 1,
+        "BALANCED_REPORTING": 1
+      },
+      "complexityProfile": {
+        "avg": 3.2,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    }
   }
 ]

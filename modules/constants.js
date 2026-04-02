@@ -9,7 +9,10 @@ export const AUDIO_URL      = 'https://toody-api.vercel.app/api/audio';
 
 export const SKILL_CATALOGUE = [
   { skill: 'reading.tfng',              screen: 's-reading',   section: 'Reading',   label: 'True / False / Not Given',    icon: '📖', desc: 'AI-generated passage + 5 TF/NG questions. Toody explains every answer.' },
-  { skill: 'reading.summaryCompletion', screen: 's-reading',   section: 'Reading',   label: 'Summary Completion',           icon: '📖', desc: 'Complete a gapped summary using a word bank.' },
+  { skill: 'reading.summaryCompletion',  screen: 's-reading',   section: 'Reading',   label: 'Summary Completion',           icon: '📖', desc: 'Complete a gapped summary using a word bank.' },
+  { skill: 'reading.yesNoNotGiven',     screen: 's-reading',   section: 'Reading',   label: 'Yes / No / Not Given',         icon: '📖', desc: "Decide if statements match the writer's views." },
+  { skill: 'reading.multipleChoice',    screen: 's-reading',   section: 'Reading',   label: 'Multiple Choice',              icon: '📖', desc: 'Choose the best answer from four options about a reading passage.' },
+  { skill: 'reading.sentenceCompletion',screen: 's-reading',   section: 'Reading',   label: 'Sentence Completion',          icon: '📖', desc: 'Complete sentences using words directly from the passage.' },
   { skill: 'listening.multipleChoice',  screen: 's-listening', section: 'Listening', label: 'Multiple Choice',              icon: '🎧', desc: 'Pick the correct answer from detailed audio scenarios.' },
   { skill: 'listening.formCompletion',  screen: 's-listening', section: 'Listening', label: 'Form Completion',              icon: '🎧', desc: 'Complete a form from information in the audio.' },
   { skill: 'writing.task1',             screen: 's-writing',   section: 'Writing',   label: 'Task 1 — Graph Description',   icon: '✍️', desc: 'Describe an academic graph or chart in 150+ words.' },
@@ -126,7 +129,7 @@ export const SKILL_MANIFEST = {
   },
   'reading-multipleChoice': {
     id:               'reading-multipleChoice',
-    catalogueKey:     null,
+    catalogueKey:     'reading.multipleChoice',
     displayName:      'Multiple Choice',
     section:          'Reading',
     icon:             '📖',
@@ -190,7 +193,7 @@ export const SKILL_MANIFEST = {
   },
   'reading-sentenceCompletion': {
     id:               'reading-sentenceCompletion',
-    catalogueKey:     null,
+    catalogueKey:     'reading.sentenceCompletion',
     displayName:      'Sentence Completion',
     section:          'Reading',
     icon:             '📖',
@@ -222,7 +225,7 @@ export const SKILL_MANIFEST = {
   },
   'reading-yesNoNotGiven': {
     id:               'reading-yesNoNotGiven',
-    catalogueKey:     null,
+    catalogueKey:     'reading.yesNoNotGiven',
     displayName:      'Yes / No / Not Given',
     section:          'Reading',
     icon:             '📖',

@@ -48,7 +48,8 @@ export async function loadTeachFirst(skillKey) {
   const cfg        = getSkillConfig(skillId);
   const skillLabel = cfg.displayName;
   const isMH       = cfg.hookStyle === 'matching';
-  const isTFNG     = cfg.answerButtons.includes('Not Given');
+  const isYNNG     = cfg.hookStyle === 'ynng';
+  const isTFNG     = cfg.answerButtons.includes('Not Given') && !isYNNG;
 
   // ── TEACHING ATTEMPTS TRACKING ────────────────────────────────────
   // Record that Teach-First fired for this skill, and snapshot accuracy before teaching.
@@ -75,11 +76,13 @@ export async function loadTeachFirst(skillKey) {
 
   const conceptPromptDetail = cfg.conceptPromptHint;
 
-  const ansVals = isMH ? ['A','B','A'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
+  const ansVals = isMH ? ['A','B','A'] : isYNNG ? ['Yes','No','Not Given'] : isTFNG ? ['True','False','NG'] : ['True','False','True'];
 
   // Skill-specific passage and statement descriptions for the hook question
   const hookPassageDesc = isMH
     ? '2 academic sentences — choose a topic where one heading fits the main idea but another could mislead'
+    : isYNNG
+    ? "2 academic sentences written in first person, clearly expressing the author's opinions"
     : isTFNG
     ? '2 academic sentences — choose a tricky topic where the Not Given trap applies'
     : '2 academic sentences from which a one-sentence summary can be drawn with one key term left blank';
@@ -87,7 +90,7 @@ export async function loadTeachFirst(skillKey) {
   // Skill-specific statement/example descriptions
   const statementDesc = isMH
     ? 'a testable claim that looks True but is actually False — a detail matches but not the main idea'
-    : isTFNG
+    : (isYNNG || isTFNG)
     ? cfg.hookPromptHint
     : 'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)';
 
@@ -97,7 +100,9 @@ export async function loadTeachFirst(skillKey) {
     ? 'testable claim'
     : 'a summary sentence with one blank gap and a wrong-form distractor visible';
 
-  const sysAnswerRule = isTFNG
+  const sysAnswerRule = isYNNG
+    ? 'CRITICAL: Every "answer" field must be exactly ONE value (Yes, No, or Not Given) — never True/False/NG.'
+    : isTFNG
     ? 'CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated.'
     : 'CRITICAL: Every "answer" field must be exactly one of: True or False — never pipe-separated or NG.';
 
@@ -120,7 +125,7 @@ Return ONLY this JSON:
   "hookQuestion": {
     "passage": "${hookPassageDesc}",
     "statement": "${statementDesc}",
-    "answer": "${isMH ? 'False' : isTFNG ? 'NG' : 'False'}",
+    "answer": "${isMH ? 'False' : isYNNG ? 'Not Given' : isTFNG ? 'NG' : 'False'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
   "workedExamples": [
@@ -234,7 +239,9 @@ Return ONLY this JSON:
       conceptHtml += conceptExamples.map(ex => {
         const normAns  = normaliseAnswer(ex.answer);
         const ansLabel = normAns === 'notgiven' ? 'Not Given' : ex.answer;
-        const ansColor = normAns === 'true' ? 'var(--success)' : normAns === 'false' ? 'var(--danger)' : 'var(--accent)';
+        const ansColor = (normAns === 'true'  || normAns === 'yes') ? 'var(--success)'
+                       : (normAns === 'false' || normAns === 'no')  ? 'var(--danger)'
+                       : 'var(--accent)';
         return `<div class="card" style="margin-top:10px;padding:12px 14px;">
           <div class="card-label" style="color:${ansColor}">Example — answer: ${ansLabel}</div>
           <div style="font-size:13px;font-style:italic;color:var(--muted);margin:6px 0 4px">${ex.passage}</div>
@@ -286,6 +293,13 @@ function renderHookQuestion() {
         style="width:100%;padding:16px;border-radius:12px;border:1.5px solid #E0DFF0;font-size:15px;color:#1A1A2E;background:#fff;box-sizing:border-box;font-family:inherit">
       <button class="btn mt8" onclick="window.answerHook(document.getElementById('hook-text-input').value)">Submit answer →</button>
     `;
+  } else if (hookCfg.hookStyle === 'ynng') {
+    // ynng: Yes / No / Not Given buttons
+    btnsContainer.innerHTML =
+      `<button class="tfng-btn" onclick="window.answerHook('Yes')"       data-mv="Yes">✓ Yes</button>` +
+      `<button class="tfng-btn" onclick="window.answerHook('No')"        data-mv="No">✗ No</button>` +
+      `<button class="tfng-btn" onclick="window.answerHook('Not Given')" data-mv="Not Given">? Not Given</button>`;
+    btnsContainer.classList.remove('hidden');
   } else {
     // tfng: ensure True / False / NG buttons are present with correct NG visibility
     btnsContainer.innerHTML =
@@ -371,12 +385,12 @@ function renderWorkedExampleAt(idx) {
 
   // Normalise answer to the three keys used by answerToChoice
   const normAns = normaliseAnswer(we.answer || 'ng');
-  const answerToChoice = { true: 'confirms', false: 'contradicts', notgiven: 'silent', ng: 'silent' };
+  const answerToChoice = { true: 'confirms', false: 'contradicts', notgiven: 'silent', ng: 'silent', yes: 'confirms', no: 'contradicts' };
   const correctChoice  = answerToChoice[normAns] || 'silent';
 
   // ── RICH FORMAT (hardcoded examples — explanation/bandFiveAnswer/teachingNote) ──
   if (we.explanation) {
-    const answerLabel  = normAns === 'true' ? 'True' : normAns === 'false' ? 'False' : 'Not Given';
+    const answerLabel  = normAns === 'true' || normAns === 'yes' ? (normAns === 'yes' ? 'Yes' : 'True') : normAns === 'false' || normAns === 'no' ? (normAns === 'no' ? 'No' : 'False') : 'Not Given';
     const wrongBadge   = we.bandFiveAnswer
       ? `<div class="card" style="margin-top:12px;border:2px solid var(--danger)">
            <div class="card-label" style="color:var(--danger)">⚠ What most students answer</div>

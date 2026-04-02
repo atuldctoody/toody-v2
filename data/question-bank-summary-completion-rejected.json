@@ -1,0 +1,102 @@
+[
+  {
+    "id": "0171b1fa-16e3-4312-9328-a58f5afbf8db",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Recent linguistic research has shifted from traditional grammar analysis to more dynamic studies of language use in social contexts. This approach emphasizes understanding how language functions in real-world interactions, a field often referred to as sociolinguistics. Researchers in this area are interested in how language varies across different communities and the factors that influence these variations. They also explore language change over time, considering both historical influences and modern developments. By combining insights from anthropology, sociology, and psychology, sociolinguists aim to uncover deep insights into human communication. This interdisciplinary method has opened new pathways for understanding the complexities of language evolution and its role in society.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "dynamic",
+        "explanation": "The word 'dynamic' captures the nature of language use in social contexts as opposed to static grammar rules.",
+        "keySentence": "Recent linguistic research has shifted from traditional grammar analysis to more dynamic studies of language use in social contexts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "sociolinguistics",
+        "explanation": "Sociolinguistics is the field that studies language use in social contexts.",
+        "keySentence": "This approach emphasizes understanding how language functions in real-world interactions, a field often referred to as sociolinguistics.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "variations",
+        "explanation": "Variations refer to differences in language across different communities.",
+        "keySentence": "Researchers in this area are interested in how language varies across different communities and the factors that influence these variations.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "evolution",
+        "explanation": "Evolution refers to the process of language change over time.",
+        "keySentence": "This interdisciplinary method has opened new pathways for understanding the complexities of language evolution and its role in society.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "pathways",
+        "explanation": "Pathways here refers to new directions or approaches in the study of language.",
+        "keySentence": "This interdisciplinary method has opened new pathways for understanding the complexities of language evolution and its role in society.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "extraData": {
+      "summaryText": "Modern linguistic research is focusing more on the [1] use of language within social contexts, known as [2]. Scholars examine how language differs between communities and what causes these [3]. They also study language changes, taking into account past and present factors. By integrating various disciplines, researchers are gaining a deeper understanding of language [4] and its societal importance. This has led to new [5] in the study of language.",
+      "wordBank": [
+        "dynamic",
+        "sociolinguistics",
+        "variations",
+        "evolution",
+        "pathways",
+        "grammar",
+        "syntax",
+        "transformations"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:55.171Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  }
+]
