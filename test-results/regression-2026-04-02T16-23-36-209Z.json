@@ -1,21 +1,52 @@
 {
-  "timestamp": "2026-04-02T15:59:48.642Z",
+  "timestamp": "2026-04-02T16:23:36.209Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 32235,
+  "durationMs": 24009,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 25294,
+      "durationMs": 24001,
       "steps": {
         "generation": {
           "pass": true,
           "topic": "Climate Change",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.2,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 23831,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Impact of Climate Change",
           "error": null
         },
         "verification": {
@@ -40,44 +71,13 @@
       }
     },
     {
-      "band": 6,
-      "pass": true,
-      "durationMs": 32175,
-      "steps": {
-        "generation": {
-          "pass": true,
-          "topic": "Climate Change and Agriculture",
-          "error": null
-        },
-        "verification": {
-          "pass": true,
-          "corrections": 1,
-          "error": null
-        },
-        "explanationQuality": {
-          "pass": true,
-          "avgScore": 4.2,
-          "error": null
-        },
-        "audio": {
-          "pass": true,
-          "error": null
-        },
-        "writingEval": {
-          "pass": true,
-          "overallBand": 6,
-          "error": null
-        }
-      }
-    },
-    {
       "band": 7,
       "pass": true,
-      "durationMs": 25980,
+      "durationMs": 23217,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Climate Change Effects",
           "error": null
         },
         "verification": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
           "error": null
         }
       }

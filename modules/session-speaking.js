@@ -159,44 +159,88 @@ export async function evaluateSpeaking(transcript) {
   const questions = speakingQs.join('\n');
 
   const prompt = {
-    system: 'You are an experienced IELTS Speaking examiner. Evaluate transcribed responses strictly using official band descriptors. Return valid JSON only.',
+    model: 'gpt-4o',
+    system: `You are a Cambridge IELTS examiner. Score this Speaking response using ONLY the official Cambridge band descriptors below.
+
+FLUENCY AND COHERENCE (25%):
+- Band 5: Usually maintains flow but uses repetition and self-correction. Over-relies on slow speech
+- Band 5.5: Maintains flow but uses repetition and self-correction more than Band 6
+- Band 6: Willing to speak at length. Repetition and self-correction reduce coherence
+- Band 6.5: Speaks at length without noticeable effort. Some hesitation but maintains coherence
+- Band 7: Speaks at length without noticeable effort. Logical sequencing. Some hesitation acceptable
+- Band 8+: Speaks fluently with only rare repetition. Develops topics coherently and appropriately
+
+LEXICAL RESOURCE (25%):
+- Band 5: Manages to talk about familiar topics. Uses basic vocabulary with some inappropriate choices
+- Band 5.5: Adequate for familiar topics. Attempts paraphrasing but not always successfully
+- Band 6: Adequate vocabulary for familiar topics. Some attempts at less common items
+- Band 6.5: Uses vocabulary with flexibility. Uses less common items with some awareness of style
+- Band 7: Uses vocabulary with flexibility. Uses less common items with some awareness of collocation
+- Band 8+: Uses a wide vocabulary resource. Uses idiomatic language naturally and accurately
+
+GRAMMATICAL RANGE AND ACCURACY (25%):
+- Band 5: Basic sentence forms with reasonable accuracy. Limited range of complex structures
+- Band 5.5: Basic sentence forms with reasonable accuracy. Some complex structures attempted
+- Band 6: Mix of simple and complex structures. Errors occur but rarely impede communication
+- Band 6.5: Mix of simple and complex structures. Generally error-free sentences
+- Band 7: Uses a variety of complex structures. Frequent error-free sentences
+- Band 8+: Wide range of structures. Majority of sentences are error free. Only minor mistakes
+
+PRONUNCIATION (25%):
+- Band 5: Generally intelligible. Mispronunciation of individual sounds causes occasional difficulty
+- Band 5.5: Generally intelligible. Mispronunciation does not cause major problems
+- Band 6: Generally intelligible throughout. Some features of L1 accent evident
+- Band 6.5: Easy to understand throughout. L1 accent has minimal effect
+- Band 7: Easy to understand throughout. Uses a range of phonological features
+- Band 8+: Easy to understand throughout. Uses a full range of phonological features
+
+INDIAN STUDENT SPECIFIC PATTERNS TO WATCH FOR:
+- Retroflex consonants (t/d sounds) — note if causing intelligibility issues
+- Rising intonation at sentence ends — note if affecting communication
+- Filler overuse (basically, actually, only) — note if reducing fluency score
+- Direct translation structures from Hindi — note if affecting grammatical range
+
+Return JSON only:
+{
+  "overallBand": number (nearest 0.5),
+  "fluencyCoherence": number (nearest 0.5),
+  "lexicalResource": number (nearest 0.5),
+  "grammaticalRange": number (nearest 0.5),
+  "pronunciation": number (nearest 0.5),
+  "feedback": {
+    "strengths": ["strength 1", "strength 2"],
+    "improvements": ["improvement 1", "improvement 2", "improvement 3"],
+    "keyFocus": "the single most important thing to fix",
+    "indianStudentNote": "specific pattern noticed if any, empty string if none"
+  },
+  "wordCount": number,
+  "speakingTime": number
+}`,
     user: `Evaluate this IELTS Speaking response for a Band ${band} target student.
 
 QUESTIONS ASKED:
 ${questions}
 
 STUDENT TRANSCRIPT:
-${transcript || '[No speech detected]'}
-
-Note: Pronunciation cannot be assessed from text alone — give a neutral score with a caveat.
-
-Return ONLY this JSON:
-{
-  "overallBand": 6.0,
-  "fluencyCoherence": {"band": 6.0, "feedback": "one sentence"},
-  "lexicalResource": {"band": 6.0, "feedback": "one sentence"},
-  "grammaticalRange": {"band": 6.0, "feedback": "one sentence"},
-  "pronunciation": {"band": 6.0, "feedback": "Cannot assess from text. Score based on grammar/lexical proxies only."},
-  "topSuggestion": "one specific, actionable improvement"
-}`
+${transcript || '[No speech detected]'}`
   };
 
   try {
-    const raw    = await callAI({ ...prompt, maxTokens: 600 });
+    const raw    = await callAI({ ...prompt, maxTokens: 800 });
     const result = parseAIJson(raw);
     speakingBandEst = result.overallBand || 6.0;
 
     document.getElementById('speaking-transcript-text').textContent = transcript || '[No transcript available]';
     document.getElementById('speaking-overall-band').textContent    = speakingBandEst.toFixed(1);
-    document.getElementById('sc-fc-band').textContent = result.fluencyCoherence?.band?.toFixed(1) || '—';
-    document.getElementById('sc-fc-fb').innerHTML     = renderMarkdown(result.fluencyCoherence?.feedback || '');
-    document.getElementById('sc-lr-band').textContent = result.lexicalResource?.band?.toFixed(1)  || '—';
-    document.getElementById('sc-lr-fb').innerHTML     = renderMarkdown(result.lexicalResource?.feedback  || '');
-    document.getElementById('sc-gr-band').textContent = result.grammaticalRange?.band?.toFixed(1) || '—';
-    document.getElementById('sc-gr-fb').innerHTML     = renderMarkdown(result.grammaticalRange?.feedback || '');
-    document.getElementById('sc-pr-band').textContent = result.pronunciation?.band?.toFixed(1)    || '—';
-    document.getElementById('sc-pr-fb').innerHTML     = renderMarkdown(result.pronunciation?.feedback    || '');
-    document.getElementById('speaking-suggestion').innerHTML = renderMarkdown(result.topSuggestion || '');
+    document.getElementById('sc-fc-band').textContent = result.fluencyCoherence?.toFixed(1) || '—';
+    document.getElementById('sc-fc-fb').innerHTML     = renderMarkdown(result.feedback?.improvements?.[0] || '');
+    document.getElementById('sc-lr-band').textContent = result.lexicalResource?.toFixed(1)  || '—';
+    document.getElementById('sc-lr-fb').innerHTML     = renderMarkdown(result.feedback?.improvements?.[1]  || '');
+    document.getElementById('sc-gr-band').textContent = result.grammaticalRange?.toFixed(1) || '—';
+    document.getElementById('sc-gr-fb').innerHTML     = renderMarkdown(result.feedback?.improvements?.[2] || '');
+    document.getElementById('sc-pr-band').textContent = result.pronunciation?.toFixed(1)    || '—';
+    document.getElementById('sc-pr-fb').innerHTML     = renderMarkdown(result.feedback?.indianStudentNote || result.feedback?.strengths?.[0] || '');
+    document.getElementById('speaking-suggestion').innerHTML = renderMarkdown(result.feedback?.keyFocus || '');
 
     document.getElementById('speaking-evaluating').classList.add('hidden');
     document.getElementById('speaking-results-view').classList.remove('hidden');

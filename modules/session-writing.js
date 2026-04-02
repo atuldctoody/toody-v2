@@ -191,42 +191,94 @@ export const submitWriting = async function () {
   const taskLabel = isTask1 ? 'Task 1 (Graph Description)' : 'Task 2 (Opinion Essay)';
 
   const prompt = {
-    system: 'You are an experienced IELTS examiner. Evaluate writing responses strictly but fairly using official band descriptors. Return valid JSON only.',
+    model: 'gpt-4o',
+    system: `You are a Cambridge IELTS examiner with 20 years experience. Score this response using ONLY the official Cambridge band descriptors below. Do not invent criteria.
+
+TASK ACHIEVEMENT (25%):
+- Band 5: Addresses task only partially. Format may be inappropriate.
+- Band 5.5: Addresses task but coverage is not always sufficient
+- Band 6: Addresses all parts of the task. Presents relevant main ideas but some may be inadequately developed
+- Band 6.5: Addresses all parts of task though some parts more fully than others
+- Band 7: Covers all requirements. Presents clear position throughout. Main ideas extended and supported
+- Band 8+: Covers all requirements fully. Position is clear throughout. Ideas well developed with relevant examples
+
+COHERENCE AND COHESION (25%):
+- Band 5: Some organisation but may lack overall progression. Limited range of cohesive devices
+- Band 5.5: Presents information with some organisation but cohesion may be faulty
+- Band 6: Arranges information coherently. Uses cohesive devices effectively but may be mechanical
+- Band 6.5: Organises information logically. Manages paragraphing well
+- Band 7: Logically organises information. Uses a range of cohesive devices appropriately
+- Band 8+: Sequences information and ideas logically. Manages all aspects of cohesion skilfully
+
+LEXICAL RESOURCE (25%):
+- Band 5: Minimal range. Noticeable errors in spelling/word formation that cause difficulty for reader
+- Band 5.5: Uses limited range of vocabulary. Makes noticeable errors in spelling/word formation
+- Band 6: Adequate range. Attempts less common vocabulary with some inaccuracy. Some spelling errors
+- Band 6.5: Uses sufficient range. Generally paraphrases successfully
+- Band 7: Uses sufficient range with flexibility. Uses less common items with awareness of style
+- Band 8+: Uses wide range with fluency and flexibility. Skilfully uses uncommon lexical items
+
+GRAMMATICAL RANGE AND ACCURACY (25%):
+- Band 5: Limited range of structures. Frequent grammatical errors that may impede communication
+- Band 5.5: Uses only a limited range of structures with only rare use of subordinate clauses
+- Band 6: Mix of simple and complex structures. Some errors in grammar but meaning is clear
+- Band 6.5: Mix of simple and complex structures. Generally error free sentences
+- Band 7: Uses a variety of complex structures. Frequent error-free sentences
+- Band 8+: Wide range of structures. Majority of sentences are error free
+
+TASK 1 SPECIFIC RULES:
+- Missing overview = Band 5.5 ceiling — always check for overview paragraph
+- Must report main trends not every detail
+- Minimum 150 words — under = penalised one band
+- Data accuracy matters — misreporting numbers is penalised
+
+TASK 2 SPECIFIC RULES:
+- Must address ALL parts of the question — missing one part = significant penalty
+- Minimum 250 words — under = penalised one band
+- Position must be clear from introduction — sitting on the fence reduces score
+- Mechanical linking (First of all / However / On the other hand at every paragraph) reduces Coherence score
+- Examples must support arguments — abstract claims without examples score lower
+
+Return JSON only:
+{
+  "overallBand": number (nearest 0.5),
+  "taskAchievement": number (nearest 0.5),
+  "coherenceCohesion": number (nearest 0.5),
+  "lexicalResource": number (nearest 0.5),
+  "grammaticalRange": number (nearest 0.5),
+  "feedback": {
+    "strengths": ["strength 1", "strength 2"],
+    "improvements": ["improvement 1", "improvement 2", "improvement 3"],
+    "keyFocus": "one sentence — the single most important thing to fix"
+  },
+  "wordCount": number,
+  "hasOverview": boolean,
+  "addressesAllParts": boolean
+}`,
     user: `Evaluate this IELTS Writing ${taskLabel} response for a Band ${band} target student.
 
 TASK PROMPT: ${writingTaskData?.prompt || ''}
 
 STUDENT RESPONSE:
-${text}
-
-Return ONLY this JSON:
-{
-  "overallBand": 6.0,
-  "taskAchievement": {"band": 6.0, "feedback": "one sentence"},
-  "coherenceCohesion": {"band": 6.0, "feedback": "one sentence"},
-  "lexicalResource": {"band": 6.0, "feedback": "one sentence"},
-  "grammaticalRange": {"band": 6.0, "feedback": "one sentence"},
-  "topSuggestion": "one specific, actionable improvement",
-  "encouragement": "one motivating sentence about their performance"
-}`
+${text}`
   };
 
   try {
-    const raw    = await callAI({ ...prompt, maxTokens: 600 });
+    const raw    = await callAI({ ...prompt, maxTokens: 800 });
     const result = parseAIJson(raw);
     writingBandEst = result.overallBand || 6.0;
 
     document.getElementById('writing-overall-band').textContent = writingBandEst.toFixed(1);
-    document.getElementById('writing-encouragement').innerHTML  = renderMarkdown(result.encouragement || '');
-    document.getElementById('wc-ta-band').textContent  = result.taskAchievement?.band?.toFixed(1)   || '—';
-    document.getElementById('wc-ta-fb').innerHTML      = renderMarkdown(result.taskAchievement?.feedback   || '');
-    document.getElementById('wc-cc-band').textContent  = result.coherenceCohesion?.band?.toFixed(1) || '—';
-    document.getElementById('wc-cc-fb').innerHTML      = renderMarkdown(result.coherenceCohesion?.feedback || '');
-    document.getElementById('wc-lr-band').textContent  = result.lexicalResource?.band?.toFixed(1)   || '—';
-    document.getElementById('wc-lr-fb').innerHTML      = renderMarkdown(result.lexicalResource?.feedback   || '');
-    document.getElementById('wc-gr-band').textContent  = result.grammaticalRange?.band?.toFixed(1)  || '—';
-    document.getElementById('wc-gr-fb').innerHTML      = renderMarkdown(result.grammaticalRange?.feedback  || '');
-    document.getElementById('writing-suggestion').innerHTML = renderMarkdown(result.topSuggestion || '');
+    document.getElementById('writing-encouragement').innerHTML  = renderMarkdown(result.feedback?.strengths?.[0] || '');
+    document.getElementById('wc-ta-band').textContent  = result.taskAchievement?.toFixed(1)   || '—';
+    document.getElementById('wc-ta-fb').innerHTML      = renderMarkdown(result.feedback?.improvements?.[0]   || '');
+    document.getElementById('wc-cc-band').textContent  = result.coherenceCohesion?.toFixed(1) || '—';
+    document.getElementById('wc-cc-fb').innerHTML      = renderMarkdown(result.feedback?.improvements?.[1] || '');
+    document.getElementById('wc-lr-band').textContent  = result.lexicalResource?.toFixed(1)   || '—';
+    document.getElementById('wc-lr-fb').innerHTML      = renderMarkdown(result.feedback?.improvements?.[2]   || '');
+    document.getElementById('wc-gr-band').textContent  = result.grammaticalRange?.toFixed(1)  || '—';
+    document.getElementById('wc-gr-fb').innerHTML      = renderMarkdown(result.feedback?.strengths?.[1]  || '');
+    document.getElementById('writing-suggestion').innerHTML = renderMarkdown(result.feedback?.keyFocus || '');
 
     document.getElementById('writing-evaluating').classList.add('hidden');
     document.getElementById('writing-results-view').classList.remove('hidden');
