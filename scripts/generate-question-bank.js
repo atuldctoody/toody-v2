@@ -230,6 +230,199 @@ Return valid JSON array of 5 objects. Nothing else.`,
   return pairs;
 }
 
+// ── STAGE 0.5 — LOGIC PAIR VALIDATION ────────────────────────────────────────
+// After Stage 0 generates pairs and before Stage 1 embeds them into a passage,
+// a second Claude call reviews each pair for ambiguity.
+// Invalid pairs are regenerated with a targeted correction hint (up to 2 attempts).
+// After 2 failed attempts the pair is replaced with a DIRECT_CONTRADICTION, which
+// is always unambiguous.
+
+async function stageLogicValidation(logicPairs, topic, band, apiKey, log) {
+  // Build compact pair summaries for the reviewer
+  const pairSummaries = logicPairs.map((p, i) =>
+    JSON.stringify({ id: i + 1, logicType: p.logicType, fact: p.fact, statement: p.statement, answer: p.answer })
+  ).join('\n');
+
+  const valRes = await fetch(ANTHROPIC_URL, {
+    method:  'POST',
+    headers: {
+      'Content-Type':      'application/json',
+      'x-api-key':         apiKey,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model:       'claude-sonnet-4-5',
+      max_tokens:  600,
+      temperature: 0,
+      messages: [{
+        role:    'user',
+        content:
+`You are a strict IELTS examiner. Review each logic pair and flag any that are ambiguous — where a careful Band 6 reader could reasonably arrive at a different answer than stated.
+
+Rules:
+- TRUE: fact must explicitly confirm statement via synonyms — no inference
+- FALSE: fact must explicitly contradict statement — not just fail to confirm
+- NOT GIVEN: fact must be genuinely silent on the claim — not hinting or implying
+- CONCESSIVE_TRAP: answer must always be False — the main clause after although/despite contradicts the statement
+
+Flag as invalid if:
+- NOT GIVEN pair could be mistaken for False (partial contradiction)
+- TRUE pair relies on inference not explicit synonym
+- FALSE pair could be argued as Not Given (indirect contradiction)
+- CONCESSIVE_TRAP returns anything other than False
+
+Logic pairs to review:
+${pairSummaries}
+
+Return JSON array: [{ "id": 1, "valid": boolean, "issue": string }]`,
+      }],
+    }),
+  });
+
+  if (!valRes.ok) throw new Error(`Stage 0.5 API error: ${valRes.status}`);
+  const valData = await valRes.json();
+  const valRaw  = valData.content?.[0]?.text || '';
+  const reviews = safeParseJson(valRaw);
+
+  if (!Array.isArray(reviews)) throw new Error('Stage 0.5: invalid review response');
+
+  const flagged = reviews.filter(r => !r.valid);
+
+  if (flagged.length === 0) {
+    log(`⟳ Stage 0.5: 5/5 pairs valid`);
+    return logicPairs;
+  }
+
+  const validated  = [...logicPairs];
+  const outcomes   = [];
+
+  for (const flag of flagged) {
+    const pairIdx      = flag.id - 1;
+    const originalPair = logicPairs[pairIdx];
+    let   fixed        = false;
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const regenRes = await fetch(ANTHROPIC_URL, {
+          method:  'POST',
+          headers: {
+            'Content-Type':      'application/json',
+            'x-api-key':         apiKey,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model:       'claude-sonnet-4-5',
+            max_tokens:  600,
+            temperature: 0,
+            messages: [{
+              role:    'user',
+              content:
+`Generate exactly 1 T/F/NG logic pair for a Band ${band} IELTS Academic passage about ${topic}.
+
+PREVIOUS ATTEMPT REJECTED: ${flag.issue}. Generate a cleaner unambiguous version.
+
+Type required: ${originalPair.logicType}
+The answer MUST be: ${originalPair.answer}
+
+Return a single JSON object (not an array):
+{
+  "logicType": "${originalPair.logicType}",
+  "complexityLevel": 2,
+  "fact": "exact sentence that will appear verbatim in passage",
+  "anchorText": "specific word or phrase that determines the answer",
+  "statement": "what the IELTS student reads",
+  "answer": "${originalPair.answer}",
+  "whyCorrect": "one sentence proof with no ambiguity",
+  "reasoning": {
+    "step_1_locate": "exact verbatim fact sentence",
+    "step_2_compare": "Passage says: [phrase]. Statement says: [phrase].",
+    "step_3_logic": "TRAP_TYPE — plain language sentence",
+    "step_4_eliminate": "Not [optionA] because [reason]. Not [optionB] because [reason]."
+  }
+}`,
+            }],
+          }),
+        });
+
+        if (!regenRes.ok) continue;
+        const regenData = await regenRes.json();
+        const regenRaw  = regenData.content?.[0]?.text || '';
+        const newPair   = safeParseJson(regenRaw);
+
+        if (newPair && newPair.fact && newPair.statement && newPair.answer) {
+          validated[pairIdx] = newPair;
+          fixed = true;
+          break;
+        }
+      } catch { /* try next attempt */ }
+    }
+
+    if (!fixed) {
+      // Fallback: DIRECT_CONTRADICTION is always unambiguous
+      try {
+        const fbRes = await fetch(ANTHROPIC_URL, {
+          method:  'POST',
+          headers: {
+            'Content-Type':      'application/json',
+            'x-api-key':         apiKey,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model:       'claude-sonnet-4-5',
+            max_tokens:  600,
+            temperature: 0,
+            messages: [{
+              role:    'user',
+              content:
+`Generate exactly 1 T/F/NG logic pair for a Band ${band} IELTS Academic passage about ${topic}.
+
+Type: DIRECT_CONTRADICTION
+The passage sentence must explicitly state the OPPOSITE of the student statement. Zero ambiguity.
+
+Return a single JSON object:
+{
+  "logicType": "DIRECT_CONTRADICTION",
+  "complexityLevel": 2,
+  "fact": "exact sentence",
+  "anchorText": "specific word/phrase",
+  "statement": "student statement",
+  "answer": "False",
+  "whyCorrect": "one sentence proof",
+  "reasoning": {
+    "step_1_locate": "...",
+    "step_2_compare": "...",
+    "step_3_logic": "DIRECT_CONTRADICTION — ...",
+    "step_4_eliminate": "..."
+  }
+}`,
+            }],
+          }),
+        });
+
+        if (fbRes.ok) {
+          const fbData = await fbRes.json();
+          const fbRaw  = fbData.content?.[0]?.text || '';
+          const fbPair = safeParseJson(fbRaw);
+          if (fbPair && fbPair.fact) {
+            validated[pairIdx] = fbPair;
+            outcomes.push(`fallback→DC`);
+          }
+        }
+      } catch { outcomes.push('fallback_failed'); }
+    } else {
+      outcomes.push('valid');
+    }
+  }
+
+  const issueDesc = flagged
+    .map(f => `${logicPairs[f.id - 1]?.logicType} ambiguous`)
+    .join(', ');
+  const outcomeStr = outcomes.length === 1 ? outcomes[0] : outcomes.join(', ');
+  log(`⟳ Stage 0.5: ${flagged.length} flagged (${issueDesc}) → regenerating... ${outcomeStr}`);
+
+  return validated;
+}
+
 // ── STAGE 1 — PASSAGE GENERATION ─────────────────────────────────────────────
 // GPT-4o receives the 5 fact sentences as hard constraints and must embed them
 // verbatim. Questions are constructed directly from Stage 0 pairs — GPT-4o
@@ -426,12 +619,12 @@ function buildEntry({ topic, band, passage, questions, corrections, quality, sim
 
 function isNetworkError(err) {
   const msg = (err.message || '').toLowerCase();
-  return /fetch failed|econnreset|etimedout|connection reset/.test(msg);
+  return /fetch failed|econnreset|etimedout|connection reset|api error: 500/.test(msg);
 }
 
 async function generateOneSet(idx, total, topic, band, apiKey, leadType) {
   const MAX_RETRIES = 2;
-  const RETRY_DELAY = 3000;
+  const RETRY_DELAY = 5000;
   const prefix = `[${String(idx).padStart(String(total).length)}/${total}]`;
   const log    = msg => process.stdout.write(`${prefix} ${msg}\n`);
 
@@ -444,7 +637,10 @@ async function generateOneSet(idx, total, topic, band, apiKey, leadType) {
     try {
       // Stage 0
       log(`⟳ Stage 0: Logic matrix (lead: ${leadType})...`);
-      const logicPairs = await stageLogicMatrix(topic, band, apiKey, leadType);
+      const rawPairs = await stageLogicMatrix(topic, band, apiKey, leadType);
+
+      // Stage 0.5
+      const logicPairs = await stageLogicValidation(rawPairs, topic, band, apiKey, log);
 
       // Stage 1
       log('⟳ Stage 1: Passage generation...');
