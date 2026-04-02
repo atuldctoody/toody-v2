@@ -9,7 +9,10 @@
 //
 // Note: updateStudentBrain and updateWeakAreas were already moved to modules/state.js.
 
-import { serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import {
+  serverTimestamp, getDocs, query, collection, where, orderBy, limit,
+  updateDoc, increment,
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { SKILL_MANIFEST, API_URL, SKILL_MAP } from './constants.js';
 import {
   studentData, setStudentData, currentUser,
@@ -40,6 +43,8 @@ let sessionCorrections    = [];   // Answer corrections from verifyAnswers() —
 let sessionPassageQuality = null; // Passage quality eval from evaluate-passage.js — logged to Firestore
 let sessionLogicValidationPassed = false; // Logic Tags validation result — logged to Firestore
 let sessionIsVerified            = false; // Whether verifyAnswers() succeeded this session
+let sessionFromBank              = false; // Whether this session was served from questionBank
+let sessionBankSetId             = null;  // Firestore document ID of the bank set used
 
 // Tough Love
 let tlQ           = null;
@@ -225,6 +230,40 @@ export function computeConfidenceMetrics(questions, answers) {
   };
 }
 
+// ── QUESTION BANK LOOKUP ──────────────────────────────────────────
+async function getQuestionFromBank(targetBand, excludeIds = []) {
+  const band       = Math.round(targetBand * 2) / 2;
+  const bandsToTry = [band, band - 0.5, band + 0.5].filter(b => b >= 5.0 && b <= 7.0);
+
+  for (const b of bandsToTry) {
+    const snapshot = await getDocs(
+      query(
+        collection(db, 'questionBank'),
+        where('band', '==', b),
+        where('status', '==', 'active'),
+        orderBy('servedCount', 'asc'),
+        limit(10)
+      )
+    );
+
+    if (snapshot.empty) continue;
+
+    const candidates = snapshot.docs.filter(d => !excludeIds.includes(d.id));
+    if (candidates.length === 0) continue;
+
+    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+
+    updateDoc(picked.ref, {
+      servedCount:  increment(1),
+      lastServedAt: serverTimestamp(),
+    }).catch(() => {});
+
+    return { id: picked.id, ...picked.data() };
+  }
+
+  return null;
+}
+
 // ── READING SESSION ───────────────────────────────────────────────
 export async function loadReadingSession() {
   sessionQuestions = [];
@@ -237,6 +276,8 @@ export async function loadReadingSession() {
   isSCSession                  = false;
   sessionLogicValidationPassed = false;
   sessionIsVerified            = false;
+  sessionFromBank              = false;
+  sessionBankSetId             = null;
   tlQ = null; tlPassed = false;
 
   goTo('s-reading');
@@ -255,6 +296,54 @@ export async function loadReadingSession() {
   document.getElementById('reading-p1-dot').className = _scDay > 0 ? 'phase-dot done' : 'phase-dot';
 
   const band = studentData?.targetBand || 6.5;
+
+  // ── Question Bank fast-path (T/F/NG only) ─────────────────────────────────
+  const cfg = getSkillConfig(currentPlan?.skillId || 'reading-tfng');
+  if (cfg.id === 'reading-tfng') {
+    try {
+      const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const bankSet   = await getQuestionFromBank(
+        studentData?.currentBand || 6.0,
+        recentIds
+      );
+
+      if (bankSet) {
+        const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
+        updateStudentDoc(currentUser.uid, { 'brain.recentQuestionBankIds': updatedRecentIds }).catch(() => {});
+
+        sessionPassage   = bankSet.passage;
+        sessionTopic     = bankSet.topic;
+        sessionFromBank  = true;
+        sessionBankSetId = bankSet.id;
+        sessionQuestions = bankSet.questions.map(q => ({
+          id:           q.id,
+          text:         q.text,
+          answer:       q.answer,
+          explanation:  q.explanation,
+          keySentence:  q.passageAnchor || q.keySentence,
+          errorReason:  q.errorReason,
+          logicType:    q.logicType,
+          reasoning:    q.reasoning || null,
+          verified:     true,
+          fromBank:     true,
+        }));
+
+        buildToughLove(sessionQuestions, sessionPassage);
+        renderReadingSession({ passage: sessionPassage, questions: sessionQuestions });
+        document.getElementById('reading-loading').classList.add('hidden');
+        document.getElementById('reading-content').classList.remove('hidden');
+        startSessionTracking();
+        setupScrollTracking();
+        trackQStart(1);
+        return;
+      }
+
+      console.log('Question bank exhausted for this band — falling back to AI generation');
+    } catch (err) {
+      console.warn('Question bank lookup failed — falling back to AI generation:', err.message);
+    }
+  }
+  // ─────────────────────────────────────────────────────────────────────────
 
   let prompt;
   if (isSCSession) {
@@ -679,6 +768,8 @@ export async function finishReadingSession() {
       missedSubTypes,
       durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
       behaviour,
+      servedFromBank:     sessionFromBank,
+      bankSetId:          sessionBankSetId,
       ...(sessionCorrections.length    ? { answerCorrections: sessionCorrections }   : {}),
       ...(sessionPassageQuality        ? { passageQuality: sessionPassageQuality }   : {}),
       ...(!isSCSession && sessionQuestions.length ? {

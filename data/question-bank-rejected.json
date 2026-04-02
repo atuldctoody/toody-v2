@@ -544,5 +544,912 @@
       "flaggedForReview": []
     },
     "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "5ac689e2-2e6c-485c-b8ef-878ebddd59fd",
+    "band": 6,
+    "topic": "Marine Biology",
+    "passage": "Marine biology is a field that delves into the vast and diverse ecosystems residing within the world's oceans. One of the most remarkable features of marine environments is the coral reef. Coral reefs support approximately 25% of all marine species, making them one of the most biodiverse ecosystems on Earth. Scientists have documented over 4,000 species of fish living in coral reef environments. These ecosystems are crucial not only for the marine life they support but also for the protection they offer to coastlines and their contribution to local economies through tourism and fishing. Another fascinating aspect of marine biology is the study of bioluminescence. Bioluminescent organisms produce light through a chemical reaction involving the molecule luciferin and the enzyme luciferase. This ability to emit light serves various purposes, from attracting prey to deterring predators, and is found in numerous marine species, including jellyfish and certain types of plankton. In the deeper parts of the ocean, unique adaptations can be observed. The giant squid's eyes can reach up to 30 centimeters in diameter, making them the largest eyes in the animal kingdom. These enormous eyes allow the squid to detect faint light in the deep ocean, aiding in the detection of prey and predators. Furthermore, whale sharks, the largest fish in the sea, demonstrate the incredible migratory patterns of marine life. Whale sharks filter feed on plankton and small fish, consuming up to 21 kilograms of food per day. These gentle giants migrate thousands of kilometers annually to follow seasonal plankton blooms, highlighting the intricate connections between marine species and their environment. Lastly, the discovery of deep-sea hydrothermal vents has reshaped our understanding of life in extreme conditions. Although deep-sea hydrothermal vents were initially thought to be lifeless due to extreme temperatures and toxic chemicals, they actually support thriving ecosystems with unique chemosynthetic bacteria forming the base of the food chain. These vents provide a glimpse into how life might exist on other planets, where sunlight is absent, and conditions are harsh. In conclusion, marine biology continues to reveal the complexities and wonders of life beneath the waves, illustrating the intricate balance and adaptations that allow life to thrive in diverse oceanic conditions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Coral reefs contain more fish species than any other marine ecosystem.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "Coral reefs support approximately 25% of all marine species, making them one of the most biodiverse ecosystems on Earth. Scientists have documented over 4,000 species of fish living in coral reef environments.",
+        "anchorText": "documented over 4,000 species",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about coral reefs and fish numbers, but it never says coral reefs have MORE species than kelp forests, mangroves, or deep sea vents.",
+        "reasoning": {
+          "step_1_locate": "Scientists have documented over 4,000 species of fish living in coral reef environments.",
+          "step_2_compare": "Passage says: 'over 4,000 species of fish living in coral reef environments'. Statement says: 'more fish species than any other marine ecosystem'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about coral reefs and fish numbers, but it never says coral reefs have MORE species than kelp forests, mangroves, or deep sea vents.",
+          "step_4_eliminate": "Not True because no comparison to other ecosystems exists. Not False because the passage doesn't contradict it either—it simply never makes this comparison."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "Coral reefs support approximately 25% of all marine species, making them one of the most biodiverse ecosystems on Earth. Scientists have documented over 4,000 species of fish living in coral reef environments.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 2,
+        "text": "Bioluminescent creatures generate light by means of a biochemical process.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Bioluminescent organisms produce light through a chemical reaction involving the molecule luciferin and the enzyme luciferase.",
+        "anchorText": "chemical reaction",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_SUBSTITUTION — 'Produce' means 'generate', 'through' means 'by means of', and 'chemical reaction' means 'biochemical process'. Same meaning, different words.",
+        "reasoning": {
+          "step_1_locate": "Bioluminescent organisms produce light through a chemical reaction involving the molecule luciferin and the enzyme luciferase.",
+          "step_2_compare": "Passage says: 'produce light through a chemical reaction'. Statement says: 'generate light by means of a biochemical process'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — 'Produce' means 'generate', 'through' means 'by means of', and 'chemical reaction' means 'biochemical process'. Same meaning, different words.",
+          "step_4_eliminate": "Not False because the passage confirms this exact mechanism. Not Not Given because the passage directly addresses how bioluminescent organisms create light."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Bioluminescent organisms produce light through a chemical reaction involving the molecule luciferin and the enzyme luciferase.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 3,
+        "text": "The colossal squid has the biggest eyes of any living creature.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "The giant squid's eyes can reach up to 30 centimeters in diameter, making them the largest eyes in the animal kingdom.",
+        "anchorText": "largest eyes in the animal kingdom",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says giant squid has the largest eyes. The statement says colossal squid has the largest eyes. These are two different animals, so one must be wrong.",
+        "reasoning": {
+          "step_1_locate": "The giant squid's eyes can reach up to 30 centimeters in diameter, making them the largest eyes in the animal kingdom.",
+          "step_2_compare": "Passage says: 'giant squid's eyes...largest eyes in the animal kingdom'. Statement says: 'colossal squid has the biggest eyes'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says giant squid has the largest eyes. The statement says colossal squid has the largest eyes. These are two different animals, so one must be wrong.",
+          "step_4_eliminate": "Not True because the passage names a different species. Not Not Given because the passage explicitly identifies which squid has the largest eyes."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "The giant squid's eyes can reach up to 30 centimeters in diameter, making them the largest eyes in the animal kingdom.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 4,
+        "text": "Whale sharks return to the same feeding grounds each year.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Whale sharks filter feed on plankton and small fish, consuming up to 21 kilograms of food per day. These gentle giants migrate thousands of kilometers annually to follow seasonal plankton blooms.",
+        "anchorText": "migrate thousands of kilometers annually",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage tells us whale sharks migrate long distances for food, but it never says if they go back to the exact same places or find new places each time.",
+        "reasoning": {
+          "step_1_locate": "These gentle giants migrate thousands of kilometers annually to follow seasonal plankton blooms.",
+          "step_2_compare": "Passage says: 'migrate thousands of kilometers annually to follow seasonal plankton blooms'. Statement says: 'return to the same feeding grounds each year'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage tells us whale sharks migrate long distances for food, but it never says if they go back to the exact same places or find new places each time.",
+          "step_4_eliminate": "Not True because the passage never confirms they return to identical locations. Not False because migration to follow food doesn't contradict returning to same grounds—the passage just doesn't address this specific behavior."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Whale sharks filter feed on plankton and small fish, consuming up to 21 kilograms of food per day. These gentle giants migrate thousands of kilometers annually to follow seasonal plankton blooms.",
+        "verified": true,
+        "studentSimulation": null
+      },
+      {
+        "id": 5,
+        "text": "Deep-sea hydrothermal vents are unable to sustain life.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although deep-sea hydrothermal vents were initially thought to be lifeless due to extreme temperatures and toxic chemicals, they actually support thriving ecosystems with unique chemosynthetic bacteria forming the base of the food chain.",
+        "anchorText": "Although...thought to be lifeless...actually support thriving ecosystems",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' tricks you into thinking the first part is true, but the real truth comes after: vents DO support life with thriving ecosystems.",
+        "reasoning": {
+          "step_1_locate": "Although deep-sea hydrothermal vents were initially thought to be lifeless due to extreme temperatures and toxic chemicals, they actually support thriving ecosystems with unique chemosynthetic bacteria forming the base of the food chain.",
+          "step_2_compare": "Passage says: 'they actually support thriving ecosystems'. Statement says: 'unable to sustain life'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' tricks you into thinking the first part is true, but the real truth comes after: vents DO support life with thriving ecosystems.",
+          "step_4_eliminate": "Not True because the passage clearly says vents support thriving ecosystems. Not Not Given because the passage directly addresses whether vents can sustain life—the answer is yes, they can."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although deep-sea hydrothermal vents were initially thought to be lifeless due to extreme temperatures and toxic chemicals, they actually support thriving ecosystems with unique chemosynthetic bacteria forming the base of the food chain.",
+        "verified": true,
+        "studentSimulation": null
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T03:48:27.722Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.3,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 2,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "not_run",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "quality_gate"
+  },
+  {
+    "id": "52fe08b4-1f95-4296-a064-d62f0c9d8662",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.852Z"
+    }
+  },
+  {
+    "id": "7b51939d-7ae2-4a60-b59c-234bdae0e61e",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.844Z"
+    }
+  },
+  {
+    "id": "a32104f7-4adb-4613-b8cc-78806b546453",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.836Z"
+    }
+  },
+  {
+    "id": "5236ed4f-c409-4f3b-aa0f-d610c10c419f",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.858Z"
+    }
+  },
+  {
+    "id": "28d13232-1743-4544-baa4-acffb21ee822",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.868Z"
+    }
+  },
+  {
+    "id": "76f5d305-48fc-41e7-9705-cfcc0a580aeb",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.879Z"
+    }
+  },
+  {
+    "id": "5db49ff9-fb41-45e7-ba4f-238577e03e6b",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.885Z"
+    }
+  },
+  {
+    "id": "3c2d42e5-1426-42e9-9774-b742ee015b73",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.890Z"
+    }
+  },
+  {
+    "id": "416cf8ef-5a55-40d0-8ed8-c2d2c1dacd3a",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.897Z"
+    }
+  },
+  {
+    "id": "bb460548-f147-4ba6-817d-789db85342b4",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.902Z"
+    }
+  },
+  {
+    "id": "c2c1d6c0-5421-4650-82b8-206210bb1ba6",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.906Z"
+    }
+  },
+  {
+    "id": "de4bd99a-1f0d-41dc-9ce7-65b12d2470be",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.914Z"
+    }
+  },
+  {
+    "id": "0eb23ad8-b95c-4105-a448-33f7e62daf45",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.963Z"
+    }
+  },
+  {
+    "id": "73111ac3-64cb-4c4d-87ee-189db01ec86c",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.977Z"
+    }
+  },
+  {
+    "id": "01e2c42a-dec1-4540-b3f2-9e4427acf14c",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:36.981Z"
+    }
+  },
+  {
+    "id": "d10a2d13-6a4e-483d-866b-b6f8ebd12dc6",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.001Z"
+    }
+  },
+  {
+    "id": "8772dcce-26d7-40a8-a16b-0378e85ddedc",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.015Z"
+    }
+  },
+  {
+    "id": "755aa7b8-27bf-43d5-9c16-1a833e880fe8",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.025Z"
+    }
+  },
+  {
+    "id": "4162ede1-ec59-4a1c-bc92-8a44cbc56779",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.030Z"
+    }
+  },
+  {
+    "id": "460b844c-9e20-4c63-b6db-c1f08dc59048",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.035Z"
+    }
+  },
+  {
+    "id": "c38603e1-d688-471a-8abd-c69538d23eae",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.040Z"
+    }
+  },
+  {
+    "id": "9662065b-6854-47be-bf49-3eb8d9e7023d",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.046Z"
+    }
+  },
+  {
+    "id": "11a40aee-43ef-42ab-9069-1403af8f833b",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.059Z"
+    }
+  },
+  {
+    "id": "1e64f56f-a8af-46da-bc8c-fb42cbbe3d3d",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.064Z"
+    }
+  },
+  {
+    "id": "503180f4-2e17-4a39-a860-69a881153116",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.069Z"
+    }
+  },
+  {
+    "id": "d1a70cd5-b3d7-4d4a-a149-b64cd3d95624",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.073Z"
+    }
+  },
+  {
+    "id": "3ad5dbf5-7dda-45ce-a4ac-46fbc1a532fe",
+    "topic": "Neuroscience",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.077Z"
+    }
+  },
+  {
+    "id": "7993108d-c646-47e9-a605-0c70dd722c34",
+    "topic": "Psychology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.083Z"
+    }
+  },
+  {
+    "id": "e568c393-36e8-4c04-8233-72cb4799d60e",
+    "topic": "Space Exploration",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.096Z"
+    }
+  },
+  {
+    "id": "18e258ce-adad-497b-8197-8d919b727bf3",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.117Z"
+    }
+  },
+  {
+    "id": "2e7cb3bd-d979-43a1-a913-7c27c13f7742",
+    "topic": "Archaeological Discovery",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.122Z"
+    }
+  },
+  {
+    "id": "cbaf3c06-95d7-46e0-bd8d-9abdff02ece1",
+    "topic": "Linguistic Research",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.126Z"
+    }
+  },
+  {
+    "id": "f3f4a1d6-1da1-4d35-9e53-fca5c5adb383",
+    "topic": "Renewable Energy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.132Z"
+    }
+  },
+  {
+    "id": "e12ac677-3826-4b10-bce0-62f0bd0d26d7",
+    "topic": "Climate Science",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.139Z"
+    }
+  },
+  {
+    "id": "4aeb5501-fcca-4df4-a9d8-64189687b040",
+    "topic": "Marine Biology",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.139Z"
+    }
+  },
+  {
+    "id": "d2fbba3c-4371-4378-b53b-f4e87036dc99",
+    "topic": "Urban Development",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:50:37.141Z"
+    }
+  },
+  {
+    "id": "5b77a867-66d3-4c4c-862e-016fa8a07d1b",
+    "topic": "Linguistic Research",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.549Z"
+    }
+  },
+  {
+    "id": "88d0adf3-20cf-433c-ab7f-3289cbf4f34a",
+    "topic": "Renewable Energy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.527Z"
+    }
+  },
+  {
+    "id": "dacba448-eeb1-4a79-ace1-391af9bd71f9",
+    "topic": "Psychology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.534Z"
+    }
+  },
+  {
+    "id": "d34f3482-f90a-4026-bf0c-743cc9d0aa76",
+    "topic": "Urban Development",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.569Z"
+    }
+  },
+  {
+    "id": "cbb4ccf4-cfeb-4535-bb97-300de3bac65f",
+    "topic": "Linguistic Research",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.579Z"
+    }
+  },
+  {
+    "id": "fe63385f-779a-48f3-ad6c-eca78c6a0940",
+    "topic": "Neuroscience",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "fetch failed",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:06.594Z"
+    }
+  },
+  {
+    "id": "5a4c5826-c1eb-431e-bb82-83198075f60e",
+    "topic": "Marine Biology",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Bad control character in string literal in JSON at position 769 (line 2 column 768)",
+    "meta": {
+      "generatedAt": "2026-04-02T04:54:33.949Z"
+    }
+  },
+  {
+    "id": "333a4f9b-8850-4793-a633-dc51f8881562",
+    "topic": "Economic Policy",
+    "band": 5.5,
+    "rejectedReason": "pipeline_error",
+    "error": "Bad control character in string literal in JSON at position 828 (line 2 column 827)",
+    "meta": {
+      "generatedAt": "2026-04-02T04:57:02.512Z"
+    }
+  },
+  {
+    "id": "91ba6835-9f93-4320-a913-8ff8cac6c84c",
+    "band": 6,
+    "topic": "Space Exploration",
+    "passage": "Space exploration has long been a field of human endeavor that pushes the boundaries of scientific and technological capability. Since November 2000, the International Space Station has been continuously inhabited, with astronauts conducting thousands of scientific experiments in microgravity conditions. This unique laboratory enables research that would be impossible under Earth's gravitational pull, providing insights into biology, physics, and materials science. The continuous operation of the ISS stands as a testament to international cooperation in space. \n\nMeanwhile, NASA's Artemis program aims to establish a permanent human presence on the lunar surface by the end of this decade. This ambitious goal represents a shift in focus from low Earth orbit to deep space exploration, with the Moon serving as a stepping stone for future missions to Mars. The Artemis program is poised to bring about a resurgence in lunar exploration, reminiscent of the Apollo era, yet with the modern objective of sustainability. \n\nIn the realm of private enterprise, SpaceX's Starship rocket completed its first successful orbital test flight in 2023, marking a significant milestone in reusable spacecraft technology. The development of reusable rockets is crucial for reducing the cost of access to space, thereby enabling more frequent and economically viable missions. This advancement could democratize space exploration, making it accessible to a wider range of participants. \n\nMars has been another focal point of exploration, with robotic missions continuing to unveil its mysteries. Mars rovers have discovered evidence of ancient water flows on the planet's surface, suggesting that Mars may have once supported microbial life. Such findings fuel the quest to understand the planet's history and its potential for supporting life, past or present. \n\nHowever, not all ventures in space exploration have met expectations. Although the James Webb Space Telescope cost over $10 billion to develop and deploy, it has failed to meet several of its primary scientific objectives in its first two years of operation. This shortcoming highlights the inherent risks and uncertainties in pioneering projects, where cutting-edge technology and scientific ambitions do not always align with projected outcomes. \n\nOverall, the pursuit of space exploration continues to challenge and inspire, driving humanity to explore the unknown while grappling with the practical realities of technological development and international collaboration.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "The International Space Station has hosted more experiments than any other space facility in history.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The International Space Station has been continuously inhabited since November 2000, with astronauts conducting thousands of scientific experiments in microgravity conditions.",
+        "anchorText": "thousands of scientific experiments",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about experiments on the ISS, but it never mentions whether this is more than other facilities. The comparison is missing.",
+        "reasoning": {
+          "step_1_locate": "The International Space Station has been continuously inhabited since November 2000, with astronauts conducting thousands of scientific experiments in microgravity conditions.",
+          "step_2_compare": "Passage says: 'thousands of scientific experiments'. Statement says: 'more experiments than any other space facility in history'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about experiments on the ISS, but it never mentions whether this is more than other facilities. The comparison is missing.",
+          "step_4_eliminate": "Not True because no comparison to other facilities exists. Not False because the passage doesn't say another facility had more experiments."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The International Space Station has been continuously inhabited since November 2000, with astronauts conducting thousands of scientific experiments in microgravity conditions.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "Not Given",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "The Artemis program intends to maintain a continuous occupation of the Moon.",
+        "answer": "Not Given",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "NASA's Artemis program aims to establish a permanent human presence on the lunar surface by the end of this decade.",
+        "anchorText": "permanent human presence",
+        "complexityLevel": 2,
+        "explanation": "The passage states the Artemis program aims to establish a permanent human presence on the lunar surface but does not explicitly confirm continuous occupation, making it Not Given.",
+        "reasoning": {
+          "step_1_locate": "NASA's Artemis program aims to establish a permanent human presence on the lunar surface by the end of this decade.",
+          "step_2_compare": "Passage says: 'permanent human presence'. Statement says: 'continuous occupation'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — Permanent human presence means exactly the same thing as continuous occupation. Both mean people will always be there.",
+          "step_4_eliminate": "Not False because the meanings match exactly. Not Not Given because the passage directly confirms this aim."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "NASA's Artemis program aims to establish a permanent human presence on the lunar surface by the end of this decade.",
+        "verified": false,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "SpaceX achieved a successful orbital test flight of Starship before 2023.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "SpaceX's Starship rocket completed its first successful orbital test flight in 2023, marking a significant milestone in reusable spacecraft technology.",
+        "anchorText": "first successful orbital test flight in 2023",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage clearly says the first success was IN 2023. The statement says it happened BEFORE 2023. These are opposite facts.",
+        "reasoning": {
+          "step_1_locate": "SpaceX's Starship rocket completed its first successful orbital test flight in 2023, marking a significant milestone in reusable spacecraft technology.",
+          "step_2_compare": "Passage says: 'first successful orbital test flight in 2023'. Statement says: 'before 2023'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage clearly says the first success was IN 2023. The statement says it happened BEFORE 2023. These are opposite facts.",
+          "step_4_eliminate": "Not True because 2023 is not before 2023. Not Not Given because the passage gives the exact year."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "SpaceX's Starship rocket completed its first successful orbital test flight in 2023, marking a significant milestone in reusable spacecraft technology.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Scientists have confirmed that microbial life existed on Mars in the past.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Mars rovers have discovered evidence of ancient water flows on the planet's surface, suggesting that Mars may have once supported microbial life.",
+        "anchorText": "may have once supported",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage only says life MAY have existed (a possibility). The statement says it was CONFIRMED (a fact). The passage never makes this confirmation.",
+        "reasoning": {
+          "step_1_locate": "Mars rovers have discovered evidence of ancient water flows on the planet's surface, suggesting that Mars may have once supported microbial life.",
+          "step_2_compare": "Passage says: 'may have once supported microbial life'. Statement says: 'confirmed that microbial life existed'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage only says life MAY have existed (a possibility). The statement says it was CONFIRMED (a fact). The passage never makes this confirmation.",
+          "step_4_eliminate": "Not True because 'may have supported' is not the same as 'confirmed existed'. Not False because the passage doesn't deny life existed, it just doesn't confirm it."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Mars rovers have discovered evidence of ancient water flows on the planet's surface, suggesting that Mars may have once supported microbial life.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 5,
+        "text": "The James Webb Space Telescope has successfully achieved its main scientific goals.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although the James Webb Space Telescope cost over $10 billion to develop and deploy, it has failed to meet several of its primary scientific objectives in its first two years of operation.",
+        "anchorText": "failed to meet several of its primary scientific objectives",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' makes you think about the cost, but the main point comes after: it FAILED its objectives. Failed is the opposite of successfully achieved.",
+        "reasoning": {
+          "step_1_locate": "Although the James Webb Space Telescope cost over $10 billion to develop and deploy, it has failed to meet several of its primary scientific objectives in its first two years of operation.",
+          "step_2_compare": "Passage says: 'failed to meet several of its primary scientific objectives'. Statement says: 'successfully achieved its main scientific goals'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' makes you think about the cost, but the main point comes after: it FAILED its objectives. Failed is the opposite of successfully achieved.",
+          "step_4_eliminate": "Not True because the passage clearly says it failed its objectives. Not Not Given because the passage directly addresses whether objectives were met."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although the James Webb Space Telescope cost over $10 billion to develop and deploy, it has failed to meet several of its primary scientific objectives in its first two years of operation.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T05:21:30.611Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 1,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "f93a9ff3-7a6a-4633-baed-64c63a5cbdd3",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Climate science is a multidisciplinary field that examines the factors influencing Earth's climate system. Among the critical tools for understanding historical climate variations are ice cores extracted from Antarctica, which provide scientists with a continuous record of atmospheric carbon dioxide concentrations spanning the past 800,000 years. These ice cores are invaluable for reconstructing past climates and assessing the natural variability of greenhouse gases. Coupled with other paleoclimate data, they reveal that current carbon dioxide levels are unprecedented in recent geological history. \n\nRecent observations highlight the significant impacts of human-induced climate change. Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating in recent decades. This rise is primarily due to thermal expansion of seawater and the melting of glaciers and ice sheets, phenomena driven by global temperature increases. Additionally, climate models predict that Arctic temperatures will increase at twice the global average rate, a phenomenon known as Arctic amplification. This disproportionate warming is attributed to feedback mechanisms, such as the loss of reflective ice surfaces, which enhance heat absorption in the region. \n\nWhile solar radiation variations have influenced climate patterns throughout Earth's history, current global warming cannot be attributed to changes in solar output, as measurements show solar activity has remained relatively stable since 1950. This evidence underscores the role of anthropogenic greenhouse gas emissions as the primary driver of recent climate change. The scientific consensus on this matter is robust, as evidenced by the work of the Intergovernmental Panel on Climate Change (IPCC). The IPCC releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies on climate science. These reports provide policymakers with critical insights into the potential impacts of climate change and the necessary measures to mitigate its effects.\n\nIn conclusion, the integration of historical data, modern observations, and sophisticated climate models provides a comprehensive understanding of climate dynamics. The evidence clearly indicates that human activities are significantly altering the climate system, necessitating urgent action to mitigate these changes and adapt to their inevitable consequences.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Antarctic ice cores offer researchers an uninterrupted historical account of CO2 levels over 800,000 years.",
+        "answer": "True",
+        "logicType": "SYNONYM_SUBSTITUTION",
+        "passageAnchor": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric carbon dioxide concentrations spanning the past 800,000 years.",
+        "anchorText": "provide scientists with a continuous record",
+        "complexityLevel": 2,
+        "explanation": "SYNONYM_SUBSTITUTION — Every key word is replaced with its exact synonym: provide=offer, scientists=researchers, continuous=uninterrupted, record=account. The meaning is identical.",
+        "reasoning": {
+          "step_1_locate": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric carbon dioxide concentrations spanning the past 800,000 years.",
+          "step_2_compare": "Passage says: 'provide scientists with a continuous record'. Statement says: 'offer researchers an uninterrupted historical account'.",
+          "step_3_logic": "SYNONYM_SUBSTITUTION — Every key word is replaced with its exact synonym: provide=offer, scientists=researchers, continuous=uninterrupted, record=account. The meaning is identical.",
+          "step_4_eliminate": "Not False because the passage directly confirms this fact with matching details. Not Not Given because the passage explicitly states this information."
+        },
+        "errorReason": "synonymTrap",
+        "keySentence": "Ice cores extracted from Antarctica provide scientists with a continuous record of atmospheric carbon dioxide concentrations spanning the past 800,000 years.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "True",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Sea levels worldwide have decreased by 21 centimeters from 1880 to the present day.",
+        "answer": "False",
+        "logicType": "DIRECT_CONTRADICTION",
+        "passageAnchor": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating in recent decades.",
+        "anchorText": "21 centimeters since 1880",
+        "complexityLevel": 2,
+        "explanation": "DIRECT_CONTRADICTION — The passage says the opposite direction: risen versus decreased. The number and timeframe match, but the direction is completely opposite.",
+        "reasoning": {
+          "step_1_locate": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating in recent decades.",
+          "step_2_compare": "Passage says: 'risen by approximately 21 centimeters'. Statement says: 'decreased by 21 centimeters'.",
+          "step_3_logic": "DIRECT_CONTRADICTION — The passage says the opposite direction: risen versus decreased. The number and timeframe match, but the direction is completely opposite.",
+          "step_4_eliminate": "Not True because risen and decreased are opposite directions. Not Not Given because the passage explicitly addresses sea level change since 1880 with a specific measurement."
+        },
+        "errorReason": "directContradiction",
+        "keySentence": "Global sea levels have risen by approximately 21 centimeters since 1880, with the rate of increase accelerating in recent decades.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Antarctic temperatures are expected to rise at twice the rate of global temperature increases.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_NO_EVIDENCE",
+        "passageAnchor": "Climate models predict that Arctic temperatures will increase at twice the global average rate, a phenomenon known as Arctic amplification.",
+        "anchorText": "Arctic temperatures will increase at twice the global average rate",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_NO_EVIDENCE — The passage talks about the Arctic (North Pole), but the statement asks about the Antarctic (South Pole). These are different regions and the passage never mentions Antarctic temperature predictions.",
+        "reasoning": {
+          "step_1_locate": "Climate models predict that Arctic temperatures will increase at twice the global average rate, a phenomenon known as Arctic amplification.",
+          "step_2_compare": "Passage says: 'Arctic temperatures will increase at twice the global average rate'. Statement says: 'Antarctic temperatures are expected to rise at twice the rate'.",
+          "step_3_logic": "NOT_GIVEN_NO_EVIDENCE — The passage talks about the Arctic (North Pole), but the statement asks about the Antarctic (South Pole). These are different regions and the passage never mentions Antarctic temperature predictions.",
+          "step_4_eliminate": "Not True because the passage only mentions Arctic, not Antarctic. Not False because the passage doesn't say Antarctic temperatures won't rise at this rate—it simply never discusses Antarctic temperature predictions at all."
+        },
+        "errorReason": "notGivenNoEvidence",
+        "keySentence": "Climate models predict that Arctic temperatures will increase at twice the global average rate, a phenomenon known as Arctic amplification.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      },
+      {
+        "id": 4,
+        "text": "Changes in solar output are responsible for the global warming observed since 1950.",
+        "answer": "False",
+        "logicType": "CONCESSIVE_TRAP",
+        "passageAnchor": "Although solar radiation variations have influenced climate patterns throughout Earth's history, current global warming cannot be attributed to changes in solar output, as measurements show solar activity has remained relatively stable since 1950.",
+        "anchorText": "current global warming cannot be attributed to changes in solar output",
+        "complexityLevel": 4,
+        "explanation": "CONCESSIVE_TRAP — The word 'Although' at the start makes students think solar radiation causes warming, but the main clause after the comma directly contradicts this: current warming CANNOT be attributed to solar changes.",
+        "reasoning": {
+          "step_1_locate": "Although solar radiation variations have influenced climate patterns throughout Earth's history, current global warming cannot be attributed to changes in solar output, as measurements show solar activity has remained relatively stable since 1950.",
+          "step_2_compare": "Passage says: 'current global warming cannot be attributed to changes in solar output'. Statement says: 'Changes in solar output are responsible for the global warming observed since 1950'.",
+          "step_3_logic": "CONCESSIVE_TRAP — The word 'Although' at the start makes students think solar radiation causes warming, but the main clause after the comma directly contradicts this: current warming CANNOT be attributed to solar changes.",
+          "step_4_eliminate": "Not True because the passage explicitly says current warming cannot be attributed to solar output. Not Not Given because the passage directly addresses whether solar changes cause current warming and says no."
+        },
+        "errorReason": "concessive",
+        "keySentence": "Although solar radiation variations have influenced climate patterns throughout Earth's history, current global warming cannot be attributed to changes in solar output, as measurements show solar activity has remained relatively stable since 1950.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "The IPCC publishes annual updates to its climate assessment reports.",
+        "answer": "Not Given",
+        "logicType": "NOT_GIVEN_TOPIC_ADJACENT",
+        "passageAnchor": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies on climate science.",
+        "anchorText": "releases comprehensive assessment reports every six to seven years",
+        "complexityLevel": 3,
+        "explanation": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about major reports every 6-7 years, but the statement asks about annual updates. These could both be true (major reports every 6-7 years AND annual updates), but the passage never mentions annual updates at all.",
+        "reasoning": {
+          "step_1_locate": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies on climate science.",
+          "step_2_compare": "Passage says: 'releases comprehensive assessment reports every six to seven years'. Statement says: 'publishes annual updates to its climate assessment reports'.",
+          "step_3_logic": "NOT_GIVEN_TOPIC_ADJACENT — The passage talks about major reports every 6-7 years, but the statement asks about annual updates. These could both be true (major reports every 6-7 years AND annual updates), but the passage never mentions annual updates at all.",
+          "step_4_eliminate": "Not False because the passage doesn't contradict annual updates—it only mentions the 6-7 year cycle for major reports. Not True because the passage never states that annual updates are published."
+        },
+        "errorReason": "notGivenTopicAdjacent",
+        "keySentence": "The Intergovernmental Panel on Climate Change (IPCC) releases comprehensive assessment reports every six to seven years, synthesizing thousands of peer-reviewed studies on climate science.",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "False",
+          "confidence": "high",
+          "matched": false
+        }
+      }
+    ],
+    "meta": {
+      "generatedAt": "2026-04-02T06:04:03.308Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 5,
+        "scores": {
+          "argumentStructure": 5,
+          "academicVocabulary": 5,
+          "writersStance": 5,
+          "trapPotential": 5,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "rejected",
+      "logicDistribution": {
+        "SYNONYM_SUBSTITUTION": 1,
+        "DIRECT_CONTRADICTION": 1,
+        "NOT_GIVEN_NO_EVIDENCE": 1,
+        "CONCESSIVE_TRAP": 1,
+        "NOT_GIVEN_TOPIC_ADJACENT": 1
+      },
+      "complexityProfile": {
+        "avg": 2.8,
+        "min": 2,
+        "max": 4
+      },
+      "flaggedForReview": []
+    },
+    "rejectedReason": "student_simulation_fail"
+  },
+  {
+    "id": "bc5927ce-6fc0-467a-b377-1462beb5ebe8",
+    "topic": "Economic Policy",
+    "band": 6,
+    "rejectedReason": "pipeline_error",
+    "error": "Stage 1 API error: 500",
+    "meta": {
+      "generatedAt": "2026-04-02T06:04:37.817Z"
+    }
   }
 ]
