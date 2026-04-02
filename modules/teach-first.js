@@ -7,7 +7,7 @@
 import { TFNG_WORKED_EXAMPLES, API_URL, AUDIO_URL } from './constants.js';
 import { studentData, currentUser, getIELTSSkills, callAI, saveLearningStyleSignal } from './state.js';
 import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } from './router.js';
-import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob } from './utils.js';
+import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob, renderReasoningHtml } from './utils.js';
 import { updateStudentDoc } from './firebase.js';
 import { showToast } from './ui.js';
 import { verifyAnswers } from '../api/verify-answers.js';
@@ -672,7 +672,8 @@ window.answerDrill = function (idx, val) {
   rf.classList.add('show', isRight ? 'good' : 'bad');
   const qs2b = teachData.drillQuestions || teachData.confidenceQuestions || [];
   const hasNext = idx + 1 < qs2b.length;
-  rf.innerHTML = (isRight ? `✅ Correct. ${boldify(q.explanation)}` : `❌ Answer: <strong>${q.answer}</strong>. ${boldify(q.explanation)}`)
+  const drillExpl = renderReasoningHtml(q, isRight);
+  rf.innerHTML = (isRight ? `✅ Correct. ${drillExpl}` : `❌ Answer: <strong>${q.answer}</strong>. ${drillExpl}`)
     + `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderDrillQuestion(${idx + 1})">${hasNext ? 'Next question →' : 'Continue →'}</button>`;
 };
 
@@ -728,7 +729,8 @@ window.answerConfidence = function (val) {
   const rf = document.getElementById('teach-conf-result');
   rf.classList.add('show', isCorrect ? 'good' : 'bad');
   const isLastConfQ = confQIdx + 1 >= qs.length;
-  rf.innerHTML = (isCorrect ? `✅ Correct. ${boldify(q.explanation)}` : `❌ The answer is ${q.answer}. ${boldify(q.explanation)}`)
+  const confExpl = renderReasoningHtml(q, isCorrect);
+  rf.innerHTML = (isCorrect ? `✅ Correct. ${confExpl}` : `❌ The answer is ${q.answer}. ${confExpl}`)
     + (isLastConfQ
         ? ''
         : `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderConfidenceQuestion(${confQIdx + 1})">Next question →</button>`);

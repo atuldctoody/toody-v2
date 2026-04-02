@@ -19,7 +19,7 @@ import {
 import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } from './router.js';
 import {
   getSkillConfig, parseAIJson, renderMarkdown, normaliseAnswer,
-  withRetry, accToBand, toSkillId, boldify,
+  withRetry, accToBand, toSkillId, boldify, renderReasoningHtml,
 } from './utils.js';
 import {
   updateStudentDoc, saveSessionDoc, generateAndSaveNarrative, getStudentDoc, db,
@@ -549,20 +549,23 @@ window.answerTFNG = function (qnum, val) {
   const rf = document.getElementById(`rf${qnum}`);
   rf.classList.remove('good', 'bad');
   rf.classList.add('show', isRight ? 'good' : 'bad');
-  const expl = q.explanation ? boldify(q.explanation) : (isRight ? 'Good work.' : 'Review the passage carefully.');
   if (isRight === true) {
-    rf.innerHTML = `✅ Correct. ${expl}`;
+    rf.innerHTML = `✅ Correct. ${renderReasoningHtml(q, true)}`;
   } else {
     const ERROR_REASON_PILLS = {
-      synonymTrap:         'Synonym trap — passage isn\'t as direct as it looks',
-      cautiousLanguageMissed: 'Cautious language — may / suggests / could',
-      negationOverlooked:  'Negation — not / never / rarely',
-      scopeError:          'Scope error — all vs some, always vs usually',
-      notGivenMarkedFalse: 'Not Given ≠ False — the passage is silent on this',
-      other:               'Reasoning error',
+      synonymTrap:             'Synonym trap — passage isn\'t as direct as it looks',
+      directContradiction:     'Direct contradiction — passage says the opposite',
+      notGivenNoEvidence:      'Not Given — topic present but this claim is never made',
+      concessive:              'Concessive trap — the "although" clause is the trap',
+      notGivenTopicAdjacent:   'Not Given — related topic, but this exact claim is absent',
+      cautiousLanguageMissed:  'Cautious language — may / suggests / could',
+      negationOverlooked:      'Negation — not / never / rarely',
+      scopeError:              'Scope error — all vs some, always vs usually',
+      notGivenMarkedFalse:     'Not Given ≠ False — the passage is silent on this',
+      other:                   'Reasoning error',
     };
     const pill = ERROR_REASON_PILLS[q.errorReason];
-    rf.innerHTML = `❌ The answer is <strong>${q.answer}</strong>. ${expl}`
+    rf.innerHTML = `❌ The answer is <strong>${q.answer}</strong>. ${renderReasoningHtml(q, false)}`
       + (pill ? `<br><span class="error-reason-pill">⚠ ${pill}</span>` : '');
   }
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);

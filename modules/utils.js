@@ -108,6 +108,25 @@ export function base64ToBlob(base64, mimeType) {
   return new Blob([buffer], { type: mimeType });
 }
 
+// ── STRUCTURED REASONING RENDERER ────────────────────────────────
+// Renders a 4-step reasoning object if present; falls back to plain explanation.
+// Used in session-reading.js, teach-first.js, and notebook.js.
+export function renderReasoningHtml(q, isRight) {
+  const r = q.reasoning;
+  if (r && r.step_1_locate && r.step_2_compare && r.step_3_logic && r.step_4_eliminate) {
+    return `
+<div class="reasoning-steps" style="margin-top:10px;font-size:13px;line-height:1.6">
+  <div class="reasoning-step" style="margin-bottom:8px"><strong>Step 1 — Find the evidence</strong><br>${r.step_1_locate}</div>
+  <div class="reasoning-step" style="margin-bottom:8px"><strong>Step 2 — Compare carefully</strong><br>${r.step_2_compare}</div>
+  <div class="reasoning-step" style="margin-bottom:8px"><strong>Step 3 — The trap</strong><br>${r.step_3_logic}</div>
+  <div class="reasoning-step"><strong>Step 4 — Why the others are wrong</strong><br>${r.step_4_eliminate}</div>
+</div>`.trim();
+  }
+  // Fallback: single paragraph
+  const expl = q.explanation || (isRight ? 'Good work.' : 'Review the passage carefully.');
+  return `<span>${expl}</span>`;
+}
+
 // ── DOM HELPERS ───────────────────────────────────────────────────
 export function _attachLongPress(el, ms, cb) {
   if (!el) return;

@@ -121,6 +121,19 @@ The Golden Sequence for mixed question types:
 2. Summary Completion second — deep dive into one section
 3. Matching Headings last — by now student has read 60-70% of the text
 
+VERIFIED IELTS TRAP FREQUENCIES (from 92 confirmed Barron's questions):
+- SYNONYM_SWAP: 40% of TRUE answers — always verify synonym precision before marking True
+- DIRECT_CONTRADICTION: 22% of FALSE answers — passage explicitly states opposite
+- NOT_GIVEN (combined): 22% — topic present but specific claim absent, or topic completely absent
+- CONCESSIVE_TRAP: 8% — Although X, Y — Y is always the truth not X
+- QUALIFIER_SHIFT: 4% — position/degree/scope changes between passage and statement
+- CAUSAL_ASSUMPTION: 3% — sequence does not equal causation
+- NEGATIVE_REFRAME: 1% — rare but critical
+
+When generating TRUE questions: 40% must use precise synonym substitution only.
+When generating NOT GIVEN: distinguish between topic present but claim absent vs topic completely absent.
+When generating explanations: always follow the 4-step reasoning structure below.
+
 ---
 
 LISTENING — COMPLETE EXPERT KNOWLEDGE
@@ -227,6 +240,15 @@ Every piece of content must pass all five tests before reaching the student:
 3. THE DIAGNOSTIC TEST: Does this question have a specific nameable error pattern that a wrong answer would reveal?
 4. THE EXPLANATION TEST: Does the explanation name the specific trap, cite exact passage evidence, and tell the student what to look for next time? Locational explanations earn zero teaching credit.
 5. THE PLAIN LANGUAGE TEST: Would a Band 5 student understand this explanation without a dictionary?
+
+STRUCTURED REASONING REQUIREMENT:
+Every explanation must follow this exact 4-step structure:
+step_1_locate: The exact verbatim sentence from the passage that is relevant
+step_2_compare: Passage says [exact phrase]. Statement says [exact phrase].
+step_3_logic: TRAP_TYPE_NAME — one plain language sentence explaining why. No jargon. Band 5 student from India must understand this immediately.
+step_4_eliminate: Not [optionA] because [reason]. Not [optionB] because [reason].
+
+Never generate a single-paragraph explanation. Always use these four steps.
 
 WHAT YOU NEVER DO:
 - Never generate a T/F/NG question where the answer requires inference rather than evidence

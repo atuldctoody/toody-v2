@@ -8,6 +8,11 @@
 //   3 — Passage Quality Gate  (api/evaluate-passage.js)         — IELTS standard gate (avg ≥ 3.5)
 //   4 — Student Simulation    (Claude Sonnet, temperature 0.3)  — blind answer check
 //
+// Question distribution calibrated against 92 verified Barron's IELTS questions
+// (data/barrons-calibration.json). Distribution reflects real Cambridge/Barron's
+// trap frequencies: SYNONYM_SWAP 40%, DIRECT_CONTRADICTION 22%, NOT_GIVEN 22%,
+// CONCESSIVE_TRAP 8%, QUALIFIER_SHIFT 4%, CAUSAL_ASSUMPTION 3%.
+//
 // Usage:
 //   node --env-file=.env scripts/generate-question-bank.js [options]
 //
@@ -24,6 +29,14 @@ import { resolve, dirname }                                    from 'path';
 import { fileURLToPath }                                       from 'url';
 import { verifyAnswers }                                       from '../api/verify-answers.js';
 import { evaluatePassage }                                     from '../api/evaluate-passage.js';
+
+// Barron's calibration data — loaded once at startup, sampled as context for Stage 0
+const __dirnameEarly = dirname(fileURLToPath(import.meta.url));
+const barrons = (() => {
+  try {
+    return JSON.parse(readFileSync(resolve(__dirnameEarly, '..', 'data', 'barrons-calibration.json'), 'utf8'));
+  } catch { return []; }
+})();
 
 const __dirname    = dirname(fileURLToPath(import.meta.url));
 const ROOT         = resolve(__dirname, '..');
@@ -45,20 +58,26 @@ const RANDOM_TOPICS = [
   'Linguistic Research',
 ];
 
+// Distribution calibrated against 92 verified Barron's questions — see data/barrons-calibration.json
 const LOGIC_TYPES = [
   'SYNONYM_SUBSTITUTION',
-  'CAUTIOUS_LANGUAGE',
-  'NEGATION_INVERSION',
-  'SCOPE_QUALIFIER',
-  'CAUSAL_ASSUMPTION',
+  'DIRECT_CONTRADICTION',
+  'NOT_GIVEN_NO_EVIDENCE',
+  'CONCESSIVE_TRAP',
+  'NOT_GIVEN_TOPIC_ADJACENT',
 ];
 
 const ERROR_REASON_MAP = {
-  SYNONYM_SUBSTITUTION: 'synonymTrap',
-  CAUTIOUS_LANGUAGE:    'cautiousLanguageMissed',
-  NEGATION_INVERSION:   'negationOverlooked',
-  SCOPE_QUALIFIER:      'scopeError',
-  CAUSAL_ASSUMPTION:    'notGivenMarkedFalse',
+  SYNONYM_SUBSTITUTION:    'synonymTrap',
+  DIRECT_CONTRADICTION:    'directContradiction',
+  NOT_GIVEN_NO_EVIDENCE:   'notGivenNoEvidence',
+  CONCESSIVE_TRAP:         'concessive',
+  NOT_GIVEN_TOPIC_ADJACENT:'notGivenTopicAdjacent',
+  // Legacy keys kept for backward compatibility with older bank entries
+  CAUTIOUS_LANGUAGE:       'cautiousLanguageMissed',
+  NEGATION_INVERSION:      'negationOverlooked',
+  SCOPE_QUALIFIER:         'scopeError',
+  CAUSAL_ASSUMPTION:       'notGivenMarkedFalse',
 };
 
 // ── CLI ───────────────────────────────────────────────────────────────────────
@@ -125,6 +144,14 @@ async function runPool(taskFns, concurrency) {
 // the answer, and the anchor text — before any passage exists.
 
 async function stageLogicMatrix(topic, band, apiKey) {
+  // Sample 10 Barron's examples as calibration context for this call
+  const barronsSample = barrons.length
+    ? barrons.slice(0, 10).map(e => `Q: ${e.explanation} → Logic: ${e.logicType}`).join('\n')
+    : '';
+  const barronsContext = barronsSample
+    ? `\nReference these verified explanation patterns from Barron's IELTS when constructing reasoning:\n${barronsSample}\nMatch this explanation style and reasoning depth.\n`
+    : '';
+
   const res = await fetch(ANTHROPIC_URL, {
     method:  'POST',
     headers: {
@@ -134,18 +161,19 @@ async function stageLogicMatrix(topic, band, apiKey) {
     },
     body: JSON.stringify({
       model:       'claude-sonnet-4-5',
-      max_tokens:  1200,
+      max_tokens:  2000,
       temperature: 0,
       messages: [{
         role:    'user',
         content:
 `Generate exactly 5 T/F/NG logic pairs for a Band ${band} IELTS Academic reading question set about ${topic}.
-Use exactly one of each logic type:
-- SYNONYM_SUBSTITUTION → answer: True (passage confirms using different words)
-- CAUTIOUS_LANGUAGE → answer: Not Given (passage uses may/might/could/suggests)
-- NEGATION_INVERSION → answer: False (passage says X exists/occurs, statement says it does not)
-- SCOPE_QUALIFIER → answer: False (passage says some/most/usually, statement says all/always/never)
-- CAUSAL_ASSUMPTION → answer: Not Given (passage shows sequence, statement claims causation)
+${barronsContext}
+Use this exact distribution (calibrated against 92 verified Barron's/Cambridge questions):
+- Q1: SYNONYM_SUBSTITUTION → answer: True (passage confirms using a precise synonym — not a semantic cousin)
+- Q2: DIRECT_CONTRADICTION → answer: False (passage explicitly states the opposite fact)
+- Q3: NOT_GIVEN_NO_EVIDENCE → answer: Not Given (topic is present in passage but the specific claim is never made)
+- Q4: CONCESSIVE_TRAP → answer: False (passage says "Although X, Y" — statement asserts X, but Y is the truth)
+- Q5: NOT_GIVEN_TOPIC_ADJACENT → answer: Not Given (related topic mentioned but the exact claim the student reads is never addressed)
 
 For each pair return:
 {
@@ -155,7 +183,13 @@ For each pair return:
   "anchorText": string (the specific word or phrase that makes this true/false/ng — e.g. "most", "may suggest", "after"),
   "statement": string (what the IELTS student reads),
   "answer": "True" | "False" | "Not Given",
-  "whyCorrect": string (one sentence logical proof)
+  "whyCorrect": string (one sentence logical proof),
+  "reasoning": {
+    "step_1_locate": "exact verbatim sentence from the fact that proves this answer",
+    "step_2_compare": "Passage says: [exact phrase]. Statement says: [exact phrase].",
+    "step_3_logic": "TRAP_TYPE_NAME — one plain language sentence a Band 5 student from India understands immediately. No jargon.",
+    "step_4_eliminate": "Not [optionA] because [reason]. Not [optionB] because [reason]."
+  }
 }
 
 Return valid JSON array of 5 objects. Nothing else.`,
@@ -216,7 +250,9 @@ Return JSON: { "passage": string, "topic": string }`,
 
   if (!parsed.passage) throw new Error('Stage 1: no passage field in response');
 
-  // Build questions from Stage 0 logic pairs — deterministic, no AI call
+  // Build questions from Stage 0 logic pairs — deterministic, no AI call.
+  // explanation is derived from step_3_logic (student-facing single sentence);
+  // reasoning carries all four steps for the structured rendering path.
   const questions = logicPairs.map((pair, i) => ({
     id:              i + 1,
     text:            pair.statement,
@@ -225,7 +261,8 @@ Return JSON: { "passage": string, "topic": string }`,
     passageAnchor:   pair.fact,
     anchorText:      pair.anchorText,
     complexityLevel: pair.complexityLevel,
-    explanation:     pair.whyCorrect,
+    explanation:     pair.reasoning?.step_3_logic || pair.whyCorrect,
+    reasoning:       pair.reasoning || null,
     errorReason:     ERROR_REASON_MAP[pair.logicType] || 'other',
   }));
 

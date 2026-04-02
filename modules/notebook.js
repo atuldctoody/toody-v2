@@ -4,7 +4,7 @@ import {
   studentData, getIELTSSkills, calcBandEstimate, callAI,
 } from './state.js';
 import { goTo, pickNextSkill, currentPlan } from './router.js';
-import { getSkillConfig, renderMarkdown, normaliseAnswer, accToBand } from './utils.js';
+import { getSkillConfig, renderMarkdown, normaliseAnswer, accToBand, renderReasoningHtml } from './utils.js';
 import { updateStudentDoc, db } from './firebase.js';
 import { showToast, safeClick, setSkillBar } from './ui.js';
 import { sessionQuestions, sessionAnswers } from './session-reading.js';
@@ -157,7 +157,7 @@ export function renderNotebook(correct, total, skillKey) {
   if (wrongQ) {
     weEl.classList.remove('hidden');
     document.getElementById('we-q').textContent = wrongQ.text || wrongQ.label || '';
-    document.getElementById('we-exp').innerHTML  = `Answer: ${wrongQ.answer}. ${renderMarkdown(wrongQ.explanation || '')}`;
+    document.getElementById('we-exp').innerHTML  = `Answer: <strong>${wrongQ.answer}</strong>. ${renderReasoningHtml(wrongQ, false)}`;
   } else {
     weEl.classList.add('hidden');
   }

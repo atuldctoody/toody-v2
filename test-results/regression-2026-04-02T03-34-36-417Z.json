@@ -1,0 +1,107 @@
+{
+  "timestamp": "2026-04-02T03:34:36.417Z",
+  "sessionsChecked": 3,
+  "passed": 3,
+  "failed": 0,
+  "regressions": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 2.0 between Band 7 (2.5) and Band 6 (4.5) — review content generation prompts"
+  ],
+  "overallPass": true,
+  "durationMs": 26756,
+  "bandResults": [
+    {
+      "band": 5,
+      "pass": true,
+      "durationMs": 23577,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Biodiversity and Conservation",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 1,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 3.5,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 24433,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Urban Biodiversity",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.5,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 7,
+      "pass": true,
+      "durationMs": 26683,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Technology in Education",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 1,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 2.5,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6.5,
+          "error": null
+        }
+      }
+    }
+  ]
+}
