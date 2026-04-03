@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-04-03T17:34:22.235Z",
+  "steps": {
+    "generation": {
+      "pass": true,
+      "durationMs": 16196,
+      "error": null
+    },
+    "verification": {
+      "pass": true,
+      "durationMs": 1738,
+      "error": null,
+      "corrections": 1
+    },
+    "explanationQuality": {
+      "pass": true,
+      "durationMs": 5687,
+      "error": null,
+      "sessionAvgScore": 5
+    },
+    "audio": {
+      "pass": true,
+      "durationMs": 2316,
+      "error": null
+    },
+    "writingEval": {
+      "pass": true,
+      "durationMs": 3039,
+      "error": null,
+      "overallBand": 6
+    },
+    "passageQuality": {
+      "pass": true,
+      "durationMs": 1401,
+      "error": null,
+      "avgScore": 4.5,
+      "passedGate": true
+    }
+  },
+  "overallPass": true,
+  "totalDurationMs": 30382
+}

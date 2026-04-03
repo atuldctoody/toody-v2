@@ -176,6 +176,7 @@ test('Test C - Session intro ready button is visible and enabled', async ({ page
 
 // ── TEST D — Teach-first ─────────────────────────────────────────
 test('Test D - Teach-first hook answer buttons are all enabled', async ({ page }) => {
+  test.setTimeout(90000); // AI hook generation can take up to 40s
   await authenticatePage(page);
   await jumpTo(page, 'teachfirst:reading-tfng');
   await page.waitForSelector('#s-teach.active', { timeout: 10000 });
@@ -214,6 +215,7 @@ test('Test D - Teach-first hook answer buttons are all enabled', async ({ page }
 
 // ── TEST E — Reading session ──────────────────────────────────────
 test('Test E - Reading session answer buttons are all enabled', async ({ page }) => {
+  test.setTimeout(90000); // AI reading generation can take up to 40s
   await authenticatePage(page);
   await jumpTo(page, 'reading');
   await page.waitForSelector('#s-reading.active', { timeout: 10000 });
@@ -244,6 +246,7 @@ test('Test E - Reading session answer buttons are all enabled', async ({ page })
 
 // ── TEST F — Writing screen ───────────────────────────────────────
 test('Test F - Writing screen submit button is visible and enabled', async ({ page }) => {
+  test.setTimeout(90000); // AI writing prompt generation can take up to 60s
   await authenticatePage(page);
   await jumpTo(page, 'writing');
   await page.waitForSelector('#s-writing.active', { timeout: 10000 });

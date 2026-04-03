@@ -382,9 +382,12 @@ export async function loadReadingSession() {
   const band = studentData?.targetBand || 6.5;
 
   // ── Question Bank fast-path (T/F/NG only) ─────────────────────────────────
-  const cfg = getSkillConfig(currentPlan?.id);
+  // currentPlan.id is set by pickNextSkill; devJumpTo sets currentPlan from SKILL_MAP which has no id.
+  // Fall back to toSkillId(currentPlan.skill) so devJumpTo paths resolve correctly.
+  const _resolvedSkillId = currentPlan?.id || toSkillId(currentPlan?.skill || '');
+  const cfg = _resolvedSkillId ? getSkillConfig(_resolvedSkillId) : null;
   console.log('Bank fast-path triggered for:', cfg?.id, '| currentBand:', studentData?.currentBand, '| targetBand:', studentData?.targetBand);
-  if (cfg.id === 'reading-tfng') {
+  if (cfg?.id === 'reading-tfng') {
     try {
       const recentIds = studentData?.brain?.recentQuestionBankIds || [];
       const _queryBand = studentData?.currentBand || 6.0;

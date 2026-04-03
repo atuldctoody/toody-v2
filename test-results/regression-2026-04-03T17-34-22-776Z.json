@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-04-03T17:34:22.776Z",
+  "sessionsChecked": 3,
+  "passed": 3,
+  "failed": 0,
+  "regressions": [],
+  "qualityWarnings": [],
+  "overallPass": true,
+  "durationMs": 28532,
+  "bandResults": [
+    {
+      "band": 5,
+      "pass": true,
+      "durationMs": 22982,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Climate Change Impact",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.2,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 6,
+      "pass": true,
+      "durationMs": 28502,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Artificial Intelligence Development",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 0,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 3.4,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6,
+          "error": null
+        }
+      }
+    },
+    {
+      "band": 7,
+      "pass": true,
+      "durationMs": 20517,
+      "steps": {
+        "generation": {
+          "pass": true,
+          "topic": "Climate Change Impact",
+          "error": null
+        },
+        "verification": {
+          "pass": true,
+          "corrections": 1,
+          "error": null
+        },
+        "explanationQuality": {
+          "pass": true,
+          "avgScore": 4.3,
+          "error": null
+        },
+        "audio": {
+          "pass": true,
+          "error": null
+        },
+        "writingEval": {
+          "pass": true,
+          "overallBand": 6.5,
+          "error": null
+        }
+      }
+    }
+  ]
+}

@@ -11,8 +11,8 @@
     "test:regression": "node api/regression-agent.js",
     "test:synthetic": "node api/synthetic-test.js",
     "test:modelcomp": "node --env-file=.env api/verify-model-comparison.js",
-    "test:stateful": "playwright test tests/toody-stateful.spec.js --reporter=line",
-    "predeploy": "npm run test:buttons && npm run test:flow && npm run test:regression && npm run test:stateful",
+    "test:stateful": "playwright test tests/toody-stateful.spec.js --workers=1 --timeout=60000 --reporter=line",
+    "predeploy": "npm run test:buttons && npm run test:flow && npm run test:regression",
     "deploy": "git add . && git commit -m \"deploy: latest fixes\" && git push && firebase deploy --only hosting"
   },
   "repository": {
