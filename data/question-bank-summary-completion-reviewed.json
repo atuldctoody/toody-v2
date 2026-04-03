@@ -1,0 +1,3145 @@
+[
+  {
+    "id": "2a24cbba-d9bc-49f1-a282-b0f862945a4c",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Cognitive Development in Children",
+    "passage": "Cognitive development in children is a complex process that involves the maturation of thought processes and the tools available for understanding the world. Jean Piaget, a prominent psychologist, proposed that this development occurs through a series of stages. Each stage is characterized by distinct cognitive capabilities. For example, in the sensorimotor stage, infants learn through physical interaction with their environment. As children grow, they enter the preoperational stage, where symbolic thought emerges, allowing them to use language and mental imagery. However, they still struggle with understanding the perspectives of others. In the concrete operational stage, logical thinking becomes more apparent, and children begin to grasp the concept of conservation. Finally, the formal operational stage is marked by the ability to engage in abstract reasoning, which is crucial for problem-solving and scientific thinking. Piaget's theory has significantly influenced our understanding of child psychology, although some researchers argue that cognitive development is more continuous than stage-like.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "sensorimotor",
+        "explanation": "The sensorimotor stage involves learning through physical interaction.",
+        "keySentence": "For example, in the sensorimotor stage, infants learn through physical interaction with their environment.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sensorimotor",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "symbolic",
+        "explanation": "Symbolic thought allows for language use and mental imagery.",
+        "keySentence": "As children grow, they enter the preoperational stage, where symbolic thought emerges, allowing them to use language and mental imagery.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "symbolic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "concrete",
+        "explanation": "The concrete operational stage is characterized by logical thinking.",
+        "keySentence": "In the concrete operational stage, logical thinking becomes more apparent, and children begin to grasp the concept of conservation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "concrete",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "formal",
+        "explanation": "The formal operational stage is marked by abstract reasoning.",
+        "keySentence": "Finally, the formal operational stage is marked by the ability to engage in abstract reasoning, which is crucial for problem-solving and scientific thinking.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "formal",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "continuous",
+        "explanation": "Some researchers argue that cognitive development is more continuous than stage-like.",
+        "keySentence": "Piaget's theory has significantly influenced our understanding of child psychology, although some researchers argue that cognitive development is more continuous than stage-like.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "continuous",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Jean Piaget's theory of cognitive development describes how children progress through distinct stages. In the initial [1] stage, infants learn via physical interaction. The next stage sees the emergence of [2] thought, enhancing language use. Logical thinking is evident in the [3] operational stage, where children understand conservation. Abstract reasoning, key in [4], is developed last. Some suggest development is more [5] than stage-like.",
+      "wordBank": [
+        "sensorimotor",
+        "symbolic",
+        "concrete",
+        "formal",
+        "continuous",
+        "linear",
+        "fixed",
+        "sequential"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:55.870Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.2,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 5,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "9170c73c-2a0e-4aac-947e-c3eaca5a3f7d",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Archaeological Discovery",
+    "passage": "In a groundbreaking discovery, archaeologists have unearthed an ancient settlement that sheds new light on prehistoric human life. The settlement, located in a remote area, consists of several well-preserved structures and artifacts. These findings suggest a complex society with advanced knowledge of agriculture and craftsmanship. Excavations revealed pottery fragments and tools that indicate a high degree of specialization among the inhabitants. The site also includes evidence of trade, with materials not native to the region. This discovery challenges previous assumptions about the social and economic structures of prehistoric communities. Researchers plan to conduct further studies to gain deeper insights into the lives of these early inhabitants.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "groundbreaking",
+        "explanation": "The summary uses 'made a discovery' which is synonymous with 'groundbreaking discovery' mentioned in the passage.",
+        "keySentence": "In a groundbreaking discovery, archaeologists have unearthed an ancient settlement that sheds new light on prehistoric human life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "groundbreaking",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "well-preserved",
+        "explanation": "The summary refers to 'includes structures' which corresponds to 'well-preserved structures' found in the passage.",
+        "keySentence": "The settlement, located in a remote area, consists of several well-preserved structures and artifacts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "well-preserved",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "knowledge",
+        "explanation": "The summary's 'advanced' is linked to 'advanced knowledge of agriculture and craftsmanship' in the passage.",
+        "keySentence": "These findings suggest a complex society with advanced knowledge of agriculture and craftsmanship.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "knowledge",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "native",
+        "explanation": "The passage mentions 'materials not native to the region', indicating non-native materials were found.",
+        "keySentence": "The site also includes evidence of trade, with materials not native to the region.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "native",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "structures",
+        "explanation": "The passage challenges 'previous assumptions about the social and economic structures' of communities.",
+        "keySentence": "This discovery challenges previous assumptions about the social and economic structures of prehistoric communities.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "structures",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Archaeologists have made a [1] discovery of an ancient settlement that offers new insights into prehistoric human life. The site includes [2] structures and artifacts, suggesting a complex society with advanced [3]. Evidence of trade was found, indicating materials not [4] to the area. This challenges earlier beliefs about prehistoric [5].",
+      "wordBank": [
+        "groundbreaking",
+        "well-preserved",
+        "knowledge",
+        "native",
+        "structures",
+        "primitive",
+        "tools",
+        "local"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T07:15:57.403Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "b8c8c71a-41d8-42db-be9f-9003a84cd436",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has always been a dynamic field, evolving with cultural and technological changes. Researchers focus on how languages influence each other, often studying bilingual communities where language [1] convergence occurs. In recent years, there's been increased attention on endangered languages and the urgency to document them before they vanish. This has led to the development of innovative methods in language preservation, including digital archiving. Additionally, sociolinguistics explores how language usage varies among different social groups, particularly looking at how age and social class influence [2] speech patterns. Despite technological advancements, challenges remain, such as limited funding and the need for interdisciplinary collaboration to fully understand language dynamics. The integration of artificial intelligence has introduced new opportunities for linguists to analyze large datasets, offering deeper insights into language [3] evolution.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "convergence",
+        "explanation": "The passage discusses how languages influence each other in bilingual communities, leading to convergence.",
+        "keySentence": "Researchers focus on how languages influence each other, often studying bilingual communities where language convergence occurs.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "convergence",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "patterns",
+        "explanation": "Sociolinguistics looks at how social factors like age and class influence speech patterns.",
+        "keySentence": "Sociolinguistics explores how language usage varies among different social groups, particularly looking at how age and social class influence speech patterns.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "variation",
+          "confidence": "medium",
+          "matched": false
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "evolution",
+        "explanation": "AI offers insights into language evolution by analyzing large datasets.",
+        "keySentence": "The integration of artificial intelligence has introduced new opportunities for linguists to analyze large datasets, offering deeper insights into language evolution.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "evolution",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "digital",
+        "explanation": "Digital archiving is mentioned as a method for language preservation.",
+        "keySentence": "This has led to the development of innovative methods in language preservation, including digital archiving.",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "digital",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": null,
+        "explanation": "Challenges in language research include interaction between languages, as mentioned in the passage.",
+        "keySentence": "Despite technological advancements, challenges remain, such as limited funding and the need for interdisciplinary collaboration to fully understand language dynamics.",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "interaction",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The word 'interaction' does NOT appear anywhere in the passage. No [5] marker exists in the passage, and the word cannot be found verbatim in the text. This answer fails the exact word requirement."
+      }
+    ],
+    "extraData": {
+      "summaryText": "Linguistic research is rapidly evolving, with a focus on language [1] in bilingual areas and endangered languages. Sociolinguistics examines how [2] affects speech. Though AI helps in studying language [3], there are challenges like funding and interdisciplinary needs. [4] archiving has become crucial in preservation efforts, yet [5] between languages still presents difficulties.",
+      "wordBank": [
+        "convergence",
+        "patterns",
+        "evolution",
+        "digital",
+        "interaction",
+        "variation",
+        "archive",
+        "divergence"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:34:59.340Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 5,
+        "bankAnswer": "interaction",
+        "verifiedAnswer": null,
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The word 'interaction' does NOT appear anywhere in the passage. No [5] marker exists in the passage, and the word cannot be found verbatim in the text. This answer fails the exact word requirement."
+      }
+    ]
+  },
+  {
+    "id": "75c6c124-fc2d-425c-9d01-763a8a56cd9c",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Archaeological Discovery",
+    "passage": "A team of archaeologists recently unearthed a significant artifact in an ancient settlement believed to date back over a thousand years. The discovery was made in a region known for its historical richness, and it has provided new insights into the cultural practices of the past inhabitants. Among the items found was an intricately designed pottery piece, which suggests a high level of craftsmanship and trade with neighboring regions. Additionally, the site yielded remnants of structures that indicate a complex society with a hierarchical system. These findings have prompted further exploration and study to understand the societal dynamics and technological advancements of the time.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "significant",
+        "explanation": "The passage describes the artifact as 'significant', emphasizing its importance in the archaeological find.",
+        "keySentence": "A team of archaeologists recently unearthed a significant artifact in an ancient settlement...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "significant",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "cultural",
+        "explanation": "The passage mentions 'cultural practices', highlighting the importance of these practices to the past inhabitants.",
+        "keySentence": "...it has provided new insights into the cultural practices of the past inhabitants.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "cultural",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "remnants",
+        "explanation": "The term 'remnants' refers to what is left of the structures, as mentioned in the passage.",
+        "keySentence": "Additionally, the site yielded remnants of structures that indicate a complex society...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "remnants",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "complex",
+        "explanation": "The passage describes the society as 'complex', suggesting an advanced level of societal organization.",
+        "keySentence": "...indicate a complex society with a hierarchical system.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "complex",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "exploration",
+        "explanation": "Further 'exploration' is encouraged to understand more about the historical context, as stated in the passage.",
+        "keySentence": "These findings have prompted further exploration and study to understand the societal dynamics...",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "exploration",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Archaeologists discovered an [1] artifact in an ancient settlement, offering insights into past [2]. A pottery piece showed craftsmanship and trade. The site also revealed [3] of structures, indicating a [4] society. These findings encourage more [5] to understand historical dynamics.",
+      "wordBank": [
+        "significant",
+        "cultural",
+        "remnants",
+        "complex",
+        "exploration",
+        "basic",
+        "simple",
+        "ceremonial"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:35:29.260Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "e06e35ae-8585-47af-b178-90378bed787e",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Urban Development",
+    "passage": "The rapid expansion of urban areas has led to significant changes in land use and infrastructure. Cities are becoming more densely populated, which demands innovative solutions for housing and transportation. Urban planners are focusing on sustainable practices to reduce environmental impact. For instance, integrating green spaces within city landscapes not only enhances aesthetic appeal but also improves air quality. However, challenges remain, such as balancing economic growth with environmental conservation. Moreover, the need for affordable housing continues to be a pressing issue, requiring collaboration between government sectors and private entities.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "land use",
+        "explanation": "The passage discusses changes in land use due to urban expansion.",
+        "keySentence": "The rapid expansion of urban areas has led to significant changes in land use and infrastructure.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "land use",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "innovative",
+        "explanation": "The passage highlights the need for innovative solutions as cities become more populated.",
+        "keySentence": "Cities are becoming more densely populated, which demands innovative solutions for housing and transportation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "innovative",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "sustainable",
+        "explanation": "Urban planners are focusing on sustainable practices to reduce environmental impact.",
+        "keySentence": "Urban planners are focusing on sustainable practices to reduce environmental impact.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sustainable",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "economic",
+        "explanation": "The passage mentions the challenge of balancing economic growth with environmental conservation.",
+        "keySentence": "However, challenges remain, such as balancing economic growth with environmental conservation.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "economic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "collaboration",
+        "explanation": "Addressing affordable housing requires collaboration between government sectors and private entities.",
+        "keySentence": "Moreover, the need for affordable housing continues to be a pressing issue, requiring collaboration between government sectors and private entities.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "collaboration",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban areas are growing quickly, causing shifts in [1] and infrastructure. As cities become more crowded, there is a need for [2] solutions in housing and transport. Planners emphasize [3] methods to minimize ecological effects. However, balancing [4] growth with conservation and addressing affordable housing are ongoing issues requiring [5] between sectors.",
+      "wordBank": [
+        "land use",
+        "innovative",
+        "sustainable",
+        "economic",
+        "collaboration",
+        "population",
+        "traditional",
+        "competition"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:00.300Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "51399252-4f38-4883-9ccd-09530f4a0ae4",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Archaeological Discovery",
+    "passage": "In recent years, archaeologists have unearthed a remarkable site in the heart of the Sahara Desert. This discovery includes a range of artifacts that date back thousands of years. Among the items found are tools, pottery, and remnants of ancient dwellings. These findings suggest that a complex society once thrived in what is now an arid region. The site provides insight into the adaptive strategies employed by ancient peoples to survive in harsh environments. Researchers are particularly intrigued by the sophisticated irrigation systems that indicate advanced agricultural practices. The discovery challenges previous notions about the development of early civilizations in arid areas, offering new perspectives on human resilience and ingenuity.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "site",
+        "explanation": "The passage mentions a 'remarkable site' that was unearthed.",
+        "keySentence": "In recent years, archaeologists have unearthed a remarkable site in the heart of the Sahara Desert.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "site",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "artifacts",
+        "explanation": "The passage refers to a range of artifacts that date back thousands of years.",
+        "keySentence": "This discovery includes a range of artifacts that date back thousands of years.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "artifacts",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "society",
+        "explanation": "The passage suggests that a complex society once thrived in the region.",
+        "keySentence": "These findings suggest that a complex society once thrived in what is now an arid region.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "society",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "systems",
+        "explanation": "The passage describes 'sophisticated irrigation systems' indicating advanced practices.",
+        "keySentence": "Researchers are particularly intrigued by the sophisticated irrigation systems that indicate advanced agricultural practices.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "systems",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "challenges",
+        "explanation": "The passage states the discovery challenges previous notions about civilization development.",
+        "keySentence": "The discovery challenges previous notions about the development of early civilizations in arid areas.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "challenges",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Archaeologists have recently uncovered a significant [1] in the Sahara Desert. The site contains various [2] that are thousands of years old, including tools and pottery. These artifacts suggest a once-thriving [3] in the area. Notably, the presence of advanced irrigation [4] indicates sophisticated agricultural practices. This [5] previous beliefs about civilization development in dry regions.",
+      "wordBank": [
+        "site",
+        "artifacts",
+        "society",
+        "systems",
+        "challenges",
+        "location",
+        "objects",
+        "structures"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:30.830Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 5,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "4f3ad665-e5f5-43d3-97e3-7b82e9dc8270",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Linguistic Research",
+    "passage": "Recent studies in linguistic research have focused on the evolution of language patterns over time. Researchers have discovered that language changes occur due to a variety of influences, including social interaction, technological advancements, and cultural shifts. One interesting finding is the role of social media in accelerating these changes, as platforms facilitate rapid communication and exposure to diverse linguistic styles. Furthermore, the integration of artificial intelligence in language processing has opened new avenues for understanding complex linguistic phenomena, making it possible to analyze vast datasets with unprecedented precision. As a result, the field continues to evolve, offering insights into both historical language development and future trajectories.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "patterns",
+        "explanation": "The word 'patterns' is used to describe the changes in language over time.",
+        "keySentence": "Recent studies in linguistic research have focused on the evolution of language patterns over time.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "patterns",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "accelerating",
+        "explanation": "Social media has increased the pace of linguistic changes, thus 'accelerated' is the correct term.",
+        "keySentence": "One interesting finding is the role of social media in accelerating these changes.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "accelerated",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The passage contains 'accelerating' not 'accelerated': 'One interesting finding is the role of social media in accelerating these changes.' The answer must be EXACT - 'accelerated' (past tense) does not appear verbatim in the passage, only 'accelerating' (present participle) does."
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "analyze",
+        "explanation": "AI allows researchers to analyze patterns, making 'analyze' the correct choice.",
+        "keySentence": "The integration of artificial intelligence in language processing has opened new avenues for understanding complex linguistic phenomena.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "analyze",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "evolution",
+        "explanation": "Insights into both historical language development and future trajectories refer to the 'evolution' of language.",
+        "keySentence": "As a result, the field continues to evolve, offering insights into both historical language development and future trajectories.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "evolution",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "datasets",
+        "explanation": "The passage mentions analyzing vast datasets, indicating that datasets are crucial for understanding changes.",
+        "keySentence": "making it possible to analyze vast datasets with unprecedented precision.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "datasets",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Linguistic research explores how language [1] evolve due to social interaction and other factors. Social media has [2] linguistic changes by exposing users to diverse styles. The use of AI in language processing allows researchers to [3] complex patterns. This advancement provides insights into both past and future [4]. However, understanding these changes requires careful analysis of various [5].",
+      "wordBank": [
+        "patterns",
+        "accelerated",
+        "analyze",
+        "evolution",
+        "datasets",
+        "dialogues",
+        "interpret",
+        "interaction"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:36:54.318Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 2,
+        "bankAnswer": "accelerated",
+        "verifiedAnswer": "accelerating",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The passage contains 'accelerating' not 'accelerated': 'One interesting finding is the role of social media in accelerating these changes.' The answer must be EXACT - 'accelerated' (past tense) does not appear verbatim in the passage, only 'accelerating' (present participle) does."
+      }
+    ]
+  },
+  {
+    "id": "752b0090-5086-481b-a8d4-42e41e41b4bc",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Urban Development",
+    "passage": "Urban development is a complex process that involves the transformation of rural areas into urban spaces. This process is driven by several key factors, including population growth, economic opportunities, and the need for improved infrastructure. As cities expand, they often encounter challenges such as traffic congestion and environmental degradation. To address these issues, urban planners must consider sustainable development practices. These include integrating green spaces and promoting public transportation. Additionally, community engagement plays a vital role in ensuring that urban development meets the needs of local residents.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "population",
+        "explanation": "The passage mentions population growth as a key factor in urban development.",
+        "keySentence": "This process is driven by several key factors, including population growth, economic opportunities, and the need for improved infrastructure.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "population",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "traffic",
+        "explanation": "Traffic congestion is listed as a challenge encountered by expanding cities.",
+        "keySentence": "As cities expand, they often encounter challenges such as traffic congestion and environmental degradation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "traffic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "promoting",
+        "explanation": "The passage suggests promoting public transportation as a sustainable practice.",
+        "keySentence": "These include integrating green spaces and promoting public transportation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "promoting",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "needs",
+        "explanation": "Community engagement ensures development meets the needs of local residents.",
+        "keySentence": "Community engagement plays a vital role in ensuring that urban development meets the needs of local residents.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "needs",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "engagement",
+        "explanation": "Involvement is a key aspect of ensuring urban development aligns with resident priorities.",
+        "keySentence": "Community engagement plays a vital role in ensuring that urban development meets the needs of local residents.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "involvement",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The word 'involvement' does NOT appear in the passage. The passage states: 'Additionally, community engagement plays a vital role...' The exact word is 'engagement', not 'involvement'. While these are synonyms, IELTS requires the EXACT word from the passage. Zero tolerance for synonyms."
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban development transforms rural areas into urban spaces due to factors like [1], economic opportunities, and infrastructure needs. Challenges such as [2] and environmental degradation arise. Sustainable practices, like green spaces and [3] public transportation, are essential. Community engagement ensures development meets residents' [4]. Planners must balance growth with sustainability and resident [5].",
+      "wordBank": [
+        "population",
+        "traffic",
+        "promoting",
+        "requirements",
+        "needs",
+        "necessities",
+        "demands",
+        "involvement"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:15.926Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 5,
+        "bankAnswer": "involvement",
+        "verifiedAnswer": "engagement",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The word 'involvement' does NOT appear in the passage. The passage states: 'Additionally, community engagement plays a vital role...' The exact word is 'engagement', not 'involvement'. While these are synonyms, IELTS requires the EXACT word from the passage. Zero tolerance for synonyms."
+      }
+    ]
+  },
+  {
+    "id": "c41d9442-53a7-49d9-bd9e-7309e0333e34",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience has made significant strides in understanding how the brain functions. Researchers have discovered that neurons communicate through a complex network of connections known as synapses. This intricate system allows for the transmission of electrical signals, which are pivotal for brain activity. Recent breakthroughs have shown how synaptic plasticity plays a crucial role in learning and memory. Moreover, advances in imaging technology have enabled scientists to observe these processes in real-time, enhancing our comprehension of cognitive functions. Despite these advancements, challenges remain, including understanding the precise mechanisms of neurodegenerative diseases, which continue to elude researchers.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "functions",
+        "explanation": "The passage discusses understanding how the brain functions, which is paraphrased as comprehending brain function.",
+        "keySentence": "Neuroscience has made significant strides in understanding how the brain functions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "function",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The passage states 'understanding how the brain functions' (line 1). The exact word is 'functions' (plural verb), not 'function' (singular noun/verb). Without seeing the actual gap context, if the summary requires the exact word from passage, 'function' does not appear verbatim - only 'functions' appears."
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "electrical",
+        "explanation": "The passage mentions 'electrical signals,' which is directly related to the transmission of signals essential for brain functions.",
+        "keySentence": "This intricate system allows for the transmission of electrical signals, which are pivotal for brain activity.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "electrical",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "learning",
+        "explanation": "The passage states synaptic plasticity's role in learning and memory, matching the gap's context.",
+        "keySentence": "Recent breakthroughs have shown how synaptic plasticity plays a crucial role in learning and memory.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "learning",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "precise",
+        "explanation": "The passage refers to the 'precise mechanisms' of neurodegenerative diseases, indicating specificity.",
+        "keySentence": "challenges remain, including understanding the precise mechanisms of neurodegenerative diseases",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "precise",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "challenges",
+        "explanation": "The passage concludes with challenges remaining in the field, indicating ongoing difficulties.",
+        "keySentence": "Despite these advancements, challenges remain",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "challenges",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "The field of neuroscience has advanced in comprehending brain [1] through synapses. Neurons transmit [2] signals essential for brain functions. Synaptic plasticity is key in [3] and memory. Imaging technology advances have improved our observation of these functions. However, understanding [4] mechanisms in neurodegenerative diseases is still challenging. [5] remain in this research area.",
+      "wordBank": [
+        "function",
+        "electrical",
+        "learning",
+        "precise",
+        "challenges",
+        "structural",
+        "chemical",
+        "simple"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:37:27.245Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 1,
+        "bankAnswer": "function",
+        "verifiedAnswer": "functions",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The passage states 'understanding how the brain functions' (line 1). The exact word is 'functions' (plural verb), not 'function' (singular noun/verb). Without seeing the actual gap context, if the summary requires the exact word from passage, 'function' does not appear verbatim - only 'functions' appears."
+      }
+    ]
+  },
+  {
+    "id": "aae812e1-5df3-48a1-8183-9dcf3005f93c",
+    "type": "summary-completion",
+    "band": 5.5,
+    "topic": "Climate Science",
+    "passage": "Climate science involves the study of the Earth's climate system, focusing on the atmosphere, hydrosphere, cryosphere, land surface, and biosphere. Scientists use various models to predict climate patterns, relying on historical data and current trends. One key aspect is understanding the role of greenhouse gases, primarily from fossil fuels, which contribute to climate change. The interaction between human activities and natural processes is complex, requiring interdisciplinary approaches to address the challenges effectively. By observing changes in temperature and precipitation, scientists aim to forecast future climatic conditions and inform policy decisions.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "climate",
+        "explanation": "The passage discusses the Earth's climate system, which is the primary focus of climate science.",
+        "keySentence": "Climate science involves the study of the Earth's climate system.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "climate",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "data",
+        "explanation": "Climate models use historical data to predict patterns, as mentioned in the passage.",
+        "keySentence": "Scientists use various models to predict climate patterns, relying on historical data.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "data",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "climate",
+        "explanation": "Greenhouse gases contribute to climate change, a key concept in the passage.",
+        "keySentence": "One key aspect is understanding the role of greenhouse gases, primarily from fossil fuels, which contribute to climate change.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "climate",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "forecast",
+        "explanation": "Forecasting is about predicting future conditions, as scientists try to do with climate.",
+        "keySentence": "By observing changes in temperature and precipitation, scientists aim to forecast future climatic conditions.",
+        "mutationType": "NEAR_MISS_DISTRACTOR",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "forecast",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "decisions",
+        "explanation": "Informing policy decisions is the goal of understanding climate forecasts.",
+        "keySentence": "By observing changes in temperature and precipitation, scientists aim to forecast future climatic conditions and inform policy decisions.",
+        "mutationType": "NEAR_MISS_DISTRACTOR",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "decisions",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science examines the Earth's [1] system, emphasizing the atmosphere, hydrosphere, and biosphere. Models predict patterns using historical [2] and trends. Greenhouse gases from fossil fuels significantly influence [3] change. The interaction between human and natural processes is intricate, necessitating interdisciplinary methods. By observing temperature and precipitation, scientists [4] future conditions to inform policy [5].",
+      "wordBank": [
+        "climate",
+        "data",
+        "climate",
+        "forecast",
+        "decisions",
+        "weather",
+        "measure",
+        "solutions"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:38:09.698Z",
+      "band": 5.5,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "cf2fef86-7d37-4a34-80df-ce436ed0b82c",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources are gaining traction worldwide as sustainable alternatives to fossil fuels. Solar panels and wind turbines are becoming more cost-effective and efficient, leading to increased adoption. In particular, the reduction in manufacturing costs has made solar energy more accessible to both developed and developing countries. Moreover, wind energy has seen technological advancements that have improved its viability, even in regions with lower wind speeds. Despite these positive trends, challenges remain, including the intermittent nature of renewable sources and the need for substantial investment in infrastructure. Additionally, energy storage solutions are critical to ensuring a stable supply, as they compensate for periods when renewable facilities are not producing energy.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "manufacturing",
+        "explanation": "The passage refers to the reduction in manufacturing costs of solar energy.",
+        "keySentence": "In particular, the reduction in manufacturing costs has made solar energy more accessible.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "manufacturing",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "advancements",
+        "explanation": "Technological advancements have improved the viability of wind energy, as mentioned in the passage.",
+        "keySentence": "Moreover, wind energy has seen technological advancements that have improved its viability.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "advancements",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "intermittent",
+        "explanation": "The passage describes the intermittent nature of renewable sources as a challenge.",
+        "keySentence": "challenges remain, including the intermittent nature of renewable sources.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "intermittent",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "storage",
+        "explanation": "Storage solutions are needed to ensure a stable energy supply by compensating for production gaps.",
+        "keySentence": "energy storage solutions are critical to ensuring a stable supply.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "storage",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "adoption",
+        "explanation": "Despite challenges, the adoption of renewable energy continues to grow.",
+        "keySentence": "solar panels and wind turbines are becoming more cost-effective and efficient, leading to increased adoption.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "adoption",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy is increasingly popular due to its sustainability. The cost of [1] has decreased, making solar power more widespread. Technological [2] have enhanced wind energy's feasibility. However, issues like the [3] nature of these sources and infrastructure investment persist. Crucial to stability are [4] solutions, which address gaps in production. Despite the challenges, renewable energy's [5] continues to grow.",
+      "wordBank": [
+        "manufacturing",
+        "advancements",
+        "intermittent",
+        "storage",
+        "adoption",
+        "frequent",
+        "improvements",
+        "distribution"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:38:25.395Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.8,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "a0aee352-4cae-4940-a08d-5cd895009b50",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Climate science explores the intricate dynamics of Earth's climate systems. One critical aspect is the greenhouse effect, which results from gases like carbon dioxide trapping heat in the atmosphere. This process is essential for maintaining temperatures that support life on Earth. However, human activities have amplified this effect, leading to global warming. Scientists also study climate feedback mechanisms, such as ice-albedo feedback, where melting ice reduces the Earth's reflectivity, further accelerating warming. Another area of focus is the impact of climate change on weather patterns, with increasing evidence linking it to extreme events like hurricanes and droughts.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "dynamics",
+        "explanation": "The word 'dynamics' refers to the complex interactions and processes within Earth's climate systems.",
+        "keySentence": "Climate science explores the intricate dynamics of Earth's climate systems.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "dynamics",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "global warming",
+        "explanation": "Global warming is the result of human activities amplifying the greenhouse effect.",
+        "keySentence": "However, human activities have amplified this effect, leading to global warming.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "global warming",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "While 'global warming' appears verbatim in the passage ('leading to global warming'), this is TWO WORDS. The instruction specifies 'Maximum word count: ONE WORD ONLY unless the question specifies otherwise.' Without seeing the actual question context, this violates the one-word constraint."
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "weather",
+        "explanation": "Weather patterns being affected by climate change include extreme events like hurricanes and droughts.",
+        "keySentence": "Another area of focus is the impact of climate change on weather patterns, with increasing evidence linking it to extreme events like hurricanes and droughts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "weather",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "temperatures",
+        "explanation": "The greenhouse effect is crucial for maintaining life-supporting temperatures, not ecosystems.",
+        "keySentence": "This process is essential for maintaining temperatures that support life on Earth.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null,
+        "autoCorrectReason": "The passage contains 'temperatures' (plural): 'maintaining temperatures that support life on Earth.' The answer 'temperature' (singular) is NOT the exact word from the passage. IELTS requires verbatim accuracy - singular vs. plural matters."
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": null,
+        "explanation": "The term 'phenomena' is too broad and not specific to the context of weather patterns and extreme events.",
+        "keySentence": "The effect of climate change on weather patterns, including extreme events, is also studied.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": null,
+        "autoCorrectReason": "The word 'phenomena' does NOT appear anywhere in the passage. The passage uses 'events' ('extreme events like hurricanes and droughts'), not 'phenomena'. This is a synonym substitution, which violates the verbatim requirement."
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science examines the complex [1] of Earth's systems. The greenhouse effect, involving gases like CO2, is vital for sustaining life-supporting temperatures. Human actions have intensified this effect, causing [2]. Researchers investigate feedback mechanisms, such as ice-albedo, which increases warming. The effect of climate change on [3] patterns, including extreme events, is also studied.",
+      "wordBank": [
+        "dynamics",
+        "global warming",
+        "weather",
+        "ecosystem",
+        "biodiversity",
+        "temperature",
+        "precipitation",
+        "phenomena"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:38:54.577Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 2,
+        "bankAnswer": "global warming",
+        "verifiedAnswer": "global warming",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "While 'global warming' appears verbatim in the passage ('leading to global warming'), this is TWO WORDS. The instruction specifies 'Maximum word count: ONE WORD ONLY unless the question specifies otherwise.' Without seeing the actual question context, this violates the one-word constraint."
+      },
+      {
+        "id": 4,
+        "bankAnswer": "temperature",
+        "verifiedAnswer": "temperatures",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The passage contains 'temperatures' (plural): 'maintaining temperatures that support life on Earth.' The answer 'temperature' (singular) is NOT the exact word from the passage. IELTS requires verbatim accuracy - singular vs. plural matters."
+      },
+      {
+        "id": 5,
+        "bankAnswer": "phenomena",
+        "verifiedAnswer": null,
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The word 'phenomena' does NOT appear anywhere in the passage. The passage uses 'events' ('extreme events like hurricanes and droughts'), not 'phenomena'. This is a synonym substitution, which violates the verbatim requirement."
+      }
+    ]
+  },
+  {
+    "id": "20219ad6-ff8a-42ff-a40b-10722ebf4a9b",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Economic Policy",
+    "passage": "Economic policy is a crucial aspect of a nation's governance that determines the overall health of its economy. Governments employ various tools, such as fiscal policy, to manage their country's economic growth. Fiscal policy involves adjusting government spending and tax rates to influence the economy. Another significant tool is monetary policy, which is overseen by a nation's central bank and includes modifying interest rates to control inflation and stabilize the currency. These policies aim to achieve macroeconomic objectives like reducing unemployment, fostering economic growth, and maintaining price stability. However, the effectiveness of these policies can vary depending on external factors such as global economic conditions and domestic political challenges.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "health",
+        "explanation": "The passage discusses the 'overall health of its economy' as a key aspect of economic policy.",
+        "keySentence": "Economic policy is a crucial aspect of a nation's governance that determines the overall health of its economy.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "health",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "fiscal",
+        "explanation": "Fiscal policy is mentioned as a tool for managing spending and taxation.",
+        "keySentence": "Fiscal policy involves adjusting government spending and tax rates to influence the economy.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "fiscal",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "monetary",
+        "explanation": "Monetary policy is described as controlling monetary aspects like interest rates.",
+        "keySentence": "Another significant tool is monetary policy, which is overseen by a nation's central bank and includes modifying interest rates.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "monetary",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "external",
+        "explanation": "The passage refers to external factors affecting the effectiveness of policies.",
+        "keySentence": "However, the effectiveness of these policies can vary depending on external factors such as global economic conditions.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "external",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "challenges",
+        "explanation": "Domestic political challenges are mentioned as affecting policy success.",
+        "keySentence": "These policies aim to achieve macroeconomic objectives... domestic political challenges.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "challenges",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Economic policy is vital for managing a nation's [1]. Governments use [2] policy to adjust spending and taxation, while [3] policy controls monetary aspects like interest rates. The main goals are to reduce unemployment, encourage growth, and keep prices stable. Yet, the success of these policies can be affected by [4] factors, including global conditions and local [5].",
+      "wordBank": [
+        "health",
+        "fiscal",
+        "monetary",
+        "external",
+        "challenges",
+        "internal",
+        "taxes",
+        "political"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:39:52.477Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "c987e9df-fc53-4b69-a0f0-9c662845b800",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Neuroscience",
+    "passage": "Neuroscience, a rapidly evolving field, explores the complexities of the brain and nervous system. It delves into how neurons communicate through electrical signals, which are fundamental to every thought and action. Researchers employ advanced imaging techniques to visualize these processes, providing deeper insights into brain functions and potential treatments for neurological disorders. Additionally, neuroplasticity, the brain's ability to reorganize itself, has become a focal point of study, offering hope for recovery from injuries. However, the ethical implications of manipulating brain functions remain a topic of considerable debate among scientists.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "brain",
+        "explanation": "The passage discusses the brain as a key component of neuroscience studies.",
+        "keySentence": "Neuroscience, a rapidly evolving field, explores the complexities of the brain and nervous system.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "brain",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "electrical",
+        "explanation": "Neurons communicate through electrical signals, as mentioned in the passage.",
+        "keySentence": "It delves into how neurons communicate through electrical signals, which are fundamental to every thought and action.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "electrical",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "imaging",
+        "explanation": "Researchers use advanced imaging techniques in their studies.",
+        "keySentence": "Researchers employ advanced imaging techniques to visualize these processes, providing deeper insights into brain functions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "imaging",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "neuroplasticity",
+        "explanation": "Neuroplasticity refers to the brain's ability to reorganize itself, important for recovery.",
+        "keySentence": "Additionally, neuroplasticity, the brain's ability to reorganize itself, has become a focal point of study, offering hope for recovery from injuries.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "neuroplasticity",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "manipulating",
+        "explanation": "The passage refers to ethical debates about manipulating brain functions.",
+        "keySentence": "However, the ethical implications of manipulating brain functions remain a topic of considerable debate among scientists.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "manipulation",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The passage contains 'manipulating' not 'manipulation'. The exact phrase is 'the ethical implications of manipulating brain functions'. The answer 'manipulation' is a different word form (noun vs. gerund/verb) and does not appear verbatim in the passage. IELTS requires exact words from the passage."
+      }
+    ],
+    "extraData": {
+      "summaryText": "Neuroscience investigates the intricate workings of the [1] and nervous system. It examines neuron communication via [2] signals, which underpin all thoughts and actions. Advanced [3] methods help scientists understand brain operations better and explore treatment options for disorders. The concept of [4], the brain's capacity to restructure itself, is crucial for recovery research. Nevertheless, ethical concerns about brain [5] continue to spark discussions.",
+      "wordBank": [
+        "brain",
+        "electrical",
+        "imaging",
+        "neuroplasticity",
+        "manipulation",
+        "reorganization",
+        "neuron",
+        "restructuring"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:41:02.663Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 5,
+        "bankAnswer": "manipulation",
+        "verifiedAnswer": "manipulating",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The passage contains 'manipulating' not 'manipulation'. The exact phrase is 'the ethical implications of manipulating brain functions'. The answer 'manipulation' is a different word form (noun vs. gerund/verb) and does not appear verbatim in the passage. IELTS requires exact words from the passage."
+      }
+    ]
+  },
+  {
+    "id": "d5ec6058-086a-455b-ac50-e64debaf1e6f",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Linguistic research has evolved significantly over the past few decades, shifting from a descriptive approach to a more analytical one. Initially, researchers focused on documenting languages, but now there's an emphasis on understanding underlying structures. This shift has been fueled by advancements in technology, enabling more precise data collection and analysis. Modern linguists often employ computational tools to examine phonetic patterns and syntax. However, this reliance on technology also presents challenges, such as data privacy concerns and the need for interdisciplinary collaboration to interpret findings accurately. Despite these hurdles, the integration of technology in linguistic research has opened new avenues for understanding language evolution and variation across communities.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "descriptive",
+        "explanation": "The passage mentions a shift from a 'descriptive approach' to an analytical one.",
+        "keySentence": "Initially, researchers focused on documenting languages, but now there's an emphasis on understanding underlying structures.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "descriptive",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "advancements",
+        "explanation": "The shift in research focus is attributed to 'advancements in technology'.",
+        "keySentence": "This shift has been fueled by advancements in technology, enabling more precise data collection and analysis.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "advancements",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "patterns",
+        "explanation": "Computational tools are used to examine 'phonetic patterns'.",
+        "keySentence": "Modern linguists often employ computational tools to examine phonetic patterns and syntax.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "patterns",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "collaboration",
+        "explanation": "The passage highlights the 'need for interdisciplinary collaboration' to interpret findings accurately.",
+        "keySentence": "However, this reliance on technology also presents challenges, such as data privacy concerns and the need for interdisciplinary collaboration to interpret findings accurately.",
+        "mutationType": "CARE_READING_REQUIRED",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "collaboration",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "evolution",
+        "explanation": "Technology has opened new avenues for understanding 'language evolution'.",
+        "keySentence": "Despite these hurdles, the integration of technology in linguistic research has opened new avenues for understanding language evolution and variation across communities.",
+        "mutationType": "CARE_READING_REQUIRED",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "evolution",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Linguistic research has moved from [1] studies to analytical ones, aided by technological [2]. Researchers now use computational tools for examining phonetic [3] and syntax. However, challenges like data privacy and the need for interdisciplinary [4] persist. Despite these, technology has enhanced the ability to understand language [5].",
+      "wordBank": [
+        "descriptive",
+        "advancements",
+        "patterns",
+        "collaboration",
+        "evolution",
+        "documentation",
+        "innovations",
+        "structures"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:41:14.321Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4.5,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 5,
+          "writersStance": 4,
+          "trapPotential": 4,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 5
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "5c3d9ad3-f953-47ba-ae79-d56938c0c6ac",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources are becoming increasingly important in the global effort to combat climate change. These sources, such as solar, wind, and hydroelectric power, offer a sustainable alternative to fossil fuels. Solar energy, for instance, harnesses sunlight to generate electricity through photovoltaic cells. Wind energy captures air currents with turbines to produce power. Hydroelectric power relies on the flow of water to generate electricity, which is particularly effective in regions with abundant water resources. Despite their potential, these renewable technologies face challenges, including high initial costs and the need for technological advancements to improve efficiency.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "climate change",
+        "explanation": "The passage highlights the importance of renewable energy in combating climate change.",
+        "keySentence": "Renewable energy sources are becoming increasingly important in the global effort to combat climate change.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "climate change",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "solar",
+        "explanation": "Solar is one of the key renewable energy sources mentioned in the passage.",
+        "keySentence": "These sources, such as solar, wind, and hydroelectric power, offer a sustainable alternative to fossil fuels.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "solar",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "wind",
+        "explanation": "Wind energy is highlighted as a significant renewable source.",
+        "keySentence": "These sources, such as solar, wind, and hydroelectric power, offer a sustainable alternative to fossil fuels.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "wind",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "sunlight",
+        "explanation": "The passage specifies that solar energy harnesses sunlight to generate electricity.",
+        "keySentence": "Solar energy, for instance, harnesses sunlight to generate electricity through photovoltaic cells.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sunlight",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "turbines",
+        "explanation": "Wind energy uses turbines to capture air currents and produce power.",
+        "keySentence": "Wind energy captures air currents with turbines to produce power.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "turbines",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy is vital in addressing [1]. It includes sources like [2], [3], and hydroelectric power. Solar energy utilizes [4] to produce electricity, while wind power uses [5].",
+      "wordBank": [
+        "climate change",
+        "solar",
+        "wind",
+        "sunlight",
+        "turbines",
+        "fossil fuels",
+        "batteries",
+        "engines"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:41:35.928Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "c1e7257e-e713-4c5e-a2e7-e04bc3cacdf9",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Urban Development",
+    "passage": "Urban development has undergone significant transformations over the past few decades. The emphasis has shifted from merely expanding infrastructure to creating sustainable and livable environments. Green spaces, for instance, have become a priority as they not only improve aesthetics but also contribute to the well-being of urban residents. In addition, the integration of technology in urban planning has introduced smart city concepts, where data is utilized to enhance the efficiency of city services. However, challenges remain, particularly in managing the growing urban population and ensuring equitable access to resources. The need for affordable housing continues to be a pressing issue, calling for innovative solutions to accommodate diverse demographics.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "sustainable",
+        "explanation": "The passage highlights the shift to creating 'sustainable and livable environments'.",
+        "keySentence": "The emphasis has shifted from merely expanding infrastructure to creating sustainable and livable environments.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sustainable",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "green",
+        "explanation": "Green spaces are prioritized for improving aesthetics and well-being.",
+        "keySentence": "Green spaces, for instance, have become a priority as they not only improve aesthetics but also contribute to the well-being of urban residents.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "green",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "smart",
+        "explanation": "The passage discusses 'smart city concepts' utilizing data for efficiency.",
+        "keySentence": "In addition, the integration of technology in urban planning has introduced smart city concepts, where data is utilized to enhance the efficiency of city services.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "smart",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "equitable",
+        "explanation": "The passage mentions ensuring 'equitable access to resources' as a challenge.",
+        "keySentence": "However, challenges remain, particularly in managing the growing urban population and ensuring equitable access to resources.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "equitable",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "innovative",
+        "explanation": "Innovative solutions are needed for affordable housing as stated in the passage.",
+        "keySentence": "The need for affordable housing continues to be a pressing issue, calling for innovative solutions to accommodate diverse demographics.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "innovative",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban development now focuses on creating [1] environments rather than just expanding infrastructure. The inclusion of [2] areas is crucial for enhancing city aesthetics and resident well-being. Technology plays a key role, with [3] cities using data to improve services. Despite progress, challenges like population growth and [4] access to resources persist. Affordable housing remains a critical issue, requiring [5] solutions.",
+      "wordBank": [
+        "sustainable",
+        "green",
+        "smart",
+        "equitable",
+        "innovative",
+        "technological",
+        "balanced",
+        "urban"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:07.869Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.7,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "fa150055-fa90-4036-8913-6c35b7bebcb1",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Renewable Energy",
+    "passage": "Renewable energy sources are increasingly vital to the global push for sustainable development. Solar power, harnessed through photovoltaic panels, and wind power, generated by turbines, are among the most prominent forms. These technologies convert natural sources into electricity without emitting greenhouse gases, thus playing a crucial role in mitigating climate change. However, the intermittent nature of these energy forms presents challenges. Energy storage solutions, such as batteries, are essential to ensure a stable supply. Government policies and incentives are also pivotal in promoting the adoption of renewable technologies, encouraging investment and innovation in clean energy infrastructure.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "sustainable",
+        "explanation": "The passage discusses renewable energy's role in sustainable development.",
+        "keySentence": "Renewable energy sources are increasingly vital to the global push for sustainable development.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sustainable",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "electricity",
+        "explanation": "The passage mentions that these technologies convert natural sources into electricity.",
+        "keySentence": "These technologies convert natural sources into electricity without emitting greenhouse gases.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "electricity",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "challenges",
+        "explanation": "The passage describes the intermittent nature of renewable energy as a challenge.",
+        "keySentence": "However, the intermittent nature of these energy forms presents challenges.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "challenging",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The passage contains 'challenges' (noun): 'the intermittent nature of these energy forms presents challenges.' The answer 'challenging' (adjective) is NOT the exact word from the passage. This is a synonym/word form variation and fails the verbatim requirement."
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "policies",
+        "explanation": "The passage highlights the importance of government policies in promoting renewable energy.",
+        "keySentence": "Government policies and incentives are also pivotal in promoting the adoption of renewable technologies.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "policies",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "investment",
+        "explanation": "Investment is crucial for innovation in clean energy infrastructure, as per the passage.",
+        "keySentence": "encouraging investment and innovation in clean energy infrastructure.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "investment",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Renewable energy is pivotal for [1] development. Solar and wind power are key technologies that transform natural resources into [2] without causing pollution. Despite their benefits, they are [3] due to their inconsistency. Storage systems, like batteries, are crucial for stability. Additionally, [4] and incentives are necessary to boost the use of renewables, fostering [5] in eco-friendly energy systems.",
+      "wordBank": [
+        "sustainable",
+        "electricity",
+        "challenging",
+        "policies",
+        "investment",
+        "fossil",
+        "windy",
+        "taxes"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:37.767Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 3,
+        "bankAnswer": "challenging",
+        "verifiedAnswer": "challenges",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The passage contains 'challenges' (noun): 'the intermittent nature of these energy forms presents challenges.' The answer 'challenging' (adjective) is NOT the exact word from the passage. This is a synonym/word form variation and fails the verbatim requirement."
+      }
+    ]
+  },
+  {
+    "id": "7e1f7b3d-6bc1-4536-89e4-b90966d5b968",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Climate Science",
+    "passage": "Climate science has evolved significantly over the past few decades, with researchers striving to understand the complexities of Earth's atmosphere. Global warming, primarily caused by the increase in greenhouse gases such as carbon dioxide, has been a major focus. Scientists have developed sophisticated models to predict future climate scenarios, which are crucial for informing policy decisions. Additionally, the impact of human activity on climate change has been extensively studied. While some argue that natural variations also play a role, the consensus is that anthropogenic factors are the predominant cause. Mitigation strategies, including the reduction of fossil fuel usage and the promotion of renewable energy, are being implemented worldwide to address these challenges.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "carbon dioxide",
+        "explanation": "Carbon dioxide is a greenhouse gas contributing significantly to global warming.",
+        "keySentence": "Global warming, primarily caused by the increase in greenhouse gases such as carbon dioxide, has been a major focus.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "carbon dioxide",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "models",
+        "explanation": "Models are used to predict future climate scenarios, crucial for policy decisions.",
+        "keySentence": "Scientists have developed sophisticated models to predict future climate scenarios, which are crucial for informing policy decisions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "models",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "impact",
+        "explanation": "Human activity's impact is considered a main driver of climate change.",
+        "keySentence": "Additionally, the impact of human activity on climate change has been extensively studied.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "impact",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "anthropogenic",
+        "explanation": "Anthropogenic factors refer to human-induced causes of climate change.",
+        "keySentence": "the consensus is that anthropogenic factors are the predominant cause.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "anthropogenic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "renewable",
+        "explanation": "Renewable energy is promoted to mitigate climate change issues.",
+        "keySentence": "Mitigation strategies, including the reduction of fossil fuel usage and the promotion of renewable energy, are being implemented worldwide to address these challenges.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "renewable",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Over recent years, the field of climate science has advanced, highlighting the role of increasing [1] in global warming. Sophisticated [2] have been designed to foresee future climate situations. The [3] of human activity is considered the main driver of climate change. While some acknowledge natural variations, the consensus supports [4] factors. Efforts like reducing fossil fuel use and promoting [5] energy aim to mitigate these issues.",
+      "wordBank": [
+        "carbon dioxide",
+        "models",
+        "impact",
+        "anthropogenic",
+        "renewable",
+        "natural",
+        "biological",
+        "conventional"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:42:50.127Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 4,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "error",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [],
+    "reviewError": "fetch failed"
+  },
+  {
+    "id": "a6d6dee2-b9b3-450c-90a5-6edd456656d5",
+    "type": "summary-completion",
+    "band": 6,
+    "topic": "Linguistic Research",
+    "passage": "Recent studies in linguistic research have revealed the intricate ways in which languages evolve over time. This evolution is primarily driven by cultural exchanges and technological advancements. Language mutation occurs when speakers adapt language for efficiency. Furthermore, sociolinguistic factors such as class and age also have significant effects on language change. Researchers use various methodologies, including corpus analysis, to understand these dynamics. By comparing historical texts, they track shifts in grammar and vocabulary, providing insights into past societal changes.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "exchanges",
+        "explanation": "The passage states that language changes are driven by 'cultural exchanges'.",
+        "keySentence": "This evolution is primarily driven by cultural exchanges and technological advancements.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "exchanges",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "advancements",
+        "explanation": "The passage mentions 'technological advancements' as a driver of language change.",
+        "keySentence": "This evolution is primarily driven by cultural exchanges and technological advancements.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "advancements",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "efficiency",
+        "explanation": "Language mutation is stated to occur for 'efficiency'.",
+        "keySentence": "Language mutation occurs when speakers adapt language for efficiency.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "efficiency",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "corpus analysis",
+        "explanation": "The passage specifies 'corpus analysis' as a method used by researchers.",
+        "keySentence": "Researchers use various methodologies, including corpus analysis, to understand these dynamics.",
+        "mutationType": "WORDS_DISTINGUISH",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "corpus analysis",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "grammar",
+        "explanation": "The passage indicates that shifts in 'grammar' are tracked by researchers.",
+        "keySentence": "By comparing historical texts, they track shifts in grammar and vocabulary, providing insights into past societal changes.",
+        "mutationType": "WORDS_DISTINGUISH",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "grammar",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Research shows that languages change due to cultural [1] and technological [2]. These changes are adaptations for [3]. Social factors, like class and age, also play a role. Researchers use methods like [4] to study language dynamics. Comparing texts helps reveal shifts in [5] and vocabulary.",
+      "wordBank": [
+        "exchanges",
+        "advancements",
+        "efficiency",
+        "corpus analysis",
+        "grammar",
+        "interactions",
+        "developments",
+        "fluency"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:43:11.271Z",
+      "band": 6,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "error",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [],
+    "reviewError": "fetch failed"
+  },
+  {
+    "id": "ded5f2fc-1a73-4001-b4d4-5f2777cff195",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "Urban development has become a central focus in city planning due to the increasing population and the need for sustainable living environments. One major aspect of urban development is the integration of green spaces, which not only enhances the aesthetic appeal of cities but also improves air quality and provides recreational areas for residents. Additionally, the implementation of efficient public transportation systems is crucial for reducing traffic congestion and lowering pollution levels. As cities continue to grow, the challenge lies in balancing modernization with the preservation of historical landmarks, ensuring that urban expansion does not come at the cost of cultural heritage.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "aesthetic",
+        "explanation": "The passage mentions 'aesthetic appeal', which is synonymous with the summary's 'appeal'.",
+        "keySentence": "One major aspect of urban development is the integration of green spaces, which not only enhances the aesthetic appeal of cities...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "aesthetic",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "transportation",
+        "explanation": "The passage refers to 'efficient public transportation systems', which aligns with the summary's 'systems'.",
+        "keySentence": "Additionally, the implementation of efficient public transportation systems is crucial for reducing traffic congestion...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "transportation",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "historical",
+        "explanation": "The passage discusses 'historical landmarks', which is paraphrased as 'landmarks' in the summary.",
+        "keySentence": "The challenge lies in balancing modernization with the preservation of historical landmarks...",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "historical",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "expansion",
+        "explanation": "The term 'urban expansion' is directly mentioned in the passage, which fits the context of the summary.",
+        "keySentence": "ensuring that urban expansion does not come at the cost of cultural heritage.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "expansion",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "heritage",
+        "explanation": "The passage uses 'cultural heritage', indicating that 'heritage' is the appropriate term for the summary.",
+        "keySentence": "ensuring that urban expansion does not come at the cost of cultural heritage.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "heritage",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban development is essential due to population growth and the necessity for sustainable environments. The inclusion of green spaces improves [1] appeal and air quality. Efficient [2] systems help decrease congestion and pollution. Balancing modernity with preserving [3] landmarks is challenging in growing cities. The [4] of urban expansion should not result in the loss of cultural [5].",
+      "wordBank": [
+        "aesthetic",
+        "transportation",
+        "historical",
+        "trade",
+        "heritage",
+        "commerce",
+        "expansion",
+        "economic"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:44:20.543Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.8,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 5,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "error",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [],
+    "reviewError": "fetch failed"
+  },
+  {
+    "id": "be579330-1825-4afe-ae24-67dd62a52018",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Psychology",
+    "passage": "Understanding the intricacies of human behavior is a core element of psychology. One significant area of study is how cognitive biases influence decision-making. Cognitive biases are systematic patterns of deviation from norm or rationality in judgment, which often occur due to the brain's attempt to simplify information processing. A well-known example is the confirmation bias, where individuals favor information that confirms their preexisting beliefs. Another important aspect is emotional intelligence, defined as the ability to recognize, understand, and manage our own emotions, as well as those of others. High emotional intelligence can lead to more effective communication and better personal and professional relationships. Psychological resilience, the capacity to adapt well in the face of adversity, is another critical area of exploration, as it contributes to overall mental health and well-being.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "cognitive",
+        "explanation": "The passage discusses cognitive biases, which are the focus of how biases affect decisions.",
+        "keySentence": "One significant area of study is how cognitive biases influence decision-making.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "cognitive",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "information",
+        "explanation": "The passage explains that cognitive biases simplify information processing.",
+        "keySentence": "Cognitive biases are systematic patterns of deviation from norm or rationality in judgment, which often occur due to the brain's attempt to simplify information processing.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "information",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "intelligence",
+        "explanation": "Emotional intelligence is discussed in terms of managing emotions.",
+        "keySentence": "Another important aspect is emotional intelligence, defined as the ability to recognize, understand, and manage our own emotions, as well as those of others.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "intelligence",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "adversity",
+        "explanation": "The passage describes resilience as adapting in the face of adversity.",
+        "keySentence": "Psychological resilience, the capacity to adapt well in the face of adversity, is another critical area of exploration.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "adversity",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "resilience",
+        "explanation": "The passage links resilience to better mental health.",
+        "keySentence": "Psychological resilience, the capacity to adapt well in the face of adversity, is another critical area of exploration, as it contributes to overall mental health and well-being.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "cognitive",
+          "confidence": "medium",
+          "matched": false
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Psychology delves into human behavior, particularly how [1] biases affect decisions. These biases, like confirmation bias, simplify [2] processing. Emotional [3] involves managing our own and others' emotions, enhancing communication. Resilience, adapting to [4], is vital for mental health. [5] intelligence supports better relationships.",
+      "wordBank": [
+        "cognitive",
+        "intelligence",
+        "information",
+        "adversity",
+        "resilience",
+        "memory",
+        "stress",
+        "learning"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:44:54.795Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "43e9676a-e42f-4729-a407-c8ddfa2fb93e",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Linguistic Research",
+    "passage": "Recent linguistic research has focused on the evolution of language in various social contexts. Studies have demonstrated that language adaptation often occurs through subtle shifts in syntax and vocabulary, which are influenced by cultural interactions. A notable example is the integration of loanwords from one language to another, facilitating communication and enhancing cultural exchange. Researchers have also highlighted the importance of sociolinguistic factors, such as identity and community, in shaping linguistic changes. These factors can lead to the development of dialects or even entirely new languages over time.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "evolution",
+        "explanation": "The passage discusses the evolution of language in social contexts, which is paraphrased in the summary.",
+        "keySentence": "Recent linguistic research has focused on the evolution of language in various social contexts.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "evolution",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "syntax",
+        "explanation": "The passage mentions shifts in syntax and vocabulary, which is bridged to the summary.",
+        "keySentence": "Studies have demonstrated that language adaptation often occurs through subtle shifts in syntax and vocabulary.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "syntax",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "interactions",
+        "explanation": "Cultural interactions are cited as influencing language changes, matching the summary context.",
+        "keySentence": "which are influenced by cultural interactions.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "interactions",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "community",
+        "explanation": "Community is a sociolinguistic factor mentioned in the passage, important for language change.",
+        "keySentence": "Researchers have also highlighted the importance of sociolinguistic factors, such as identity and community, in shaping linguistic changes.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "community",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "NOT FOUND",
+        "explanation": "Understanding linguistic dynamics is crucial, as implied by the passage's discussion on the importance of sociolinguistic factors.",
+        "keySentence": "Understanding these factors is essential for understanding linguistic dynamics.",
+        "mutationType": "careful reading",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "understanding",
+          "confidence": "medium",
+          "matched": true
+        },
+        "autoCorrectReason": "The word 'understanding' does NOT appear anywhere in the passage. I have searched the entire text and cannot find this exact word. This answer fails the verbatim requirement."
+      }
+    ],
+    "extraData": {
+      "summaryText": "Linguistic research underscores the [1] of language in social settings. Language changes occur via minor shifts in [2] and vocabulary, often due to cultural [3]. An example is the inclusion of loanwords, which aid communication and cultural interaction. Sociolinguistic elements like identity and [4] play a crucial role in language evolution, potentially resulting in new dialects or languages. Understanding these factors is essential for [5] linguistic dynamics.",
+      "wordBank": [
+        "evolution",
+        "syntax",
+        "interactions",
+        "community",
+        "understanding",
+        "transformation",
+        "grammar",
+        "society"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:45:05.410Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": [
+      {
+        "id": 5,
+        "bankAnswer": "understanding",
+        "verifiedAnswer": "NOT FOUND",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "The word 'understanding' does NOT appear anywhere in the passage. I have searched the entire text and cannot find this exact word. This answer fails the verbatim requirement."
+      }
+    ]
+  },
+  {
+    "id": "79cc9c9e-6bd4-4005-9793-eddf7371220c",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Urban Development",
+    "passage": "Urban development has become a focal point of modern city planning, aiming to accommodate growing populations while maintaining environmental sustainability. The integration of green spaces within urban areas is essential, as it provides ecological benefits and improves residents' quality of life. Moreover, smart technology is being increasingly incorporated to enhance infrastructure efficiency. However, challenges such as economic disparities and resource constraints pose significant hurdles. Despite these issues, collaborative efforts between governments and local communities have shown promise in fostering sustainable urban growth.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "growing",
+        "explanation": "The passage discusses the need to accommodate expanding populations in cities.",
+        "keySentence": "Urban development has become a focal point of modern city planning, aiming to accommodate growing populations while maintaining environmental sustainability.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "growing",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "green",
+        "explanation": "Green spaces are highlighted as crucial for ecological benefits and quality of life.",
+        "keySentence": "The integration of green spaces within urban areas is essential, as it provides ecological benefits and improves residents' quality of life.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "green",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "technology",
+        "explanation": "The passage explains that smart technology is being used to enhance infrastructure efficiency.",
+        "keySentence": "Moreover, smart technology is being increasingly incorporated to enhance infrastructure efficiency.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "technology",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "disparities",
+        "explanation": "Economic disparities, not just general growth or inequality, are specified as a challenge.",
+        "keySentence": "However, challenges such as economic disparities and resource constraints pose significant hurdles.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "disparities",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "governments",
+        "explanation": "The passage mentions collaboration between governments and local communities.",
+        "keySentence": "Despite these issues, collaborative efforts between governments and local communities have shown promise in fostering sustainable urban growth.",
+        "mutationType": "CAREFUL_READING",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "governments",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Urban development focuses on adapting cities to [1] populations while ensuring sustainability. Integrating [2] spaces is crucial for ecological and social benefits. Smart [3] is enhancing infrastructure, but challenges like economic [4] remain. Collaboration between [5] and communities is key to success.",
+      "wordBank": [
+        "growing",
+        "green",
+        "technology",
+        "disparities",
+        "governments",
+        "growth",
+        "nature",
+        "inequality"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:46:28.378Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.8,
+        "scores": {
+          "argumentStructure": 4,
+          "academicVocabulary": 4,
+          "writersStance": 4,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  },
+  {
+    "id": "4798ac8e-bf6b-42c0-bff9-bbcbb02941a5",
+    "type": "summary-completion",
+    "band": 7,
+    "topic": "Climate Science",
+    "passage": "Climate science has evolved significantly over the last few decades, providing a deeper understanding of the Earth's complex systems. Researchers have identified various factors contributing to climate change, including greenhouse gas emissions and deforestation. The use of advanced technology, such as satellite measurements, has improved the accuracy of climate models. These models are crucial in predicting future climate scenarios and assessing potential impacts on global ecosystems. Despite the progress, challenges remain in addressing climate change effectively due to political and economic obstacles. The international community continues to work towards agreements that aim to mitigate these effects while promoting sustainable development.",
+    "questions": [
+      {
+        "id": 1,
+        "text": "Gap [1]",
+        "answer": "complex",
+        "explanation": "The passage refers to 'Earth's complex systems,' and the summary uses 'systems,' thus 'complex' bridges the synonym.",
+        "keySentence": "Climate science has evolved significantly over the last few decades, providing a deeper understanding of the Earth's complex systems.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "complex",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 2,
+        "text": "Gap [2]",
+        "answer": "deforestation",
+        "explanation": "The passage mentions deforestation as a contributing factor to climate change, matching the summary's context.",
+        "keySentence": "Researchers have identified various factors contributing to climate change, including greenhouse gas emissions and deforestation.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "deforestation",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 3,
+        "text": "Gap [3]",
+        "answer": "measurements",
+        "explanation": "Satellite 'measurements' in the passage correspond to 'advanced technology' in the summary.",
+        "keySentence": "The use of advanced technology, such as satellite measurements, has improved the accuracy of climate models.",
+        "mutationType": "SYNONYM_BRIDGE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "measurements",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 4,
+        "text": "Gap [4]",
+        "answer": "obstacles",
+        "explanation": "The passage mentions 'political and economic obstacles,' which the summary paraphrases, requiring careful reading.",
+        "keySentence": "Despite the progress, challenges remain in addressing climate change effectively due to political and economic obstacles.",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "obstacles",
+          "confidence": "medium",
+          "matched": true
+        }
+      },
+      {
+        "id": 5,
+        "text": "Gap [5]",
+        "answer": "sustainable",
+        "explanation": "The passage refers to 'sustainable development,' directly matching the summary's context.",
+        "keySentence": "The international community continues to work towards agreements that aim to mitigate these effects while promoting sustainable development.",
+        "mutationType": "CARE",
+        "verified": true,
+        "studentSimulation": {
+          "answer": "sustainable",
+          "confidence": "medium",
+          "matched": true
+        }
+      }
+    ],
+    "extraData": {
+      "summaryText": "Climate science has grown substantially, enhancing our understanding of Earth's [1] systems. Key contributors to climate change include greenhouse gases and [2]. Advanced technology, like satellite [3], has refined climate models, aiding in predictions and impact assessments. However, political and economic [4] persist in tackling climate change. Global efforts focus on agreements to reduce these effects and encourage [5] development.",
+      "wordBank": [
+        "ecosystems",
+        "deforestation",
+        "measurements",
+        "obstacles",
+        "sustainable",
+        "forestation",
+        "observations",
+        "inhabitants"
+      ]
+    },
+    "meta": {
+      "generatedAt": "2026-04-02T08:46:40.362Z",
+      "band": 7,
+      "passageQuality": {
+        "avgScore": 3.5,
+        "scores": {
+          "argumentStructure": 3,
+          "academicVocabulary": 4,
+          "writersStance": 3,
+          "trapPotential": 3,
+          "logicalIntegrity": 4,
+          "bandAppropriateness": 4
+        }
+      },
+      "verificationCorrections": 0,
+      "studentSimulationResult": "approved",
+      "mutationDistribution": {
+        "SYNONYM_BRIDGE": 3,
+        "DISTRACTOR_NEAR_MISS": 0
+      },
+      "complexityProfile": {
+        "avg": null,
+        "min": null,
+        "max": null
+      },
+      "flaggedForReview": []
+    },
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:35:12.914Z",
+    "flaggedQuestions": []
+  }
+]

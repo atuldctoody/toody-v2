@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // scripts/review-question-bank.js
-// Claude-powered review of every T/F/NG question set in the bank.
-// Reads:  data/question-bank-tfng.json
-// Writes: data/question-bank-tfng-reviewed.json
+// Claude-powered review of any question type in the bank.
+// Reads:  data/question-bank-{type}.json
+// Writes: data/question-bank-{type}-reviewed.json
 //
-// Usage: node --env-file=.env scripts/review-question-bank.js
+// Usage: node --env-file=.env scripts/review-question-bank.js [--type tfng]
 // Resumable — skips sets already marked verified or needs_correction.
 // Rate-limited — batches of 3 with 15s pause + exponential backoff on 429.
 
@@ -20,8 +20,129 @@ const BATCH_SIZE    = 3;
 const BATCH_DELAY   = 15_000; // ms between batches
 const MAX_RETRIES   = 3;
 const RETRY_DELAY   = 30_000; // ms base delay on 429
-const INPUT_FILE    = path.join(__dirname, '../data/question-bank-tfng.json');
-const OUTPUT_FILE   = path.join(__dirname, '../data/question-bank-tfng-reviewed.json');
+
+// ── TYPE CONFIG ───────────────────────────────────────────────────────────────
+
+const SUPPORTED_TYPES = {
+  'tfng': {
+    label:      'T/F/NG',
+    qFormat:    q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- TRUE: passage explicitly confirms using synonyms or paraphrase — no inference allowed
+- FALSE: passage explicitly contradicts — provable by underlining exact passage text
+- NOT GIVEN: passage is genuinely silent — not hinting, not implying
+
+Critical patterns to catch:
+- 'a/an [noun]' in passage + 'only/solely/the only' in statement = FALSE not NOT GIVEN
+- Reporting verbs (argue, suggest, believe) + statement as fact = NOT GIVEN
+- Cautious language (may/might/could) + definite statement = NOT GIVEN
+- 'Although X, Y' — Y is truth, X is distractor
+- Sequence ≠ causation — temporal order does not imply cause`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each stated answer is correct:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'ynng': {
+    label:      'Y/N/NG',
+    qFormat:    q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- YES: passage has explicit author opinion marker (I believe, clearly, it is vital, argues) that CONFIRMS the statement — not a reported view
+- NO: passage has explicit author opinion marker that CONTRADICTS the statement
+- NOT GIVEN: author is silent — passage only reports others' views, hedges, or presents both sides equally
+
+Critical patterns to catch:
+- Reporting verbs (researchers found, some argue, studies suggest) = author opinion NOT expressed → NOT GIVEN
+- Hedging (arguably, may suggest, could be argued, it appears) without commitment = NOT GIVEN
+- Author presents both sides equally without picking one = NOT GIVEN
+- Explicit I/we statements or strong evaluative language (crucial, essential, vital) = Yes or No`,
+    prompt: (set) => `Passage: ${set.passage}
+
+This is a YES/NO/NOT GIVEN set testing identification of the WRITER'S VIEWS AND CLAIMS.
+
+Verify if each stated answer is correct:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'multiple-choice': {
+    label:      'Multiple Choice',
+    qFormat:    q => `Q${q.id}: ${q.text} | Options: ${(q.options||[]).map(o=>`${o.label}: ${o.text}`).join(' | ')} | Answer: ${q.answer}`,
+    rules: `- Correct option must be explicitly supported by the passage — no inference
+- Distractors must be either contradicted by the passage or not mentioned
+- Watch for options that use words from the passage but distort the meaning
+- The correct answer should be provable by quoting a specific passage sentence`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each stated answer is the correct multiple choice option:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'sentence-completion': {
+    label:      'Sentence Completion',
+    qFormat:    q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- The answer must be the EXACT word or phrase from the passage (verbatim — no synonyms)
+- The completed sentence must make grammatical sense
+- The answer word must appear in the passage in a context that confirms the gap
+- Maximum word count: ONE WORD ONLY unless the question specifies otherwise`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each sentence completion answer is correct (answers must be exact words from the passage):
+{RULES}
+
+Questions (each has a gap marked _____ to complete):
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'summary-completion': {
+    label:      'Summary Completion',
+    qFormat:    q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- The answer must be the EXACT word or phrase from the passage (verbatim — no synonyms)
+- The completed summary must accurately reflect the passage meaning
+- The answer must fit grammatically in context
+- Maximum word count: ONE WORD ONLY unless the question specifies otherwise`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each summary completion answer is correct (answers must be exact words from the passage):
+{RULES}
+
+Questions (each has a gap marked _____ to complete with a word from the passage):
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+};
+
+// ── ARG PARSING ───────────────────────────────────────────────────────────────
+
+const args      = process.argv.slice(2);
+const typeIdx   = args.indexOf('--type');
+const TYPE_KEY  = typeIdx !== -1 ? args[typeIdx + 1] : 'tfng';
+
+if (!SUPPORTED_TYPES[TYPE_KEY]) {
+  console.error(`Unsupported type: ${TYPE_KEY}. Supported: ${Object.keys(SUPPORTED_TYPES).join(', ')}`);
+  process.exit(1);
+}
+
+const TYPE_CFG   = SUPPORTED_TYPES[TYPE_KEY];
+const INPUT_FILE  = path.join(__dirname, `../data/question-bank-${TYPE_KEY}.json`);
+const OUTPUT_FILE = path.join(__dirname, `../data/question-bank-${TYPE_KEY}-reviewed.json`);
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
 
@@ -90,26 +211,10 @@ const SYSTEM_PROMPT =
   'Zero tolerance for ambiguity.';
 
 async function reviewSet(set, apiKey) {
-  const userPrompt =
-`Passage: ${set.passage}
-
-Verify if each stated answer is correct:
-- TRUE: passage explicitly confirms using synonyms or paraphrase — no inference allowed
-- FALSE: passage explicitly contradicts — provable by underlining exact passage text
-- NOT GIVEN: passage is genuinely silent — not hinting, not implying
-
-Critical patterns to catch:
-- 'a/an [noun]' in passage + 'only/solely/the only' in statement = FALSE not NOT GIVEN
-- Reporting verbs (argue, suggest, believe) + statement as fact = NOT GIVEN
-- Cautious language (may/might/could) + definite statement = NOT GIVEN
-- 'Although X, Y' — Y is truth, X is distractor
-- Sequence ≠ causation — temporal order does not imply cause
-
-Questions:
-${set.questions.map((q, i) => `Q${i + 1}: ${q.text} | Answer: ${q.answer}`).join('\n')}
-
-Return JSON array only — no other text:
-[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`;
+  const qLines     = set.questions.map((q, i) => TYPE_CFG.qFormat({ ...q, id: i + 1 })).join('\n');
+  const userPrompt = TYPE_CFG.prompt(set)
+    .replace('{RULES}',     TYPE_CFG.rules)
+    .replace('{QUESTIONS}', qLines);
 
   const raw     = await callClaude(apiKey, SYSTEM_PROMPT, userPrompt);
   const reviews = safeParseJson(raw);
@@ -186,7 +291,7 @@ async function main() {
   const toProcess = bank.filter(s => !checkpoint[s.id]);
   const skipped   = total - toProcess.length;
 
-  console.log(`\nClaude Bank Review — T/F/NG`);
+  console.log(`\nClaude Bank Review — ${TYPE_CFG.label}`);
   console.log(`Total: ${total} sets | To review: ${toProcess.length} | Skipped: ${skipped} | Batch: ${BATCH_SIZE} | Pause: ${BATCH_DELAY / 1000}s\n`);
 
   // Build output array seeded with checkpointed results
@@ -270,7 +375,7 @@ async function main() {
 
   console.log(`
 ═══════════════════════════════════════
-CLAUDE BANK REVIEW — T/F/NG COMPLETE
+CLAUDE BANK REVIEW — ${TYPE_CFG.label} COMPLETE
 ═══════════════════════════════════════
 Reviewed this run: ${doneThisRun} sets (${skipped} skipped from checkpoint)
 Total bank status:
@@ -279,7 +384,7 @@ Total bank status:
   ⚠ Needs review:   ${allReview} sets
   ✗ Errors:         ${allErrors} sets
 Estimated cost:   $${estCost.toFixed(4)}
-Output: data/question-bank-tfng-reviewed.json
+Output: data/question-bank-${TYPE_KEY}-reviewed.json
 ═══════════════════════════════════════`);
 }
 
