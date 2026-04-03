@@ -368,6 +368,45 @@ Return valid JSON array of 5 objects only.`);
   return pairs;
 }
 
+// ── STAGE 0.25 — ABSOLUTE QUALIFIER PRE-CHECK ─────────────────────────────────
+// Runs on TFNG pairs only, before Stage 0.5.
+// Detects 'a/an [adjective?] noun' in fact vs 'only/solely/the main/entirely' in statement
+// and auto-classifies as ABSOLUTE_QUALIFIER → False, flagging for Stage 0.5 review.
+
+function stageAbsoluteQualifierCheck(logicPairs, log) {
+  const articlePattern  = /\b(?:a|an)\s+(?:\w+\s+){0,2}\w+/gi;
+  const absolutePattern = /\b(?:the only|always|entirely|solely|the main)\b/i;
+
+  let flagCount = 0;
+  const result = logicPairs.map((pair, i) => {
+    // Only reclassify if answer was Not Given — False already correct
+    if (pair.answer !== 'Not Given') return pair;
+
+    const factHasArticle    = articlePattern.test(pair.fact || '');
+    articlePattern.lastIndex = 0; // reset stateful regex
+    const stmtHasAbsolute   = absolutePattern.test(pair.statement || '');
+
+    if (factHasArticle && stmtHasAbsolute) {
+      flagCount++;
+      log(`⟳ Stage 0.25: Q${i + 1} auto-reclassified NOT GIVEN→FALSE (ABSOLUTE_QUALIFIER): article 'a/an' in fact vs absolute claim in statement`);
+      return {
+        ...pair,
+        logicType:  'ABSOLUTE_QUALIFIER',
+        answer:     'False',
+        whyCorrect: `The passage uses 'a/an' before the noun (implying it is one of several), while the statement makes an absolute claim ('only'/'solely'/'the main'/'always'/'entirely'). The article 'a' directly contradicts the absolute — answer is False, not Not Given.`,
+        reasoning: {
+          ...pair.reasoning,
+          step_3_logic: `ABSOLUTE_QUALIFIER — passage says 'a/an [noun]' (one of many); statement says it is the only/main/sole one. Direct contradiction via indefinite article.`,
+        },
+      };
+    }
+    return pair;
+  });
+
+  if (flagCount === 0) log('⟳ Stage 0.25: no ABSOLUTE_QUALIFIER patterns detected');
+  return result;
+}
+
 // ── STAGE 0.5 — LOGIC PAIR VALIDATION ────────────────────────────────────────
 // Runs for TFNG and YNNG only. Reviews all 5 pairs for ambiguity.
 // Regenerates invalid pairs (up to 2 attempts). Falls back to DIRECT_CONTRADICTION.
@@ -390,7 +429,14 @@ Flag invalid if: Yes/No pair has no explicit opinion marker, or Not Given pair c
 - FALSE: fact must explicitly contradict — not just fail to confirm
 - NOT GIVEN: fact must be genuinely silent — not hinting or implying
 - CONCESSIVE_TRAP: answer must always be False — main clause after although/despite contradicts statement
-Flag invalid if: NOT GIVEN could be mistaken for False, TRUE requires inference, FALSE could be Not Given, CONCESSIVE_TRAP is not False`;
+Flag invalid if: NOT GIVEN could be mistaken for False, TRUE requires inference, FALSE could be Not Given, CONCESSIVE_TRAP is not False
+
+ABSOLUTE QUALIFIER DETECTION — flag as invalid if:
+- The passage uses 'a' or 'an' before a noun (e.g. 'a key mechanism', 'a major factor', 'a significant cause') AND the statement uses 'the only', 'always', 'entirely', 'solely', or 'the main' referring to the same noun
+- 'a key mechanism' vs 'the only mechanism' = FALSE not NOT GIVEN
+- 'a major factor' vs 'the only factor' = FALSE not NOT GIVEN
+- The article 'a' implies plurality — the statement's absolute claim is directly contradicted
+- This must be classified as FALSE (ABSOLUTE_QUALIFIER) not NOT GIVEN`;
 
   const valRaw = await anthropicCall(apiKey, 'claude-sonnet-4-5', 0, 600,
     `You are a strict IELTS examiner. Review each logic pair and flag any that are ambiguous.
@@ -1180,10 +1226,15 @@ async function generateOneSet(idx, total, type, topic, band, apiKey, leadType) {
       log(`⟳ Stage 0: Logic matrix (${stage0Label})...`);
       const plan = await stageLogicMatrix(type, topic, band, apiKey, leadType);
 
-      // Stage 0.5 — TFNG and YNNG only
-      const logicPairs = (cfg.runStage05 && Array.isArray(plan))
-        ? await stageLogicValidation(type, plan, topic, band, apiKey, log)
+      // Stage 0.25 — TFNG only: auto-reclassify article 'a/an' vs absolute qualifier
+      const planAfter025 = (type === 'tfng' && Array.isArray(plan))
+        ? stageAbsoluteQualifierCheck(plan, log)
         : plan;
+
+      // Stage 0.5 — TFNG and YNNG only
+      const logicPairs = (cfg.runStage05 && Array.isArray(planAfter025))
+        ? await stageLogicValidation(type, planAfter025, topic, band, apiKey, log)
+        : planAfter025;
 
       // Stage 1
       log('⟳ Stage 1: Content generation...');
