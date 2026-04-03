@@ -114,38 +114,75 @@ export function renderSkillPicker() {
   const el = document.getElementById('home-skill-picker');
   if (!el) return;
   const skills = getIELTSSkills();
-  el.innerHTML = Object.values(SKILL_MANIFEST).map(cfg => {
-    const data      = skills[cfg.id] || {};
-    const acc       = data.attempted > 0
-      ? (data.accuracy !== undefined ? `${data.accuracy}%` : data.bandEstimate !== undefined ? `Band ${data.bandEstimate}` : '—')
-      : 'Not tried';
-    const isActive  = currentPlan?.skill === (cfg.catalogueKey || cfg.id);
-    const isDeployed = cfg.catalogueKey !== null;
 
-    // Lock if not deployed yet, or if first-time and prerequisite not met
-    let isLocked = !isDeployed;
-    if (isDeployed && cfg.prerequisite && cfg.accuracyGate) {
-      const prereqData = skills[cfg.prerequisite] || {};
-      if ((data.attempted || 0) === 0 && (prereqData.accuracy ?? 0) < cfg.accuracyGate) {
-        isLocked = true;
+  const sectionOrder = ['Reading', 'Listening', 'Writing', 'Speaking'];
+  const sectionIcons = { Reading: '📖', Listening: '🎧', Writing: '✍️', Speaking: '🎤' };
+  const groups = { Reading: [], Listening: [], Writing: [], Speaking: [] };
+  Object.values(SKILL_MANIFEST).forEach(cfg => {
+    if (groups[cfg.section]) groups[cfg.section].push(cfg);
+  });
+
+  el.innerHTML = sectionOrder.map(section => {
+    const sId = section.toLowerCase();
+    const rows = groups[section].map(cfg => {
+      const data      = skills[cfg.id] || {};
+      const attempted = data.attempted || 0;
+      const accuracy  = data.accuracy  ?? null;
+      const isActive  = currentPlan?.skill === (cfg.catalogueKey || cfg.id);
+      const isDeployed = cfg.catalogueKey !== null;
+
+      let isLocked = !isDeployed;
+      if (isDeployed && cfg.prerequisite && cfg.accuracyGate) {
+        const prereqData = skills[cfg.prerequisite] || {};
+        if (attempted === 0 && (prereqData.accuracy ?? 0) < cfg.accuracyGate) isLocked = true;
       }
-    }
 
-    const lockLabel = !isDeployed
-      ? 'Coming soon'
-      : (cfg.prerequisite ? `Complete ${getSkillConfig(cfg.prerequisite).displayName} first` : 'Locked');
+      const lockLabel = !isDeployed
+        ? 'Coming soon'
+        : cfg.prerequisite ? `Unlock: ${getSkillConfig(cfg.prerequisite).displayName}` : 'Locked';
 
-    return `<button class="skill-pick-btn${isActive ? ' active' : ''}${isLocked ? ' locked' : ''}"
-      ${isLocked ? 'disabled' : `onclick="window.pickSkill('${cfg.catalogueKey}')"`}>
-      <span class="spb-icon">${cfg.icon}</span>
-      <span class="spb-body">
-        <span class="spb-label">${cfg.displayName}</span>
-        <span class="spb-acc">${isLocked ? lockLabel : acc}</span>
-      </span>
-    </button>`;
+      let pillHtml;
+      if (isLocked) {
+        pillHtml = `<span class="srb-pill srb-pill--locked">${lockLabel}</span>`;
+      } else if (attempted === 0) {
+        pillHtml = `<span class="srb-pill srb-pill--new">Not started</span>`;
+      } else {
+        const isMastered = accuracy > 80 && attempted > 5;
+        const tier = accuracy > 70 ? 'green' : accuracy >= 50 ? 'amber' : 'red';
+        pillHtml = `<span class="srb-pill srb-pill--${tier}">${accuracy}%</span>${isMastered ? ' <span class="srb-check">✓</span>' : ''}`;
+      }
+
+      const onclickAttr = isLocked
+        ? ''
+        : `onclick="window.pickSkill('${cfg.catalogueKey}'); window.startSession();"`;
+
+      return `<button class="skill-row-btn${isActive ? ' active' : ''}${isLocked ? ' locked' : ''}"
+        ${isLocked ? 'disabled' : onclickAttr}>
+        <span class="srb-name">${cfg.displayName}</span>
+        <div class="srb-right">${pillHtml}</div>
+      </button>`;
+    }).join('');
+
+    return `
+      <div class="skill-section" id="sp-section-${sId}">
+        <button class="skill-section-hdr" onclick="window.toggleSkillSection('${sId}')">
+          <span>${sectionIcons[section]} ${section}</span>
+          <span class="skill-section-chev" id="sp-chev-${sId}">▾</span>
+        </button>
+        <div class="skill-section-body" id="sp-body-${sId}">${rows}</div>
+      </div>`;
   }).join('');
 }
 window.renderSkillPicker = renderSkillPicker;
+
+window.toggleSkillSection = function (sId) {
+  const body = document.getElementById('sp-body-' + sId);
+  const chev = document.getElementById('sp-chev-' + sId);
+  if (!body) return;
+  const collapsed = body.classList.toggle('collapsed');
+  if (chev) chev.textContent = collapsed ? '›' : '▾';
+};
+
 window.renderHome = renderHome;
 
 export function renderSkillSnapshot() {

@@ -1394,6 +1394,44 @@ a { color: inherit; text-decoration: none; }
 .spb-acc   { font-size: 11px; color: var(--muted); }
 
 
+/* ── SKILL SECTION GROUPED PICKER ── */
+.skill-section        { margin-bottom: 8px; }
+.skill-section-hdr    { width:100%; display:flex; justify-content:space-between; align-items:center;
+                         padding:12px 14px; background:var(--accent-light); border:1.5px solid var(--border);
+                         border-radius:var(--radius); font-size:14px; font-weight:700; color:var(--text);
+                         cursor:pointer; text-align:left; font-family:inherit; }
+.skill-section-hdr:active { opacity:0.85; }
+.skill-section-chev   { font-size:16px; color:var(--accent); font-weight:700; transition:transform 0.15s; }
+.skill-section-body   { margin-top:4px; }
+.skill-section-body.collapsed { display:none; }
+.skill-row-btn        { width:100%; display:flex; justify-content:space-between; align-items:center;
+                         padding:12px 14px; min-height:48px; background:var(--white); border:1.5px solid var(--border);
+                         border-radius:10px; margin-bottom:4px; cursor:pointer; text-align:left;
+                         font-family:inherit; transition:border-color 0.12s, background 0.12s; }
+.skill-row-btn:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-light); }
+.skill-row-btn:active { transform:scale(0.99); }
+.skill-row-btn.active { border-color:var(--accent); background:var(--accent-light); }
+.skill-row-btn.locked { opacity:0.5; cursor:default; }
+.srb-name             { font-size:13px; font-weight:500; color:var(--text); flex:1; text-align:left; }
+.srb-right            { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.srb-pill             { font-size:11px; font-weight:600; padding:3px 8px; border-radius:20px; white-space:nowrap; }
+.srb-pill--new        { background:#F0F0F6; color:var(--muted); }
+.srb-pill--locked     { background:#EFEFEF; color:var(--muted); font-size:10px; max-width:130px;
+                         overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.srb-pill--green      { background:#D1F5E7; color:#1A7A4F; }
+.srb-pill--amber      { background:#FFF3CC; color:#9A6000; }
+.srb-pill--red        { background:#FFE5E5; color:#B02020; }
+.srb-check            { font-size:13px; color:var(--success); font-weight:700; }
+
+/* ── TEACH-FIRST SKILL INTRO CARD ── */
+.skill-intro-card     { background:var(--white); border:1.5px solid var(--border); border-radius:var(--r);
+                         padding:20px 18px; }
+.skill-intro-card-title { font-size:18px; font-weight:700; color:var(--accent); margin-bottom:16px; }
+.skill-intro-row      { display:flex; flex-direction:column; gap:4px; margin-bottom:14px; }
+.skill-intro-label    { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase;
+                         letter-spacing:0.05em; }
+.skill-intro-text     { font-size:14px; line-height:1.55; color:var(--text); }
+
 /* ── DEV PANEL JUMP BUTTONS ── */
 .dev-jump-btn { padding: 10px 8px; background: #F4F4F9; border: 1px solid #E0DFF0; border-radius: 8px; font-size: 13px; font-weight: 500; color: #1A1A2E; cursor: pointer; text-align: center; }
 .dev-jump-btn:active { background: #E8E6F8; }

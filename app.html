@@ -733,6 +733,26 @@
   </div>
   <div id="teach-loading" class="screen-loading"><div class="spinner"></div><p>Preparing your lesson…</p></div>
 
+  <!-- Skill intro card — shown before hook for non-TFNG/YNNG skills -->
+  <div id="teach-skill-intro" class="hidden">
+    <div class="toody-msg">
+      <div class="toody-avatar">💡</div>
+      <div class="toody-bubble">Before we start — here's exactly what this question type involves.</div>
+    </div>
+    <div class="skill-intro-card">
+      <div class="skill-intro-card-title" id="teach-intro-title"></div>
+      <div class="skill-intro-row">
+        <div class="skill-intro-label">What it tests</div>
+        <div class="skill-intro-text" id="teach-intro-tests"></div>
+      </div>
+      <div class="skill-intro-row">
+        <div class="skill-intro-label">Key strategy</div>
+        <div class="skill-intro-text" id="teach-intro-strategy"></div>
+      </div>
+    </div>
+    <button class="btn mt16" onclick="window.dismissSkillIntro()">Let's try one <span class="arrow">→</span></button>
+  </div>
+
   <!-- Phase 0: Concept explanation -->
   <div id="teach-concept" class="hidden">
     <div class="toody-msg">

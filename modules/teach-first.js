@@ -23,6 +23,59 @@ let teachStartTime    = 0;     // Date.now() at start of teach phase
 let workedExIdx       = 0;     // Which of the 3 guided examples we're on
 let confQIdx          = 0;     // Confidence builder question index
 let confCorrect       = 0;     // Confidence correct count
+let hasSeenIntro      = false; // True after the skill intro card is dismissed
+
+// ── SKILL INTRO CARDS ─────────────────────────────────────────────
+// Shown before the hook question for skill types that drop straight into
+// a question with no context. T/F/NG and Y/N/NG are excluded — they already
+// have a conceptual hook that introduces the skill.
+const SKILL_INTROS = {
+  'reading-summaryCompletion': {
+    title:    'Summary Completion',
+    tests:    'Whether you can find specific words from a passage to complete a summary',
+    strategy: 'The summary paraphrases the passage — find the original word that matches the meaning',
+  },
+  'reading-sentenceCompletion': {
+    title:    'Sentence Completion',
+    tests:    'Whether you can locate exact words from the passage to complete sentences',
+    strategy: 'The answer is always a word that appears verbatim in the passage — no synonyms',
+  },
+  'reading-multipleChoice': {
+    title:    'Multiple Choice',
+    tests:    'Whether you can identify which option accurately reflects the passage',
+    strategy: 'Every option appears in the passage — find the one that matches exactly without distortion',
+  },
+  'reading-matchingHeadings': {
+    title:    'Matching Headings',
+    tests:    'Whether you can identify the main idea of each paragraph',
+    strategy: 'Read the whole paragraph — headings match the dominant idea, not a single detail',
+  },
+  'reading-matchingInformation': {
+    title:    'Matching Information',
+    tests:    'Whether you can locate specific information across different sections of a passage',
+    strategy: 'Scan each section systematically — the same section can answer multiple questions',
+  },
+  'reading-matchingFeatures': {
+    title:    'Matching Features',
+    tests:    'Whether you can match statements to the correct person, place, or category',
+    strategy: 'Watch for proximity traps — a name near a claim does not mean they made that claim',
+  },
+  'reading-shortAnswer': {
+    title:    'Short Answer',
+    tests:    'Whether you can extract precise factual answers from a passage',
+    strategy: 'ONE WORD ONLY — the exact word from the passage, nothing more',
+  },
+  'listening-multipleChoice': {
+    title:    'Listening — Multiple Choice',
+    tests:    'Whether you can identify the correct option from what you hear',
+    strategy: 'Speakers often correct themselves — the final answer is what counts, not the first mention',
+  },
+  'listening-formCompletion': {
+    title:    'Listening — Form Completion',
+    tests:    'Whether you can extract specific details while listening',
+    strategy: 'Answers are often spelled out or repeated — listen for corrections and confirmations',
+  },
+};
 
 // ── LOAD TEACH FIRST ─────────────────────────────────────────────
 export async function loadTeachFirst(skillKey) {
@@ -35,6 +88,7 @@ export async function loadTeachFirst(skillKey) {
   teachDrillIndex   = 0;
   teachDrillCorrect = 0;
   teachSkillKey     = skillKey || 'reading.tfng';
+  hasSeenIntro      = false;
 
   ['teach-hook','teach-concept','teach-worked','teach-reinforce','teach-confidence'].forEach(id => {
     document.getElementById(id)?.classList.add('hidden');
@@ -330,6 +384,23 @@ function renderHookQuestion() {
   const hq = teachData.hookQuestion;
   if (!hq) { window.startConceptPhase(); return; }
 
+  // Show skill intro card for question types that drop straight into a question
+  // with no context. Skip for T/F/NG and Y/N/NG which have their own hook framing.
+  const skillId = toSkillId(teachSkillKey);
+  const intro   = SKILL_INTROS[skillId];
+  if (intro && !hasSeenIntro) {
+    hasSeenIntro = true;
+    const titleEl    = document.getElementById('teach-intro-title');
+    const testsEl    = document.getElementById('teach-intro-tests');
+    const strategyEl = document.getElementById('teach-intro-strategy');
+    if (titleEl)    titleEl.textContent    = intro.title;
+    if (testsEl)    testsEl.textContent    = intro.tests;
+    if (strategyEl) strategyEl.textContent = intro.strategy;
+    document.getElementById('teach-skill-intro')?.classList.remove('hidden');
+    document.getElementById('teach-hook')?.classList.add('hidden');
+    return;
+  }
+
   const hookCfgEarly = getSkillConfig(toSkillId(teachSkillKey));
   const isGapfill = hookCfgEarly.hookStyle === 'gapfill' || hookCfgEarly.hookStyle === 'shortanswer';
 
@@ -415,6 +486,11 @@ function renderHookQuestion() {
   document.getElementById('teach-hook-reveal').classList.add('hidden');
   document.getElementById('teach-hook').classList.remove('hidden');
 }
+
+window.dismissSkillIntro = function () {
+  document.getElementById('teach-skill-intro')?.classList.add('hidden');
+  renderHookQuestion();
+};
 
 window.answerHook = function (val) {
   const hq = teachData.hookQuestion;
