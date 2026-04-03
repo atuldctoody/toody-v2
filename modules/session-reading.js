@@ -247,6 +247,7 @@ export function computeConfidenceMetrics(questions, answers) {
 async function getQuestionFromBank(targetBand, excludeIds = []) {
   const band       = Math.round(targetBand * 2) / 2;
   const bandsToTry = [band, band - 0.5, band + 0.5].filter(b => b >= 5.0 && b <= 7.0);
+  console.log('[getQuestionFromBank] bands to try:', bandsToTry);
 
   for (const b of bandsToTry) {
     const snapshot = await getDocs(
@@ -258,10 +259,12 @@ async function getQuestionFromBank(targetBand, excludeIds = []) {
         limit(10)
       )
     );
+    console.log('[getQuestionFromBank] band', b, '→ snapshot.empty:', snapshot.empty, '| docs:', snapshot.size);
 
     if (snapshot.empty) continue;
 
     const candidates = snapshot.docs.filter(d => !excludeIds.includes(d.id));
+    console.log('[getQuestionFromBank] band', b, '→ candidates after exclude:', candidates.length);
     if (candidates.length === 0) continue;
 
     const picked = candidates[Math.floor(Math.random() * candidates.length)];
@@ -379,14 +382,18 @@ export async function loadReadingSession() {
   const band = studentData?.targetBand || 6.5;
 
   // ── Question Bank fast-path (T/F/NG only) ─────────────────────────────────
-  const cfg = getSkillConfig(currentPlan?.skillId || 'reading-tfng');
+  const cfg = getSkillConfig(currentPlan?.id);
+  console.log('Bank fast-path triggered for:', cfg?.id, '| currentBand:', studentData?.currentBand, '| targetBand:', studentData?.targetBand);
   if (cfg.id === 'reading-tfng') {
     try {
       const recentIds = studentData?.brain?.recentQuestionBankIds || [];
+      const _queryBand = studentData?.currentBand || 6.0;
+      console.log('[Bank] querying questionBank with band:', _queryBand, '| excludeIds count:', recentIds.length);
       const bankSet   = await getQuestionFromBank(
-        studentData?.currentBand || 6.0,
+        _queryBand,
         recentIds
       );
+      console.log('getQuestionFromBank result:', bankSet ? 'found (id: ' + bankSet.id + ')' : 'null');
 
       if (bankSet) {
         const updatedRecentIds = [bankSet.id, ...recentIds].slice(0, 20);
@@ -419,9 +426,12 @@ export async function loadReadingSession() {
         return;
       }
 
-      console.log('Question bank exhausted for this band — falling back to AI generation');
+      console.log('Falling back to AI generation');
+      console.log('[Bank] reason: bank exhausted — no documents at queried bands for this student');
     } catch (err) {
-      console.warn('Question bank lookup failed — falling back to AI generation:', err.message);
+      console.log('Falling back to AI generation');
+      console.warn('[Bank] lookup threw — reason:', err.message, '| full error:', err);
+      console.warn('[Bank] LIKELY CAUSE: missing Firestore composite index for (band, status, servedCount) on questionBank collection, OR status field not set to "active" on documents');
     }
   }
 
