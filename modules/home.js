@@ -146,6 +146,7 @@ export function renderSkillPicker() {
   }).join('');
 }
 window.renderSkillPicker = renderSkillPicker;
+window.renderHome = renderHome;
 
 export function renderSkillSnapshot() {
   const sk = getIELTSSkills();
