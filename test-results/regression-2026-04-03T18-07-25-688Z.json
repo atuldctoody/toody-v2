@@ -1,21 +1,21 @@
 {
-  "timestamp": "2026-04-03T17:34:22.776Z",
+  "timestamp": "2026-04-03T18:07:25.688Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 28532,
+  "durationMs": 34108,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 22982,
+      "durationMs": 34099,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "Climate Change",
           "error": null
         },
         "verification": {
@@ -25,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 28502,
+      "durationMs": 33966,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Artificial Intelligence Development",
+          "topic": "Urban Wildlife Adaptation",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 2,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.4,
+          "avgScore": 4.3,
           "error": null
         },
         "audio": {
@@ -73,16 +73,16 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 20517,
+      "durationMs": 28948,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Impact",
+          "topic": "climate migration",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6.5,
+          "overallBand": 6,
           "error": null
         }
       }

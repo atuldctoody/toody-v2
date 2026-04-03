@@ -7,7 +7,7 @@
 import { TFNG_WORKED_EXAMPLES, API_URL, AUDIO_URL } from './constants.js';
 import { studentData, currentUser, getIELTSSkills, callAI, saveLearningStyleSignal } from './state.js';
 import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } from './router.js';
-import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob, renderReasoningHtml } from './utils.js';
+import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob, renderReasoningHtml, renderMarkdown } from './utils.js';
 import { updateStudentDoc } from './firebase.js';
 import { showToast } from './ui.js';
 import { verifyAnswers } from '../api/verify-answers.js';
@@ -190,7 +190,7 @@ export async function loadTeachFirst(skillKey) {
     : `{"label":"${label}","passage":"2 academic sentences","statement":"${exStatementHint}","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
-    system: `You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. ${sysAnswerRule}`,
+    system: `You are an expert IELTS Academic teacher. Return valid JSON only, no markdown, no preamble. ${sysAnswerRule} Do not use markdown formatting in any passage, statement, or question text — write plain text only, no asterisks, no bold, no italics.`,
     user: `Generate a 10-minute interactive lesson on ${skillLabel} for a Band ${band} IELTS student.
 
 Return ONLY this JSON:
@@ -410,8 +410,8 @@ function renderHookQuestion() {
     passageEl.innerHTML   = renderWithGapBlanks(hq.passage);
     statementEl.innerHTML = renderWithGapBlanks(hq.statement);
   } else {
-    passageEl.textContent   = hq.passage;
-    statementEl.textContent = hq.statement;
+    passageEl.innerHTML   = renderMarkdown(hq.passage);
+    statementEl.innerHTML = renderMarkdown(hq.statement);
   }
 
   const hookCfg       = hookCfgEarly;   // already computed above
@@ -541,8 +541,8 @@ function renderWorkedExampleAt(idx) {
   document.getElementById('teach-ex-counter').textContent = `Example ${idx + 1} of 3 — ${counterLabel}`;
   document.getElementById('teach-ex-fill').style.width = `${((idx + 1) / 3) * 100}%`;
   document.getElementById('teach-we-passage').innerHTML = (we.passage || '')
-    .split('\n').filter(p => p.trim()).map(p => `<p>${p}</p>`).join('');
-  document.getElementById('teach-we-statement').textContent = we.statement || '';
+    .split('\n').filter(p => p.trim()).map(p => `<p>${renderMarkdown(p)}</p>`).join('');
+  document.getElementById('teach-we-statement').innerHTML = renderMarkdown(we.statement || '');
 
   const insightEl = document.getElementById('teach-ex-insight');
   insightEl.classList.add('hidden');
@@ -890,8 +890,8 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
   contentEl.innerHTML = `
     <div class="card mt8" id="drill-card-${idx}">
       <div class="card-label">Quick drill ${idx + 1} of ${qs.length}</div>
-      <div class="passage-snippet" style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px">${q.passage}</div>
-      <div class="q-text" style="margin-bottom:12px">${q.statement}</div>
+      <div class="passage-snippet" style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px">${renderMarkdown(q.passage)}</div>
+      <div class="q-text" style="margin-bottom:12px">${renderMarkdown(q.statement)}</div>
       <div class="tfng">
         <button class="tfng-btn" data-dv="True"  onclick="window.answerDrill(${idx},'True')">✓ True</button>
         <button class="tfng-btn" data-dv="False" onclick="window.answerDrill(${idx},'False')">✗ False</button>
@@ -948,8 +948,8 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   }
   const q = qs[idx];
   document.getElementById('teach-conf-counter').textContent = `Question ${idx + 1} of 2`;
-  document.getElementById('teach-conf-passage').textContent = q.passage;
-  document.getElementById('teach-conf-statement').textContent = q.statement;
+  document.getElementById('teach-conf-passage').innerHTML = renderMarkdown(q.passage);
+  document.getElementById('teach-conf-statement').innerHTML = renderMarkdown(q.statement);
   const confCfg = getSkillConfig(toSkillId(teachSkillKey));
 
   // For MC: inject options list + replace buttons with A/B/C/D
