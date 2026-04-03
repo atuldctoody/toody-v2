@@ -1340,6 +1340,15 @@ a { color: inherit; text-decoration: none; }
 .sc-gap-select.sc-wrong   { border-color: var(--danger);  color: var(--danger);  background: var(--danger-light); }
 .sc-wordbank-wrap { margin-bottom: 14px; }
 .sc-wordbank      { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.gap-blank {
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 2px solid var(--accent);
+  margin: 0 4px;
+  vertical-align: baseline;
+  font-style: italic;
+  color: var(--accent);
+}
 .sc-word-chip {
   background: var(--white);
   border: 1.5px solid var(--border);

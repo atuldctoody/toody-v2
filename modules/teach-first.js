@@ -97,7 +97,7 @@ export async function loadTeachFirst(skillKey) {
     ? cfg.hookPromptHint
     : isMC
     ? 'the question stem — what is the student asked to identify or choose?'
-    : 'a summary sentence with one blank gap where the instinctive fill word uses the wrong form (e.g. noun instead of adjective)';
+    : 'a summary sentence with one blank gap — represent the gap as _______ (five underscores). CRITICAL: the statement must NOT contain the answer word anywhere. The answer word goes in the "answer" field only. Never bold or reveal the answer in the statement text.';
 
   const exStatementHint = isMH
     ? 'a heading choice where a distractor matches a detail but not the main idea'
@@ -251,6 +251,34 @@ Return ONLY this JSON:
       } catch (err) { console.warn('Hook verification failed, using original:', err?.message || err); }
     }
 
+    // ── Answer-leak guard for gapfill/shortanswer hooks ───────────────────────
+    // If the AI included the answer word in the statement, regenerate the hook once.
+    if ((cfg.hookStyle === 'gapfill' || cfg.hookStyle === 'shortanswer') &&
+        teachData.hookQuestion?.statement && teachData.hookQuestion?.answer) {
+      const stmtLower = teachData.hookQuestion.statement.toLowerCase();
+      const ansLower  = (teachData.hookQuestion.answer || '').toLowerCase().trim();
+      if (ansLower && stmtLower.includes(ansLower)) {
+        console.warn('Answer leaked in hook statement — regenerating hook once.');
+        try {
+          const leakRetryPrompt = {
+            ...prompt,
+            user: prompt.user + '\n\nCRITICAL FIX FOR HOOK QUESTION: The previous hookQuestion.statement contained the answer word in the text. This gives the answer away before the student attempts it. Regenerate ONLY the hookQuestion with a statement that uses _______ (five underscores) as the gap — the answer word must NOT appear anywhere in the statement text. Only the "answer" field should contain the correct word.',
+          };
+          const leakRetryRaw  = await callAI(leakRetryPrompt);
+          const leakRetryData = parseAIJson(leakRetryRaw);
+          if (leakRetryData.hookQuestion) {
+            const newStmt = (leakRetryData.hookQuestion.statement || '').toLowerCase();
+            const newAns  = (leakRetryData.hookQuestion.answer    || '').toLowerCase().trim();
+            // Only accept the retry if the leak is resolved
+            if (!newAns || !newStmt.includes(newAns)) {
+              teachData.hookQuestion = leakRetryData.hookQuestion;
+            }
+          }
+        } catch { /* non-fatal — use original hook */ }
+      }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
     // Render concept bullets + verified illustrative examples
     const bullets = Array.isArray(teachData.concept)
       ? teachData.concept
@@ -290,13 +318,32 @@ Return ONLY this JSON:
 window.loadTeachFirst = loadTeachFirst;
 
 // ── HOOK PHASE ────────────────────────────────────────────────────
+// Replace **(blank)**, **blank**, and _______ markers with a styled gap element.
+// Used for gapfill/shortanswer hook passages so blanks render visually.
+function renderWithGapBlanks(text) {
+  const safe = String(text || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return safe.replace(/\*\*\(blank\)\*\*|\*\*blank\*\*/gi, '<span class="gap-blank">_______</span>');
+}
+
 function renderHookQuestion() {
   const hq = teachData.hookQuestion;
   if (!hq) { window.startConceptPhase(); return; }
-  document.getElementById('teach-hook-passage').textContent = hq.passage;
-  document.getElementById('teach-hook-statement').textContent = hq.statement;
 
-  const hookCfg       = getSkillConfig(toSkillId(teachSkillKey));
+  const hookCfgEarly = getSkillConfig(toSkillId(teachSkillKey));
+  const isGapfill = hookCfgEarly.hookStyle === 'gapfill' || hookCfgEarly.hookStyle === 'shortanswer';
+
+  const passageEl   = document.getElementById('teach-hook-passage');
+  const statementEl = document.getElementById('teach-hook-statement');
+  if (isGapfill) {
+    passageEl.innerHTML   = renderWithGapBlanks(hq.passage);
+    statementEl.innerHTML = renderWithGapBlanks(hq.statement);
+  } else {
+    passageEl.textContent   = hq.passage;
+    statementEl.textContent = hq.statement;
+  }
+
+  const hookCfg       = hookCfgEarly;   // already computed above
   const btnsContainer = document.getElementById('teach-hook-btns');
 
   // Clean up any previous text input wrap from a typed-answer skill

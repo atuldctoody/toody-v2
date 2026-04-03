@@ -3,7 +3,7 @@ import { SKILL_MANIFEST } from './constants.js';
 import {
   studentData, getIELTSSkills, calcBandEstimate, callAI,
 } from './state.js';
-import { goTo, pickNextSkill, currentPlan } from './router.js';
+import { goTo, pickNextSkill, currentPlan, goToHome } from './router.js';
 import { getSkillConfig, renderMarkdown, normaliseAnswer, accToBand, renderReasoningHtml } from './utils.js';
 import { updateStudentDoc, db } from './firebase.js';
 import { showToast, safeClick, setSkillBar } from './ui.js';
