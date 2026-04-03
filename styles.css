@@ -1295,7 +1295,7 @@ a { color: inherit; text-decoration: none; }
 /* ── MINI MOCK TIMER BAR ── */
 #mini-mock-timer-bar {
   position: fixed;
-  top: 0;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;

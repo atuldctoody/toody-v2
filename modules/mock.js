@@ -196,12 +196,16 @@ export function runMockPhase(phase) {
     else                 { el.className = 'mock-step'; }
   });
 
-  if (phase === 0) { loadReadingSession(); _startMiniMockTimer(0); }
+  if (phase === 0) {
+    try { loadReadingSession(); } catch(e) { showToast('Session failed to load — tap to retry.'); return; }
+    _startMiniMockTimer(0);
+  }
   else if (phase === 1) { setListenType('mc'); loadListeningSession(); _startMiniMockTimer(1); }
   else if (phase === 2) { loadWritingSession(); _startMiniMockTimer(2); }
   else if (phase === 3) { loadSpeakingSession(); _startMiniMockTimer(3); }
   else showMockResults();
 }
+window.runMockPhase = runMockPhase;
 
 export function showMockResults() {
   _hideMiniMockTimer();
@@ -216,12 +220,23 @@ export function showMockResults() {
   const writingPct = writingBand > 0 ? Math.round(((writingBand - 4) / 5) * 100) : 0;
   const speakPct   = speakBand  > 0 ? Math.round(((speakBand  - 4) / 5) * 100) : 0;
 
-  const overallBand = (
-    (readingPct / 100 * 3 + 4.5) * 0.25 +
-    (listenPct  / 100 * 3 + 4.5) * 0.25 +
-    writingBand                          * 0.25 +
-    speakBand                            * 0.25
-  ).toFixed(1);
+  const totalReadingQ  = sessionQuestions.length || 5;
+  const readingCorrect = Math.round(readingPct / 100 * totalReadingQ);
+  const readingBand    = readingPct > 0 ? rawScoreToBand(readingCorrect, totalReadingQ) : 0;
+
+  const totalListenQ  = listenQuestions.length || 5;
+  const listenCorrect = Math.round(listenPct / 100 * totalListenQ);
+  const listenBand    = listenPct > 0 ? rawScoreToBand(listenCorrect, totalListenQ) : 0;
+
+  const bandSections = [];
+  if (readingBand > 0) bandSections.push(readingBand);
+  if (listenBand  > 0) bandSections.push(listenBand);
+  if (writingBand > 0) bandSections.push(writingBand);
+  if (speakBand   > 0) bandSections.push(speakBand);
+
+  const overallBand = bandSections.length > 0
+    ? (Math.round((bandSections.reduce((a, b) => a + b, 0) / bandSections.length) * 2) / 2).toFixed(1)
+    : '0.0';
 
   document.getElementById('mock-overall-band').textContent = overallBand;
 
@@ -285,6 +300,11 @@ export function selectMockOption(btn) {
 window.selectMockOption = selectMockOption;
 
 export async function startFullMockGeneration() {
+  if (!currentUser) {
+    showToast('Please sign in to generate your mock test.');
+    goTo('s-fullmock-setup');
+    return;
+  }
   const opt = fullMockSelectedOpt;
   fullMockSections = opt === 'all'
     ? ['reading','listening','writing','speaking']
@@ -348,23 +368,23 @@ export async function startFullMockGeneration() {
           callAI({ system: 'You are an IELTS examiner. Return valid JSON only.', user: `Create an IELTS Listening Multiple Choice section (academic lecture context) for Band ${band}. Return ONLY: {"scenario":"2-sentence description","audioText":"academic lecture 180-200 words","questions":[{"id":1,"text":"question?","options":["A: option","B: option","C: option"],"answer":"A|B|C","explanation":"one sentence"},...7 questions]}`, maxTokens: 1600 }),
         ]);
         const parsed = [s1, s2, s3, s4].map(r => parseAIJson(r));
-        // Generate audio in sequence (rate limit friendly)
-        const audioBlobUrls = [];
-        for (const sec of parsed) {
-          try {
-            const audioRes = await fetch(`${API_URL.replace('/generate', '/audio')}`, {
-              method: 'POST', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ text: sec.audioText })
-            });
-            const audioData = await audioRes.json();
-            if (audioData.audio) {
-              const blob = base64ToBlob(audioData.audio, audioData.mimeType || 'audio/mpeg');
-              audioBlobUrls.push(URL.createObjectURL(blob));
-            } else {
-              audioBlobUrls.push(null);
-            }
-          } catch { audioBlobUrls.push(null); }
-        }
+        // Generate audio in parallel
+        const audioBlobUrls = await Promise.all(
+          parsed.map(sec => (async () => {
+            try {
+              const audioRes = await fetch(`${API_URL.replace('/generate', '/audio')}`, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: sec.audioText })
+              });
+              const audioData = await audioRes.json();
+              if (audioData.audio) {
+                const blob = base64ToBlob(audioData.audio, audioData.mimeType || 'audio/mpeg');
+                return URL.createObjectURL(blob);
+              }
+              return null;
+            } catch { return null; }
+          })())
+        );
         fullMockContent.listening = {
           sections: parsed.map((sec, i) => ({
             ...sec,
@@ -562,8 +582,8 @@ export function _renderMockListening() {
         <button class="mock-play-btn" onclick="document.getElementById('mock-audio-${sIdx}').play()">▶ Play Audio</button>
       </div>`;
     } else {
-      html += `<div class="mock-audio-unavail">Audio unavailable — read the scenario text for this section.</div>`;
-      html += `<div class="mock-passage-text" style="font-style:italic;font-size:13px">${sec.audioText || ''}</div>`;
+      html += `<div class="audio-fallback">Audio unavailable — read the transcript below</div>`;
+      html += `<div class="transcript">${sec.audioText || ''}</div>`;
     }
     const questions = sec.questions || [];
     html += `<div class="mock-questions-block">`;
