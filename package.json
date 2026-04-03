@@ -11,7 +11,8 @@
     "test:regression": "node api/regression-agent.js",
     "test:synthetic": "node api/synthetic-test.js",
     "test:modelcomp": "node --env-file=.env api/verify-model-comparison.js",
-    "predeploy": "npm run test:buttons && npm run test:flow && npm run test:regression",
+    "test:stateful": "playwright test tests/toody-stateful.spec.js --reporter=line",
+    "predeploy": "npm run test:buttons && npm run test:flow && npm run test:regression && npm run test:stateful",
     "deploy": "git add . && git commit -m \"deploy: latest fixes\" && git push && firebase deploy --only hosting"
   },
   "repository": {
@@ -28,6 +29,7 @@
   "homepage": "https://github.com/atuldctoody/toody-v2#readme",
   "devDependencies": {
     "@playwright/test": "^1.58.2",
+    "dotenv": "^17.4.0",
     "firebase-admin": "^13.7.0"
   }
 }
