@@ -127,6 +127,109 @@ Questions (each has a gap marked _____ to complete with a word from the passage)
 Return JSON array only — no other text:
 [{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
   },
+  'matching-headings': {
+    label:   'Matching Headings',
+    // For matching-headings, qFormat receives the full set for context
+    qFormat: (q, set) => {
+      const para    = (set.extraData?.paragraphs || []).find(p => p.label === q.text.replace('Paragraph ', ''));
+      const heading = (set.extraData?.headings   || []).find(h => String(h.id) === String(q.answer));
+      return `Q${q.id}: Paragraph ${para?.label || q.text} → Heading #${q.answer} "${heading?.text || '?'}" | Para text: "${(para?.text || '').slice(0, 120)}..."`;
+    },
+    rules: `- The correct heading must capture the MAIN IDEA of the paragraph — not a single detail
+- Distractors may mention words from the paragraph but not the dominant theme
+- Verify the heading covers the paragraph's primary focus, not a sub-point
+- A heading that only fits one sentence is wrong if the paragraph covers a broader topic`,
+    prompt: (set) => {
+      const headings  = (set.extraData?.headings   || []).map(h => `  ${h.id}. ${h.text}`).join('\n');
+      const parasList = (set.extraData?.paragraphs || []).map(p => `  Paragraph ${p.label}: ${p.text}`).join('\n\n');
+      return `Passage paragraphs:
+${parasList}
+
+Available headings:
+${headings}
+
+Verify if each paragraph-to-heading match is correct:
+{RULES}
+
+Questions (each gives the paragraph label and the bank's chosen heading number):
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`;
+    },
+  },
+  'matching-information': {
+    label:   'Matching Information',
+    qFormat: q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- The correct section must contain the specific information stated — verbatim or unambiguous paraphrase
+- Watch for proximity traps — a name or concept near a sentence doesn't mean that section is the answer
+- The same section can answer multiple questions legitimately
+- Verify by quoting the exact passage phrase that confirms the match`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each piece of information is correctly matched to the right section:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'matching-features': {
+    label:   'Matching Features',
+    qFormat: q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- The correct feature (person/place/category) must be explicitly linked to the statement in the passage
+- Proximity trap: a name mentioned near a claim does NOT mean that person made the claim
+- Attribution must be explicit — "X said", "X found", "according to X"
+- Watch for statements that sound plausible but attribute the claim to the wrong person`,
+    prompt: (set) => `Passage: ${set.passage}
+
+Verify if each statement is correctly matched to the right feature/person/category:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'listening-mc': {
+    label:   'Listening — Multiple Choice',
+    qFormat: q => `Q${q.id}: ${q.text} | Options: ${(q.options||[]).map(o=>`${o.label}: ${o.text}`).join(' | ')} | Answer: ${q.answer}`,
+    rules: `- The correct option must be explicitly supported by the audio script — no inference
+- Speakers often correct themselves — the FINAL statement counts, not the first mention
+- Distractors often use words from the script but distort the meaning
+- The correct answer should be provable by quoting a specific line from the audio script`,
+    prompt: (set) => `Audio Script: ${set.audioText || set.passage}
+
+Verify if each multiple choice answer is correct based on what is stated in the audio script:
+{RULES}
+
+Questions:
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
+  'listening-form': {
+    label:   'Listening — Form Completion',
+    qFormat: q => `Q${q.id}: ${q.text} | Answer: ${q.answer}`,
+    rules: `- The answer must be the EXACT word, number, or phrase spoken in the audio script
+- Speakers often spell out or repeat key details — use the confirmed version
+- Watch for corrections mid-speech — the corrected value is the answer
+- Numbers, dates, names must match exactly as spoken`,
+    prompt: (set) => `Audio Script: ${set.audioText || set.passage}
+
+Verify if each form completion answer matches what is stated in the audio script:
+{RULES}
+
+Questions (each gap must be filled with exact words from the audio):
+{QUESTIONS}
+
+Return JSON array only — no other text:
+[{ "id": number, "bankAnswer": string, "verifiedAnswer": string, "correct": boolean, "confidence": "high"|"medium"|"low", "reasoning": string }]`,
+  },
 };
 
 // ── ARG PARSING ───────────────────────────────────────────────────────────────
@@ -211,7 +314,7 @@ const SYSTEM_PROMPT =
   'Zero tolerance for ambiguity.';
 
 async function reviewSet(set, apiKey) {
-  const qLines     = set.questions.map((q, i) => TYPE_CFG.qFormat({ ...q, id: i + 1 })).join('\n');
+  const qLines     = set.questions.map((q, i) => TYPE_CFG.qFormat({ ...q, id: i + 1 }, set)).join('\n');
   const userPrompt = TYPE_CFG.prompt(set)
     .replace('{RULES}',     TYPE_CFG.rules)
     .replace('{QUESTIONS}', qLines);

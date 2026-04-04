@@ -2393,10 +2393,9 @@
       },
       "flaggedForReview": []
     },
-    "reviewStatus": "error",
-    "reviewedAt": "2026-04-03T18:35:12.914Z",
-    "flaggedQuestions": [],
-    "reviewError": "fetch failed"
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:44:02.624Z",
+    "flaggedQuestions": []
   },
   {
     "id": "a6d6dee2-b9b3-450c-90a5-6edd456656d5",
@@ -2459,7 +2458,8 @@
           "answer": "corpus analysis",
           "confidence": "medium",
           "matched": true
-        }
+        },
+        "autoCorrectReason": "While 'corpus analysis' appears verbatim in the passage ('Researchers use various methodologies, including corpus analysis'), this is TWO WORDS. The instruction explicitly states 'Maximum word count: ONE WORD ONLY unless the question specifies otherwise.' No exception is indicated for Q4, therefore this answer violates the word limit."
       },
       {
         "id": 5,
@@ -2516,10 +2516,18 @@
       },
       "flaggedForReview": []
     },
-    "reviewStatus": "error",
-    "reviewedAt": "2026-04-03T18:35:12.914Z",
-    "flaggedQuestions": [],
-    "reviewError": "fetch failed"
+    "reviewStatus": "needs_correction",
+    "reviewedAt": "2026-04-03T18:44:02.624Z",
+    "flaggedQuestions": [
+      {
+        "id": 4,
+        "bankAnswer": "corpus analysis",
+        "verifiedAnswer": "corpus analysis",
+        "correct": false,
+        "confidence": "high",
+        "reasoning": "While 'corpus analysis' appears verbatim in the passage ('Researchers use various methodologies, including corpus analysis'), this is TWO WORDS. The instruction explicitly states 'Maximum word count: ONE WORD ONLY unless the question specifies otherwise.' No exception is indicated for Q4, therefore this answer violates the word limit."
+      }
+    ]
   },
   {
     "id": "ded5f2fc-1a73-4001-b4d4-5f2777cff195",
@@ -2639,10 +2647,9 @@
       },
       "flaggedForReview": []
     },
-    "reviewStatus": "error",
-    "reviewedAt": "2026-04-03T18:35:12.914Z",
-    "flaggedQuestions": [],
-    "reviewError": "fetch failed"
+    "reviewStatus": "verified",
+    "reviewedAt": "2026-04-03T18:44:02.624Z",
+    "flaggedQuestions": []
   },
   {
     "id": "be579330-1825-4afe-ae24-67dd62a52018",

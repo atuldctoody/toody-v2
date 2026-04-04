@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // scripts/apply-bank-corrections.js
-// Reads question-bank-tfng-reviewed.json and applies auto-corrected answers to Firestore.
+// Reads question-bank-{type}-reviewed.json and applies auto-corrected answers to Firestore.
 //
 // Usage:
 //   node --env-file=.env scripts/apply-bank-corrections.js \
-//     --key-file data/toody-1ab05-firebase-adminsdk-fbsvc-12e2e5547c.json
+//     [--type tfng] --key-file data/toody-1ab05-firebase-adminsdk-fbsvc-12e2e5547c.json
 
 import fs   from 'fs';
 import path from 'path';
@@ -12,14 +12,37 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// ── TYPE → FIRESTORE COLLECTION MAP ──────────────────────────────────────────
+// TFNG uses 'questionBank' (no suffix); all other types use 'questionBank-{type}'
+
+const COLLECTION_MAP = {
+  'tfng':                 'questionBank',
+  'ynng':                 'questionBank-ynng',
+  'multiple-choice':      'questionBank-multiple-choice',
+  'sentence-completion':  'questionBank-sentence-completion',
+  'summary-completion':   'questionBank-summary-completion',
+  'matching-headings':    'questionBank-matching-headings',
+  'matching-information': 'questionBank-matching-information',
+  'matching-features':    'questionBank-matching-features',
+  'listening-mc':         'questionBank-listening-mc',
+  'listening-form':       'questionBank-listening-form',
+};
+
 // ── ARG PARSING ───────────────────────────────────────────────────────────────
 
 const args    = process.argv.slice(2);
+const typeIdx = args.indexOf('--type');
+const TYPE    = typeIdx !== -1 ? args[typeIdx + 1] : 'tfng';
 const kfIdx   = args.indexOf('--key-file');
 const keyFile = kfIdx !== -1 ? args[kfIdx + 1] : 'data/toody-1ab05-firebase-adminsdk-fbsvc-12e2e5547c.json';
 
-const REVIEWED_FILE = path.join(__dirname, '../data/question-bank-tfng-reviewed.json');
-const COLLECTION    = 'questionBank'; // TFNG lives here (no suffix)
+if (!COLLECTION_MAP[TYPE]) {
+  console.error(`Unsupported type: ${TYPE}. Supported: ${Object.keys(COLLECTION_MAP).join(', ')}`);
+  process.exit(1);
+}
+
+const REVIEWED_FILE = path.join(__dirname, `../data/question-bank-${TYPE}-reviewed.json`);
+const COLLECTION    = COLLECTION_MAP[TYPE];
 
 // ── FIREBASE INIT ─────────────────────────────────────────────────────────────
 
@@ -42,7 +65,7 @@ async function main() {
   const reviewed = JSON.parse(fs.readFileSync(REVIEWED_FILE, 'utf8'));
   const toFix    = reviewed.filter(s => s.reviewStatus === 'needs_correction');
 
-  console.log(`\nApply Bank Corrections — T/F/NG`);
+  console.log(`\nApply Bank Corrections — ${TYPE.toUpperCase()}`);
   console.log(`Sets needing correction: ${toFix.length}\n`);
 
   if (toFix.length === 0) {

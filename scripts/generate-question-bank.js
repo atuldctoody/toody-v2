@@ -327,11 +327,11 @@ async function stageLogicMatrix_ynng(topic, band, apiKey, leadType) {
   const typeList = [leadType, ...others];
 
   const TYPE_INSTRUCTIONS = {
-    AUTHOR_AGREES:       'answer: Yes — passage contains an explicit opinion marker (I believe, clearly, it is vital, argues that, contends that) where the author directly agrees with the statement',
-    AUTHOR_DISAGREES:    'answer: No — passage contains an explicit opinion marker where the author directly contradicts the statement',
-    NEUTRAL_AUTHOR:      'answer: Not Given — passage reports the views of others (researchers found, some argue) but the author never states a personal position on this claim',
-    HEDGED_OPINION:      'answer: Not Given — author uses arguably / may suggest / could be argued / it appears / possibly without committing to a definite view',
-    BALANCED_REPORTING:  'answer: Not Given — author presents both sides of the argument equally and never picks one',
+    AUTHOR_AGREES:       'answer: Yes — passage contains an explicit first-person opinion marker (I believe, I contend, I argue, In my view, In my opinion, It is my view, I maintain, I would argue, clearly, obviously, it is vital that, it is essential that) where the author DIRECTLY agrees with the statement. CRITICAL — AUTHOR OPINION MARKERS: If the passage contains ANY of these phrases the answer is NEVER Not Given. If the statement matches the opinion → YES.',
+    AUTHOR_DISAGREES:    'answer: No — passage contains an explicit first-person opinion marker (I believe, I contend, I argue, In my view, In my opinion, It is my view, I maintain, I would argue, clearly, obviously, it is vital that, it is essential that) where the author DIRECTLY contradicts the statement. CRITICAL — AUTHOR OPINION MARKERS: If the passage contains ANY of these phrases the answer is NEVER Not Given. If the statement contradicts the opinion → NO.',
+    NEUTRAL_AUTHOR:      'answer: Not Given — passage uses ONLY reporting verbs about OTHER people\'s views (researchers argue, experts believe, studies suggest, scientists found). The AUTHOR must express zero personal opinion. CRITICAL: If the author uses ANY first-person opinion markers (I believe, I contend, In my view, clearly, it is vital) anywhere in the passage → this mutation is INVALID, regenerate. Not Given is only correct when the author expresses NO personal opinion whatsoever.',
+    HEDGED_OPINION:      'answer: Not Given — author uses arguably / may suggest / could be argued / it appears / possibly / it seems without committing to a definite view. The hedge must be genuine — the author neither confirms nor denies.',
+    BALANCED_REPORTING:  'answer: Not Given — author presents both sides of the argument equally and never picks one. Both perspectives must be given equal weight with no evaluative language favouring either side.',
   };
 
   const qLines = typeList.map((t, i) => `- Q${i + 1}: ${t} → ${TYPE_INSTRUCTIONS[t]}`).join('\n');
@@ -419,12 +419,13 @@ async function stageLogicValidation(type, logicPairs, topic, band, apiKey, log) 
   ).join('\n');
 
   const rules = isYnng
-    ? `- YES: passage must have explicit author opinion marker (I believe, clearly, it is vital, argues) confirming statement — not just a reported view
-- NO: passage must have explicit author opinion marker contradicting statement
-- NOT GIVEN (NEUTRAL_AUTHOR): passage reports others' views only — author is silent
-- NOT GIVEN (HEDGED_OPINION): author hedges with arguably/may suggest without committing
-- NOT GIVEN (BALANCED_REPORTING): author presents both sides — never picks one
-Flag invalid if: Yes/No pair has no explicit opinion marker, or Not Given pair could be read as Yes/No`
+    ? `- YES: passage must have explicit first-person author opinion marker (I believe, I contend, I argue, In my view, In my opinion, It is my view, I maintain, I would argue, clearly, obviously, it is vital that, it is essential that) CONFIRMING the statement — not a reported view
+- NO: passage must have explicit first-person author opinion marker CONTRADICTING the statement
+- NOT GIVEN (NEUTRAL_AUTHOR): passage uses ONLY reporting verbs about others' views (researchers argue, experts believe, studies suggest) — author expresses zero personal opinion. Flag invalid if ANY first-person opinion marker appears anywhere in the passage.
+- NOT GIVEN (HEDGED_OPINION): author hedges with arguably/may suggest/could be argued without committing to a definite view
+- NOT GIVEN (BALANCED_REPORTING): author presents both sides equally — never picks one, no evaluative language favouring either
+CRITICAL: If passage contains 'I believe', 'I contend', 'In my view', 'clearly', 'it is vital' etc. → answer is NEVER Not Given. Flag as invalid if a Not Given pair contains any first-person opinion marker.
+Flag invalid if: Yes/No pair has no explicit first-person opinion marker, or Not Given pair contains an author opinion marker that makes it Yes or No`
     : `- TRUE: fact must explicitly confirm via synonyms — no inference allowed
 - FALSE: fact must explicitly contradict — not just fail to confirm
 - NOT GIVEN: fact must be genuinely silent — not hinting or implying
