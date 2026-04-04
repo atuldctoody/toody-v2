@@ -355,6 +355,8 @@ export async function loadReadingSession() {
   sessionIsVerified            = false;
   sessionFromBank              = false;
   sessionBankSetId             = null;
+  sessionCorrections           = [];
+  sessionPassageQuality        = null;
   tlQ = null; tlPassed = false;
 
   goTo('s-reading');
@@ -1727,6 +1729,7 @@ export async function finishReadingSession() {
   const skillId  = toSkillId(skillKey);
   const prevSkill = getIELTSSkills()[skillId] || { accuracy: 0, attempted: 0 };
 
+  // Phase 1 — Save session log (non-critical: failure must not block skill progress write)
   let _readingSessionRef = null;
   try {
     _readingSessionRef = await saveSessionDoc(currentUser.uid, {
@@ -1757,7 +1760,12 @@ export async function finishReadingSession() {
       // For YNNG/MC/SC log isVerified without logic types
       ...(isYNNGSession ? { isVerified: sessionIsVerified } : {}),
     });
+  } catch (e) {
+    console.error('saveSessionDoc failed (non-critical):', e);
+  }
 
+  // Phase 2 — Write skill progress (critical: always runs, even if session log failed)
+  try {
     const prevCorrect  = Math.round(((prevSkill.accuracy || 0) / 100) * (prevSkill.attempted || 0));
     const newAttempted = (prevSkill.attempted || 0) + total;
     const newAccuracy  = newAttempted > 0
@@ -1817,6 +1825,12 @@ export async function finishReadingSession() {
       toughLoveResults: (studentData.toughLoveResults || 0) + (tlPassed ? 1 : 0),
     });
 
+    // Update in-memory skill data immediately so home screen reflects progress without a refresh
+    if (studentData?.brain?.subjects?.['ielts-academic']?.skills?.[skillId]) {
+      studentData.brain.subjects['ielts-academic'].skills[skillId].attempted = newAttempted;
+      studentData.brain.subjects['ielts-academic'].skills[skillId].accuracy  = newAccuracy;
+    }
+
     const snap = await getStudentDoc(currentUser.uid);
     setStudentData(snap.data());
     const questionResults = (!isSCSession && !isMCSession && !isSentenceCompSession &&
@@ -1825,7 +1839,9 @@ export async function finishReadingSession() {
       : null;
     await updateStudentBrain(behaviour, accuracy, skillKey, questionResults);
     await updateWeakAreas(skillKey, missedSubTypes);
-  } catch { /* Firestore save failed — still show notebook */ }
+  } catch (e) {
+    console.error('Skill progress write failed:', e);
+  }
 
   if (_readingSessionRef) generateAndSaveNarrative(currentUser.uid, _readingSessionRef, {
     skill: skillKey, day, accuracy, questionsCorrect: sessionCorrect, total, missedSubTypes, topic: sessionTopic,

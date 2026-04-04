@@ -1,42 +1,42 @@
 {
-  "timestamp": "2026-04-04T09:23:13.470Z",
+  "timestamp": "2026-04-04T10:03:24.158Z",
   "steps": {
     "generation": {
       "pass": true,
-      "durationMs": 9805,
+      "durationMs": 10899,
       "error": null
     },
     "verification": {
       "pass": true,
-      "durationMs": 2119,
+      "durationMs": 1826,
       "error": null,
       "corrections": 0
     },
     "explanationQuality": {
       "pass": true,
-      "durationMs": 5530,
+      "durationMs": 5018,
       "error": null,
-      "sessionAvgScore": 4.8
+      "sessionAvgScore": 4.3
     },
     "audio": {
       "pass": true,
-      "durationMs": 1744,
+      "durationMs": 1739,
       "error": null
     },
     "writingEval": {
       "pass": true,
-      "durationMs": 3783,
+      "durationMs": 8291,
       "error": null,
       "overallBand": 6
     },
     "passageQuality": {
       "pass": true,
-      "durationMs": 1022,
+      "durationMs": 1254,
       "error": null,
-      "avgScore": 4.2,
+      "avgScore": 4.3,
       "passedGate": true
     }
   },
   "overallPass": true,
-  "totalDurationMs": 24005
+  "totalDurationMs": 29032
 }
