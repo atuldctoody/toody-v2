@@ -1,31 +1,31 @@
 {
-  "timestamp": "2026-04-03T18:07:25.688Z",
+  "timestamp": "2026-04-04T04:09:39.959Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 34108,
+  "durationMs": 25354,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 34099,
+      "durationMs": 25249,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change",
+          "topic": "Renewable Energy",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.5,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 33966,
+      "durationMs": 24612,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Wildlife Adaptation",
+          "topic": "Sleep and Cognitive Function",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 2,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 4.2,
           "error": null
         },
         "audio": {
@@ -73,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 28948,
+      "durationMs": 25327,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "climate migration",
+          "topic": "Nutrition and Mental Health",
           "error": null
         },
         "verification": {
@@ -87,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.3,
+          "avgScore": 3.8,
           "error": null
         },
         "audio": {
@@ -96,7 +96,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 6,
+          "overallBand": 6.5,
           "error": null
         }
       }
