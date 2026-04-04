@@ -10,27 +10,11 @@ import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } f
 import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob, renderReasoningHtml, renderMarkdown } from './utils.js';
 import { updateStudentDoc, db } from './firebase.js';
 import {
-  getDocs, query, collection, where, limit, addDoc, serverTimestamp,
+  getDocs, query, collection, where, limit,
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { showToast } from './ui.js';
 import { verifyAnswers } from '../api/verify-answers.js';
-
-// ── QUALITY LOGGER ───────────────────────────────────────────────
-// Silent fire-and-forget logger for AI format errors and bank coverage gaps.
-// Never throws — errors are swallowed so quality events never block sessions.
-export async function logQualityEvent(type, details) {
-  if (!currentUser) return;
-  try {
-    await addDoc(collection(db, 'qualityLogs'), {
-      type,
-      uid:       currentUser.uid,
-      // No Firestore session ID is reliably available at log-time; use uid+skillId+timestamp.
-      traceKey:  `${currentUser.uid}:${details.skillId || ''}:${Date.now()}`,
-      timestamp: serverTimestamp(),
-      ...details,
-    });
-  } catch { /* non-fatal */ }
-}
+import { logQualityEvent, parseWithValidation } from './content-validator.js';
 
 // ── HOOK BANK MAP ─────────────────────────────────────────────────
 // Skills that have a verified question bank. Matching-headings is excluded
@@ -363,7 +347,17 @@ Return ONLY this JSON:
       callAI(prompt),
       fetchHookFromBank(skillId, band).catch(() => null),
     ]);
-    teachData = parseAIJson(raw);
+
+    // DCV: validate format, apply autofixes, retry once on reject errors.
+    // Skip the AI hookQuestion when a verified bank hook will replace it anyway.
+    teachData = await parseWithValidation(raw, prompt, cfg.hookStyle, {
+      skillId,
+      extractItems: (p) => [
+        ...(bankHook ? [] : [p.hookQuestion]),
+        ...(p.drillQuestions      || []),
+        ...(p.confidenceQuestions || []),
+      ].filter(Boolean),
+    });
 
     if (bankHook) {
       teachData.hookQuestion = bankHook;
@@ -469,26 +463,6 @@ Return ONLY this JSON:
             }
           }
         } catch { /* non-fatal — use original hook */ }
-      }
-    }
-    // ─────────────────────────────────────────────────────────────────────────
-
-    // ── TYPE_MISMATCH quality check ───────────────────────────────────────────
-    // Pipe-separated answers (e.g. "True|False") signal AI format confusion.
-    // Check hook + drill + confidence questions. Fire-and-forget — never blocks.
-    {
-      const _allQs = [
-        teachData.hookQuestion,
-        ...(teachData.drillQuestions      || []),
-        ...(teachData.confidenceQuestions || []),
-      ].filter(Boolean);
-      const _piped = _allQs.filter(q => q.answer && String(q.answer).includes('|'));
-      if (_piped.length > 0) {
-        logQualityEvent('TYPE_MISMATCH', {
-          skillId,
-          expected: cfg.hookStyle,
-          received: `pipe-separated answers in ${_piped.length} Q(s): ${_piped.slice(0, 3).map(q => q.answer).join(', ')}`,
-        }).catch(() => {});
       }
     }
     // ─────────────────────────────────────────────────────────────────────────

@@ -29,7 +29,8 @@ import {
   updateStudentDoc, saveSessionDoc, generateAndSaveNarrative, getStudentDoc, db,
 } from './firebase.js';
 import { showToast, safeClick, showSessionTip, finishTip, setTipNotebookFn } from './ui.js';
-import { loadTeachFirst, logQualityEvent } from './teach-first.js';
+import { loadTeachFirst } from './teach-first.js';
+import { logQualityEvent, parseWithValidation } from './content-validator.js';
 import { renderNotebook } from './notebook.js';
 import { mockMode, mockResults, runMockPhase } from './mock.js';
 import { verifyAnswers } from '../api/verify-answers.js';
@@ -942,9 +943,25 @@ Return ONLY this JSON:
   sessionCorrections  = [];
   sessionPassageQuality = null;
 
+  // DCV requestedType — maps session flags to the validator's type string
+  const _dcvType = isYNNGSession             ? 'ynng'
+                 : isMCSession               ? 'mc'
+                 : isSCSession               ? 'sc'
+                 : isSentenceCompSession     ? 'gapfill'
+                 : isMatchingInfoSession     ? 'matching'
+                 : isMatchingFeaturesSession ? 'matching'
+                 : isMatchingHeadingsSession ? 'matching-headings'
+                 : isShortAnswerSession      ? 'shortanswer'
+                 : 'tfng';
+
   try {
-    let raw    = await callAI(prompt);
-    let parsed = parseAIJson(raw);
+    let raw = await callAI(prompt);
+    // DCV: validate format, apply markdown autofixes, retry once on reject errors.
+    // extractItems omitted — parseWithValidation defaults to p.questions and attaches
+    // p.passage temporarily for checkExplanationDepth without polluting question objects.
+    let parsed = await parseWithValidation(raw, prompt, _dcvType, {
+      skillId: _resolvedSkillId,
+    });
 
     // ── Passage Quality Gate ───────────────────────────────────────────────────
     // Runs evaluate-passage.js before any student sees the content.
@@ -1003,20 +1020,6 @@ Return ONLY this JSON:
       } catch { /* non-fatal — continue with original parsed */ }
     }
     // ──────────────────────────────────────────────────────────────────────────
-
-    // ── TYPE_MISMATCH quality check ───────────────────────────────────────────
-    // Flag pipe-separated answers (AI format confusion) before any student sees content.
-    {
-      const _piped = (parsed.questions || []).filter(q => q?.answer && String(q.answer).includes('|'));
-      if (_piped.length > 0) {
-        logQualityEvent('TYPE_MISMATCH', {
-          skillId:  _resolvedSkillId,
-          expected: _resolvedSkillId,
-          received: `pipe-separated answers in ${_piped.length} Q(s): ${_piped.slice(0, 3).map(q => q.answer).join(', ')}`,
-        }).catch(() => {});
-      }
-    }
-    // ─────────────────────────────────────────────────────────────────────────
 
     sessionPassage = parsed.passage;
     sessionTopic   = parsed.topic || 'Reading';
