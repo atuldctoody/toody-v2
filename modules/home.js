@@ -232,6 +232,11 @@ export function startSession() {
     .map(e => `<div class="expect-item"><div class="expect-icon">${e.icon}</div><div class="expect-text">${e.text}</div></div>`)
     .join('');
 
+  // Re-enable btn-ready — it was disabled by the previous session's inline onclick handler
+  // (this.disabled=true) and is never auto-reset, so subsequent "Let's go" taps do nothing.
+  const btnReady = document.getElementById('btn-ready');
+  if (btnReady) btnReady.disabled = false;
+
   goTo('s-session-intro');
 }
 window.startSession = startSession;

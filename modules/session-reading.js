@@ -13,6 +13,7 @@ import {
   serverTimestamp, getDocs, query, collection, where, orderBy, limit,
   updateDoc, increment,
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
 import { SKILL_MANIFEST, API_URL, SKILL_MAP } from './constants.js';
 import {
   studentData, setStudentData, currentUser,
@@ -28,7 +29,7 @@ import {
   updateStudentDoc, saveSessionDoc, generateAndSaveNarrative, getStudentDoc, db,
 } from './firebase.js';
 import { showToast, safeClick, showSessionTip, finishTip, setTipNotebookFn } from './ui.js';
-import { loadTeachFirst } from './teach-first.js';
+import { loadTeachFirst, logQualityEvent } from './teach-first.js';
 import { renderNotebook } from './notebook.js';
 import { mockMode, mockResults, runMockPhase } from './mock.js';
 import { verifyAnswers } from '../api/verify-answers.js';
@@ -1002,6 +1003,20 @@ Return ONLY this JSON:
       } catch { /* non-fatal — continue with original parsed */ }
     }
     // ──────────────────────────────────────────────────────────────────────────
+
+    // ── TYPE_MISMATCH quality check ───────────────────────────────────────────
+    // Flag pipe-separated answers (AI format confusion) before any student sees content.
+    {
+      const _piped = (parsed.questions || []).filter(q => q?.answer && String(q.answer).includes('|'));
+      if (_piped.length > 0) {
+        logQualityEvent('TYPE_MISMATCH', {
+          skillId:  _resolvedSkillId,
+          expected: _resolvedSkillId,
+          received: `pipe-separated answers in ${_piped.length} Q(s): ${_piped.slice(0, 3).map(q => q.answer).join(', ')}`,
+        }).catch(() => {});
+      }
+    }
+    // ─────────────────────────────────────────────────────────────────────────
 
     sessionPassage = parsed.passage;
     sessionTopic   = parsed.topic || 'Reading';
