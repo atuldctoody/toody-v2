@@ -8,9 +8,101 @@ import { TFNG_WORKED_EXAMPLES, API_URL, AUDIO_URL } from './constants.js';
 import { studentData, currentUser, getIELTSSkills, callAI, saveLearningStyleSignal } from './state.js';
 import { goTo, setCurrentPlan, currentPlan, pickNextSkill, launchSkillScreen } from './router.js';
 import { getSkillConfig, parseAIJson, normaliseAnswer, toSkillId, boldify, base64ToBlob, renderReasoningHtml, renderMarkdown } from './utils.js';
-import { updateStudentDoc } from './firebase.js';
+import { updateStudentDoc, db } from './firebase.js';
+import {
+  getDocs, query, collection, where, limit,
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { showToast } from './ui.js';
 import { verifyAnswers } from '../api/verify-answers.js';
+
+// ── HOOK BANK MAP ─────────────────────────────────────────────────
+// Skills that have a verified question bank. Matching-headings is excluded
+// because its bank format lacks the heading options array needed for the hook.
+const HOOK_BANK_MAP = {
+  'reading-tfng':                'questionBank',
+  'reading-yesNoNotGiven':       'questionBank-ynng',
+  'reading-multipleChoice':      'questionBank-multiple-choice',
+  'reading-summaryCompletion':   'questionBank-summary-completion',
+  'reading-matchingInformation': 'questionBank-matching-information',
+  'reading-matchingFeatures':    'questionBank-matching-features',
+};
+
+// Fetch one hook question from the verified bank for the given skillId + band.
+// Returns a hookQuestion object (passage, statement, answer, insight, _bankId)
+// or null if no bank entry exists for the skill or query returns empty.
+async function fetchHookFromBank(skillId, band) {
+  const collName = HOOK_BANK_MAP[skillId];
+  if (!collName) return null;
+
+  const normBand   = Math.round(band * 2) / 2;
+  const bandsToTry = [normBand, normBand - 0.5, normBand + 0.5].filter(b => b >= 5.0 && b <= 9.0);
+
+  for (const b of bandsToTry) {
+    let snapshot;
+    try {
+      snapshot = await getDocs(
+        query(
+          collection(db, collName),
+          where('band', '==', b),
+          where('status', '==', 'active'),
+          limit(10)
+        )
+      );
+    } catch { continue; }
+    if (!snapshot || snapshot.empty) continue;
+
+    const docs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    let pickedDoc, pickedQ;
+
+    // For TFNG / YNNG: prefer a Not-Given question — it's the hardest and makes
+    // the best hook by surfacing the most common student error immediately.
+    if (skillId === 'reading-tfng' || skillId === 'reading-yesNoNotGiven') {
+      const ngPairs = [];
+      for (const d of docs) {
+        for (const q of (d.questions || [])) {
+          const norm = (q.answer || '').toLowerCase().replace(/[\s_-]/g, '');
+          if (norm === 'notgiven' || norm === 'ng') ngPairs.push({ doc: d, q });
+        }
+      }
+      if (ngPairs.length > 0) {
+        const pick = ngPairs[Math.floor(Math.random() * ngPairs.length)];
+        pickedDoc = pick.doc;
+        pickedQ   = pick.q;
+      }
+    }
+
+    if (!pickedDoc) {
+      pickedDoc = docs[Math.floor(Math.random() * docs.length)];
+      const qs  = pickedDoc.questions || [];
+      if (!qs.length) continue;
+      pickedQ = qs[Math.floor(Math.random() * qs.length)];
+    }
+
+    if (!pickedQ) continue;
+
+    const hook = {
+      passage:   pickedDoc.passage,
+      statement: pickedQ.text,
+      answer:    pickedQ.answer,
+      insight:   pickedQ.explanation || '',
+      _bankId:   `${pickedDoc.id}:${pickedQ.id}`,
+    };
+
+    // Attach options for MC (strip isCorrect so answer isn't revealed)
+    if (Array.isArray(pickedQ.options) && pickedQ.options.length) {
+      hook.options = pickedQ.options.map(o => ({ label: o.label, text: o.text }));
+    }
+
+    return hook;
+  }
+  return null; // no bank hit — caller falls back to AI-generated hook
+}
+
+// ── HOOK BANK ID ACCESSOR ─────────────────────────────────────────
+// Written when a bank hook is loaded; read by session-reading.js when
+// saving the session record so we can track which bank questions are served.
+let _hookBankId = null;
+export function getHookBankId() { return _hookBankId; }
 
 // ── TEACH-FIRST STATE ─────────────────────────────────────────────
 let teachData         = null;  // AI-generated lesson content
@@ -236,9 +328,22 @@ Return ONLY this JSON:
     maxTokens: 3500
   };
 
+  // Reset bank-id tracking for this lesson run
+  _hookBankId = null;
+
   try {
-    const raw  = await callAI(prompt);
-    teachData  = parseAIJson(raw);
+    // Run AI lesson generation and bank hook fetch in parallel to minimise latency.
+    // The bank hook (if found) replaces the AI-generated hookQuestion after parsing.
+    const [raw, bankHook] = await Promise.all([
+      callAI(prompt),
+      fetchHookFromBank(skillId, band).catch(() => null),
+    ]);
+    teachData = parseAIJson(raw);
+
+    if (bankHook) {
+      teachData.hookQuestion = bankHook;
+      _hookBankId = bankHook._bankId || null;
+    }
 
     // For reading-tfng, replace AI-generated worked examples with the hardcoded
     // expert-verified set. Hook, concept, confidence, and drill remain AI-generated.
@@ -522,6 +627,8 @@ window.dismissSkillIntro = function () {
 window.answerHook = function (val) {
   const hq = teachData.hookQuestion;
   if (!hq) return;
+  // Log which bank question was served (if bank-sourced) for session analytics
+  if (hq._bankId) console.log('[Hook] bank question served:', hq._bankId);
   const hookCfg    = getSkillConfig(toSkillId(teachSkillKey));
   const isTextInput = hookCfg.hookStyle === 'gapfill' || hookCfg.hookStyle === 'shortanswer';
   if (isTextInput) {

@@ -28,16 +28,6 @@ export const SKILL_CATALOGUE = [
 export const SKILL_MAP = Object.fromEntries(SKILL_CATALOGUE.map(s => [s.skill, s]));
 
 
-// Hook trap question — hardcoded, no instructions, hooks on NG confusion
-export const HOOK_TRAP = {
-  passage: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade. Researchers attribute this to stricter vehicle emission standards introduced in 2015.',
-  statement: 'The reduction in urban air pollution has improved the mental health of city residents.',
-  answer: 'NG',
-  explanation: 'The passage confirms pollution has decreased in major cities — but it says nothing about mental health. The statement introduces a new claim the passage never addresses. This is Not Given: the passage is simply silent on this point.',
-  keySentence: 'Recent studies suggest that urban air pollution has decreased in major cities over the last decade.',
-  insight: "This is the Cautious Language Trap. The passage uses the word 'suggest' — not 'proves' or 'confirms.' When a passage uses cautious language — words like suggest, may, could, or appears to — it is NOT confirming the statement as true. But it is also not contradicting it. The passage is simply uncertain. Uncertain = Not Given, not False. False means the passage says the opposite. This passage never says the opposite — it uses cautious language.",
-};
-
 // Hardcoded expert-verified T/F/NG worked examples.
 // Used in the Teach-First phase for reading-tfng instead of AI generation,
 // so every student sees the same battle-tested explanations for the three
