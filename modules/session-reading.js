@@ -1038,6 +1038,10 @@ Return ONLY this JSON:
       } catch { /* non-fatal */ }
       sessionQuestions   = verified.questions;
       sessionCorrections = verified.corrections;
+      verified.corrections.forEach(c => logQualityEvent('ANSWER_CORRECTED', {
+        skillId: _resolvedSkillId, originalAnswer: c.originalAnswer,
+        correctedAnswer: c.correctedAnswer, errorTag: c.errorTag, reason: c.reason,
+      }));
       buildToughLove(verified.questions, parsed.passage);
       renderYNNGSession({ ...parsed, questions: verified.questions });
     } else if (isMCSession) {
@@ -1069,6 +1073,10 @@ Return ONLY this JSON:
       } catch { /* non-fatal — original questions used */ }
       sessionQuestions   = verified.questions;
       sessionCorrections = verified.corrections;
+      verified.corrections.forEach(c => logQualityEvent('ANSWER_CORRECTED', {
+        skillId: _resolvedSkillId, originalAnswer: c.originalAnswer,
+        correctedAnswer: c.correctedAnswer, errorTag: c.errorTag, reason: c.reason,
+      }));
 
       // Re-build tough love with verified (possibly corrected) questions
       buildToughLove(verified.questions, parsed.passage);

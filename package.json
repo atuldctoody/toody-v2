@@ -31,5 +31,8 @@
     "@playwright/test": "^1.58.2",
     "dotenv": "^17.4.0",
     "firebase-admin": "^13.7.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0"
   }
 }

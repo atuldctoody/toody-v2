@@ -383,6 +383,10 @@ Return ONLY this JSON:
             API_URL
           );
           const vq = result.questions?.[0];
+          result.corrections?.forEach(c => logQualityEvent('ANSWER_CORRECTED', {
+            skillId, originalAnswer: c.originalAnswer,
+            correctedAnswer: c.correctedAnswer, errorTag: c.errorTag, reason: c.reason,
+          }));
           return vq ? { ...q, answer: vq.answer, explanation: vq.explanation } : q;
         };
 
@@ -432,6 +436,10 @@ Return ONLY this JSON:
           API_URL
         );
         const hq = hookResult.questions?.[0];
+        hookResult.corrections?.forEach(c => logQualityEvent('ANSWER_CORRECTED', {
+          skillId, originalAnswer: c.originalAnswer,
+          correctedAnswer: c.correctedAnswer, errorTag: c.errorTag, reason: c.reason,
+        }));
         if (hq) {
           teachData.hookQuestion.answer = hq.answer;
           if (hq.explanation) teachData.hookQuestion.insight = hq.explanation;
