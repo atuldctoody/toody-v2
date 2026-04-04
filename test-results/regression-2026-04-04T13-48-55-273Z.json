@@ -1,31 +1,33 @@
 {
-  "timestamp": "2026-04-04T11:39:36.517Z",
+  "timestamp": "2026-04-04T13:48:55.273Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [],
+  "qualityWarnings": [
+    "⚠ QUALITY WARNING: explanation drift 1.6 between Band 5 (3.2) and Band 6 (4.8) — review content generation prompts"
+  ],
   "overallPass": true,
-  "durationMs": 24404,
+  "durationMs": 27011,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 24399,
+      "durationMs": 25266,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Research",
+          "topic": "Urban Green Spaces and Mental Health",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.6,
+          "avgScore": 3.2,
           "error": null
         },
         "audio": {
@@ -42,21 +44,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 24368,
+      "durationMs": 26972,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Cognitive Psychology and Memory",
+          "topic": "Urban Pollution and Health",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 1,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.4,
+          "avgScore": 4.8,
           "error": null
         },
         "audio": {
@@ -73,11 +75,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23032,
+      "durationMs": 23244,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Agriculture",
+          "topic": "Climate Change and Biodiversity",
           "error": null
         },
         "verification": {
@@ -87,7 +89,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.1,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
