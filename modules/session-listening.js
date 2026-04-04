@@ -6,7 +6,9 @@
 //
 // Forward references resolved: mockMode, mockResults, runMockPhase ← modules/mock.js
 
-import { serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import {
+  serverTimestamp, getDocs, query, collection, where, orderBy, limit, updateDoc, increment,
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { API_URL, AUDIO_URL, SKILL_MANIFEST } from './constants.js';
 import {
   studentData, setStudentData, currentUser,
@@ -18,7 +20,7 @@ import {
   getSkillConfig, parseAIJson, renderMarkdown, normaliseAnswer,
   base64ToBlob, toSkillId, withRetry,
 } from './utils.js';
-import { updateStudentDoc, saveSessionDoc, generateAndSaveNarrative, getStudentDoc } from './firebase.js';
+import { updateStudentDoc, saveSessionDoc, generateAndSaveNarrative, getStudentDoc, db } from './firebase.js';
 import { showToast, safeClick, showSessionTip, setTipNotebookFn } from './ui.js';
 import {
   startSessionTracking, trackQStart, trackQAnswer, trackAnswerChange,
@@ -35,8 +37,35 @@ let listenType      = 'mc';   // 'mc' | 'fc'
 let listenCorrect   = 0;
 let listenAudioEl   = null;   // Audio element for ElevenLabs playback
 let listenHasPlayed = false;  // Whether student has pressed play at least once
+let listenFromBank  = false;  // Whether session was served from questionBank
 export function setListenType(val)    { listenType    = val; }
 export function setListenCorrect(val) { listenCorrect = val; }
+
+// ── BANK QUERY ─────────────────────────────────────────────────────
+async function getListeningFromBank(collectionName, targetBand) {
+  const band       = Math.round(targetBand * 2) / 2;
+  const bandsToTry = [band, band - 0.5, band + 0.5].filter(b => b >= 5.0 && b <= 8.0);
+  const recentIds  = studentData?.brain?.recentQuestionBankIds || [];
+
+  for (const b of bandsToTry) {
+    const snapshot = await getDocs(
+      query(
+        collection(db, collectionName),
+        where('band', '==', b),
+        where('status', '==', 'active'),
+        orderBy('servedCount', 'asc'),
+        limit(5)
+      )
+    );
+    if (snapshot.empty) continue;
+    const candidates = snapshot.docs.filter(d => !recentIds.includes(d.id));
+    if (candidates.length === 0) continue;
+    const picked = candidates[Math.floor(Math.random() * candidates.length)];
+    updateDoc(picked.ref, { servedCount: increment(1), lastServedAt: serverTimestamp() }).catch(() => {});
+    return { id: picked.id, ...picked.data() };
+  }
+  return null;
+}
 
 // ── LOAD LISTENING SESSION ────────────────────────────────────────
 export async function loadListeningSession() {
@@ -47,6 +76,7 @@ export async function loadListeningSession() {
   listenAnswers    = {};
   listenCorrect    = 0;
   listenHasPlayed  = false;
+  listenFromBank   = false;
   if (listenAudioEl) { listenAudioEl.pause(); listenAudioEl = null; }
 
   document.getElementById('listening-loading').classList.remove('hidden');
@@ -59,11 +89,73 @@ export async function loadListeningSession() {
 
   const band = studentData?.targetBand || 6.5;
 
-  let prompt;
-  if (listenType === 'mc') {
-    prompt = {
-      system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
-      user: `Create an IELTS Listening Multiple Choice exercise for a Band ${band} student.
+  // Helper — renders question HTML into DOM (shared between bank and AI paths)
+  function renderListeningQuestions(type, questions, formTitle) {
+    if (type === 'mc') {
+      document.getElementById('listening-q-label').textContent = 'Questions — Multiple Choice';
+      document.getElementById('listening-questions').innerHTML = questions.map(q => `
+        <div class="q-block" id="lqb${q.id}">
+          <div class="q-num">${q.id}</div>
+          <div class="q-text">${q.text}</div>
+          <div class="mc-options" id="mc${q.id}">
+            ${q.options.map(opt => {
+              const letter = opt.charAt(0);
+              return `<button class="mc-option" data-action="answer-mc" data-q="${q.id}" data-v="${letter}">${opt}</button>`;
+            }).join('')}
+          </div>
+        </div>
+      `).join('');
+    } else {
+      document.getElementById('listening-q-label').textContent = formTitle || 'Form Completion';
+      document.getElementById('listening-questions').innerHTML = `
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Complete the form. Write no more than <strong>three words</strong> for each answer.</p>
+        ${questions.map(q => `
+          <div class="fc-field" id="lqb${q.id}">
+            <label class="fc-label">${q.id}. ${q.label}</label>
+            <input class="fc-input" id="fc${q.id}" type="text" placeholder="${q.hint || 'your answer'}" oninput="checkFCProgress()" />
+          </div>
+        `).join('')}`;
+    }
+  }
+
+  try {
+    // ── BANK PATH — try pre-built questions first ─────────────────
+    let bankSet = null;
+    try {
+      const collName = listenType === 'mc' ? 'questionBank-listening-mc' : 'questionBank-listening-form';
+      bankSet = await getListeningFromBank(collName, studentData?.currentBand || 6.0);
+    } catch { /* non-fatal — fall through to AI */ }
+
+    if (bankSet) {
+      listenScenario  = bankSet.transcript || bankSet.passage || bankSet.scenario || '';
+      listenQuestions = bankSet.questions || [];
+      listenFromBank  = true;
+
+      renderListeningQuestions(listenType, listenQuestions, bankSet.formTitle);
+
+      document.getElementById('listening-loading').classList.add('hidden');
+      document.getElementById('listening-content').classList.remove('hidden');
+      startSessionTracking();
+      trackQStart(1);
+
+      if (bankSet.audioUrl) {
+        // Pre-generated audio from batch script — show exam-condition warning
+        const hint = document.getElementById('audio-hint-text');
+        if (hint) hint.textContent = 'You will hear this passage ONCE — just like the real exam.';
+        setupAudioPlayer(bankSet.audioUrl);
+      } else {
+        // Bank question not yet voiced — generate ElevenLabs audio on demand
+        fetchListeningAudio(listenScenario);
+      }
+      return;
+    }
+
+    // ── AI PATH — generate content ────────────────────────────────
+    let prompt;
+    if (listenType === 'mc') {
+      prompt = {
+        system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
+        user: `Create an IELTS Listening Multiple Choice exercise for a Band ${band} student.
 "transcript" must be the ACTUAL spoken words a student would hear — write it as natural speech (4-6 sentences of a real conversation, monologue, or announcement). The questions must be answerable from the transcript.
 Return ONLY this JSON:
 {
@@ -76,11 +168,11 @@ Return ONLY this JSON:
     {"id":5,"text":"question","options":["A. option","B. option","C. option"],"answer":"B","explanation":"why"}
   ]
 }`
-    };
-  } else {
-    prompt = {
-      system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
-      user: `Create an IELTS Listening Form Completion exercise for a Band ${band} student.
+      };
+    } else {
+      prompt = {
+        system: 'You are an IELTS examiner. Generate listening exercises. Return valid JSON only, no markdown.',
+        user: `Create an IELTS Listening Form Completion exercise for a Band ${band} student.
 "transcript" must be the ACTUAL spoken words of the phone call or interview — write it as natural speech (4-6 sentences). Include the answers embedded naturally in the spoken text.
 Return ONLY this JSON:
 {
@@ -94,45 +186,18 @@ Return ONLY this JSON:
     {"id":5,"label":"Preferred time","answer":"exact answer","hint":"morning or afternoon"}
   ]
 }`
-    };
-  }
+      };
+    }
 
-  try {
     const raw    = await callAI(prompt);
     const parsed = parseAIJson(raw);
     listenScenario  = parsed.transcript || parsed.scenario || '';
     listenQuestions = parsed.questions;
 
-    // Render questions (gated — hidden until user presses play)
-    if (listenType === 'mc') {
-      document.getElementById('listening-q-label').textContent = 'Questions — Multiple Choice';
-      document.getElementById('listening-questions').innerHTML = listenQuestions.map(q => `
-        <div class="q-block" id="lqb${q.id}">
-          <div class="q-num">${q.id}</div>
-          <div class="q-text">${q.text}</div>
-          <div class="mc-options" id="mc${q.id}">
-            ${q.options.map(opt => {
-              const letter = opt.charAt(0);
-              return `<button class="mc-option" data-action="answer-mc" data-q="${q.id}" data-v="${letter}">${opt}</button>`;
-            }).join('')}
-          </div>
-        </div>
-      `).join('');
-    } else {
-      document.getElementById('listening-q-label').textContent = parsed.formTitle || 'Form Completion';
-      document.getElementById('listening-questions').innerHTML = `
-        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Complete the form. Write no more than <strong>three words</strong> for each answer.</p>
-        ${listenQuestions.map(q => `
-          <div class="fc-field" id="lqb${q.id}">
-            <label class="fc-label">${q.id}. ${q.label}</label>
-            <input class="fc-input" id="fc${q.id}" type="text" placeholder="${q.hint || 'your answer'}" oninput="checkFCProgress()" />
-          </div>
-        `).join('')}`;
-    }
+    renderListeningQuestions(listenType, listenQuestions, parsed.formTitle);
 
     document.getElementById('listening-loading').classList.add('hidden');
     document.getElementById('listening-content').classList.remove('hidden');
-
     startSessionTracking();
     trackQStart(1);
 
@@ -166,11 +231,11 @@ export async function fetchListeningAudio(text) {
     setupAudioPlayer(url);
   } catch {
     showToast('Having trouble connecting — please check your internet and try again.');
-    // Graceful fallback: show questions and an inline scenario text
-    document.getElementById('audio-hint-text').textContent = 'Audio unavailable. Read the scenario below and answer the questions.';
+    // Graceful fallback: show passage text so student can still answer
+    document.getElementById('audio-hint-text').textContent = 'Audio unavailable. Read the passage carefully and answer the questions.';
     document.getElementById('listening-audio-wrap').insertAdjacentHTML('afterend',
       `<div class="passage-wrap" style="margin-top:0">
-         <div class="passage-label">Scenario (Text Fallback)</div>
+         <div class="passage-label">Passage (Text Fallback)</div>
          <div class="passage-text">${listenScenario.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('')}</div>
        </div>`);
     showListeningQuestionsGate();
@@ -179,22 +244,35 @@ export async function fetchListeningAudio(text) {
 
 export function setupAudioPlayer(url) {
   if (listenAudioEl) { listenAudioEl.pause(); }
-  listenAudioEl = new Audio(url);
+
+  // Use a DOM audio element so event delegation can find it via getElementById
+  const existing = document.getElementById('listening-audio');
+  if (existing) existing.remove();
+  const audioEl = document.createElement('audio');
+  audioEl.id            = 'listening-audio';
+  audioEl.src           = url;
+  audioEl.preload       = 'auto';
+  audioEl.style.display = 'none';
+  document.getElementById('listening-audio-wrap')?.appendChild(audioEl);
+  listenAudioEl = audioEl;
 
   listenAudioEl.addEventListener('timeupdate', updateAudioProgress);
   listenAudioEl.addEventListener('ended', () => {
-    const btn = document.getElementById('audio-play-btn');
-    if (btn) btn.textContent = '▶';
+    const btn  = document.getElementById('audio-play-btn');
+    const hint = document.getElementById('audio-hint-text');
+    if (btn)  { btn.textContent = '▶'; btn.disabled = false; }
+    if (hint && !listenFromBank) hint.textContent = 'Play again below if needed.';
     showListeningQuestionsGate();
   });
-  listenAudioEl.addEventListener('error', () => {
-    showListeningQuestionsGate();
-  });
+  listenAudioEl.addEventListener('error', () => showListeningQuestionsGate());
 
   const btn  = document.getElementById('audio-play-btn');
+  if (btn) { btn.disabled = false; btn.textContent = '▶'; }
+  // Hint text is set by the caller for bank questions; only set default for ElevenLabs path
   const hint = document.getElementById('audio-hint-text');
-  if (btn)  { btn.disabled = false; btn.textContent = '▶'; }
-  if (hint) hint.textContent = 'Press ▶ to listen before answering.';
+  if (hint && hint.textContent === 'Loading audio…') {
+    hint.textContent = 'Press ▶ to listen before answering.';
+  }
 }
 
 export function updateAudioProgress() {
@@ -351,7 +429,8 @@ export async function finishListeningSession() {
       accuracy,
       warmupCorrect,
       durationMinutes:    Math.round(behaviour.sessionDurationSec / 60),
-      behaviour
+      behaviour,
+      servedFromBank:     listenFromBank,
     });
 
     const prevL        = getIELTSSkills()[listenSkillId] || { accuracy: 0, attempted: 0 };
@@ -438,6 +517,18 @@ window.finishListeningSession = finishListeningSession;
     const { action } = btn.dataset;
     if (action === 'answer-mc') {
       answerListeningMC(parseInt(btn.dataset.q, 10), btn.dataset.v);
+    }
+    if (action === 'play-listening') {
+      const audio = document.getElementById('listening-audio');
+      if (audio) {
+        audio.play();
+        btn.textContent = '⏸';
+        btn.disabled = true;
+        if (!listenHasPlayed) {
+          listenHasPlayed = true;
+          setTimeout(showListeningQuestionsGate, 1000);
+        }
+      }
     }
   });
 })();
