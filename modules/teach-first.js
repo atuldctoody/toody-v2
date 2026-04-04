@@ -437,7 +437,7 @@ function renderHookQuestion() {
   if (hookCfg.hookStyle === 'matching') {
     // matching-info / matching-features: render section letter buttons (A–E)
     btnsContainer.innerHTML = hookCfg.answerButtons.map(v =>
-      `<button class="tfng-btn" onclick="window.answerHook('${v}')" data-mv="${v}">${v}</button>`
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="${v}">${v}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
   } else if (hookCfg.hookStyle === 'matching-headings') {
@@ -454,7 +454,7 @@ function renderHookQuestion() {
     }
     const letters = opts.length ? opts.map(o => o.label) : hookCfg.answerButtons;
     btnsContainer.innerHTML = letters.map(l =>
-      `<button class="tfng-btn" onclick="window.answerHook('${l}')" data-mv="${l}">${l}</button>`
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="${l}">${l}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
   } else if (hookCfg.hookStyle === 'multiplechoice') {
@@ -470,7 +470,7 @@ function renderHookQuestion() {
       btnsContainer.insertAdjacentElement('beforebegin', optDiv);
     }
     btnsContainer.innerHTML = ['A','B','C','D'].map(l =>
-      `<button class="tfng-btn" onclick="window.answerHook('${l}')" data-mv="${l}">${l}</button>`
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="${l}">${l}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
   } else if (hookCfg.hookStyle === 'gapfill' || hookCfg.hookStyle === 'shortanswer') {
@@ -482,21 +482,21 @@ function renderHookQuestion() {
     inputWrap.innerHTML = `
       <input type="text" id="hook-text-input" placeholder="Type your answer here..."
         style="width:100%;padding:16px;border-radius:12px;border:1.5px solid #E0DFF0;font-size:15px;color:#1A1A2E;background:#fff;box-sizing:border-box;font-family:inherit">
-      <button class="btn mt8" onclick="window.answerHook(document.getElementById('hook-text-input').value)">Submit answer →</button>
+      <button class="btn mt8" data-action="hook-submit">Submit answer →</button>
     `;
   } else if (hookCfg.hookStyle === 'ynng') {
     // ynng: Yes / No / Not Given buttons
     btnsContainer.innerHTML =
-      `<button class="tfng-btn" onclick="window.answerHook('Yes')"       data-mv="Yes">✓ Yes</button>` +
-      `<button class="tfng-btn" onclick="window.answerHook('No')"        data-mv="No">✗ No</button>` +
-      `<button class="tfng-btn" onclick="window.answerHook('Not Given')" data-mv="Not Given">? Not Given</button>`;
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="Yes">✓ Yes</button>` +
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="No">✗ No</button>` +
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="Not Given">? Not Given</button>`;
     btnsContainer.classList.remove('hidden');
   } else {
     // tfng: ensure True / False / NG buttons are present with correct NG visibility
     btnsContainer.innerHTML =
-      `<button class="tfng-btn" onclick="window.answerHook('True')"  data-mv="True">✓ True</button>` +
-      `<button class="tfng-btn" onclick="window.answerHook('False')" data-mv="False">✗ False</button>` +
-      `<button class="tfng-btn" onclick="window.answerHook('NG')"    data-mv="NG">? Not Given</button>`;
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="True">✓ True</button>` +
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="False">✗ False</button>` +
+      `<button class="tfng-btn" data-action="hook-answer" data-mv="NG">? Not Given</button>`;
     btnsContainer.classList.remove('hidden');
     const ngBtn = btnsContainer.querySelector('[data-mv="NG"]');
     if (ngBtn) ngBtn.classList.toggle('hidden', !hookCfg.answerButtons.includes('Not Given'));
@@ -596,7 +596,7 @@ function renderWorkedExampleAt(idx) {
       <div style="margin-bottom:12px">${optsHtml}</div>
       <div class="predict-block" id="predict-0">
         <div class="predict-prompt">Which part of the passage contains the answer?</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="0">Show me the thinking <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-0">
           <div class="card" style="margin-top:12px">
             <div class="card-label" style="color:var(--accent)">Step 1</div>
@@ -606,7 +606,7 @@ function renderWorkedExampleAt(idx) {
       </div>
       <div class="predict-block hidden" id="predict-1">
         <div class="predict-prompt">Which option does the passage support?</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Show reasoning <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="1">Show reasoning <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-1">
           <div class="card" style="margin-top:12px">
             <div class="card-label" style="color:var(--accent)">Step 2</div>
@@ -618,7 +618,7 @@ function renderWorkedExampleAt(idx) {
         <div class="predict-prompt">Pick the correct answer.</div>
         <div class="tfng mt8">
           ${['A','B','C','D'].map(l =>
-            `<button class="tfng-btn" data-choice="${l}" onclick="window.teachPickMCStep3('${l}','${(we.answer||'').toUpperCase()}')">${l}</button>`
+            `<button class="tfng-btn" data-action="teach-pick-mc" data-choice="${l}" data-correct="${(we.answer||'').toUpperCase()}">${l}</button>`
           ).join('')}
         </div>
         <div class="predict-reveal hidden" id="predict-reveal-2">
@@ -658,14 +658,14 @@ function renderWorkedExampleAt(idx) {
     document.getElementById('teach-steps-container').innerHTML = `
       <div class="predict-block" id="predict-0">
         <div class="predict-prompt">What do most Band 5 students answer here — and why?</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="0">Show me <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-0">
           ${wrongBadge}
         </div>
       </div>
       <div class="predict-block hidden" id="predict-1">
         <div class="predict-prompt">Here is the correct reasoning — step by step.</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Show reasoning <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="1">Show reasoning <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-1">
           <div class="card" style="margin-top:12px">
             <div class="card-label" style="color:var(--accent)">The reasoning</div>
@@ -677,9 +677,9 @@ function renderWorkedExampleAt(idx) {
       <div class="predict-block hidden" id="predict-2">
         <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
         <div class="step3-choices mt8">
-          <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
-          <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
-          <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="confirms"    data-correct="${correctChoice}">✓ Confirms it</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="contradicts" data-correct="${correctChoice}">✗ Contradicts it</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="silent"      data-correct="${correctChoice}">? Stays silent</button>
         </div>
         <div class="predict-reveal hidden" id="predict-reveal-2">
           <div class="card" style="margin-top:12px;border:2px solid var(--success)">
@@ -695,7 +695,7 @@ function renderWorkedExampleAt(idx) {
     document.getElementById('teach-steps-container').innerHTML = `
       <div class="predict-block" id="predict-0">
         <div class="predict-prompt">What part of the passage is relevant here?</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(0)">Show me the thinking <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="0">Show me the thinking <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-0">
           <div class="card" style="margin-top:12px">
             <div class="card-label" style="color:var(--accent)">Step 1</div>
@@ -705,7 +705,7 @@ function renderWorkedExampleAt(idx) {
       </div>
       <div class="predict-block hidden" id="predict-1">
         <div class="predict-prompt">What is this statement actually claiming?</div>
-        <button class="btn-secondary mt8" onclick="window.teachRevealStep(1)">Reveal <span class="arrow">→</span></button>
+        <button class="btn-secondary mt8" data-action="teach-reveal-step" data-step="1">Reveal <span class="arrow">→</span></button>
         <div class="predict-reveal hidden" id="predict-reveal-1">
           <div class="card" style="margin-top:12px">
             <div class="card-label" style="color:var(--accent)">Step 2</div>
@@ -716,9 +716,9 @@ function renderWorkedExampleAt(idx) {
       <div class="predict-block hidden" id="predict-2">
         <div class="predict-prompt">Does the passage confirm, contradict, or stay silent on this?</div>
         <div class="step3-choices mt8">
-          <button class="step3-btn" data-choice="confirms"    onclick="window.teachPickStep3('confirms','${correctChoice}')">✓ Confirms it</button>
-          <button class="step3-btn" data-choice="contradicts" onclick="window.teachPickStep3('contradicts','${correctChoice}')">✗ Contradicts it</button>
-          <button class="step3-btn" data-choice="silent"      onclick="window.teachPickStep3('silent','${correctChoice}')">? Stays silent</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="confirms"    data-correct="${correctChoice}">✓ Confirms it</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="contradicts" data-correct="${correctChoice}">✗ Contradicts it</button>
+          <button class="step3-btn" data-action="teach-pick-step3" data-choice="silent"      data-correct="${correctChoice}">? Stays silent</button>
         </div>
         <div class="predict-reveal hidden" id="predict-reveal-2">
           <div class="card" style="margin-top:12px">
@@ -827,7 +827,7 @@ window.teachReinforceHear = function () {
     contentEl.innerHTML = `
       <div class="card mt8" style="text-align:center">
         <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Toody is reading the reasoning aloud.</p>
-        <button class="btn" id="hear-play-btn" onclick="window.toggleHearAudio()">\u25b6 Play</button>
+        <button class="btn" id="hear-play-btn" data-action="hear-play">\u25b6 Play</button>
       </div>`;
     window._hearAudio = audio;
     audio.addEventListener('ended', () => {
@@ -909,7 +909,7 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
       : _drillAcc >= 50
       ? 'Solid. Room to improve.'
       : 'This is where Toody helps most. Let\'s keep going.';
-    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. ${_drillMsg}</p><button class="btn-secondary" style="margin-top:10px;display:block;margin-left:auto;margin-right:auto" onclick="renderConfidenceQuestion(0)">Continue →</button></div>`;
+    contentEl.innerHTML = `<div class="card mt8" style="background:var(--success-light);border:1.5px solid var(--success-mid)"><p style="font-size:14px;font-weight:600;color:var(--success-text);text-align:center">${teachDrillCorrect} / ${qs.length} correct. ${_drillMsg}</p><button class="btn-secondary" style="margin-top:10px;display:block;margin-left:auto;margin-right:auto" data-action="conf-next" data-idx="0">Continue →</button></div>`;
     return;
   }
   const q = qs[idx];
@@ -930,20 +930,20 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
       ? q.options.map(o => o.label)
       : drillCfg.answerButtons;
     drillBtnsHtml = letters.map(v =>
-      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${v}</button>`
+      `<button class="tfng-btn" data-action="drill-answer" data-idx="${idx}" data-dv="${v}">${v}</button>`
     ).join('');
   } else if (drillCfg.hookStyle === 'multiplechoice' && (q.options || []).length) {
     drillOptsHtml = `<div style="margin-bottom:12px">${(q.options || []).map(o =>
       `<div style="padding:8px 12px;margin-bottom:5px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:13px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
     ).join('')}</div>`;
     drillBtnsHtml = ['A','B','C','D'].map(v =>
-      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${v}</button>`
+      `<button class="tfng-btn" data-action="drill-answer" data-idx="${idx}" data-dv="${v}">${v}</button>`
     ).join('');
   } else {
     const [a0, a1, a2] = drillCfg.answerButtons;
     const lblMap = { True: '✓ True', False: '✗ False', NG: '? Not Given', 'Not Given': '? Not Given', Yes: '✓ Yes', No: '✗ No' };
     drillBtnsHtml = [a0, a1, a2].filter(Boolean).map(v =>
-      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${lblMap[v] || v}</button>`
+      `<button class="tfng-btn" data-action="drill-answer" data-idx="${idx}" data-dv="${v}">${lblMap[v] || v}</button>`
     ).join('');
   }
 
@@ -975,7 +975,7 @@ window.answerDrill = function (idx, val) {
   const hasNext = idx + 1 < qs2b.length;
   const drillExpl = renderReasoningHtml(q, isRight);
   rf.innerHTML = (isRight ? `✅ Correct. ${drillExpl}` : `❌ Answer: <strong>${q.answer}</strong>. ${drillExpl}`)
-    + `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderDrillQuestion(${idx + 1})">${hasNext ? 'Next question →' : 'Continue →'}</button>`;
+    + `<br><button class="btn-secondary" style="margin-top:10px" data-action="drill-next" data-idx="${idx + 1}">${hasNext ? 'Next question →' : 'Continue →'}</button>`;
 };
 
 // ── CONFIDENCE BUILDER ────────────────────────────────────────────
@@ -1019,7 +1019,7 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
       confBtnsEl.insertAdjacentElement('beforebegin', optDiv);
     }
     confBtnsEl.innerHTML = ['A','B','C','D'].map(l =>
-      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+      `<button class="tfng-btn" data-action="conf-answer" data-mv="${l}">${l}</button>`
     ).join('');
   } else if (confCfg.hookStyle === 'matching-headings') {
     const opts = q.options || [];
@@ -1034,12 +1034,12 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
     }
     const letters = opts.length ? opts.map(o => o.label) : confCfg.answerButtons;
     confBtnsEl.innerHTML = letters.map(l =>
-      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+      `<button class="tfng-btn" data-action="conf-answer" data-mv="${l}">${l}</button>`
     ).join('');
   } else if (confCfg.hookStyle === 'matching') {
     // matching-info / matching-features: letter buttons from answerButtons
     confBtnsEl.innerHTML = confCfg.answerButtons.map(l =>
-      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+      `<button class="tfng-btn" data-action="conf-answer" data-mv="${l}">${l}</button>`
     ).join('');
   } else {
     const ngBtn = document.querySelector('#teach-conf-btns [data-mv="NG"]');
@@ -1074,7 +1074,7 @@ window.answerConfidence = function (val) {
   rf.innerHTML = (isCorrect ? `✅ Correct. ${confExpl}` : `❌ The answer is ${q.answer}. ${confExpl}`)
     + (isLastConfQ
         ? ''
-        : `<br><button class="btn-secondary" style="margin-top:10px" onclick="renderConfidenceQuestion(${confQIdx + 1})">Next question →</button>`);
+        : `<br><button class="btn-secondary" style="margin-top:10px" data-action="conf-next" data-idx="${confQIdx + 1}">Next question →</button>`);
   if (isLastConfQ) {
     const bubble = document.getElementById('teach-conf-bubble');
     if (confCorrect === 2 && bubble) bubble.textContent = "You've got the pattern. Now let's see it under real conditions.";
@@ -1110,3 +1110,54 @@ window.startRealSession = function () {
   goTo('s-phase2');
   setTimeout(() => launchSkillScreen(plan), 1500);
 };
+
+// ── EVENT DELEGATION — s-teach screen ────────────────────────────
+// One static listener routes all dynamic button clicks, eliminating
+// the iOS Safari "first tap unresponsive" bug for innerHTML-created buttons.
+(function () {
+  const el = document.getElementById('s-teach');
+  if (!el) return;
+  el.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn || btn.disabled) return;
+    const { action } = btn.dataset;
+    switch (action) {
+      case 'hook-answer':
+        window.answerHook(btn.dataset.mv);
+        break;
+      case 'hook-submit': {
+        const val = document.getElementById('hook-text-input')?.value || '';
+        btn.disabled = true;
+        window.answerHook(val);
+        break;
+      }
+      case 'teach-reveal-step':
+        btn.disabled = true;
+        window.teachRevealStep(parseInt(btn.dataset.step, 10));
+        break;
+      case 'teach-pick-mc':
+        window.teachPickMCStep3(btn.dataset.choice, btn.dataset.correct);
+        break;
+      case 'teach-pick-step3':
+        window.teachPickStep3(btn.dataset.choice, btn.dataset.correct);
+        break;
+      case 'drill-answer':
+        window.answerDrill(parseInt(btn.dataset.idx, 10), btn.dataset.dv);
+        break;
+      case 'drill-next':
+        btn.disabled = true;
+        window.renderDrillQuestion(parseInt(btn.dataset.idx, 10));
+        break;
+      case 'conf-answer':
+        window.answerConfidence(btn.dataset.mv);
+        break;
+      case 'conf-next':
+        btn.disabled = true;
+        window.renderConfidenceQuestion(parseInt(btn.dataset.idx, 10));
+        break;
+      case 'hear-play':
+        window.toggleHearAudio();
+        break;
+    }
+  });
+})();

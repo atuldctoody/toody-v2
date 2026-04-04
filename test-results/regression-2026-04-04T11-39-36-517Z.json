@@ -1,31 +1,31 @@
 {
-  "timestamp": "2026-04-04T10:03:24.614Z",
+  "timestamp": "2026-04-04T11:39:36.517Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
   "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 24307,
+  "durationMs": 24404,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 21145,
+      "durationMs": 24399,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change Effects",
+          "topic": "Climate Change Research",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.7,
+          "avgScore": 3.6,
           "error": null
         },
         "audio": {
@@ -34,7 +34,7 @@
         },
         "writingEval": {
           "pass": true,
-          "overallBand": 5,
+          "overallBand": 6,
           "error": null
         }
       }
@@ -42,21 +42,21 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 24276,
+      "durationMs": 24368,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Cognitive Psychology and Memory",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 0,
+          "corrections": 1,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.2,
+          "avgScore": 3.4,
           "error": null
         },
         "audio": {
@@ -73,21 +73,21 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23204,
+      "durationMs": 23032,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Climate Change and Agriculture",
           "error": null
         },
         "verification": {
           "pass": true,
-          "corrections": 2,
+          "corrections": 0,
           "error": null
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.4,
+          "avgScore": 3.1,
           "error": null
         },
         "audio": {

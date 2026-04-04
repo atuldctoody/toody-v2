@@ -1158,9 +1158,9 @@ export function renderReadingSession(parsed) {
       <div class="q-text">${q.text}</div>
       <div class="q-sub">True, False, or Not Given in the passage?</div>
       <div class="tfng" id="tfng${q.id}">
-        <button class="tfng-btn" onclick="answerTFNG(${q.id},'True')"  data-v="True">✓ True</button>
-        <button class="tfng-btn" onclick="answerTFNG(${q.id},'False')" data-v="False">✗ False</button>
-        <button class="tfng-btn" onclick="answerTFNG(${q.id},'NG')"    data-v="NG">? Not Given</button>
+        <button class="tfng-btn" data-action="answer-tfng" data-q="${q.id}" data-v="True">✓ True</button>
+        <button class="tfng-btn" data-action="answer-tfng" data-q="${q.id}" data-v="False">✗ False</button>
+        <button class="tfng-btn" data-action="answer-tfng" data-q="${q.id}" data-v="NG">? Not Given</button>
       </div>
       <div class="result-flash" id="rf${q.id}"></div>
     </div>
@@ -1232,9 +1232,9 @@ export function renderYNNGSession(parsed) {
       <div class="q-text">${q.text}</div>
       <div class="q-sub">Does this match the writer's view?</div>
       <div class="tfng" id="tfng${q.id}">
-        <button class="tfng-btn" onclick="answerYNNG(${q.id},'Yes')"       data-v="Yes">✓ Yes</button>
-        <button class="tfng-btn" onclick="answerYNNG(${q.id},'No')"        data-v="No">✗ No</button>
-        <button class="tfng-btn" onclick="answerYNNG(${q.id},'Not Given')" data-v="Not Given">? Not Given</button>
+        <button class="tfng-btn" data-action="answer-ynng" data-q="${q.id}" data-v="Yes">✓ Yes</button>
+        <button class="tfng-btn" data-action="answer-ynng" data-q="${q.id}" data-v="No">✗ No</button>
+        <button class="tfng-btn" data-action="answer-ynng" data-q="${q.id}" data-v="Not Given">? Not Given</button>
       </div>
       <div class="result-flash" id="rf${q.id}"></div>
     </div>
@@ -1284,7 +1284,7 @@ export function renderMCSession(parsed) {
 
   document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => {
     const optionsHtml = (q.options || []).map(opt =>
-      `<button class="mc-option" data-v="${opt.label}" onclick="answerMC(${q.id},'${opt.label}')">
+      `<button class="mc-option" data-action="answer-mc" data-q="${q.id}" data-v="${opt.label}">
         <span class="mc-label">${opt.label}</span>
         <span>${opt.text}</span>
       </button>`
@@ -1405,7 +1405,7 @@ export function renderMatchingInfoSession(parsed) {
   const sectionLabels = ['A', 'B', 'C', 'D', 'E'];
   document.getElementById('questions-container').innerHTML = (parsed.questions || []).map(q => {
     const btns = sectionLabels.map(l =>
-      `<button class="tfng-btn" data-v="${l}" onclick="answerMatchingInfo(${q.id},'${l}')">${l}</button>`
+      `<button class="tfng-btn" data-action="answer-mi" data-q="${q.id}" data-v="${l}">${l}</button>`
     ).join('');
     return `
       <div class="q-block" id="qb${q.id}">
@@ -1456,7 +1456,7 @@ export function renderMatchingFeaturesSession({ passage, questions, features }) 
   const featureList = features || sessionMatchingFeatures;
   document.getElementById('questions-container').innerHTML = (questions || []).map(q => {
     const btns = featureList.map(f =>
-      `<button class="mc-option" data-v="${f}" onclick="answerMatchingFeatures(${q.id},this)">
+      `<button class="mc-option" data-action="answer-mf" data-q="${q.id}" data-v="${f}">
         <span>${f}</span>
       </button>`
     ).join('');
@@ -1681,7 +1681,7 @@ export function renderToughLove() {
 
   document.getElementById('tl-hint-options').innerHTML = options.map(o => {
     const label = o.text.length > 120 ? o.text.substring(0, 120) + '…' : o.text;
-    return `<button class="hint-btn" onclick="pickHint(this,${o.correct})">"${label}"</button>`;
+    return `<button class="hint-btn" data-action="pick-hint" data-correct="${o.correct}">"${label}"</button>`;
   }).join('');
 
   document.getElementById('tl-result').className = 'result-flash mt16';
@@ -1883,3 +1883,28 @@ export async function finishReadingSession() {
   }
 }
 window.finishReadingSession = finishReadingSession;
+
+// ── EVENT DELEGATION — s-reading + s-toughlove ────────────────────
+// One static listener per screen container routes all dynamic button clicks.
+// This eliminates the iOS Safari "first tap unresponsive" bug that occurs
+// when onclick= handlers are attached to elements created via innerHTML.
+(function () {
+  function readingDelegate(e) {
+    const btn = e.target.closest('[data-action]');
+    if (!btn || btn.disabled) return;
+    const { action } = btn.dataset;
+    const qnum = parseInt(btn.dataset.q || '0', 10);
+    switch (action) {
+      case 'answer-tfng': window.answerTFNG(qnum, btn.dataset.v); break;
+      case 'answer-ynng': window.answerYNNG(qnum, btn.dataset.v); break;
+      case 'answer-mc':   window.answerMC(qnum, btn.dataset.v); break;
+      case 'answer-mi':   window.answerMatchingInfo(qnum, btn.dataset.v); break;
+      case 'answer-mf':   window.answerMatchingFeatures(qnum, btn); break;
+      case 'pick-hint':   window.pickHint(btn, btn.dataset.correct === 'true'); break;
+    }
+  }
+  const readingEl = document.getElementById('s-reading');
+  const tlEl      = document.getElementById('s-toughlove');
+  if (readingEl) readingEl.addEventListener('click', readingDelegate);
+  if (tlEl)      tlEl.addEventListener('click', readingDelegate);
+})();

@@ -113,7 +113,7 @@ Return ONLY this JSON:
           <div class="mc-options" id="mc${q.id}">
             ${q.options.map(opt => {
               const letter = opt.charAt(0);
-              return `<button class="mc-option" data-v="${letter}" onclick="answerMC(${q.id},'${letter}')">${opt}</button>`;
+              return `<button class="mc-option" data-action="answer-mc" data-q="${q.id}" data-v="${letter}">${opt}</button>`;
             }).join('')}
           </div>
         </div>
@@ -248,7 +248,7 @@ export function showListeningQuestionsGate() {
   if (hint && listenHasPlayed) hint.textContent = 'You can replay the audio at any time.';
 }
 
-window.answerMC = function (qnum, val) {
+function answerListeningMC(qnum, val) {
   if (listenAnswers[qnum]) return;
   trackQAnswer(qnum);
   trackQStart(qnum + 1);
@@ -262,7 +262,8 @@ window.answerMC = function (qnum, val) {
   if (Object.keys(listenAnswers).length >= listenQuestions.length) {
     document.getElementById('btn-listening-submit').disabled = false;
   }
-};
+}
+window.answerMC = answerListeningMC;  // keep global alias for any legacy callers
 
 window.checkFCProgress = function () {
   const allFilled = listenQuestions.every(q => {
@@ -426,3 +427,17 @@ export async function finishListeningSession() {
   }
 }
 window.finishListeningSession = finishListeningSession;
+
+// ── EVENT DELEGATION — s-listening screen ────────────────────────
+(function () {
+  const el = document.getElementById('s-listening');
+  if (!el) return;
+  el.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action]');
+    if (!btn || btn.disabled) return;
+    const { action } = btn.dataset;
+    if (action === 'answer-mc') {
+      answerListeningMC(parseInt(btn.dataset.q, 10), btn.dataset.v);
+    }
+  });
+})();
