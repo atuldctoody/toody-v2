@@ -96,11 +96,12 @@ function checkExplanationDepth(payload, requestedType) {
   const explanation = (payload.explanation || payload.insight || '').trim();
   if (!explanation) return null; // field absent for this item type — skip
 
-  const words = explanation.split(/\s+/).filter(Boolean);
-  if (words.length < 30) {
+  const words   = explanation.split(/\s+/).filter(Boolean);
+  const minWords = /drill|confidence/i.test(requestedType) ? 20 : 30;
+  if (words.length < minWords) {
     return {
       code:    'SHALLOW_EXPLANATION',
-      message: `Explanation is only ${words.length} words (minimum 30). Write a specific step-by-step explanation that names the exact evidence from the passage and explains why wrong answers are eliminated.`,
+      message: `Explanation is only ${words.length} words (minimum ${minWords}). Write a specific step-by-step explanation that names the exact evidence from the passage and explains why wrong answers are eliminated.`,
       autofix: false,
     };
   }
