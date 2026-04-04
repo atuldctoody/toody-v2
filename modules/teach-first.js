@@ -101,7 +101,8 @@ export async function loadTeachFirst(skillKey) {
   const skillId    = toSkillId(skillKey);
   const cfg        = getSkillConfig(skillId);
   const skillLabel = cfg.displayName;
-  const isMH       = cfg.hookStyle === 'matching';
+  const isMH       = cfg.hookStyle === 'matching-headings';
+  const isMIF      = cfg.hookStyle === 'matching';        // matching-info / matching-features
   const isYNNG     = cfg.hookStyle === 'ynng';
   const isMC       = cfg.hookStyle === 'multiplechoice';
   const isTFNG     = cfg.answerButtons.includes('Not Given') && !isYNNG;
@@ -131,11 +132,13 @@ export async function loadTeachFirst(skillKey) {
 
   const conceptPromptDetail = cfg.conceptPromptHint;
 
-  const ansVals = isMH ? ['A','B','A'] : isYNNG ? ['Yes','No','Not Given'] : isTFNG ? ['True','False','NG'] : isMC ? ['A','B','C'] : ['True','False','True'];
+  const ansVals = (isMH || isMIF) ? ['A','B','A'] : isYNNG ? ['Yes','No','Not Given'] : isTFNG ? ['True','False','NG'] : isMC ? ['A','B','C'] : ['True','False','True'];
 
   // Skill-specific passage and statement descriptions for the hook question
   const hookPassageDesc = isMH
-    ? '2 academic sentences — choose a topic where one heading fits the main idea but another could mislead'
+    ? 'A single academic paragraph of 4-6 sentences on an academic topic — write a complete paragraph where the main idea is clear but one or two details could mislead a student into picking a heading that only matches part of the paragraph'
+    : isMIF
+    ? '2 academic sentences — choose a topic where the information appears in an unexpected section'
     : isYNNG
     ? "2 academic sentences written in first person, clearly expressing the author's opinions"
     : isTFNG
@@ -146,7 +149,9 @@ export async function loadTeachFirst(skillKey) {
 
   // Skill-specific statement/example descriptions
   const statementDesc = isMH
-    ? 'a testable claim that looks True but is actually False — a detail matches but not the main idea'
+    ? 'the task question: "Choose the best heading for this paragraph from the options below."'
+    : isMIF
+    ? 'the specific piece of information to locate — a detail or fact from one of the sections'
     : (isYNNG || isTFNG)
     ? cfg.hookPromptHint
     : isMC
@@ -154,7 +159,9 @@ export async function loadTeachFirst(skillKey) {
     : 'a summary sentence with one blank gap — represent the gap as _______ (five underscores). CRITICAL: the statement must NOT contain the answer word anywhere. The answer word goes in the "answer" field only. Never bold or reveal the answer in the statement text.';
 
   const exStatementHint = isMH
-    ? 'a heading choice where a distractor matches a detail but not the main idea'
+    ? '"Choose the best heading for this paragraph from the options below."'
+    : isMIF
+    ? 'the specific piece of information to locate in a paragraph'
     : isTFNG
     ? 'testable claim'
     : isMC
@@ -165,7 +172,7 @@ export async function loadTeachFirst(skillKey) {
     ? 'CRITICAL: Every "answer" field must be exactly ONE value (Yes, No, or Not Given) — never True/False/NG.'
     : isTFNG
     ? 'CRITICAL: Every "answer" field must be exactly ONE value (True, False, or NG) — never pipe-separated.'
-    : isMC
+    : (isMC || isMH || isMIF)
     ? 'CRITICAL: Every "answer" field must be exactly ONE letter (A, B, C, or D) matching the correct option.'
     : 'CRITICAL: Every "answer" field must be exactly one of: True or False — never pipe-separated or NG.';
 
@@ -185,8 +192,11 @@ export async function loadTeachFirst(skillKey) {
     : '';
 
   const mcOptSchema = '"options":[{"label":"A","text":"option A text"},{"label":"B","text":"option B text"},{"label":"C","text":"option C text"},{"label":"D","text":"option D text"}],';
+  const mhOptSchema = '"options":[{"label":"A","text":"heading option A — a heading that matches a specific detail (distractor)"},{"label":"B","text":"heading option B — the correct heading that captures the main idea of the whole paragraph"},{"label":"C","text":"heading option C — a plausible but too-broad or off-topic heading (distractor)"},{"label":"D","text":"heading option D — another distractor heading"}],';
   const exSchema = (label, ansIdx) => isMC
     ? `{"label":"${label}","passage":"3-4 sentences — enough detail to answer a multiple choice question","statement":"${exStatementHint}",${mcOptSchema}"answer":"${ansVals[ansIdx]}","steps":["Read the question: what are you looking for in the passage?","Scan the passage: which sentence directly answers the question?","Eliminate: why are the distractors wrong?"],"insight":"One sentence: the key reasoning move that separates the correct answer from the distractors."}`
+    : isMH
+    ? `{"label":"${label}","passage":"A single academic paragraph of 4-6 sentences","statement":"${exStatementHint}",${mhOptSchema}"answer":"${ansVals[ansIdx]}","steps":["Read the full paragraph — what is the dominant idea of the whole paragraph?","Look at each heading option — which one covers the whole paragraph, not just one detail?","Eliminate distractors — a heading that matches only one sentence is wrong"],"insight":"One sentence for the student: the correct heading must describe what the WHOLE paragraph is about."}`
     : `{"label":"${label}","passage":"2 academic sentences","statement":"${exStatementHint}","answer":"${ansVals[ansIdx]}","steps":["Step 1 reasoning","Step 2 reasoning","Step 3 reasoning"],"conclusion":"Therefore the answer is ${ansVals[ansIdx]} — one sentence.","insight":"One sentence for the student: what to notice about this specific example or trap."}`;
 
   const prompt = {
@@ -204,9 +214,9 @@ Return ONLY this JSON:
   ],` : ''}
   "hookQuestion": {
     "passage": "${hookPassageDesc}",
-    "statement": "${statementDesc}",${isMC ? `
-    "options": [{"label":"A","text":"option A"},{"label":"B","text":"option B"},{"label":"C","text":"option C"},{"label":"D","text":"option D"}],` : ''}
-    "answer": "${isMH ? 'False' : isYNNG ? 'Not Given' : isTFNG ? 'NG' : isMC ? 'B' : 'False'}",
+    "statement": "${statementDesc}",${(isMC || isMH) ? `
+    "options": ${isMH ? '[{"label":"A","text":"heading option A — a heading that matches a specific detail in the paragraph (distractor)"},{"label":"B","text":"heading option B — the correct heading that describes the main idea of the whole paragraph"},{"label":"C","text":"heading option C — a plausible but too-broad heading (distractor)"},{"label":"D","text":"heading option D — another distractor heading"}]' : '[{"label":"A","text":"option A"},{"label":"B","text":"option B"},{"label":"C","text":"option C"},{"label":"D","text":"option D"}]'},` : ''}
+    "answer": "${isMH ? 'B' : isYNNG ? 'Not Given' : isTFNG ? 'NG' : isMC ? 'B' : 'False'}",
     "insight": "Here is what most students miss: one sentence explaining exactly why this question trips people up."
   },
   "workedExamples": [
@@ -215,12 +225,12 @@ Return ONLY this JSON:
     ${exSchema('Hard — the exact sub-type where most Band 6 students fail', 2)}
   ],
   "confidenceQuestions": [
-    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "a clear achievable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"},
-    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "another achievable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[1]}", "explanation": "one sentence"}
+    {"passage": "${isMH ? 'A single academic paragraph of 4-5 sentences' : isMC ? '3-4 sentences' : '2 academic sentences'} — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "${isMH ? 'Choose the best heading for this paragraph from the options below.' : 'a clear achievable question stem'}",${isMC ? ` ${mcOptSchema}` : isMH ? ` ${mhOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"},
+    {"passage": "${isMH ? 'A single academic paragraph of 4-5 sentences' : isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic — set at Band ${Math.max(5, band - 0.5)} difficulty", "statement": "${isMH ? 'Choose the best heading for this paragraph from the options below.' : 'another achievable question stem'}",${isMC ? ` ${mcOptSchema}` : isMH ? ` ${mhOptSchema}` : ''} "answer": "${ansVals[1]}", "explanation": "one sentence"}
   ],
   "drillQuestions": [
-    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'}", "statement": "a testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[2]}", "explanation": "one sentence"},
-    {"passage": "${isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic", "statement": "another testable question stem",${isMC ? ` ${mcOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"}
+    {"passage": "${isMH ? 'A single academic paragraph of 4-5 sentences' : isMC ? '3-4 sentences' : '2 academic sentences'}", "statement": "${isMH ? 'Choose the best heading for this paragraph from the options below.' : 'a testable question stem'}",${isMC ? ` ${mcOptSchema}` : isMH ? ` ${mhOptSchema}` : ''} "answer": "${ansVals[2]}", "explanation": "one sentence"},
+    {"passage": "${isMH ? 'A single academic paragraph of 4-5 sentences' : isMC ? '3-4 sentences' : '2 academic sentences'} on a different topic", "statement": "${isMH ? 'Choose the best heading for this paragraph from the options below.' : 'another testable question stem'}",${isMC ? ` ${mcOptSchema}` : isMH ? ` ${mhOptSchema}` : ''} "answer": "${ansVals[0]}", "explanation": "one sentence"}
   ]
 }${adaptiveInstruction}`,
     maxTokens: 3500
@@ -425,9 +435,26 @@ function renderHookQuestion() {
   document.getElementById('teach-hook-mc-opts')?.remove();
 
   if (hookCfg.hookStyle === 'matching') {
-    // Render letter option buttons (A, B, C, D, E) from skill config
+    // matching-info / matching-features: render section letter buttons (A–E)
     btnsContainer.innerHTML = hookCfg.answerButtons.map(v =>
       `<button class="tfng-btn" onclick="window.answerHook('${v}')" data-mv="${v}">${v}</button>`
+    ).join('');
+    btnsContainer.classList.remove('hidden');
+  } else if (hookCfg.hookStyle === 'matching-headings') {
+    // matching-headings: show heading options as readable text, then A/B/C/D buttons
+    const opts = hq.options || [];
+    if (opts.length) {
+      const optDiv = document.createElement('div');
+      optDiv.id = 'teach-hook-mc-opts';
+      optDiv.style.cssText = 'margin-bottom:12px';
+      optDiv.innerHTML = opts.map(o =>
+        `<div style="padding:10px 14px;margin-bottom:6px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:14px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+      ).join('');
+      btnsContainer.insertAdjacentElement('beforebegin', optDiv);
+    }
+    const letters = opts.length ? opts.map(o => o.label) : hookCfg.answerButtons;
+    btnsContainer.innerHTML = letters.map(l =>
+      `<button class="tfng-btn" onclick="window.answerHook('${l}')" data-mv="${l}">${l}</button>`
     ).join('');
     btnsContainer.classList.remove('hidden');
   } else if (hookCfg.hookStyle === 'multiplechoice') {
@@ -887,23 +914,48 @@ window.renderDrillQuestion = function renderDrillQuestion(idx) {
   }
   const q = qs[idx];
   const contentEl = document.getElementById('teach-reinforce-content');
+  const drillCfg  = getSkillConfig(toSkillId(teachSkillKey));
+
+  // Build answer buttons based on skill type
+  let drillOptsHtml = '';
+  let drillBtnsHtml;
+  if (drillCfg.hookStyle === 'matching' || drillCfg.hookStyle === 'matching-headings') {
+    // For matching-headings: show heading options if present, then letter buttons
+    if (drillCfg.hookStyle === 'matching-headings' && (q.options || []).length) {
+      drillOptsHtml = `<div style="margin-bottom:12px">${(q.options || []).map(o =>
+        `<div style="padding:8px 12px;margin-bottom:5px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:13px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+      ).join('')}</div>`;
+    }
+    const letters = (drillCfg.hookStyle === 'matching-headings' && (q.options || []).length)
+      ? q.options.map(o => o.label)
+      : drillCfg.answerButtons;
+    drillBtnsHtml = letters.map(v =>
+      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${v}</button>`
+    ).join('');
+  } else if (drillCfg.hookStyle === 'multiplechoice' && (q.options || []).length) {
+    drillOptsHtml = `<div style="margin-bottom:12px">${(q.options || []).map(o =>
+      `<div style="padding:8px 12px;margin-bottom:5px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:13px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+    ).join('')}</div>`;
+    drillBtnsHtml = ['A','B','C','D'].map(v =>
+      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${v}</button>`
+    ).join('');
+  } else {
+    const [a0, a1, a2] = drillCfg.answerButtons;
+    const lblMap = { True: '✓ True', False: '✗ False', NG: '? Not Given', 'Not Given': '? Not Given', Yes: '✓ Yes', No: '✗ No' };
+    drillBtnsHtml = [a0, a1, a2].filter(Boolean).map(v =>
+      `<button class="tfng-btn" data-dv="${v}" onclick="window.answerDrill(${idx},'${v}')">${lblMap[v] || v}</button>`
+    ).join('');
+  }
+
   contentEl.innerHTML = `
     <div class="card mt8" id="drill-card-${idx}">
       <div class="card-label">Quick drill ${idx + 1} of ${qs.length}</div>
       <div class="passage-snippet" style="font-size:13px;font-style:italic;color:var(--muted);margin-bottom:8px">${renderMarkdown(q.passage)}</div>
       <div class="q-text" style="margin-bottom:12px">${renderMarkdown(q.statement)}</div>
-      <div class="tfng">
-        <button class="tfng-btn" data-dv="True"  onclick="window.answerDrill(${idx},'True')">✓ True</button>
-        <button class="tfng-btn" data-dv="False" onclick="window.answerDrill(${idx},'False')">✗ False</button>
-        <button class="tfng-btn" data-dv="NG"    onclick="window.answerDrill(${idx},'NG')">? Not Given</button>
-      </div>
+      ${drillOptsHtml}<div class="tfng">${drillBtnsHtml}</div>
       <div class="result-flash" id="drill-result-${idx}"></div>
     </div>`;
   contentEl.classList.remove('hidden');
-  // Hide NG button for skills that do not use Not Given answers
-  const drillCfg  = getSkillConfig(toSkillId(teachSkillKey));
-  const drillNgBtn = document.querySelector(`#drill-card-${idx} [data-dv="NG"]`);
-  if (drillNgBtn) drillNgBtn.classList.toggle('hidden', !drillCfg.answerButtons.includes('Not Given'));
 };
 
 window.answerDrill = function (idx, val) {
@@ -952,7 +1004,7 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
   document.getElementById('teach-conf-statement').innerHTML = renderMarkdown(q.statement);
   const confCfg = getSkillConfig(toSkillId(teachSkillKey));
 
-  // For MC: inject options list + replace buttons with A/B/C/D
+  // Rebuild answer buttons based on skill type
   document.getElementById('teach-conf-mc-opts')?.remove();
   const confBtnsEl = document.getElementById('teach-conf-btns');
   if (confCfg.hookStyle === 'multiplechoice') {
@@ -967,6 +1019,26 @@ window.renderConfidenceQuestion = function renderConfidenceQuestion(idx) {
       confBtnsEl.insertAdjacentElement('beforebegin', optDiv);
     }
     confBtnsEl.innerHTML = ['A','B','C','D'].map(l =>
+      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+    ).join('');
+  } else if (confCfg.hookStyle === 'matching-headings') {
+    const opts = q.options || [];
+    if (opts.length) {
+      const optDiv = document.createElement('div');
+      optDiv.id = 'teach-conf-mc-opts';
+      optDiv.style.cssText = 'margin-bottom:12px';
+      optDiv.innerHTML = opts.map(o =>
+        `<div style="padding:10px 14px;margin-bottom:6px;background:#fff;border:1.5px solid #E0DFF0;border-radius:10px;font-size:14px"><strong style="color:var(--accent)">${o.label}.</strong> ${o.text}</div>`
+      ).join('');
+      confBtnsEl.insertAdjacentElement('beforebegin', optDiv);
+    }
+    const letters = opts.length ? opts.map(o => o.label) : confCfg.answerButtons;
+    confBtnsEl.innerHTML = letters.map(l =>
+      `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
+    ).join('');
+  } else if (confCfg.hookStyle === 'matching') {
+    // matching-info / matching-features: letter buttons from answerButtons
+    confBtnsEl.innerHTML = confCfg.answerButtons.map(l =>
       `<button class="tfng-btn" onclick="window.answerConfidence('${l}')" data-mv="${l}">${l}</button>`
     ).join('');
   } else {

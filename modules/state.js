@@ -71,7 +71,16 @@ export function calcBandEstimate() {
   const wBand = avgBand(['writing-task1','writing-task2']); if (wBand !== null) parts.push(wBand);
   const sBand = avgBand(['speaking-part1']); if (sBand !== null) parts.push(sBand);
   if (!parts.length) return null;
-  return Math.round((parts.reduce((a, b) => a + b, 0) / parts.length) * 2) / 2;
+  const rawBand = Math.round((parts.reduce((a, b) => a + b, 0) / parts.length) * 2) / 2;
+
+  // Confidence weighting — cap estimate conservatively for students with limited data.
+  // A single session at 80% should not jump to 7.5 when starting band is 5.5.
+  const totalSessions = studentData?.brain?.totalSessions || 1;
+  const startingBand  = studentData?.currentBand || studentData?.targetBand || 6.0;
+  const cap = totalSessions === 1 ? startingBand + 0.5
+            : totalSessions <= 3 ? startingBand + 1.0
+            : Infinity;
+  return Math.min(rawBand, Math.round(cap * 2) / 2);
 }
 
 export function isMockUnlocked() {
