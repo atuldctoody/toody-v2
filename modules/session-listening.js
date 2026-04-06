@@ -394,6 +394,7 @@ window.submitListening = function () {
     if (isRight) listenCorrect++;
     listenAnswers[q.id] = userAns;
 
+    const _lSkill = `listening.${listenType === 'mc' ? 'multipleChoice' : 'formCompletion'}`;
     resultsHtml += `
       <div style="padding:10px 0;border-bottom:1px solid var(--border);">
         <div style="font-size:13px;font-weight:400;margin-bottom:4px">${q.id}. ${q.text || q.label}</div>
@@ -402,6 +403,7 @@ window.submitListening = function () {
           ${!isRight ? ` — Correct: <strong>${q.answer}</strong>` : ''}
         </div>
         <div style="font-size:12px;color:var(--muted);margin-top:3px">${renderMarkdown(q.explanation || '')}</div>
+        <button class="report-link" data-action="report-issue" data-qid="listen_q${q.id}" data-skill="${_lSkill}">Report issue</button>
       </div>`;
   });
 
@@ -529,6 +531,9 @@ window.finishListeningSession = finishListeningSession;
     const { action } = btn.dataset;
     if (action === 'answer-mc') {
       answerListeningMC(parseInt(btn.dataset.q, 10), btn.dataset.v);
+    }
+    if (action === 'report-issue') {
+      window.showReportModal(btn.dataset.qid, btn.dataset.skill);
     }
     if (action === 'play-listening') {
       const audio = document.getElementById('listening-audio');

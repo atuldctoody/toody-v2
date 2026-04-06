@@ -1160,6 +1160,7 @@ export function submitSCSession() {
         Gap [${q.id}]: ${isRight
           ? '✅ Correct.'
           : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation)}`}
+        <br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + q.id : 'ai_q' + q.id}" data-skill="${currentPlan?.skill || 'reading.summaryCompletion'}">Report issue</button>
       </div>`;
   });
 
@@ -1234,6 +1235,7 @@ window.answerTFNG = function (qnum, val) {
     rf.innerHTML = `❌ The answer is <strong>${q.answer}</strong>. ${renderReasoningHtml(q, false)}`
       + (pill ? `<br><span class="error-reason-pill">⚠ ${pill}</span>` : '');
   }
+  rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + qnum : 'ai_q' + qnum}" data-skill="${currentPlan?.skill || 'reading.tfng'}">Report issue</button>`;
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
@@ -1290,6 +1292,7 @@ window.answerYNNG = function (qnum, val) {
   rf.innerHTML = isRight
     ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
     : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + qnum : 'ai_q' + qnum}" data-skill="${currentPlan?.skill || 'reading.ynng'}">Report issue</button>`;
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
@@ -1348,6 +1351,7 @@ window.answerMC = function (qnum, val) {
   rf.innerHTML = isRight
     ? `✅ Correct.`
     : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + qnum : 'ai_q' + qnum}" data-skill="${currentPlan?.skill || 'reading.multipleChoice'}">Report issue</button>`;
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
 
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
@@ -1407,6 +1411,7 @@ function submitSentenceComp() {
       rf.innerHTML = isRight
         ? `✅ Correct.`
         : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+      rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + q.id : 'ai_q' + q.id}" data-skill="${currentPlan?.skill || 'reading'}">Report issue</button>`;
     }
   });
 
@@ -1462,6 +1467,7 @@ window.answerMatchingInfo = function (qnum, val) {
   rf.innerHTML = isRight
     ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
     : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + qnum : 'ai_q' + qnum}" data-skill="${currentPlan?.skill || 'reading.matchingInformation'}">Report issue</button>`;
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
     document.getElementById('btn-reading-submit').disabled = false;
@@ -1515,6 +1521,7 @@ window.answerMatchingFeatures = function (qnum, btn) {
   rf.innerHTML = isRight
     ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
     : `❌ The answer is <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+  rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + qnum : 'ai_q' + qnum}" data-skill="${currentPlan?.skill || 'reading.matchingFeatures'}">Report issue</button>`;
   setTimeout(() => rf.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
   if (Object.keys(sessionAnswers).length >= sessionQuestions.length) {
     document.getElementById('btn-reading-submit').disabled = false;
@@ -1590,6 +1597,7 @@ function submitMatchingHeadings() {
       rf.innerHTML = isRight
         ? `✅ Correct. ${renderMarkdown(q.explanation || '')}`
         : `❌ The correct heading is <strong>${correctHeading ? ROMAN[correctHeading.id - 1] + ': ' + correctHeading.text : q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+      rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + q.id : 'ai_q' + q.id}" data-skill="${currentPlan?.skill || 'reading.matchingHeadings'}">Report issue</button>`;
     }
   });
   const btn = document.getElementById('btn-reading-submit');
@@ -1651,6 +1659,7 @@ function submitShortAnswer() {
       rf.innerHTML = isRight
         ? `✅ Correct.`
         : `❌ Answer: <strong>${q.answer}</strong>. ${renderMarkdown(q.explanation || '')}`;
+      rf.innerHTML += `<br><button class="report-link" data-action="report-issue" data-qid="${sessionFromBank && sessionBankSetId ? sessionBankSetId + '_q' + q.id : 'ai_q' + q.id}" data-skill="${currentPlan?.skill || 'reading'}">Report issue</button>`;
     }
   });
   const btn = document.getElementById('btn-reading-submit');
@@ -1921,12 +1930,13 @@ window.finishReadingSession = finishReadingSession;
     const { action } = btn.dataset;
     const qnum = parseInt(btn.dataset.q || '0', 10);
     switch (action) {
-      case 'answer-tfng': window.answerTFNG(qnum, btn.dataset.v); break;
-      case 'answer-ynng': window.answerYNNG(qnum, btn.dataset.v); break;
-      case 'answer-mc':   window.answerMC(qnum, btn.dataset.v); break;
-      case 'answer-mi':   window.answerMatchingInfo(qnum, btn.dataset.v); break;
-      case 'answer-mf':   window.answerMatchingFeatures(qnum, btn); break;
-      case 'pick-hint':   window.pickHint(btn, btn.dataset.correct === 'true'); break;
+      case 'answer-tfng':   window.answerTFNG(qnum, btn.dataset.v); break;
+      case 'answer-ynng':   window.answerYNNG(qnum, btn.dataset.v); break;
+      case 'answer-mc':     window.answerMC(qnum, btn.dataset.v); break;
+      case 'answer-mi':     window.answerMatchingInfo(qnum, btn.dataset.v); break;
+      case 'answer-mf':     window.answerMatchingFeatures(qnum, btn); break;
+      case 'pick-hint':     window.pickHint(btn, btn.dataset.correct === 'true'); break;
+      case 'report-issue':  window.showReportModal(btn.dataset.qid, btn.dataset.skill); break;
     }
   }
   const readingEl = document.getElementById('s-reading');

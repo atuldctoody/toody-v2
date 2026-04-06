@@ -1551,5 +1551,23 @@
   <button class="btn" style="margin-top:var(--space-4)" onclick="window.week1KeepGoing()">Keep going <span class="arrow">→</span></button>
 </div>
 
+<!-- ══════════════════════ REPORT ISSUE MODAL ══════════════════════ -->
+<div id="report-modal" style="display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.45);" onclick="if(event.target===this)window.closeReportModal()">
+  <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#fff;border-radius:16px 16px 0 0;padding:24px 20px 32px;box-sizing:border-box">
+    <div style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:4px">Report an issue</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:18px">What's wrong with this question?</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:14px">
+      <label class="report-radio-option"><input type="radio" name="report-type" value="wrong_answer"> Wrong answer — the correct answer seems incorrect</label>
+      <label class="report-radio-option"><input type="radio" name="report-type" value="confusing_explanation"> Confusing explanation — I don't understand the feedback</label>
+      <label class="report-radio-option"><input type="radio" name="report-type" value="something_else"> Something else</label>
+    </div>
+    <textarea id="report-details" placeholder="Tell us more (optional)…" maxlength="200" style="display:none;width:100%;min-height:72px;border-radius:10px;border:1.5px solid var(--border);padding:10px 12px;font-size:13px;font-family:inherit;color:var(--text);resize:none;box-sizing:border-box;background:#fafafa"></textarea>
+    <div style="display:flex;gap:10px;margin-top:16px">
+      <button onclick="window.closeReportModal()" style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:14px;color:var(--muted);font-family:inherit;cursor:pointer">Cancel</button>
+      <button onclick="window.submitReport()" style="flex:2;padding:12px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer">Submit</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

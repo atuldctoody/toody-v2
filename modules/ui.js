@@ -1,7 +1,7 @@
 // modules/ui.js
 // Shared UI helpers, briefing flow, IELTS overview modal, tip screen.
 
-import { doc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { doc, updateDoc, addDoc, collection, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 import { auth, db, updateStudentDoc } from './firebase.js';
 import { studentData, currentUser, getIELTSSkills, buildContextSnippet, callAI } from './state.js';
 import { goTo, _updateBackBtn } from './router.js';
@@ -346,3 +346,52 @@ export function finishTip() {
   if (tipNotebookFn) { tipNotebookFn(); tipNotebookFn = null; }
 }
 window.finishTip = finishTip;
+
+// ── REPORT ISSUE MODAL ────────────────────────────────────────────
+let _reportCtx = { questionId: '', skillId: '' };
+
+export function showReportModal(questionId, skillId) {
+  _reportCtx = { questionId, skillId };
+  const modal = document.getElementById('report-modal');
+  if (!modal) return;
+  document.querySelectorAll('input[name="report-type"]').forEach(r => { r.checked = false; });
+  const ta = document.getElementById('report-details');
+  if (ta) { ta.value = ''; ta.style.display = 'none'; }
+  modal.style.display = 'block';
+}
+window.showReportModal = showReportModal;
+
+window.closeReportModal = function () {
+  const modal = document.getElementById('report-modal');
+  if (modal) modal.style.display = 'none';
+};
+
+window.submitReport = async function () {
+  const selected = document.querySelector('input[name="report-type"]:checked');
+  if (!selected) { showToast('Please select an option first'); return; }
+  const details = (document.getElementById('report-details')?.value || '').trim().slice(0, 200);
+  const uid = currentUser?.uid;
+  if (!uid) return;
+  try {
+    await addDoc(collection(db, 'studentReports'), {
+      type:       selected.value,
+      details:    details || null,
+      questionId: _reportCtx.questionId,
+      skillId:    _reportCtx.skillId,
+      studentUid: uid,
+      timestamp:  serverTimestamp(),
+    });
+    window.closeReportModal();
+    showToast('Thanks — we\'ll look into this');
+  } catch (err) {
+    console.error('submitReport failed:', err);
+    showToast('Couldn\'t send — please try again');
+  }
+};
+
+document.addEventListener('change', (e) => {
+  if (e.target?.name === 'report-type') {
+    const ta = document.getElementById('report-details');
+    if (ta) ta.style.display = e.target.value === 'something_else' ? 'block' : 'none';
+  }
+});
