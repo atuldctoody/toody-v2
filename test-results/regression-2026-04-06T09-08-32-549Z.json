@@ -1,23 +1,21 @@
 {
-  "timestamp": "2026-04-04T13:48:55.273Z",
+  "timestamp": "2026-04-06T09:08:32.549Z",
   "sessionsChecked": 3,
   "passed": 3,
   "failed": 0,
   "regressions": [],
-  "qualityWarnings": [
-    "⚠ QUALITY WARNING: explanation drift 1.6 between Band 5 (3.2) and Band 6 (4.8) — review content generation prompts"
-  ],
+  "qualityWarnings": [],
   "overallPass": true,
-  "durationMs": 27011,
+  "durationMs": 23763,
   "bandResults": [
     {
       "band": 5,
       "pass": true,
-      "durationMs": 25266,
+      "durationMs": 22630,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Green Spaces and Mental Health",
+          "topic": "climate change",
           "error": null
         },
         "verification": {
@@ -27,7 +25,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.2,
+          "avgScore": 4.5,
           "error": null
         },
         "audio": {
@@ -44,11 +42,11 @@
     {
       "band": 6,
       "pass": true,
-      "durationMs": 26972,
+      "durationMs": 21690,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Urban Pollution and Health",
+          "topic": "Neuroscience and Plasticity",
           "error": null
         },
         "verification": {
@@ -58,7 +56,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 4.8,
+          "avgScore": 4.6,
           "error": null
         },
         "audio": {
@@ -75,11 +73,11 @@
     {
       "band": 7,
       "pass": true,
-      "durationMs": 23244,
+      "durationMs": 23727,
       "steps": {
         "generation": {
           "pass": true,
-          "topic": "Climate Change and Biodiversity",
+          "topic": "Memory Function in Psychology",
           "error": null
         },
         "verification": {
@@ -89,7 +87,7 @@
         },
         "explanationQuality": {
           "pass": true,
-          "avgScore": 3.6,
+          "avgScore": 4.3,
           "error": null
         },
         "audio": {

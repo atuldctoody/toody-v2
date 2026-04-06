@@ -158,17 +158,19 @@ async function main() {
 
   const { db, bucket } = initFirebase(opts.keyFile);
 
-  let processed = 0;
+  let processed = 0;  // successful generations
+  let attempted = 0;  // attempted (counts against --limit)
   let skipped   = 0;
   let errors    = 0;
 
   for (const collId of COLLECTIONS) {
+    if (attempted >= opts.limit) break;
     console.log(`[AUDIO] Reading collection: ${collId}`);
     const snap = await db.collection(collId).get();
     console.log(`[AUDIO] Found ${snap.size} documents\n`);
 
     for (const doc of snap.docs) {
-      if (processed >= opts.limit) break;
+      if (attempted >= opts.limit) break;
 
       const data = doc.data();
 
@@ -186,6 +188,7 @@ async function main() {
       }
 
       const charCount = passageText.length;
+      attempted++;
       console.log(`[AUDIO] ${opts.dryRun ? 'DRY-RUN' : 'Processing'}: ${doc.id} — ${charCount} chars`);
 
       if (opts.dryRun) {
