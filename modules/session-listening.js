@@ -144,8 +144,8 @@ export async function loadListeningSession() {
         if (hint) hint.textContent = 'You will hear this passage ONCE — just like the real exam.';
         setupAudioPlayer(bankSet.audioUrl);
       } else {
-        // Bank question not yet voiced — generate ElevenLabs audio on demand
-        fetchListeningAudio(listenScenario);
+        // Bank question not yet voiced — show text fallback (no on-demand ElevenLabs)
+        showTextFallback();
       }
       return;
     }
@@ -201,8 +201,8 @@ Return ONLY this JSON:
     startSessionTracking();
     trackQStart(1);
 
-    // Fetch audio from ElevenLabs (async — player shows loading state)
-    fetchListeningAudio(listenScenario);
+    // No on-demand ElevenLabs — show text fallback until pre-generated audio is in the bank
+    showTextFallback();
 
   } catch {
     showToast('Having trouble connecting — please check your internet and try again.');
@@ -213,6 +213,18 @@ Return ONLY this JSON:
 window.loadListeningSession = loadListeningSession;
 
 // ── LISTENING AUDIO ────────────────────────────────────────────────
+// Shows the transcript as readable text and reveals questions immediately.
+// Used when no pre-generated audioUrl exists on the bank question.
+function showTextFallback() {
+  document.getElementById('audio-hint-text').textContent = 'Read this passage carefully before answering.';
+  document.getElementById('listening-audio-wrap').insertAdjacentHTML('afterend',
+    `<div class="passage-wrap" style="margin-top:0">
+       <div class="passage-label">Passage</div>
+       <div class="passage-text">${listenScenario.split('\n').filter(p=>p.trim()).map(p=>`<p>${p}</p>`).join('')}</div>
+     </div>`);
+  showListeningQuestionsGate();
+}
+
 export async function fetchListeningAudio(text) {
   try {
     const data = await withRetry(async () => {
